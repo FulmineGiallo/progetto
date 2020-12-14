@@ -1,0 +1,27 @@
+
+CREATE TABLE Partecipazione(
+   presenza varchar(10) check presenza in('assente', 'presente'),
+   FOREIGN KEY (idImpiegato) REFERENCES Impiegato(idImpiegato),
+   FOREIGN KEY (idRiunione) REFERENCES Riunione(idRiunione)
+
+);
+
+
+CREATE TABLE Riunione(
+   idRiunione int PRIMARY KEY, 
+   orarioInizio TIMESTAMP,
+   orarioFine   TIMESTAMP,
+   data DATA,
+   titolo varchar(20),
+   descrizione varchar(40)
+);
+
+
+CREATE TABLE RiunioneTelematica
+(
+    piattaforma varchar(20),
+    codiceAccesso varchar(10),
+    FOREIGN KEY (idRiunioneT) REFERENCES Riunione(idRiunione) NULL,
+    FOREIGN KEY (idRiunioneF) REFERENCES Riunione(idRiunione) NULL,
+    -CONSTRAINT uncità_rinione UNIQUE(idRiunioneT, idRiunioneF)
+);
