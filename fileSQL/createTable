@@ -22,6 +22,11 @@ CREATE TABLE RiunioneTelematica
     piattaforma varchar(20),
     codiceAccesso varchar(10),
     FOREIGN KEY (idRiunioneT) REFERENCES Riunione(idRiunione) NULL,
+);
+
+CREATE TABLE RiunioneFisica
+(
+    piattaforma varchar(20),
+    codiceAccesso varchar(10),
     FOREIGN KEY (idRiunioneF) REFERENCES Riunione(idRiunione) NULL,
-    -CONSTRAINT uncità_rinione UNIQUE(idRiunioneT, idRiunioneF)
 );
