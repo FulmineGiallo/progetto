@@ -3,7 +3,6 @@ CREATE TABLE Partecipazione(
    presenza varchar(10) check presenza in('assente', 'presente'),
    FOREIGN KEY (idImpiegato) REFERENCES Impiegato(idImpiegato),
    FOREIGN KEY (idRiunione) REFERENCES Riunione(idRiunione)
-
 );
 
 
@@ -11,22 +10,24 @@ CREATE TABLE Riunione(
    idRiunione int PRIMARY KEY, 
    orarioInizio TIMESTAMP,
    orarioFine   TIMESTAMP,
-   data DATA,
-   titolo varchar(20),
-   descrizione varchar(40)
-);
-
-
-CREATE TABLE RiunioneTelematica
-(
-    piattaforma varchar(20),
-    codiceAccesso varchar(10),
-    FOREIGN KEY (idRiunioneT) REFERENCES Riunione(idRiunione) NULL,
+   data date,
+   titolo varchar(30),
+   descrizione varchar(100)
 );
 
 CREATE TABLE RiunioneFisica
 (
-    piattaforma varchar(20),
-    codiceAccesso varchar(10),
+    Sede varchar(20),
+    Piano varchar(3),
+    nomeStanza varchar(30),
+	idRiunioneF int,
+    FOREIGN KEY (idRiunioneF) REFERENCES Riunione(idRiunione)
+);
+
+CREATE TABLE RiunioneFisica
+(
+    Sede varchar(20),
+    Piano varchar(3),
+    nomeStanza(30) 
     FOREIGN KEY (idRiunioneF) REFERENCES Riunione(idRiunione) NULL,
 );
