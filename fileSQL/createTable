@@ -31,3 +31,11 @@ CREATE TABLE RiunioneFisica
     nomeStanza(30) 
     FOREIGN KEY (idRiunioneF) REFERENCES Riunione(idRiunione) NULL,
 );
+
+
+/* VINCOLI */
+ALTER TABLE RiunioneTelematica
+ADD CONSTRAINT unicità_RiunioneT UNIQUE (idriunioneT)
+
+ALTER TABLE public.riunione
+    ADD COLUMN idriunione integer NOT NULL DEFAULT nextval('idriunioneseq'::regclass);
