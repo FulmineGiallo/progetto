@@ -24,11 +24,13 @@ BEGIN
 			   		   AND PRR2.Impiegato = NEW.Recensito
 					   AND PRR1.Ruolo = 'Project Manager') THEN
 			RAISE NOTICE 'questo recensore non può scrivere recensioni perché non è un project manager del progetto';
+			RETURN NULL;
 		ELSE
 			RETURN NEW;
 		END IF;
 	ELSE
 		RAISE NOTICE 'recensore e recensito non hanno lavorato allo stesso progetto';
+		RETURN NULL;
 	END IF;
 END
 
