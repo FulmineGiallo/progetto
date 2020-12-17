@@ -29,19 +29,16 @@ BEGIN
 			RETURN NEW;
 		END IF;
 	ELSE
-		IF EXISTS (SELECT *
-			   FROM ProgettoRecensoreRecensito PRR1, ProgettoRecensoreRecensito PRR2
-			   WHERE PRR1.idProgetto = PRR2.idProgetto) THEN
+		IF NEW.Recensore = NEW.Recensito THEN
 			   RAISE NOTICE 'Non puoi recensirti da solo';
 		END IF;
-		IF EXISTS (SELECT *
-			   FROM ProgettoRecensoreRecensito PRR1, ProgettoRecensoreRecensito PRR2
-			   WHERE PRR1.idProgetto <> PRR2.idProgetto) THEN
-			   RAISE NOTICE 'recensore e recensito non hanno lavorato allo stesso progetto';
+		IF PRR1.idProgetto <> PRR2.idProgetto THEN
+			   RAISE NOTICE 'Recensore e Recensito non hanno lavorato allo stesso progetto';
 		END IF;
 		RETURN NULL;
 	END IF;
 END
+
 CREATE TRIGGER TriggerInserimentoRecensione
 BEFORE INSERT ON Valutazione
 FOR EACH ROW
