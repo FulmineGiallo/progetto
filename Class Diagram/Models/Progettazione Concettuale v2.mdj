@@ -599,7 +599,7 @@
 											"top": 1034,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+ambito: enumTipoAmbito",
+											"text": "+ambito: enumTipoAmbito[1...*]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4333,7 +4333,7 @@
 										"$ref": "AAAAAAF2cpNPUaFlVOE="
 									},
 									"edgePosition": 1,
-									"text": "+Composizione Skill"
+									"text": "+ComposizioneSkill"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5061,7 +5061,7 @@
 								"$ref": "AAAAAAF2cpaz6sxgzP0="
 							},
 							"lineStyle": 1,
-							"points": "655:1047;632:1024;635:1008"
+							"points": "664:1047;635:1008"
 						},
 						{
 							"_type": "UMLClassView",
@@ -5844,7 +5844,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF2TdR6oTxlffo="
 							},
-							"name": "Composizione Skill",
+							"name": "ComposizioneSkill",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAF2cpNPUKFi91s=",
@@ -6196,7 +6196,8 @@
 								"$ref": "AAAAAAF2TdsHtz2HAeI="
 							},
 							"name": "ambito",
-							"type": "enumTipoAmbito"
+							"type": "enumTipoAmbito",
+							"multiplicity": "1...*"
 						}
 					]
 				},
