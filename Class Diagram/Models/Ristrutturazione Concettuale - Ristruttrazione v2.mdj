@@ -6122,9 +6122,9 @@
 										"$ref": "AAAAAAF2cpfqMOyC1wA="
 									},
 									"font": "Arial;13;0",
-									"left": 264,
+									"left": 263,
 									"top": 1029,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -6185,9 +6185,9 @@
 										"$ref": "AAAAAAF2cpfqMOyDEd8="
 									},
 									"font": "Arial;13;0",
-									"left": 225,
+									"left": 224,
 									"top": 1236,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -6485,7 +6485,7 @@
 									"hostEdge": {
 										"$ref": "AAAAAAF2cpuKKfp50js="
 									},
-									"text": "1...*"
+									"text": "0...*"
 								},
 								{
 									"_type": "UMLQualifierCompartmentView",
@@ -6924,7 +6924,7 @@
 								"reference": {
 									"$ref": "AAAAAAF2TdsHtz2HAeI="
 								},
-								"multiplicity": "1...*"
+								"multiplicity": "0...*"
 							}
 						}
 					],
