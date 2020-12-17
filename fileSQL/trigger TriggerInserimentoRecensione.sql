@@ -42,8 +42,6 @@ BEGIN
 		RETURN NULL;
 	END IF;
 END
-
-
 CREATE TRIGGER TriggerInserimentoRecensione
 BEFORE INSERT ON Valutazione
 FOR EACH ROW
