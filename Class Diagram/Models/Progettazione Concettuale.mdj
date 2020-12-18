@@ -286,13 +286,30 @@
 											"height": 13,
 											"text": "+Grado",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF2d9sGxYzfGoQ=",
+											"_parent": {
+												"$ref": "AAAAAAF2TdR6ozxtt2U="
+											},
+											"model": {
+												"$ref": "AAAAAAF2d9sGhozcRO4="
+											},
+											"font": "Arial;13;0",
+											"left": 1045,
+											"top": 981,
+											"width": 119,
+											"height": 13,
+											"text": "+Password",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1040,
 									"top": 841,
 									"width": 129,
-									"height": 143
+									"height": 158
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -305,7 +322,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 1040,
-									"top": 984,
+									"top": 999,
 									"width": 129,
 									"height": 10
 								},
@@ -5934,6 +5951,14 @@
 							},
 							"name": "Grado",
 							"type": ""
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF2d9sGhozcRO4=",
+							"_parent": {
+								"$ref": "AAAAAAF2TdR6oTxlffo="
+							},
+							"name": "Password"
 						}
 					]
 				},
@@ -7352,7 +7377,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF2cU00pUrIS0A="
 							},
-							"name": "Presenza"
+							"name": "Presenza",
+							"type": ""
 						}
 					]
 				},
@@ -7412,7 +7438,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF2cU5palroj2Y="
 							},
-							"name": "Ruolo"
+							"name": "Ruolo",
+							"type": ""
 						}
 					]
 				}

@@ -286,13 +286,30 @@
 											"height": 13,
 											"text": "+Grado: enumGrado[1]",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF2d9o7pcHY/XQ=",
+											"_parent": {
+												"$ref": "AAAAAAF2TdR6ozxtt2U="
+											},
+											"model": {
+												"$ref": "AAAAAAF2d9o7lMHVQuo="
+											},
+											"font": "Arial;13;0",
+											"left": 293,
+											"top": 1077,
+											"width": 134.0498046875,
+											"height": 13,
+											"text": "+Password: String[1]",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 288,
 									"top": 937,
 									"width": 144.0498046875,
-									"height": 143
+									"height": 158
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -305,7 +322,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 288,
-									"top": 1080,
+									"top": 1095,
 									"width": 144.0498046875,
 									"height": 10
 								},
@@ -5989,6 +6006,16 @@
 							"type": {
 								"$ref": "AAAAAAF2UvgNeoUaR2o="
 							},
+							"multiplicity": "1"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF2d9o7lMHVQuo=",
+							"_parent": {
+								"$ref": "AAAAAAF2TdR6oTxlffo="
+							},
+							"name": "Password",
+							"type": "String",
 							"multiplicity": "1"
 						}
 					]
