@@ -1276,7 +1276,7 @@
 											"top": 1417,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+OrarioInizio: TIMESTAMP[1]",
+											"text": "+OrarioInizio: Time[1]",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1293,7 +1293,7 @@
 											"top": 1432,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+OrarioFine: TIMESTAMP[1]",
+											"text": "+OrarioFine: Time[1]",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8208,19 +8208,6 @@
 							"height": 33
 						},
 						{
-							"_type": "EdgeLabelView",
-							"_id": "AAAAAAF2h3r/YiAvl5I=",
-							"font": "Arial;13;0",
-							"left": 1827,
-							"top": 1232,
-							"width": 140.55615234375,
-							"height": 13,
-							"alpha": 3.2090576735670697,
-							"distance": 148.33745312630927,
-							"edgePosition": 1,
-							"text": "+OrganizzatoreRiunione"
-						},
-						{
 							"_type": "UMLAssociationView",
 							"_id": "AAAAAAF2h3r/YiAusug=",
 							"_parent": {
@@ -8511,19 +8498,6 @@
 							"height": 33
 						},
 						{
-							"_type": "EdgeLabelView",
-							"_id": "AAAAAAF2h3HyT4seVnc=",
-							"font": "Arial;13;0",
-							"left": 1823,
-							"top": 1462,
-							"width": 150.6806640625,
-							"height": 13,
-							"alpha": -0.15160550817343132,
-							"distance": 72.83543093852057,
-							"edgePosition": 1,
-							"text": "+PartecipazioneImpiegato"
-						},
-						{
 							"_type": "UMLAssociationView",
 							"_id": "AAAAAAF2h3HyT4sdOLQ=",
 							"_parent": {
@@ -8812,19 +8786,6 @@
 							"top": 1448,
 							"width": 153,
 							"height": 33
-						},
-						{
-							"_type": "EdgeLabelView",
-							"_id": "AAAAAAF2h1lo38EDClQ=",
-							"font": "Arial;13;0",
-							"left": 2671,
-							"top": 1456,
-							"width": 144.16796875,
-							"height": 13,
-							"alpha": 3.2919640591552795,
-							"distance": 66.75327707311455,
-							"edgePosition": 1,
-							"text": "+RegistrazioneImpiegato"
 						},
 						{
 							"_type": "UMLAssociationView",
@@ -10430,7 +10391,7 @@
 								"$ref": "AAAAAAF2TePvYFnZ74U="
 							},
 							"name": "OrarioInizio",
-							"type": "TIMESTAMP",
+							"type": "Time",
 							"multiplicity": "1"
 						},
 						{
@@ -10440,7 +10401,7 @@
 								"$ref": "AAAAAAF2TePvYFnZ74U="
 							},
 							"name": "OrarioFine",
-							"type": "TIMESTAMP",
+							"type": "Time",
 							"multiplicity": "1"
 						},
 						{
