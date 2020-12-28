@@ -1063,7 +1063,7 @@
 											"top": 1861,
 											"width": 188.51904296875,
 											"height": 13,
-											"text": "+DataV: Date[1]",
+											"text": "+DataValutazione: Date[1]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -10265,7 +10265,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF2TeHo0E6aBL8="
 							},
-							"name": "DataV",
+							"name": "DataValutazione",
 							"type": "Date",
 							"multiplicity": "1"
 						}
