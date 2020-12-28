@@ -371,6 +371,23 @@
 									"subViews": [
 										{
 											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF2qTr35itFq9g=",
+											"_parent": {
+												"$ref": "AAAAAAF2TdR6ozxtt2U="
+											},
+											"model": {
+												"$ref": "AAAAAAF2qTr3yCtC7rE="
+											},
+											"font": "Arial;13;0",
+											"left": 2229,
+											"top": 1402,
+											"width": 205.841796875,
+											"height": 13,
+											"text": "+idImpiegato: int[1]",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
 											"_id": "AAAAAAF2TdeQzjypNIM=",
 											"_parent": {
 												"$ref": "AAAAAAF2TdR6ozxtt2U="
@@ -380,7 +397,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1402,
+											"top": 1417,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+CF: String[1]",
@@ -397,7 +414,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1417,
+											"top": 1432,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+Nome: String[1]",
@@ -414,7 +431,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1432,
+											"top": 1447,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+Cognome: String[1]",
@@ -431,7 +448,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1447,
+											"top": 1462,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+Genere: enumGenere[1]",
@@ -448,7 +465,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1462,
+											"top": 1477,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+DataN: Date[1]",
@@ -465,7 +482,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1477,
+											"top": 1492,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+ComuneN: String[1]",
@@ -482,7 +499,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1492,
+											"top": 1507,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+E-mail: String[1]",
@@ -499,7 +516,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1507,
+											"top": 1522,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+Password: String[1]",
@@ -510,7 +527,7 @@
 									"left": 2224,
 									"top": 1397,
 									"width": 215.841796875,
-									"height": 128
+									"height": 143
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -523,7 +540,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 2224,
-									"top": 1525,
+									"top": 1540,
 									"width": 215.841796875,
 									"height": 10
 								},
@@ -3673,7 +3690,24 @@
 											"top": 1781,
 											"width": 181.009765625,
 											"height": 13,
-											"text": "+DataStipendio: Date[1]",
+											"text": "+DataRiscossione: Date[1]",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF2qT7QVzXnfSU=",
+											"_parent": {
+												"$ref": "AAAAAAF2h1CoAoRBUc8="
+											},
+											"model": {
+												"$ref": "AAAAAAF2qT7QFDXenMs="
+											},
+											"font": "Arial;13;0",
+											"left": 2141,
+											"top": 1796,
+											"width": 181.009765625,
+											"height": 13,
+											"text": "+Quantità: real[1]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3681,7 +3715,7 @@
 									"left": 2136,
 									"top": 1761,
 									"width": 191.009765625,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -3694,7 +3728,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 2136,
-									"top": 1799,
+									"top": 1814,
 									"width": 191.009765625,
 									"height": 10
 								},
@@ -9803,6 +9837,16 @@
 					"attributes": [
 						{
 							"_type": "UMLAttribute",
+							"_id": "AAAAAAF2qTr3yCtC7rE=",
+							"_parent": {
+								"$ref": "AAAAAAF2TdR6oTxlffo="
+							},
+							"name": "idImpiegato",
+							"type": "int",
+							"multiplicity": "1"
+						},
+						{
+							"_type": "UMLAttribute",
 							"_id": "AAAAAAF2TdeQvTym2sI=",
 							"_parent": {
 								"$ref": "AAAAAAF2TdR6oTxlffo="
@@ -12046,8 +12090,18 @@
 							"_parent": {
 								"$ref": "AAAAAAF2h1Cn/4Q5TnE="
 							},
-							"name": "DataStipendio",
+							"name": "DataRiscossione",
 							"type": "Date",
+							"multiplicity": "1"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF2qT7QFDXenMs=",
+							"_parent": {
+								"$ref": "AAAAAAF2h1Cn/4Q5TnE="
+							},
+							"name": "Quantità",
+							"type": "real",
 							"multiplicity": "1"
 						}
 					]
