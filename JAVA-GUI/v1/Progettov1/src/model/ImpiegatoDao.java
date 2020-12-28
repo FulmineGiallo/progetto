@@ -27,10 +27,10 @@ public class ImpiegatoDao implements Dao<ImpiegatoDao>
     @Override
     public void delete(ImpiegatoDao impiegati)
     {
-        System.out.println("Ho eliminato:");
+        System.out.println("Ho eliminato: ");
+        //System.out.println("Ciao");
     }
 
-+
 
     @Override
     public List<ImpiegatoDao> getAll() {
