@@ -3,8 +3,7 @@ CONTROLLARE GLI ON DELETE CASCADE E UPDATE SULLA PARTE DI DESTRA
 
 
 
-registrazione:
-uniqueimpiegatoprogetto
+registrazione (che ora è ProgettoImpiegato):
 
 trigger inserimentoProjectManager:
 CREATE TRIGGER triggerinserimentoprojectmanager
@@ -55,7 +54,7 @@ ALTER FUNCTION public.ckregistrazione()
 
 
 
-valutazione:
+valutazione (ora divise in valutazioneProgettoImpiegato e valutazioneRiunioneImpiegato):
 trigger datavalutazione
 
 CREATE TRIGGER triggerdatavalutazione
@@ -134,3 +133,22 @@ $BODY$;
 
 ALTER FUNCTION public.ckrecensione()
     OWNER TO postgres;
+
+
+
+
+
+
+VIEW:
+
+CREATE OR REPLACE VIEW public.progettorecensorerecensito
+ AS
+ SELECT r.idprogetto,
+    i.cf AS impiegato,
+    r.ruolo
+   FROM (impiegato i
+     JOIN registrazione r ON (((i.cf)::text = (r.cf)::text)));
+
+ALTER TABLE public.progettorecensorerecensito
+    OWNER TO postgres;
+
