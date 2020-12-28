@@ -1,0 +1,74 @@
+SI DEVE AGGIUNGERE LA SEQUENCE PER idTipologia
+CONTROLLARE GLI ON DELETE CASCADE E UPDATE SULLA PARTE DI DESTRA
+
+
+
+registrazione:
+uniqueimpiegatoprogetto
+
+
+
+
+valutazione:
+trigger datavalutazione
+function inserimentodatacorrente:
+
+CREATE FUNCTION public.inserimentodatacorrente()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$
+BEGIN
+	NEW.DataV = current_date;
+	RETURN NEW;
+END
+$BODY$;
+
+ALTER FUNCTION public.inserimentodatacorrente()
+    OWNER TO postgres;
+
+
+
+trigger inserimentorecensione
+function ckrecensione:
+
+CREATE FUNCTION public.ckrecensione()
+    RETURNS trigger
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE NOT LEAKPROOF
+AS $BODY$
+BEGIN			
+	IF EXISTS (SELECT *
+			   FROM ProgettoRecensoreRecensito PRR1, ProgettoRecensoreRecensito PRR2
+			   WHERE PRR1.Impiegato <> PRR2.Impiegato
+			   AND PRR1.idProgetto = PRR2.idProgetto
+			   AND PRR1.Impiegato = NEW.Recensore
+			   AND PRR2.Impiegato = NEW.Recensito) THEN --recensore e recensito hanno lavorato allo stesso progetto
+		IF NOT EXISTS (SELECT *
+			   		   FROM ProgettoRecensoreRecensito PRR1, ProgettoRecensoreRecensito PRR2
+			   		   WHERE PRR1.Impiegato <> PRR2.Impiegato
+			   		   AND PRR1.idProgetto = PRR2.idProgetto
+			   		   AND PRR1.Impiegato = NEW.Recensore
+			   		   AND PRR2.Impiegato = NEW.Recensito
+					   AND PRR1.Ruolo = 'Project Manager') THEN
+			RAISE NOTICE 'questo recensore non può scrivere recensioni perché non è un project manager del progetto';
+			RETURN NULL;
+		ELSE
+			RETURN NEW;
+		END IF;
+	ELSE
+		IF NEW.Recensore = NEW.Recensito THEN
+			   RAISE NOTICE 'Non puoi recensirti da solo';
+		END IF;
+		IF PRR1.idProgetto <> PRR2.idProgetto THEN
+			   RAISE NOTICE 'Recensore e Recensito non hanno lavorato allo stesso progetto';
+		END IF;
+		RETURN NULL;
+	END IF;
+END
+$BODY$;
+
+ALTER FUNCTION public.ckrecensione()
+    OWNER TO postgres;
