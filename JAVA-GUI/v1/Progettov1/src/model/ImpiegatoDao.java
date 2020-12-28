@@ -13,21 +13,24 @@ public class ImpiegatoDao implements Dao<ImpiegatoDao>
     }
 
     @Override
-    public void save(ImpiegatoDao impiegato) {
+    public void save(ImpiegatoDao impiegato)
+    {
             impiegati.add(impiegato);
     }
 
     @Override
-    public void update(ImpiegatoDao o, String parametri)
+    public void update(ImpiegatoDao o, String parametri[])
     {
 
     }
 
     @Override
-    public void delete(ImpiegatoDao o)
+    public void delete(ImpiegatoDao impiegati)
     {
-
+        System.out.println("Ho eliminato:");
     }
+
++
 
     @Override
     public List<ImpiegatoDao> getAll() {
