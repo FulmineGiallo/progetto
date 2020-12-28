@@ -6,7 +6,13 @@ CONTROLLARE GLI ON DELETE CASCADE E UPDATE SULLA PARTE DI DESTRA
 registrazione:
 uniqueimpiegatoprogetto
 
-trigger inserimentoProjectManager
+trigger inserimentoProjectManager:
+CREATE TRIGGER triggerinserimentoprojectmanager
+    BEFORE INSERT
+    ON public.registrazione
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ckregistrazione();
+
 function ckregistrazione:
 
 CREATE FUNCTION public.ckregistrazione()
@@ -51,6 +57,14 @@ ALTER FUNCTION public.ckregistrazione()
 
 valutazione:
 trigger datavalutazione
+
+CREATE TRIGGER triggerdatavalutazione
+    BEFORE INSERT
+    ON public.valutazione
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.inserimentodatacorrente();
+
+
 function inserimentodatacorrente:
 
 CREATE FUNCTION public.inserimentodatacorrente()
@@ -71,6 +85,14 @@ ALTER FUNCTION public.inserimentodatacorrente()
 
 
 trigger inserimentorecensione
+
+CREATE TRIGGER triggerinserimentorecensione
+    BEFORE INSERT
+    ON public.valutazione
+    FOR EACH ROW
+    EXECUTE PROCEDURE public.ckrecensione();
+
+
 function ckrecensione:
 
 CREATE FUNCTION public.ckrecensione()
