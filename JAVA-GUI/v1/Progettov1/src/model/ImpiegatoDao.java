@@ -29,6 +29,7 @@ public class ImpiegatoDao implements Dao<ImpiegatoDao>
     {
         System.out.println("Ho eliminato: ");
         System.out.println("Prova 2");
+        System.out.println("Prova 22");
     }
 
 
