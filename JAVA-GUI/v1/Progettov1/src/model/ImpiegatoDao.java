@@ -28,10 +28,7 @@ public class ImpiegatoDao implements Dao<ImpiegatoDao>
     public void delete(ImpiegatoDao impiegati)
     {
         System.out.println("Ho eliminato: ");
-        System.out.println("Prova 2");
-        System.out.println("Prova 22");
-        System.out.println("Prova 23");
-
+        System.out.println("Prova 55");
     }
 
 
