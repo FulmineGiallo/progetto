@@ -1281,36 +1281,36 @@
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF2TeQg7Fraozk=",
+											"_id": "AAAAAAF2UwoHCj4C+WQ=",
 											"_parent": {
 												"$ref": "AAAAAAF2TePvYVnhaSg="
 											},
 											"model": {
-												"$ref": "AAAAAAF2TeQg21rO0s0="
+												"$ref": "AAAAAAF2UwoG4j32EEE="
 											},
 											"font": "Arial;13;0",
 											"left": 1109,
 											"top": 1417,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+OrarioInizio: Time[1]",
+											"text": "+Titolo: String[1]",
 											"horizontalAlignment": 0
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF2TeRHSVtWSyk=",
+											"_id": "AAAAAAF2UwolgUBeJek=",
 											"_parent": {
 												"$ref": "AAAAAAF2TePvYVnhaSg="
 											},
 											"model": {
-												"$ref": "AAAAAAF2TeRHGFtKtVk="
+												"$ref": "AAAAAAF2UwolWkBSssw="
 											},
 											"font": "Arial;13;0",
 											"left": 1109,
 											"top": 1432,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+OrarioFine: Time[1]",
+											"text": "+Descrizione: String[0...1]",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1332,36 +1332,36 @@
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF2UwoHCj4C+WQ=",
+											"_id": "AAAAAAF2TeQg7Fraozk=",
 											"_parent": {
 												"$ref": "AAAAAAF2TePvYVnhaSg="
 											},
 											"model": {
-												"$ref": "AAAAAAF2UwoG4j32EEE="
+												"$ref": "AAAAAAF2TeQg21rO0s0="
 											},
 											"font": "Arial;13;0",
 											"left": 1109,
 											"top": 1462,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+Titolo: String[1]",
+											"text": "+OrarioInizio: Time[1]",
 											"horizontalAlignment": 0
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF2UwolgUBeJek=",
+											"_id": "AAAAAAF2TeRHSVtWSyk=",
 											"_parent": {
 												"$ref": "AAAAAAF2TePvYVnhaSg="
 											},
 											"model": {
-												"$ref": "AAAAAAF2UwolWkBSssw="
+												"$ref": "AAAAAAF2TeRHGFtKtVk="
 											},
 											"font": "Arial;13;0",
 											"left": 1109,
 											"top": 1477,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+Descrizione: String[0...1]",
+											"text": "+OrarioFine: Time[1]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5785,7 +5785,7 @@
 											"top": 1861,
 											"width": 188.51904296875,
 											"height": 13,
-											"text": "+DataV: Date[1]",
+											"text": "+DataValutazione: Date[1]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -10430,36 +10430,6 @@
 						},
 						{
 							"_type": "UMLAttribute",
-							"_id": "AAAAAAF2TeQg21rO0s0=",
-							"_parent": {
-								"$ref": "AAAAAAF2TePvYFnZ74U="
-							},
-							"name": "OrarioInizio",
-							"type": "Time",
-							"multiplicity": "1"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAF2TeRHGFtKtVk=",
-							"_parent": {
-								"$ref": "AAAAAAF2TePvYFnZ74U="
-							},
-							"name": "OrarioFine",
-							"type": "Time",
-							"multiplicity": "1"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAF2TeRle1vGx68=",
-							"_parent": {
-								"$ref": "AAAAAAF2TePvYFnZ74U="
-							},
-							"name": "Data",
-							"type": "Date",
-							"multiplicity": "1"
-						},
-						{
-							"_type": "UMLAttribute",
 							"_id": "AAAAAAF2UwoG4j32EEE=",
 							"_parent": {
 								"$ref": "AAAAAAF2TePvYFnZ74U="
@@ -10477,6 +10447,36 @@
 							"name": "Descrizione",
 							"type": "String",
 							"multiplicity": "0...1"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF2TeRle1vGx68=",
+							"_parent": {
+								"$ref": "AAAAAAF2TePvYFnZ74U="
+							},
+							"name": "Data",
+							"type": "Date",
+							"multiplicity": "1"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF2TeQg21rO0s0=",
+							"_parent": {
+								"$ref": "AAAAAAF2TePvYFnZ74U="
+							},
+							"name": "OrarioInizio",
+							"type": "Time",
+							"multiplicity": "1"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF2TeRHGFtKtVk=",
+							"_parent": {
+								"$ref": "AAAAAAF2TePvYFnZ74U="
+							},
+							"name": "OrarioFine",
+							"type": "Time",
+							"multiplicity": "1"
 						}
 					]
 				},
@@ -12214,7 +12214,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF2h29FZGtv1hk="
 							},
-							"name": "DataV",
+							"name": "DataValutazione",
 							"type": "Date",
 							"multiplicity": "1"
 						}
