@@ -7,21 +7,20 @@ import javafx.stage.Stage;
 
 import java.io.PrintWriter;
 
-public class Registrazione
+public class RegistrazioneImpiegato
 {
     private final PrintWriter writer;
 
-    public Registrazione(PrintWriter writer) {
+    public RegistrazioneImpiegato(PrintWriter writer) {
         this.writer = writer ;
     }
 
     public void start(Stage window) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/registrazione.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/registrazioneimpiegato.fxml"));
         Scene scene = new Scene(root);
         window.setScene(scene);
         window.show();
 
-        //ciao2
     }
 }

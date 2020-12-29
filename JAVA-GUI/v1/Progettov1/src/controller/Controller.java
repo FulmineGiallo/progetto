@@ -1,15 +1,11 @@
 
 package controller;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import view.Registrazione;
+import view.RegistrazioneImpiegato;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Controller
@@ -19,11 +15,11 @@ public class Controller
     @FXML
     Label cambia;
 
-    Registrazione frame;
+    RegistrazioneImpiegato frame;
     public void initialize() throws Exception
     {
         PrintWriter writer = null;
-        frame = new Registrazione(writer);
+        frame = new RegistrazioneImpiegato(writer);
     }
 
     public void inviaCurriculum(javafx.event.ActionEvent actionEvent) throws Exception {
