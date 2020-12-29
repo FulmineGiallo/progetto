@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 public class Registrazione
 {
-    private final PrintWriter writer ;
+    private final PrintWriter writer;
 
     public Registrazione(PrintWriter writer) {
         this.writer = writer ;

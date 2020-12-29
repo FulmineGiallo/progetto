@@ -1,11 +1,15 @@
-package controller;
 
+package controller;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import view.Registrazione;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Controller
@@ -21,16 +25,9 @@ public class Controller
         PrintWriter writer = null;
         frame = new Registrazione(writer);
     }
-    
 
-    
     public void inviaCurriculum(javafx.event.ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage)invia.getScene().getWindow();
         frame.start(stage);
-        System.out.println("sto utilizzando IntelliJ e ho fatto un push");
-    }
-    
-    public void CambiaLabel (javafx.event.ActionEvent actionEvent) {
-        cambia.setText("ciao");
     }
 }
