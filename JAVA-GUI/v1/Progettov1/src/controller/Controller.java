@@ -27,11 +27,10 @@ public class Controller
     public void inviaCurriculum(javafx.event.ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage)invia.getScene().getWindow();
         frame.start(stage);
+        System.out.println("sto utilizzando IntelliJ e ho fatto un push");
     }
     
     public void CambiaLabel (javafx.event.ActionEvent actionEvent) {
-    	cambia.setText("ciao");
+        cambia.setText("ciao");
     }
-    
-
 }
