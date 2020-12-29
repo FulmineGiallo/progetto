@@ -11,7 +11,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="392.0" prefWidth="276.0">
                <children>
-                  <Button fx:id="invia" layoutX="174.0" layoutY="358.0" mnemonicParsing="false" onAction="#CambiaLabel" text="Invia il curriculum" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="14.000000000000028" />
+                  <Button fx:id="invia" layoutX="174.0" layoutY="358.0" mnemonicParsing="false" onAction="#inviaCurriculum" text="Invia il curriculum" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="14.000000000000028" />
                   <Label id="ciao" fx:id="cambia" layoutX="121.0" layoutY="118.0" prefHeight="78.0" prefWidth="134.0" text="Label" />
                </children>
             </AnchorPane>
