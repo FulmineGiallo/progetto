@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Aggiunte nuove classi da formare: Progetto, RiunioneDao, Valutazione e modificata interfaccia metodo inviaCurriculum che apre una nuova finestra." />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Aggiunte nuove classi da formare: Progetto, RiunioneDao, Valutazione e modificata interfaccia metodo inviaCurriculum che apre una nuova finestra.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/RegistrazioneImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/RegistrazioneImpiegato.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,6 +106,9 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="controller" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Carmi\Desktop\Progettov1\src\view\fxml" />
     </key>
@@ -314,7 +322,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
@@ -361,30 +368,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="122" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1609257877965" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1609293635278">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1609349089647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609293635278" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1609293635278">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609349089647" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1609349089647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609293635278" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1609293635277">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609349089647" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1609349089647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609293635277" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1609293635278">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609349089647" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1609349089647">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609293635278" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609349089647" />
     <state x="481" y="128" key="MultipleFileMergeDialog" timestamp="1609189819700">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="481" y="128" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1609189819700" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1609275604602">
+    <state x="249" y="0" key="SettingsEditor" timestamp="1609337069485">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1609275604602" />
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1609337069485" />
     <state x="618" y="327" key="VCS.ChangelistChooser" timestamp="1609191517916">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -393,10 +400,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="134" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1609292153574" />
-    <state x="465" y="234" width="594" height="354" key="com.intellij.ide.util.TipDialog" timestamp="1609291962087">
+    <state x="465" y="234" width="594" height="354" key="com.intellij.ide.util.TipDialog" timestamp="1609348630598">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="234" width="594" height="354" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1609291962087" />
+    <state x="465" y="234" width="594" height="354" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1609348630598" />
     <state x="578" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609189724904">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

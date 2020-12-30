@@ -11,8 +11,9 @@ public class RegistrazioneImpiegato
 {
     private final PrintWriter writer;
 
-    public RegistrazioneImpiegato(PrintWriter writer) {
-        this.writer = writer ;
+    public RegistrazioneImpiegato(PrintWriter writer)
+    {
+        this.writer = writer;
     }
 
     public void start(Stage window) throws Exception

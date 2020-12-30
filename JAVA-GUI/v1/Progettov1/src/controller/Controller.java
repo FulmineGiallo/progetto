@@ -13,15 +13,15 @@ public class Controller
     @FXML
     Button invia;
 
-    RegistrazioneImpiegato frame;
+    RegistrazioneImpiegato registrazione;
     public void initialize() throws Exception
     {
         PrintWriter writer = null;
-        frame = new RegistrazioneImpiegato(writer);
+        registrazione = new RegistrazioneImpiegato(writer);
     }
 
     public void inviaCurriculum(javafx.event.ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage)invia.getScene().getWindow();
-        frame.start(stage);
+        registrazione.start(stage);
     }
 }
