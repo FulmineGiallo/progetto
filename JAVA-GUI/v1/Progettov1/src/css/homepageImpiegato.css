@@ -1,0 +1,8 @@
+#topPane
+{
+    -fx-border-width: 1 2 3 4; -fx-border-color: white white black white;
+}
+#centerPane
+{
+    -fx-border-width: 1 2 3 4; -fx-border-color: white white white black;
+}
