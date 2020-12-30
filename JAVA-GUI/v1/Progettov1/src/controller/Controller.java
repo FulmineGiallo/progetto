@@ -12,8 +12,7 @@ public class Controller
 {
     @FXML
     Button invia;
-    @FXML
-    Label cambia;
+
 
     RegistrazioneImpiegato frame;
     public void initialize() throws Exception

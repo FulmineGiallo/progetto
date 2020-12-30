@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Aggiunta la classe Impiegato e la classe Riunione">
-      <change afterPath="$PROJECT_DIR$/src/css/homepageImpiegato.css" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Update di homepagebenvenuto.fxml, si deve solo aggiungere uno stile al frame, è tutto responsive">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomePageBenvenuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePageBenvenuto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/fxml/homepagebenvenuto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/fxml/homepagebenvenuto.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609276280465</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Update di homepagebenvenuto.fxml, si deve solo aggiungere uno stile al frame, è tutto responsive">
+      <created>1609291688977</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1609291688977</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -315,7 +319,8 @@
     <MESSAGE value="Printf Prova2" />
     <MESSAGE value="Nomi corretti delle classi in viewv" />
     <MESSAGE value="Aggiunta la classe Impiegato e la classe Riunione" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta la classe Impiegato e la classe Riunione" />
+    <MESSAGE value="Update di homepagebenvenuto.fxml, si deve solo aggiungere uno stile al frame, è tutto responsive" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update di homepagebenvenuto.fxml, si deve solo aggiungere uno stile al frame, è tutto responsive" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="66" width="1077" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609275574169">
@@ -342,30 +347,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1609254338315" />
-    <state x="354" y="7" key="CommitChangelistDialog2" timestamp="1609276279875">
+    <state x="354" y="7" key="CommitChangelistDialog2" timestamp="1609291688089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="354" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1609276279875" />
+    <state x="354" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1609291688089" />
     <state x="549" y="122" key="FileChooserDialogImpl" timestamp="1609257877965">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="122" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1609257877965" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1609280268421">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1609291951703">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609280268421" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1609280268421">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1609291951703" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1609291951703">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609280268421" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1609280268421">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1609291951703" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1609291951703">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609280268421" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1609280268421">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1609291951703" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1609291951703">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609280268421" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1609291951703" />
     <state x="481" y="128" key="MultipleFileMergeDialog" timestamp="1609189819700">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -378,14 +383,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="618" y="327" key="VCS.ChangelistChooser/0.0.1536.824@0.0.1536.824" timestamp="1609191517916" />
-    <state x="361" y="134" key="Vcs.Push.Dialog.v2" timestamp="1609276283999">
+    <state x="361" y="134" key="Vcs.Push.Dialog.v2" timestamp="1609291691080">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="134" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1609276283999" />
-    <state x="465" y="234" width="594" height="354" key="com.intellij.ide.util.TipDialog" timestamp="1609289900307">
+    <state x="361" y="134" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1609291691080" />
+    <state x="465" y="234" width="594" height="354" key="com.intellij.ide.util.TipDialog" timestamp="1609291962087">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="234" width="594" height="354" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1609289900307" />
+    <state x="465" y="234" width="594" height="354" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1609291962087" />
     <state x="578" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609189724904">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

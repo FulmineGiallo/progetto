@@ -16,6 +16,6 @@
          </font>
       </Label>
       <Pane id="topPane" prefHeight="94.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Button layoutX="251.0" layoutY="448.0" mnemonicParsing="false" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="26.399999999999977" />
+      <Button fx:id="invia" layoutX="251.0" layoutY="448.0" mnemonicParsing="false" onAction="#inviaCurriculum" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="26.399999999999977" />
    </children>
 </AnchorPane>
