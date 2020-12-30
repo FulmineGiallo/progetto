@@ -13,7 +13,6 @@ public class Controller
     @FXML
     Button invia;
 
-
     RegistrazioneImpiegato frame;
     public void initialize() throws Exception
     {

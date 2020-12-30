@@ -10,15 +10,11 @@ import javafx.stage.Stage;
 
 public class HomePageBenvenuto extends Application
 {
-    @FXML
-    SplitPane splitImpiegato;
-
-
     @Override
     public void start(Stage primaryStage) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/homepagebenvenuto.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("HomePage - Benvenuto");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
