@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Aggiunte nuove classi da formare: Progetto, RiunioneDao, Valutazione e modificata interfaccia metodo inviaCurriculum che apre una nuova finestra.">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Carmi.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/css/homepageImpiegato.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/homepageImpiegato.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomePageBenvenuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomePageBenvenuto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/fxml/homepagebenvenuto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/fxml/homepagebenvenuto.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Aggiunte nuove classi da formare: Progetto, RiunioneDao, Valutazione e modificata interfaccia metodo inviaCurriculum che apre una nuova finestra." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +80,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -322,6 +314,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
