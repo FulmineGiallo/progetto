@@ -16,6 +16,7 @@ public class HomePageBenvenuto extends Application
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         //hello
+        //hello2
     }
 
 
