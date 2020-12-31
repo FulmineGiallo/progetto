@@ -6,20 +6,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class HomePageBenvenuto extends Application
+import java.io.PrintWriter;
+
+public class HomePageBenvenuto
 {
-    @Override
-    public void start(Stage primaryStage) throws Exception
-    {
+
+
+    private final PrintWriter writer;
+
+    public HomePageBenvenuto
+            (PrintWriter writer) {
+        this.writer = writer ;
+    }
+
+    public void start(Stage window) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/homepagebenvenuto.fxml"));
-        primaryStage.setTitle("HomePage - Benvenuto");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-        
+        Scene scene =  new Scene(root);
+        window.setScene(scene);
+        window.show();
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
