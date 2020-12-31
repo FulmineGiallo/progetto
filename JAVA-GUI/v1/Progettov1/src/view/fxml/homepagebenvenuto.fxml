@@ -16,7 +16,7 @@
                </font>
             </Label>
          </children></Pane>
-      <Button id="Button" layoutX="628.0" layoutY="455.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="157.0" stylesheets="@../../css/homepageImpiegato.css" text="Effettua Login" AnchorPane.bottomAnchor="18.600000000000023" AnchorPane.rightAnchor="14.400000000000006" />
+      <Button id="Button" fx:id="login" layoutX="628.0" layoutY="455.0" mnemonicParsing="false" onAction="#effettua" prefHeight="26.0" prefWidth="157.0" stylesheets="@../../css/homepageImpiegato.css" text="Effettua Login" AnchorPane.bottomAnchor="18.600000000000023" AnchorPane.rightAnchor="14.400000000000006" />
       <Pane id="centerPane" layoutX="396.0" prefHeight="408.0" prefWidth="0.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.bottomAnchor="-4.0" AnchorPane.rightAnchor="397.6" AnchorPane.topAnchor="90.0" />
       <Button id="Button" fx:id="invia" layoutX="192.0" layoutY="439.0" mnemonicParsing="false" onAction="#inviaCurriculum" prefHeight="26.0" prefWidth="194.0" stylesheets="@../../css/homepageImpiegato.css" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="413.6" />
    </children>

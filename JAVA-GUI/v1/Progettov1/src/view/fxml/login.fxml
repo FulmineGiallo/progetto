@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" style="-fx-background-color: #36393e;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+   <children>
+      <Label id="LoginLabel" layoutX="147.0" layoutY="56.0" prefHeight="47.0" prefWidth="276.0" text="Login" textFill="#5aafff" AnchorPane.bottomAnchor="301.0" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="177.0" AnchorPane.topAnchor="56.0">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="155.0" prefHeight="35.0" prefWidth="71.0" text="Email" textFill="#5aafff" AnchorPane.bottomAnchor="234.8" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="484.8">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label id="PasswordLabel" layoutX="44.0" layoutY="213.0" prefHeight="35.0" prefWidth="104.0" text="Password" textFill="#5aafff" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="452.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField id="emailTextField" layoutX="167.0" layoutY="160.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="239.4" AnchorPane.rightAnchor="242.6" />
+      <Button id="signinButton" layoutX="423.0" layoutY="330.0" mnemonicParsing="false" style="-fx-background-color: #1E90FF;" text="Sign in" AnchorPane.bottomAnchor="57.39999999999998" AnchorPane.rightAnchor="106.60000000000002">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button id="backButton" layoutX="71.0" layoutY="330.0" mnemonicParsing="false" style="-fx-background-color: #1E90FF;" text="Back" AnchorPane.bottomAnchor="57.39999999999998" AnchorPane.leftAnchor="71.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <PasswordField id="passwordTextField" layoutX="167.0" layoutY="218.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="181.4" AnchorPane.rightAnchor="242.6" />
+   </children>
+</AnchorPane>

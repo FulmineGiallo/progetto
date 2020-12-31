@@ -1,6 +1,5 @@
 package view;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,17 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.PrintWriter;
 
-public class RegistrazioneImpiegato
+public class Login
 {
-
     private final PrintWriter writer;
 
-    public RegistrazioneImpiegato(PrintWriter writer) {
+    public Login(PrintWriter writer) {
         this.writer = writer ;
     }
-
     public void start(Stage window) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/registrazioneimpiegato.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
         Scene scene =  new Scene(root);
         window.setScene(scene);
         window.show();

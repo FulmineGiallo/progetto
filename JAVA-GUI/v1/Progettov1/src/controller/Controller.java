@@ -1,27 +1,40 @@
-
 package controller;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import view.Login;
 import view.RegistrazioneImpiegato;
 
 import java.io.PrintWriter;
 
-public class Controller
-{
+public class Controller {
     @FXML
-    Button invia;
+    private Button invia;
+    @FXML
+    public Button login;
 
-    RegistrazioneImpiegato registrazione;
-    public void initialize() throws Exception
+    /* Page Registrazione */
+    RegistrazioneImpiegato registrazionePage;
+    /*Page Login*/
+    Login loginPage;
+
+
+    public void inviaCurriculum(javafx.event.ActionEvent actionEvent) throws Exception
     {
         PrintWriter writer = null;
-        registrazione = new RegistrazioneImpiegato(writer);
+        registrazionePage = new RegistrazioneImpiegato(writer);
+
+        Stage stage = (Stage) invia.getScene().getWindow();
+        registrazionePage.start(stage);
     }
 
-    public void inviaCurriculum(javafx.event.ActionEvent actionEvent) throws Exception {
-        Stage stage = (Stage)invia.getScene().getWindow();
-        registrazione.start(stage);
+    public void effettua(javafx.event.ActionEvent actionEvent) throws Exception
+    {
+        PrintWriter writer = null ;
+        loginPage = new Login(writer);
+
+        Stage stage = (Stage) login.getScene().getWindow();
+        loginPage.start(stage);
     }
 }
