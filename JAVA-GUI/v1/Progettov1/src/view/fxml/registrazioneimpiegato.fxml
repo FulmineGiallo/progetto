@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox spacing="20.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0">
+         <children>
+            <VBox spacing="3.0">
+               <children>
+                  <JFXTextField labelFloat="true" promptText="Nome" />
+                  <Label textFill="RED" visible="false" />
+               </children>
+            </VBox>
+            <VBox maxWidth="300.0" minWidth="300.0" prefWidth="300.0">
+               <children>
+                  <JFXTextField labelFloat="true" promptText="Cognome" />
+                  <Label textFill="RED" visible="false" />
+               </children>
+            </VBox>
+            <HBox maxWidth="300.0" minWidth="300.0" prefWidth="300.0" spacing="20.0">
+               <children>
+                  <Label text="Genere:" />
+                  <HBox spacing="50.0">
+                     <children>
+                        <JFXRadioButton text="Uomo">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="Genere" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton prefHeight="17.0" text="Donna" toggleGroup="$Genere" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <VBox maxWidth="300.0" minWidth="300.0" prefWidth="300.0">
+               <children>
+                  <Label text="Data di nascita:" />
+                  <JFXDatePicker prefHeight="25.0" prefWidth="300.0" />
+               </children>
+            </VBox>
+            <VBox maxWidth="300.0" minWidth="300.0" prefWidth="300.0">
+               <children>
+                  <Label text="Comune di nascita:" />
+                  <JFXListView prefHeight="25.0" showTooltip="true" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets right="100.0" top="100.0" />
+   </padding>
+</AnchorPane>
