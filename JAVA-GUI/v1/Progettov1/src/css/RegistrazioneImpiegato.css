@@ -1,3 +1,117 @@
 @font-face{
+	font-family: 'Whitney';
+	src: url('\fonts\whitneybold.otf');
+}
 
+@font-face{
+	font-family: 'WhitneyBook';
+	src: url('\fonts\whitneybook.otf');
+}
+
+@font-face{
+	font-family: 'WhitneySemiboldItalic';
+	src: url('\fonts\whitneySemiboldItalic.otf');
+}
+
+/*
+	#7289da - azzurro
+	#424549 - grigio 1
+	#36393e - grigio 2
+	#282b30 - grigio 3
+	#1e2124 - grigio 4
+	(dal più chiaro al più scuro)
+*/
+
+.RegistrazioneImpiegato{
+	-fx-background-color: #424549;
+}
+
+.DescrizioneLabel{
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 30;
+}
+
+.DescrizioneLabel2{
+	-fx-text-fill: red;
+	-fx-font-weight: 900;
+	-fx-font-size: 16;
+}
+
+.NomeTF{
+	-fx-text-fill: white;
+	-jfx-focus-color: #7289da;
+	-jfx-unfocus-color: white;
+	-fx-prompt-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.NomeLabel{
+	-fx-font-size: 10;
+	-fx-text-fill: red;
+}
+
+.CognomeTF{
+	-fx-text-fill: white;
+	-jfx-focus-color: #7289da;
+	-jfx-unfocus-color: white;
+	-fx-prompt-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.CognomeLabel{
+	-fx-font-size: 10;
+	-fx-text-fill: red;
+}
+
+.GenereLabel{
+	-fx-font-size: 14;
+	-fx-text-fill: white;
+}
+
+.GenereRB1{
+	-jfx-selected-color: #7289da;
+	-jfx-unselected-color: white;
+	-fx-font-size: 14;
+	-fx-text-fill: white;
+}
+
+.GenereRB2{
+	-jfx-selected-color: #7289da;
+	-jfx-unselected-color: white;
+	-fx-font-size: 14;
+	-fx-text-fill: white;
+}
+
+.DataDiNascitaLabel{
+	-fx-font-size: 14;
+	-fx-text-fill: white;
+}
+
+.DataDiNascitaDP > .date-picker-display-node:readonly{
+	-jfx-focus-color: #7289da;
+	-jfx-unfocus-color: white;
+	-fx-text-fill: white;
+	-jfx-label-float: true;
+	-fx-prompt-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.DataDiNascitaDP > .date-picker-popup > .calendar-grid {
+    -fx-background-color: #424549;
+    -fx-cursor: hand;
+}
+
+.DataDiNascitaErrorLabel{
+	-fx-font-size: 10;
+	-fx-text-fill: red;
+}
+
+.ComuneDiNascitaLabel{
+	-fx-font-size: 14;
+	-fx-text-fill: white;
+}
+
+.ComuneDiNascitaLV{
+	-fx-background-color: transparent;
 }
