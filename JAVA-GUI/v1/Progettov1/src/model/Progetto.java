@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Progetto
 {
@@ -9,13 +11,22 @@ public class Progetto
     Date dataInizio;
     Date dataFine;
     Date scadenza;
+    Impiegato projectManager;
+    List<Impiegato> partecipantiProgetto = new ArrayList<>();
 
-    public Progetto(String titolo, String descrizione, Date dataInizio, Date dataFine, Date scadenza) {
+    public Progetto(String titolo, String descrizione, Date dataInizio, Date dataFine, Date scadenza, Impiegato projectManager)
+    {
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.scadenza = scadenza;
+        this.projectManager = projectManager;
+    }
+
+    public void partecipanti()
+    {
+
     }
 
     public String getTitolo() {

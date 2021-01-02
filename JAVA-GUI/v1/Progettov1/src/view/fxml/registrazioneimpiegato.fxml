@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -12,73 +11,59 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="RegistrazioneImpiegato" fx:id="RegistrazioneImpiegato" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox id="Form" fx:id="Form" prefHeight="900.0" prefWidth="600.0" spacing="20.0" styleClass="form">
+      <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox>
-               <children>
-                  <Label fx:id="DescrizioneLabel" text="Inserisci qui i tuoi dati">
-                     <styleClass>
-                        <String fx:value="DescrizioneLabel" />
-                        <String fx:value="DescrizioneLabel" />
-                     </styleClass>
-                  </Label>
-                  <Label fx:id="DescrizioneLabel2" styleClass="DescrizioneLabel2" text="* Campo obbligatorio" />
-               </children>
-            </VBox>
+            <Label text="Label" />
             <VBox spacing="3.0">
 				<children>
-                  <JFXTextField fx:id="NomeTF" alignment="TOP_LEFT" labelFloat="true" promptText="* Nome">
-                     <styleClass>
-                        <String fx:value="CognomeTF" />
-                        <String fx:value="NomeTF" />
-                     </styleClass></JFXTextField>
-                  <Label fx:id="NomeLabel" textFill="RED" />
+                  <JFXTextField alignment="TOP_LEFT" labelFloat="true" prefColumnCount="10" prefHeight="30.0" prefWidth="200.0" promptText="Nome" />
+                  <Label textFill="RED" visible="false" />
                </children>
             </VBox>
             <VBox>
                <children>
-                  <JFXTextField fx:id="CognomeTF" alignment="TOP_LEFT" labelFloat="true" prefWidth="400.0" promptText="* Cognome" styleClass="CognomeTF" />
-                  <Label fx:id="CognomeLabel" textFill="RED" />
+                  <JFXTextField alignment="TOP_LEFT" labelFloat="true" prefColumnCount="10" promptText="Cognome" />
+                  <Label textFill="RED" visible="false" />
                </children>
             </VBox>
-            <HBox spacing="15.0">
+            <HBox spacing="10.0">
                <children>
-                  <Label fx:id="GenereLabel" styleClass="GenereLabel" text="* Genere" />
+                  <Label text="Genere:" />
                   <HBox alignment="CENTER" spacing="30.0">
                      <children>
-                        <JFXRadioButton fx:id="GenereRB1" styleClass="GenereRB1" text="Uomo">
+                        <JFXRadioButton text="Uomo">
 							<toggleGroup>
 								<ToggleGroup fx:id="Genere" />
                             </toggleGroup>
                         </JFXRadioButton>
-                        <JFXRadioButton fx:id="GenereRB2" prefHeight="17.0" styleClass="GenereRB2" text="Donna" toggleGroup="$Genere" />
+                        <JFXRadioButton prefHeight="17.0" text="Donna" toggleGroup="$Genere" />
                      </children>
                   </HBox>
                </children>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
             </HBox>
             <VBox>
                <children>
-                  <JFXDatePicker id="DataDiNascitaDP" fx:id="DataDiNascitaDP" defaultColor="#7289da" editable="false" prefHeight="30.0" promptText="* Data di nascita" showWeekNumbers="true" styleClass="DataDiNascitaDP" />
-                  <Label fx:id="DataDiNascitaErrorLabel" textFill="RED" />
+                  <Label text="Data di nascita:" />
+                  <JFXDatePicker prefHeight="60.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding></JFXDatePicker>
                </children>
             </VBox>
             <HBox spacing="10.0">
                <children>
       			<VBox maxWidth="300.0" minWidth="300.0" prefWidth="300.0">
                      <children>
-                        <Label fx:id="ComuneDiNascitaLabel" styleClass="ComuneDiNascitaLabel" text="* Comune di nascita">
-                           <padding>
-                              <Insets bottom="5.0" />
-                           </padding></Label>
-                        <JFXListView fx:id="ComuneDiNascitaLV" prefHeight="30.0" showTooltip="true" styleClass="ComuneDiNascitaLV" />
+                        <Label text="Comune di nascita:" />
+                        <JFXListView prefHeight="25.0" showTooltip="true" />
                      </children>
                   </VBox>
-                  <JFXTextField fx:id="ComuneDiNascitaTF" alignment="TOP_LEFT" labelFloat="true" prefHeight="25.0" promptText="Provincia (sigla)">
+                  <JFXTextField alignment="TOP_LEFT" labelFloat="true" prefHeight="25.0" prefWidth="88.0" promptText="Provincia (sigla)">
                      <padding>
                         <Insets top="25.0" />
                      </padding>
@@ -86,9 +71,9 @@
                </children>
             </HBox>
          </children>
-         <padding>
-            <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
-         </padding>
       </VBox>
    </children>
+   <padding>
+      <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
+   </padding>
 </AnchorPane>
