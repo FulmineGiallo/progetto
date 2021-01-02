@@ -11,12 +11,11 @@ import java.io.PrintWriter;
 public class HomePageBenvenuto
 {
 
-
     private final PrintWriter writer;
 
-    public HomePageBenvenuto
-            (PrintWriter writer) {
-        this.writer = writer ;
+    public HomePageBenvenuto(PrintWriter writer)
+    {
+        this.writer = writer;
     }
 
     public void start(Stage window) throws Exception {

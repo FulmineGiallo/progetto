@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="mainPane" prefHeight="511.0" prefWidth="641.0" stylesheets="@../../css/homepageImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Homepageimpiegato">
+   <children>
+      <Button id="Button" fx:id="buttonValutazioni" layoutX="264.0" layoutY="24.0" mnemonicParsing="false" text="Le tue valutazioni" />
+      <Button id="Button" fx:id="buttonCreaProgetto" layoutX="439.0" layoutY="24.0" mnemonicParsing="false" text="Crea nuovo Progetto" />
+      <VBox layoutX="14.0" layoutY="70.0" prefHeight="258.0" prefWidth="171.0" />
+      <Line endX="491.99993896484375" layoutX="100.0" layoutY="337.0" startX="-100.0" />
+      <Label id="label" layoutX="14.0" layoutY="347.0" text="Riunioni:" />
+      <Label id="label" layoutX="23.0" layoutY="41.0" text="id:" />
+      <Label id="label" layoutX="23.0" layoutY="24.0" text="Nome:">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

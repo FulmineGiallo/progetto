@@ -23,12 +23,3 @@
      -fx-text-fill: #242d35;
      -fx-font-size: 14px;
  }
-#Button:hover
-{
-    -fx-background-color: gray;
-}
-#label
-{
-    -fx-text-fill: white;
-    -fx-font-family: "Roboto Thin" ;
-}

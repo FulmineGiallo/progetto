@@ -16,7 +16,7 @@ public class ControllerLogin
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception
     {
-        PrintWriter writer = null ;
+        PrintWriter writer = null;
         benvenuto = new HomePageBenvenuto(writer);
 
         Stage stage = (Stage) backHomePage.getScene().getWindow();
