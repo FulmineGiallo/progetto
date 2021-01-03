@@ -15,7 +15,7 @@ public class Login
         this.writer = writer ;
     }
     public void start(Stage window) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Login.fxml"));
         Scene scene =  new Scene(root);
         window.setScene(scene);
         window.show();

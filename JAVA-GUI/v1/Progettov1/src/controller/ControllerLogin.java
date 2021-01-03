@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Dao.ImpiegatoDao;
 import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
 
@@ -34,7 +35,7 @@ public class ControllerLogin
     private PasswordField passwordField;
     @FXML
     private Button okButton;
-
+    ControllerHomepageImpiegato impiegato;
 
 
     boolean accesso = false;
@@ -63,7 +64,6 @@ public class ControllerLogin
             System.out.println("Valido");
             System.out.println("Email" + emailField.getText() +" Password" + passwordField.getText());
             PrintWriter writer = null;
-
 
             homeImpiegato = new HomePageImpiegato(writer);
 

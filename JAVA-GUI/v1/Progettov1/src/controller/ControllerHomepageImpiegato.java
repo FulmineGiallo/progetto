@@ -7,17 +7,13 @@ import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
 import model.Impiegato;
 
-import java.sql.Connection;
 import java.sql.SQLException;
+
 
 public class ControllerHomepageImpiegato
 {
     @FXML
     private Label nomeImpiegato;
-    
+    String email;
 
-    public void setNomeImpiegato(MouseEvent mouseEvent)
-    {
-        nomeImpiegato.setText("");
-    }
 }
