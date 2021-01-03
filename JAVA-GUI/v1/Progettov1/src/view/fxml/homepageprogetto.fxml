@@ -6,42 +6,41 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="716.0" style="-fx-background-color: #424549;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXListView layoutX="20.0" layoutY="56.0" prefHeight="368.0" prefWidth="165.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="56.0" />
-      <Label id="ProjectManagerHomeLabel" layoutX="20.0" layoutY="8.0" prefHeight="31.0" prefWidth="188.0" text="Project Manager Home" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="8.0">
+      <Label id="ProjectManagerHomeLabel" layoutX="20.0" layoutY="8.0" prefHeight="31.0" prefWidth="188.0" text="Project Manager Home" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="347.0" AnchorPane.topAnchor="8.0">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="34.0" text="Lista Utenti:" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="34.0" />
+      <Label layoutX="20.0" layoutY="34.0" text="Lista Utenti:" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="347.0" AnchorPane.topAnchor="34.0" />
       <JFXButton id="AggiungiPartecipanteButton" layoutX="24.0" layoutY="454.0" prefHeight="31.0" prefWidth="159.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Aggiungi partecipante" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="24.0" />
-      <JFXButton id="ComunicaRiunioneButton" layoutX="450.0" layoutY="13.0" prefHeight="38.0" prefWidth="242.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Comunica una riunione o programmala" textFill="WHITE" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="13.0" />
-      <Pane layoutX="235.0" layoutY="67.0" prefHeight="366.0" prefWidth="417.0" style="-fx-background-color: white; -fx-border-color: #7289da; -fx-border-width: 3;" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="67.0">
+      <JFXButton id="ComunicaRiunioneButton" layoutX="429.0" layoutY="13.0" prefHeight="38.0" prefWidth="263.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Comunica una riunione o programmala" textFill="WHITE" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="13.0" />
+      <AnchorPane layoutX="235.0" layoutY="67.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="67.0">
          <children>
-            <JFXButton id="RimuoviButton" layoutX="329.0" layoutY="312.0" prefHeight="31.0" prefWidth="63.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Rimuovi" textFill="WHITE" />
-            <Label id="InformazioniUtenteLabel" layoutX="14.0" layoutY="14.0" text="Informazioni utente">
+            <JFXButton id="RimuoviButton" layoutX="329.0" layoutY="312.0" prefHeight="31.0" prefWidth="63.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Rimuovi" textFill="WHITE" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="25.0" />
+            <Label id="InformazioniUtenteLabel" layoutX="14.0" layoutY="14.0" text="Informazioni utente" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="212.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="67.0" text="Ruolo:">
+            <Label layoutX="21.0" layoutY="67.0" text="Ruolo:" AnchorPane.leftAnchor="14.0">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label id="OutputRuoloLabel" layoutX="95.0" layoutY="67.0" prefHeight="32.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: grey;" textFill="WHITE" />
-            <Label id="SkillsLaber" layoutX="21.0" layoutY="146.0" text="Skills:">
+            <Label id="OutputRuoloLabel" layoutX="95.0" layoutY="67.0" prefHeight="32.0" prefWidth="200.0" style="-fx-border-width: 0.5; -fx-border-color: grey;" textFill="WHITE" AnchorPane.bottomAnchor="267.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="67.0" />
+            <Label id="SkillsLaber" layoutX="21.0" layoutY="146.0" text="Skills:" AnchorPane.leftAnchor="14.0">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <JFXListView id="OutputSkillsList" layoutX="95.0" layoutY="146.0" prefHeight="192.0" prefWidth="200.0" />
+            <JFXListView id="OutputSkillsList" layoutX="95.0" layoutY="146.0" prefHeight="192.0" prefWidth="200.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="146.0" />
          </children>
-      </Pane>
+      </AnchorPane>
       <JFXButton id="TornaHomeButton" layoutX="533.0" layoutY="444.0" prefHeight="31.0" prefWidth="159.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Torna alla home" textFill="WHITE" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="24.0">
          <font>
             <Font size="17.0" />
