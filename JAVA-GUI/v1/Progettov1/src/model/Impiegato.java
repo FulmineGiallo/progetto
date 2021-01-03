@@ -13,7 +13,7 @@ public class Impiegato
     private String email;
     private String passowrd;
 
-    public Impiegato(String CF, String nome, String cognome, String genere, Date dataNascita, String comuneNascita, String email, String passowrd)
+    public Impiegato(String CF)
     {
         this.CF = CF;
         this.nome = nome;

@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Creata classe per la connessione a Postegre">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/model/Connection/PostgresSQLJDBC.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/model/Dao/ImpiegatoDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/model/Dao/ImpiegatoDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/Driver.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/RegistrazioneImpiegato.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/RegistrazioneImpiegato.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ControllerHomepageImpiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ControllerHomepageImpiegato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ControllerLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ControllerLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Connection/PostgresSQLJDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Connection/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Dao/ImpiegatoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Dao/ImpiegatoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Impiegato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Impiegato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/fxml/homepageimpiegato.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/fxml/homepageimpiegato.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +82,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
     <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
@@ -331,7 +350,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609678489488</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Creata classe per la connessione a Postegre">
+      <created>1609692507300</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1609692507300</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -394,6 +420,7 @@
     <MESSAGE value="aggiunta classe HomePageProgetto.jav" />
     <MESSAGE value="Aggiornata interfaccia homepageimpiegato.fxml" />
     <MESSAGE value="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto" />
+    <MESSAGE value="Creata classe per la connessione a Postegre" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creata classe per la connessione a Postegre" />
   </component>
 </project>

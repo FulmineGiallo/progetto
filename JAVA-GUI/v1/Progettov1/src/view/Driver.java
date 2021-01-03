@@ -5,9 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Connection.PostgresSQLJDBC;
+import model.Connection.DBConnection;
+import model.Dao.ImpiegatoDao;
+import model.Impiegato;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 
 public class Driver extends Application
@@ -20,10 +23,13 @@ public class Driver extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public static void main(String[] args)
-    {
-        PostgresSQLJDBC sqlConnection = new PostgresSQLJDBC();
-        sqlConnection.connect();
+    public static void main(String[] args) throws SQLException {
+        DBConnection dbconn = null;
+        Connection connection = null;
+
+        dbconn = DBConnection.getInstance();
+        connection = dbconn.getConnection();
+
 
         launch(args);
     }
