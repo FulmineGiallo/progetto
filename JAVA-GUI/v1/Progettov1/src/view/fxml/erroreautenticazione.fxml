@@ -2,24 +2,30 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="176.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLogin">
    <children>
-      <Label layoutX="47.0" layoutY="64.0" prefHeight="48.0" prefWidth="250.0" text="Autenticazione Errata" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="49.60000000000002">
+      <Label layoutX="111.0" layoutY="64.0" prefHeight="48.0" prefWidth="250.0" text="Autenticazione Errata" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="-14.399999999999977">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="48.0" layoutY="48.0" prefHeight="32.0" prefWidth="159.0" text="ATTENZIONE" textFill="RED" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.60000000000002">
+      <Label layoutX="110.0" layoutY="48.0" prefHeight="32.0" prefWidth="159.0" text="ATTENZIONE" textFill="RED" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="-13.399999999999977">
          <font>
             <Font name="Arial" size="12.0" />
          </font>
       </Label>
-      <Button id="Button" fx:id="okButton" layoutX="231.0" layoutY="123.0" mnemonicParsing="false" onAction="#closeButton" stylesheets="@../../css/homepageImpiegato.css" text="OK" AnchorPane.bottomAnchor="26.6" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="36.8" />
-      <Line endX="-64.9999771118164" endY="11.199996948242188" layoutX="104.0" layoutY="85.0" startX="-64.9999771118164" startY="-29.599987030029297" AnchorPane.bottomAnchor="79.30000305175781" AnchorPane.leftAnchor="38.500022888183594" AnchorPane.rightAnchor="307.4999771118164" />
+      <Button id="Button" fx:id="okButton" layoutX="236.0" layoutY="120.0" mnemonicParsing="false" onAction="#closeButton" stylesheets="@../../css/homepageImpiegato.css" text="OK" AnchorPane.bottomAnchor="29.599999999999994" AnchorPane.leftAnchor="236.0" AnchorPane.rightAnchor="31.80000000000001" />
+      <Line endX="-64.9999771118164" endY="11.199996948242188" layoutX="166.0" layoutY="89.0" startX="-64.9999771118164" startY="-29.599987030029297" AnchorPane.bottomAnchor="75.30000305175781" AnchorPane.leftAnchor="100.5000228881836" AnchorPane.rightAnchor="245.4999771118164" />
+      <ImageView fitHeight="73.0" fitWidth="64.0" layoutX="21.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/warning.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

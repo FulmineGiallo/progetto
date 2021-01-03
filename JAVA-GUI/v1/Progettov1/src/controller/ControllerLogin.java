@@ -59,10 +59,11 @@ public class ControllerLogin
             Stage window;
             window = new Stage();
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/erroreautenticazione.fxml"));
-            Scene scene =  new Scene(root);
+            Scene scene =  new Scene(root, 350,176);
             window.setScene(scene);
             window.setTitle("Errore Autenticazione!");
             window.initModality(Modality.APPLICATION_MODAL);
+            window.setResizable(false);
             window.show();
 
         }
