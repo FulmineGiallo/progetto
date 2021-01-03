@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.HomePageBenvenuto;
+import view.HomePageImpiegato;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +21,7 @@ import java.io.PrintWriter;
 public class ControllerLogin
 {
     HomePageBenvenuto benvenuto;
-
+    HomePageImpiegato homeImpiegato;
 
     @FXML
     private Button backHomePage;
@@ -53,6 +54,11 @@ public class ControllerLogin
             /* QUERY AVVENUTA CON SUCCESSO UTENTE PRESENTE NEL DB */
             System.out.println("Valido");
             System.out.println("Email" + emailField.getText() +" Password" + passwordField.getText());
+            PrintWriter writer = null;
+            homeImpiegato = new HomePageImpiegato(writer);
+
+            Stage stage = (Stage)accedi.getScene().getWindow();
+            homeImpiegato.start(stage);
         }
         else
         {

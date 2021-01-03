@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 
 public class RegistrazioneImpiegato
 {
-
     private final PrintWriter writer;
 
     public RegistrazioneImpiegato(PrintWriter writer) {
