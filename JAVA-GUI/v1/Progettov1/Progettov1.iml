@@ -10,5 +10,6 @@
     <orderEntry type="library" exported="" name="javafx-swt" level="project" />
     <orderEntry type="library" name="lib1" level="project" />
     <orderEntry type="library" name="Libreria JFoenix per SceneBuilder" level="project" />
+    <orderEntry type="library" name="postgresql-42.2.18" level="project" />
   </component>
 </module>
