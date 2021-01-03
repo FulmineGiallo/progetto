@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Aggiornata interfaccia homepageimpiegato.fxml">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto">
+      <change afterPath="$PROJECT_DIR$/src/model/Connection/PostgresSQLJDBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/controller/Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/controller/ControllerHomepageimpiegato.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/controller/ControllerHomepageimpiegato.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/RegistrazioneImpiegato.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/RegistrazioneImpiegato.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/fxml/homepagebenvenuto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/fxml/homepagebenvenuto.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/fxml/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/fxml/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ControllerLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ControllerLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ImpiegatoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Dao/ImpiegatoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/RiunioneDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Dao/RiunioneDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/fxml/homepagebenvenuto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/fxml/homepagebenvenuto.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,7 +334,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609678269694</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto">
+      <created>1609678489488</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1609678489488</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -387,6 +403,7 @@
     <MESSAGE value="Update erroreautenticazione.fxml" />
     <MESSAGE value="aggiunta classe HomePageProgetto.jav" />
     <MESSAGE value="Aggiornata interfaccia homepageimpiegato.fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiornata interfaccia homepageimpiegato.fxml" />
+    <MESSAGE value="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto" />
   </component>
 </project>

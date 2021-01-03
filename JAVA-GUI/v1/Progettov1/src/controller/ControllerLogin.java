@@ -34,6 +34,10 @@ public class ControllerLogin
     @FXML
     private Button okButton;
 
+    boolean accesso = false;
+    String email = emailField.getText();
+    String password = passwordField.getText();
+
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception
     {
         PrintWriter writer = null;
@@ -47,6 +51,7 @@ public class ControllerLogin
         Stage stage = (Stage)okButton.getScene().getWindow();
         stage.close();
     }
+
     public void checkLogin(ActionEvent actionEvent) throws Exception
     {
         if(emailField.getText().equals("carminefb@live.it") && passwordField.getText().equals("ciao"))
@@ -55,6 +60,8 @@ public class ControllerLogin
             System.out.println("Valido");
             System.out.println("Email" + emailField.getText() +" Password" + passwordField.getText());
             PrintWriter writer = null;
+
+
             homeImpiegato = new HomePageImpiegato(writer);
 
             Stage stage = (Stage)accedi.getScene().getWindow();

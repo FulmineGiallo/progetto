@@ -1,0 +1,39 @@
+<changelist name="Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]" date="1609676973127" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 03/01/2021 13:29 [Default]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Progettov1/controller/ControllerLogin.class" />
+    <option name="AFTER_PATH" value="out/production/Progettov1/controller/ControllerLogin.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]/ControllerLogin.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Progettov1/view/Driver.class" />
+    <option name="AFTER_PATH" value="out/production/Progettov1/view/Driver.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]/Driver.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/view/fxml/img/login.png" />
+    <option name="AFTER_PATH" value="src/view/resources/img/login.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]/login.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/view/fxml/img/password.png" />
+    <option name="AFTER_PATH" value="src/view/resources/img/password.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]/password.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/view/fxml/img/freccia.png" />
+    <option name="AFTER_PATH" value="src/view/resources/img/freccia.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]/freccia.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/view/fxml/img/email.png" />
+    <option name="AFTER_PATH" value="src/view/resources/img/email.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]/email.png" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="src/view/fxml/img/shopping-online.png" />
+    <option name="AFTER_PATH" value="src/view/resources/img/shopping-online.png" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_03_01_2021_13_29_[Default]/shopping-online.png" />
+  </binary>
+</changelist>

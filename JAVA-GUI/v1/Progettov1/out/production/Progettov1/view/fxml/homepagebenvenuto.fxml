@@ -10,6 +10,41 @@
 
 <AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageBenvenuto">
    <children>
+      <AnchorPane layoutX="420.0" layoutY="185.0" prefHeight="238.0" prefWidth="379.0" AnchorPane.bottomAnchor="-46.60000000000002" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="0.7999999999999545" AnchorPane.topAnchor="185.0">
+         <children>
+            <Button id="Button" fx:id="login" layoutX="157.0" layoutY="193.0" mnemonicParsing="false" onAction="#effettua" prefHeight="26.0" prefWidth="157.0" stylesheets="@../../css/homepageImpiegato.css" text="Effettua Login" AnchorPane.bottomAnchor="142.20000000000002" AnchorPane.rightAnchor="64.60000000000002" />
+            <Label id="label" layoutY="4.0" prefHeight="50.0" prefWidth="351.0" text="Chiedi di essere un nostro impiegato!" textFill="WHITE" AnchorPane.bottomAnchor="307.20000000000005" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="28.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="197.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="180.60000000000002" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="88.20000000000005">
+               <image>
+                  <Image url="@../resources/img/freccia.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="12.0" layoutY="124.0" prefHeight="295.0" prefWidth="379.0" AnchorPane.bottomAnchor="14.399999999999977" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="408.8" AnchorPane.topAnchor="124.0">
+         <children>
+            <Button id="Button" fx:id="invia" layoutX="181.0" layoutY="256.0" mnemonicParsing="false" onAction="#inviaCurriculum" prefHeight="26.0" prefWidth="194.0" stylesheets="@../../css/homepageImpiegato.css" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="79.20000000000005" AnchorPane.rightAnchor="59.0" />
+            <Label prefHeight="170.0" prefWidth="361.0" text="E' la prima volta che conosci la nostra piattaforma?" textFill="WHITE" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="61.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutY="85.0" prefHeight="50.0" prefWidth="423.0" text="Sei già un nostro impiegato?" textFill="WHITE" AnchorPane.bottomAnchor="226.20000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-44.0">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="223.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="133.60000000000002" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="62.19999999999999">
+               <image>
+                  <Image url="@../resources/img/freccia.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <Pane id="topPane" layoutX="-14.0" layoutY="-5.0" prefHeight="94.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-5.000000000000028">
          <children>
             <Label layoutX="40.0" layoutY="19.0" prefHeight="56.0" prefWidth="294.0" text="Benvenuto" textFill="WHITE">
@@ -23,33 +58,6 @@
                </image>
             </ImageView>
          </children></Pane>
-      <Button id="Button" fx:id="login" layoutX="591.0" layoutY="374.0" mnemonicParsing="false" onAction="#effettua" prefHeight="26.0" prefWidth="157.0" stylesheets="@../../css/homepageImpiegato.css" text="Effettua Login" AnchorPane.bottomAnchor="99.60000000000002" AnchorPane.rightAnchor="51.39999999999998" />
       <Pane id="centerPane" layoutX="396.0" prefHeight="408.0" prefWidth="0.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.bottomAnchor="-4.0" AnchorPane.rightAnchor="397.6" AnchorPane.topAnchor="90.0" />
-      <Button id="Button" fx:id="invia" layoutX="175.0" layoutY="374.0" mnemonicParsing="false" onAction="#inviaCurriculum" prefHeight="26.0" prefWidth="194.0" stylesheets="@../../css/homepageImpiegato.css" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="99.60000000000002" AnchorPane.rightAnchor="430.6" />
-      <Label layoutX="12.0" layoutY="139.0" prefHeight="169.0" prefWidth="379.0" text="E' la prima volta che conosci la nostra piattaforma?" textFill="WHITE" AnchorPane.bottomAnchor="191.39999999999998" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="408.8">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label id="label" layoutX="12.0" layoutY="223.0" prefHeight="49.0" prefWidth="357.0" text="Chiedi di essere un nostro impiegato!" textFill="WHITE" AnchorPane.bottomAnchor="238.6" AnchorPane.leftAnchor="416.0" AnchorPane.rightAnchor="4.800000000000011">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="12.0" layoutY="224.0" prefHeight="50.0" prefWidth="379.0" text="Sei già un nostro impiegato?" textFill="WHITE" AnchorPane.bottomAnchor="225.60000000000002" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="408.8">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="609.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="133.39999999999998" AnchorPane.leftAnchor="233.6" AnchorPane.rightAnchor="472.4">
-         <image>
-            <Image url="@../resources/img/freccia.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="623.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="623.0" AnchorPane.rightAnchor="83.0">
-         <image>
-            <Image url="@../resources/img/freccia.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

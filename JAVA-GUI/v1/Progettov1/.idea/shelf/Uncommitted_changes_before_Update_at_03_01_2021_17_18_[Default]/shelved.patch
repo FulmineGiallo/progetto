@@ -1,0 +1,283 @@
+Index: src/view/fxml/homepagebenvenuto.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/fxml/homepagebenvenuto.fxml b/src/view/fxml/homepagebenvenuto.fxml
+--- a/src/view/fxml/homepagebenvenuto.fxml	(revision 11feac8c404965e3e35734edadca2f4a012cf736)
++++ b/src/view/fxml/homepagebenvenuto.fxml	(date 1609689508809)
+@@ -10,46 +10,54 @@
+ 
+ <AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageBenvenuto">
+    <children>
+-      <Pane id="topPane" layoutX="-14.0" layoutY="-5.0" prefHeight="94.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-5.000000000000028">
++      <AnchorPane layoutX="420.0" layoutY="185.0" prefHeight="238.0" prefWidth="379.0" AnchorPane.bottomAnchor="-46.60000000000002" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="0.7999999999999545" AnchorPane.topAnchor="185.0">
+          <children>
+-            <Label layoutX="40.0" layoutY="19.0" prefHeight="56.0" prefWidth="294.0" text="Benvenuto" textFill="WHITE">
++            <Button id="Button" fx:id="login" layoutX="157.0" layoutY="193.0" mnemonicParsing="false" onAction="#effettua" prefHeight="26.0" prefWidth="157.0" stylesheets="@../../css/homepageImpiegato.css" text="Effettua Login" AnchorPane.bottomAnchor="142.20000000000002" AnchorPane.rightAnchor="64.60000000000002" />
++            <Label id="label" layoutY="4.0" prefHeight="50.0" prefWidth="351.0" text="Chiedi di essere un nostro impiegato!" textFill="WHITE" AnchorPane.bottomAnchor="307.20000000000005" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="28.0">
+                <font>
+-                  <Font size="39.0" />
++                  <Font size="20.0" />
+                </font>
+             </Label>
+-            <ImageView fitHeight="64.0" fitWidth="66.0" layoutX="233.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
++            <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="197.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="180.60000000000002" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="88.20000000000005">
+                <image>
+-                  <Image url="@../resources/img/shopping-online.png" />
++                  <Image url="@../resources/img/freccia.png" />
+                </image>
+             </ImageView>
+-         </children></Pane>
+-      <Button id="Button" fx:id="login" layoutX="591.0" layoutY="374.0" mnemonicParsing="false" onAction="#effettua" prefHeight="26.0" prefWidth="157.0" stylesheets="@../../css/homepageImpiegato.css" text="Effettua Login" AnchorPane.bottomAnchor="99.60000000000002" AnchorPane.rightAnchor="51.39999999999998" />
+-      <Pane id="centerPane" layoutX="396.0" prefHeight="408.0" prefWidth="0.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.bottomAnchor="-4.0" AnchorPane.rightAnchor="397.6" AnchorPane.topAnchor="90.0" />
+-      <Button id="Button" fx:id="invia" layoutX="175.0" layoutY="374.0" mnemonicParsing="false" onAction="#inviaCurriculum" prefHeight="26.0" prefWidth="194.0" stylesheets="@../../css/homepageImpiegato.css" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="99.60000000000002" AnchorPane.rightAnchor="430.6" />
+-      <Label layoutX="12.0" layoutY="139.0" prefHeight="169.0" prefWidth="379.0" text="E' la prima volta che conosci la nostra piattaforma?" textFill="WHITE" AnchorPane.bottomAnchor="191.39999999999998" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="408.8">
+-         <font>
+-            <Font size="15.0" />
+-         </font>
+-      </Label>
+-      <Label id="label" layoutX="12.0" layoutY="223.0" prefHeight="49.0" prefWidth="357.0" text="Chiedi di essere un nostro impiegato!" textFill="WHITE" AnchorPane.bottomAnchor="238.6" AnchorPane.leftAnchor="416.0" AnchorPane.rightAnchor="4.800000000000011">
+-         <font>
+-            <Font size="20.0" />
+-         </font>
+-      </Label>
+-      <Label layoutX="12.0" layoutY="224.0" prefHeight="50.0" prefWidth="379.0" text="Sei già un nostro impiegato?" textFill="WHITE" AnchorPane.bottomAnchor="225.60000000000002" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="408.8">
+-         <font>
+-            <Font size="29.0" />
+-         </font>
+-      </Label>
+-      <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="609.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="133.39999999999998" AnchorPane.leftAnchor="233.6" AnchorPane.rightAnchor="472.4">
+-         <image>
+-            <Image url="@../resources/img/freccia.png" />
+-         </image>
+-      </ImageView>
+-      <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="623.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="623.0" AnchorPane.rightAnchor="83.0">
+-         <image>
+-            <Image url="@../resources/img/freccia.png" />
+-         </image>
+-      </ImageView>
++         </children>
++      </AnchorPane>
++      <AnchorPane layoutX="12.0" layoutY="124.0" prefHeight="295.0" prefWidth="379.0" AnchorPane.bottomAnchor="14.399999999999977" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="408.8" AnchorPane.topAnchor="124.0">
++         <children>
++            <Button id="Button" fx:id="invia" layoutX="181.0" layoutY="256.0" mnemonicParsing="false" onAction="#inviaCurriculum" prefHeight="26.0" prefWidth="194.0" stylesheets="@../../css/homepageImpiegato.css" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="79.20000000000005" AnchorPane.rightAnchor="59.0" />
++            <Label prefHeight="170.0" prefWidth="361.0" text="E' la prima volta che conosci la nostra piattaforma?" textFill="WHITE" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="61.0">
++               <font>
++                  <Font size="15.0" />
++               </font>
++            </Label>
++            <Label layoutY="85.0" prefHeight="50.0" prefWidth="423.0" text="Sei già un nostro impiegato?" textFill="WHITE" AnchorPane.bottomAnchor="226.20000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-44.0">
++               <font>
++                  <Font size="29.0" />
++               </font>
++            </Label>
++            <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="223.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="133.60000000000002" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="62.19999999999999">
++               <image>
++                  <Image url="@../resources/img/freccia.png" />
++               </image>
++            </ImageView>
++         </children>
++      </AnchorPane>
++      <Pane id="topPane" layoutX="-14.0" layoutY="-5.0" prefHeight="94.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-5.000000000000028">
++         <children>
++            <Label layoutX="40.0" layoutY="19.0" prefHeight="56.0" prefWidth="294.0" text="Benvenuto" textFill="WHITE">
++               <font>
++                  <Font size="39.0" />
++               </font>
++            </Label>
++            <ImageView fitHeight="64.0" fitWidth="66.0" layoutX="233.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
++               <image>
++                  <Image url="@../resources/img/shopping-online.png" />
++               </image>
++            </ImageView>
++         </children></Pane>
++      <Pane id="centerPane" layoutX="396.0" prefHeight="408.0" prefWidth="0.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.bottomAnchor="-4.0" AnchorPane.rightAnchor="397.6" AnchorPane.topAnchor="90.0" />
+    </children>
+ </AnchorPane>
+Index: out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml b/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml
+--- a/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml	(revision 11feac8c404965e3e35734edadca2f4a012cf736)
++++ b/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml	(date 1609676973023)
+@@ -1,16 +1,89 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<?import javafx.scene.control.Button?>
+-<?import javafx.scene.control.ButtonBar?>
++<?import com.jfoenix.controls.JFXDatePicker?>
++<?import com.jfoenix.controls.JFXListView?>
++<?import com.jfoenix.controls.JFXRadioButton?>
++<?import com.jfoenix.controls.JFXTextField?>
++<?import javafx.geometry.Insets?>
++<?import javafx.scene.control.Label?>
++<?import javafx.scene.control.ToggleGroup?>
+ <?import javafx.scene.layout.AnchorPane?>
++<?import javafx.scene.layout.HBox?>
++<?import javafx.scene.layout.VBox?>
+ 
+-
+-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
++<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+-      <ButtonBar layoutX="42.0" layoutY="50.0" prefHeight="40.0" prefWidth="200.0">
+-        <buttons>
+-          <Button mnemonicParsing="false" text="Button" />
+-        </buttons>
+-      </ButtonBar>
++      <VBox fx:id="Form" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
++         <children>
++            <VBox fx:id="DescrizioneBox" spacing="3.0">
++               <children>
++                  <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci qui i tuoi dati" />
++                  <Label fx:id="DescrizioneLabel2" styleClass="DescrizioneLabel2" text="* Campo obbligatorio" />
++               </children>
++            </VBox>
++            <VBox fx:id="NomeBox" prefHeight="45.0" spacing="3.0">
++				<children>
++                  <JFXTextField fx:id="NomeTF" alignment="TOP_LEFT" labelFloat="true" maxWidth="450.0" prefColumnCount="10" prefHeight="30.0" promptText="* Nome" styleClass="NomeTF" />
++                  <Label fx:id="NomeErrorLabel" styleClass="NomeErrorLabel" textFill="RED" />
++               </children>
++            </VBox>
++            <VBox fx:id="CognomeBox" prefHeight="45.0">
++               <children>
++                  <JFXTextField fx:id="CognomeTF" alignment="TOP_LEFT" labelFloat="true" maxWidth="450.0" prefColumnCount="10" prefHeight="30.0" promptText="* Cognome" styleClass="CognomeTF" />
++                  <Label fx:id="CognomeErrorLabel" styleClass="CognomeErrorLabel" textFill="RED" />
++               </children>
++            </VBox>
++            <VBox fx:id="GenereBox" prefHeight="45.0" spacing="3.0">
++               <children>
++                  <HBox spacing="10.0">
++                     <children>
++                        <Label fx:id="GenereLabel" styleClass="GenereLabel" text="* Genere" />
++                        <HBox fx:id="GenereRBBox" alignment="CENTER" spacing="30.0">
++                           <children>
++                              <JFXRadioButton fx:id="GenereRB1" styleClass="GenereRB1" text="Uomo">
++      							<toggleGroup>
++      								<ToggleGroup fx:id="Genere" />
++                                  </toggleGroup>
++                              </JFXRadioButton>
++                              <JFXRadioButton fx:id="GenereRB2" styleClass="GenereRB2" text="Donna" toggleGroup="$Genere" />
++                           </children>
++                        </HBox>
++                     </children>
++                  </HBox>
++                  <Label fx:id="GenereErrorLabel" styleClass="GenereErrorLabel" />
++               </children>
++            </VBox>
++            <VBox fx:id="DataDiNascitaBox" prefHeight="45.0" prefWidth="400.0">
++               <children>
++                  <JFXDatePicker fx:id="DataDiNascitaDP" editable="false" prefWidth="220.0" promptText="* Data di nascita" showWeekNumbers="true" styleClass="DataDiNascitaDP">
++                     <opaqueInsets>
++                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
++                     </opaqueInsets></JFXDatePicker>
++                  <Label fx:id="DataDiNascitaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
++               </children>
++            </VBox>
++            <HBox fx:id="ComuneDiNascitaBox" prefHeight="45.0" spacing="10.0">
++               <children>
++      			<VBox>
++                     <children>
++                        <Label fx:id="ComuneDiNascitaLabel" styleClass="ComuneDiNascitaLabel" text="* Comune di nascita:" />
++                        <JFXListView fx:id="ComuneDINascitaLV" prefWidth="290.0" showTooltip="true" styleClass="ComuneDiNascitaLV" />
++                     </children>
++                  </VBox>
++                  <JFXTextField fx:id="ProvinciaTF" alignment="TOP_LEFT" labelFloat="true" maxWidth="150.0" promptText="* Provincia (sigla)" styleClass="ProvinciaTF">
++                     <padding>
++                        <Insets top="25.0" />
++                     </padding>
++                  </JFXTextField>
++               </children>
++            </HBox>
++         </children>
++         <padding>
++            <Insets bottom="100.0" top="100.0" />
++         </padding>
++      </VBox>
+    </children>
++   <padding>
++      <Insets left="100.0" right="100.0" />
++   </padding>
+ </AnchorPane>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 11feac8c404965e3e35734edadca2f4a012cf736)
++++ b/.idea/workspace.xml	(date 1609689522792)
+@@ -1,10 +1,14 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Aggiornata interfaccia homepageimpiegato.fxml">
++    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/controller/Controller.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/controller/ControllerHomepageimpiegato.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/controller/ControllerHomepageimpiegato.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/RegistrazioneImpiegato.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/RegistrazioneImpiegato.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/view/fxml/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/fxml/Login.fxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/fxml/homepagebenvenuto.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/fxml/homepagebenvenuto.fxml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -325,7 +329,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1609678269694</updated>
+     </task>
+-    <option name="localTasksCounter" value="14" />
++    <task id="LOCAL-00014" summary="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto">
++      <created>1609678489488</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1609678489488</updated>
++    </task>
++    <option name="localTasksCounter" value="15" />
+     <servers />
+   </component>
+   <component name="TimeTrackingManager">
+@@ -387,6 +398,7 @@
+     <MESSAGE value="Update erroreautenticazione.fxml" />
+     <MESSAGE value="aggiunta classe HomePageProgetto.jav" />
+     <MESSAGE value="Aggiornata interfaccia homepageimpiegato.fxml" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Aggiornata interfaccia homepageimpiegato.fxml" />
++    <MESSAGE value="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto" />
++    <option name="LAST_COMMIT_MESSAGE" value="Delete class Controllor.java&#10;(è stata incorporata in ControllerHomePageBenvenuto" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/view/fxml/Login.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/fxml/Login.fxml b/src/view/fxml/Login.fxml
+--- a/src/view/fxml/Login.fxml	(revision 11feac8c404965e3e35734edadca2f4a012cf736)
++++ b/src/view/fxml/Login.fxml	(date 1609676973035)
+@@ -40,17 +40,17 @@
+       <PasswordField id="passwordTextField" fx:id="passwordField" layoutX="275.0" layoutY="218.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="181.4" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="134.6" />
+       <ImageView fitHeight="54.0" fitWidth="55.0" layoutX="187.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="329.0" AnchorPane.leftAnchor="187.0" AnchorPane.rightAnchor="359.0">
+          <image>
+-            <Image url="@img/login.png" />
++            <Image url="@../resources/img/login.png" />
+          </image>
+       </ImageView>
+       <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="94.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="94.0" AnchorPane.rightAnchor="461.0">
+          <image>
+-            <Image url="@img/password.png" />
++            <Image url="@../resources/img/password.png" />
+          </image>
+       </ImageView>
+       <ImageView fitHeight="38.0" fitWidth="55.0" layoutX="98.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="464.0">
+          <image>
+-            <Image url="@img/email.png" />
++            <Image url="@../resources/img/email.png" />
+          </image>
+       </ImageView>
+    </children>

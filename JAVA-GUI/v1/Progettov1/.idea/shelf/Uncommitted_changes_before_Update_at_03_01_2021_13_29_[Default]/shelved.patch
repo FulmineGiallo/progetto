@@ -1,0 +1,424 @@
+Index: out/production/Progettov1/view/fxml/homepagebenvenuto.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/production/Progettov1/view/fxml/homepagebenvenuto.fxml b/out/production/Progettov1/view/fxml/homepagebenvenuto.fxml
+--- a/out/production/Progettov1/view/fxml/homepagebenvenuto.fxml	(revision c768ac79c5d0ea45f01d9bfb08daa5de6922ca47)
++++ b/out/production/Progettov1/view/fxml/homepagebenvenuto.fxml	(date 1609676949574)
+@@ -2,11 +2,13 @@
+ 
+ <?import javafx.scene.control.Button?>
+ <?import javafx.scene.control.Label?>
++<?import javafx.scene.image.Image?>
++<?import javafx.scene.image.ImageView?>
+ <?import javafx.scene.layout.AnchorPane?>
+ <?import javafx.scene.layout.Pane?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
++<AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageBenvenuto">
+    <children>
+       <Pane id="topPane" layoutX="-14.0" layoutY="-5.0" prefHeight="94.0" prefWidth="800.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-5.000000000000028">
+          <children>
+@@ -15,9 +17,39 @@
+                   <Font size="39.0" />
+                </font>
+             </Label>
++            <ImageView fitHeight="64.0" fitWidth="66.0" layoutX="233.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
++               <image>
++                  <Image url="@../resources/img/shopping-online.png" />
++               </image>
++            </ImageView>
+          </children></Pane>
+-      <Button id="Button" fx:id="login" layoutX="628.0" layoutY="455.0" mnemonicParsing="false" onAction="#effettua" prefHeight="26.0" prefWidth="157.0" stylesheets="@../../css/homepageImpiegato.css" text="Effettua Login" AnchorPane.bottomAnchor="18.600000000000023" AnchorPane.rightAnchor="14.400000000000006" />
++      <Button id="Button" fx:id="login" layoutX="591.0" layoutY="374.0" mnemonicParsing="false" onAction="#effettua" prefHeight="26.0" prefWidth="157.0" stylesheets="@../../css/homepageImpiegato.css" text="Effettua Login" AnchorPane.bottomAnchor="99.60000000000002" AnchorPane.rightAnchor="51.39999999999998" />
+       <Pane id="centerPane" layoutX="396.0" prefHeight="408.0" prefWidth="0.0" stylesheets="@../../css/homepageImpiegato.css" AnchorPane.bottomAnchor="-4.0" AnchorPane.rightAnchor="397.6" AnchorPane.topAnchor="90.0" />
+-      <Button id="Button" fx:id="invia" layoutX="192.0" layoutY="439.0" mnemonicParsing="false" onAction="#inviaCurriculum" prefHeight="26.0" prefWidth="194.0" stylesheets="@../../css/homepageImpiegato.css" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="413.6" />
++      <Button id="Button" fx:id="invia" layoutX="175.0" layoutY="374.0" mnemonicParsing="false" onAction="#inviaCurriculum" prefHeight="26.0" prefWidth="194.0" stylesheets="@../../css/homepageImpiegato.css" text="Invia il tuo curriclum" AnchorPane.bottomAnchor="99.60000000000002" AnchorPane.rightAnchor="430.6" />
++      <Label layoutX="12.0" layoutY="139.0" prefHeight="169.0" prefWidth="379.0" text="E' la prima volta che conosci la nostra piattaforma?" textFill="WHITE" AnchorPane.bottomAnchor="191.39999999999998" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="408.8">
++         <font>
++            <Font size="15.0" />
++         </font>
++      </Label>
++      <Label id="label" layoutX="12.0" layoutY="223.0" prefHeight="49.0" prefWidth="357.0" text="Chiedi di essere un nostro impiegato!" textFill="WHITE" AnchorPane.bottomAnchor="238.6" AnchorPane.leftAnchor="416.0" AnchorPane.rightAnchor="4.800000000000011">
++         <font>
++            <Font size="20.0" />
++         </font>
++      </Label>
++      <Label layoutX="12.0" layoutY="224.0" prefHeight="50.0" prefWidth="379.0" text="Sei già un nostro impiegato?" textFill="WHITE" AnchorPane.bottomAnchor="225.60000000000002" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="408.8">
++         <font>
++            <Font size="29.0" />
++         </font>
++      </Label>
++      <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="609.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="133.39999999999998" AnchorPane.leftAnchor="233.6" AnchorPane.rightAnchor="472.4">
++         <image>
++            <Image url="@../resources/img/freccia.png" />
++         </image>
++      </ImageView>
++      <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="623.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="623.0" AnchorPane.rightAnchor="83.0">
++         <image>
++            <Image url="@../resources/img/freccia.png" />
++         </image>
++      </ImageView>
+    </children>
+ </AnchorPane>
+Index: src/view/fxml/erroreautenticazione.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/fxml/erroreautenticazione.fxml b/src/view/fxml/erroreautenticazione.fxml
+--- a/src/view/fxml/erroreautenticazione.fxml	(revision c768ac79c5d0ea45f01d9bfb08daa5de6922ca47)
++++ b/src/view/fxml/erroreautenticazione.fxml	(date 1609676949569)
+@@ -24,7 +24,7 @@
+       <Line endX="-64.9999771118164" endY="11.199996948242188" layoutX="166.0" layoutY="89.0" startX="-64.9999771118164" startY="-29.599987030029297" AnchorPane.bottomAnchor="75.30000305175781" AnchorPane.leftAnchor="100.5000228881836" AnchorPane.rightAnchor="245.4999771118164" />
+       <ImageView fitHeight="73.0" fitWidth="64.0" layoutX="21.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+-            <Image url="@img/warning.png" />
++            <Image url="@../resources/img/warning.png" />
+          </image>
+       </ImageView>
+    </children>
+Index: src/view/fxml/homepagebenvenuto.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/fxml/homepagebenvenuto.fxml b/src/view/fxml/homepagebenvenuto.fxml
+--- a/src/view/fxml/homepagebenvenuto.fxml	(revision c768ac79c5d0ea45f01d9bfb08daa5de6922ca47)
++++ b/src/view/fxml/homepagebenvenuto.fxml	(date 1609676949574)
+@@ -19,7 +19,7 @@
+             </Label>
+             <ImageView fitHeight="64.0" fitWidth="66.0" layoutX="233.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+-                  <Image url="@img/shopping-online.png" />
++                  <Image url="@../resources/img/shopping-online.png" />
+                </image>
+             </ImageView>
+          </children></Pane>
+@@ -43,12 +43,12 @@
+       </Label>
+       <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="609.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="133.39999999999998" AnchorPane.leftAnchor="233.6" AnchorPane.rightAnchor="472.4">
+          <image>
+-            <Image url="@img/freccia.png" />
++            <Image url="@../resources/img/freccia.png" />
+          </image>
+       </ImageView>
+       <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="623.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="623.0" AnchorPane.rightAnchor="83.0">
+          <image>
+-            <Image url="@img/freccia.png" />
++            <Image url="@../resources/img/freccia.png" />
+          </image>
+       </ImageView>
+    </children>
+Index: out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml b/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml
+--- a/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml	(revision c768ac79c5d0ea45f01d9bfb08daa5de6922ca47)
++++ b/out/production/Progettov1/view/fxml/registrazioneimpiegato.fxml	(date 1609674352014)
+@@ -1,16 +1,89 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<?import javafx.scene.control.Button?>
+-<?import javafx.scene.control.ButtonBar?>
++<?import com.jfoenix.controls.JFXDatePicker?>
++<?import com.jfoenix.controls.JFXListView?>
++<?import com.jfoenix.controls.JFXRadioButton?>
++<?import com.jfoenix.controls.JFXTextField?>
++<?import javafx.geometry.Insets?>
++<?import javafx.scene.control.Label?>
++<?import javafx.scene.control.ToggleGroup?>
+ <?import javafx.scene.layout.AnchorPane?>
++<?import javafx.scene.layout.HBox?>
++<?import javafx.scene.layout.VBox?>
+ 
+-
+-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
++<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+-      <ButtonBar layoutX="42.0" layoutY="50.0" prefHeight="40.0" prefWidth="200.0">
+-        <buttons>
+-          <Button mnemonicParsing="false" text="Button" />
+-        </buttons>
+-      </ButtonBar>
++      <VBox fx:id="Form" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
++         <children>
++            <VBox fx:id="DescrizioneBox" spacing="3.0">
++               <children>
++                  <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci qui i tuoi dati" />
++                  <Label fx:id="DescrizioneLabel2" styleClass="DescrizioneLabel2" text="* Campo obbligatorio" />
++               </children>
++            </VBox>
++            <VBox fx:id="NomeBox" prefHeight="45.0" spacing="3.0">
++				<children>
++                  <JFXTextField fx:id="NomeTF" alignment="TOP_LEFT" labelFloat="true" maxWidth="450.0" prefColumnCount="10" prefHeight="30.0" promptText="* Nome" styleClass="NomeTF" />
++                  <Label fx:id="NomeErrorLabel" styleClass="NomeErrorLabel" textFill="RED" />
++               </children>
++            </VBox>
++            <VBox fx:id="CognomeBox" prefHeight="45.0">
++               <children>
++                  <JFXTextField fx:id="CognomeTF" alignment="TOP_LEFT" labelFloat="true" maxWidth="450.0" prefColumnCount="10" prefHeight="30.0" promptText="* Cognome" styleClass="CognomeTF" />
++                  <Label fx:id="CognomeErrorLabel" styleClass="CognomeErrorLabel" textFill="RED" />
++               </children>
++            </VBox>
++            <VBox fx:id="GenereBox" prefHeight="45.0" spacing="3.0">
++               <children>
++                  <HBox spacing="10.0">
++                     <children>
++                        <Label fx:id="GenereLabel" styleClass="GenereLabel" text="* Genere" />
++                        <HBox fx:id="GenereRBBox" alignment="CENTER" spacing="30.0">
++                           <children>
++                              <JFXRadioButton fx:id="GenereRB1" styleClass="GenereRB1" text="Uomo">
++      							<toggleGroup>
++      								<ToggleGroup fx:id="Genere" />
++                                  </toggleGroup>
++                              </JFXRadioButton>
++                              <JFXRadioButton fx:id="GenereRB2" styleClass="GenereRB2" text="Donna" toggleGroup="$Genere" />
++                           </children>
++                        </HBox>
++                     </children>
++                  </HBox>
++                  <Label fx:id="GenereErrorLabel" styleClass="GenereErrorLabel" />
++               </children>
++            </VBox>
++            <VBox fx:id="DataDiNascitaBox" prefHeight="45.0" prefWidth="400.0">
++               <children>
++                  <JFXDatePicker fx:id="DataDiNascitaDP" editable="false" prefWidth="220.0" promptText="* Data di nascita" showWeekNumbers="true" styleClass="DataDiNascitaDP">
++                     <opaqueInsets>
++                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
++                     </opaqueInsets></JFXDatePicker>
++                  <Label fx:id="DataDiNascitaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
++               </children>
++            </VBox>
++            <HBox fx:id="ComuneDiNascitaBox" prefHeight="45.0" spacing="10.0">
++               <children>
++      			<VBox>
++                     <children>
++                        <Label fx:id="ComuneDiNascitaLabel" styleClass="ComuneDiNascitaLabel" text="* Comune di nascita:" />
++                        <JFXListView fx:id="ComuneDINascitaLV" prefWidth="290.0" showTooltip="true" styleClass="ComuneDiNascitaLV" />
++                     </children>
++                  </VBox>
++                  <JFXTextField fx:id="ProvinciaTF" alignment="TOP_LEFT" labelFloat="true" maxWidth="150.0" promptText="* Provincia (sigla)" styleClass="ProvinciaTF">
++                     <padding>
++                        <Insets top="25.0" />
++                     </padding>
++                  </JFXTextField>
++               </children>
++            </HBox>
++         </children>
++         <padding>
++            <Insets bottom="100.0" top="100.0" />
++         </padding>
++      </VBox>
+    </children>
++   <padding>
++      <Insets left="100.0" right="100.0" />
++   </padding>
+ </AnchorPane>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c768ac79c5d0ea45f01d9bfb08daa5de6922ca47)
++++ b/.idea/workspace.xml	(date 1609676706852)
+@@ -2,12 +2,11 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Aggiunte nuove classi da formare: Progetto, RiunioneDao, Valutazione e modificata interfaccia metodo inviaCurriculum che apre una nuova finestra.">
+-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Libreria_JFoenix_per_SceneBuilder.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib1.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Progettov1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Progettov1.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/controller/Homepageimpiegato.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Progettov1/view/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progettov1/view/Driver.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/controller/ControllerLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ControllerLogin.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Driver.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/view/fxml/erroreautenticazione.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/fxml/erroreautenticazione.fxml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -75,6 +74,9 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+     <option name="UPDATE_TYPE" value="MERGE" />
++  </component>
++  <component name="GitToolBoxStore">
++    <option name="projectConfigVersion" value="2" />
+   </component>
+   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+   <component name="ProjectId" id="1mC6P1L90yTLG2zybOd83J78ZfO" />
+@@ -99,6 +101,7 @@
+     <property name="OverrideImplement.combined" value="false" />
+     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
++    <property name="aspect.path.notification.shown" value="true" />
+     <property name="create.test.in.the.same.root" value="true" />
+     <property name="dynamic.classpath" value="false" />
+     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Libreria JFoenix per SceneBuilder.jar" />
+@@ -181,19 +184,6 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+-      <option name="arquillianRunConfiguration">
+-        <value>
+-          <option name="containerStateName" value="" />
+-        </value>
+-      </option>
+-      <option name="TEST_OBJECT" value="CLASS" />
+-      <properties />
+-      <listeners />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+     <configuration default="true" type="JUnit" factoryName="JUnit">
+       <option name="TEST_OBJECT" value="class" />
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+@@ -230,6 +220,7 @@
+       <item itemvalue="Application.Driver" />
+     </list>
+   </component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
+   <component name="SvnConfiguration">
+     <configuration />
+   </component>
+@@ -241,6 +232,8 @@
+       <option name="presentableId" value="Default" />
+       <updated>1359379246138</updated>
+       <workItem from="1359379250712" duration="1302000" />
++      <workItem from="1609675772078" duration="224000" />
++      <workItem from="1609676012168" duration="17000" />
+     </task>
+     <task id="LOCAL-00001" summary="Add New method update">
+       <created>1609189591081</created>
+@@ -311,6 +304,9 @@
+   <component name="TimeTrackingManager">
+     <option name="totallyTimeSpent" value="1302000" />
+   </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
++  </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+       <map>
+@@ -337,6 +333,11 @@
+                 </map>
+               </option>
+             </State>
++          </value>
++        </entry>
++        <entry key="MAIN">
++          <value>
++            <State />
+           </value>
+         </entry>
+       </map>
+Index: src/view/fxml/Login.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/fxml/Login.fxml b/src/view/fxml/Login.fxml
+--- a/src/view/fxml/Login.fxml	(revision c768ac79c5d0ea45f01d9bfb08daa5de6922ca47)
++++ b/src/view/fxml/Login.fxml	(date 1609676949580)
+@@ -40,17 +40,17 @@
+       <PasswordField id="passwordTextField" fx:id="passwordField" layoutX="275.0" layoutY="218.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="181.4" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="134.6" />
+       <ImageView fitHeight="54.0" fitWidth="55.0" layoutX="187.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="329.0" AnchorPane.leftAnchor="187.0" AnchorPane.rightAnchor="359.0">
+          <image>
+-            <Image url="@img/login.png" />
++            <Image url="@../resources/img/login.png" />
+          </image>
+       </ImageView>
+       <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="94.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="94.0" AnchorPane.rightAnchor="461.0">
+          <image>
+-            <Image url="@img/password.png" />
++            <Image url="@../resources/img/password.png" />
+          </image>
+       </ImageView>
+       <ImageView fitHeight="38.0" fitWidth="55.0" layoutX="98.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="464.0">
+          <image>
+-            <Image url="@img/email.png" />
++            <Image url="@../resources/img/email.png" />
+          </image>
+       </ImageView>
+    </children>
+Index: out/production/Progettov1/view/fxml/login.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/production/Progettov1/view/fxml/login.fxml b/out/production/Progettov1/view/fxml/login.fxml
+--- a/out/production/Progettov1/view/fxml/login.fxml	(revision c768ac79c5d0ea45f01d9bfb08daa5de6922ca47)
++++ b/out/production/Progettov1/view/fxml/login.fxml	(date 1609676949580)
+@@ -4,37 +4,54 @@
+ <?import javafx.scene.control.Label?>
+ <?import javafx.scene.control.PasswordField?>
+ <?import javafx.scene.control.TextField?>
++<?import javafx.scene.image.Image?>
++<?import javafx.scene.image.ImageView?>
+ <?import javafx.scene.layout.AnchorPane?>
+ <?import javafx.scene.text.Font?>
+ 
+ <AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="600.0" style="-fx-background-color: #36393e;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLogin">
+    <children>
+-      <Label id="LoginLabel" layoutX="147.0" layoutY="56.0" prefHeight="47.0" prefWidth="276.0" text="Login" textFill="#5aafff" AnchorPane.bottomAnchor="301.0" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="177.0" AnchorPane.topAnchor="56.0">
++      <Label id="LoginLabel" layoutX="242.0" layoutY="35.0" prefHeight="68.0" prefWidth="290.0" text="Login" textFill="#5aafff" AnchorPane.bottomAnchor="322.0" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="68.0">
+          <font>
+             <Font size="46.0" />
+          </font>
+       </Label>
+-      <Label layoutX="54.0" layoutY="155.0" prefHeight="35.0" prefWidth="71.0" text="Email" textFill="#5aafff" AnchorPane.bottomAnchor="234.8" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="484.8">
++      <Label layoutX="143.0" layoutY="155.0" prefHeight="35.0" prefWidth="71.0" text="Email" textFill="#5aafff" AnchorPane.bottomAnchor="234.8" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="385.8">
+          <font>
+             <Font size="22.0" />
+          </font>
+       </Label>
+-      <Label id="PasswordLabel" layoutX="44.0" layoutY="213.0" prefHeight="35.0" prefWidth="104.0" text="Password" textFill="#5aafff" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="452.0">
++      <Label id="PasswordLabel" layoutX="143.0" layoutY="213.0" prefHeight="35.0" prefWidth="109.0" text="Password" textFill="#5aafff" AnchorPane.bottomAnchor="176.8" AnchorPane.leftAnchor="143.00000000000003" AnchorPane.rightAnchor="347.4">
+          <font>
+             <Font size="22.0" />
+          </font>
+       </Label>
+-      <TextField id="emailTextField" layoutX="167.0" layoutY="160.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="239.4" AnchorPane.rightAnchor="242.6" />
+-      <Button id="signinButton" layoutX="423.0" layoutY="330.0" mnemonicParsing="false" style="-fx-background-color: #1E90FF;" text="Sign in" AnchorPane.bottomAnchor="57.39999999999998" AnchorPane.rightAnchor="106.60000000000002">
++      <TextField id="emailTextField" fx:id="emailField" layoutX="275.0" layoutY="160.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="239.4" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="134.6" />
++      <Button id="signinButton" fx:id="accedi" layoutX="370.0" layoutY="323.0" mnemonicParsing="false" onAction="#checkLogin" style="-fx-background-color: #1E90FF;" text="Accedi" AnchorPane.bottomAnchor="54.0">
+          <font>
+-            <Font size="16.0" />
++            <Font size="22.0" />
+          </font>
+       </Button>
+-      <Button id="backButton" fx:id="backHomePage" layoutX="71.0" layoutY="330.0" mnemonicParsing="false" onAction="#backHomePageBenvenuto" style="-fx-background-color: #1E90FF;" text="Back" AnchorPane.bottomAnchor="57.39999999999998" AnchorPane.leftAnchor="71.0">
++      <Button id="backButton" fx:id="backHomePage" layoutX="96.0" layoutY="322.0" mnemonicParsing="false" onAction="#backHomePageBenvenuto" style="-fx-background-color: #1E90FF;" text="Indietro" AnchorPane.bottomAnchor="52.6">
+          <font>
+-            <Font size="16.0" />
++            <Font size="23.0" />
+          </font>
+       </Button>
+-      <PasswordField id="passwordTextField" layoutX="167.0" layoutY="218.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="181.4" AnchorPane.rightAnchor="242.6" />
++      <PasswordField id="passwordTextField" fx:id="passwordField" layoutX="275.0" layoutY="218.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="181.4" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="134.6" />
++      <ImageView fitHeight="54.0" fitWidth="55.0" layoutX="187.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="329.0" AnchorPane.leftAnchor="187.0" AnchorPane.rightAnchor="359.0">
++         <image>
++            <Image url="@../resources/img/login.png" />
++         </image>
++      </ImageView>
++      <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="94.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="94.0" AnchorPane.rightAnchor="461.0">
++         <image>
++            <Image url="@../resources/img/password.png" />
++         </image>
++      </ImageView>
++      <ImageView fitHeight="38.0" fitWidth="55.0" layoutX="98.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="464.0">
++         <image>
++            <Image url="@../resources/img/email.png" />
++         </image>
++      </ImageView>
+    </children>
+ </AnchorPane>
