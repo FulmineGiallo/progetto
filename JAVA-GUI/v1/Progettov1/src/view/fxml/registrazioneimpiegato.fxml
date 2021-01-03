@@ -11,59 +11,65 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="545.0" prefWidth="600.0" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="Form" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label text="Label" />
-            <VBox spacing="3.0">
+            <VBox fx:id="DescrizioneBox" spacing="3.0">
+               <children>
+                  <Label fx:id="DescrizioneLabel" text="Inserisci qui i tuoi dati" />
+                  <Label fx:id="DescrizioneLabel2" text="* Campo obbligatorio" />
+               </children>
+            </VBox>
+            <VBox fx:id="NomeBox" prefHeight="30.0" spacing="3.0">
 				<children>
-                  <JFXTextField alignment="TOP_LEFT" labelFloat="true" prefColumnCount="10" prefHeight="30.0" prefWidth="200.0" promptText="Nome" />
-                  <Label textFill="RED" visible="false" />
+                  <JFXTextField fx:id="NomeTF" alignment="TOP_LEFT" labelFloat="true" maxWidth="400.0" prefColumnCount="10" prefHeight="30.0" promptText="* Nome" />
+                  <Label fx:id="NomeErrorLabel" textFill="RED" />
                </children>
             </VBox>
-            <VBox>
+            <VBox fx:id="CognomeBox" prefHeight="30.0">
                <children>
-                  <JFXTextField alignment="TOP_LEFT" labelFloat="true" prefColumnCount="10" promptText="Cognome" />
-                  <Label textFill="RED" visible="false" />
+                  <JFXTextField fx:id="CognomeTF" alignment="TOP_LEFT" labelFloat="true" maxWidth="400.0" prefColumnCount="10" prefHeight="30.0" promptText="* Cognome" />
+                  <Label fx:id="CognomeErrorLabel" textFill="RED" />
                </children>
             </VBox>
-            <HBox spacing="10.0">
+            <VBox fx:id="GenereBox" prefHeight="30.0" spacing="3.0">
                <children>
-                  <Label text="Genere:" />
-                  <HBox alignment="CENTER" spacing="30.0">
+                  <HBox spacing="10.0">
                      <children>
-                        <JFXRadioButton text="Uomo">
-							<toggleGroup>
-								<ToggleGroup fx:id="Genere" />
-                            </toggleGroup>
-                        </JFXRadioButton>
-                        <JFXRadioButton prefHeight="17.0" text="Donna" toggleGroup="$Genere" />
+                        <Label fx:id="GenereLabel" text="* Genere" />
+                        <HBox fx:id="GenereRBBox" alignment="CENTER" spacing="30.0">
+                           <children>
+                              <JFXRadioButton fx:id="GenereRB1" text="Uomo">
+      							<toggleGroup>
+      								<ToggleGroup fx:id="Genere" />
+                                  </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="GenereRB2" text="Donna" toggleGroup="$Genere" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
-               </children>
-            </HBox>
-            <VBox>
-               <children>
-                  <Label text="Data di nascita:" />
-                  <JFXDatePicker prefHeight="60.0" prefWidth="200.0">
-                     <opaqueInsets>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding></JFXDatePicker>
+                  <Label fx:id="GenereErrorLabel" />
                </children>
             </VBox>
-            <HBox spacing="10.0">
+            <VBox fx:id="DataDiNascitaBox" prefHeight="30.0">
                <children>
-      			<VBox maxWidth="300.0" minWidth="300.0" prefWidth="300.0">
+                  <JFXDatePicker fx:id="DataDiNascitaDP" editable="false" prefWidth="220.0" promptText="* Data di nascita" showWeekNumbers="true">
+                     <opaqueInsets>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </opaqueInsets></JFXDatePicker>
+               </children>
+            </VBox>
+            <HBox fx:id="ComuneDiNascitaBox" prefHeight="30.0" spacing="10.0">
+               <children>
+      			<VBox>
                      <children>
-                        <Label text="Comune di nascita:" />
-                        <JFXListView prefHeight="25.0" showTooltip="true" />
+                        <Label fx:id="ComuneDiNascitaLabel" text="* Comune di nascita:" />
+                        <JFXListView fx:id="ComuneDINascitaLV" prefWidth="290.0" showTooltip="true" />
                      </children>
                   </VBox>
-                  <JFXTextField alignment="TOP_LEFT" labelFloat="true" prefHeight="25.0" prefWidth="88.0" promptText="Provincia (sigla)">
+                  <JFXTextField fx:id="ProvinciaTF" alignment="TOP_LEFT" labelFloat="true" prefWidth="97.0" promptText="* Provincia (sigla)">
                      <padding>
                         <Insets top="25.0" />
                      </padding>
@@ -71,9 +77,12 @@
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets top="100.0" />
+         </padding>
       </VBox>
    </children>
    <padding>
-      <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
+      <Insets left="100.0" right="100.0" />
    </padding>
 </AnchorPane>
