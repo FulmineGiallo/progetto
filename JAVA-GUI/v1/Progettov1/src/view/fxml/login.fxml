@@ -40,17 +40,17 @@
       <PasswordField id="passwordTextField" fx:id="passwordField" layoutX="275.0" layoutY="218.0" prefHeight="25.0" prefWidth="190.0" AnchorPane.bottomAnchor="181.4" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="134.6" />
       <ImageView fitHeight="54.0" fitWidth="55.0" layoutX="187.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="329.0" AnchorPane.leftAnchor="187.0" AnchorPane.rightAnchor="359.0">
          <image>
-            <Image url="@img/login.png" />
+            <Image url="@../resources/img/login.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="45.0" fitWidth="71.0" layoutX="94.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="94.0" AnchorPane.rightAnchor="461.0">
          <image>
-            <Image url="@img/password.png" />
+            <Image url="@../resources/img/password.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="55.0" layoutX="98.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="464.0">
          <image>
-            <Image url="@img/email.png" />
+            <Image url="@../resources/img/email.png" />
          </image>
       </ImageView>
    </children>
