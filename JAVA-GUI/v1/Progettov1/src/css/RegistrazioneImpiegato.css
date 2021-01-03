@@ -46,7 +46,7 @@
 	-fx-font-size: 14;
 }
 
-.NomeLabel{
+.NomeErrorLabel{
 	-fx-font-size: 10;
 	-fx-text-fill: red;
 }
@@ -59,7 +59,7 @@
 	-fx-font-size: 14;
 }
 
-.CognomeLabel{
+.CognomeErrorLabel{
 	-fx-font-size: 10;
 	-fx-text-fill: red;
 }
@@ -81,6 +81,11 @@
 	-jfx-unselected-color: white;
 	-fx-font-size: 14;
 	-fx-text-fill: white;
+}
+
+.GenereErrorLabel{
+	-fx-font-size: 10;
+	-fx-text-fill: red;
 }
 
 .DataDiNascitaLabel{
@@ -114,4 +119,12 @@
 
 .ComuneDiNascitaLV{
 	-fx-background-color: transparent;
+}
+
+.ProvinciaTF{
+	-fx-text-fill: white;
+	-jfx-focus-color: #7289da;
+	-jfx-unfocus-color: white;
+	-fx-prompt-text-fill: white;
+	-fx-font-size: 14;
 }
