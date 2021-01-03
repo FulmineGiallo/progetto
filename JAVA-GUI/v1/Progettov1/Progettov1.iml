@@ -8,5 +8,7 @@
     <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="javafx-swt" level="project" />
+    <orderEntry type="library" name="lib1" level="project" />
+    <orderEntry type="library" name="Libreria JFoenix per SceneBuilder" level="project" />
   </component>
 </module>
