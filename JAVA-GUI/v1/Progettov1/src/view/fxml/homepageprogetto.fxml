@@ -48,7 +48,7 @@
       </JFXButton>
       <ImageView fitHeight="38.0" fitWidth="41.0" layoutX="202.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/projectmanagerprofilepng" />
+            <Image url="@img/projectmanagerprofile.png" />
          </image>
       </ImageView>
    </children>
