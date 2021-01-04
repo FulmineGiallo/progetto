@@ -24,3 +24,23 @@
 	-fx-border-width: 0 0 5 0;
 	-fx-border-color: #36393e;
 }
+
+.RegistrazioneLabel, .LoginLabel{
+	-fx-font-size: 14;
+	-fx-text-fill: white;
+}
+
+.RegistrazioneButton, .LoginButton{
+	-fx-background-color: -fx-secondary;
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 20;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+}
+
+.RegistrazioneButton:hover, .LoginButton:hover{
+	-fx-background-color: -fx-primary;
+	-fx-backgrund-radius: 10;
+}

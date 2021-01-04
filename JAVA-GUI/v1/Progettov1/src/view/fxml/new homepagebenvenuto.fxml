@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -34,18 +35,43 @@
                   </AnchorPane>
                </children>
             </HBox>
-            <HBox fx:id="SceltaBox">
+            <HBox fx:id="SceltaBox" maxHeight="0.0" minHeight="300.0">
                <children>
-                  <AnchorPane fx:id="RegistrazionePanel" prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane fx:id="RegistrazionePanel" minWidth="300.0">
                      <children>
-                        <VBox AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+                        <VBox spacing="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
                            <children>
-                              <Label fx:id="DescrizioneLabel" text="È la prima volta che accedi alla nostra piattaforma?" />
-                              <Label fx:id="DescrizioneLabel2" text="Chiedi di essere un nostro impiegato!" />
+                              <Label fx:id="RegistrazioneLabel" styleClass="RegistrazioneLabel" text="È la prima volta che accedi&#10;alla nostra piattaforma?" />
+                              <Label fx:id="RegistrazioneLabel2" styleClass="RegistrazioneLabel" text="Chiedi di essere un nostro impiegato!" />
                            </children>
                         </VBox>
-                     </children></AnchorPane>
-                  <AnchorPane fx:id="LoginPanel" prefHeight="200.0" prefWidth="200.0" />
+                        <VBox spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0">
+                           <children>
+                              <ImageView fx:id="RegistrazioneIV" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" translateX="69.0">
+                                <image>
+                                    <Image url="@../resources/img/freccia.png" />
+            								</image>
+            							  </ImageView>
+            							  <Button fx:id="RegistrazioneButton" mnemonicParsing="false" styleClass="RegistrazioneButton" text="Invia il tuo curriculum" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="LoginPanel" minWidth="300.0">
+                     <children>
+                        <Label fx:id="LoginLabel" layoutX="20.0" layoutY="10.0" styleClass="LoginLabel" text="È la prima volta che accedi&#10;alla nostra piattaforma?" />
+                        <VBox spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0">
+                           <children>
+                              <ImageView fx:id="LoginIV" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" translateX="69.0">
+                                 <image>
+                                    <Image url="@../resources/img/freccia.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="LoginButton" mnemonicParsing="false" styleClass="LoginButton" text="Effettua l'accesso" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
                </children>
             </HBox>
          </children>
