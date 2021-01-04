@@ -1,0 +1,11 @@
+.RegistrazioneProgetto{
+	-fx-font-family: 'Roboto';
+	min-width:1000px;  
+}
+
+
+.InputTitolo,
+.InputDescrizione{
+	-fx-text-fill: white;
+	-fx-prompt-text-fill: white;
+}
