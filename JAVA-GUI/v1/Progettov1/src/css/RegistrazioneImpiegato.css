@@ -37,7 +37,9 @@
 .CognomeTF,
 .DataDiNascitaDP,
 .ProvinciaTF,
-.ComuneLV{
+.ComuneLV,
+.SkillLV,
+.GradoLV{
 	-fx-text-fill: white;
 	-fx-prompt-text-fill: white;
 	-fx-font-size: 14;
@@ -57,7 +59,9 @@
 .GenereRB1,
 .GenereRB2,
 .ComuneLabel,
-.ProvinciaLabel{
+.ProvinciaLabel,
+.SkillLabel,
+.GradoLabel{
 	-fx-font-size: 14;
 	-fx-text-fill: white;
 }
@@ -101,8 +105,32 @@
 	-fx-font-size: 14;
 }
 
+.DataDiNascitaDP:focused{
+	-fx-border-color: -fx-primary;
+}
+
 .DataDiNascitaDP .arrow-button{
-	-fx-background-color: derive(-fx-secondary, +20%);
-	-fx-border-width: 2 2 0 2;
+	-fx-background-color: white;
+	-fx-border-width: 2;
 	-fx-border-color: white;
+}
+
+.DataDiNascitaDP:focused .arrow-button{
+	-fx-background-color: -fx-primary;
+	-fx-border-color: -fx-primary;
+}
+
+.AnnullaButton, .ConfermaButton{
+	-fx-background-color: -fx-secondary;
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 30;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+}
+
+.AnnullaButton:hover, .ConfermaButton:hover{
+	-fx-background-color: -fx-primary;
+	-fx-backgrund-radius: 10;
 }

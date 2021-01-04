@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -12,13 +13,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1000.0" prefWidth="650.0" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="769.0" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="Form" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox fx:id="Form" spacing="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <VBox fx:id="DescrizioneBox" spacing="3.0">
                <children>
-                  <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci qui i tuoi dati" />
+                  <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci qui i tuoi dati per la registrazione" />
                   <Label fx:id="DescrizioneLabel2" styleClass="DescrizioneLabel2" text="* Campo obbligatorio" />
                </children>
             </VBox>
@@ -28,6 +29,9 @@
                   <TextField fx:id="NomeTF" prefWidth="223.0" promptText="* Nome" styleClass="NomeTF" />
                   <Label fx:id="NomeErrorLabel" styleClass="NomeErrorLabel" textFill="RED" />
                </children>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
             </VBox>
             <VBox fx:id="CognomeBox" prefHeight="45.0">
                <children>
@@ -70,7 +74,7 @@
       			<VBox>
                      <children>
                         <Label fx:id="ComuneLabel" styleClass="ComuneLabel" text="* Comune di nascita:" />
-                        <ListView fx:id="ComuneLV" maxWidth="290.0" prefWidth="290.0" styleClass="ComuneLV" />
+                        <ListView fx:id="ComuneLV" maxWidth="316.0" prefWidth="316.0" styleClass="ComuneLV" />
                      </children>
                   </VBox>
                   <VBox>
@@ -81,21 +85,41 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox spacing="100.0">
+            <VBox fx:id="SkillBox" prefHeight="45.0">
                <children>
-                  <Button fx:id="AnnullaButton" mnemonicParsing="false" text="Annulla registrazione" />
-                  <Button fx:id="ConfermaButton" mnemonicParsing="false" text="Conferma registrazione" />
+                  <Label fx:id="SkillLabel" styleClass="SkillLabel" text="Inserisci le tue skills" />
+                  <ListView fx:id="SkillLV" maxWidth="316.0" prefWidth="316.0" styleClass="SkillLV" />
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets top="50.0" />
                </VBox.margin>
-               <padding>
-                  <Insets right="50.0" />
-               </padding>
-            </HBox>
+            </VBox>
+            <VBox fx:id="GradoBox" prefHeight="45.0">
+               <children>
+                  <Label fx:id="GradoLabel" styleClass="GradoLabel" text="Grado che vorresti ricoprire in azienda" />
+                  <ListView fx:id="GradoLV" maxWidth="316.0" prefWidth="316.0" styleClass="GradoLV" />
+               </children>
+            </VBox>
+            <AnchorPane fx:id="ButtonBar">
+               <children>
+                  <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefWidth="180.0" styleClass="AnnullaButton" text="Annulla" AnchorPane.leftAnchor="50.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefWidth="180.0" styleClass="ConfermaButton" text="Conferma" AnchorPane.rightAnchor="50.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="100.0" />
+               </VBox.margin>
+            </AnchorPane>
          </children>
          <padding>
-            <Insets bottom="100.0" top="100.0" />
+            <Insets bottom="50.0" top="50.0" />
          </padding>
       </VBox>
    </children>
