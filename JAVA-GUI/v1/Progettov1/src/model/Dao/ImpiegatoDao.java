@@ -15,6 +15,8 @@ public class ImpiegatoDao
     private Connection connection;
     private PreparedStatement getImpiegati;
     private PreparedStatement getNome;
+    private PreparedStatement getCognome;
+
 
 
     public ImpiegatoDao(Connection connection, String email) throws SQLException
@@ -22,12 +24,20 @@ public class ImpiegatoDao
         this.connection = connection;
         getImpiegati = connection.prepareStatement("SELECT * FROM impiegato");
         getNome = connection.prepareStatement("SELECT nome FROM impiegato WHERE email ='" + email + "'");
+        getCognome = connection.prepareStatement("SELECT nome,cognome FROM impiegato WHERE email ='" + email + "'");
     }
+
     public String getNome() throws SQLException
     {
         ResultSet rs = getNome.executeQuery();
         return rs.getString("nome");
     }
+    public String getCognome() throws SQLException
+    {
+        ResultSet rs = getCognome.executeQuery();
+        return rs.getString("cognome");
+    }
+
     public List<Impiegato> getAllImpiegati() throws SQLException
     {
         ResultSet rs = getImpiegati.executeQuery();

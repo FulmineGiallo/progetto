@@ -81,7 +81,6 @@ public class ControllerLogin
             window.initModality(Modality.APPLICATION_MODAL);
             window.setResizable(false);
             window.show();
-
         }
     }
 }
