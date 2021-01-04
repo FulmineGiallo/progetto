@@ -1,0 +1,26 @@
+/*
+	#7289da - azzurro
+	#424549 - grigio 1
+	#36393e - grigio 2
+	#282b30 - grigio 3
+	#1e2124 - grigio 4
+	(dal più chiaro al più scuro)
+*/
+
+.HomePageBenvenuto{
+	-fx-primary: #7289da;
+	-fx-secondary: #424549;
+	-fx-background-color: -fx-secondary;
+	-fx-font-family: 'Roboto';
+}
+
+.TitoloLabel{
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 30;
+}
+
+.TitoloBox{
+	-fx-border-width: 0 0 5 0;
+	-fx-border-color: #36393e;
+}
