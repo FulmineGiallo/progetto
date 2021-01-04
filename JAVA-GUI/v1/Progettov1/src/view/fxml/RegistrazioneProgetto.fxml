@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="976.0" style="-fx-background-color: #424549;" styleClass="RegistrazioneProgetto" stylesheets="@RegistrazioneProgetto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="976.0" style="-fx-background-color: #424549;" styleClass="RegistrazioneProgetto" stylesheets="@../../css/RegistrazioneProgetto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="56.0" layoutY="32.0" text="Creazione nuovo progetto" textFill="WHITE" AnchorPane.leftAnchor="70.0">
          <font>
