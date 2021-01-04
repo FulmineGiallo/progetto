@@ -29,7 +29,7 @@
       </Label>
       <Pane layoutX="16.0" layoutY="374.0" prefHeight="126.0" prefWidth="610.0" style="-fx-background-color: white;" />
       <Pane layoutX="200.0" layoutY="70.0" prefHeight="258.0" prefWidth="431.0" style="-fx-background-color: white;" />
-      <Label fx:id="nomeImpiegato" layoutX="84.0" layoutY="27.0" onDragDetected="#setNomeImpiegato" stylesheets="@../../css/homepageimpiegato.css" text="nomeSQL" textFill="WHITE">
+      <Label fx:id="nomeImpiegato" layoutX="84.0" layoutY="27.0"  stylesheets="@../../css/homepageimpiegato.css" text="nomeSQL" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

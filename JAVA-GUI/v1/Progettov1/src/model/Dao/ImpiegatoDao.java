@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ImpiegatoDao
 {
+
     private Connection connection;
     private PreparedStatement getImpiegati;
     private PreparedStatement getNome;

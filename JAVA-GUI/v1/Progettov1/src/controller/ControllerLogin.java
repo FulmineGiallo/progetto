@@ -35,12 +35,11 @@ public class ControllerLogin
     private PasswordField passwordField;
     @FXML
     private Button okButton;
-    ControllerHomepageImpiegato impiegato;
 
 
     boolean accesso = false;
-    String email = emailField.getText();
-    String password = passwordField.getText();
+    String email;
+    String password;
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception
     {
@@ -58,13 +57,14 @@ public class ControllerLogin
 
     public void checkLogin(ActionEvent actionEvent) throws Exception
     {
+
         if(emailField.getText().equals("carminefb@live.it") && passwordField.getText().equals("ciao"))
         {
             /* QUERY AVVENUTA CON SUCCESSO UTENTE PRESENTE NEL DB */
             System.out.println("Valido");
             System.out.println("Email" + emailField.getText() +" Password" + passwordField.getText());
-            PrintWriter writer = null;
 
+            PrintWriter writer = null;
             homeImpiegato = new HomePageImpiegato(writer);
 
             Stage stage = (Stage)accedi.getScene().getWindow();

@@ -35,8 +35,6 @@ public class ControllerHomePageBenvenuto
 
         Stage stage = (Stage)login.getScene().getWindow();
         loginPage.start(stage);
-        
-        //prova
     }
 
 }
