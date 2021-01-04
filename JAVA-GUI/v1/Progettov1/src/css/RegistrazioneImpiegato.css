@@ -1,18 +1,3 @@
-@font-face{
-	font-family: 'Whitney';
-	src: url('\fonts\whitneybold.otf');
-}
-
-@font-face{
-	font-family: 'WhitneyBook';
-	src: url('\fonts\whitneybook.otf');
-}
-
-@font-face{
-	font-family: 'WhitneySemiboldItalic';
-	src: url('\fonts\whitneySemiboldItalic.otf');
-}
-
 /*
 	#7289da - azzurro
 	#424549 - grigio 1
@@ -23,7 +8,10 @@
 */
 
 .RegistrazioneImpiegato{
-	-fx-background-color: #424549;
+	-fx-primary: #7289da;
+	-fx-secondary: #424549;
+	-fx-background-color: -fx-secondary;
+	-fx-font-family: 'Roboto';
 }
 
 .DescrizioneLabel{
@@ -38,93 +26,83 @@
 	-fx-font-size: 16;
 }
 
-.NomeTF{
+.NomeLabel,
+.CognomeLabel,
+.ProvinciaLabel{
+	-fx-font-size: 10;
+	-fx-text-fill: -fx-primary;
+}
+
+.NomeTF,
+.CognomeTF,
+.DataDiNascitaDP,
+.ProvinciaTF,
+.ComuneLV{
 	-fx-text-fill: white;
-	-jfx-focus-color: #7289da;
-	-jfx-unfocus-color: white;
 	-fx-prompt-text-fill: white;
 	-fx-font-size: 14;
+	-fx-background-color: -fx-secondary;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: white;
 }
 
-.NomeErrorLabel{
-	-fx-font-size: 10;
-	-fx-text-fill: red;
+.NomeTF:focused,
+.CognomeTF:focused,
+.ProvinciaTF:focused{
+	-fx-border-color: -fx-primary;
 }
 
-.CognomeTF{
-	-fx-text-fill: white;
-	-jfx-focus-color: #7289da;
-	-jfx-unfocus-color: white;
-	-fx-prompt-text-fill: white;
-	-fx-font-size: 14;
-}
-
-.CognomeErrorLabel{
-	-fx-font-size: 10;
-	-fx-text-fill: red;
-}
-
-.GenereLabel{
+.GenereLabel,
+.DataDiNascitaLabel,
+.GenereRB1,
+.GenereRB2,
+.ComuneLabel,
+.ProvinciaLabel{
 	-fx-font-size: 14;
 	-fx-text-fill: white;
 }
 
-.GenereRB1{
-	-jfx-selected-color: #7289da;
-	-jfx-unselected-color: white;
-	-fx-font-size: 14;
-	-fx-text-fill: white;
-}
-
-.GenereRB2{
-	-jfx-selected-color: #7289da;
-	-jfx-unselected-color: white;
-	-fx-font-size: 14;
-	-fx-text-fill: white;
-}
-
-.GenereErrorLabel{
-	-fx-font-size: 10;
-	-fx-text-fill: red;
-}
-
-.DataDiNascitaLabel{
-	-fx-font-size: 14;
-	-fx-text-fill: white;
-}
-
-.DataDiNascitaDP > .date-picker-display-node:readonly{
-	-jfx-focus-color: #7289da;
-	-jfx-unfocus-color: white;
-	-fx-text-fill: white;
-	-jfx-label-float: true;
-	-fx-prompt-text-fill: white;
-	-fx-font-size: 14;
-}
-
-.DataDiNascitaDP > .date-picker-popup > .calendar-grid {
-    -fx-background-color: #424549;
-    -fx-cursor: hand;
-}
-
+.NomeErrorLabel,
+.CognomeErrorLabel,
+.GenereErrorLabel,
 .DataDiNascitaErrorLabel{
 	-fx-font-size: 10;
 	-fx-text-fill: red;
 }
 
-.ComuneDiNascitaLabel{
-	-fx-font-size: 14;
-	-fx-text-fill: white;
+.GenereRB1:focused,
+.GenereRB2:focused{
+	-fx-text-fill: -fx-primary;
 }
 
-.ComuneDiNascitaLV{
-	-fx-background-color: transparent;
+.GenereRB1 .radio,
+.GenereRB2 .radio{
+	-fx-background-color: -fx-secondary;
+	-fx-border-width: 2px;
+	-fx-border-color: white;
+	-fx-border-radius: 15px;
 }
 
-.ProvinciaTF{
+.GenereRB1:focused .radio .dot,
+.GenereRB2:focused .radio .dot{
+	-fx-mark-highlight-color: -fx-primary;
+	-fx-mark-color: -fx-primary;
+}
+
+.GenereRB1 .radio .dot,
+.GenereRB2 .radio .dot{
+	-fx-mark-highlight-color: white;
+	-fx-mark-color: white;
+}
+
+.DataDiNascitaDP .date-picker-display-node{
+	-fx-background-color: -fx-secondary;
 	-fx-text-fill: white;
-	-jfx-focus-color: #7289da;
-	-jfx-unfocus-color: white;
-	-fx-prompt-text-fill: white;
 	-fx-font-size: 14;
+}
+
+.DataDiNascitaDP .arrow-button{
+	-fx-background-color: derive(-fx-secondary, +20%);
+	-fx-border-width: 2 2 0 2;
+	-fx-border-color: white;
 }
