@@ -1,27 +1,21 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import model.Connection.DBBuilder;
 import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.Impiegato;
 import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
-
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -32,21 +26,13 @@ public class ControllerLogin
     HomePageBenvenuto benvenuto;
     HomePageImpiegato homeImpiegato;
 
-    @FXML
-    private Button backHomePage;
-    @FXML
-    private Button accedi;
-    @FXML
-    private TextField emailField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Button okButton;
+    @FXML private Button backHomePage;
+    @FXML private Button accedi;
+    @FXML private TextField emailField;
+    @FXML private PasswordField passwordField;
+    @FXML private Button okButton;
 
-
-    boolean accesso = false;
-    String email;
-    String password;
+    int accesso = 0;
     Connection connection;
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception
@@ -65,25 +51,47 @@ public class ControllerLogin
 
     public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception
     {
-
-        if(emailField.getText().equals("m.carofano@studenti.unina.it") && passwordField.getText().equals("ciao"))
+        if(!emailField.getText().isEmpty() && !passwordField.getText().isEmpty())
         {
-            /* QUERY AVVENUTA CON SUCCESSO UTENTE PRESENTE NEL DB */
-
+            /*Istanzio connessione per vedere se l'impiegato esiste */
             DBConnection connDB;
             connDB = DBConnection.getInstance();
             connection = connDB.getConnection();
 
-            ImpiegatoDaoInterface impiegato = new ImpiegatoDao(connection);
-            System.out.println("Valido" + impiegato.getNome(emailField.getText(), accesso));
+            /*Creo impiegatoDao e gli passo la connessione */
+            ImpiegatoDaoInterface impiegatoDao = new ImpiegatoDao(connection);
+
+            /*Eseguo query */
+            accesso = impiegatoDao.impiegatoExist(emailField.getText(), passwordField.getText());
+            Impiegato impiegato = null;
 
 
-            PrintWriter writer = null;
-            homeImpiegato = new HomePageImpiegato(writer);
+            /* QUERY AVVENUTA CON SUCCESSO UTENTE PRESENTE NEL DB */
+            if(accesso == 1)
+            {
+                impiegato = impiegatoDao.creaImpiegato(impiegatoDao.getCFWithEmail(emailField.getText()));
 
-            Stage stage = (Stage)accedi.getScene().getWindow();
-            homeImpiegato.start(stage);
+                PrintWriter writer = null;
+                homeImpiegato = new HomePageImpiegato(writer, impiegato);
+
+                Stage stage = (Stage)accedi.getScene().getWindow();
+                homeImpiegato.start(stage);
+            }
+            /* Non ci sono email e password corrispondenti */
+            if(accesso == 0)
+            {
+                Stage window;
+                window = new Stage();
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/errorelogin.fxml"));
+                Scene scene =  new Scene(root, 450,176);
+                window.setScene(scene);
+                window.setTitle("Errore Impiegato!");
+                window.initModality(Modality.APPLICATION_MODAL);
+                window.setResizable(false);
+                window.show();
+            }
         }
+        /* Se i campi sono vuoti */
         else
         {
             Stage window;

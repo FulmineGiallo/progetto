@@ -11,19 +11,31 @@ public class Impiegato
     private Date dataNascita;
     private String comuneNascita;
     private String email;
-    private String passowrd;
+    private int idgrado;
+    private int idimpegato;
+    private String password;
 
-    public Impiegato(String CF)
+    public Impiegato( String CF)
     {
         this.CF = CF;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.genere = genere;
-        this.dataNascita = dataNascita;
-        this.comuneNascita = comuneNascita;
-        this.email = email;
-        this.passowrd = passowrd;
     }
+
+    public int getIdgrado() {
+        return idgrado;
+    }
+
+    public void setIdgrado(int idgrado) {
+        this.idgrado = idgrado;
+    }
+
+    public int getIdimpegato() {
+        return idimpegato;
+    }
+
+    public void setIdimpegato(int idimpegato) {
+        this.idimpegato = idimpegato;
+    }
+
 
     public String getCF()
     {
@@ -88,11 +100,11 @@ public class Impiegato
         this.email = email;
     }
 
-    public String getPassowrd() {
-        return passowrd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassowrd(String passowrd) {
-        this.passowrd = passowrd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

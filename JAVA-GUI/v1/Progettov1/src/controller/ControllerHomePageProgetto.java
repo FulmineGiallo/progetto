@@ -25,16 +25,14 @@ public class ControllerHomePageProgetto {
     @FXML
     private Button buttonHome;
 
-    @FXML
-    void backHomePageImpiegato(ActionEvent event) throws Exception {
+    /*void backHomePageImpiegato(ActionEvent event) throws Exception {
 
             PrintWriter writer = null;
             homeImpiegato = new HomePageImpiegato(writer);
 
             Stage stage = (Stage) buttonHome.getScene().getWindow();
             homeImpiegato.start(stage);
-       
-    	
-    }
 
+    }
+    */
 }

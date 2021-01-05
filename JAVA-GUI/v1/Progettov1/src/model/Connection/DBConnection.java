@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 
-public class DBConnection {
-
+public class DBConnection
+{
     private static DBConnection instance;
     private Connection connection = null;
     private final String USERNAME = "postgres";
@@ -18,7 +18,7 @@ public class DBConnection {
     private final String database ="Azienda";
     private String url = "jdbc:postgresql://"+IP+":"+PORT+"/"+database;
 
-    private DBConnection() throws SQLException {
+    public DBConnection() throws SQLException {
         try
         {
             Class.forName("org.postgresql.Driver");

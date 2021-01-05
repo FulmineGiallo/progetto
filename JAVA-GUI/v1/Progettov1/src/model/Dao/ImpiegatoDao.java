@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ImpiegatoDao implements ImpiegatoDaoInterface
@@ -17,27 +18,72 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
 
     private final PreparedStatement getImpiegati;
     private final PreparedStatement getNome;
-
-
+    private final PreparedStatement loginImpiegato;
+    private final PreparedStatement getImpiegato;
+    private final PreparedStatement getCF;
     public ImpiegatoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
         getImpiegati = connection.prepareStatement("SELECT * FROM impiegato");
         getNome = connection.prepareStatement("SELECT nome FROM impiegato WHERE email = ?");
+        loginImpiegato = connection.prepareStatement("SELECT COUNT(*) FROM impiegatoaccount WHERE email = ? AND password = ?");
+        getImpiegato = connection.prepareStatement("SELECT * FROM impiegato WHERE cf = ?");
+        getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
+
     }
 
-    public String getNome(String email, boolean accesso) throws SQLException
+    @Override
+    public int impiegatoExist(String email, String password) throws SQLException
     {
-        String nome = null;
-        getNome.setString(1,email);
-        ResultSet rs = getNome.executeQuery();
+        int accesso = 0;
+        loginImpiegato.setString(1,email);
+        loginImpiegato.setString(2,password);
+        ResultSet rs = loginImpiegato.executeQuery();
         while(rs.next())
         {
-            nome = rs.getString("nome");
+            accesso = rs.getInt("count");
         }
-
         rs.close();
-        return nome;
+        //Se ritorna 0, l'impiegato non esiste, altrimenti 1.
+        return accesso;
+    }
+
+    @Override
+    public Impiegato creaImpiegato(String CF) throws SQLException
+    {
+        getImpiegato.setString(1,CF);
+        ResultSet rs = getImpiegato.executeQuery();
+        Impiegato impiegato = null;
+        while (rs.next())
+        {
+            impiegato = new Impiegato(rs.getString("CF"));
+            impiegato.setNome(rs.getString("nome"));
+            impiegato.setCognome(rs.getString("cognome"));
+            impiegato.setComuneNascita(rs.getString("comunen"));
+            impiegato.setGenere(rs.getString("genere"));
+            impiegato.setEmail(rs.getString("email"));
+            impiegato.setDataNascita(rs.getDate("datan"));
+            impiegato.setPassword(rs.getString("password"));
+            impiegato.setIdgrado(rs.getInt("idgrado"));
+            impiegato.setIdimpegato(rs.getInt("idimpiegato"));
+        }
+        rs.close();
+        return impiegato;
+    }
+
+    @Override
+    public String getCFWithEmail(String email) throws SQLException
+    {
+        String CF = null;
+        getCF.setString(1,email);
+        ResultSet rs = getCF.executeQuery();
+
+        while(rs.next())
+        {
+            CF = rs.getString("CF");
+        }
+        rs.close();
+        return CF;
     }
 
 
@@ -55,7 +101,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             impiegato.setGenere(rs.getString("genere"));
             impiegato.setEmail(rs.getString("email"));
             impiegato.setDataNascita(rs.getDate("datan"));
-            impiegato.setPassowrd(rs.getString("password"));
+            impiegato.setPassword(rs.getString("password"));
         }
         rs.close();
         return list;
