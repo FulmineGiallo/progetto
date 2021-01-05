@@ -18,7 +18,7 @@ public class CaricamentoRegistrazione {
 
     public void start(Stage window){
         try {
-			Parent root = FXMLLoader.load(getClass().getResource("@../../src/view/fxml/CaricamentoRegistrazione.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("fxml/CaricamentoRegistrazione.fxml"));
 			Scene scene = new Scene(root);
 			
 			window.setResizable(false);
