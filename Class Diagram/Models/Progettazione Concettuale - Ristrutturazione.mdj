@@ -452,23 +452,6 @@
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF2rwWWl+W9uHY=",
-											"_parent": {
-												"$ref": "AAAAAAF2TdR6ozxtt2U="
-											},
-											"model": {
-												"$ref": "AAAAAAF2rwWWVeW60/s="
-											},
-											"font": "Arial;13;0",
-											"left": 2229,
-											"top": 1462,
-											"width": 205.841796875,
-											"height": 13,
-											"text": "+FotoProfilo: Immagine[0...1]",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
 											"_id": "AAAAAAF2h1Y+NJ/Wc2U=",
 											"_parent": {
 												"$ref": "AAAAAAF2TdR6ozxtt2U="
@@ -478,7 +461,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1477,
+											"top": 1462,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+Genere: enumGenere[1]",
@@ -495,7 +478,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1492,
+											"top": 1477,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+DataN: Date[1]",
@@ -512,7 +495,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1507,
+											"top": 1492,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+ComuneN: String[1]",
@@ -529,7 +512,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1522,
+											"top": 1507,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+E-mail: String[1]",
@@ -546,7 +529,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 1537,
+											"top": 1522,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+Password: String[1]",
@@ -557,7 +540,7 @@
 									"left": 2224,
 									"top": 1397,
 									"width": 215.841796875,
-									"height": 158
+									"height": 143
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -570,7 +553,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 2224,
-									"top": 1555,
+									"top": 1540,
 									"width": 215.841796875,
 									"height": 10
 								},
@@ -10231,16 +10214,6 @@
 							"name": "Cognome",
 							"type": "String",
 							"multiplicity": "1"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAF2rwWWVeW60/s=",
-							"_parent": {
-								"$ref": "AAAAAAF2TdR6oTxlffo="
-							},
-							"name": "FotoProfilo",
-							"type": "Immagine",
-							"multiplicity": "0...1"
 						},
 						{
 							"_type": "UMLAttribute",
