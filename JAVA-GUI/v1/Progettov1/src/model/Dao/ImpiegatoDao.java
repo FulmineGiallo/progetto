@@ -13,10 +13,10 @@ import java.util.List;
 public class ImpiegatoDao implements ImpiegatoDaoInterface
 {
 
-    private Connection connection;
+    private final Connection connection;
 
-    private PreparedStatement getImpiegati;
-    private PreparedStatement getNome;
+    private final PreparedStatement getImpiegati;
+    private final PreparedStatement getNome;
 
 
     public ImpiegatoDao(Connection connection) throws SQLException
@@ -28,9 +28,14 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
 
     public String getNome(String email, boolean accesso) throws SQLException
     {
+        String nome = null;
         getNome.setString(1,email);
         ResultSet rs = getNome.executeQuery();
-        String nome = rs.getString("nome");
+        while(rs.next())
+        {
+            nome = rs.getString("nome");
+        }
+
         rs.close();
         return nome;
     }

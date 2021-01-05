@@ -71,8 +71,6 @@ public class ControllerLogin
             /* QUERY AVVENUTA CON SUCCESSO UTENTE PRESENTE NEL DB */
 
             DBConnection connDB;
-
-
             connDB = DBConnection.getInstance();
             connection = connDB.getConnection();
 
