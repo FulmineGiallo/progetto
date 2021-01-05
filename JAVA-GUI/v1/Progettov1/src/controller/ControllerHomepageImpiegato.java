@@ -1,5 +1,42 @@
 package controller;
 
-public class ControllerHomepageImpiegato
-{
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import java.io.PrintWriter;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import view.HomePageProgetto;
+
+public class ControllerHomepageImpiegato {
+
+	 HomePageProgetto homeProgetto;
+    
+	 @FXML
+    private Button buttonValutazioni;
+
+    @FXML
+    private Button buttonCreaProgetto;
+
+    @FXML
+    private Label nomeImpiegato;
+
+    
+    
+    @FXML
+   public void CreateProject(ActionEvent actionEvent) throws Exception {
+
+    	PrintWriter writer = null;
+        homeProgetto = new HomePageProgetto(writer);
+
+        Stage stage = (Stage) buttonCreaProgetto.getScene().getWindow();
+        homeProgetto.start(stage);
+    	
+    }
+    
+    
+    
+    
 }
