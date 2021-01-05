@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="HomePageBenvenuto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="HomePageBenvenuto" stylesheets="@/../../css/HomePageBenvenuto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="TitoloBox" minHeight="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="TitoloBox" minHeight="100.0" styleClass="TitoloBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
                <children>
@@ -42,7 +42,7 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <AnchorPane fx:id="RegistrazioneBox" minWidth="300.0">
+                  <AnchorPane fx:id="RegistrazioneBox" minWidth="300.0" styleClass="RegistrazioneBox">
                      <children>
                         <VBox spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                            <children>
@@ -62,7 +62,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="LoginBox" minWidth="300.0" GridPane.columnIndex="1">
+                  <AnchorPane fx:id="LoginBox" minWidth="300.0" styleClass="LoginBox" GridPane.columnIndex="1">
                      <children>
                         <Label fx:id="LoginLabel" styleClass="LoginLabel" text="È la prima volta che accedi&#10;alla nostra piattaforma?" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                         <VBox alignment="CENTER" spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
