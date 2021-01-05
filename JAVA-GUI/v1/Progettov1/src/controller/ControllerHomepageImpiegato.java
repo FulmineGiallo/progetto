@@ -1,6 +1,6 @@
 package controller;
 
-<<<<<<< HEAD
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.io.PrintWriter;
@@ -36,14 +36,6 @@ public class ControllerHomepageImpiegato {
         homeProgetto.start(stage);
     	
     }
-    
-    
-    
-    
-=======
-public class ControllerHomepageImpiegato
-{
-    ControllerLogin informazioniLogin;
-
->>>>>>> 762c38d80038bca86de03aa0182385f02331fdf6
 }
+    
+  
