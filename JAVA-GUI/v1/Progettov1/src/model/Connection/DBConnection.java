@@ -26,7 +26,7 @@ public class DBConnection
         }
         catch (SQLException | ClassNotFoundException err)
         {
-            err.printStackTrace();
+            System.out.println("Database Connection Creation Failed : " + err.getMessage());
         }
     }
 

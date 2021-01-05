@@ -12,12 +12,19 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import model.Connection.DBBuilder;
+import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
+import model.DaoInterface.ImpiegatoDaoInterface;
+import model.Impiegato;
 import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 
 public class ControllerLogin
@@ -40,6 +47,7 @@ public class ControllerLogin
     boolean accesso = false;
     String email;
     String password;
+    Connection connection;
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception
     {
@@ -55,14 +63,22 @@ public class ControllerLogin
         stage.close();
     }
 
-    public void checkLogin(ActionEvent actionEvent) throws Exception
+    public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception
     {
 
-        if(emailField.getText().equals("carminefb@live.it") && passwordField.getText().equals("ciao"))
+        if(emailField.getText().equals("m.carofano@studenti.unina.it") && passwordField.getText().equals("ciao"))
         {
             /* QUERY AVVENUTA CON SUCCESSO UTENTE PRESENTE NEL DB */
-            System.out.println("Valido");
-            System.out.println("Email" + emailField.getText() +" Password" + passwordField.getText());
+
+            DBConnection connDB;
+
+
+            connDB = DBConnection.getInstance();
+            connection = connDB.getConnection();
+
+            ImpiegatoDaoInterface impiegato = new ImpiegatoDao(connection);
+            System.out.println("Valido" + impiegato.getNome(emailField.getText(), accesso));
+
 
             PrintWriter writer = null;
             homeImpiegato = new HomePageImpiegato(writer);
