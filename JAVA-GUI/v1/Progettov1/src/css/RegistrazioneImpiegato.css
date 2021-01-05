@@ -14,6 +14,24 @@
 	-fx-font-family: 'Roboto';
 }
 
+.scroll-pane .viewport{
+	-fx-background-color: -fx-secondary;
+}
+
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .scroll-bar:vertical{
+	-fx-background-color: -fx-secondary;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb,
+.scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primary;
+}
+
 .DescrizioneLabel{
 	-fx-text-fill: white;
 	-fx-font-weight: 900;

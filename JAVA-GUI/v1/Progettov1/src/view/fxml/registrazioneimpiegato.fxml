@@ -7,121 +7,133 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="769.0" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="Form" spacing="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox fx:id="DescrizioneBox" layoutX="100.0" layoutY="10.0" spacing="3.0">
          <children>
-            <VBox fx:id="DescrizioneBox" spacing="3.0">
-               <children>
-                  <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci qui i tuoi dati per la registrazione" />
-                  <Label fx:id="DescrizioneLabel2" styleClass="DescrizioneLabel2" text="* Campo obbligatorio" />
-               </children>
-            </VBox>
-            <VBox fx:id="NomeBox" prefHeight="45.0" spacing="3.0">
-				<children>
-                  <Label fx:id="NomeLabel" text="* Nome" visible="false" />
-                  <TextField fx:id="NomeTF" prefWidth="223.0" promptText="* Nome" styleClass="NomeTF" />
-                  <Label fx:id="NomeErrorLabel" styleClass="NomeErrorLabel" textFill="RED" />
-               </children>
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-            </VBox>
-            <VBox fx:id="CognomeBox" prefHeight="45.0">
-               <children>
-                  <TextField fx:id="CognomeTF" prefWidth="223.0" promptText="* Cognome" styleClass="NomeTF" />
-                  <Label fx:id="CognomeErrorLabel" styleClass="CognomeErrorLabel" textFill="RED" />
-               </children>
-            </VBox>
-            <VBox fx:id="GenereBox" prefHeight="45.0" spacing="3.0">
-               <children>
-                  <HBox prefHeight="30.0" spacing="10.0">
-                     <children>
-                        <Label fx:id="GenereLabel" prefHeight="30.0" prefWidth="56.0" styleClass="GenereLabel" text="* Genere" />
-                        <HBox fx:id="GenereRBBox" alignment="CENTER" spacing="30.0">
-                           <children>
-                              <RadioButton fx:id="GenereRB1" mnemonicParsing="false" prefHeight="30.0" styleClass="GenereRB1" text="Uomo">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Genere" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="GenereRB2" mnemonicParsing="false" prefHeight="30.0" styleClass="GenereRB2" text="Donna" toggleGroup="$Genere" />
-                           </children></HBox>
-                     </children>
-                  </HBox>
-                  <Label fx:id="GenereErrorLabel" styleClass="GenereErrorLabel" />
-               </children>
-            </VBox>
-            <VBox fx:id="DataDiNascitaBox" prefHeight="45.0" prefWidth="400.0">
-               <children>
-                  <HBox spacing="10.0">
-                     <children>
-                        <Label fx:id="DataDiNascitaLabel" prefHeight="30.0" prefWidth="104.0" styleClass="DataDiNascitaLabel" text="* Data di nascita" />
-                        <DatePicker fx:id="DataDiNascitaDP" editable="false" prefHeight="30.0" styleClass="DataDiNascitaDP" />
-                     </children>
-                  </HBox>
-                  <Label fx:id="DataDiNascitaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
-               </children>
-            </VBox>
-            <HBox fx:id="ComuneDiNascitaBox" prefHeight="45.0" spacing="10.0">
-               <children>
-      			<VBox>
-                     <children>
-                        <Label fx:id="ComuneLabel" styleClass="ComuneLabel" text="* Comune di nascita:" />
-                        <ListView fx:id="ComuneLV" maxWidth="316.0" prefWidth="316.0" styleClass="ComuneLV" />
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
-                        <Label fx:id="ProvinciaLabel" styleClass="ProvinciaLabel" text="* Provincia di nascita" visible="false" />
-                        <TextField fx:id="ProvinciaTF" maxWidth="165.0" prefWidth="165.0" promptText="* Provincia di nascita" styleClass="ProvinciaTF" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox fx:id="SkillBox" prefHeight="45.0">
-               <children>
-                  <Label fx:id="SkillLabel" styleClass="SkillLabel" text="Inserisci le tue skills" />
-                  <ListView fx:id="SkillLV" maxWidth="316.0" prefWidth="316.0" styleClass="SkillLV" />
-               </children>
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
-            </VBox>
-            <VBox fx:id="GradoBox" prefHeight="45.0">
-               <children>
-                  <Label fx:id="GradoLabel" styleClass="GradoLabel" text="Grado che vorresti ricoprire in azienda" />
-                  <ListView fx:id="GradoLV" maxWidth="316.0" prefWidth="316.0" styleClass="GradoLV" />
-               </children>
-            </VBox>
-            <AnchorPane fx:id="ButtonBar">
-               <children>
-                  <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefWidth="180.0" styleClass="AnnullaButton" text="Annulla" AnchorPane.leftAnchor="50.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefWidth="180.0" styleClass="ConfermaButton" text="Conferma" AnchorPane.rightAnchor="50.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="100.0" />
-               </VBox.margin>
-            </AnchorPane>
+            <Label fx:id="DescrizioneLabel" alignment="TOP_LEFT" styleClass="DescrizioneLabel" text="Inserisci qui i tuoi dati per la registrazione" textAlignment="CENTER" />
+            <Label fx:id="DescrizioneLabel2" styleClass="DescrizioneLabel2" text="* Campo obbligatorio" />
          </children>
-         <padding>
-            <Insets bottom="50.0" top="50.0" />
-         </padding>
       </VBox>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="100.0" maxHeight="300.0" minViewportHeight="300.0" minViewportWidth="600.0" prefViewportHeight="300.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <content>
+            <AnchorPane>
+               <children>
+                  <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox fx:id="Form" alignment="CENTER" spacing="25.0">
+                           <children>
+                              <VBox fx:id="NomeBox" maxWidth="567.0" prefHeight="45.0" spacing="3.0">
+                  				<children>
+                                    <Label fx:id="NomeLabel" styleClass="NomeLabel" text="* Nome" visible="false" />
+                                    <TextField fx:id="NomeTF" prefWidth="223.0" promptText="* Nome" styleClass="NomeTF" />
+                                    <Label fx:id="NomeErrorLabel" styleClass="NomeErrorLabel" textFill="RED" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </VBox>
+                              <VBox fx:id="CognomeBox" maxWidth="567.0" prefHeight="45.0">
+                                 <children>
+                                    <TextField fx:id="CognomeTF" prefWidth="223.0" promptText="* Cognome" styleClass="CognomeTF" />
+                                    <Label fx:id="CognomeErrorLabel" styleClass="CognomeErrorLabel" textFill="RED" />
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="GenereBox" maxWidth="567.0" prefHeight="45.0" spacing="3.0">
+                                 <children>
+                                    <HBox prefHeight="30.0" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="GenereLabel" prefHeight="30.0" prefWidth="56.0" styleClass="GenereLabel" text="* Genere" />
+                                          <HBox fx:id="GenereRBBox" alignment="CENTER" spacing="30.0">
+                                             <children>
+                                                <RadioButton fx:id="GenereRB1" mnemonicParsing="false" prefHeight="30.0" styleClass="GenereRB1" text="Uomo">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="Genere" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="GenereRB2" mnemonicParsing="false" prefHeight="30.0" styleClass="GenereRB2" text="Donna" toggleGroup="$Genere" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <Label fx:id="GenereErrorLabel" styleClass="GenereErrorLabel" />
+                                 </children>
+                              </VBox>
+                              <VBox fx:id="DataDiNascitaBox" maxWidth="567.0" prefHeight="45.0" prefWidth="400.0">
+                                 <children>
+                                    <HBox spacing="10.0">
+                                       <children>
+                                          <Label fx:id="DataDiNascitaLabel" prefHeight="30.0" prefWidth="104.0" styleClass="DataDiNascitaLabel" text="* Data di nascita" />
+                                          <DatePicker fx:id="DataDiNascitaDP" editable="false" prefHeight="30.0" styleClass="DataDiNascitaDP" />
+                                       </children>
+                                    </HBox>
+                                    <Label fx:id="DataDiNascitaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
+                                 </children>
+                              </VBox>
+                              <HBox fx:id="ComuneDiNascitaBox" maxWidth="567.0" prefHeight="45.0" spacing="10.0">
+                                 <children>
+                        			<VBox>
+                                       <children>
+                                          <Label fx:id="ComuneLabel" styleClass="ComuneLabel" text="* Comune di nascita:" />
+                                          <ListView fx:id="ComuneLV" maxWidth="316.0" prefWidth="316.0" styleClass="ComuneLV" />
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <Label fx:id="ProvinciaLabel" styleClass="ProvinciaLabel" text="* Provincia di nascita" visible="false" />
+                                          <TextField fx:id="ProvinciaTF" maxWidth="165.0" prefWidth="165.0" promptText="* Provincia di nascita" styleClass="ProvinciaTF" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox fx:id="SkillBox" maxWidth="567.0" prefHeight="45.0">
+                                 <children>
+                                    <Label fx:id="SkillLabel" styleClass="SkillLabel" text="Inserisci le tue skills" />
+                                    <ListView fx:id="SkillLV" maxWidth="316.0" prefWidth="316.0" styleClass="SkillLV" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="50.0" />
+                                 </VBox.margin>
+                              </VBox>
+                              <VBox fx:id="GradoBox" maxWidth="567.0" prefHeight="45.0">
+                                 <children>
+                                    <Label fx:id="GradoLabel" styleClass="GradoLabel" text="Grado che vorresti ricoprire in azienda" />
+                                    <ListView fx:id="GradoLV" maxWidth="316.0" prefWidth="316.0" styleClass="GradoLV" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="50.0" left="10.0" top="50.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </StackPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <AnchorPane fx:id="ButtonBar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefWidth="180.0" styleClass="AnnullaButton" text="Annulla" AnchorPane.leftAnchor="50.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefWidth="180.0" styleClass="ConfermaButton" text="Conferma" AnchorPane.rightAnchor="50.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
    <padding>
       <Insets left="100.0" right="100.0" />
