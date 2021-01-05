@@ -79,12 +79,6 @@
 						{
 							"_type": "EdgeLabelView",
 							"_id": "AAAAAAF2h3r/YiAvl5I=",
-							"_parent": {
-								"$ref": "AAAAAAF2h3r/YiAusug="
-							},
-							"model": {
-								"$ref": "AAAAAAF2h3r/YCAqzS8="
-							},
 							"fontColor": "#ffffff",
 							"font": "Arial;13;0",
 							"left": 1839,
@@ -93,9 +87,6 @@
 							"height": 13,
 							"alpha": 3.200695333711319,
 							"distance": 169.29559947027565,
-							"hostEdge": {
-								"$ref": "AAAAAAF2h3r/YiAusug="
-							},
 							"edgePosition": 1,
 							"text": "+OrganizzatoreRiunione"
 						},
@@ -665,25 +656,6 @@
 										},
 										{
 											"_type": "UMLAttributeView",
-											"_id": "AAAAAAF2rwWWl+W9uHY=",
-											"_parent": {
-												"$ref": "AAAAAAF2TdR6ozxtt2U="
-											},
-											"model": {
-												"$ref": "AAAAAAF2rwWWVeW60/s="
-											},
-											"fillColor": "#424549",
-											"fontColor": "#ffffff",
-											"font": "Arial;13;0",
-											"left": 2229,
-											"top": 2398,
-											"width": 205.841796875,
-											"height": 13,
-											"text": "+FotoProfilo: Immagine[0...1]",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
 											"_id": "AAAAAAF2h1Y+NJ/Wc2U=",
 											"_parent": {
 												"$ref": "AAAAAAF2TdR6ozxtt2U="
@@ -695,7 +667,7 @@
 											"fontColor": "#ffffff",
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 2413,
+											"top": 2398,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+Genere: enumGenere[1]",
@@ -714,7 +686,7 @@
 											"fontColor": "#ffffff",
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 2428,
+											"top": 2413,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+DataN: Date[1]",
@@ -733,7 +705,7 @@
 											"fontColor": "#ffffff",
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 2443,
+											"top": 2428,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+ComuneN: String[1]",
@@ -752,7 +724,7 @@
 											"fontColor": "#ffffff",
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 2458,
+											"top": 2443,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+E-mail: String[1]",
@@ -771,7 +743,7 @@
 											"fontColor": "#ffffff",
 											"font": "Arial;13;0",
 											"left": 2229,
-											"top": 2473,
+											"top": 2458,
 											"width": 205.841796875,
 											"height": 13,
 											"text": "+Password: String[1]",
@@ -784,7 +756,7 @@
 									"left": 2224,
 									"top": 2333,
 									"width": 215.841796875,
-									"height": 158
+									"height": 143
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -799,7 +771,7 @@
 									"fontColor": "#ffffff",
 									"font": "Arial;13;0",
 									"left": 2224,
-									"top": 2491,
+									"top": 2476,
 									"width": 215.841796875,
 									"height": 10
 								},
@@ -14804,16 +14776,6 @@
 							"name": "Cognome",
 							"type": "String",
 							"multiplicity": "1"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAF2rwWWVeW60/s=",
-							"_parent": {
-								"$ref": "AAAAAAF2TdR6oTxlffo="
-							},
-							"name": "FotoProfilo",
-							"type": "Immagine",
-							"multiplicity": "0...1"
 						},
 						{
 							"_type": "UMLAttribute",
