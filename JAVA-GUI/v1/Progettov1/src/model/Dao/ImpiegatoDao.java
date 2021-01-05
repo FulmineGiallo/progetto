@@ -1,5 +1,6 @@
 package model.Dao;
 
+import model.DaoInterface.ImpiegatoDaoInterface;
 import model.Impiegato;
 
 import java.sql.Connection;
@@ -9,34 +10,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImpiegatoDao
+public class ImpiegatoDao implements ImpiegatoDaoInterface
 {
 
-    private Connection connection;
-    private PreparedStatement getImpiegati;
-    private PreparedStatement getNome;
-    private PreparedStatement getCognome;
+    private final Connection connection;
+
+    private final PreparedStatement getImpiegati;
+    private final PreparedStatement getNome;
 
 
-
-    public ImpiegatoDao(Connection connection, String email) throws SQLException
+    public ImpiegatoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
         getImpiegati = connection.prepareStatement("SELECT * FROM impiegato");
-        getNome = connection.prepareStatement("SELECT nome FROM impiegato WHERE email ='" + email + "'");
-        getCognome = connection.prepareStatement("SELECT nome,cognome FROM impiegato WHERE email ='" + email + "'");
+        getNome = connection.prepareStatement("SELECT nome FROM impiegato WHERE email = ?");
     }
 
-    public String getNome() throws SQLException
+    public String getNome(String email, boolean accesso) throws SQLException
     {
+        String nome = null;
+        getNome.setString(1,email);
         ResultSet rs = getNome.executeQuery();
-        return rs.getString("nome");
+        while(rs.next())
+        {
+            nome = rs.getString("nome");
+        }
+
+        rs.close();
+        return nome;
     }
-    public String getCognome() throws SQLException
-    {
-        ResultSet rs = getCognome.executeQuery();
-        return rs.getString("cognome");
-    }
+
 
     public List<Impiegato> getAllImpiegati() throws SQLException
     {

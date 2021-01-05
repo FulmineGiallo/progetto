@@ -3,50 +3,51 @@ package model.Connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
 
-public class DBConnection
-{
+public class DBConnection {
+
     private static DBConnection instance;
-    private final String IP= "database-oobd.c9kspmggklai.eu-west-2.rds.amazonaws.com";
-    private final String port = "5432";
-    private final String user = "postgres";
-    private final String password = "Postgresebello1";
-    private final String DBname = "Azienda";
-
-    private String url = "jdbc:postgresql://"+IP+":"+port+"/"+ DBname;
-
     private Connection connection = null;
+    private final String USERNAME = "postgres";
+    private final String PASSWORD = "Postgresebello1";
+    private final String IP = "database-oobd.c9kspmggklai.eu-west-2.rds.amazonaws.com";
+    private final String PORT = "5432";
+    private final String database ="Azienda";
+    private String url = "jdbc:postgresql://"+IP+":"+PORT+"/"+database;
 
-    public DBConnection() throws SQLException
-    {
+    private DBConnection() throws SQLException {
         try
         {
             Class.forName("org.postgresql.Driver");
-            Connection connection = DriverManager.getConnection(url,user,password);
+            connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+
         }
-        catch (SQLException | ClassNotFoundException err)
+        catch (ClassNotFoundException ex)
         {
-            err.printStackTrace();
+            System.out.println("Database Connection Creation Failed : " + ex.getMessage());
         }
+
     }
 
-    public Connection getConnection()
-    {
+    public Connection getConnection() {
         return connection;
     }
 
-    public static DBConnection getInstance() throws SQLException {
+    public static DBConnection getInstance() throws SQLException
+    {
         if (instance == null)
         {
             instance = new DBConnection();
         }
         else
+        if (instance.getConnection().isClosed())
         {
-            if (instance.getConnection().isClosed()) {
-                instance = new DBConnection();
-            }
+            instance = new DBConnection();
         }
+
         return instance;
     }
-
 }
