@@ -11,9 +11,9 @@ import java.io.PrintWriter;
 public class ControllerHomePageBenvenuto
 {
     @FXML
-    private Button invia;
+    private Button RegistrazioneButton;
     @FXML
-    public Button login;
+    public Button LoginButton;
 
     RegistrazioneImpiegato registrazione;
     Login loginPage;
@@ -24,16 +24,16 @@ public class ControllerHomePageBenvenuto
         PrintWriter writer = null;
         registrazione = new RegistrazioneImpiegato(writer);
 
-        Stage stage = (Stage)invia.getScene().getWindow();
+        Stage stage = (Stage)RegistrazioneButton.getScene().getWindow();
         registrazione.start(stage);
     }
 
     public void effettua(javafx.event.ActionEvent actionEvent) throws Exception
     {
-        PrintWriter writer = null ;
+        PrintWriter writer = null;
         loginPage = new Login(writer);
 
-        Stage stage = (Stage)login.getScene().getWindow();
+        Stage stage = (Stage)LoginButton.getScene().getWindow();
         loginPage.start(stage);
     }
 

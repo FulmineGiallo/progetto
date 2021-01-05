@@ -57,7 +57,7 @@
                                     <Image url="@../resources/img/freccia.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="RegistrazioneButton" mnemonicParsing="false" styleClass="RegistrazioneButton" text="Invia il tuo curriculum" />
+                              <Button fx:id="RegistrazioneButton" mnemonicParsing="false" onAction="#inviaCurriculum" styleClass="RegistrazioneButton" text="Invia il tuo curriculum" />
                            </children>
                         </VBox>
                      </children>
@@ -72,7 +72,7 @@
                                     <Image url="@../resources/img/freccia.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="LoginButton" minWidth="221.0" mnemonicParsing="false" styleClass="LoginButton" text="Effettua l'accesso" />
+                              <Button fx:id="LoginButton" minWidth="221.0" mnemonicParsing="false" onAction="#effettua" styleClass="LoginButton" text="Effettua l'accesso" />
                            </children>
                         </VBox>
                      </children>
