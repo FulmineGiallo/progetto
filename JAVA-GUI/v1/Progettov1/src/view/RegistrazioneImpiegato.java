@@ -1,6 +1,5 @@
 package view;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,7 +18,13 @@ public class RegistrazioneImpiegato
     public void start(Stage window) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/registrazioneimpiegato.fxml"));
         Scene scene =  new Scene(root);
-        window.setScene(scene);
+		window.setScene(scene);
+        
+        window.setMinWidth(850.0);
+        window.setMinHeight(450.0);
+        window.setTitle("Registrazione");
+        window.centerOnScreen();
+        
         window.show();
     }
 }

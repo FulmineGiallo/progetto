@@ -20,12 +20,16 @@ public class HomePageBenvenuto
 
     public void start(Stage window) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/homepagebenvenuto.fxml"));
-        Scene scene =  new Scene(root);
+        Scene scene = new Scene(root);
         window.setScene(scene);
-        window.show();
-        window.setMinWidth(1100.0);
-        window.setMinHeight(550.0);
+		
+        window.setMinWidth(700.0);
+        window.setMinHeight(450.0);
         window.setTitle("Home Page");
+        window.centerOnScreen();
+        
+
+        window.show();
     }
 
 

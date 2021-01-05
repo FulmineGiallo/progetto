@@ -1,0 +1,35 @@
+/*
+	#7289da - azzurro
+	#424549 - grigio 1
+	#36393e - grigio 2
+	#282b30 - grigio 3
+	#1e2124 - grigio 4
+	(dal più chiaro al più scuro)
+*/
+
+.CaricamentoRegistrazione{
+	-fx-primary: #7289da;
+	-fx-secondary: #424549;
+	-fx-background-color: -fx-secondary;
+	-fx-font-family: 'Roboto';
+}
+
+.CaricamentoLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 20;
+}
+
+.CaricamentoPB{
+	-fx-indeterminate-bar-length: 105;
+	-fx-indeterminate-bar-flip: false;
+}
+
+.CaricamentoPB .track{
+	-fx-background-color: -fx-secondary;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+}
+
+.CaricamentoPB .bar{
+	-fx-background-color: linear-gradient(from 0px 0px to 50px 50px, -fx-primary, -fx-secondary);
+}

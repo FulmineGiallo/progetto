@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="CaricamentoRegistrazione" prefHeight="176.0" prefWidth="347.0" styleClass="CaricamentoRegistrazione" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="CaricamentoLabel" prefHeight="126.0" prefWidth="317.0" styleClass="CaricamentoLabel" text="Il direttore alle risorse umane Mario Carofano sta valutando la tua richiesta..." wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
+      <ProgressBar fx:id="CaricamentoPB" layoutY="54.0" prefHeight="20.0" prefWidth="317.0" styleClass="CaricamentoPB" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" />
+   </children>
+</AnchorPane>

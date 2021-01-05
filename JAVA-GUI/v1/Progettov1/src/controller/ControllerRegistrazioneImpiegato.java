@@ -13,6 +13,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import view.HomePageBenvenuto;
+import view.CaricamentoRegistrazione;
 
 public class ControllerRegistrazioneImpiegato {
 
@@ -30,6 +31,8 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Button 		ConfermaButton;
     
     HomePageBenvenuto homePageBenvenuto;
+    CaricamentoRegistrazione caricamentoRegistrazione;
+    
     
     public void annullaOperazione (ActionEvent actionEvent) throws Exception{
         
@@ -38,5 +41,14 @@ public class ControllerRegistrazioneImpiegato {
 
         Stage stage = (Stage)AnnullaButton.getScene().getWindow();
         homePageBenvenuto.start(stage);
+    }
+    
+    public void confermaOperazione (ActionEvent actionEvent) throws Exception{
+    	
+    	PrintWriter writer = null;
+    	caricamentoRegistrazione = new CaricamentoRegistrazione(writer);
+
+        Stage stage = (Stage)ConfermaButton.getScene().getWindow();
+        caricamentoRegistrazione.start(stage);
     }
 }
