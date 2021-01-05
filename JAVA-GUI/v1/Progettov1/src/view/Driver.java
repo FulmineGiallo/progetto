@@ -10,23 +10,26 @@ import model.Dao.ImpiegatoDao;
 import model.Impiegato;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 
 public class Driver extends Application
 {
+	
+	HomePageBenvenuto homePageBenvenuto;
     @Override
-    public void start(Stage primaryStage) throws Exception
+    public void start(Stage primaryStage)
     {
         try
         {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/homepagebenvenuto.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+        	PrintWriter writer = null;
+        	homePageBenvenuto = new HomePageBenvenuto(writer);
+        	
+            homePageBenvenuto.start(primaryStage);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Impossibile caricare la finestra!");
         }
 
     }

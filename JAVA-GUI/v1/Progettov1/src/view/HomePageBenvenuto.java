@@ -23,6 +23,9 @@ public class HomePageBenvenuto
         Scene scene =  new Scene(root);
         window.setScene(scene);
         window.show();
+        window.setMinWidth(1100.0);
+        window.setMinHeight(550.0);
+        window.setTitle("Home Page");
     }
 
 
