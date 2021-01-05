@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="HomePageBenvenuto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="HomePageBenvenuto" stylesheets="@/../../css/HomePageBenvenuto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="HomePageBenvenuto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1000.0" styleClass="HomePageBenvenuto" stylesheets="@../../css/HomePageBenvenuto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageBenvenuto">
    <children>
       <AnchorPane fx:id="TitoloBox" minHeight="100.0" styleClass="TitoloBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -47,7 +47,7 @@
                         <VBox spacing="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                            <children>
                               <Label fx:id="RegistrazioneLabel" styleClass="RegistrazioneLabel" text="È la prima volta che accedi&#10;alla nostra piattaforma?" />
-                              <Label fx:id="RegistrazioneLabel2" styleClass="RegistrazioneLabel" text="Chiedi di essere un nostro impiegato!" />
+                              <Label fx:id="RegistrazioneLabel2" styleClass="RegistrazioneLabel2" text="Chiedi di essere un nostro impiegato!" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
@@ -64,7 +64,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="LoginBox" minWidth="300.0" styleClass="LoginBox" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="LoginLabel" styleClass="LoginLabel" text="È la prima volta che accedi&#10;alla nostra piattaforma?" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                        <Label fx:id="LoginLabel" styleClass="LoginLabel" text="Sei già un nostro impiegato?" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                         <VBox alignment="CENTER" spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                            <children>
                               <ImageView fx:id="LoginIV" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
