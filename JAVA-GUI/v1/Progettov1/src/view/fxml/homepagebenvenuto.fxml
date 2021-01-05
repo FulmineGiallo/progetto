@@ -21,7 +21,7 @@
                   <Label fx:id="TitoloLabel1" prefHeight="75.0" styleClass="TitoloLabel" text="Benvenuto" />
                   <ImageView fx:id="TitoloIV1" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@progetto/JAVA-GUI/v1/Progettov1/src/view/resources/img/shopping-online.png" />
+                        <Image url="@../resources/img/shopping-online.png" />
                      </image>
                   </ImageView>
                </children>
@@ -54,7 +54,7 @@
                            <children>
                               <ImageView fx:id="RegistrazioneIV" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@progetto/JAVA-GUI/v1/Progettov1/src/view/resources/img/freccia.png" />
+                                    <Image url="@../resources/img/freccia.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="RegistrazioneButton" mnemonicParsing="false" styleClass="RegistrazioneButton" text="Invia il tuo curriculum" />
@@ -69,7 +69,7 @@
                            <children>
                               <ImageView fx:id="LoginIV" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@progetto/JAVA-GUI/v1/Progettov1/src/view/resources/img/freccia.png" />
+                                    <Image url="@../resources/img/freccia.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="LoginButton" minWidth="221.0" mnemonicParsing="false" styleClass="LoginButton" text="Effettua l'accesso" />
