@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import view.Login;
 import view.RegistrazioneImpiegato;
+import javafx.event.ActionEvent;
 
 import java.io.PrintWriter;
 
@@ -19,7 +20,7 @@ public class ControllerHomePageBenvenuto
     Login loginPage;
 
 
-    public void inviaCurriculum(javafx.event.ActionEvent actionEvent) throws Exception
+    public void inviaCurriculum(ActionEvent actionEvent) throws Exception
     {
         PrintWriter writer = null;
         registrazione = new RegistrazioneImpiegato(writer);
@@ -28,7 +29,7 @@ public class ControllerHomePageBenvenuto
         registrazione.start(stage);
     }
 
-    public void effettua(javafx.event.ActionEvent actionEvent) throws Exception
+    public void effettua(ActionEvent actionEvent) throws Exception
     {
         PrintWriter writer = null;
         loginPage = new Login(writer);

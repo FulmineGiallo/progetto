@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" styleClass="RegistrazioneImpiegato" stylesheets="@../../css/RegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneImpiegato">
    <children>
       <VBox fx:id="DescrizioneBox" layoutX="100.0" layoutY="10.0" spacing="3.0">
          <children>
@@ -122,7 +122,7 @@
       </ScrollPane>
       <AnchorPane fx:id="ButtonBar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" prefWidth="180.0" styleClass="AnnullaButton" text="Annulla" AnchorPane.leftAnchor="50.0">
+            <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#annullaOperazione" prefWidth="180.0" styleClass="AnnullaButton" text="Annulla" AnchorPane.leftAnchor="50.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
