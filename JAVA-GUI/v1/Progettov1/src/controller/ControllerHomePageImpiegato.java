@@ -26,7 +26,7 @@ public class ControllerHomePageImpiegato
 
     public void inizializza(Impiegato impiegato)
     {
-        nomeImpiegato.setText(impiegato.getNome());
+    	nomeImpiegato.setText(impiegato.getNome());
     }
 
     @FXML

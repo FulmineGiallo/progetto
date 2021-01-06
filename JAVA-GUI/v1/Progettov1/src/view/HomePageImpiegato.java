@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class HomePageImpiegato
 {
     private final PrintWriter writer;
-    ControllerHomePageImpiegato controller = new ControllerHomePageImpiegato();
+    ControllerHomePageImpiegato controllerHomePageImpiegato;
 
     Impiegato impiegato;
     public HomePageImpiegato(PrintWriter writer, Impiegato impiegato)
@@ -24,9 +24,12 @@ public class HomePageImpiegato
 
     public void start(Stage window) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/homepageimpiegato.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/homepageimpiegato.fxml"));
+        Parent root = loader.load();
         Scene scene =  new Scene(root);
-        controller.inizializza(impiegato);
+        
+        controllerHomePageImpiegato = loader.getController();
+        controllerHomePageImpiegato.inizializza(impiegato);
         window.setScene(scene);
         window.show();
 
