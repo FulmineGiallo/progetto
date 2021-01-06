@@ -21,6 +21,8 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final PreparedStatement loginImpiegato;
     private final PreparedStatement getImpiegato;
     private final PreparedStatement getCF;
+    private final PreparedStatement getGrado;
+
     public ImpiegatoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
@@ -29,7 +31,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         loginImpiegato = connection.prepareStatement("SELECT COUNT(*) FROM impiegatoaccount WHERE email = ? AND password = ?");
         getImpiegato = connection.prepareStatement("SELECT * FROM impiegato WHERE cf = ?");
         getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
-
+        getGrado = connection.prepareStatement("SELECT tipogrado FROM impiegato NATURAL JOIN grado WHERE impiegato.email = ?");
     }
 
     @Override
@@ -66,6 +68,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             impiegato.setPassword(rs.getString("password"));
             impiegato.setIdgrado(rs.getInt("idgrado"));
             impiegato.setIdimpegato(rs.getInt("idimpiegato"));
+            impiegato.setGrado(getGrado(rs.getString("email")));
         }
         rs.close();
         return impiegato;
@@ -85,8 +88,20 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         rs.close();
         return CF;
     }
+    @Override
+    public String getGrado(String email) throws SQLException
+    {
+        String grado = null;
+        getGrado.setString(1,email);
+        ResultSet rs = getGrado.executeQuery();
 
-
+        while(rs.next())
+        {
+            grado = rs.getString("tipogrado");
+        }
+        rs.close();
+        return grado;
+    }
     public List<Impiegato> getAllImpiegati() throws SQLException
     {
         ResultSet rs = getImpiegati.executeQuery();

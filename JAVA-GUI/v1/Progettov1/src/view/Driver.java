@@ -26,7 +26,6 @@ public class Driver extends Application
         {
         	PrintWriter writer = null;
         	homePageBenvenuto = new HomePageBenvenuto(writer);
-        	
             homePageBenvenuto.start(primaryStage);
         } catch (Exception e) {
             System.err.println("Impossibile caricare la finestra!");

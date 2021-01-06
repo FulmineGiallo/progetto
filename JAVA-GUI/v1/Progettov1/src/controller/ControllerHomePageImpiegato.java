@@ -4,12 +4,14 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import java.io.PrintWriter;
+import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Impiegato;
+import model.Progetto;
 import view.HomePageProgetto;
 
 public class ControllerHomePageImpiegato
@@ -23,13 +25,12 @@ public class ControllerHomePageImpiegato
      @FXML
      private Label nomeImpiegato;
      @FXML
-     private Label idLabel;
-
+     private Label gradoLabel;
 
     public void inizializza(Impiegato impiegato)
     {
-    	nomeImpiegato.setText(impiegato.getNome());
-    	idLabel.setText(Integer.toString(impiegato.getIdgrado()));
+    	nomeImpiegato.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
+        gradoLabel.setText(impiegato.getGrado());
     }
 
     @FXML

@@ -13,6 +13,16 @@ public class Impiegato
     private String email;
     private int idgrado;
     private int idimpegato;
+    private String grado;
+
+    public String getGrado() {
+        return grado;
+    }
+
+    public void setGrado(String grado) {
+        this.grado = grado;
+    }
+
     private String password;
 
     public Impiegato( String CF)
