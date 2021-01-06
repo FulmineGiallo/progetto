@@ -1,5 +1,7 @@
 package model;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,11 @@ public class Progetto
     public void partecipanti()
     {
 
+    }
+    public ObservableList<Progetto> progettoListaImpiegato()
+    {
+
+        return null;
     }
 
     public String getTitolo() {
