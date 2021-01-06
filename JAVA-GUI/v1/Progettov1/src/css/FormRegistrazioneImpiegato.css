@@ -146,7 +146,6 @@
 .AnnullaButton, .ConfermaButton{
 	-fx-background-color: -fx-secondary;
 	-fx-text-fill: white;
-	-fx-font-weight: 900;
 	-fx-font-size: 30;
 	-fx-border-width: 2;
 	-fx-border-color: white;

@@ -1,0 +1,54 @@
+.ConfermaRegistrazioneImpiegato{
+	-fx-primary: #7289da;
+	-fx-secondary: #424549;
+	-fx-background-color: -fx-secondary;
+	-fx-font-family: 'Roboto';
+}
+
+.EmailLabel,
+.PasswordLabel,
+.EmailTF,
+.PasswordTF,
+.AnnullaButton,
+.AccediButton{
+	-fx-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.DescrizioneLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 30;
+}
+
+.EmailTF,
+.PasswordTF{
+	-fx-background-color: -fx-secondary;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: white;
+}
+
+.EmailTF:focused,
+.PasswordTF:focused{
+	-fx-border-color: -fx-primary;
+}
+
+.Form{
+	-fx-border-width: 5;
+	-fx-border-color: white;
+	-fx-background-color: #36393e;
+}
+
+.AnnullaButton, .AccediButton{
+	-fx-background-color: -fx-secondary;
+	-fx-text-fill: white;
+	-fx-font-size: 30;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.AnnullaButton:hover, .AccediButton:hover{
+	-fx-background-color: -fx-primary;
+	-fx-backgrund-radius: 10;
+}

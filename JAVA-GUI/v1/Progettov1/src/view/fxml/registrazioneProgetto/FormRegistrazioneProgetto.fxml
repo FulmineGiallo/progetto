@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneProgetto" stylesheets="@../../css/FormRegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
+<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneProgetto" stylesheets="@../../../css/FormRegistrazioneProgetto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
    <children>
       <VBox fx:id="IstruzioniBox" layoutX="100.0" layoutY="10.0" spacing="3.0">
          <children>

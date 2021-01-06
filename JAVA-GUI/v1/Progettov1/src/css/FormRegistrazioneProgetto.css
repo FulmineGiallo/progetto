@@ -68,8 +68,10 @@
 	-fx-border-color: white;
 }
 
-.TitoloTF:focused{
+.TitoloTF:focused,
+.DescrizioneTA:focused .scroll-pane{
 	-fx-border-color: -fx-primary;
+	
 }
 
 .DescrizioneTA .scroll-pane{
