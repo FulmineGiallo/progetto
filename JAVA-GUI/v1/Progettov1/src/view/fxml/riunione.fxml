@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../css/riunione.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRiunione">
+    <children>
+        <Pane id="mainPane" layoutX="446.0" layoutY="3.0" prefHeight="400.0" prefWidth="154.0" style="-fx-border-color: black;" stylesheets="@../../css/riunione.css" AnchorPane.bottomAnchor="-3.0" AnchorPane.rightAnchor="-0.39999999999997726" AnchorPane.topAnchor="3.0">
+            <children>
+                <Pane prefHeight="115.0" prefWidth="154.0" style="-fx-border-color: black;">
+                    <children>
+                        <Label id="label" layoutX="7.0" layoutY="14.0" prefHeight="30.0" prefWidth="103.0" text="Project Manager">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="117.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../resources/img/project.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+                <Label id="label" layoutX="14.0" layoutY="130.0" text="Lista utenti" />
+                <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="98.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/img/profile.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+        <Pane layoutY="196.0" prefHeight="206.0" prefWidth="446.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="154.0">
+            <children>
+                <Label id="label" layoutX="14.0" layoutY="14.0" stylesheets="@../../css/riunione.css" text="Descrizione" />
+            </children>
+        </Pane>
+        <Pane prefHeight="196.0" prefWidth="446.0" style="-fx-border-color: black;" stylesheets="@../../css/riunione.css" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="153.60000000000002">
+            <children>
+                <Label id="label" layoutX="14.0" layoutY="31.0" stylesheets="@../../css/riunione.css" text="Codice Accesso:" />
+                <Label id="label" layoutX="14.0" layoutY="71.0" stylesheets="@../../css/riunione.css" text="Orario Inizio:" />
+                <Label id="label" layoutX="14.0" layoutY="90.0" stylesheets="@../../css/riunione.css" text="Orario Fine" />
+                <Label id="label" layoutX="14.0" layoutY="54.0" stylesheets="@../../css/riunione.css" text="Data:" />
+                <Label id="label" layoutX="14.0" layoutY="14.0" stylesheets="@../../css/riunione.css" text="Nome Riunione:" />
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
