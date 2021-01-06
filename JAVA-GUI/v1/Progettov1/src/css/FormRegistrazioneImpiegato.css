@@ -14,8 +14,13 @@
 	-fx-font-family: 'Roboto';
 }
 
+.scroll-pane {
+	-fx-border-width: 5;
+	-fx-border-color: white;
+}
+
 .scroll-pane .viewport{
-	-fx-background-color: -fx-secondary;
+	-fx-background-color: #36393e;
 }
 
 .scroll-pane:focused {
@@ -146,6 +151,7 @@
 	-fx-border-width: 2;
 	-fx-border-color: white;
 	-fx-border-radius: 10;
+	-fx-background-radius: 10;
 }
 
 .AnnullaButton:hover, .ConfermaButton:hover{

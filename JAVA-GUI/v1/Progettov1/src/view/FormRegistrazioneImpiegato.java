@@ -9,19 +9,19 @@ import java.io.PrintWriter;
 
 import controller.ControllerRegistrazioneImpiegato;
 
-public class RegistrazioneImpiegato
+public class FormRegistrazioneImpiegato
 {
 	
 	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
     private final PrintWriter writer;
 
-    public RegistrazioneImpiegato(PrintWriter writer) {
+    public FormRegistrazioneImpiegato(PrintWriter writer) {
         this.writer = writer ;
     }
 
     public void start(Stage window) throws Exception {
     	
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneimpiegato.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/FormRegistrazioneImpiegato.fxml"));
         Parent root = loader.load();
         Scene scene =  new Scene(root);
 

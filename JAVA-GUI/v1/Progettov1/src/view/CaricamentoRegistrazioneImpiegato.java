@@ -9,22 +9,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class CaricamentoRegistrazione {
+public class CaricamentoRegistrazioneImpiegato {
 	
 	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
 	
 	private final PrintWriter writer;
 
-    public CaricamentoRegistrazione(PrintWriter writer) {
+    public CaricamentoRegistrazioneImpiegato(PrintWriter writer) {
         this.writer = writer ;
     }
 
-    public void start(Stage window){
+    public void start(Stage window) {
         try {
-        	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CaricamentoRegistrazione.fxml"));
         	
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CaricamentoRegistrazioneImpiegato.fxml"));
 			Parent root = loader.load();
-			Scene scene = new Scene(root);
+			Scene scene = new Scene(root, 347.0, 176.0);
 			
 			controllerRegistrazioneImpiegato = loader.getController();
 			
@@ -34,6 +34,9 @@ public class CaricamentoRegistrazione {
 			
 			window.setScene(scene);
 			window.show();
+			
+			System.out.println("width: "+window.getWidth());
+			System.out.println("Height: "+window.getHeight());
 		} catch (IOException e) {
 			System.err.println("Impossibile caricare la finestra!");
 			//e.printStackTrace();
