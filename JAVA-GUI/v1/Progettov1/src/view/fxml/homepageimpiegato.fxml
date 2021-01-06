@@ -34,5 +34,6 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="idLabel" layoutX="48.0" layoutY="42.0" prefHeight="17.0" prefWidth="50.0" stylesheets="@../../css/homepageimpiegato.css" textFill="WHITE" />
    </children>
 </AnchorPane>

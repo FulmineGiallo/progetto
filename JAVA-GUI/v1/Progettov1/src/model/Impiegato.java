@@ -31,6 +31,7 @@ public class Impiegato
     public int getIdimpegato() {
         return idimpegato;
     }
+    
 
     public void setIdimpegato(int idimpegato) {
         this.idimpegato = idimpegato;

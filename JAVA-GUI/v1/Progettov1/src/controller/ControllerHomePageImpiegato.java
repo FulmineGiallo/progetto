@@ -22,11 +22,14 @@ public class ControllerHomePageImpiegato
      private Button buttonCreaProgetto;
      @FXML
      private Label nomeImpiegato;
+     @FXML
+     private Label idLabel;
 
 
     public void inizializza(Impiegato impiegato)
     {
     	nomeImpiegato.setText(impiegato.getNome());
+    	idLabel.setText(Integer.toString(impiegato.getIdgrado()));
     }
 
     @FXML
