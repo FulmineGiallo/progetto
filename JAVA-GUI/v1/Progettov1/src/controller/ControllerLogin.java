@@ -82,7 +82,7 @@ public class ControllerLogin
             {
                 Stage window;
                 window = new Stage();
-                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/errorelogin.fxml"));
+                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/errore/errorelogin.fxml"));
                 Scene scene =  new Scene(root, 450,176);
                 window.setScene(scene);
                 window.setTitle("Errore Impiegato!");
@@ -96,7 +96,7 @@ public class ControllerLogin
         {
             Stage window;
             window = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/erroreautenticazione.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/errore/erroreautenticazione.fxml"));
             Scene scene =  new Scene(root, 350,176);
             window.setScene(scene);
             window.setTitle("Errore Autenticazione!");
