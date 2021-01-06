@@ -1,0 +1,10 @@
+#mainPane
+{
+    -fx-background-color: 	#36393e;
+}
+
+#label
+{
+    -fx-text-fill: white;
+    -fx-font-family: "Roboto Thin";
+}

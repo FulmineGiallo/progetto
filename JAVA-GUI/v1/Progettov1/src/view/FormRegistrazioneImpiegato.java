@@ -21,7 +21,7 @@ public class FormRegistrazioneImpiegato
 
     public void start(Stage window) throws Exception {
     	
-    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/registrazioneImpiegato/FormRegistrazioneImpiegato.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneImpiegato/FormRegistrazioneImpiegato.fxml"));
         Parent root = loader.load();
         Scene scene =  new Scene(root);
 

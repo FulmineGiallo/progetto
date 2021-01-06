@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import view.HomePageBenvenuto;
@@ -35,6 +36,7 @@ public class ControllerRegistrazioneImpiegato {
     CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
     
     
+    
     public void annullaOperazione (ActionEvent actionEvent) throws Exception{
         
     	PrintWriter writer = null;
@@ -51,5 +53,14 @@ public class ControllerRegistrazioneImpiegato {
 
         Stage stage = (Stage)ConfermaButton.getScene().getWindow();
         caricamentoRegistrazioneImpiegato.start(stage);
+    }
+
+    public void visualizzaNomeLabel(MouseEvent mouseEvent) {
+    }
+
+    public void visualizzaCognomeLabel(MouseEvent mouseEvent) {
+    }
+
+    public void coloraGenereLabel(MouseEvent mouseEvent) {
     }
 }
