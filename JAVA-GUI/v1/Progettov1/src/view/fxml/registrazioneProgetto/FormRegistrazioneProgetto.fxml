@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneProgetto" stylesheets="@../../css/FormRegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
+   <children>
+      <VBox fx:id="IstruzioniBox" layoutX="100.0" layoutY="10.0" spacing="3.0">
+         <children>
+            <Label fx:id="IstruzioniLabel" alignment="TOP_LEFT" styleClass="IstruzioniLabel" text="Inserisci qui i dati per la registrazione di un nuovo progetto" textAlignment="CENTER" />
+            <Label fx:id="IstruzioniLabel2" styleClass="IstruzioniLabel2" text="* Campo obbligatorio" />
+         </children>
+      </VBox>
+      <StackPane layoutX="100.0" layoutY="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="500.0" maxWidth="700.0" minViewportHeight="300.0" minViewportWidth="685.0" prefViewportHeight="300.0">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <VBox fx:id="Form" alignment="CENTER" spacing="25.0">
+                                 <children>
+                                    <VBox fx:id="TitoloBox" maxWidth="567.0" prefHeight="45.0" spacing="3.0">
+                                       <children>
+                                          <Label fx:id="TitoloLabel" styleClass="TitoloLabel" text="* Nome" visible="false" />
+                                          <TextField fx:id="TitoloTF" onMouseClicked="#visualizzaNomeLabel" prefWidth="223.0" promptText="* Titolo" styleClass="TitoloTF" />
+                                          <Label fx:id="TitoloErrorLabel" styleClass="TitoloErrorLabel" textFill="RED" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <VBox fx:id="DescrizioneBox" maxWidth="567.0">
+                                       <children>
+                                          <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
+                                          <TextArea fx:id="DescrizioneTA" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" wrapText="true" />
+                                          <Label fx:id="DescrizioneErrorLabel" styleClass="CognomeErrorLabel" textFill="RED" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="DataDiInizioBox" maxWidth="567.0" prefHeight="45.0" prefWidth="400.0">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label fx:id="DataDiInizioLabel" prefHeight="30.0" prefWidth="118.0" styleClass="DataDiNascitaLabel" text="* Data di inizio" />
+                                                <DatePicker fx:id="DataDiInizioDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiNascitaDP" />
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="DataDiInizioErrorLabel" styleClass="DataDiNascitaErrorLabel" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="DataDiScadenzaBox" maxWidth="567.0" prefHeight="45.0" prefWidth="400.0">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label fx:id="DataDiScadenzaLabel" prefHeight="30.0" styleClass="DataDiNascitaLabel" text="* Data di scadenza" />
+                                                <DatePicker fx:id="DataDiScadenzaDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiNascitaDP" />
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="DataDiScadenzaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
+                                       </children>
+                                    </VBox>
+                                    <HBox fx:id="TipologiaBox" maxWidth="567.0" prefHeight="30.0" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="TipologiaLabel" prefHeight="30.0" prefWidth="118.0" styleClass="DataDiNascitaLabel" text="* Tipologia" />
+                                          <ComboBox fx:id="TipologiaComboBox" prefWidth="150.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="AmbitiBox" maxWidth="567.0" prefHeight="30.0" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="AmbitiLabel" prefHeight="30.0" prefWidth="118.0" styleClass="DataDiNascitaLabel" text="Ambiti" />
+                                          <MenuButton fx:id="AmbitiMenuButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" text="MenuButton" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="50.0" left="10.0" top="50.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
+      <AnchorPane fx:id="ButtonBar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#annullaOperazione" prefWidth="180.0" styleClass="AnnullaButton" text="Annulla" AnchorPane.leftAnchor="50.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#confermaOperazione" prefWidth="180.0" styleClass="ConfermaButton" text="Conferma" AnchorPane.rightAnchor="50.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets left="100.0" right="100.0" />
+   </padding>
+</AnchorPane>

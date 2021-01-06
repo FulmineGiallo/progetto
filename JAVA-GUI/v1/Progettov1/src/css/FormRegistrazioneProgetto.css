@@ -1,0 +1,173 @@
+/*
+	#7289da - azzurro
+	#424549 - grigio 1
+	#36393e - grigio 2
+	#282b30 - grigio 3
+	#1e2124 - grigio 4
+	(dal più chiaro al più scuro)
+*/
+
+.RegistrazioneProgetto{
+	-fx-primary: #7289da;
+	-fx-secondary: #424549;
+	-fx-background-color: -fx-secondary;
+	-fx-font-family: 'Roboto';
+}
+
+.IstruzioniLabel{
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 30;
+}
+
+.IstruzioniLabel2{
+	-fx-text-fill: red;
+	-fx-font-weight: 900;
+	-fx-font-size: 16;
+}
+
+.scroll-pane {
+	-fx-border-width: 5;
+	-fx-border-color: white;
+}
+
+.scroll-pane .viewport{
+	-fx-background-color: #36393e;
+}
+
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .scroll-bar:vertical{
+	-fx-background-color: -fx-secondary;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb,
+.scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primary;
+}
+
+.TitoloLabel,
+.DescrizioneLabel{
+	-fx-font-size: 10;
+	-fx-text-fill: -fx-primary;
+}
+
+.TitoloTF,
+.DataDiNascitaDP,
+.DataDiScadenzaDP,
+.TipologiaComboBox,
+.AmbitiMenuButton{
+	-fx-text-fill: white;
+	-fx-prompt-text-fill: white;
+	-fx-font-size: 14;
+	-fx-background-color: -fx-secondary;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: white;
+}
+
+.TitoloTF:focused{
+	-fx-border-color: -fx-primary;
+}
+
+.DescrizioneTA .scroll-pane{
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: white;
+	-fx-hbar-policy: NEVER;
+}
+
+.DescrizioneTA .scroll-pane,
+.DescrizioneTA .scroll-pane .viewport .content{
+	-fx-background-color: -fx-secondary;
+}
+
+.DescrizioneTA{
+	-fx-text-fill: white;
+	-fx-prompt-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.GenereLabel,
+.DataDiNascitaLabel,
+.GenereRB1,
+.GenereRB2,
+.ComuneLabel,
+.ProvinciaLabel,
+.SkillLabel,
+.GradoLabel{
+	-fx-font-size: 14;
+	-fx-text-fill: white;
+}
+
+.TitoloErrorLabel,
+.GenereErrorLabel,
+.DataDiInizioErrorLabel,
+.DataDiScadenzaErrorLabel,
+.TipologiaErrorLabel{
+	-fx-font-size: 10;
+	-fx-text-fill: red;
+}
+
+.GenereRB1:focused,
+.GenereRB2:focused{
+	-fx-text-fill: -fx-primary;
+}
+
+.GenereRB1 .radio,
+.GenereRB2 .radio{
+	-fx-background-color: -fx-secondary;
+	-fx-border-width: 2px;
+	-fx-border-color: white;
+	-fx-border-radius: 15px;
+}
+
+.GenereRB1:focused .radio .dot,
+.GenereRB2:focused .radio .dot{
+	-fx-mark-highlight-color: -fx-primary;
+	-fx-mark-color: -fx-primary;
+}
+
+.GenereRB1 .radio .dot,
+.GenereRB2 .radio .dot{
+	-fx-mark-highlight-color: white;
+	-fx-mark-color: white;
+}
+
+.DataDiNascitaDP .date-picker-display-node{
+	-fx-background-color: -fx-secondary;
+	-fx-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.DataDiNascitaDP:focused{
+	-fx-border-color: -fx-primary;
+}
+
+.DataDiNascitaDP .arrow-button{
+	-fx-background-color: white;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+}
+
+.DataDiNascitaDP:focused .arrow-button{
+	-fx-background-color: -fx-primary;
+	-fx-border-color: -fx-primary;
+}
+
+.AnnullaButton, .ConfermaButton{
+	-fx-background-color: -fx-secondary;
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 30;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.AnnullaButton:hover, .ConfermaButton:hover{
+	-fx-background-color: -fx-primary;
+	-fx-backgrund-radius: 10;
+}
