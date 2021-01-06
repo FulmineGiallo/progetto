@@ -26,7 +26,7 @@ public class HomePageImpiegato
 
     public void start(Stage window) throws Exception
     {
-    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/homepageimpiegato.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepageimpiegato.fxml"));
         Parent root = loader.load();
         Scene scene =  new Scene(root);
         

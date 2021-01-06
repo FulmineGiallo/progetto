@@ -21,7 +21,7 @@ public class Login
     
     public void start(Stage window) throws Exception {
     	
-    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/login.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Login.fxml"));
     	Parent root = loader.load();
     	Scene scene = new Scene(root);		
     			

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="HomePageBenvenuto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1000.0" styleClass="HomePageBenvenuto" stylesheets="@../../css/HomePageBenvenuto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageBenvenuto">
+<AnchorPane fx:id="HomePageBenvenuto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1000.0" styleClass="HomePageBenvenuto" stylesheets="@../../../css/HomePageBenvenuto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageBenvenuto">
    <children>
       <AnchorPane fx:id="TitoloBox" minHeight="100.0" styleClass="TitoloBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,7 +21,7 @@
                   <Label fx:id="TitoloLabel1" prefHeight="75.0" styleClass="TitoloLabel" text="Benvenuto" />
                   <ImageView fx:id="TitoloIV1" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/img/shopping-online.png" />
+                        <Image url="@../../resources/img/shopping-online.png" />
                      </image>
                   </ImageView>
                </children>
@@ -54,7 +54,7 @@
                            <children>
                               <ImageView fx:id="RegistrazioneIV" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../resources/img/freccia.png" />
+                                    <Image url="@../../resources/img/freccia.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="RegistrazioneButton" mnemonicParsing="false" onAction="#inviaCurriculum" styleClass="RegistrazioneButton" text="Invia il tuo curriculum" />
@@ -69,7 +69,7 @@
                            <children>
                               <ImageView fx:id="LoginIV" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../resources/img/freccia.png" />
+                                    <Image url="@../../resources/img/freccia.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="LoginButton" minWidth="221.0" mnemonicParsing="false" onAction="#effettua" styleClass="LoginButton" text="Effettua l'accesso" />

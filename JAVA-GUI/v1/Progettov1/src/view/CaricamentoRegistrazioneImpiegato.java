@@ -22,7 +22,7 @@ public class CaricamentoRegistrazioneImpiegato {
     public void start(Stage window) {
         try {
         	
-        	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CaricamentoRegistrazioneImpiegato.fxml"));
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneImpiegato/CaricamentoRegistrazioneImpiegato.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root, 347.0, 176.0);
 			

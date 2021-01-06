@@ -25,7 +25,7 @@ public class HomePageBenvenuto
     public void start(Stage window) throws Exception {
         
     	
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/homepagebenvenuto.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepagebenvenuto.fxml"));
         Parent root = loader.load();
         Scene scene =  new Scene(root);
 		
