@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="1089.0" style="-fx-background-color: #424549;" stylesheets="@../../../css/VisualizzaValutazioni.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerValutazioni">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="477.0" layoutY="7.0" prefHeight="63.0" prefWidth="136.0" text="Valutazioni" textFill="WHITE">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <ListView fx:id="ValutazioniListView" layoutX="45.0" layoutY="84.0" maxHeight="601.0" maxWidth="310.0" prefHeight="601.0" prefWidth="294.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="84.0" />
+      <AnchorPane layoutX="474.0" layoutY="121.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="474.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="121.0">
+         <children>
+            <Label layoutX="44.0" layoutY="280.0" prefHeight="25.0" prefWidth="92.0" text="Recensione:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ListView fx:id="RecensiononeListView" layoutX="167.0" layoutY="280.0" prefHeight="139.0" prefWidth="312.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="280.0" />
+            <Label fx:id="RecensoreLabel" layoutX="167.0" layoutY="41.0" prefHeight="35.0" prefWidth="191.0" AnchorPane.rightAnchor="185.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="175.0" prefHeight="35.0" prefWidth="124.0" text="Data Valutazione:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="StelleLabel" layoutX="167.0" layoutY="105.0" prefHeight="35.0" prefWidth="136.0" />
+            <Label contentDisplay="CENTER" layoutX="29.0" layoutY="105.0" prefHeight="35.0" prefWidth="111.0" text="       Stelle:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="dataValutazioneLabel" layoutX="167.0" layoutY="175.0" prefHeight="35.0" prefWidth="191.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="41.0" prefHeight="35.0" prefWidth="111.0" text="Recensione da:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="TornaAllaHomeButton" layoutX="898.0" layoutY="679.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Torna alla Home" textFill="WHITE" AnchorPane.bottomAnchor="29.0" AnchorPane.rightAnchor="44.0" />
+   </children>
+</AnchorPane>

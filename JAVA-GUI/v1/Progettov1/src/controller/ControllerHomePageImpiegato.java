@@ -13,10 +13,12 @@ import javafx.stage.Stage;
 import model.Impiegato;
 import model.Progetto;
 import view.HomePageProgetto;
+import view.HomePageValutazioni;
 
 public class ControllerHomePageImpiegato
 {
 	 HomePageProgetto homeProgetto;
+	 HomePageValutazioni homeValutazioni;
 
 	 @FXML
      private Button buttonValutazioni;
@@ -43,6 +45,20 @@ public class ControllerHomePageImpiegato
         homeProgetto.start(stage);
     	
     }
+    
+    
+    @FXML
+    public void VisualizzaValutazioni(ActionEvent event) throws Exception {
+
+    	PrintWriter writer = null;
+        homeValutazioni = new HomePageValutazioni(writer);
+
+        Stage stage = (Stage) buttonValutazioni.getScene().getWindow();
+        homeValutazioni.start(stage);
+    	
+    }
+    
+    
 }
     
   
