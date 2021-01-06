@@ -7,8 +7,11 @@ import javafx.stage.Stage;
 
 import java.io.PrintWriter;
 
+import controller.ControllerHomePageProgetto;
+
 public class HomePageProgetto
 {
+	ControllerHomePageProgetto controllerHomePageProgetto;
     private final PrintWriter writer;
 
     public HomePageProgetto(PrintWriter writer)
@@ -17,8 +20,13 @@ public class HomePageProgetto
     }
 
     public void start(Stage window) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/homepageprogetto.fxml"));
-        Scene scene =  new Scene(root);
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/homepageprogetto.fxml"));
+    	Parent root = loader.load();
+    	
+    	controllerHomePageProgetto = loader.getController();
+    	
+    	Scene scene =  new Scene(root);
         window.setScene(scene);
         window.show();
     }

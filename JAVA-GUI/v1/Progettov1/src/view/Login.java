@@ -7,17 +7,26 @@ import javafx.stage.Stage;
 
 import java.io.PrintWriter;
 
+import controller.ControllerLogin;
+
 public class Login
 {
+	ControllerLogin controllerLogin;
     private final PrintWriter writer;
 
     public Login(PrintWriter writer) {
         this.writer = writer ;
     }
+    
+    
     public void start(Stage window) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/login.fxml"));
-        Scene scene =  new Scene(root);
-        window.setScene(scene);
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/login.fxml"));
+    	Parent root = loader.load();
+    	Scene scene = new Scene(root);		
+    			
+    	controllerLogin = loader.getController();
+    	window.setScene(scene);
         window.show();
     }
 }

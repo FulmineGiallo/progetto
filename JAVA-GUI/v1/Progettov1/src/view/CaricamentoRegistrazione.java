@@ -3,12 +3,15 @@ package view;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import controller.ControllerRegistrazioneImpiegato;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class CaricamentoRegistrazione {
+	
+	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
 	
 	private final PrintWriter writer;
 
@@ -18,8 +21,12 @@ public class CaricamentoRegistrazione {
 
     public void start(Stage window){
         try {
-			Parent root = FXMLLoader.load(getClass().getResource("fxml/CaricamentoRegistrazione.fxml"));
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CaricamentoRegistrazione.fxml"));
+        	
+			Parent root = loader.load();
 			Scene scene = new Scene(root);
+			
+			controllerRegistrazioneImpiegato = loader.getController();
 			
 			window.setResizable(false);
 			window.setTitle("Caricamento in corso...");

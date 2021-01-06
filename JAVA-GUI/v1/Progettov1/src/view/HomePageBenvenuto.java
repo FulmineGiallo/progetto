@@ -8,9 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.PrintWriter;
 
+import controller.ControllerHomePageBenvenuto;
+
 public class HomePageBenvenuto
 {
-
+	
+	
+	ControllerHomePageBenvenuto controllerHomePageBenvenuto;
     private final PrintWriter writer;
 
     public HomePageBenvenuto(PrintWriter writer)
@@ -19,16 +23,19 @@ public class HomePageBenvenuto
     }
 
     public void start(Stage window) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/homepagebenvenuto.fxml"));
-        Scene scene = new Scene(root);
-        window.setScene(scene);
+        
+    	
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/homepagebenvenuto.fxml"));
+        Parent root = loader.load();
+        Scene scene =  new Scene(root);
 		
+        
+        controllerHomePageBenvenuto = loader.getController();
+        window.setScene(scene);
         window.setMinWidth(700.0);
         window.setMinHeight(450.0);
         window.setTitle("Home Page");
         window.centerOnScreen();
-        
-
         window.show();
     }
 

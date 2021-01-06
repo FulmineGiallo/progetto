@@ -7,8 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.PrintWriter;
 
+import controller.ControllerRegistrazioneImpiegato;
+
 public class RegistrazioneImpiegato
 {
+	
+	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
     private final PrintWriter writer;
 
     public RegistrazioneImpiegato(PrintWriter writer) {
@@ -16,9 +20,14 @@ public class RegistrazioneImpiegato
     }
 
     public void start(Stage window) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/registrazioneimpiegato.fxml"));
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneimpiegato.fxml"));
+        Parent root = loader.load();
         Scene scene =  new Scene(root);
-		window.setScene(scene);
+
+        controllerRegistrazioneImpiegato = loader.getController();
+        
+        window.setScene(scene);
         
         window.setMinWidth(850.0);
         window.setMinHeight(450.0);
