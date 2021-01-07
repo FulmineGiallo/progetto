@@ -21,8 +21,6 @@ public class Grado
 
     @Override
     public String toString() {
-        return "Grado{" +
-                "tipoGrado='" + tipoGrado + '\'' +
-                '}';
+        return tipoGrado;
     }
 }

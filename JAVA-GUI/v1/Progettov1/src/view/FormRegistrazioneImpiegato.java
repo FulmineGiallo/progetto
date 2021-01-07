@@ -26,7 +26,7 @@ public class FormRegistrazioneImpiegato
         Scene scene =  new Scene(root);
 
         controllerRegistrazioneImpiegato = loader.getController();
-        
+        controllerRegistrazioneImpiegato.inizializza();
         window.setScene(scene);
         
         window.setMinWidth(850.0);

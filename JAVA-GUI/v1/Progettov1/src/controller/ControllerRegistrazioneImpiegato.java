@@ -64,10 +64,9 @@ public class ControllerRegistrazioneImpiegato {
             }
         }
 
-    public void setGradoComboBox(ActionEvent event)
+    public void inizializza()
     {
-        //GradoComboBox.getItems().addAll(gradiList);
-        System.out.println(event.getSource());
+        GradoComboBox.getItems().addAll(gradiList);
     }
 
 
