@@ -27,7 +27,7 @@ public class ControllerLogin
     HomePageImpiegato homeImpiegato;
 
     @FXML private Button AnnullaButton;
-    @FXML private Button ConfermaButton;
+    @FXML private Button AccediButton;
     //@FXML private TextField emailField;
     //@FXML private PasswordField passwordField;
     @FXML private Button okButton;
@@ -79,7 +79,7 @@ public class ControllerLogin
                 PrintWriter writer = null;
                 homeImpiegato = new HomePageImpiegato(writer, impiegato);
 
-                Stage stage = (Stage)ConfermaButton.getScene().getWindow();
+                Stage stage = (Stage)AccediButton.getScene().getWindow();
                 homeImpiegato.start(stage);
             }
             /* Non ci sono email e password corrispondenti */
