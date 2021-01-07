@@ -1,16 +1,8 @@
-/*
-	#7289da - azzurro
-	#424549 - grigio 1
-	#36393e - grigio 2
-	#282b30 - grigio 3
-	#1e2124 - grigio 4
-	(dal più chiaro al più scuro)
-*/
-
 .HomePageBenvenuto{
-	-fx-primary: #7289da;
-	-fx-secondary: #424549;
-	-fx-background-color: -fx-secondary;
+	-fx-primocolore: #7289da;
+	-fx-secondocolore: #424549;
+	-fx-terzocolore: #36393e;
+	-fx-background-color: -fx-secondocolore;
 	-fx-font-family: 'Roboto';
 }
 
@@ -21,12 +13,12 @@
 
 .TitoloBox{
 	-fx-border-width: 0 0 5 0;
-	-fx-border-color: #36393e;
+	-fx-border-color: -fx-terzocolore;
 }
 
 .RegistrazioneBox{
 	-fx-border-width: 0 5 0 0;
-	-fx-border-color: #36393e;
+	-fx-border-color: -fx-terzocolore;
 }
 
 .RegistrazioneLabel, .LoginLabel{
@@ -40,8 +32,9 @@
 	-fx-font-family: 'Roboto Light';
 }
 
-.RegistrazioneButton, .LoginButton{
-	-fx-background-color: -fx-secondary;
+.RegistrazioneButton,
+.LoginButton{
+	-fx-background-color: -fx-secondocolore;
 	-fx-text-fill: white;
 	-fx-font-weight: 900;
 	-fx-font-size: 20;
@@ -50,7 +43,8 @@
 	-fx-border-radius: 10;
 }
 
-.RegistrazioneButton:hover, .LoginButton:hover{
-	-fx-background-color: -fx-primary;
-	-fx-backgrund-radius: 10;
+.RegistrazioneButton:hover,
+.LoginButton:hover{
+	-fx-background-color: -fx-primocolore;
+	-fx-background-radius: 10;
 }

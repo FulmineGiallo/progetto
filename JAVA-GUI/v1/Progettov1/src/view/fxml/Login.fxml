@@ -16,11 +16,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="Login" prefHeight="450.0" prefWidth="850.0" styleClass="ConfermaRegistrazioneImpiegato" stylesheets="@../../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLogin">
+<AnchorPane fx:id="Login" prefHeight="550.0" prefWidth="850.0" styleClass="ConfermaRegistrazioneImpiegato" stylesheets="@../../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLogin">
    <children>
       <Label fx:id="TitoloLabel" alignment="CENTER" layoutX="20.0" layoutY="10.0" styleClass="TitoloLabel" text="Login" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <graphic>
-            <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/img/login.png" />
                </image>
@@ -36,7 +36,7 @@
                <children>
                   <GridPane fx:id="Form" styleClass="Form">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="175.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" />
                      </columnConstraints>
                      <rowConstraints>
@@ -46,7 +46,7 @@
                      <children>
                         <Label fx:id="EmailLabel" styleClass="EmailLabel" text="Email" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                            <graphic>
-                              <ImageView fx:id="EmailIV" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="EmailIV" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/img/email.png" />
                                  </image>
@@ -62,7 +62,7 @@
                         <TextField fx:id="EmailTF" styleClass="EmailTF" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
                         <Label fx:id="PasswordLabel" styleClass="PasswordLabel" text="Password" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
                            <graphic>
-                              <ImageView fx:id="PasswordIV" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="PasswordIV" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/img/password.png" />
                                  </image>
