@@ -104,7 +104,7 @@
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" maxWidth="178.0" minWidth="178.0" mnemonicParsing="false" onAction="#checkLogin" prefHeight="45.0" styleClass="AccediButton" text="Accedi">
+                        <Button fx:id="AccediButton" alignment="CENTER" focusTraversable="false" maxWidth="178.0" minWidth="178.0" mnemonicParsing="false" onAction="#checkLogin" prefHeight="45.0" styleClass="AccediButton" text="Accedi">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
