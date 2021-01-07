@@ -3,9 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -90,18 +91,18 @@
                                           <Label fx:id="DataDiNascitaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
                                        </children>
                                     </VBox>
-                                    <HBox fx:id="ComuneDiNascitaBox" maxWidth="567.0" prefHeight="45.0" spacing="10.0">
+                                    <HBox fx:id="ComuneDiNascitaBox1" maxWidth="567.0" prefHeight="45.0" spacing="10.0">
                                        <children>
-                              			<VBox>
+                                          <VBox>
                                              <children>
-                                                <Label fx:id="ComuneLabel" styleClass="ComuneLabel" text="* Comune di nascita:" />
-                                                <ListView fx:id="ComuneLV" maxWidth="316.0" prefWidth="316.0" styleClass="ComuneLV" />
+                                                <Label fx:id="ComuneLabel1" styleClass="ComuneLabel" text="* Comune di nascita:" />
+                                                <ComboBox fx:id="ComuneComboBox" maxWidth="316.0" prefHeight="30.0" prefWidth="316.0" styleClass="ComuneComboBox" />
                                              </children>
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <Label fx:id="ProvinciaLabel" styleClass="ProvinciaLabel" text="* Provincia di nascita" visible="false" />
-                                                <TextField fx:id="ProvinciaTF" maxWidth="165.0" prefWidth="165.0" promptText="* Provincia di nascita" styleClass="ProvinciaTF" />
+                                                <Label fx:id="ProvinciaLabel1" styleClass="ProvinciaLabel" text="* Provincia di nascita" visible="false" />
+                                                <TextField fx:id="ProvinciaTF1" maxWidth="165.0" prefWidth="165.0" promptText="* Provincia di nascita" styleClass="ProvinciaTF" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -109,7 +110,7 @@
                                     <VBox fx:id="SkillBox" maxWidth="567.0" prefHeight="45.0">
                                        <children>
                                           <Label fx:id="SkillLabel" styleClass="SkillLabel" text="Inserisci le tue skills" />
-                                          <ListView fx:id="SkillLV" maxWidth="316.0" prefWidth="316.0" styleClass="SkillLV" />
+                                          <MenuButton fx:id="SkillMenuButton" maxWidth="316.0" minHeight="30.0" mnemonicParsing="false" prefWidth="316.0" styleClass="SkillMenuButton" />
                                        </children>
                                        <VBox.margin>
                                           <Insets top="50.0" />
@@ -118,7 +119,7 @@
                                     <VBox fx:id="GradoBox" maxWidth="567.0" prefHeight="45.0">
                                        <children>
                                           <Label fx:id="GradoLabel" styleClass="GradoLabel" text="Grado che vorresti ricoprire in azienda" />
-                                          <ListView fx:id="GradoLV" maxWidth="316.0" prefWidth="316.0" styleClass="GradoLV" />
+                                          <ComboBox fx:id="GradoComboBox" minHeight="30.0" prefWidth="316.0" styleClass="GradoComboBox" />
                                        </children>
                                     </VBox>
                                  </children>

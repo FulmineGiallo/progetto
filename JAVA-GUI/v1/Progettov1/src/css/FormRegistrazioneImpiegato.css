@@ -57,9 +57,9 @@
 .CognomeTF,
 .DataDiNascitaDP,
 .ProvinciaTF,
-.ComuneLV,
-.SkillLV,
-.GradoLV{
+.ComuneComboBox,
+.SkillMenuButton,
+.GradoComboBox{
 	-fx-text-fill: white;
 	-fx-prompt-text-fill: white;
 	-fx-font-size: 14;
@@ -70,7 +70,11 @@
 
 .NomeTF:focused,
 .CognomeTF:focused,
-.ProvinciaTF:focused{
+.ProvinciaTF:focused,
+.DataDiNascitaDP:focused,
+.ComuneComboBox:focused,
+.SkillMenuButton:focused,
+.GradoComboBox:focused{
 	-fx-border-color: -fx-primocolore;
 }
 
@@ -125,19 +129,36 @@
 	-fx-font-size: 14;
 }
 
-.DataDiNascitaDP:focused{
-	-fx-border-color: -fx-primocolore;
-}
-
-.DataDiNascitaDP .arrow-button{
+.DataDiNascitaDP .arrow-button,
+.ComuneComboBox .arrow-button,
+.SkillMenuButton .arrow-button,
+.GradoComboBox .arrow-button{
 	-fx-background-color: white;
 	-fx-border-width: 2;
 	-fx-border-color: white;
 }
 
-.DataDiNascitaDP:focused .arrow-button{
+.SkillMenuButton .arrow-button{
+	-fx-background-insets: 0 0 0 -13;
+}
+
+.DataDiNascitaDP:focused .arrow-button,
+.ComuneComboBox:focused .arrow-button,
+.SkillMenuButton:focused .arrow-button,
+.GradoComboBox:focused .arrow-button{
 	-fx-background-color: -fx-primocolore;
 	-fx-border-color: -fx-primocolore;
+}
+
+.SkillMenuButton{
+	-fx-background-color: -fx-secondocolore;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: white;
+}
+
+.SkillMenuButton .label .text{
+	-fx-fill: white;
+	-fx-font-size: 14;
 }
 
 .ButtonBar{
