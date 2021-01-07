@@ -1,0 +1,37 @@
+.ErroreAutenticazione{
+	-fx-primocolore: #7289da;
+	-fx-secondocolore: #424549;
+	-fx-terzocolore: #36393e;
+	-fx-background-color: -fx-secondocolore;
+	-fx-font-family: 'Roboto';	
+}
+
+.TestoBox{
+	-fx-border-width: 0 0 0 5;
+	-fx-border-color: -fx-terzocolore;
+}
+
+.AttenzioneLabel{
+	-fx-text-fill: red;
+	-fx-font-size: 16;
+}
+
+.AutenticazioneErrataLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 20;
+}
+
+.OkButton{
+	-fx-background-color: -fx-terzocolore;
+	-fx-text-fill: white;
+	-fx-font-size: 16;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.OkButton:hover{
+	-fx-background-color: -fx-primocolore;
+	-fx-backgrund-radius: 10;
+}
