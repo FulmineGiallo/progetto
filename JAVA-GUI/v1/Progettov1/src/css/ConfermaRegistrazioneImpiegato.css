@@ -1,7 +1,8 @@
 .ConfermaRegistrazioneImpiegato{
-	-fx-primary: #7289da;
-	-fx-secondary: #424549;
-	-fx-background-color: -fx-secondary;
+	-fx-primocolore: #7289da;
+	-fx-secondocolore: #424549;
+	-fx-terzocolore: #36393e;
+	-fx-background-color: -fx-secondocolore;
 	-fx-font-family: 'Roboto';
 }
 
@@ -21,15 +22,15 @@
 }
 
 .EmailTF, .PasswordTF{
-	-fx-background-color: -fx-secondary;
+	-fx-background-color: -fx-secondocolore;
 	-fx-border-width: 0 0 2 0;
 	-fx-border-color: white;
 }
 
 .CambiaPasswordButton, .ConfermaButton{
-	-fx-background-color: -fx-secondary;
+	-fx-background-color: -fx-terzocolore;
 	-fx-text-fill: white;
-	-fx-font-size: 14;
+	-fx-font-size: 18;
 	-fx-border-width: 2;
 	-fx-border-color: white;
 	-fx-border-radius: 10;
@@ -37,6 +38,6 @@
 }
 
 .CambiaPasswordButton:hover, .ConfermaButton:hover{
-	-fx-background-color: -fx-primary;
+	-fx-background-color: -fx-primocolore;
 	-fx-backgrund-radius: 10;
 }

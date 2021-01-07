@@ -1,17 +1,26 @@
-/*
-	#7289da - azzurro
-	#424549 - grigio 1
-	#36393e - grigio 2
-	#282b30 - grigio 3
-	#1e2124 - grigio 4
-	(dal più chiaro al più scuro)
-*/
-
 .RegistrazioneImpiegato{
-	-fx-primary: #7289da;
-	-fx-secondary: #424549;
-	-fx-background-color: -fx-secondary;
+	-fx-primocolore: #7289da;
+	-fx-secondocolore: #424549;
+	-fx-terzocolore: #36393e;
+	-fx-background-color: -fx-secondocolore;
 	-fx-font-family: 'Roboto';
+}
+
+.IstruzioniBox{
+	-fx-border-width: 0 0 5 0;
+	-fx-border-color: -fx-terzocolore;
+}
+
+.IstruzioniLabel{
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 30;
+}
+
+.IstruzioniLabel2{
+	-fx-text-fill: red;
+	-fx-font-weight: 900;
+	-fx-font-size: 16;
 }
 
 .scroll-pane {
@@ -20,7 +29,7 @@
 }
 
 .scroll-pane .viewport{
-	-fx-background-color: #36393e;
+	-fx-background-color: -fx-terzocolore;
 }
 
 .scroll-pane:focused {
@@ -28,32 +37,20 @@
 }
 
 .scroll-pane .scroll-bar:vertical{
-	-fx-background-color: -fx-secondary;
+	-fx-background-color: -fx-secondocolore;
 }
 
 .scroll-pane .scroll-bar:vertical .thumb,
 .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
 .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
-	-fx-background-color: -fx-primary;
-}
-
-.DescrizioneLabel{
-	-fx-text-fill: white;
-	-fx-font-weight: 900;
-	-fx-font-size: 30;
-}
-
-.DescrizioneLabel2{
-	-fx-text-fill: red;
-	-fx-font-weight: 900;
-	-fx-font-size: 16;
+	-fx-background-color: -fx-primocolore;
 }
 
 .NomeLabel,
 .CognomeLabel,
 .ProvinciaLabel{
 	-fx-font-size: 10;
-	-fx-text-fill: -fx-primary;
+	-fx-text-fill: -fx-primocolore;
 }
 
 .NomeTF,
@@ -66,7 +63,7 @@
 	-fx-text-fill: white;
 	-fx-prompt-text-fill: white;
 	-fx-font-size: 14;
-	-fx-background-color: -fx-secondary;
+	-fx-background-color: -fx-secondocolore;
 	-fx-border-width: 0 0 2 0;
 	-fx-border-color: white;
 }
@@ -74,7 +71,7 @@
 .NomeTF:focused,
 .CognomeTF:focused,
 .ProvinciaTF:focused{
-	-fx-border-color: -fx-primary;
+	-fx-border-color: -fx-primocolore;
 }
 
 .GenereLabel,
@@ -99,12 +96,12 @@
 
 .GenereRB1:focused,
 .GenereRB2:focused{
-	-fx-text-fill: -fx-primary;
+	-fx-text-fill: -fx-primocolore;
 }
 
 .GenereRB1 .radio,
 .GenereRB2 .radio{
-	-fx-background-color: -fx-secondary;
+	-fx-background-color: -fx-secondocolore;
 	-fx-border-width: 2px;
 	-fx-border-color: white;
 	-fx-border-radius: 15px;
@@ -112,8 +109,8 @@
 
 .GenereRB1:focused .radio .dot,
 .GenereRB2:focused .radio .dot{
-	-fx-mark-highlight-color: -fx-primary;
-	-fx-mark-color: -fx-primary;
+	-fx-mark-highlight-color: -fx-primocolore;
+	-fx-mark-color: -fx-primocolore;
 }
 
 .GenereRB1 .radio .dot,
@@ -123,13 +120,13 @@
 }
 
 .DataDiNascitaDP .date-picker-display-node{
-	-fx-background-color: -fx-secondary;
+	-fx-background-color: -fx-secondocolore;
 	-fx-text-fill: white;
 	-fx-font-size: 14;
 }
 
 .DataDiNascitaDP:focused{
-	-fx-border-color: -fx-primary;
+	-fx-border-color: -fx-primocolore;
 }
 
 .DataDiNascitaDP .arrow-button{
@@ -139,12 +136,17 @@
 }
 
 .DataDiNascitaDP:focused .arrow-button{
-	-fx-background-color: -fx-primary;
-	-fx-border-color: -fx-primary;
+	-fx-background-color: -fx-primocolore;
+	-fx-border-color: -fx-primocolore;
+}
+
+.ButtonBar{
+	-fx-border-width: 5 0 0 0;
+	-fx-border-color: -fx-terzocolore;
 }
 
 .AnnullaButton, .ConfermaButton{
-	-fx-background-color: -fx-secondary;
+	-fx-background-color: -fx-terzocolore;
 	-fx-text-fill: white;
 	-fx-font-size: 30;
 	-fx-border-width: 2;
@@ -154,6 +156,6 @@
 }
 
 .AnnullaButton:hover, .ConfermaButton:hover{
-	-fx-background-color: -fx-primary;
+	-fx-background-color: -fx-primocolore;
 	-fx-backgrund-radius: 10;
 }
