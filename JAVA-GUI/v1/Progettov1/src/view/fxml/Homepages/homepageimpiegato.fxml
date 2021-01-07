@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" prefHeight="511.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageImpiegato" stylesheets="@../../css/homepageimpiegato.css">
+<AnchorPane id="mainPane" prefHeight="511.0" prefWidth="641.0" stylesheets="@../../css/homepageimpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageImpiegato">
    <children>
       <Button id="Button" fx:id="buttonValutazioni" layoutX="264.0" layoutY="24.0" mnemonicParsing="false" onAction="#VisualizzaValutazioni" text="Le tue valutazioni" />
       <Button id="Button" fx:id="buttonCreaProgetto" layoutX="439.0" layoutY="24.0" mnemonicParsing="false" onAction="#CreateProject" text="Crea nuovo Progetto" />

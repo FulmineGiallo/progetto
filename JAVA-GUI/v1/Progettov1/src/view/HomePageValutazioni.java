@@ -34,6 +34,7 @@ public class HomePageValutazioni {
 	    	
 	    	
 	        Scene scene =  new Scene(root); 
+	        window.setTitle("Home page valutazioni");
 	        window.setScene(scene);
 	        window.show();
 

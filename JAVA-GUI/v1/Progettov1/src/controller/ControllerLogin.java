@@ -26,11 +26,16 @@ public class ControllerLogin
     HomePageBenvenuto benvenuto;
     HomePageImpiegato homeImpiegato;
 
-    @FXML private Button backHomePage;
-    @FXML private Button accedi;
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
+    @FXML private Button AnnullaButton;
+    @FXML private Button ConfermaButton;
+    //@FXML private TextField emailField;
+    //@FXML private PasswordField passwordField;
     @FXML private Button okButton;
+    
+    @FXML
+    private PasswordField PasswordTF;
+    @FXML
+    private TextField EmailTF;
 
     int accesso = 0;
     Connection connection;
@@ -40,7 +45,7 @@ public class ControllerLogin
         PrintWriter writer = null;
         benvenuto = new HomePageBenvenuto(writer);
 
-        Stage stage = (Stage) backHomePage.getScene().getWindow();
+        Stage stage = (Stage) AnnullaButton.getScene().getWindow();
         benvenuto.start(stage);
     }
     @FXML
@@ -51,7 +56,7 @@ public class ControllerLogin
 
     public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception
     {
-        if(!emailField.getText().isEmpty() && !passwordField.getText().isEmpty())
+        if(!EmailTF.getText().isEmpty() && !PasswordTF.getText().isEmpty())
         {
             /*Istanzio connessione per vedere se l'impiegato esiste */
             DBConnection connDB;
@@ -62,19 +67,19 @@ public class ControllerLogin
             ImpiegatoDaoInterface impiegatoDao = new ImpiegatoDao(connection);
 
             /*Eseguo query */
-            accesso = impiegatoDao.impiegatoExist(emailField.getText(), passwordField.getText());
+            accesso = impiegatoDao.impiegatoExist(EmailTF.getText(), PasswordTF.getText());
             Impiegato impiegato = null;
 
 
             /* QUERY AVVENUTA CON SUCCESSO UTENTE PRESENTE NEL DB */
             if(accesso == 1)
             {
-                impiegato = impiegatoDao.creaImpiegato(impiegatoDao.getCFWithEmail(emailField.getText()));
+                impiegato = impiegatoDao.creaImpiegato(impiegatoDao.getCFWithEmail(EmailTF.getText()));
 
                 PrintWriter writer = null;
                 homeImpiegato = new HomePageImpiegato(writer, impiegato);
 
-                Stage stage = (Stage)accedi.getScene().getWindow();
+                Stage stage = (Stage)ConfermaButton.getScene().getWindow();
                 homeImpiegato.start(stage);
             }
             /* Non ci sono email e password corrispondenti */
