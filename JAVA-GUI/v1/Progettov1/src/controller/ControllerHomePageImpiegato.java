@@ -19,6 +19,8 @@ public class ControllerHomePageImpiegato
 {
 	 HomePageProgetto homeProgetto;
 	 HomePageValutazioni homeValutazioni;
+	 Impiegato impiegato = null;
+	 
 
 	 @FXML
      private Button buttonValutazioni;
@@ -31,6 +33,7 @@ public class ControllerHomePageImpiegato
 
     public void inizializza(Impiegato impiegato)
     {
+    	this.impiegato = impiegato;
     	nomeImpiegato.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
         gradoLabel.setText(impiegato.getGrado());
     }
@@ -51,7 +54,7 @@ public class ControllerHomePageImpiegato
     public void VisualizzaValutazioni(ActionEvent event) throws Exception {
 
     	PrintWriter writer = null;
-        homeValutazioni = new HomePageValutazioni(writer);
+        homeValutazioni = new HomePageValutazioni(writer, impiegato);
 
         Stage stage = (Stage) buttonValutazioni.getScene().getWindow();
         homeValutazioni.start(stage);
