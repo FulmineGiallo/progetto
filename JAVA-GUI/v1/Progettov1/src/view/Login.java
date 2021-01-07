@@ -26,8 +26,9 @@ public class Login
     	Scene scene = new Scene(root);		
     			
     	controllerLogin = loader.getController();
-    	
+    	window.setTitle("Login");
     	window.setScene(scene);
         window.show();
+        
     }
 }

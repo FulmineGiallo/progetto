@@ -32,6 +32,7 @@ public class HomePageImpiegato
         
         controllerHomePageImpiegato = loader.getController();
         controllerHomePageImpiegato.inizializza(impiegato);
+        window.setTitle("Home page impiegato");
         window.setScene(scene);
         window.show();
 
