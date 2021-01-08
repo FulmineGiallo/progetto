@@ -37,7 +37,7 @@
 }
 
 .ListaProgettiLabel,
-.DescrizioneProgettoLabel,
+.TitoloProgettoLabel,
 .ListaRiunioniLabel{
 	-fx-text-fill: white;
 	-fx-font-size: 18;	
@@ -47,6 +47,41 @@
 	-fx-border-width: 5;
 	-fx-border-color: white;
 	-fx-background-color: -fx-terzocolore;
+}
+
+.DescrizioneProgettoTA,
+.DescrizioneProgettoTA .scroll-pane,
+.DescrizioneProgettoTA .scroll-pane .viewport,
+.DescrizioneProgettoTA .scroll-pane .viewport .content{
+	-fx-background-color: -fx-terzocolore;
+	-fx-padding: 0;
+}
+
+.DescrizioneProgettoTA{
+	-fx-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.DescrizioneProgettoTA .scroll-pane{
+	-fx-hbar-policy: NEVER;
+}
+
+.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical{
+	-fx-background-color: -fx-secondocolore;
+}
+
+.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .thumb,
+.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
+.DataDiInizioLabel,
+.DataDiFineLabel,
+.DataDiScadenzaLabel,
+.NoteLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 14;
 }
 
 .ListaProgettiScrollPane,

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -70,7 +71,7 @@
                      <children>
                         <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label fx:id="DescrizioneProgettoLabel" styleClass="DescrizioneProgettoLabel" text="Titolo progetto" />
+                              <Label fx:id="TitoloProgettoLabel" styleClass="TitoloProgettoLabel" text="Titolo progetto" />
                            </children>
                         </HBox>
                         <AnchorPane styleClass="DescrizioneProgettoBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
@@ -80,22 +81,23 @@
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
-                                  <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints percentHeight="80.0" vgrow="SOMETIMES" />
+                                  <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
                                           <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label fx:id="DescrizioneLabel" text="Label" />
+                                                <TextArea fx:id="DescrizioneProgettoTA" minHeight="60.0" styleClass="DescrizioneProgettoTA" text="[inserire descrizione da DB]" wrapText="true" />
                                                 <HBox spacing="10.0">
                                                    <children>
-                                                      <Label fx:id="DataDiInizioLabel" text="Label" />
-                                                      <Label fx:id="DataDiFineLabel" text="Label" />
+                                                      <Label fx:id="DataDiInizioLabel" styleClass="DataDiInizioLabel" text="[inserire data di inizio da DB]" />
+                                                      <Label fx:id="DataDiFineLabel" styleClass="DataDiFineLabel" text="[inserire data di fine da DB]" />
                                                    </children>
                                                 </HBox>
-                                                <Label fx:id="DataDiScadenzaLabel" text="Label" />
+                                                <Label fx:id="DataDiScadenzaLabel" styleClass="DataDiScadenzaLabel" text="[inserire data di scadenza da DB]" />
+                                                <Label fx:id="NoteLabel" styleClass="NoteLabel" text="[inserire eventuali note]" />
                                              </children>
                                           </VBox>
                                        </children>
