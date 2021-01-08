@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
@@ -34,12 +35,13 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private ToggleGroup 	Genere;
     @FXML private DatePicker 	DataDiNascitaDP;
     @FXML private ComboBox<Comune> 	ComuneComboBox;
-    @FXML private TextField 	ProvinciaTF1;
+
     @FXML private ListView<?> 	SkillLV;
     @FXML private ComboBox<Grado> GradoComboBox;
     @FXML private Button 		AnnullaButton;
     @FXML private Button 		ConfermaButton;
-    
+    @FXML private Button        CercaComuniButton;
+
     HomePageBenvenuto homePageBenvenuto;
     CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
 
@@ -79,14 +81,17 @@ public class ControllerRegistrazioneImpiegato {
             throwables.printStackTrace();
         }
     }
-    public void inizializza() throws SQLException {
+
+    public void inizializza() throws SQLException
+    {
         GradoComboBox.getItems().addAll(gradiList);
-        comuneList = comuni.gradoList("");
         ComuneComboBox.getItems().addAll(comuneList);
+        
     }
     @FXML
     void cercaComuni(ActionEvent event) throws SQLException
     {
+        comuneList = comuni.gradoList("NA");
         inizializza();
     }
 
