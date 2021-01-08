@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="HomePageImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="900.0" styleClass="HomePageImpiegato" stylesheets="@../../../css/new%20HomePageImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane fx:id="ToolBar" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox alignment="CENTER_LEFT">
+               <children>
+                  <Label fx:id="NomeImpiegatoLabel" styleClass="NomeImpiegatoLabel" text="Ermenegilda Carotenuto" />
+                  <Label fx:id="GradoImpiegatoLabel" styleClass="GradoImpiegatoLabel" text="Direttore delle risorse umane" />
+               </children>
+            </VBox>
+            <HBox alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
+               <children>
+                  <Button fx:id="ValutazioniButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" styleClass="ValutazioniButton" text="Le tue valutazioni" />
+                  <Button fx:id="NuovoProgettoButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" styleClass="NuovoProgettoButton" text="Nuovo progetto" />
+                <Button fx:id="LogoutButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" styleClass="LogoutButton" text="Logout" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <GridPane fx:id="ProgettiRiunioniBox" vgap="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints percentHeight="65.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="35.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane fx:id="ProgettiBox" hgap="30.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ScrollPane fx:id="ListaProgettiScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="ListaProgettiScrollPane">
+                     <content>
+                        <ListView fx:id="ListaProgettiLV" prefHeight="200.0" prefWidth="200.0" styleClass="ListaProgettiLV" />
+                     </content>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </ScrollPane>
+                  <AnchorPane fx:id="DescrizioneProgettoBox" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </AnchorPane>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </GridPane>
+            <ScrollPane fx:id="ListaRiunioniScrollPane" fitToHeight="true" fitToWidth="true" styleClass="ListaRiunioniScrollPane" GridPane.rowIndex="1">
+               <content>
+                  <ListView fx:id="RiunioniLV" prefHeight="200.0" prefWidth="200.0" styleClass="ListaRiunioniLV" />
+               </content>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ScrollPane>
+         </children>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</AnchorPane>
