@@ -16,14 +16,16 @@ public class calcoloCF {
 		//String luogo;
 		
 		
-		public calcoloCF(String cognome, String nome, char sesso, int giornoDiNascita, int meseDiNascita,String annoDiNascita, String provincia, String luogo) {
+		public calcoloCF(String cognome, String nome, char sesso, int giornoDiNascita, int meseDiNascita,String annoDiNascita, String comune) {
 			this.cognome = cognome.toUpperCase();
 			this.nome = nome.toUpperCase();
 			this.sesso = sesso;
 			this.giornoDiNascita = giornoDiNascita;
 			this.meseDiNascita = meseDiNascita;
 			this.annoDiNascita = annoDiNascita;
-			this.comune = provincia.toUpperCase();
+			this.comune = comune.toUpperCase();
+
+	    	
 //			this.luogo = luogo.toUpperCase();
 		}
 		
@@ -365,9 +367,9 @@ public class calcoloCF {
 		@Override
 		public String toString() {
 			
-			String cf = check_cognome(cognome)+check_nome(nome, nome.length())+ annoDiNascita.substring(annoDiNascita.length() - 2)  + check_mese(meseDiNascita) + check_giorno(giornoDiNascita, sesso) + check_provincia(comune);
+			String cf = check_cognome(cognome)+check_nome(nome, nome.length())+ annoDiNascita.substring(annoDiNascita.length() - 2)  + check_mese(meseDiNascita) + check_giorno(giornoDiNascita, sesso) + comune;
 			
-			return "calcoloCF "+ cf+check_lettera(cf);
+			return cf+check_lettera(cf);
 		}
 	    
 	    

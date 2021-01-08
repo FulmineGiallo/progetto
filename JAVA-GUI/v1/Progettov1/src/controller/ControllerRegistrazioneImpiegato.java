@@ -3,6 +3,10 @@ package controller;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,17 +15,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+import javafx.util.converter.LocalDateStringConverter;
 import model.Comune;
 import model.Connection.DBConnection;
 import model.Dao.ComuneDao;
 import model.Dao.GradoDao;
 import model.DaoInterface.GradoDaoInterface;
 import model.Grado;
+import model.calcoloCF;
 import view.HomePageBenvenuto;
 import view.CaricamentoRegistrazioneImpiegato;
 
@@ -41,6 +47,7 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Button 		AnnullaButton;
     @FXML private Button 		ConfermaButton;
     @FXML private Button        CercaComuniButton;
+    @FXML private TextField CodiceFiscaleTF;
 
     HomePageBenvenuto homePageBenvenuto;
     CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
@@ -57,6 +64,7 @@ public class ControllerRegistrazioneImpiegato {
             throwables.printStackTrace();
         }
     }
+
     ObservableList<Grado> gradiList = FXCollections.observableArrayList();
     ObservableList<Comune> comuneList = FXCollections.observableArrayList();
     GradoDaoInterface gradi = null;
@@ -84,33 +92,42 @@ public class ControllerRegistrazioneImpiegato {
     public void inizializza() throws SQLException
     {
         GradoComboBox.getItems().addAll(gradiList);
-        ProvinciaTextField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if(ProvinciaTextField.getText().length() > 2 )
-                {
-                    s = ProvinciaTextField.getText().substring(0, 2);
-                    ProvinciaTextField.setText(s);
-                }
-            }
-        });
         comuneList = comuni.gradoList(ProvinciaTextField.getText());
     }
-
     public void updateComune() throws SQLException
     {
         comuneList = comuni.gradoList(ProvinciaTextField.getText());
         ComuneComboBox.setItems(comuneList);
+        System.out.println(comuneList.size());
     }
     @FXML
     void cercaComuni(ActionEvent event) throws SQLException
     {
         updateComune();
     }
-    String CFRegistrazione()
+
+    public void CFRegistrazione()
     {
-        return null;
+ 
+    	String comune = ComuneComboBox.getValue().toString().substring(0,4);
+    	calcoloCF cf = null;
+    	
+    	String data = DataDiNascitaDP.getValue().toString();
+    	
+    	String year = data.substring(0,4);
+    	int month = Integer.parseInt(data.substring(5,7));
+    	int day = Integer.parseInt(data.substring(8,10));   	
+    	
+    	
+    	if(GenereRB1.isSelected())
+    		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'M', day, month, year, comune);
+    	else
+    		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'F', day, month, year, comune);
+        
+    	CodiceFiscaleTF.setText(cf.toString());
     }
+    
+    
     public void annullaOperazione (ActionEvent actionEvent) throws Exception
     {
     	PrintWriter writer = null;
