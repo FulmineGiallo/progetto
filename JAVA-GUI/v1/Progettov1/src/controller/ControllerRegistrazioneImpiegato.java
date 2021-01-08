@@ -57,7 +57,6 @@ public class ControllerRegistrazioneImpiegato {
             throwables.printStackTrace();
         }
     }
-
     ObservableList<Grado> gradiList = FXCollections.observableArrayList();
     ObservableList<Comune> comuneList = FXCollections.observableArrayList();
     GradoDaoInterface gradi = null;
@@ -85,20 +84,29 @@ public class ControllerRegistrazioneImpiegato {
     public void inizializza() throws SQLException
     {
         GradoComboBox.getItems().addAll(gradiList);
+        ProvinciaTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(ProvinciaTextField.getText().length() > 2 )
+                {
+                    s = ProvinciaTextField.getText().substring(0, 2);
+                    ProvinciaTextField.setText(s);
+                }
+            }
+        });
         comuneList = comuni.gradoList(ProvinciaTextField.getText());
     }
+
     public void updateComune() throws SQLException
     {
         comuneList = comuni.gradoList(ProvinciaTextField.getText());
         ComuneComboBox.setItems(comuneList);
-        System.out.println(comuneList.size());
     }
     @FXML
     void cercaComuni(ActionEvent event) throws SQLException
     {
         updateComune();
     }
-
     String CFRegistrazione()
     {
         return null;
