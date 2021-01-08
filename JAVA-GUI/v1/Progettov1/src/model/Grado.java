@@ -20,7 +20,8 @@ public class Grado
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return tipoGrado;
     }
 }

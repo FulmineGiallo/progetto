@@ -4,15 +4,20 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import model.Comune;
 import model.Connection.DBConnection;
+import model.Dao.ComuneDao;
 import model.Dao.GradoDao;
 import model.DaoInterface.GradoDaoInterface;
 import model.Grado;
@@ -28,8 +33,8 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private RadioButton 	GenereRB2;
     @FXML private ToggleGroup 	Genere;
     @FXML private DatePicker 	DataDiNascitaDP;
-    @FXML private ListView<?> 	ComuneLV;
-    @FXML private TextField 	ProvinciaTF;
+    @FXML private ComboBox<Comune> 	ComuneComboBox;
+    @FXML private TextField 	ProvinciaTF1;
     @FXML private ListView<?> 	SkillLV;
     @FXML private ComboBox<Grado> GradoComboBox;
     @FXML private Button 		AnnullaButton;
@@ -52,6 +57,7 @@ public class ControllerRegistrazioneImpiegato {
     }
 
     ObservableList<Grado> gradiList = FXCollections.observableArrayList();
+    ObservableList<Comune> comuneList = FXCollections.observableArrayList();
     GradoDaoInterface gradi = null;
         {
             try
@@ -63,12 +69,26 @@ public class ControllerRegistrazioneImpiegato {
                 throwables.printStackTrace();
             }
         }
-
-    public void inizializza()
+    ComuneDao comuni = null;
     {
-        GradoComboBox.getItems().addAll(gradiList);
+        try
+        {
+            comuni = new ComuneDao(connection);
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
     }
-
+    public void inizializza() throws SQLException {
+        GradoComboBox.getItems().addAll(gradiList);
+        comuneList = comuni.gradoList("");
+        ComuneComboBox.getItems().addAll(comuneList);
+    }
+    @FXML
+    void cercaComuni(ActionEvent event) throws SQLException
+    {
+        inizializza();
+    }
 
 
     public void annullaOperazione (ActionEvent actionEvent) throws Exception
@@ -99,4 +119,6 @@ public class ControllerRegistrazioneImpiegato {
 
     public void coloraGenereLabel(MouseEvent mouseEvent) {
     }
+
+
 }

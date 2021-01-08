@@ -102,7 +102,7 @@
                                           <VBox>
                                              <children>
                                                 <Label fx:id="ProvinciaLabel1" styleClass="ProvinciaLabel" text="* Provincia di nascita" visible="false" />
-                                                <TextField fx:id="ProvinciaTF1" maxWidth="165.0" prefWidth="165.0" promptText="* Provincia di nascita" styleClass="ProvinciaTF" />
+                                                <TextField fx:id="ProvinciaTF1" maxWidth="165.0" onInputMethodTextChanged="#cercaComuni" prefWidth="165.0" promptText="* Provincia di nascita" styleClass="ProvinciaTF" />
                                              </children>
                                           </VBox>
                                        </children>

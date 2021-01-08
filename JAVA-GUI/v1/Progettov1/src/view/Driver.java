@@ -1,17 +1,8 @@
 package view;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Connection.DBConnection;
-import model.Dao.ImpiegatoDao;
-import model.Impiegato;
-
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 
@@ -32,14 +23,8 @@ public class Driver extends Application
         }
 
     }
-    public static void main(String[] args) throws SQLException {
-        /*
-        DBConnection dbconn = null;
-        Connection connection = null;
-
-        dbconn = DBConnection.getInstance();
-        connection = dbconn.getConnection();
-        */
+    public static void main(String[] args) throws SQLException
+    {
         launch(args);
     }
 }

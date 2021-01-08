@@ -30,7 +30,7 @@
                         <VBox fx:id="TestoBox" alignment="CENTER_LEFT" styleClass="TestoBox" GridPane.columnIndex="1">
                            <children>
                               <Label fx:id="AttenzioneLabel" styleClass="AttenzioneLabel" text="ATTENZIONE!" />
-                              <Label fx:id="AutenticazioneErrataLabel" styleClass="AutenticazioneErrataLabel" text="Non esiste nessun utente con questa email" wrapText="true" />
+                              <Label fx:id="AutenticazioneErrataLabel" styleClass="AutenticazioneErrataLabel" text="Email o password errati" wrapText="true" />
                            </children>
                            <GridPane.margin>
                               <Insets />
