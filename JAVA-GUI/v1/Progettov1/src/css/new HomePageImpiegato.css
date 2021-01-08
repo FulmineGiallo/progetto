@@ -22,7 +22,6 @@
 .LogoutButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-text-fill: white;
-	-fx-font-weight: 900;
 	-fx-font-size: 18;
 	-fx-border-width: 2;
 	-fx-border-color: white;
@@ -35,6 +34,19 @@
 .LogoutButton:hover{
 	-fx-background-color: -fx-primocolore;
 	-fx-backgrund-radius: 10;
+}
+
+.ListaProgettiLabel,
+.DescrizioneProgettoLabel,
+.ListaRiunioniLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 18;	
+}
+
+.DescrizioneProgettoBox{
+	-fx-border-width: 5;
+	-fx-border-color: white;
+	-fx-background-color: -fx-terzocolore;
 }
 
 .ListaProgettiScrollPane,
@@ -55,7 +67,7 @@
 
 .ListaProgettiScrollPane .scroll-bar:vertical,
 .ListaRiunioniScrollPane .scroll-bar:vertical{
-	-fx-background-color: -fx-secondocolore;
+	-fx-background-color: -fx-terzocolore;
 }
 
 .ListaProgettiScrollPane .scroll-bar:vertical .thumb,

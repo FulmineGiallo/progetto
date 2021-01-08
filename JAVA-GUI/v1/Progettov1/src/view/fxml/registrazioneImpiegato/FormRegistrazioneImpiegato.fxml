@@ -85,28 +85,44 @@
                                           <HBox spacing="10.0">
                                              <children>
                                                 <Label fx:id="DataDiNascitaLabel" prefHeight="30.0" prefWidth="104.0" styleClass="DataDiNascitaLabel" text="* Data di nascita" />
-                                                <DatePicker fx:id="DataDiNascitaDP" editable="false" prefHeight="30.0" styleClass="DataDiNascitaDP" />
+                                                <DatePicker fx:id="DataDiNascitaDP" editable="false" maxWidth="166.0" prefHeight="30.0" prefWidth="166.0" styleClass="DataDiNascitaDP" />
                                              </children>
                                           </HBox>
                                           <Label fx:id="DataDiNascitaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
                                        </children>
                                     </VBox>
-                                    <HBox fx:id="ComuneDiNascitaBox1" maxWidth="567.0" prefHeight="45.0" spacing="10.0">
+                                    <GridPane fx:id="ComuneDiNascitaBox" hgap="10.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
                                        <children>
                                           <VBox>
                                              <children>
-                                                <Label fx:id="ComuneLabel1" styleClass="ComuneLabel" text="* Comune di nascita:" />
-                                                <ComboBox fx:id="ComuneComboBox" maxWidth="316.0" prefHeight="30.0" prefWidth="316.0" styleClass="ComuneComboBox" />
+                                                <Label fx:id="ComuneLabel11" styleClass="ComuneLabel" text="* Comune di nascita:" />
+                                                <ComboBox fx:id="ComuneComboBox1" maxWidth="280.0" prefHeight="30.0" prefWidth="280.0" styleClass="ComuneComboBox" />
                                              </children>
                                           </VBox>
-                                          <VBox>
+                                          <VBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
                                              <children>
-                                                <Label fx:id="ProvinciaLabel1" styleClass="ProvinciaLabel" text="* Provincia di nascita" visible="false" />
-                                                <TextField fx:id="ProvinciaTF1" maxWidth="165.0" onInputMethodTextChanged="#cercaComuni" prefWidth="165.0" promptText="* Provincia di nascita" styleClass="ProvinciaTF" />
+                                                <Label fx:id="ProvinciaLabel11" styleClass="ProvinciaLabel" text="* Provincia di nascita" visible="false" />
+                                                <TextField fx:id="ProvinciaTF11" onInputMethodTextChanged="#cercaComuni" promptText="* Sigla provincia" styleClass="ProvinciaTF" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="BASELINE_CENTER" GridPane.columnIndex="2">
+                                             <children>
+                                                <Button fx:id="CercaComuniButton1" mnemonicParsing="false" styleClass="CercaComuniButton" text="Cerca comuni" />
                                              </children>
                                           </VBox>
                                        </children>
-                                    </HBox>
+                                       <VBox.margin>
+                                          <Insets left="55.0" right="40.0" />
+                                       </VBox.margin>
+                                    </GridPane>
                                     <VBox fx:id="SkillBox" maxWidth="567.0" prefHeight="45.0">
                                        <children>
                                           <Label fx:id="SkillLabel" styleClass="SkillLabel" text="Inserisci le tue skills" />

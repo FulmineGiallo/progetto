@@ -123,6 +123,21 @@
 	-fx-mark-color: white;
 }
 
+.CercaComuniButton{
+	-fx-background-color: -fx-terzocolore;
+	-fx-text-fill: white;
+	-fx-font-size: 14;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.CercaComuniButton:hover{
+	-fx-background-color: -fx-primocolore;
+	-fx-backgrund-radius: 10;
+}
+
 .DataDiNascitaDP .date-picker-display-node{
 	-fx-background-color: -fx-secondocolore;
 	-fx-text-fill: white;
