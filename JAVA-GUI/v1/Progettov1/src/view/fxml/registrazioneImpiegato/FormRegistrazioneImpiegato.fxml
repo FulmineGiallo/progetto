@@ -110,6 +110,7 @@
                                           <VBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
                                              <children>
                                                 <Label fx:id="ProvinciaLabel11" styleClass="ProvinciaLabel" text="* Provincia di nascita" visible="false" />
+                                                <TextField fx:id="ProvinciaTextField" stylesheets="@../../../css/ConfermaRegistrazioneImpiegato.css" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="BASELINE_LEFT" GridPane.columnIndex="2">

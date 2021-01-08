@@ -35,7 +35,7 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private ToggleGroup 	Genere;
     @FXML private DatePicker 	DataDiNascitaDP;
     @FXML private ComboBox<Comune> 	ComuneComboBox;
-
+    @FXML private TextField ProvinciaTextField;
     @FXML private ListView<?> 	SkillLV;
     @FXML private ComboBox<Grado> GradoComboBox;
     @FXML private Button 		AnnullaButton;
@@ -85,17 +85,24 @@ public class ControllerRegistrazioneImpiegato {
     public void inizializza() throws SQLException
     {
         GradoComboBox.getItems().addAll(gradiList);
-        ComuneComboBox.getItems().addAll(comuneList);
-        
+        comuneList = comuni.gradoList(ProvinciaTextField.getText());
+    }
+    public void updateComune() throws SQLException
+    {
+        comuneList = comuni.gradoList(ProvinciaTextField.getText());
+        ComuneComboBox.setItems(comuneList);
+        System.out.println(comuneList.size());
     }
     @FXML
     void cercaComuni(ActionEvent event) throws SQLException
     {
-        comuneList = comuni.gradoList("NA");
-        inizializza();
+        updateComune();
     }
 
-
+    String CFRegistrazione()
+    {
+        return null;
+    }
     public void annullaOperazione (ActionEvent actionEvent) throws Exception
     {
     	PrintWriter writer = null;
