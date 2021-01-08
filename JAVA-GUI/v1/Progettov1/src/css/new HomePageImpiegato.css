@@ -19,7 +19,8 @@
 
 .ValutazioniButton,
 .NuovoProgettoButton,
-.LogoutButton{
+.LogoutButton,
+.GestioneProgettoButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-text-fill: white;
 	-fx-font-size: 18;
@@ -31,7 +32,8 @@
 
 .ValutazioniButton:hover,
 .NuovoProgettoButton:hover,
-.LogoutButton:hover{
+.LogoutButton:hover,
+.GestioneProgettoButton:hover{
 	-fx-background-color: -fx-primocolore;
 	-fx-backgrund-radius: 10;
 }

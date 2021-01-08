@@ -126,6 +126,13 @@
 	-fx-mark-color: white;
 }
 
+.ComuneComboBox .list-cell{
+	-fx-background-color: -fx-secondocolore;
+}
+.ComuneComboBox .list-cell .text{
+	-fx-fill: white;
+}
+
 .CercaComuniButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-text-fill: white;
