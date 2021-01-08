@@ -1,4 +1,6 @@
 package model;
 
-public class Valutazione {
+public class Valutazione
+{
+
 }

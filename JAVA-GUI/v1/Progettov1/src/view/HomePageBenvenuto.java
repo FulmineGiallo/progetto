@@ -12,8 +12,6 @@ import controller.ControllerHomePageBenvenuto;
 
 public class HomePageBenvenuto
 {
-	
-	
 	ControllerHomePageBenvenuto controllerHomePageBenvenuto;
     private final PrintWriter writer;
 
@@ -22,14 +20,13 @@ public class HomePageBenvenuto
         this.writer = writer;
     }
 
-    public void start(Stage window) throws Exception {
-        
-    	
+    public void start(Stage window) throws Exception
+    {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepagebenvenuto.fxml"));
         Parent root = loader.load();
         Scene scene =  new Scene(root);
-		
-        
+
+
         controllerHomePageBenvenuto = loader.getController();
         window.setScene(scene);
         window.setMinWidth(700.0);
@@ -38,6 +35,4 @@ public class HomePageBenvenuto
         window.centerOnScreen();
         window.show();
     }
-
-
 }

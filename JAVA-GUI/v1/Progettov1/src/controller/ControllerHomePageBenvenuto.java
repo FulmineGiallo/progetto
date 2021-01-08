@@ -22,6 +22,7 @@ public class ControllerHomePageBenvenuto
 
     public void inviaCurriculum(ActionEvent actionEvent) throws Exception
     {
+
         PrintWriter writer = null;
         registrazione = new FormRegistrazioneImpiegato(writer);
 

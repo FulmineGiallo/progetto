@@ -21,7 +21,7 @@ public class HomePageProgetto
 
     public void start(Stage window) throws Exception {
     	
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/homepageprogetto.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/homepageprogetto.fxml"));
     	Parent root = loader.load();
     	
     	controllerHomePageProgetto = loader.getController();

@@ -22,6 +22,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final PreparedStatement getImpiegato;
     private final PreparedStatement getCF;
     private final PreparedStatement getGrado;
+    private final PreparedStatement insertImpiegato;
 
     public ImpiegatoDao(Connection connection) throws SQLException
     {
@@ -32,6 +33,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         getImpiegato = connection.prepareStatement("SELECT * FROM impiegato WHERE cf = ?");
         getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
         getGrado = connection.prepareStatement("SELECT tipogrado FROM impiegato NATURAL JOIN grado WHERE impiegato.email = ?");
+        insertImpiegato = connection.prepareStatement("");
     }
 
     @Override
@@ -102,6 +104,12 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         rs.close();
         return grado;
     }
+
+    @Override
+    public int insertRegistrazione(String nome, String cognome, String genere, Date datan, String comunen, String provincia) {
+        return 0;
+    }
+
     public List<Impiegato> getAllImpiegati() throws SQLException
     {
         ResultSet rs = getImpiegati.executeQuery();
