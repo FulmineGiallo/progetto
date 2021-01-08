@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneImpiegato" stylesheets="@../../../css/FormRegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneImpiegato">
+<AnchorPane fx:id="RegistrazioneImpiegato" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneImpiegato" stylesheets="@../../../css/FormRegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneImpiegato">
    <children>
       <HBox fx:id="IstruzioniBox" alignment="CENTER" layoutX="100.0" layoutY="10.0" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -91,11 +91,11 @@
                                           <Label fx:id="DataDiNascitaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
                                        </children>
                                     </VBox>
-                                    <GridPane fx:id="ComuneDiNascitaBox" hgap="10.0">
+                                    <GridPane fx:id="ComuneDiNascitaBox" hgap="10.0" maxWidth="567.0" prefWidth="567.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="28.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="22.0" />
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -113,23 +113,29 @@
                                                 <TextField fx:id="ProvinciaTF11" onInputMethodTextChanged="#cercaComuni" promptText="* Sigla provincia" styleClass="ProvinciaTF" />
                                              </children>
                                           </VBox>
-                                          <VBox alignment="BASELINE_CENTER" GridPane.columnIndex="2">
+                                          <VBox alignment="BASELINE_LEFT" GridPane.columnIndex="2">
                                              <children>
                                                 <Button fx:id="CercaComuniButton1" mnemonicParsing="false" styleClass="CercaComuniButton" text="Cerca comuni" />
                                              </children>
                                           </VBox>
                                        </children>
-                                       <VBox.margin>
-                                          <Insets left="55.0" right="40.0" />
-                                       </VBox.margin>
                                     </GridPane>
+                                    <VBox fx:id="CodiceFiscaleBox" maxWidth="567.0" prefHeight="45.0" spacing="3.0">
+                                       <children>
+                                          <Label fx:id="CodiceFiscaleLabel" styleClass="CodiceFiscaleLabel" text="Codice Fiscale" />
+                                          <TextField fx:id="CodiceFiscaleTF" editable="false" onMouseClicked="#visualizzaNomeLabel" prefWidth="223.0" styleClass="CodiceFiscaleTF" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="30.0" />
+                                       </VBox.margin>
+                                    </VBox>
                                     <VBox fx:id="SkillBox" maxWidth="567.0" prefHeight="45.0">
                                        <children>
                                           <Label fx:id="SkillLabel" styleClass="SkillLabel" text="Inserisci le tue skills" />
                                           <MenuButton fx:id="SkillMenuButton" maxWidth="316.0" minHeight="30.0" mnemonicParsing="false" prefWidth="316.0" styleClass="SkillMenuButton" />
                                        </children>
                                        <VBox.margin>
-                                          <Insets top="50.0" />
+                                          <Insets top="30.0" />
                                        </VBox.margin>
                                     </VBox>
                                     <VBox fx:id="GradoBox" maxWidth="567.0" prefHeight="45.0">
