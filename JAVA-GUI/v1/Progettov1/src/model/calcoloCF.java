@@ -12,9 +12,7 @@ public class calcoloCF {
 		int giornoDiNascita;
 		int meseDiNascita;
 		String annoDiNascita;
-		String comune;
-		//String luogo;
-		
+		String comune;		
 		
 		public calcoloCF(String cognome, String nome, char sesso, int giornoDiNascita, int meseDiNascita,String annoDiNascita, String comune) {
 			this.cognome = cognome.toUpperCase();
@@ -24,45 +22,32 @@ public class calcoloCF {
 			this.meseDiNascita = meseDiNascita;
 			this.annoDiNascita = annoDiNascita;
 			this.comune = comune.toUpperCase();
-
-	    	
-//			this.luogo = luogo.toUpperCase();
 		}
 		
 		//FUNZIONE PER COMPORRE IL CODICE ASSOCIATO AL NOME
-		public String check_nome(String controllo, int cont) {
+		public String check_nome(String controllo, int consonanti) {
 	        final int dim = 3;
 	        char data[] = new char[dim];
 	        int data_pos = 0;
-	        int num_cons = 0;
-	        if(cont >= 4){
+	        int num_cons = 1;
+	        if(consonanti >= 4){
 	            for(int i=0; i<controllo.length(); i++){
 	                if(data_pos < dim){
 	                    char c = controllo.charAt(i);
 	                    if(isConsonant(c)){
-	                        num_cons++;
-	                        data[data_pos] = c;
-	                        data_pos++;
+	                    	if(num_cons != 2) {
+		                        data[data_pos] = c;
+		                        data_pos++;
+	                    	}
+	                    	num_cons++;
 	                    }
 	                }
-	            }
-	            
-	            if(num_cons<3) {
-	            	for(int i=0; i<controllo.length(); i++){
-	            	    char c = controllo.charAt(i);
-	                    if(isVowel(c)){
-	                        data[data_pos] = c;
-	                        data_pos++;
-	                        if(data_pos==3)
-	                        	break;
-	                    }
-	            	}
-	            }
-	            
+	            }	            
 	        }
-	        else if(cont <= 3) {
+	        else if(consonanti <= 3) {
 	        	check(controllo, data, data_pos);
 	        }
+	        
 	        return new String(data);
 	    }
 		
@@ -127,7 +112,9 @@ public class calcoloCF {
 	    }
 	    
 	    //FUNZIONE PER CONTARE IL NUMERO DI CONSONANTI NELLA STRINGA
-	    private int consonantCount(String controllo, int cont){
+	    private int consonantCount(String controllo){
+	    	int cont = 0;
+	    	
 	        for(int i=0; i<controllo.length(); i++){
 	            if(isConsonant(controllo.charAt(i))){
 	                cont++;
@@ -176,70 +163,6 @@ public class calcoloCF {
 	    			return 'T';
 				default:
 					return 'X';
-	    	}
-	    }
-	    
-	    
-	  //FUNZIONE PER SOSTITUIRE IL NUMERO DEL MESE IN PAROLE
-	    private String stringMese(int mese) {
-	    	switch(mese) {
-	    		case 1:
-	    			return "Gennaio";
-	    		case 2:
-	    			return "Febbraio";
-	    		case 3:
-	    			return "Marzo";
-	    		case 4:
-	    			return "Aprile";
-	    		case 5:
-	    			return "Maggio";
-	    		case 6:
-	    			return "Giugno";
-	    		case 7:
-	    			return "Luglio";
-	    		case 8:
-	    			return "Agosto";
-	    		case 9:
-	    			return "Settembre";
-	    		case 10:
-	    			return "Ottobre";
-	    		case 11:
-	    			return "Novembre";
-	    		case 12:
-	    			return "Dicembre";
-				default:
-					return " ";
-	    	}
-	    }
-	    
-	    
-	    //FUNZIONE PER SOSTITUIRE IL CODICE DELLA PROVINCIA IN PAROLE
-	    private String check_provincia(String provincia) {
-	    	switch(provincia) {
-	    		case "AVELLINO":
-	    			return "A509";
-	    		case "BENEVENTO":
-	    			return "A783";
-	    		case "CASERTA":
-	    			return "B963";
-	    		case "NAPOLI":
-	    			return "F839";
-	    		case "SALERNO":
-	    			return "H703";
-				default:
-					return "Città non specificata";
-	    	}
-	    }
-	    
-	    //FUNZIONE PER SOSTITUIRE IL CARATTERE DEL SESSO IN PAROLE
-	    private String check_sesso(char sesso) {
-	    	switch(sesso) {
-	    		case 'M':
-	    			return "Uomo";
-	    		case 'F':
-	    			return "Donna";
-				default:
-					return "Sesso non specificato";
 	    	}
 	    }
 	    
@@ -367,9 +290,8 @@ public class calcoloCF {
 		@Override
 		public String toString() {
 			
-			String cf = check_cognome(cognome)+check_nome(nome, nome.length())+ annoDiNascita.substring(annoDiNascita.length() - 2)  + check_mese(meseDiNascita) + check_giorno(giornoDiNascita, sesso) + comune;
-			
-			return cf+check_lettera(cf);
+			String cf = check_cognome(cognome)+check_nome(nome, consonantCount(nome))+ annoDiNascita.substring(annoDiNascita.length() - 2)  + check_mese(meseDiNascita) + check_giorno(giornoDiNascita, sesso) + comune;
+			return cf + check_lettera(cf);
 		}
 	    
 	    
