@@ -26,11 +26,12 @@ public class HomePageImpiegato
 
     public void start(Stage window) throws Exception
     {
-    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepageimpiegato.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/HomePageImpiegato.fxml"));
         Parent root = loader.load();
         Scene scene =  new Scene(root);
         
         controllerHomePageImpiegato = loader.getController();
+        
         controllerHomePageImpiegato.inizializza(impiegato);
         window.setTitle("Home page impiegato");
         window.setScene(scene);

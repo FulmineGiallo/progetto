@@ -27,15 +27,15 @@ public class ControllerHomePageImpiegato
      @FXML
      private Button buttonCreaProgetto;
      @FXML
-     private Label nomeImpiegato;
+     private Label NomeImpiegatoLabel;
      @FXML
-     private Label gradoLabel;
+     private Label GradoImpiegatoLabel;
 
     public void inizializza(Impiegato impiegato)
     {
     	this.impiegato = impiegato;
-    	nomeImpiegato.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
-        gradoLabel.setText(impiegato.getGrado());
+    	NomeImpiegatoLabel.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
+        GradoImpiegatoLabel.setText(impiegato.getGrado());
     }
 
     @FXML
