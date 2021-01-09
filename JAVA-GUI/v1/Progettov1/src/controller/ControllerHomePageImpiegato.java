@@ -19,10 +19,16 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Connection.DBConnection;
 import model.Dao.ProgettoDao;
+import model.Dao.RiunioneDao;
 import model.DaoInterface.ProgettoDaoInterface;
+import model.DaoInterface.RiunioneDaoInterface;
 import model.Impiegato;
 import model.Progetto;
+<<<<<<< Updated upstream
 import view.HomePageBenvenuto;
+=======
+import model.Riunione;
+>>>>>>> Stashed changes
 import view.HomePageProgetto;
 import view.HomePageValutazioni;
 
@@ -104,13 +110,16 @@ public class ControllerHomePageImpiegato
 
     @FXML
     private ScrollPane ListaRiunioniScrollPane;
-
-    
-
     
     @FXML
-    private ListView<?> RiunioniLV;
-     ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
+    private ListView<Riunione> RiunioniLV;
+    
+    
+    
+    ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
+    ObservableList<Riunione> listaRiunioni = FXCollections.observableArrayList();
+     
+     
      Connection connection;
      DBConnection dbConnection;
     {
@@ -131,6 +140,18 @@ public class ControllerHomePageImpiegato
             throwables.printStackTrace();
         }
     }
+    
+    RiunioneDaoInterface riunioni;
+    {
+        try {
+            riunioni = new RiunioneDao(connection);
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    
 
     public void inizializza(Impiegato impiegato) throws SQLException {
     	this.impiegato = impiegato;
@@ -139,6 +160,9 @@ public class ControllerHomePageImpiegato
         GradoImpiegatoLabel.setText(impiegato.getGrado());
         listaProgetti.addAll(progetti.getProgettiImpiegato(impiegato));
         ListaProgettiLV.setItems(listaProgetti);
+        listaRiunioni.addAll(riunioni.getRiunioniImpiegato(impiegato));
+
+        RiunioniLV.setItems(listaRiunioni);
         updateInfoProgetto();
     }
 

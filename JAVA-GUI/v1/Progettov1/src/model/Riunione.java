@@ -7,18 +7,25 @@ public class Riunione
 {
     private String titolo;
     private String descrizione;
+    private String organizzatore;
     private Date data;
     private Time orarioInizio;
     private Time orarioFine;
 
-    public Riunione(String titolo, String descrizione, Date data, Time orarioInizio, Time orarioFine) {
-        this.titolo = titolo;
-        this.descrizione = descrizione;
-        this.data = data;
-        this.orarioInizio = orarioInizio;
-        this.orarioFine = orarioFine;
-    }
+//    public Riunione(String titolo, String descrizione, Date data, Time orarioInizio, Time orarioFine, String organizzatore) {
+//        this.titolo = titolo;
+//        this.descrizione = descrizione;
+//        this.data = data;
+//        this.orarioInizio = orarioInizio;
+//        this.orarioFine = orarioFine;
+//        this.organizzatore = organizzatore;
+//    }
 
+    public Riunione(String titolo) {
+        this.titolo = titolo;        
+    }
+    
+    
     public String getTitolo() {
         return titolo;
     }
@@ -26,6 +33,15 @@ public class Riunione
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
+    
+    public String getOrganizzatore() {
+        return organizzatore;
+    }
+
+    public void setOrganizzatore(String organizzatore) {
+        this.organizzatore = organizzatore;
+    }
+    
 
     public String getDescrizione() {
         return descrizione;
@@ -57,5 +73,9 @@ public class Riunione
 
     public void setOrarioFine(Time orarioFine) {
         this.orarioFine = orarioFine;
+    }
+    @Override
+    public String toString() {
+        return "titolo: " + titolo + " data: " + data + " orario inizio " + orarioInizio + " orario fine " + orarioFine + " organizzatore " + organizzatore.toUpperCase();
     }
 }
