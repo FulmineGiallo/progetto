@@ -98,7 +98,7 @@ public class ControllerRegistrazioneImpiegato {
     {
         comuneList = comuni.gradoList(ProvinciaTextField.getText());
         ComuneComboBox.setItems(comuneList);
-        System.out.println(comuneList.size());
+      //  System.out.println(comuneList.size());
     }
     @FXML
     void cercaComuni(ActionEvent event) throws SQLException
