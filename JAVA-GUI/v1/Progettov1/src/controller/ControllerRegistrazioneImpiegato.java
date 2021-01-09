@@ -97,7 +97,7 @@ public class ControllerRegistrazioneImpiegato {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if(ProvinciaTextField.getText().length() > 2 )
                 {
-                    s = ProvinciaTextField.getText().substring(0, 2);
+                    s = ProvinciaTextField.getText().substring(0, 2).toUpperCase();
                     ProvinciaTextField.setText(s);
                 }
             }
