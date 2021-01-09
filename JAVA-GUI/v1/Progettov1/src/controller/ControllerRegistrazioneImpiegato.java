@@ -92,6 +92,16 @@ public class ControllerRegistrazioneImpiegato {
     public void inizializza() throws SQLException
     {
         GradoComboBox.getItems().addAll(gradiList);
+        ProvinciaTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if(ProvinciaTextField.getText().length() > 2 )
+                {
+                    s = ProvinciaTextField.getText().substring(0, 2);
+                    ProvinciaTextField.setText(s);
+                }
+            }
+        });
         comuneList = comuni.gradoList(ProvinciaTextField.getText());
     }
     public void updateComune() throws SQLException
@@ -109,6 +119,7 @@ public class ControllerRegistrazioneImpiegato {
     public void CFRegistrazione()
     {
  
+    	try {
     	String comune = ComuneComboBox.getValue().toString().substring(0,4);
     	calcoloCF cf = null;
     	
@@ -124,7 +135,14 @@ public class ControllerRegistrazioneImpiegato {
     	else
     		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'F', day, month, year, comune);
         
+    	CodiceFiscaleTF.setStyle("-fx-text-fill: white");
     	CodiceFiscaleTF.setText(cf.toString());
+    	
+    	}catch(Exception e) {
+    		CodiceFiscaleTF.setStyle("-fx-text-fill: red");
+    		CodiceFiscaleTF.setText("Inserire tutti i campi prima di calcolare il codice fiscale, poi ricliccare qui");
+    	}
+    	
     }
     
     
