@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="ErroreAutenticazione" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" styleClass="ErroreAutenticazione" stylesheets="@../../../css/ErroreAutenticazione.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="FinestraErrore" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" styleClass="FinestraErrore" stylesheets="@../../css/FinestraErrore.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFinestraErrore">
    <children>
       <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,7 +30,7 @@
                         <VBox fx:id="TestoBox" alignment="CENTER_LEFT" styleClass="TestoBox" GridPane.columnIndex="1">
                            <children>
                               <Label fx:id="AttenzioneLabel" styleClass="AttenzioneLabel" text="ATTENZIONE!" />
-                              <Label fx:id="AutenticazioneErrataLabel" styleClass="AutenticazioneErrataLabel" text="Autenticazione Errata" />
+                              <Label fx:id="AutenticazioneErrataLabel" styleClass="AutenticazioneErrataLabel" text="Email o password errati" wrapText="true" />
                            </children>
                            <GridPane.margin>
                               <Insets />
@@ -41,7 +41,7 @@
                         </VBox>
                         <ImageView fx:id="AttenzioneIV" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/img/warning.png" />
+                              <Image url="@../resources/img/warning.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

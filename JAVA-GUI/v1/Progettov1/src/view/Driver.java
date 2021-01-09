@@ -10,9 +10,9 @@ public class Driver extends Application
 {
 	
 	HomePageBenvenuto homePageBenvenuto;
+	
     @Override
-    public void start(Stage primaryStage)
-    {
+    public void start(Stage primaryStage) {
         try
         {
         	PrintWriter writer = null;
@@ -23,8 +23,8 @@ public class Driver extends Application
         }
 
     }
-    public static void main(String[] args) throws SQLException
-    {
+    
+    public static void main(String[] args) {
         launch(args);
     }
 }
