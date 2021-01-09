@@ -36,7 +36,8 @@ public class HomePageBenvenuto
 			window.setMinHeight(450.0);
 			
 			window.show();
-		} catch (IOException e) {
+		} catch (IOException e)
+		{
 			e.printStackTrace();
 			//inserire inizializzazione della finestraErrore
 		}

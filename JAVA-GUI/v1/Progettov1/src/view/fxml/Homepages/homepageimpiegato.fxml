@@ -34,7 +34,7 @@
                <children>
                   <Button fx:id="ValutazioniButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" styleClass="ValutazioniButton" text="Le tue valutazioni" />
                   <Button fx:id="NuovoProgettoButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" styleClass="NuovoProgettoButton" text="Nuovo progetto" />
-                <Button fx:id="LogoutButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" styleClass="LogoutButton" text="Logout" />
+                <Button fx:id="LogoutButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#Logout" prefHeight="50.0" styleClass="LogoutButton" text="Logout" />
                </children>
             </HBox>
          </children>

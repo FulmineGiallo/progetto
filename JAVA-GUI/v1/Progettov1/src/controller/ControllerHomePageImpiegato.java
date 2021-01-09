@@ -22,6 +22,7 @@ import model.Dao.ProgettoDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
+import view.HomePageBenvenuto;
 import view.HomePageProgetto;
 import view.HomePageValutazioni;
 
@@ -29,6 +30,7 @@ public class ControllerHomePageImpiegato
 {
 	 HomePageProgetto homeProgetto;
 	 HomePageValutazioni homeValutazioni;
+	 HomePageBenvenuto homePageBenvenuto;
 	 Impiegato impiegato = null;
 	 @FXML
      private Button buttonValutazioni;
@@ -149,7 +151,6 @@ public class ControllerHomePageImpiegato
                 DataDiFineLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
                 DataDiScadenzaLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
             }
-
         });
     }
 
@@ -176,7 +177,14 @@ public class ControllerHomePageImpiegato
     	
     }
     
-    
+    @FXML
+    public void Logout(ActionEvent event) throws Exception
+    {
+        PrintWriter writer = null;
+        homePageBenvenuto = new HomePageBenvenuto(writer);
+        Stage stage = (Stage) LogoutButton.getScene().getWindow();
+        homePageBenvenuto.start(stage);
+    }
 }
     
   
