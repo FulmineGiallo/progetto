@@ -103,6 +103,9 @@ public class ControllerHomePageImpiegato
     @FXML
     private ScrollPane ListaRiunioniScrollPane;
 
+    
+
+    
     @FXML
     private ListView<?> RiunioniLV;
      ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
@@ -129,7 +132,7 @@ public class ControllerHomePageImpiegato
 
     public void inizializza(Impiegato impiegato) throws SQLException {
     	this.impiegato = impiegato;
-
+    	DescrizioneProgettoTA.setEditable(false);
     	NomeImpiegatoLabel.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
         GradoImpiegatoLabel.setText(impiegato.getGrado());
         listaProgetti.addAll(progetti.getProgettiImpiegato(impiegato));
@@ -145,6 +148,7 @@ public class ControllerHomePageImpiegato
             public void handle(javafx.scene.input.MouseEvent mouseEvent)
             {
                 DescrizioneProgettoTA.setText(ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
+                DescrizioneProgettoTA.setEditable(false);
                 DataDiInizioLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
                 DataDiFineLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
                 DataDiScadenzaLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
