@@ -6,7 +6,10 @@
 	-fx-font-family: 'Roboto';
 }
 
-.NomeImpiegatoLabel{
+.NomeImpiegatoLabel,
+.ListaProgettiLabel,
+.TitoloProgettoLabel,
+.ListaRiunioniLabel{
 	-fx-font-size: 18;
 	-fx-text-fill: white;
 }
@@ -19,8 +22,7 @@
 
 .ValutazioniButton,
 .NuovoProgettoButton,
-.LogoutButton,
-.GestioneProgettoButton{
+.LogoutButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-text-fill: white;
 	-fx-font-size: 18;
@@ -30,19 +32,32 @@
 	-fx-background-radius: 10;
 }
 
+.GestioneProgettoButton,
+.ModificaButton{
+	-fx-background-color: #1e2124;
+	-fx-text-fill: white;
+	-fx-font-size: 18;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;	
+}
+
+
 .ValutazioniButton:hover,
 .NuovoProgettoButton:hover,
 .LogoutButton:hover,
-.GestioneProgettoButton:hover{
+.GestioneProgettoButton:hover,
+.ModificaButton:hover{
 	-fx-background-color: -fx-primocolore;
 	-fx-backgrund-radius: 10;
 }
 
-.ListaProgettiLabel,
-.TitoloProgettoLabel,
-.ListaRiunioniLabel{
+.IstruzioniLabel{
+	-fx-font-size: 30;
 	-fx-text-fill: white;
-	-fx-font-size: 18;	
+	-fx-font-family: 'Roboto Light';
+	-fx-font-style: italic;
 }
 
 .DescrizioneProgettoBox{
