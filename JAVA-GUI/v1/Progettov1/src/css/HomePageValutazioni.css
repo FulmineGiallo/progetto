@@ -1,0 +1,74 @@
+.HomePageValutazioni{
+	-fx-primocolore: #7289da;
+	-fx-secondocolore: #424549;
+	-fx-terzocolore: #36393e;
+	-fx-background-color: -fx-secondocolore;
+	-fx-font-family: 'Roboto';
+}
+
+.NomeImpiegatoLabel,
+.ListaValutazioniLabel{
+	-fx-font-size: 18;
+	-fx-text-fill: white;
+}
+
+.GradoImpiegatoLabel{
+	-fx-font-size: 16;
+	-fx-text-fill: white;
+	-fx-font-family: 'Roboto Light';
+}
+
+.HomePageImpiegatoButton{
+	-fx-background-color: -fx-terzocolore;
+	-fx-text-fill: white;
+	-fx-font-size: 18;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.HomePageImpiegatoButton:hover{
+	-fx-background-color: -fx-primocolore;
+	-fx-backgrund-radius: 10;
+}
+
+.IstruzioniLabel{
+	-fx-font-size: 30;
+	-fx-text-fill: white;
+	-fx-font-family: 'Roboto Light';
+	-fx-font-style: italic;
+}
+
+.DescrizioneValutazioneBox{
+	-fx-border-width: 5;
+	-fx-border-color: white;
+	-fx-background-color: -fx-terzocolore;
+}
+
+.ListaValutazioniScrollPane{
+	-fx-border-width: 5;
+	-fx-border-color: white;
+}
+
+.ListaValutazioniScrollPane .viewport{
+	-fx-background-color: -fx-terzocolore;
+}
+
+.ListaValutazioniScrollPane:focused{
+    -fx-background-insets: 0;
+}
+
+.ListaValutazioniScrollPane .scroll-bar:vertical{
+	-fx-background-color: -fx-terzocolore;
+}
+
+.ListaValutazioniScrollPane .scroll-bar:vertical .thumb,
+.ListaValutazioniScrollPane .scroll-bar:vertical .increment-button .increment-arrow,
+.ListaValutazioniScrollPane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
+.ListaValutazioniLV{
+	-fx-background-color: -fx-terzocolore;
+}

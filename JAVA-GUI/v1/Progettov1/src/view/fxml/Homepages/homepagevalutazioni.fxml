@@ -1,55 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="1089.0" style="-fx-background-color: #424549;" stylesheets="@../../../css/VisualizzaValutazioni.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerValutazioni">
+
+<AnchorPane fx:id="HomePageValutazioni" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="900.0" styleClass="HomePageValutazioni" stylesheets="@../../../css/HomePageValutazioni.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label contentDisplay="CENTER" layoutX="477.0" layoutY="7.0" prefHeight="63.0" prefWidth="136.0" text="Valutazioni" textFill="WHITE">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </Label>
-      <ListView fx:id="ValutazioniListView" layoutX="45.0" layoutY="84.0" maxHeight="601.0" maxWidth="310.0" prefHeight="601.0" prefWidth="294.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="84.0" />
-      <AnchorPane layoutX="474.0" layoutY="121.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="117.0" AnchorPane.leftAnchor="474.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="121.0">
+      <GridPane fx:id="ToolBar" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints hgrow="SOMETIMES" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Label layoutX="44.0" layoutY="280.0" prefHeight="25.0" prefWidth="92.0" text="Recensione:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <ListView fx:id="RecensiononeListView" layoutX="167.0" layoutY="280.0" prefHeight="139.0" prefWidth="312.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="280.0" />
-            <Label fx:id="RecensoreLabel" layoutX="167.0" layoutY="41.0" prefHeight="35.0" prefWidth="191.0" AnchorPane.rightAnchor="185.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="29.0" layoutY="175.0" prefHeight="35.0" prefWidth="124.0" text="Data Valutazione:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="StelleLabel" layoutX="167.0" layoutY="105.0" prefHeight="35.0" prefWidth="136.0" />
-            <Label contentDisplay="CENTER" layoutX="29.0" layoutY="105.0" prefHeight="35.0" prefWidth="111.0" text="       Stelle:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="dataValutazioneLabel" layoutX="167.0" layoutY="175.0" prefHeight="35.0" prefWidth="191.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="35.0" layoutY="41.0" prefHeight="35.0" prefWidth="111.0" text="Recensione da:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
+            <VBox alignment="CENTER_LEFT">
+               <children>
+                  <Label fx:id="NomeImpiegatoLabel" styleClass="NomeImpiegatoLabel" />
+                  <Label fx:id="GradoImpiegatoLabel" styleClass="GradoImpiegatoLabel" />
+               </children>
+            </VBox>
+            <HBox alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
+               <children>
+                  <Button fx:id="HomePageImpiegatoButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#Logout" prefHeight="50.0" styleClass="HomePageImpiegatoButton" text="Torna alla tua homepage" />
+               </children>
+            </HBox>
          </children>
-      </AnchorPane>
-      <Button fx:id="TornaAllaHomeButton" layoutX="898.0" layoutY="679.0" mnemonicParsing="false" onAction="#backhomeimpiegato" prefHeight="44.0" prefWidth="147.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Torna alla Home" textFill="WHITE" AnchorPane.bottomAnchor="29.0" AnchorPane.rightAnchor="44.0" />
+      </GridPane>
+      <GridPane fx:id="ValutazioniBox" hgap="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="70.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane fx:id="ListaValutazioniBox" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <HBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="ListaValutazioniLabel" styleClass="ListaValutazioniLabel" text="Le tue valutazioni" />
+                     </children>
+                  </HBox>
+                  <ScrollPane fx:id="ListaValutazioniScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="ListaValutazioniScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+                     <content>
+                        <ListView fx:id="ListaValutazioniLV" prefHeight="200.0" prefWidth="200.0" styleClass="ListaValutazioniLV" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="IstruzioniBox" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1">
+               <children>
+                  <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="IstruzioniLabel" styleClass="IstruzioniLabel" text="Clicca un progetto per&#10;visualizzarne le informazioni" textAlignment="CENTER" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <AnchorPane fx:id="DescrizioneValutazioneBox" prefHeight="200.0" prefWidth="200.0" styleClass="DescrizioneValutazioneBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
    </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
 </AnchorPane>
