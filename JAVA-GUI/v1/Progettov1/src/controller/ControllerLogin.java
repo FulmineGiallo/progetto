@@ -28,23 +28,18 @@ public class ControllerLogin
 
     @FXML private Button AnnullaButton;
     @FXML private Button AccediButton;
-    //@FXML private TextField emailField;
-    //@FXML private PasswordField passwordField;
     @FXML private Button okButton;
-    
-    @FXML
-    private PasswordField PasswordTF;
-    @FXML
-    private TextField EmailTF;
+    @FXML private PasswordField PasswordTF;
+    @FXML private TextField EmailTF;
 
     int accesso = 0;
     Connection connection;
+
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception
     {
         PrintWriter writer = null;
         benvenuto = new HomePageBenvenuto(writer);
-
         Stage stage = (Stage) AnnullaButton.getScene().getWindow();
         benvenuto.start(stage);
     }

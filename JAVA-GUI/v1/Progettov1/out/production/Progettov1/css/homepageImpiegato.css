@@ -1,34 +1,122 @@
-#topPane
-{
-    -fx-border-width: 1 2 3 4; -fx-border-color: white white black white;
-    -fx-background-color: 	#424549;
+.HomePageImpiegato{
+	-fx-primocolore: #7289da;
+	-fx-secondocolore: #424549;
+	-fx-terzocolore: #36393e;
+	-fx-background-color: -fx-secondocolore;
+	-fx-font-family: 'Roboto';
 }
-#mainPane
-{
-    -fx-background-color: 	#36393e;
+
+.NomeImpiegatoLabel{
+	-fx-font-size: 18;
+	-fx-text-fill: white;
 }
-#centerPane
-{
-    -fx-border-width: 1 2 3 4; -fx-border-color: 	#1e2124 	#1e2124 white 	#1e2124;
+
+.GradoImpiegatoLabel{
+	-fx-font-size: 16;
+	-fx-text-fill: white;
+	-fx-font-family: 'Roboto Light';
 }
-#Button
-{
-     -fx-background-color:
-         rgba(0,0,0,0.08),
-         linear-gradient(#9a9a9a, #909090),
-         linear-gradient(white 0%, #f3f3f3 50%, #ececec 51%, #f2f2f2 100%);
-     -fx-background-insets: 0 0 -1 0,0,1;
-     -fx-background-radius: 5,5,4;
-     -fx-padding: 3 30 3 30;
-     -fx-text-fill: #242d35;
-     -fx-font-size: 14px;
- }
-#Button:hover
-{
-    -fx-background-color: gray;
+
+.ValutazioniButton,
+.NuovoProgettoButton,
+.LogoutButton,
+.GestioneProgettoButton{
+	-fx-background-color: -fx-terzocolore;
+	-fx-text-fill: white;
+	-fx-font-size: 18;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
 }
-#label
-{
-    -fx-text-fill: white;
-    -fx-font-family: "Roboto Thin" ;
+
+.ValutazioniButton:hover,
+.NuovoProgettoButton:hover,
+.LogoutButton:hover,
+.GestioneProgettoButton:hover{
+	-fx-background-color: -fx-primocolore;
+	-fx-backgrund-radius: 10;
+}
+
+.ListaProgettiLabel,
+.TitoloProgettoLabel,
+.ListaRiunioniLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 18;	
+}
+
+.DescrizioneProgettoBox{
+	-fx-border-width: 5;
+	-fx-border-color: white;
+	-fx-background-color: -fx-terzocolore;
+}
+
+.DescrizioneProgettoTA,
+.DescrizioneProgettoTA .scroll-pane,
+.DescrizioneProgettoTA .scroll-pane .viewport,
+.DescrizioneProgettoTA .scroll-pane .viewport .content{
+	-fx-background-color: -fx-terzocolore;
+	-fx-padding: 0;
+}
+
+.DescrizioneProgettoTA{
+	-fx-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.DescrizioneProgettoTA .scroll-pane{
+	-fx-hbar-policy: NEVER;
+}
+
+.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical{
+	-fx-background-color: -fx-secondocolore;
+}
+
+.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .thumb,
+.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
+.DataDiInizioLabel,
+.DataDiFineLabel,
+.DataDiScadenzaLabel,
+.NoteLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.ListaProgettiScrollPane,
+.ListaRiunioniScrollPane{
+	-fx-border-width: 5;
+	-fx-border-color: white;
+}
+
+.ListaProgettiScrollPane .viewport,
+.ListaRiunioniScrollPane .viewport{
+	-fx-background-color: -fx-terzocolore;
+}
+
+.ListaProgettiScrollPane:focused,
+.ListaRiunioniScrollPane:focused{
+    -fx-background-insets: 0;
+}
+
+.ListaProgettiScrollPane .scroll-bar:vertical,
+.ListaRiunioniScrollPane .scroll-bar:vertical{
+	-fx-background-color: -fx-terzocolore;
+}
+
+.ListaProgettiScrollPane .scroll-bar:vertical .thumb,
+.ListaProgettiScrollPane .scroll-bar:vertical .increment-button .increment-arrow,
+.ListaProgettiScrollPane .scroll-bar:vertical .decrement-button .decrement-arrow,
+.ListaRiunioniScrollPane .scroll-bar:vertical .thumb,
+.ListaRiunioniScrollPane .scroll-bar:vertical .increment-button .increment-arrow,
+.ListaRiunioniScrollPane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
+.ListaProgettiLV,
+.ListaRiunioniLV{
+	-fx-background-color: -fx-terzocolore;
 }

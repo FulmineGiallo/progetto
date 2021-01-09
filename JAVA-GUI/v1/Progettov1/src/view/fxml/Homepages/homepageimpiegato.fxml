@@ -71,7 +71,7 @@
                      <children>
                         <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label fx:id="TitoloProgettoLabel" styleClass="TitoloProgettoLabel" text="Titolo progetto" />
+                              <Label fx:id="TitoloProgettoLabel" styleClass="TitoloProgettoLabel" text="Descrizione" />
                            </children>
                         </HBox>
                         <AnchorPane styleClass="DescrizioneProgettoBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
@@ -89,15 +89,15 @@
                                        <children>
                                           <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <TextArea fx:id="DescrizioneProgettoTA" minHeight="60.0" styleClass="DescrizioneProgettoTA" text="[inserire descrizione da DB]" wrapText="true" />
+                                                <TextArea fx:id="DescrizioneProgettoTA" minHeight="60.0" styleClass="DescrizioneProgettoTA" text="Clicca un progetto per conoscere la sua Descrizione" wrapText="true" />
                                                 <HBox spacing="10.0">
                                                    <children>
-                                                      <Label fx:id="DataDiInizioLabel" styleClass="DataDiInizioLabel" text="[inserire data di inizio da DB]" />
-                                                      <Label fx:id="DataDiFineLabel" styleClass="DataDiFineLabel" text="[inserire data di fine da DB]" />
+                                                      <Label fx:id="DataDiInizioLabel" styleClass="DataDiInizioLabel" text="Clicca un progetto per conoscere la sua Data Inizio" />
+                                                      <Label fx:id="DataDiFineLabel" styleClass="DataDiFineLabel" text="e Data Fine" />
                                                    </children>
                                                 </HBox>
-                                                <Label fx:id="DataDiScadenzaLabel" styleClass="DataDiScadenzaLabel" text="[inserire data di scadenza da DB]" />
-                                                <Label fx:id="NoteLabel" styleClass="NoteLabel" text="[inserire eventuali note]" />
+                                                <Label fx:id="DataDiScadenzaLabel" styleClass="DataDiScadenzaLabel" text="Clicca un progetto per conoscere la sua Scadenza" />
+                                                <Label fx:id="NoteLabel" styleClass="NoteLabel" />
                                              </children>
                                           </VBox>
                                        </children>

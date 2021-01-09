@@ -1,18 +1,24 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Timer;
 
 import controller.ControllerRegistrazioneImpiegato;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class CaricamentoRegistrazioneImpiegato {
 	
 	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
-	
+	HomePageBenvenuto homePageBenvenuto;
+
 	private final PrintWriter writer;
 
     public CaricamentoRegistrazioneImpiegato(PrintWriter writer) {
@@ -20,8 +26,8 @@ public class CaricamentoRegistrazioneImpiegato {
     }
 
     public void start(Stage window) {
-        try {
-        	
+        try
+		{
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneImpiegato/CaricamentoRegistrazioneImpiegato.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root, 347.0, 176.0);
@@ -34,12 +40,16 @@ public class CaricamentoRegistrazioneImpiegato {
 			
 			window.setScene(scene);
 			window.show();
-			
-			System.out.println("width: "+window.getWidth());
-			System.out.println("Height: "+window.getHeight());
-		} catch (IOException e) {
+			PauseTransition delay = new PauseTransition(Duration.seconds(3));
+			delay.setOnFinished( event -> window.close() );
+			delay.play();
+
+		} catch (IOException e)
+		{
 			System.err.println("Impossibile caricare la finestra!");
-			//e.printStackTrace();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-    }
+	}
 }

@@ -16,24 +16,9 @@ public class Progetto
     Impiegato projectManager;
     List<Impiegato> partecipantiProgetto = new ArrayList<>();
 
-    public Progetto(String titolo, String descrizione, Date dataInizio, Date dataFine, Date scadenza, Impiegato projectManager)
+    public Progetto(String titolo)
     {
         this.titolo = titolo;
-        this.descrizione = descrizione;
-        this.dataInizio = dataInizio;
-        this.dataFine = dataFine;
-        this.scadenza = scadenza;
-        this.projectManager = projectManager;
-    }
-
-    public void partecipanti()
-    {
-
-    }
-    public ObservableList<Progetto> progettoListaImpiegato()
-    {
-
-        return null;
     }
 
     public String getTitolo() {
@@ -74,5 +59,10 @@ public class Progetto
 
     public void setScadenza(Date scadenza) {
         this.scadenza = scadenza;
+    }
+
+    @Override
+    public String toString() {
+        return titolo;
     }
 }
