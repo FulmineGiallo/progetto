@@ -43,7 +43,6 @@
 	-fx-background-radius: 10;	
 }
 
-
 .ValutazioniButton:hover,
 .NuovoProgettoButton:hover,
 .LogoutButton:hover,
@@ -60,7 +59,7 @@
 	-fx-font-style: italic;
 }
 
-.DescrizioneProgettoBox{
+.DescrizioneProgettoPane{
 	-fx-border-width: 5;
 	-fx-border-color: white;
 	-fx-background-color: -fx-terzocolore;

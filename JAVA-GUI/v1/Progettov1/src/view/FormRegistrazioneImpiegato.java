@@ -24,16 +24,18 @@ public class FormRegistrazioneImpiegato
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneImpiegato/FormRegistrazioneImpiegato.fxml"));
         Parent root = loader.load();
         Scene scene =  new Scene(root);
+        
+		window.hide();
+		window.setScene(scene);
 
         controllerRegistrazioneImpiegato = loader.getController();
         controllerRegistrazioneImpiegato.inizializza();
-
-        window.setScene(scene);
         
+        window.setTitle("Registrazione");
+        window.setMaximized(true);
+        window.centerOnScreen();
         window.setMinWidth(850.0);
         window.setMinHeight(450.0);
-        window.setTitle("Registrazione");
-        window.centerOnScreen();
         
         window.show();
     }

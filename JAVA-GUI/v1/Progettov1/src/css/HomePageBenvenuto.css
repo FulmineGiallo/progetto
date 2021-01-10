@@ -8,7 +8,7 @@
 
 .TitoloLabel{
 	-fx-text-fill: white;
-	-fx-font-size: 30;
+	-fx-font-size: 50;
 }
 
 .TitoloBox{
@@ -22,22 +22,22 @@
 }
 
 .RegistrazioneLabel, .LoginLabel{
-	-fx-font-size: 20;
+	-fx-font-size: 30;
 	-fx-text-fill: white;
 }
 
 .RegistrazioneLabel2{
-	-fx-font-size: 16;
+	-fx-font-size: 28;
 	-fx-text-fill: white;
 	-fx-font-family: 'Roboto Light';
 }
 
 .RegistrazioneButton,
 .LoginButton{
-	-fx-background-color: -fx-secondocolore;
+	-fx-background-color: -fx-terzocolore;
 	-fx-text-fill: white;
 	-fx-font-weight: 900;
-	-fx-font-size: 20;
+	-fx-font-size: 30;
 	-fx-border-width: 2;
 	-fx-border-color: white;
 	-fx-border-radius: 10;

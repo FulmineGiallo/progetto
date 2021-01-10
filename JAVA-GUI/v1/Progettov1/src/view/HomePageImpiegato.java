@@ -29,14 +29,20 @@ public class HomePageImpiegato
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/HomePageImpiegato.fxml"));
         Parent root = loader.load();
         Scene scene =  new Scene(root);
-        
-        controllerHomePageImpiegato = loader.getController();
-        
-        controllerHomePageImpiegato.inizializza(impiegato);
-        window.setTitle("HomePage Impiegato");
-        window.setScene(scene);
-        window.show();
 
+		window.hide();
+        window.setScene(scene);
+				
+		controllerHomePageImpiegato = loader.getController();
+		controllerHomePageImpiegato.inizializza(impiegato);
+		
+		window.setTitle("La tua homepage");
+		window.setMaximized(true);
+		window.centerOnScreen();
+		window.setMinHeight(630.0);
+		window.setMinWidth(900.0);
+		
+		window.show();
     }
 
 }

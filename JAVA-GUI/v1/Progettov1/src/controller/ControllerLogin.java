@@ -36,21 +36,20 @@ public class ControllerLogin
     Connection connection;
 
 
-    public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception
-    {
+    public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception {
         PrintWriter writer = null;
         benvenuto = new HomePageBenvenuto(writer);
         Stage stage = (Stage) AnnullaButton.getScene().getWindow();
         benvenuto.start(stage);
     }
+    
     @FXML
     public void closeButton(ActionEvent event) {
         Stage stage = (Stage)okButton.getScene().getWindow();
         stage.close();
     }
 
-    public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception
-    {
+    public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception {
         if(!EmailTF.getText().isEmpty() && !PasswordTF.getText().isEmpty())
         {
             /*Istanzio connessione per vedere se l'impiegato esiste */
