@@ -16,11 +16,42 @@
 	-fx-font-size: 16;
 }
 
-.AutenticazioneErrataLabel{
+.MessaggioErroreTA{
 	-fx-text-fill: white;
-	-fx-font-size: 18;
+	-fx-font-size: 14;
+	-fx-background-color: -fx-secondocolore;
 }
 
+.MessaggioErroreTA:focused .scroll-pane{
+	-fx-border-color: -fx-primocolore;
+}
+
+.MessaggioErroreTA .scroll-pane,
+.MessaggioErroreTA .scroll-pane .viewport,
+.MessaggioErroreTA .scroll-pane .viewport .content{
+	-fx-background-color: -fx-secondocolore;
+}
+
+.MessaggioErroreTA .scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.MessaggioErroreTA .scroll-pane .scroll-bar{
+	-fx-background-color: -fx-secondocolore;
+}
+
+.MessaggioErroreTA .scroll-pane .scroll-bar .thumb,
+.MessaggioErroreTA .scroll-pane .scroll-bar .increment-button .increment-arrow,
+.MessaggioErroreTA .scroll-pane .scroll-bar .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
+.ButtonBar{
+	-fx-border-color: -fx-terzocolore;
+	-fx-border-width: 5 0 0 0;
+}
+
+.DettagliButton,
 .OkButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-background-radius: 10;
@@ -32,6 +63,7 @@
 	-fx-background-radius: 10;
 }
 
+.DettagliButton:hover,
 .OkButton:hover{
 	-fx-background-color: -fx-primocolore;
 	-fx-background-radius: 10;
