@@ -25,6 +25,7 @@
 .NuovoProgettoButton,
 .LogoutButton{
 	-fx-background-color: -fx-terzocolore;
+	-fx-background-radius: 10;
 	-fx-text-fill: white;
 	-fx-font-size: 18;
 	-fx-border-width: 2;
@@ -36,6 +37,7 @@
 .GestioneProgettoButton,
 .ModificaButton{
 	-fx-background-color: -fx-quartocolore;
+	-fx-background-radius: 10;
 	-fx-text-fill: white;
 	-fx-font-size: 18;
 	-fx-border-width: 2;
@@ -50,7 +52,7 @@
 .GestioneProgettoButton:hover,
 .ModificaButton:hover{
 	-fx-background-color: -fx-primocolore;
-	-fx-backgrund-radius: 10;
+	-fx-background-radius: 10;
 }
 
 .IstruzioniLabel{

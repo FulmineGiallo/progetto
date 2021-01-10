@@ -35,6 +35,7 @@
 .RegistrazioneButton,
 .LoginButton{
 	-fx-background-color: -fx-terzocolore;
+	-fx-background-radius: 10;
 	-fx-text-fill: white;
 	-fx-font-weight: 900;
 	-fx-font-size: 30;
