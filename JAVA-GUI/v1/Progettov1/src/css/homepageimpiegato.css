@@ -2,6 +2,7 @@
 	-fx-primocolore: #7289da;
 	-fx-secondocolore: #424549;
 	-fx-terzocolore: #36393e;
+	-fx-quartocolore: #1e2124;
 	-fx-background-color: -fx-secondocolore;
 	-fx-font-family: 'Roboto';
 }
@@ -34,7 +35,7 @@
 
 .GestioneProgettoButton,
 .ModificaButton{
-	-fx-background-color: #1e2124;
+	-fx-background-color: -fx-quartocolore;
 	-fx-text-fill: white;
 	-fx-font-size: 18;
 	-fx-border-width: 2;
@@ -75,7 +76,7 @@
 
 .DescrizioneProgettoTA{
 	-fx-text-fill: white;
-	-fx-font-size: 14;
+	-fx-font-size: 18;
 }
 
 .DescrizioneProgettoTA .scroll-pane{
@@ -97,7 +98,7 @@
 .DataDiScadenzaLabel,
 .NoteLabel{
 	-fx-text-fill: white;
-	-fx-font-size: 14;
+	-fx-font-size: 18;
 }
 
 .ListaProgettiScrollPane,
@@ -132,5 +133,11 @@
 
 .ListaProgettiLV,
 .ListaRiunioniLV{
-	-fx-background-color: -fx-terzocolore;
+	-fx-control-inner-background: -fx-terzocolore;
+	-fx-font-size: 18;
+}
+
+.ListaProgettiLV .list-cell:selected,
+.ListaRiunioniLV .list-cell:selected{
+	-fx-background-color: -fx-primocolore;
 }
