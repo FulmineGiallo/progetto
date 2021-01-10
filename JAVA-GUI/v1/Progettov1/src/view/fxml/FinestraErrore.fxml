@@ -90,7 +90,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="OkButton" mnemonicParsing="false" prefWidth="70.0" styleClass="OkButton" text="OK" />
+                        <Button fx:id="OkButton" mnemonicParsing="false" onAction="#ChiudiFinestra" prefWidth="70.0" styleClass="OkButton" text="OK" />
                      </children>
                   </HBox>
                </children>

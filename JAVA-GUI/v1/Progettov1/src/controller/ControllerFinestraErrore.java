@@ -24,10 +24,34 @@ public class ControllerFinestraErrore {
     @FXML private GridPane 		ButtonBar;
     @FXML private Button 		DettagliButton;
     @FXML private Button 		OkButton;
+    
+    public void inizializza(String messaggioErrore, Exception errore) {
+    	MessaggioErroreLabel.setText(messaggioErrore);
+    	if(errore != null) {
+        	MessaggioErroreTA.setText(errore.toString());
+    	} else {
+    		MessaggioErroreTA.setText("Nessun dettaglio da mostrare");
+    	}
+    }
 
     @FXML
     void MostraNascondiDettagli(ActionEvent event) {
-
+    	
+    	if (MessaggioErroreLabel.isVisible()) {
+    		
+    		MessaggioErroreLabel.setVisible(false);
+    		MessaggioErroreTA.setVisible(true);
+    		
+    	} else if (MessaggioErroreTA.isVisible()) {
+    		
+    		MessaggioErroreLabel.setVisible(true);
+    		MessaggioErroreTA.setVisible(false);
+    		
+    	}
     }
-
+    
+    @FXML
+    void ChiudiFinestra(ActionEvent event) {
+    	FinestraErrore.getScene().getWindow().hide();
+    }
 }

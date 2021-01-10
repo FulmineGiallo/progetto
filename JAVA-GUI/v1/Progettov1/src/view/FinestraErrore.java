@@ -1,7 +1,4 @@
 package view;
-
-import java.io.PrintWriter;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,15 +8,16 @@ import controller.ControllerFinestraErrore;
 
 public class FinestraErrore {
 	
-	private ControllerFinestraErrore controllerFinestraErrore;
-    private final PrintWriter writer;
-
-	public FinestraErrore(PrintWriter writer)
-    {
-        this.writer = writer;
-    }
+	private ControllerFinestraErrore 	controllerFinestraErrore;
+	private String						messaggioErrore;
+	private Exception					errore;
 	
-    public void start(Stage window, String tipoErrore) throws Exception
+	public FinestraErrore(String messaggioErrore, Exception errore) {
+		this.messaggioErrore = messaggioErrore;
+		this.errore = errore;
+	}
+
+	public void start(Stage window) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraErrore.fxml"));
         Parent root = loader.load();
@@ -29,7 +27,7 @@ public class FinestraErrore {
         window.setScene(scene);
         
         controllerFinestraErrore = loader.getController();
-        //controllerFinestraErrore.inizializza();
+        controllerFinestraErrore.inizializza(messaggioErrore, errore);
         
         window.setTitle("Errore!");
         window.setResizable(false);

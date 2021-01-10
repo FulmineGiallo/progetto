@@ -32,7 +32,7 @@ public class ControllerHomePageBenvenuto
 		}
     }
 
-    public void effettua(ActionEvent actionEvent) throws Exception {
+    public void effettua(ActionEvent actionEvent){
         try {
 			PrintWriter writer = null;
 			loginPage = new Login(writer);

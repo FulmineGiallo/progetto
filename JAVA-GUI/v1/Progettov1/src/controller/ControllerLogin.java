@@ -14,6 +14,8 @@ import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.Impiegato;
+import view.FinestraErrore;
+import view.FormRegistrazioneImpiegato;
 import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
 import java.io.PrintWriter;
@@ -25,12 +27,13 @@ public class ControllerLogin
 {
     HomePageBenvenuto benvenuto;
     HomePageImpiegato homeImpiegato;
+    FinestraErrore popup;
 
     @FXML private Button AnnullaButton;
     @FXML private Button AccediButton;
-    @FXML private Button okButton;
     @FXML private PasswordField PasswordTF;
     @FXML private TextField EmailTF;
+
 
     int accesso = 0;
     Connection connection;
@@ -41,12 +44,6 @@ public class ControllerLogin
         benvenuto = new HomePageBenvenuto(writer);
         Stage stage = (Stage) AnnullaButton.getScene().getWindow();
         benvenuto.start(stage);
-    }
-    
-    @FXML
-    public void closeButton(ActionEvent event) {
-        Stage stage = (Stage)okButton.getScene().getWindow();
-        stage.close();
     }
 
     public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception {
@@ -78,30 +75,18 @@ public class ControllerLogin
             }
             /* Non ci sono email e password corrispondenti */
             if(accesso == 0)
-            {
-                Stage window;
-                window = new Stage();
-                Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/errore/errorelogin.fxml"));
-                Scene scene =  new Scene(root, 450,176);
-                window.setScene(scene);
-                window.setTitle("Errore Impiegato!");
-                window.initModality(Modality.APPLICATION_MODAL);
-                window.setResizable(false);
-                window.show();
+            {            	
+    			//PrintWriter writer = null;
+    			popup = new FinestraErrore("Email o password errati", null);
+    			popup.start(new Stage());
             }
         }
         /* Se i campi sono vuoti */
         else
-        {
-            Stage window;
-            window = new Stage();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/fxml/errore/erroreautenticazione.fxml"));
-            Scene scene =  new Scene(root, 350,176);
-            window.setScene(scene);
-            window.setTitle("Errore Autenticazione!");
-            window.initModality(Modality.APPLICATION_MODAL);
-            window.setResizable(false);
-            window.show();
+        {        	
+			//PrintWriter writer = null;
+			popup = new FinestraErrore("Autenticazione errata", null);
+			popup.start(new Stage());
         }
     }
 }
