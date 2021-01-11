@@ -123,16 +123,17 @@ public class ControllerRegistrazioneImpiegato {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if(ProvinciaTextField.getText().length() > 2 )
                 {
-                    s = ProvinciaTextField.getText().substring(0, 2).toUpperCase();
+                    s = ProvinciaTextField.getText().substring(0, 2);
                     ProvinciaTextField.setText(s);
                 }
             }
         });
-        comuneList = comuni.gradoList(ProvinciaTextField.getText());
+
+        comuneList = comuni.gradoList(ProvinciaTextField.getText().toUpperCase());
     }
     public void updateComune() throws SQLException
     {
-        comuneList = comuni.gradoList(ProvinciaTextField.getText());
+        comuneList = comuni.gradoList(ProvinciaTextField.getText().toUpperCase());
         ComuneComboBox.setItems(comuneList);
       //  System.out.println(comuneList.size());
     }
