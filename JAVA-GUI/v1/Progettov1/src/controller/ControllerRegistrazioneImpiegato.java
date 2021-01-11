@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 import javafx.beans.value.ChangeListener;
@@ -71,7 +72,8 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private MenuButton SkillMenuButton;
     @FXML private Label GradoLabel;
 
- 
+   private Date today = Calendar.getInstance().getTime();
+   private Date datadinascita = Calendar.getInstance().getTime();
 
     HomePageBenvenuto homePageBenvenuto;
     CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
@@ -230,10 +232,18 @@ public class ControllerRegistrazioneImpiegato {
             			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
          }
          
-  
-        
-       //  System.out.print(checkNome + " " + checkCognome + " "  + checkEmail + " " + checkPassword );
          
+         System.out.print(DataDiNascitaDP.getValue());
+         System.out.print(today);
+         
+         
+//         datadinascita = Date.from(DataDiNascitaDP.atS);
+//         
+//         
+//         if(today.compareTo(DataDiNascitaDP.getValue())) {
+//        	 
+//         }
+//         
          
          if(checkNome && checkCognome && checkEmail && checkPassword) {
          PrintWriter writer = null;
