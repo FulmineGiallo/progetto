@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneProgetto" stylesheets="@../../../css/FormRegistrazioneProgetto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
@@ -33,96 +32,79 @@
             <Insets bottom="10.0" top="10.0" />
          </padding>
       </HBox>
-      <GridPane layoutX="70.0" layoutY="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+      <HBox fx:id="FormBox" alignment="CENTER" layoutX="100.0" layoutY="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
-            <HBox alignment="CENTER" GridPane.columnIndex="1">
+            <AnchorPane>
                <children>
-                  <AnchorPane>
-                     <children>
-                        <ScrollPane fx:id="FormScrollPane" fitToWidth="true" hbarPolicy="NEVER" maxHeight="500.0" maxWidth="700.0" minViewportHeight="300.0" minViewportWidth="685.0" prefViewportHeight="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                              <AnchorPane>
+                  <ScrollPane fx:id="FormScrollPane" fitToWidth="true" hbarPolicy="NEVER" maxHeight="500.0" maxWidth="700.0" minViewportHeight="300.0" minViewportWidth="685.0" prefViewportHeight="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <VBox fx:id="Form" alignment="CENTER" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <VBox fx:id="TitoloBox" spacing="3.0">
                                        <children>
-                                          <VBox fx:id="Form" alignment="CENTER" spacing="25.0">
-                                             <children>
-                                                <VBox fx:id="TitoloBox" maxWidth="567.0" prefHeight="45.0" spacing="3.0">
-                                                   <children>
-                                                      <Label fx:id="TitoloLabel" styleClass="TitoloLabel" text="* Nome" visible="false" />
-                                                      <TextField fx:id="TitoloTF" onMouseClicked="#visualizzaNomeLabel" prefWidth="223.0" promptText="* Titolo" styleClass="TitoloTF" />
-                                                      <Label fx:id="TitoloErrorLabel" styleClass="TitoloErrorLabel" textFill="RED" />
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </VBox>
-                                                <VBox fx:id="DescrizioneBox" maxWidth="567.0">
-                                                   <children>
-                                                      <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
-                                                      <TextArea fx:id="DescrizioneTA" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" wrapText="true" />
-                                                      <Label fx:id="DescrizioneErrorLabel" styleClass="CognomeErrorLabel" textFill="RED" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox fx:id="DataDiInizioBox" maxWidth="567.0" prefHeight="45.0" prefWidth="400.0">
-                                                   <children>
-                                                      <HBox spacing="10.0">
-                                                         <children>
-                                                            <Label fx:id="DataDiInizioLabel" prefHeight="30.0" prefWidth="118.0" styleClass="DataDiInizioLabel" text="* Data di inizio" />
-                                                            <DatePicker fx:id="DataDiInizioDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiInizioDP" />
-                                                         </children>
-                                                      </HBox>
-                                                      <Label fx:id="DataDiInizioErrorLabel" styleClass="DataDiNascitaErrorLabel" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox fx:id="DataDiScadenzaBox" maxWidth="567.0" prefHeight="45.0" prefWidth="400.0">
-                                                   <children>
-                                                      <HBox spacing="10.0">
-                                                         <children>
-                                                            <Label fx:id="DataDiScadenzaLabel" prefHeight="30.0" styleClass="DataDiScadenzaLabel" text="* Data di scadenza" />
-                                                            <DatePicker fx:id="DataDiScadenzaDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiScadenzaDP" />
-                                                         </children>
-                                                      </HBox>
-                                                      <Label fx:id="DataDiScadenzaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
-                                                   </children>
-                                                </VBox>
-                                                <HBox fx:id="TipologiaBox" maxWidth="567.0" prefHeight="30.0" spacing="10.0">
-                                                   <children>
-                                                      <Label fx:id="TipologiaLabel" prefHeight="30.0" prefWidth="118.0" styleClass="TipologiaLabel" text="* Tipologia" />
-                                                      <ComboBox fx:id="TipologiaComboBox" prefHeight="30.0" prefWidth="200.0" styleClass="TipologiaComboBox" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox fx:id="AmbitiBox" maxWidth="567.0" prefHeight="30.0" spacing="10.0">
-                                                   <children>
-                                                      <Label fx:id="AmbitiLabel" prefHeight="30.0" prefWidth="118.0" styleClass="AmbitiLabel" text="Ambiti" />
-                                                      <MenuButton fx:id="AmbitiMenuButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="AmbitiMenuButton" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="50.0" left="10.0" top="50.0" />
-                                             </padding>
-                                          </VBox>
+                                          <Label fx:id="TitoloLabel" styleClass="TitoloLabel" text="* Nome" visible="false" />
+                                          <TextField fx:id="TitoloTF" onMouseClicked="#visualizzaNomeLabel" prefWidth="223.0" promptText="* Titolo" styleClass="TitoloTF" />
+                                          <Label fx:id="TitoloErrorLabel" styleClass="TitoloErrorLabel" textFill="RED" />
                                        </children>
-                                    </StackPane>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </VBox>
+                                    <VBox fx:id="DescrizioneBox">
+                                       <children>
+                                          <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
+                                          <TextArea fx:id="DescrizioneTA" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="DataDiInizioBox" spacing="3.0">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label fx:id="DataDiInizioLabel" prefHeight="30.0" prefWidth="118.0" styleClass="DataDiInizioLabel" text="* Data di inizio" />
+                                                <DatePicker fx:id="DataDiInizioDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiInizioDP" />
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="DataDiInizioErrorLabel" styleClass="DataDiNascitaErrorLabel" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="DataDiScadenzaBox" spacing="3.0">
+                                       <children>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Label fx:id="DataDiScadenzaLabel" prefHeight="30.0" styleClass="DataDiScadenzaLabel" text="* Data di scadenza" />
+                                                <DatePicker fx:id="DataDiScadenzaDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiScadenzaDP" />
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="DataDiScadenzaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
+                                       </children>
+                                    </VBox>
+                                    <HBox fx:id="TipologiaBox" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="TipologiaLabel" prefHeight="30.0" prefWidth="118.0" styleClass="TipologiaLabel" text="* Tipologia" />
+                                          <ComboBox fx:id="TipologiaComboBox" prefHeight="30.0" prefWidth="200.0" styleClass="TipologiaComboBox" />
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="AmbitiBox" maxWidth="567.0" prefHeight="30.0" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="AmbitiLabel" prefHeight="30.0" prefWidth="111.0" styleClass="AmbitiLabel" text="Ambiti" />
+                                          <MenuButton fx:id="AmbitiMenuButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="AmbitiMenuButton" />
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </AnchorPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
+                                 <padding>
+                                    <Insets bottom="50.0" top="50.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
                </children>
-            </HBox>
+            </AnchorPane>
          </children>
-      </GridPane>
+      </HBox>
       <AnchorPane fx:id="ButtonBar" styleClass="ButtonBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <GridPane layoutX="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

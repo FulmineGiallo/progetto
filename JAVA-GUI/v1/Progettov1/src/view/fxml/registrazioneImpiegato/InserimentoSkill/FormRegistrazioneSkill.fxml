@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="RegistrazioneSkill" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneSkill" stylesheets="@../../../../css/FormRegistrazioneSkill.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneSkill">
+   <children>
+      <HBox fx:id="IstruzioniBox" alignment="CENTER" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox spacing="3.0">
+               <children>
+                  <Label fx:id="IstruzioniLabel" alignment="TOP_LEFT" styleClass="IstruzioniLabel" text="Inserisci qui i dati per la creazione di una nuova skill" textAlignment="CENTER" />
+                  <Label fx:id="IstruzioniLabel2" styleClass="IstruzioniLabel2" text="* Campo obbligatorio" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox fx:id="FormBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <ScrollPane fx:id="FormScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minViewportHeight="300.0" minViewportWidth="685.0" prefHeight="200.0" prefWidth="200.0" styleClass="FormScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <VBox fx:id="Form" spacing="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <GridPane fx:id="TitoloBox" hgap="10.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="27.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="43.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
+                                          <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label fx:id="TitoloLabel" styleClass="TitoloLabel" text="* Titolo" />
+                                          <AnchorPane GridPane.columnIndex="1">
+                                             <children>
+                                                <ComboBox fx:id="TitoloComboBox" styleClass="TitoloComboBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane GridPane.columnIndex="2">
+                                             <GridPane.margin>
+                                                <Insets right="10.0" />
+                                             </GridPane.margin>
+                                             <children>
+                                                <TextField fx:id="NuovoTitoloTF" promptText="* Inserisci un nuovo titolo" styleClass="NuovoTitoloTF" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <Label fx:id="NuovoTitoloErrorLabel" styleClass="NuovoTitoloErrorLabel" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <VBox fx:id="DescrizioneBox">
+                                       <children>
+                                          <Label fx:id="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
+                                          <TextArea fx:id="DescrizioneTA" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" />
+                                       </children></VBox>
+                                    <HBox fx:id="TipoSkillBox" alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="TipoSkillLabel" prefWidth="150.0" styleClass="TipoSkillLabel" text="* Tipo Skill" />
+                                          <HBox fx:id="TipoSkillRBBox" spacing="25.0">
+                                             <children>
+                                                <RadioButton fx:id="TipoSkillRB1" mnemonicParsing="false" selected="true" styleClass="TipoSkillRB1" text="Soft-Skill">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="TipoSkill" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" styleClass="TipoSkillRB2" text="Hard-Skill" toggleGroup="$TipoSkill" />
+                                             </children>
+                                          </HBox>
+                                       </children></HBox>
+                                    <GridPane fx:id="DataCertificazioneBox" vgap="3.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="27.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
+                                        <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="DataCertificazioneLabel" prefWidth="150.0" styleClass="DataCertificazioneLabel" text="* Data di certificazione" />
+                                          <DatePicker fx:id="DataCertificazioneDP" styleClass="DataCertificazioneDP" GridPane.columnIndex="1" />
+                                          <Label fx:id="DataCertificazioneErrorLabel" styleClass="DataCertificazioneErrorLabel" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="50.0" top="50.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="ButtonBar" styleClass="ButtonBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <GridPane alignment="CENTER" layoutX="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#annullaOperazione" prefWidth="180.0" styleClass="AnnullaButton" text="Annulla">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#confermaOperazione" prefWidth="180.0" styleClass="ConfermaButton" text="Conferma">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+</AnchorPane>
