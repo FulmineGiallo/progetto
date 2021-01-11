@@ -80,7 +80,6 @@ public class ControllerHomePageImpiegato
     DBConnection dbConnection;
     ProgettoDaoInterface progetti;
     RiunioneDaoInterface riunioni;
-    
     {
         try {
             dbConnection = new DBConnection();
@@ -134,9 +133,21 @@ public class ControllerHomePageImpiegato
                 DataDiInizioLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
                 DataDiFineLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
                 DataDiScadenzaLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
+
+                if(ListaProgettiLV.getSelectionModel().getSelectedItem().getProjectManager() == impiegato)
+                {
+                    ProjectManagerBox.setVisible(true);
+                }
+                else
+                    ProjectManagerBox.setVisible(false);
+
+
+
             }
         });
     }
+
+
 
     @FXML
     public void CreaProgetto(ActionEvent actionEvent) throws Exception {

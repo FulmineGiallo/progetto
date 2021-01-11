@@ -39,7 +39,6 @@ public class RiunioneDao implements RiunioneDaoInterface
             riunione.setOrganizzatore(rs.getString("nome"));
             riunione.setOrganizzatore(riunione.getOrganizzatore() + " " + rs.getString("cognome"));
             lista.add(riunione);
-            
         }
         rs.close();
 

@@ -14,7 +14,15 @@ public class Progetto
     Date dataFine;
     Date scadenza;
     Impiegato projectManager;
-    List<Impiegato> partecipantiProgetto = new ArrayList<>();
+
+    public Impiegato getProjectManager()
+    {
+        return projectManager;
+    }
+
+    public void setProjectManager(Impiegato projectManager) {
+        this.projectManager = projectManager;
+    }
 
     public Progetto(String titolo)
     {

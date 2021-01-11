@@ -19,7 +19,7 @@ public class ProgettoDao implements ProgettoDaoInterface
 
     public ProgettoDao(Connection connection) throws SQLException {
         this.connection = connection;
-        progettiImpiegato = connection.prepareStatement("SELECT progetto.titolo, progetto.descrizione, progetto.datainizio, progetto.datafine, progetto.scadenza FROM impiegato NATURAL JOIN progettoimpiegato NATURAL JOIN progetto WHERE CF = ?");
+        progettiImpiegato = connection.prepareStatement("SELECT progetto.titolo, progetto.descrizione, progetto.datainizio, progetto.datafine, progetto.scadenza, progetto.projectmanagerprogetto FROM impiegato NATURAL JOIN progettoimpiegato NATURAL JOIN progetto WHERE CF = ?");
     }
 
     @Override
@@ -38,6 +38,11 @@ public class ProgettoDao implements ProgettoDaoInterface
             progetto.setDataFine(rs.getDate("datafine"));
             progetto.setDescrizione(rs.getString("descrizione"));
 
+
+            if(impiegato.getCF().equals(rs.getString("projectmanagerprogetto")))
+            {
+                progetto.setProjectManager(impiegato);
+            }
             lista.add(progetto);
         }
         rs.close();
