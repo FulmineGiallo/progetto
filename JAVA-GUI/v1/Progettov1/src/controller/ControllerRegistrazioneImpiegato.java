@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.text.SimpleDateFormat;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -73,7 +73,10 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Label GradoLabel;
 
    private Date today = Calendar.getInstance().getTime();
-   private Date datadinascita = Calendar.getInstance().getTime();
+   private Date datadinascita;
+   private Date dataSupportata;
+   
+   
 
     HomePageBenvenuto homePageBenvenuto;
     CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
@@ -197,6 +200,8 @@ public class ControllerRegistrazioneImpiegato {
     	boolean checkCognome = true;
     	boolean checkEmail = true;
     	boolean checkPassword = true;
+    	boolean checkData = true;
+    	
     	
     	
     	
@@ -231,21 +236,18 @@ public class ControllerRegistrazioneImpiegato {
             		else
             			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
          }
+       
+        datadinascita= java.sql.Date.valueOf(DataDiNascitaDP.getValue()); 
+        dataSupportata = new Date(today.getYear()-18, today.getMonth(), today.getDay() );
+         
+       
+         if(datadinascita.after(dataSupportata)) {
+     		checkData=false;
+     		DataDiNascitaErrorLabel.setText("L'impiegato deve avere minimo diciotto anni");
+         }
          
          
-         System.out.print(DataDiNascitaDP.getValue());
-         System.out.print(today);
-         
-         
-//         datadinascita = Date.from(DataDiNascitaDP.atS);
-//         
-//         
-//         if(today.compareTo(DataDiNascitaDP.getValue())) {
-//        	 
-//         }
-//         
-         
-         if(checkNome && checkCognome && checkEmail && checkPassword) {
+         if(checkNome && checkCognome && checkEmail && checkPassword && checkData) {
          PrintWriter writer = null;
          caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(writer);
 
