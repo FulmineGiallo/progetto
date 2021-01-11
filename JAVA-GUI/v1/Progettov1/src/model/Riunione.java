@@ -76,6 +76,6 @@ public class Riunione
     }
     @Override
     public String toString() {
-        return "titolo: " + titolo + " data: " + data + " orario inizio " + orarioInizio + " orario fine " + orarioFine + " organizzatore " + organizzatore.toUpperCase();
+        return "titolo: " + titolo + " data: " + data + " orario inizio " + orarioInizio.toString().substring(0,5) + " orario fine " + orarioFine.toString().substring(0,5);
     }
 }
