@@ -48,6 +48,30 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Button 		ConfermaButton;
     @FXML private Button        CercaComuniButton;
     @FXML private TextField CodiceFiscaleTF;
+    @FXML private Label IstruzioniLabel;
+    @FXML private Label IstruzioniLabel2;
+    @FXML private ScrollPane FormScrollPane;
+    @FXML private Label EmailLabel;
+    @FXML private TextField EmailTF;
+    @FXML private Label EmailErrorLabel;
+    @FXML private Label PasswordLabel;
+    @FXML private TextField PasswordTF;
+    @FXML private Label PasswordErrorLabel;
+    @FXML private Label NomeLabel;
+    @FXML private Label NomeErrorLabel;
+    @FXML private Label CognomeErrorLabel;
+    @FXML private Label GenereLabel;
+    @FXML private Label GenereErrorLabel;
+    @FXML private Label DataDiNascitaLabel;
+    @FXML private Label DataDiNascitaErrorLabel;
+    @FXML private Label ComuneLabel11;
+    @FXML private Label ProvinciaLabel;
+    @FXML private Label CodiceFiscaleLabel;
+    @FXML private Label SkillLabel;
+    @FXML private MenuButton SkillMenuButton;
+    @FXML private Label GradoLabel;
+
+ 
 
     HomePageBenvenuto homePageBenvenuto;
     CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
@@ -92,6 +116,8 @@ public class ControllerRegistrazioneImpiegato {
     public void inizializza() throws SQLException
     {
         GradoComboBox.getItems().addAll(gradiList);
+        GradoComboBox.getSelectionModel().select(2);
+        
         ProvinciaTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -157,13 +183,64 @@ public class ControllerRegistrazioneImpiegato {
     
     public void confermaOperazione (ActionEvent actionEvent) throws Exception
     {
+    	
+    	NomeErrorLabel.setText("");
+    	CognomeErrorLabel.setText("");
+    	CognomeErrorLabel.setText("");
+    	EmailErrorLabel.setText("");
+    	PasswordErrorLabel.setText("");
+    	
+    	boolean checkNome = true;
+    	boolean checkCognome = true;
+    	boolean checkEmail = true;
+    	boolean checkPassword = true;
+    	
+    	
+    	
+    	if (!(NomeTF.getText().matches("[a-zA-Z\s]+")) || ( NomeTF.getText().isBlank()) ) {
+    		checkNome = false;
+    		if(NomeTF.getText().isBlank())	
+    			NomeErrorLabel.setText("Il nome non puo essere vuoto");
+    		else
+    			NomeErrorLabel.setText("Il nome puo contenere solo lettere");
+    	}
+        
+    	
+    	if (!(CognomeTF.getText().matches("[a-zA-Z\s]+")) || ( CognomeTF.getText().isBlank()) ) {
+    		checkCognome=false;
+    		if(CognomeTF.getText().isBlank())	
+    			CognomeErrorLabel.setText("Il cognome non puo essere vuoto");
+    		else
+    			CognomeErrorLabel.setText("Il Cognome puo contenere solo lettere");
+    	}
+    	
+    	if (!(EmailTF.getText().matches("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) || ( EmailTF.getText().isBlank()) ) {
+        		checkEmail=false;
+        		if(EmailTF.getText().isBlank())	
+        			EmailErrorLabel.setText("L' email non puo essere vuoto");
+        		else
+        			EmailErrorLabel.setText("L'email non rispetta la sintassi");
+    	}
+         if (( !(PasswordTF.getText().matches("[a-zA-Z0-9._%-]{4,}")) || ( EmailTF.getText().isBlank()))) {
+            		checkPassword=false;
+            		if(PasswordTF.getText().isBlank())	
+            			PasswordErrorLabel.setText("La password non puo essere vuota");
+            		else
+            			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
+         }
+         
+  
+        
+       //  System.out.print(checkNome + " " + checkCognome + " "  + checkEmail + " " + checkPassword );
+         
+         
+         if(checkNome && checkCognome && checkEmail && checkPassword) {
+         PrintWriter writer = null;
+         caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(writer);
 
-
-    	PrintWriter writer = null;
-    	caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(writer);
-
-        Stage stage = (Stage)ConfermaButton.getScene().getWindow();
-        caricamentoRegistrazioneImpiegato.start(stage);
+         Stage stage = (Stage)ConfermaButton.getScene().getWindow();
+         caricamentoRegistrazioneImpiegato.start(stage);
+         }   	
     }
 
     public void visualizzaNomeLabel(MouseEvent mouseEvent) {
