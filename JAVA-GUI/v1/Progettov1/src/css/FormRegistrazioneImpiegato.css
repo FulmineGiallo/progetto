@@ -46,6 +46,8 @@
 	-fx-background-color: -fx-primocolore;
 }
 
+.EmailLabel,
+.PasswordLabel,
 .NomeLabel,
 .CognomeLabel,
 .ProvinciaLabel{
@@ -53,6 +55,8 @@
 	-fx-text-fill: -fx-primocolore;
 }
 
+.EmailTF,
+.PasswordTF,
 .NomeTF,
 .CognomeTF,
 .DataDiNascitaDP,
@@ -69,6 +73,8 @@
 	-fx-border-color: white;
 }
 
+.EmailTF:focused,
+.PasswordTF:focused,
 .NomeTF:focused,
 .CognomeTF:focused,
 .ProvinciaTF:focused,
@@ -93,6 +99,8 @@
 	-fx-text-fill: white;
 }
 
+.EmailErrorLabel,
+.PasswordErrorLabel,
 .NomeErrorLabel,
 .CognomeErrorLabel,
 .GenereErrorLabel,
