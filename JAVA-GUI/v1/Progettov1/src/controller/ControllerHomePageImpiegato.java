@@ -25,14 +25,14 @@ import model.DaoInterface.RiunioneDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
-
+import view.FormRegistrazioneProgetto;
 import view.HomePageBenvenuto;
 import view.HomePageProgetto;
 import view.HomePageValutazioni;
 
 public class ControllerHomePageImpiegato
 {
-	HomePageProgetto homeProgetto;
+	FormRegistrazioneProgetto registrazioneProgetto;
 	HomePageValutazioni homeValutazioni;
 	HomePageBenvenuto homePageBenvenuto;
 	Impiegato impiegato = null;
@@ -152,10 +152,10 @@ public class ControllerHomePageImpiegato
     @FXML
     public void CreaProgetto(ActionEvent actionEvent) throws Exception {
     	PrintWriter writer = null;
-        homeProgetto = new HomePageProgetto(writer);
+        registrazioneProgetto = new FormRegistrazioneProgetto(writer);
 
         Stage stage = (Stage) NuovoProgettoButton.getScene().getWindow();
-        homeProgetto.start(stage);
+        registrazioneProgetto.start(stage);
     }
     
     @FXML

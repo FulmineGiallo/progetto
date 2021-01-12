@@ -1,0 +1,108 @@
+
+/*
+	#7289da - azzurro
+	#424549 - grigio 1
+	#36393e - grigio 2
+	#282b30 - grigio 3
+	#1e2124 - grigio 4
+	(dal più chiaro al più scuro)
+*/
+
+.RegistrazioneProgetto{
+	-fx-primary: #7289da;
+	-fx-secondary: #424549;
+	-fx-background-color: -fx-secondary;
+	-fx-font-family: 'Roboto';
+}
+
+.scroll-pane .viewport{
+	-fx-background-color: -fx-secondary;
+}
+
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .scroll-bar:vertical{
+	-fx-background-color: -fx-secondary;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb,
+.scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primary;
+}
+
+.DescrizioneLabel{
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 30;
+}
+
+.DescrizioneLabel2{
+	-fx-text-fill: red;
+	-fx-font-weight: 900;
+	-fx-font-size: 16;
+}
+
+.TitoloTF,
+.Descrizione,
+.DataInizio{
+	-fx-text-fill: white;
+	-fx-prompt-text-fill: white;
+	-fx-font-size: 14;
+	-fx-background-color: -fx-secondary;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: white;
+}
+
+.TitoloTF:focused,
+.Descrizione:focused{
+	-fx-border-color: -fx-primary;
+}
+
+
+.NomeErrorLabel,
+.CognomeErrorLabel,
+.GenereErrorLabel,
+.DataDiNascitaErrorLabel{
+	-fx-font-size: 10;
+	-fx-text-fill: red;
+}
+
+
+.DataInizio .date-picker-display-node{
+	-fx-background-color: -fx-secondary;
+	-fx-text-fill: white;
+	-fx-font-size: 14;
+}
+
+.DataInizio:focused{
+	-fx-border-color: -fx-primary;
+}
+
+.DataInizio .arrow-button{
+	-fx-background-color: white;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+}
+
+.DataInizio:focused .arrow-button{
+	-fx-background-color: -fx-primary;
+	-fx-border-color: -fx-primary;
+}
+
+.AnnullaButton, .ConfermaButton{
+	-fx-background-color: -fx-secondary;
+	-fx-text-fill: white;
+	-fx-font-weight: 900;
+	-fx-font-size: 28;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+}
+
+.AnnullaButton:hover, .ConfermaButton:hover{
+	-fx-background-color: -fx-primary;
+	-fx-backgrund-radius: 10;
+}
