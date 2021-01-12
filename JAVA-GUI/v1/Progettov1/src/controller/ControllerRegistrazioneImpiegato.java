@@ -73,7 +73,7 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Label GradoLabel;
 
    private Date today = Calendar.getInstance().getTime();
-   private Date datadinascita;
+   private Date datadinascita = null;
    private Date dataSupportata;
    
    
@@ -237,12 +237,18 @@ public class ControllerRegistrazioneImpiegato {
             			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
          }
        
-        datadinascita= java.sql.Date.valueOf(DataDiNascitaDP.getValue()); 
-        dataSupportata = new Date(today.getYear()-18, today.getMonth(), today.getDay() );
+         if(DataDiNascitaDP.getValue() != null)
+        	datadinascita= java.sql.Date.valueOf(DataDiNascitaDP.getValue()); 
+         
+         
+         	dataSupportata = new Date(today.getYear()-18, today.getMonth(), today.getDay() );
          
        
-         if(datadinascita.after(dataSupportata)) {
+         if(datadinascita == null || datadinascita.after(dataSupportata)) {
      		checkData=false;
+     		if(datadinascita == null)
+     			DataDiNascitaErrorLabel.setText("Inserire la data di nascita");
+     		else		
      		DataDiNascitaErrorLabel.setText("L'impiegato deve avere minimo diciotto anni");
          }
          

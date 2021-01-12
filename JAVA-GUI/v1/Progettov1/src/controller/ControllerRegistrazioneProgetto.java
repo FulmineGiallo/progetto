@@ -115,8 +115,8 @@ public class ControllerRegistrazioneProgetto {
     private Button ConfermaButton;
     
     
-    private Date dataInizioDate;
-    private Date dataScadenzaDate;
+    private Date dataInizioDate = null;
+    private Date dataScadenzaDate = null;
     private Date dataSupportata = Calendar.getInstance().getTime();
     
     
@@ -134,10 +134,13 @@ public class ControllerRegistrazioneProgetto {
     	boolean checkDataInizio = true;
     	boolean checkDataScadenza = true;
 
+
+    	if(DataDiInizioDP.getValue() != null)
+    		dataInizioDate = java.sql.Date.valueOf(DataDiInizioDP.getValue());
     	
-    	dataInizioDate = java.sql.Date.valueOf(DataDiInizioDP.getValue()); 
-    	dataScadenzaDate = java.sql.Date.valueOf(DataDiScadenzaDP.getValue()); 
-    	
+    	if(DataDiScadenzaDP.getValue() != null)
+        	dataScadenzaDate = java.sql.Date.valueOf(DataDiScadenzaDP.getValue()); 
+
     	
     	if (!(TitoloTF.getText().matches("[a-zA-Z0-9\s]+")) || ( TitoloTF.getText().isBlank()) ) {
     		checkTitolo = false;
