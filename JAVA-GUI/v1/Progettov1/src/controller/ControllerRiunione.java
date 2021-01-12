@@ -1,4 +1,9 @@
 package controller;
 
-public class ControllerRiunione {
+import javafx.event.ActionEvent;
+
+public class ControllerRiunione
+{
+
+
 }

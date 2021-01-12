@@ -1,20 +1,29 @@
 package controller;
 
 import java.io.PrintWriter;
-import java.util.Locale;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Connection.DBConnection;
+import model.Dao.ValutazioneDao;
+import model.DaoInterface.ValutazioneDaoInterface;
 import model.Impiegato;
-import view.HomePageBenvenuto;
+import model.Valutazione;
 import view.HomePageImpiegato;
-import view.HomePageValutazioni;
 
-public class ControllerValutazioni {
+public class ControllerValutazioni 
+{
 	
 	HomePageImpiegato homeImpiegato;
 	
@@ -22,7 +31,7 @@ public class ControllerValutazioni {
 	Impiegato impiegato = new Impiegato(null);
 	
     @FXML
-    private ListView<?> ValutazioniListView;
+    private ListView<Valutazione> ListaValutazioniLV;
 
     @FXML
     private ListView<?> RecensiononeListView;
@@ -37,21 +46,53 @@ public class ControllerValutazioni {
     private Label dataValutazioneLabel;
 
     @FXML
-    private Button TornaAllaHomeButton;
-    
-    
-    public void inizializza(Impiegato impiegato)
+    private Button HomePageImpiegatoButton;
+
+    Connection connection;
+    DBConnection dbConnection;
     {
-    	this.impiegato=impiegato;
+        try {
+            dbConnection = new DBConnection();
+            connection = dbConnection.getConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
-    
+    ObservableList<Valutazione> lista = FXCollections.observableArrayList();
+    ValutazioneDaoInterface valutazioni;
+    {
+        try {
+            valutazioni = new ValutazioneDao(connection);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void inizializza(Impiegato impiegato) throws SQLException
+    {
+        this.impiegato=impiegato;
+        lista.addAll(valutazioni.getValutazioni(impiegato));
+        ListaValutazioniLV.setItems(lista);
+        updateValutazioni();
+    }
+
+    public void updateValutazioni()
+    {
+        ListaValutazioniLV.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent)
+            {
+
+
+            }
+        });
+    }
    public void backhomeimpiegato(ActionEvent event) throws Exception {
 	   
 	   	PrintWriter writer = null;
    		homeImpiegato = new HomePageImpiegato(writer, impiegato);
 
-   		Stage stage = (Stage)TornaAllaHomeButton.getScene().getWindow();
+   		Stage stage = (Stage)HomePageImpiegatoButton.getScene().getWindow();
    		homeImpiegato.start(stage);
     }
-
 }

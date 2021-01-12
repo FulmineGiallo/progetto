@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane fx:id="HomePageValutazioni" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="900.0" styleClass="HomePageValutazioni" stylesheets="@../../../css/HomePageValutazioni.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="HomePageValutazioni" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="900.0" styleClass="HomePageValutazioni" stylesheets="@../../../css/HomePageValutazioni.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerValutazioni">
    <children>
       <GridPane fx:id="ToolBar" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
@@ -32,7 +32,7 @@
             </VBox>
             <HBox alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="HomePageImpiegatoButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#Logout" prefHeight="50.0" styleClass="HomePageImpiegatoButton" text="Torna alla tua homepage" />
+                  <Button fx:id="HomePageImpiegatoButton" maxHeight="50.0" minHeight="50.0" mnemonicParsing="false" onAction="#backhomeimpiegato" prefHeight="50.0" styleClass="HomePageImpiegatoButton" text="Torna alla tua homepage" />
                </children>
             </HBox>
          </children>

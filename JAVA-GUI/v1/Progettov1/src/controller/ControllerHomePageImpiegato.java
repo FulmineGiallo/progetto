@@ -123,8 +123,10 @@ public class ControllerHomePageImpiegato
         updateInfoProgetto();
     }
 
-    public void updateInfoProgetto() {
-        ListaProgettiLV.setOnMouseClicked(new EventHandler<MouseEvent>(){
+    public void updateInfoProgetto()
+    {
+        ListaProgettiLV.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 IstruzioniBox.setVisible(false);
@@ -137,17 +139,14 @@ public class ControllerHomePageImpiegato
                 if(ListaProgettiLV.getSelectionModel().getSelectedItem().getProjectManager() == impiegato)
                 {
                     ProjectManagerBox.setVisible(true);
+                    /* Se il bottone gestione progetto viene cliccato */
+
                 }
                 else
                     ProjectManagerBox.setVisible(false);
-
-
-
             }
         });
     }
-
-
 
     @FXML
     public void CreaProgetto(ActionEvent actionEvent) throws Exception {

@@ -37,8 +37,6 @@ public class ProgettoDao implements ProgettoDaoInterface
             progetto.setScadenza(rs.getDate("scadenza"));
             progetto.setDataFine(rs.getDate("datafine"));
             progetto.setDescrizione(rs.getString("descrizione"));
-
-
             if(impiegato.getCF().equals(rs.getString("projectmanagerprogetto")))
             {
                 progetto.setProjectManager(impiegato);

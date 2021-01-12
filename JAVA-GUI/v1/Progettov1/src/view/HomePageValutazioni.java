@@ -35,7 +35,7 @@ public class HomePageValutazioni {
 	    	controllerValutazioni = loader.getController();
 	        controllerValutazioni.inizializza(impiegato);
 	    
-	        window.setTitle("Home page valutazioni");
+	        window.setTitle("Homepage Valutazioni");
 	        window.setScene(scene);
 	        window.show();
 

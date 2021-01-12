@@ -192,7 +192,7 @@ public class ControllerRegistrazioneProgetto {
         	dataScadenzaDate = java.sql.Date.valueOf(DataDiScadenzaDP.getValue()); 
 
     	
-    	if (!(TitoloTF.getText().matches("[a-zA-Z0-9\s]+")) || ( TitoloTF.getText().isBlank()) ) {
+    	if (!(TitoloTF.getText().matches("[a-zA-Z0-9]+")) || ( TitoloTF.getText().isBlank()) ) {
     		checkTitolo = false;
     		if(TitoloTF.getText().isBlank())	
     			TitoloErrorLabel.setText("Il titolo non puo essere vuoto");
