@@ -13,23 +13,22 @@ public class FormRegistrazioneImpiegato
 {
 	
 	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
-    private final PrintWriter writer;
 
-    public FormRegistrazioneImpiegato(PrintWriter writer) {
-        this.writer = writer ;
+    public FormRegistrazioneImpiegato() {
+    	
     }
 
     public void start(Stage window) throws Exception {
-    	
+    	  	 	
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneImpiegato/FormRegistrazioneImpiegato.fxml"));
         Parent root = loader.load();
-        Scene scene =  new Scene(root);
+        Scene scene = new Scene(root);
         
 		window.hide();
 		window.setScene(scene);
 
         controllerRegistrazioneImpiegato = loader.getController();
-        controllerRegistrazioneImpiegato.inizializza();
+        controllerRegistrazioneImpiegato.inizializza(window);
         
         window.setTitle("Registrazione");
         window.setMaximized(true);

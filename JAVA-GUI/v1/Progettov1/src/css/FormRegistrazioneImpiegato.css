@@ -104,8 +104,10 @@
 .NomeErrorLabel,
 .CognomeErrorLabel,
 .DataDiNascitaErrorLabel,
+.ComuneErrorLabel,
+.ProvinciaErrorLabel,
 .CodiceFiscaleErrorLabel{
-	-fx-font-size: 10;
+	-fx-font-size: 11.5;
 	-fx-text-fill: red;
 }
 

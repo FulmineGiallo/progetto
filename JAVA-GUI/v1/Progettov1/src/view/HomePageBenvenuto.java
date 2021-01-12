@@ -21,6 +21,7 @@ public class HomePageBenvenuto
 
     public void start(Stage window) {
         try {
+        		    	
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepagebenvenuto.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
@@ -29,6 +30,7 @@ public class HomePageBenvenuto
 			window.setScene(scene);
 			
 			controllerHomePageBenvenuto = loader.getController();
+			controllerHomePageBenvenuto.recuperaStage(window);
 			
 			window.setTitle("Home Page");
 			window.setMaximized(true);
@@ -36,7 +38,7 @@ public class HomePageBenvenuto
 			window.setMinWidth(1100.0);
 			window.setMinHeight(500.0);
 			
-			window.show();
+			window.show();			
 		} catch (IOException e) {
 			e.printStackTrace();
 			//inserire inizializzazione della finestraErrore

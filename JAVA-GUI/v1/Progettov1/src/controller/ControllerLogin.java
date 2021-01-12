@@ -33,15 +33,19 @@ public class ControllerLogin
     @FXML private Button AccediButton;
     @FXML private PasswordField PasswordTF;
     @FXML private TextField EmailTF;
-
-
+    
+    private Stage window;
+    
     int accesso = 0;
     Connection connection;
-
+    
+    public void recuperaStage(Stage window) {
+    	this.window = window;
+    }
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception {
         benvenuto = new HomePageBenvenuto();
-        benvenuto.start(new Stage());
+        benvenuto.start(window);
     }
 
     public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception {

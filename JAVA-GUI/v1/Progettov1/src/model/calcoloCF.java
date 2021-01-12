@@ -11,10 +11,10 @@ public class calcoloCF {
 		char sesso;
 		int giornoDiNascita;
 		int meseDiNascita;
-		String annoDiNascita;
+		int annoDiNascita;
 		String comune;		
 		
-		public calcoloCF(String cognome, String nome, char sesso, int giornoDiNascita, int meseDiNascita,String annoDiNascita, String comune) {
+		public calcoloCF(String cognome, String nome, char sesso, int giornoDiNascita, int meseDiNascita, int annoDiNascita, String comune) {
 			this.cognome = cognome.toUpperCase();
 			this.nome = nome.toUpperCase();
 			this.sesso = sesso;
@@ -121,6 +121,10 @@ public class calcoloCF {
 	            }
 	        }
 	        return cont;
+	    }
+	    
+	    private String check_anno(int anno) {
+	    	return String.valueOf(anno).substring(2,4);
 	    }
 	    
 	    //FUNZIONE PER COMPORRE IL CODICE ASSOCIATO AL GIORNO
@@ -289,8 +293,7 @@ public class calcoloCF {
 
 		@Override
 		public String toString() {
-			
-			String cf = check_cognome(cognome)+check_nome(nome, consonantCount(nome))+ annoDiNascita.substring(annoDiNascita.length() - 2)  + check_mese(meseDiNascita) + check_giorno(giornoDiNascita, sesso) + comune;
+			String cf = check_cognome(cognome)+check_nome(nome, consonantCount(nome)) + check_anno(annoDiNascita)  + check_mese(meseDiNascita) + check_giorno(giornoDiNascita, sesso) + comune;
 			return cf + check_lettera(cf);
 		}
 	    

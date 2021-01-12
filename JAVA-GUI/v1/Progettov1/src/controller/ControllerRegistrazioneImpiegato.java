@@ -58,9 +58,11 @@ public class ControllerRegistrazioneImpiegato {
     
     @FXML private Label 			ComuneLabel;
     @FXML private ComboBox<Comune> 	ComuneComboBox;
+    @FXML private Label				ComuneErrorLabel;
     
     @FXML private Label 			ProvinciaLabel;
-    @FXML private TextField 		ProvinciaTextField;
+    @FXML private TextField 		ProvinciaTF;
+    @FXML private Label				ProvinciaErrorLabel;
     @FXML private Button        	CercaComuniButton;
     
     @FXML private Label 			CodiceFiscaleLabel;
@@ -75,6 +77,8 @@ public class ControllerRegistrazioneImpiegato {
     
     @FXML private Button 			AnnullaButton;
     @FXML private Button 			ConfermaButton;
+    
+    private Stage window = null;
 
     private Calendar Oggi = Calendar.getInstance();
     private int OggiGiorno = Oggi.get(Calendar.DAY_OF_MONTH);
@@ -87,11 +91,12 @@ public class ControllerRegistrazioneImpiegato {
     HomePageBenvenuto homePageBenvenuto;
     CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
     
-	boolean checkNome = true;
-	boolean checkCognome = true;
 	boolean checkEmail = true;
 	boolean checkPassword = true;
+    boolean checkNome = true;
+	boolean checkCognome = true;
 	boolean checkData = true;
+	boolean checkProvincia = true;
 
     Connection connection;
     DBConnection dbConnection;
@@ -134,107 +139,132 @@ public class ControllerRegistrazioneImpiegato {
         }
     }
 
-    public void inizializza() throws SQLException {
+    public void inizializza(Stage window) throws SQLException {
+    	this.window = window;
+    	
         GradoComboBox.getItems().addAll(gradiList);
         GradoComboBox.getSelectionModel().select(2);
         
-        ProvinciaTextField.textProperty().addListener(new ChangeListener<String>() {
+        ProvinciaTF.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if(ProvinciaTextField.getText().length() > 2 )
+                if(ProvinciaTF.getText().length() > 2)
                 {
-                    s = ProvinciaTextField.getText().substring(0, 2);
-                    ProvinciaTextField.setText(s);
+                    s = ProvinciaTF.getText().substring(0, 2);
+                    ProvinciaTF.setText(s);
                 }
             }
         });
 
-        comuneList = comuni.gradoList(ProvinciaTextField.getText().toUpperCase());
+        comuneList = comuni.gradoList(ProvinciaTF.getText().toUpperCase());
     }
     
     public void updateComune() throws SQLException {
-        comuneList = comuni.gradoList(ProvinciaTextField.getText().toUpperCase());
-        ComuneComboBox.setItems(comuneList);
+        comuneList = comuni.gradoList(ProvinciaTF.getText().toUpperCase());
+        if(comuneList.isEmpty()) {
+        	ComuneComboBox.setPromptText("Nessun risultato trovato!");
+        } else {
+        	ComuneComboBox.setPromptText(String.valueOf(comuneList.size()) + " comuni trovati");
+            ComuneComboBox.setItems(comuneList);
+        }
     }
     
-    @FXML void cercaComuni(ActionEvent event) throws SQLException {
-        updateComune();
+    @FXML private void cercaComuni(ActionEvent event) throws SQLException{
+    	ComuneComboBox.setPromptText("");
+    	updateComune();
     }
 
-    public void CFRegistrazione() {
- 
-    	try {
-	    	String comune = ComuneComboBox.getValue().toString().substring(0,4);
-	    	calcoloCF cf = null;
-	    	
-	    	String data = DataDiNascitaDP.getValue().toString();
-	    	
-	    	String year = data.substring(0,4);
-	    	int month = Integer.parseInt(data.substring(5,7));
-	    	int day = Integer.parseInt(data.substring(8,10));   	
-	    	
-	    	
-	    	if(GenereRB1.isSelected())
-	    		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'M', day, month, year, comune);
-	    	else
-	    		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'F', day, month, year, comune);
-	        
-	    	CodiceFiscaleTF.setText(cf.toString());
-	    	
-    	}catch(Exception e) {
-    		CodiceFiscaleErrorLabel.setText("Inserisci tutti i campi prima di calcolare il codice fiscale");
-    	}
-    	
+    @FXML private void CFRegistrazione() {
+    	CodiceFiscaleErrorLabel.setText("");
+			try {
+				String comune = ComuneComboBox.getValue().getCodiceComune();
+				calcoloCF cf = null;
+
+				DataDiNascita = DataDiNascitaDP.getValue();
+
+				int AnnoNascita = DataDiNascita.getYear();
+				int MeseNascita = DataDiNascita.getMonthValue();
+				int GiornoNascita = DataDiNascita.getDayOfMonth();
+
+				if (GenereRB1.isSelected())
+					cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'M', GiornoNascita, MeseNascita,
+							AnnoNascita, comune);
+				else
+					cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'F', GiornoNascita, MeseNascita,
+							AnnoNascita, comune);
+
+				CodiceFiscaleTF.setText(cf.toString());
+
+			} catch (Exception e) {
+				CodiceFiscaleErrorLabel.setText("Inserisci tutti i campi prima di calcolare il codice fiscale");
+			}
     }
     
-    public void annullaOperazione (ActionEvent actionEvent) throws Exception {
+    @FXML private void annullaOperazione (ActionEvent actionEvent) throws Exception {
     	homePageBenvenuto = new HomePageBenvenuto();
-        homePageBenvenuto.start(new Stage());
+        homePageBenvenuto.start(window);
     }
     
-    public void confermaOperazione (ActionEvent actionEvent) throws Exception
-    {
-    	NomeErrorLabel.setText("");
-    	CognomeErrorLabel.setText("");
-    	CognomeErrorLabel.setText("");
+    @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {
+		if(controlloCampi()) {
+		    caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
+		    caricamentoRegistrazioneImpiegato.start(new Stage());
+		}	
+    }
+    
+    public boolean controlloCampi() {
     	EmailErrorLabel.setText("");
     	PasswordErrorLabel.setText("");
+    	NomeErrorLabel.setText("");
+    	CognomeErrorLabel.setText("");
+    	DataDiNascitaErrorLabel.setText("");        
+    	ProvinciaErrorLabel.setText("");
     	
-    	if (!(NomeTF.getText().matches("[a-zA-Z\s]+")) || ( NomeTF.getText().isBlank()) ) {
-    		checkNome = false;
-    		if(NomeTF.getText().isBlank())	
-    			NomeErrorLabel.setText("Il nome non può essere vuoto");
-    		else
-    			NomeErrorLabel.setText("Il nome può contenere solo lettere");
-    	}
-        
-    	if (!(CognomeTF.getText().matches("[a-zA-Z\s]+")) || ( CognomeTF.getText().isBlank()) ) {
-    		checkCognome=false;
-    		if(CognomeTF.getText().isBlank())	
-    			CognomeErrorLabel.setText("Il cognome non può essere vuoto");
-    		else
-    			CognomeErrorLabel.setText("Il cognome può contenere solo lettere");
-    	}
-    	
-    	if (!(EmailTF.getText().matches("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) || ( EmailTF.getText().isBlank()) ) {
-        		checkEmail=false;
-        		if(EmailTF.getText().isBlank())	
-        			EmailErrorLabel.setText("L' email non può essere vuoto");
-        		else
-        			EmailErrorLabel.setText("L'email non rispetta la sintassi");
+    	//CONTROLLO EMAIL
+    	if(EmailTF.getText().isBlank()) {
+    		checkEmail = false;
+    		EmailErrorLabel.setText("Questo campo è obbligatorio");
+    	} else {
+    		if(!(EmailTF.getText().matches("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))) {
+    			checkEmail = false;
+    			EmailErrorLabel.setText("La sintassi dell'email non è valida");
+    		}
     	}
     	
+    	//CONTROLLO PASSWORD
     	if(PasswordTF.getText().isBlank()) {
     		checkPassword = false;
-    		PasswordErrorLabel.setText("La password non può essere vuota");
+    		PasswordErrorLabel.setText("Questo campo è obbligatorio");
     	} else {
     		if(!(PasswordTF.getText().length() >= 4)) {
     			checkPassword = false;
     			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
     		}
     	}
+    	
+    	//CONTROLLO NOME
+    	if(NomeTF.getText().isBlank()) {
+    		checkNome = false;
+    		NomeErrorLabel.setText("Questo campo è obbligatorio");
+    	} else {
+    		if(!(NomeTF.getText().matches("[a-zA-Z\s]+"))) {
+    			checkNome = false;
+    			NomeErrorLabel.setText("Il nome può contenere solo lettere");
+    		}
+    	}
+    	
+    	//CONTROLLO COGNOME
+    	if(CognomeTF.getText().isBlank()) {
+    		checkCognome = false;
+    		CognomeErrorLabel.setText("Questo campo è obbligatorio");
+    	} else {
+    		if(!(CognomeTF.getText().matches("[a-zA-Z\s]+"))) {
+    			checkCognome = false;
+    			CognomeErrorLabel.setText("Il cognome può contenere solo lettere");
+    		}
+    	}
        
-        DataDiNascita = DataDiNascitaDP.getValue();
+    	//CONTROLLO DATA DI NASCITA
         dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
 
         if(DataDiNascita != null) {
@@ -249,27 +279,32 @@ public class ControllerRegistrazioneImpiegato {
         	}
         } else {
         	checkData = false;
-        	DataDiNascitaErrorLabel.setText("Inserisci una data di nascita");
+        	DataDiNascitaErrorLabel.setText("Questo campo è obbligatorio");
         }
-         
-         
-         if(checkNome && checkCognome && checkEmail && checkPassword && checkData) {
-	         PrintWriter writer = null;
-	         caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(writer);
-	
-	         Stage stage = (Stage)ConfermaButton.getScene().getWindow();
-	         caricamentoRegistrazioneImpiegato.start(stage);
-         }   	
+        
+        //CONTROLLO PROVINCIA DI NASCITA
+    	if(ProvinciaTF.getText().isBlank()) {
+    		checkProvincia = false;
+    		ProvinciaErrorLabel.setText("Questo campo è obbligatorio");
+    	} else {
+    		if(!(ProvinciaTF.getText().matches("[a-zA-Z]+"))) {
+    			checkProvincia = false;
+    			ProvinciaErrorLabel.setText("La provincia può contenere solo lettere");
+    		}
+    	}
+    	
+    	return checkNome && checkCognome && checkEmail && checkPassword && checkData && checkProvincia;
     }
 
     public void visualizzaNomeLabel(MouseEvent mouseEvent) {
+    	
     }
 
     public void visualizzaCognomeLabel(MouseEvent mouseEvent) {
+    	
     }
 
     public void coloraGenereLabel(MouseEvent mouseEvent) {
+    	
     }
-
-
 }

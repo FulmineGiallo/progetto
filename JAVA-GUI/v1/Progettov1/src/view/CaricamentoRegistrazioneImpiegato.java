@@ -1,12 +1,7 @@
 package view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Timer;
 
-import controller.ControllerRegistrazioneImpiegato;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,15 +9,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import controller.ControllerRegistrazioneImpiegato;
+
 public class CaricamentoRegistrazioneImpiegato {
 	
 	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
 	HomePageBenvenuto homePageBenvenuto;
 
-	private final PrintWriter writer;
-
-    public CaricamentoRegistrazioneImpiegato(PrintWriter writer) {
-        this.writer = writer ;
+    public CaricamentoRegistrazioneImpiegato() {
+    	
     }
 
     public void start(Stage window) {
@@ -30,7 +25,7 @@ public class CaricamentoRegistrazioneImpiegato {
 		{
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneImpiegato/CaricamentoRegistrazioneImpiegato.fxml"));
 			Parent root = loader.load();
-			Scene scene = new Scene(root, 347.0, 176.0);
+			Scene scene = new Scene(root, 400.0, 200.0);
 			
 			controllerRegistrazioneImpiegato = loader.getController();
 			
@@ -41,7 +36,7 @@ public class CaricamentoRegistrazioneImpiegato {
 			window.setScene(scene);
 			window.show();
 			PauseTransition delay = new PauseTransition(Duration.seconds(3));
-			delay.setOnFinished( event -> window.close() );
+			delay.setOnFinished( event -> window.close());
 			delay.play();
 
 		} catch (IOException e)
