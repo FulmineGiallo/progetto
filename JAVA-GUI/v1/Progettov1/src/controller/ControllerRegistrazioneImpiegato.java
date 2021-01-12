@@ -3,25 +3,18 @@ package controller;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.converter.LocalDateStringConverter;
+
 import model.Comune;
 import model.Connection.DBConnection;
 import model.Dao.ComuneDao;
@@ -29,60 +22,80 @@ import model.Dao.GradoDao;
 import model.DaoInterface.GradoDaoInterface;
 import model.Grado;
 import model.calcoloCF;
+
 import view.HomePageBenvenuto;
 import view.CaricamentoRegistrazioneImpiegato;
 
 public class ControllerRegistrazioneImpiegato {
 
-	//FormRegistrazioneImpiegato
-    @FXML private TextField 	NomeTF;
-    @FXML private TextField 	CognomeTF;
-    @FXML private RadioButton 	GenereRB1;
-    @FXML private RadioButton 	GenereRB2;
-    @FXML private ToggleGroup 	Genere;
-    @FXML private DatePicker 	DataDiNascitaDP;
+    @FXML private Label 			IstruzioniLabel;
+    @FXML private Label 			IstruzioniLabel2;
+    
+    @FXML private Label 			EmailLabel;
+    @FXML private TextField 		EmailTF;
+    @FXML private Label 			EmailErrorLabel;
+    
+    @FXML private Label 			PasswordLabel;
+    @FXML private TextField 		PasswordTF;
+    @FXML private Label 			PasswordErrorLabel;
+    
+    @FXML private Label 			NomeLabel;
+	@FXML private TextField 		NomeTF;
+    @FXML private Label 			NomeErrorLabel;
+    
+    @FXML private Label				CognomeLabel;
+    @FXML private TextField 		CognomeTF;
+    @FXML private Label 			CognomeErrorLabel;
+    
+    @FXML private Label 			GenereLabel;
+    @FXML private ToggleGroup 		Genere;
+    @FXML private RadioButton 		GenereRB1;
+    @FXML private RadioButton 		GenereRB2;
+
+    @FXML private Label 			DataDiNascitaLabel;
+    @FXML private DatePicker 		DataDiNascitaDP;
+    @FXML private Label 			DataDiNascitaErrorLabel;
+    
+    @FXML private Label 			ComuneLabel;
     @FXML private ComboBox<Comune> 	ComuneComboBox;
-    @FXML private TextField ProvinciaTextField;
-    @FXML private ListView<?> 	SkillLV;
-    @FXML private ComboBox<Grado> GradoComboBox;
-    @FXML private Button 		AnnullaButton;
-    @FXML private Button 		ConfermaButton;
-    @FXML private Button        CercaComuniButton;
-    @FXML private TextField CodiceFiscaleTF;
-    @FXML private Label IstruzioniLabel;
-    @FXML private Label IstruzioniLabel2;
-    @FXML private ScrollPane FormScrollPane;
-    @FXML private Label EmailLabel;
-    @FXML private TextField EmailTF;
-    @FXML private Label EmailErrorLabel;
-    @FXML private Label PasswordLabel;
-    @FXML private TextField PasswordTF;
-    @FXML private Label PasswordErrorLabel;
-    @FXML private Label NomeLabel;
-    @FXML private Label NomeErrorLabel;
-    @FXML private Label CognomeErrorLabel;
-    @FXML private Label GenereLabel;
-    @FXML private Label GenereErrorLabel;
-    @FXML private Label DataDiNascitaLabel;
-    @FXML private Label DataDiNascitaErrorLabel;
-    @FXML private Label ComuneLabel11;
-    @FXML private Label ProvinciaLabel;
-    @FXML private Label CodiceFiscaleLabel;
-    @FXML private Label SkillLabel;
-    @FXML private MenuButton SkillMenuButton;
-    @FXML private Label GradoLabel;
+    
+    @FXML private Label 			ProvinciaLabel;
+    @FXML private TextField 		ProvinciaTextField;
+    @FXML private Button        	CercaComuniButton;
+    
+    @FXML private Label 			CodiceFiscaleLabel;
+    @FXML private TextField 		CodiceFiscaleTF;
+    @FXML private Label 			CodiceFiscaleErrorLabel;
+    
+    @FXML private Label 			SkillLabel;
+    @FXML private MenuButton 		SkillMenuButton;
+    
+    @FXML private Label				GradoLabel;
+    @FXML private ComboBox<Grado> 	GradoComboBox;
+    
+    @FXML private Button 			AnnullaButton;
+    @FXML private Button 			ConfermaButton;
 
-   private Date today = Calendar.getInstance().getTime();
-   private Date datadinascita = null;
-   private Date dataSupportata;
+    private Calendar Oggi = Calendar.getInstance();
+    private int OggiGiorno = Oggi.get(Calendar.DAY_OF_MONTH);
+    private int OggiMese = Oggi.get(Calendar.MONTH) + 1;
+    private int OggiAnno = Oggi.get(Calendar.YEAR);
+    
+    private LocalDate DataDiNascita = null;
+    private LocalDate dataSupportata = null;
    
-   
-
     HomePageBenvenuto homePageBenvenuto;
     CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
+    
+	boolean checkNome = true;
+	boolean checkCognome = true;
+	boolean checkEmail = true;
+	boolean checkPassword = true;
+	boolean checkData = true;
 
     Connection connection;
     DBConnection dbConnection;
+    
     {
         try
         {
@@ -97,17 +110,20 @@ public class ControllerRegistrazioneImpiegato {
     ObservableList<Grado> gradiList = FXCollections.observableArrayList();
     ObservableList<Comune> comuneList = FXCollections.observableArrayList();
     GradoDaoInterface gradi = null;
+    
+    {
+        try
         {
-            try
-            {
-                gradi = new GradoDao(connection);
-                gradiList = gradi.gradoList();
-            } catch (SQLException throwables)
-            {
-                throwables.printStackTrace();
-            }
+            gradi = new GradoDao(connection);
+            gradiList = gradi.gradoList();
+        } catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
         }
+    }
+        
     ComuneDao comuni = null;
+    
     {
         try
         {
@@ -118,8 +134,7 @@ public class ControllerRegistrazioneImpiegato {
         }
     }
 
-    public void inizializza() throws SQLException
-    {
+    public void inizializza() throws SQLException {
         GradoComboBox.getItems().addAll(gradiList);
         GradoComboBox.getSelectionModel().select(2);
         
@@ -136,129 +151,114 @@ public class ControllerRegistrazioneImpiegato {
 
         comuneList = comuni.gradoList(ProvinciaTextField.getText().toUpperCase());
     }
-    public void updateComune() throws SQLException
-    {
+    
+    public void updateComune() throws SQLException {
         comuneList = comuni.gradoList(ProvinciaTextField.getText().toUpperCase());
         ComuneComboBox.setItems(comuneList);
-      //  System.out.println(comuneList.size());
     }
-    @FXML
-    void cercaComuni(ActionEvent event) throws SQLException
-    {
+    
+    @FXML void cercaComuni(ActionEvent event) throws SQLException {
         updateComune();
     }
 
-    public void CFRegistrazione()
-    {
+    public void CFRegistrazione() {
  
     	try {
-    	String comune = ComuneComboBox.getValue().toString().substring(0,4);
-    	calcoloCF cf = null;
-    	
-    	String data = DataDiNascitaDP.getValue().toString();
-    	
-    	String year = data.substring(0,4);
-    	int month = Integer.parseInt(data.substring(5,7));
-    	int day = Integer.parseInt(data.substring(8,10));   	
-    	
-    	
-    	if(GenereRB1.isSelected())
-    		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'M', day, month, year, comune);
-    	else
-    		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'F', day, month, year, comune);
-        
-    	CodiceFiscaleTF.setStyle("-fx-text-fill: white");
-    	CodiceFiscaleTF.setText(cf.toString());
-    	
+	    	String comune = ComuneComboBox.getValue().toString().substring(0,4);
+	    	calcoloCF cf = null;
+	    	
+	    	String data = DataDiNascitaDP.getValue().toString();
+	    	
+	    	String year = data.substring(0,4);
+	    	int month = Integer.parseInt(data.substring(5,7));
+	    	int day = Integer.parseInt(data.substring(8,10));   	
+	    	
+	    	
+	    	if(GenereRB1.isSelected())
+	    		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'M', day, month, year, comune);
+	    	else
+	    		cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'F', day, month, year, comune);
+	        
+	    	CodiceFiscaleTF.setText(cf.toString());
+	    	
     	}catch(Exception e) {
-    		CodiceFiscaleTF.setStyle("-fx-text-fill: red");
-    		CodiceFiscaleTF.setText("Inserire tutti i campi prima di calcolare il codice fiscale, poi ricliccare qui");
+    		CodiceFiscaleErrorLabel.setText("Inserisci tutti i campi prima di calcolare il codice fiscale");
     	}
     	
     }
     
-    
-    public void annullaOperazione (ActionEvent actionEvent) throws Exception
-    {
-    	PrintWriter writer = null;
-    	homePageBenvenuto = new HomePageBenvenuto(writer);
-
-        Stage stage = (Stage)AnnullaButton.getScene().getWindow();
-        homePageBenvenuto.start(stage);
+    public void annullaOperazione (ActionEvent actionEvent) throws Exception {
+    	homePageBenvenuto = new HomePageBenvenuto();
+        homePageBenvenuto.start(new Stage());
     }
     
     public void confermaOperazione (ActionEvent actionEvent) throws Exception
     {
-    	
     	NomeErrorLabel.setText("");
     	CognomeErrorLabel.setText("");
     	CognomeErrorLabel.setText("");
     	EmailErrorLabel.setText("");
     	PasswordErrorLabel.setText("");
     	
-    	boolean checkNome = true;
-    	boolean checkCognome = true;
-    	boolean checkEmail = true;
-    	boolean checkPassword = true;
-    	boolean checkData = true;
-    	
-    	
-    	
-    	
     	if (!(NomeTF.getText().matches("[a-zA-Z\s]+")) || ( NomeTF.getText().isBlank()) ) {
     		checkNome = false;
     		if(NomeTF.getText().isBlank())	
-    			NomeErrorLabel.setText("Il nome non puo essere vuoto");
+    			NomeErrorLabel.setText("Il nome non può essere vuoto");
     		else
-    			NomeErrorLabel.setText("Il nome puo contenere solo lettere");
+    			NomeErrorLabel.setText("Il nome può contenere solo lettere");
     	}
         
-    	
     	if (!(CognomeTF.getText().matches("[a-zA-Z\s]+")) || ( CognomeTF.getText().isBlank()) ) {
     		checkCognome=false;
     		if(CognomeTF.getText().isBlank())	
-    			CognomeErrorLabel.setText("Il cognome non puo essere vuoto");
+    			CognomeErrorLabel.setText("Il cognome non può essere vuoto");
     		else
-    			CognomeErrorLabel.setText("Il Cognome puo contenere solo lettere");
+    			CognomeErrorLabel.setText("Il cognome può contenere solo lettere");
     	}
     	
     	if (!(EmailTF.getText().matches("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) || ( EmailTF.getText().isBlank()) ) {
         		checkEmail=false;
         		if(EmailTF.getText().isBlank())	
-        			EmailErrorLabel.setText("L' email non puo essere vuoto");
+        			EmailErrorLabel.setText("L' email non può essere vuoto");
         		else
         			EmailErrorLabel.setText("L'email non rispetta la sintassi");
     	}
-         if (( !(PasswordTF.getText().matches("[a-zA-Z0-9._%-]{4,}")) || ( EmailTF.getText().isBlank()))) {
-            		checkPassword=false;
-            		if(PasswordTF.getText().isBlank())	
-            			PasswordErrorLabel.setText("La password non puo essere vuota");
-            		else
-            			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
-         }
+    	
+    	if(PasswordTF.getText().isBlank()) {
+    		checkPassword = false;
+    		PasswordErrorLabel.setText("La password non può essere vuota");
+    	} else {
+    		if(!(PasswordTF.getText().length() >= 4)) {
+    			checkPassword = false;
+    			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
+    		}
+    	}
        
-         if(DataDiNascitaDP.getValue() != null)
-        	datadinascita= java.sql.Date.valueOf(DataDiNascitaDP.getValue()); 
-         
-         
-         	dataSupportata = new Date(today.getYear()-18, today.getMonth(), today.getDay() );
-         
-       
-         if(datadinascita == null || datadinascita.after(dataSupportata)) {
-     		checkData=false;
-     		if(datadinascita == null)
-     			DataDiNascitaErrorLabel.setText("Inserire la data di nascita");
-     		else		
-     		DataDiNascitaErrorLabel.setText("L'impiegato deve avere minimo diciotto anni");
-         }
+        DataDiNascita = DataDiNascitaDP.getValue();
+        dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
+
+        if(DataDiNascita != null) {
+        	if(DataDiNascita.isAfter(dataSupportata)) {
+    			checkData=false;
+    			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
+    		}
+        	
+        	if(DataDiNascita.isAfter(LocalDate.of(OggiAnno, OggiMese, OggiGiorno))){
+        		checkData = false;
+        		DataDiNascitaErrorLabel.setText("Inserisci una data di nascita corretta");
+        	}
+        } else {
+        	checkData = false;
+        	DataDiNascitaErrorLabel.setText("Inserisci una data di nascita");
+        }
          
          
          if(checkNome && checkCognome && checkEmail && checkPassword && checkData) {
-         PrintWriter writer = null;
-         caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(writer);
-
-         Stage stage = (Stage)ConfermaButton.getScene().getWindow();
-         caricamentoRegistrazioneImpiegato.start(stage);
+	         PrintWriter writer = null;
+	         caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(writer);
+	
+	         Stage stage = (Stage)ConfermaButton.getScene().getWindow();
+	         caricamentoRegistrazioneImpiegato.start(stage);
          }   	
     }
 

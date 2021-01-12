@@ -40,10 +40,8 @@ public class ControllerLogin
 
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception {
-        PrintWriter writer = null;
-        benvenuto = new HomePageBenvenuto(writer);
-        Stage stage = (Stage) AnnullaButton.getScene().getWindow();
-        benvenuto.start(stage);
+        benvenuto = new HomePageBenvenuto();
+        benvenuto.start(new Stage());
     }
 
     public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception {

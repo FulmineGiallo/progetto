@@ -14,11 +14,9 @@ import controller.ControllerHomePageBenvenuto;
 public class HomePageBenvenuto
 {
 	private ControllerHomePageBenvenuto controllerHomePageBenvenuto;
-    private final PrintWriter writer;
 
-    public HomePageBenvenuto(PrintWriter writer)
-    {
-        this.writer = writer;
+    public HomePageBenvenuto() {
+
     }
 
     public void start(Stage window) {

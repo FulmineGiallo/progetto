@@ -69,6 +69,7 @@
                                     </VBox>
                                     <VBox fx:id="CognomeBox">
                                        <children>
+                                          <Label fx:id="CognomeLabel" styleClass="CognomeLabel" text="* Cognome" visible="false" />
                                           <TextField fx:id="CognomeTF" onMouseClicked="#visualizzaCognomeLabel" prefWidth="223.0" promptText="* Cognome" styleClass="CognomeTF" />
                                           <Label fx:id="CognomeErrorLabel" styleClass="CognomeErrorLabel" textFill="RED" />
                                        </children>
@@ -111,7 +112,7 @@
                                        <children>
                                           <VBox>
                                              <children>
-                                                <Label fx:id="ComuneLabel11" styleClass="ComuneLabel" text="* Comune di nascita:" />
+                                                <Label fx:id="ComuneLabel" styleClass="ComuneLabel" text="* Comune di nascita:" />
                                                 <ComboBox fx:id="ComuneComboBox" maxWidth="280.0" prefHeight="30.0" prefWidth="280.0" styleClass="ComuneComboBox" />
                                              </children>
                                           </VBox>
@@ -135,6 +136,7 @@
                                        <children>
                                           <Label fx:id="CodiceFiscaleLabel" styleClass="CodiceFiscaleLabel" text="Codice Fiscale" />
                                           <TextField fx:id="CodiceFiscaleTF" editable="false" onAction="#CFRegistrazione" onMouseClicked="#CFRegistrazione" prefWidth="223.0" styleClass="CodiceFiscaleTF" />
+                                          <Label fx:id="CodiceFiscaleErrorLabel" styleClass="CodiceFiscaleErrorLabel" />
                                        </children>
                                        <VBox.margin>
                                           <Insets top="30.0" />

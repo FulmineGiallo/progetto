@@ -15,8 +15,7 @@ public class Driver extends Application
     public void start(Stage primaryStage) {
         try
         {
-        	PrintWriter writer = null;
-        	homePageBenvenuto = new HomePageBenvenuto(writer);
+        	homePageBenvenuto = new HomePageBenvenuto();
             homePageBenvenuto.start(primaryStage);
         } catch (Exception e) {
             System.err.println("Impossibile caricare la finestra!");

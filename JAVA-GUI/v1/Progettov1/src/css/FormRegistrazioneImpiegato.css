@@ -103,8 +103,8 @@
 .PasswordErrorLabel,
 .NomeErrorLabel,
 .CognomeErrorLabel,
-.GenereErrorLabel,
-.DataDiNascitaErrorLabel{
+.DataDiNascitaErrorLabel,
+.CodiceFiscaleErrorLabel{
 	-fx-font-size: 10;
 	-fx-text-fill: red;
 }

@@ -170,10 +170,7 @@ public class ControllerHomePageImpiegato
     
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
-        PrintWriter writer = null;
-        homePageBenvenuto = new HomePageBenvenuto(writer);
-        
-        Stage stage = (Stage) LogoutButton.getScene().getWindow();
-        homePageBenvenuto.start(stage);
+        homePageBenvenuto = new HomePageBenvenuto();
+        homePageBenvenuto.start(new Stage());
     }
 }
