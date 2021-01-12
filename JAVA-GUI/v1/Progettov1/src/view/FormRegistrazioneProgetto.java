@@ -29,7 +29,7 @@ public class FormRegistrazioneProgetto
 		window.setScene(scene);
 
         controllerRegistrazioneProgetto = loader.getController();
-   //   controllerRegistrazioneProgetto.inizializza();
+        controllerRegistrazioneProgetto.inizializzaRegistrazioneProgetto();
         
         window.setTitle("Registrazione");
         window.setMaximized(true);
