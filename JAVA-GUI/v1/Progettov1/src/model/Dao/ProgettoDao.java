@@ -16,7 +16,7 @@ public class ProgettoDao implements ProgettoDaoInterface
     private final PreparedStatement insertProgetto;
     public ProgettoDao(Connection connection) throws SQLException {
         this.connection = connection;
-        progettiImpiegato = connection.prepareStatement("SELECT progetto.titolo, progetto.descrizione, progetto.datainizio, progetto.datafine, progetto.scadenza, progetto.projectmanagerprogetto FROM progetto  WHERE projectmanagerprogetto = ?");
+        progettiImpiegato = connection.prepareStatement("SELECT * FROM listaprogetti  WHERE partecipante = ?");
         insertProgetto = connection.prepareStatement("INSERT INTO progetto VALUES (NEXTVAL('id_progetto_seq'), ?, ?, current_date, ?, ?,?, ?)");
     }
 
@@ -35,7 +35,7 @@ public class ProgettoDao implements ProgettoDaoInterface
             progetto.setScadenza(rs.getDate("scadenza"));
             progetto.setDataFine(rs.getDate("datafine"));
             progetto.setDescrizione(rs.getString("descrizione"));
-            if(impiegato.getCF().equals(rs.getString("projectmanagerprogetto")))
+            if(impiegato.getCF().equals(rs.getString("projectmanager")))
             {
                 progetto.setProjectManager(impiegato);
             }

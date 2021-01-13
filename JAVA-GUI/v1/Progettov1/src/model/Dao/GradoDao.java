@@ -19,7 +19,7 @@ public class GradoDao implements GradoDaoInterface
     public GradoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
-        getGradi = connection.prepareStatement("SELECT tipogrado FROM grado");
+        getGradi = connection.prepareStatement("SELECT tipogrado FROM gradidisponibili");
     }
     @Override
 
