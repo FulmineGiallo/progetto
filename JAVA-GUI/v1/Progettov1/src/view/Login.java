@@ -31,7 +31,8 @@ public class Login
 			controllerLogin = loader.getController();
 			controllerLogin.recuperaStage(window);
 			
-			window.setTitle("Login");
+			//window.setTitle("Login");
+			window.setTitle(window.toString());
 			window.setMaximized(true);
 			window.centerOnScreen();
 			window.setMinHeight(550.0);

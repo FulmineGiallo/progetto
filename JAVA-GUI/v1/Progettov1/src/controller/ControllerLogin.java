@@ -68,12 +68,8 @@ public class ControllerLogin
             if(accesso == 1)
             {
                 impiegato = impiegatoDao.creaImpiegato(impiegatoDao.getCFWithEmail(EmailTF.getText()));
-
-                PrintWriter writer = null;
-                homeImpiegato = new HomePageImpiegato(writer, impiegato);
-
-                Stage stage = (Stage)AccediButton.getScene().getWindow();
-                homeImpiegato.start(stage);
+                homeImpiegato = new HomePageImpiegato(impiegato);
+                homeImpiegato.start(window);
             }
             /* Non ci sono email e password corrispondenti */
             if(accesso == 0)

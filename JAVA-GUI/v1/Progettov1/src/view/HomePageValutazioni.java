@@ -1,8 +1,5 @@
 package view;
 
-import java.io.PrintWriter;
-
-
 import controller.ControllerValutazioni;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,32 +9,25 @@ import model.Impiegato;
 
 public class HomePageValutazioni {
 
-	   ControllerValutazioni controllerValutazioni;
-	   Impiegato impiegato;
+	ControllerValutazioni controllerValutazioni;
+	Impiegato impiegato;
 	    
+	public HomePageValutazioni(Impiegato impiegato) {
+		this.impiegato = impiegato;
+	}
+	
+	public void start(Stage window) throws Exception
+	{
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepagevalutazioni.fxml"));
+	    Parent root = loader.load();
+	    Scene scene =  new Scene(root); 
 	    
-	 private final PrintWriter writer;
-	 
-	 public HomePageValutazioni(PrintWriter writer, Impiegato impiegato)
-	    {
-	        this.writer = writer;
-	        this.impiegato = impiegato;
-	    }
-	 
-
-
-	    public void start(Stage window) throws Exception
-	    {
-	    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepagevalutazioni.fxml"));
-	        Parent root = loader.load();
-	        Scene scene =  new Scene(root); 
-	        
-	    	controllerValutazioni = loader.getController();
-	        controllerValutazioni.inizializza(impiegato);
-	    
-	        window.setTitle("Homepage Valutazioni");
-	        window.setScene(scene);
-	        window.show();
-
-	    }
+		controllerValutazioni = loader.getController();
+	    controllerValutazioni.inizializza(impiegato, window);
+	
+	    //window.setTitle("Homepage Valutazioni");
+	    window.setTitle(window.toString());
+	    window.setScene(scene);
+	    window.show();
+	}
 }

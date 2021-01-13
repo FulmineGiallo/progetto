@@ -21,13 +21,15 @@ public class HomePageProgetto
 
     public void start(Stage window) throws Exception {
     	
-    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/homepageprogetto.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepageprojectmanager.fxml"));
     	Parent root = loader.load();
     	
     	controllerHomePageProgetto = loader.getController();
     	
     	Scene scene =  new Scene(root);
         window.setScene(scene);
+        
+        window.setTitle(window.toString());
         window.show();
     }
 }

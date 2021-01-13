@@ -13,7 +13,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Connection.DBConnection;
 import model.Dao.ValutazioneDao;
@@ -22,17 +26,9 @@ import model.Impiegato;
 import model.Valutazione;
 import view.HomePageImpiegato;
 
-public class ControllerValutazioni 
-{
-	
-	HomePageImpiegato homeImpiegato;
-	
-
+public class ControllerValutazioni {
 	Impiegato impiegato = new Impiegato(null);
 	
-    @FXML
-    private ListView<Valutazione> ListaValutazioniLV;
-
     @FXML
     private ListView<?> RecensiononeListView;
 
@@ -44,9 +40,29 @@ public class ControllerValutazioni
 
     @FXML
     private Label dataValutazioneLabel;
-
-    @FXML
-    private Button HomePageImpiegatoButton;
+    
+    @FXML private AnchorPane 			HomePageValutazioni;
+    
+    @FXML private VBox 					ImpiegatoBox;
+    @FXML private Label 				NomeImpiegatoLabel;
+    @FXML private Label 				GradoImpiegatoLabel;
+    
+    @FXML private HBox 					ToolBar;
+    @FXML private Button 				HomePageImpiegatoButton;
+    
+    @FXML private AnchorPane 			ListaValutazioniBox;
+    @FXML private Label 				ListaValutazioniLabel;
+    @FXML private ScrollPane 			ListaValutazioniScrollPane;
+    @FXML private ListView<Valutazione> ListaValutazioniLV;
+    
+    @FXML private AnchorPane 			IstruzioniBox;
+    @FXML private Label 				IstruzioniLabel;
+    
+    @FXML private AnchorPane 			DescrizioneValutazioneBox;
+    @FXML private AnchorPane 			DescrizioneValutazionePane;
+    
+	HomePageImpiegato homePageImpiegato;
+    Stage window;
 
     Connection connection;
     DBConnection dbConnection;
@@ -67,9 +83,9 @@ public class ControllerValutazioni
             throwables.printStackTrace();
         }
     }
-    public void inizializza(Impiegato impiegato) throws SQLException
-    {
-        this.impiegato=impiegato;
+    public void inizializza(Impiegato impiegato, Stage window) throws SQLException {
+    	this.window = window;
+        this.impiegato = impiegato;
         lista.addAll(valutazioni.getValutazioni(impiegato));
         ListaValutazioniLV.setItems(lista);
         updateValutazioni();
@@ -87,12 +103,8 @@ public class ControllerValutazioni
             }
         });
     }
-   public void backhomeimpiegato(ActionEvent event) throws Exception {
-	   
-	   	PrintWriter writer = null;
-   		homeImpiegato = new HomePageImpiegato(writer, impiegato);
-
-   		Stage stage = (Stage)HomePageImpiegatoButton.getScene().getWindow();
-   		homeImpiegato.start(stage);
+   public void backHomePageImpiegato(ActionEvent event) throws Exception {
+   		homePageImpiegato = new HomePageImpiegato(impiegato);
+   		homePageImpiegato.start(window);
     }
 }

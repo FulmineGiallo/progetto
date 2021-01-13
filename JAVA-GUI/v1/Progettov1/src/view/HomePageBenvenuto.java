@@ -32,7 +32,8 @@ public class HomePageBenvenuto
 			controllerHomePageBenvenuto = loader.getController();
 			controllerHomePageBenvenuto.recuperaStage(window);
 			
-			window.setTitle("Home Page");
+			//window.setTitle("Home Page");
+			window.setTitle(window.toString());
 			window.setMaximized(true);
 			window.centerOnScreen();
 			window.setMinWidth(1100.0);

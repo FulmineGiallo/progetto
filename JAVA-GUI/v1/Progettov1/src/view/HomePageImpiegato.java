@@ -13,14 +13,11 @@ import java.io.PrintWriter;
 
 public class HomePageImpiegato
 {
-    private final PrintWriter writer;
     ControllerHomePageImpiegato controllerHomePageImpiegato;
     Impiegato impiegato;
 
-
-    public HomePageImpiegato(PrintWriter writer, Impiegato impiegato)
+    public HomePageImpiegato(Impiegato impiegato)
     {
-        this.writer = writer;
         this.impiegato = impiegato;
     }
 
@@ -34,9 +31,10 @@ public class HomePageImpiegato
         window.setScene(scene);
 				
 		controllerHomePageImpiegato = loader.getController();
-		controllerHomePageImpiegato.inizializza(impiegato);
+		controllerHomePageImpiegato.inizializza(impiegato, window);
 		
-		window.setTitle("La tua homepage");
+		//window.setTitle("La tua homepage");
+		window.setTitle(window.toString());
 		window.setMaximized(true);
 		window.centerOnScreen();
 		window.setMinHeight(630.0);

@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -25,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import model.Ambito;
 import model.Comune;
 import model.Connection.DBConnection;
@@ -32,104 +34,76 @@ import model.Dao.AmbitoDao;
 import model.Dao.ComuneDao;
 import model.Dao.ProgettoDao;
 import model.DaoInterface.ProgettoDaoInterface;
+import view.HomePageImpiegato;
 import model.Impiegato;
 import model.Progetto;
 
 public class ControllerRegistrazioneProgetto {
 
-    @FXML
-    private AnchorPane RegistrazioneProgetto;
+    @FXML private AnchorPane RegistrazioneProgetto;
 
-    @FXML
-    private HBox IstruzioniBox;
+    @FXML private HBox IstruzioniBox;
 
-    @FXML
-    private Label IstruzioniLabel;
+    @FXML private Label IstruzioniLabel;
 
-    @FXML
-    private Label IstruzioniLabel2;
+    @FXML private Label IstruzioniLabel2;
 
-    @FXML
-    private HBox FormBox;
+    @FXML private HBox FormBox;
 
-    @FXML
-    private ScrollPane FormScrollPane;
+    @FXML private ScrollPane FormScrollPane;
 
-    @FXML
-    private VBox Form;
+    @FXML private VBox Form;
 
-    @FXML
-    private VBox TitoloBox;
+    @FXML private VBox TitoloBox;
 
-    @FXML
-    private Label TitoloLabel;
+    @FXML private Label TitoloLabel;
 
-    @FXML
-    private TextField TitoloTF;
+    @FXML private TextField TitoloTF;
 
-    @FXML
-    private Label TitoloErrorLabel;
+    @FXML private Label TitoloErrorLabel;
 
-    @FXML
-    private VBox DescrizioneBox;
+    @FXML private VBox DescrizioneBox;
 
-    @FXML
-    private Label DescrizioneLabel;
+    @FXML private Label DescrizioneLabel;
 
-    @FXML
-    private TextArea DescrizioneTA;
+    @FXML private TextArea DescrizioneTA;
 
-    @FXML
-    private VBox DataDiInizioBox;
+    @FXML private VBox DataDiInizioBox;
 
-    @FXML
-    private Label DataDiInizioLabel;
+    @FXML private Label DataDiInizioLabel;
 
-    @FXML
-    private DatePicker DataDiInizioDP;
+    @FXML private DatePicker DataDiInizioDP;
 
-    @FXML
-    private Label DataDiInizioErrorLabel;
+    @FXML private Label DataDiInizioErrorLabel;
 
-    @FXML
-    private VBox DataDiScadenzaBox;
+    @FXML private VBox DataDiScadenzaBox;
 
-    @FXML
-    private Label DataDiScadenzaLabel;
+    @FXML private Label DataDiScadenzaLabel;
 
-    @FXML
-    private DatePicker DataDiScadenzaDP;
+    @FXML private DatePicker DataDiScadenzaDP;
 
-    @FXML
-    private Label DataDiScadenzaErrorLabel;
+    @FXML private Label DataDiScadenzaErrorLabel;
 
-    @FXML
-    private HBox TipologiaBox;
+    @FXML private HBox TipologiaBox;
 
-    @FXML
-    private Label TipologiaLabel;
+    @FXML private Label TipologiaLabel;
 
-    @FXML
-    private ComboBox<?> TipologiaComboBox;
+    @FXML private ComboBox<?> TipologiaComboBox;
 
-    @FXML
-    private HBox AmbitiBox;
+    @FXML private HBox AmbitiBox;
 
-    @FXML
-    private Label AmbitiLabel;
+    @FXML private Label AmbitiLabel;
 
-    @FXML
-    private MenuButton AmbitiMenuButton;
+    @FXML private MenuButton AmbitiMenuButton;
 
-    @FXML
-    private AnchorPane ButtonBar;
+    @FXML private AnchorPane ButtonBar;
 
-    @FXML
-    private Button AnnullaButton;
+    @FXML private Button AnnullaButton;
 
-    @FXML
-    private Button ConfermaButton;
+    @FXML private Button ConfermaButton;
     
+    Stage window;    
+    HomePageImpiegato homePageImpiegato;
     
     private Date dataInizioDate = null;
     private Date dataScadenzaDate = null;
@@ -162,23 +136,22 @@ public class ControllerRegistrazioneProgetto {
     }
 
     Impiegato impiegato;
-    public void inizializzaRegistrazioneProgetto(Impiegato impiegato) {
-
+    public void inizializzaRegistrazioneProgetto(Impiegato impiegato, Stage window) {
+    	this.window = window;
         this.impiegato = impiegato;
     	int i = 0;
 
     	while(i<ambitoList.size()) {
-    		MenuItem a = new MenuItem(ambitoList.get(i).toString());
+    		CheckMenuItem a = new CheckMenuItem(ambitoList.get(i).toString());
     		AmbitiMenuButton.getItems().add(a);
     		i++;
     	}
-    	AmbitiMenuButton.setTextFill(Color.BLACK);
     }
     
-    
     @FXML
-    void annullaOperazione(ActionEvent event) {
-
+    void annullaOperazione(ActionEvent event) throws Exception{
+    	homePageImpiegato = new HomePageImpiegato(impiegato);
+    	homePageImpiegato.start(window);
     }
 
     @FXML

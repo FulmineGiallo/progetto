@@ -30,7 +30,8 @@ public class FormRegistrazioneImpiegato
         controllerRegistrazioneImpiegato = loader.getController();
         controllerRegistrazioneImpiegato.inizializza(window);
         
-        window.setTitle("Registrazione");
+        //window.setTitle("Registrazione");
+        window.setTitle(window.toString());
         window.setMaximized(true);
         window.centerOnScreen();
         window.setMinWidth(850.0);

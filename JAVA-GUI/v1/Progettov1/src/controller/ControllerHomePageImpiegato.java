@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -30,25 +32,18 @@ import view.HomePageBenvenuto;
 import view.HomePageProgetto;
 import view.HomePageValutazioni;
 
-public class ControllerHomePageImpiegato
-{
-	FormRegistrazioneProgetto registrazioneProgetto;
-	HomePageValutazioni homeValutazioni;
-	HomePageBenvenuto homePageBenvenuto;
-	Impiegato impiegato = null;
-	
+public class ControllerHomePageImpiegato {
 	@FXML private AnchorPane 			HomePageImpiegato;
 	
-	@FXML private GridPane 				ToolBar;
+	@FXML private VBox					ImpiegatoBox;
 	@FXML private Label 				NomeImpiegatoLabel;
 	@FXML private Label 				GradoImpiegatoLabel;
+	
+	@FXML private HBox					ToolBar;
 	@FXML private Button 				ValutazioniButton;
 	@FXML private Button 				NuovoProgettoButton;
 	@FXML private Button 				LogoutButton;
 	
-	@FXML private GridPane 				ProgettiRiunioniBox;
-	
-	@FXML private GridPane 				ProgettiBox;
 	@FXML private AnchorPane 			ListaProgettiBox;
 	@FXML private Label 				ListaProgettiLabel;
 	@FXML private ScrollPane 			ListaProgettiScrollPane;
@@ -58,21 +53,44 @@ public class ControllerHomePageImpiegato
 	@FXML private Label					IstruzioniLabel;
 	
 	@FXML private AnchorPane			DescrizioneProgettoBox;
-	@FXML private Label 				TitoloProgettoLabel;
 	@FXML private AnchorPane 			DescrizioneProgettoPane;
+	@FXML private Label 				ProjectManagerProgettoLabel;
+	@FXML private Label 				TitoloProgettoLabel;
 	@FXML private TextArea 				DescrizioneProgettoTA;
-	@FXML private Label 				DataDiInizioLabel;
-	@FXML private Label 				DataDiFineLabel;
-	@FXML private Label 				DataDiScadenzaLabel;
-	@FXML private Label 				NoteLabel;
+	@FXML private Label 				DataDiInizioProgettoLabel;
+	@FXML private Label 				DataDiFineProgettoLabel;
+	@FXML private Label 				DataDiScadenzaProgettoLabel;
+	@FXML private Label 				NoteProgettoLabel;
 	
 	@FXML private AnchorPane			ProjectManagerBox;
 	@FXML private Button 				GestioneProgettoButton;
-	@FXML private Button 				ModificaButton;
+	@FXML private Button 				ModificaProgettoButton;
+	
+	@FXML private AnchorPane			DescrizioneRiunioneBox;
+	@FXML private AnchorPane 			DescrizioneRiunionePane;
+	@FXML private Label 				OrganizzatoreRiunioneLabel;
+	@FXML private Label 				TitoloRiunioneLabel;
+	@FXML private TextArea 				DescrizioneRiunioneTA;
+	@FXML private Label 				DataDiInizioRiunioneLabel;
+	@FXML private Label 				OrarioDiInizioRiunioneLabel;
+	@FXML private Label 				OrarioDiFineRiunioneLabel;
+	@FXML private Label 				NoteRiunioneLabel;
+	
+	@FXML private AnchorPane			OrganizzatoreBox;
+	@FXML private Button 				GestioneRiunioneButton;
+	@FXML private Button 				ModificaRiunioneButton;
+	
 	@FXML private Label 				ListaRiunioniLabel;
 	@FXML private ScrollPane 			ListaRiunioniScrollPane;
 	@FXML private ListView<Riunione> 	RiunioniLV;
-    
+	
+	HomePageBenvenuto 					homePageBenvenuto;
+	HomePageValutazioni 				homePageValutazioni;
+	FormRegistrazioneProgetto 			registrazioneProgetto;
+	Stage 								window;
+	
+	Impiegato impiegato = null;
+   
     ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
     ObservableList<Riunione> listaRiunioni = FXCollections.observableArrayList();
     
@@ -80,6 +98,7 @@ public class ControllerHomePageImpiegato
     DBConnection dbConnection;
     ProgettoDaoInterface progetti;
     RiunioneDaoInterface riunioni;
+    
     {
         try {
             dbConnection = new DBConnection();
@@ -105,7 +124,8 @@ public class ControllerHomePageImpiegato
         }
     }
     
-    public void inizializza(Impiegato impiegato) throws SQLException {
+    public void inizializza(Impiegato impiegato, Stage window) throws SQLException {
+    	this.window = window;
     	this.impiegato = impiegato;
     	
     	NomeImpiegatoLabel.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
@@ -132,9 +152,9 @@ public class ControllerHomePageImpiegato
                 IstruzioniBox.setVisible(false);
                 DescrizioneProgettoBox.setVisible(true);
                 DescrizioneProgettoTA.setText(ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
-                DataDiInizioLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
-                DataDiFineLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
-                DataDiScadenzaLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
+                DataDiInizioProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
+                DataDiFineProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
+                DataDiScadenzaProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
 
                 if(ListaProgettiLV.getSelectionModel().getSelectedItem().getProjectManager() == impiegato)
                 {
@@ -150,26 +170,20 @@ public class ControllerHomePageImpiegato
 
     @FXML
     public void CreaProgetto(ActionEvent actionEvent) throws Exception {
-    	PrintWriter writer = null;
-        registrazioneProgetto = new FormRegistrazioneProgetto(writer, impiegato);
-
-        Stage stage = (Stage) NuovoProgettoButton.getScene().getWindow();
-        registrazioneProgetto.start(stage);
+        registrazioneProgetto = new FormRegistrazioneProgetto(impiegato);
+        registrazioneProgetto.start(window);
     }
     
     @FXML
     public void VisualizzaValutazioni(ActionEvent event) throws Exception {
-
-    	PrintWriter writer = null;
-        homeValutazioni = new HomePageValutazioni(writer, impiegato);
-
-        Stage stage = (Stage) ValutazioniButton.getScene().getWindow();
-        homeValutazioni.start(stage);
+        homePageValutazioni = new HomePageValutazioni(impiegato);
+        homePageValutazioni.start(window);
     }
     
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
+    	//inserire conferma di esecuzione logout
         homePageBenvenuto = new HomePageBenvenuto();
-        homePageBenvenuto.start(new Stage());
+        homePageBenvenuto.start(window);
     }
 }
