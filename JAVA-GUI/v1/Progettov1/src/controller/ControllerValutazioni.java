@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import model.Connection.DBConnection;
 import model.Dao.ValutazioneDao;
 import model.DaoInterface.ValutazioneDaoInterface;
+import model.Grado;
 import model.Impiegato;
 import model.Valutazione;
 import view.HomePageImpiegato;
@@ -86,6 +87,8 @@ public class ControllerValutazioni {
     public void inizializza(Impiegato impiegato, Stage window) throws SQLException {
     	this.window = window;
         this.impiegato = impiegato;
+        NomeImpiegatoLabel.setText(impiegato.getNome() + impiegato.getCognome());
+        GradoImpiegatoLabel.setText(impiegato.getGrado());
         lista.addAll(valutazioni.getValutazioni(impiegato));
         ListaValutazioniLV.setItems(lista);
         updateValutazioni();
