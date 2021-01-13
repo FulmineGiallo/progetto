@@ -30,6 +30,10 @@ import model.Comune;
 import model.Connection.DBConnection;
 import model.Dao.AmbitoDao;
 import model.Dao.ComuneDao;
+import model.Dao.ProgettoDao;
+import model.DaoInterface.ProgettoDaoInterface;
+import model.Impiegato;
+import model.Progetto;
 
 public class ControllerRegistrazioneProgetto {
 
@@ -156,17 +160,18 @@ public class ControllerRegistrazioneProgetto {
             throwables.printStackTrace();
         }
     }
-    
-    public void inizializzaRegistrazioneProgetto() {
-    	
+
+    Impiegato impiegato;
+    public void inizializzaRegistrazioneProgetto(Impiegato impiegato) {
+
+        this.impiegato = impiegato;
     	int i = 0;
-    	
+
     	while(i<ambitoList.size()) {
     		MenuItem a = new MenuItem(ambitoList.get(i).toString());
     		AmbitiMenuButton.getItems().add(a);
     		i++;
     	}
-    	
     	AmbitiMenuButton.setTextFill(Color.BLACK);
     }
     
@@ -177,12 +182,15 @@ public class ControllerRegistrazioneProgetto {
     }
 
     @FXML
-    void confermaOperazione(ActionEvent event) {
+    void confermaOperazione(ActionEvent event)
+    {
     	
     	boolean checkTitolo = true;
     	boolean checkDescrizione = true;
     	boolean checkDataInizio = true;
     	boolean checkDataScadenza = true;
+    	boolean checkDataFine = true;
+
 
 
     	if(DataDiInizioDP.getValue() != null)
@@ -223,8 +231,30 @@ public class ControllerRegistrazioneProgetto {
     		else
     			DataDiScadenzaErrorLabel.setText("il progetto non puo scadere prima del suo inizio");
     	}
-    	
-    	
+
+        int risultato;
+    	if(checkTitolo && checkDescrizione && checkDataInizio && checkDataScadenza)
+        {
+            try {
+                ProgettoDaoInterface progetto = new ProgettoDao(connection);
+                Progetto registrazione = new Progetto(TitoloTF.getText());
+                registrazione.setProjectManager(impiegato);
+                registrazione.setDescrizione(DescrizioneTA.getText());
+                registrazione.setDataInizio(DataDiInizioDP.getValue());
+                registrazione.setScadenza(DataDiScadenzaDP.getValue());
+                risultato = progetto.creaProgetto(registrazione);
+                if(risultato == 1)
+                {
+                    System.out.println("Dati inseriti");
+                }
+                else
+                    System.out.println("Errore nella query");
+
+            } catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+        }
 
     }
 

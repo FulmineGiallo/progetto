@@ -7,10 +7,16 @@
 	-fx-font-family: 'Roboto';
 }
 
-.NomeImpiegatoLabel,
 .ListaProgettiLabel,
-.TitoloProgettoLabel,
+.TitoloLabel,
+.OrganizzatoreRiunioneLabel,
+.ProjectManagerProgettoLabel,
 .ListaRiunioniLabel{
+	-fx-font-size: 18;
+	-fx-text-fill: white;
+}
+
+.NomeImpiegatoLabel{
 	-fx-font-size: 18;
 	-fx-text-fill: white;
 }
@@ -34,7 +40,7 @@
 	-fx-background-radius: 10;
 }
 
-.GestioneProgettoButton,
+.GestioneButton,
 .ModificaButton{
 	-fx-background-color: -fx-quartocolore;
 	-fx-background-radius: 10;
@@ -49,7 +55,7 @@
 .ValutazioniButton:hover,
 .NuovoProgettoButton:hover,
 .LogoutButton:hover,
-.GestioneProgettoButton:hover,
+.GestioneButton:hover,
 .ModificaButton:hover{
 	-fx-background-color: -fx-primocolore;
 	-fx-background-radius: 10;
@@ -62,42 +68,44 @@
 	-fx-font-style: italic;
 }
 
-.DescrizioneProgettoPane{
+.DescrizionePane{
 	-fx-border-width: 5;
 	-fx-border-color: white;
 	-fx-background-color: -fx-terzocolore;
 }
 
-.DescrizioneProgettoTA,
-.DescrizioneProgettoTA .scroll-pane,
-.DescrizioneProgettoTA .scroll-pane .viewport,
-.DescrizioneProgettoTA .scroll-pane .viewport .content{
+.DescrizioneTA,
+.DescrizioneTA .scroll-pane,
+.DescrizioneTA .scroll-pane .viewport,
+.DescrizioneTA .scroll-pane .viewport .content{
 	-fx-background-color: -fx-terzocolore;
 	-fx-padding: 0;
 }
 
-.DescrizioneProgettoTA{
+.DescrizioneTA{
 	-fx-text-fill: white;
 	-fx-font-size: 18;
 }
 
-.DescrizioneProgettoTA .scroll-pane{
+.DescrizioneTA .scroll-pane{
 	-fx-hbar-policy: NEVER;
 }
 
-.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical{
+.DescrizioneTA .scroll-pane .scroll-bar:vertical{
 	-fx-background-color: -fx-secondocolore;
 }
 
-.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .thumb,
-.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
-.DescrizioneProgettoTA .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+.DescrizioneTA .scroll-pane .scroll-bar:vertical .thumb,
+.DescrizioneTA .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.DescrizioneTA .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
 	-fx-background-color: -fx-primocolore;
 }
 
 .DataDiInizioLabel,
-.DataDiFineLabel,
-.DataDiScadenzaLabel,
+.DataDiFineProgettoLabel,
+.DataDiScadenzaProgettoLabel,
+.OrarioDiInizioRiunioneLabel,
+.OrarioDiFineRiunioneLabel,
 .NoteLabel{
 	-fx-text-fill: white;
 	-fx-font-size: 18;
@@ -137,6 +145,11 @@
 .ListaRiunioniLV{
 	-fx-control-inner-background: -fx-terzocolore;
 	-fx-font-size: 18;
+}
+
+.ListaProgettiLV .list-cell,
+.ListaRiunioniLV .list-cell{
+	-fx-pref-height: 100;
 }
 
 .ListaProgettiLV .list-cell:selected,

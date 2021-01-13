@@ -151,7 +151,7 @@ public class ControllerHomePageImpiegato
     @FXML
     public void CreaProgetto(ActionEvent actionEvent) throws Exception {
     	PrintWriter writer = null;
-        registrazioneProgetto = new FormRegistrazioneProgetto(writer);
+        registrazioneProgetto = new FormRegistrazioneProgetto(writer, impiegato);
 
         Stage stage = (Stage) NuovoProgettoButton.getScene().getWindow();
         registrazioneProgetto.start(stage);

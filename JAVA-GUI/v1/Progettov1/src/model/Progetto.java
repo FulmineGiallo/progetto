@@ -1,10 +1,7 @@
 package model;
 
-import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 public class Progetto
 {
@@ -72,5 +69,11 @@ public class Progetto
     @Override
     public String toString() {
         return titolo;
+    }
+
+    public void setDataInizio(LocalDate value) {
+    }
+
+    public void setScadenza(LocalDate value) {
     }
 }

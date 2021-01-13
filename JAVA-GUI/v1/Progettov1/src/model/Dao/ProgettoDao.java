@@ -7,19 +7,17 @@ import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ProgettoDao implements ProgettoDaoInterface
 {
     private final Connection connection;
     private final PreparedStatement progettiImpiegato;
-
+    private final PreparedStatement insertProgetto;
     public ProgettoDao(Connection connection) throws SQLException {
         this.connection = connection;
-        progettiImpiegato = connection.prepareStatement("SELECT progetto.titolo, progetto.descrizione, progetto.datainizio, progetto.datafine, progetto.scadenza, progetto.projectmanagerprogetto FROM impiegato NATURAL JOIN progettoimpiegato NATURAL JOIN progetto WHERE CF = ?");
+        progettiImpiegato = connection.prepareStatement("SELECT progetto.titolo, progetto.descrizione, progetto.datainizio, progetto.datafine, progetto.scadenza, progetto.projectmanagerprogetto FROM progetto  WHERE projectmanagerprogetto = ?");
+        insertProgetto = connection.prepareStatement("INSERT INTO progetto VALUES (NEXTVAL('id_progetto_seq'), ?, ?, current_date, ?, ?,?, ?)");
     }
 
     @Override
@@ -46,5 +44,17 @@ public class ProgettoDao implements ProgettoDaoInterface
         rs.close();
 
         return lista;
+    }
+
+    @Override
+    public int creaProgetto(Progetto progetto) throws SQLException
+    {
+        int row = 0;
+        insertProgetto.setString(1, progetto.getTitolo());
+        insertProgetto.setString(2,progetto.getDescrizione());
+        insertProgetto.setDate(3, (Date) progetto.getDataFine());
+        insertProgetto.setDate(4, (Date) progetto.getScadenza());
+        insertProgetto.setString(5,progetto.getProjectManager().getCF());
+        return row;
     }
 }

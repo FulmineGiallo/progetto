@@ -40,7 +40,7 @@
                         <Label fx:id="GradoImpiegatoLabel" styleClass="GradoImpiegatoLabel" />
                      </children>
                   </VBox>
-                  <HBox fx:id="ToolBar" alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
+                  <HBox alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
                      <children>
                         <Button fx:id="ValutazioniButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#VisualizzaValutazioni" prefHeight="65.0" styleClass="ValutazioniButton" text="Le tue valutazioni" />
                         <Button fx:id="NuovoProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#CreaProgetto" prefHeight="65.0" styleClass="NuovoProgettoButton" text="Nuovo progetto" />

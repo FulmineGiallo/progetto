@@ -8,14 +8,18 @@ import javafx.stage.Stage;
 import java.io.PrintWriter;
 
 import controller.ControllerRegistrazioneProgetto;
+import model.Impiegato;
 
 public class FormRegistrazioneProgetto
 {
 	
 	ControllerRegistrazioneProgetto controllerRegistrazioneProgetto;
     private final PrintWriter writer;
+    Impiegato impiegato;
 
-    public FormRegistrazioneProgetto(PrintWriter writer) {
+    public FormRegistrazioneProgetto(PrintWriter writer, Impiegato impiegato)
+    {
+        this.impiegato = impiegato;
         this.writer = writer ;
     }
 
@@ -29,7 +33,7 @@ public class FormRegistrazioneProgetto
 		window.setScene(scene);
 
         controllerRegistrazioneProgetto = loader.getController();
-        controllerRegistrazioneProgetto.inizializzaRegistrazioneProgetto();
+        controllerRegistrazioneProgetto.inizializzaRegistrazioneProgetto(impiegato);
         
         window.setTitle("Registrazione");
         window.setMaximized(true);
