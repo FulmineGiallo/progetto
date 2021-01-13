@@ -151,10 +151,10 @@ public class ControllerHomePageImpiegato {
             public void handle(MouseEvent mouseEvent) {
                 IstruzioniBox.setVisible(false);
                 DescrizioneProgettoBox.setVisible(true);
-                DescrizioneProgettoTA.setText(ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
-                DataDiInizioProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
-                DataDiFineProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
-                DataDiScadenzaProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
+                DescrizioneProgettoTA.setText("Descrizione: \n" + ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
+                DataDiInizioProgettoLabel.setText(String.valueOf("Data Inizio: " + ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
+                DataDiFineProgettoLabel.setText(String.valueOf("Data Fine: "  + ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
+                DataDiScadenzaProgettoLabel.setText(String.valueOf("Data Scadenza: " + ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
 
                 if(ListaProgettiLV.getSelectionModel().getSelectedItem().getProjectManager() == impiegato)
                 {
