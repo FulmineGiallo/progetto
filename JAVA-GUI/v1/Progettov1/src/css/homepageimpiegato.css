@@ -7,10 +7,14 @@
 	-fx-font-family: 'Roboto';
 }
 
-.NomeImpiegatoLabel,
 .ListaProgettiLabel,
 .TitoloProgettoLabel,
 .ListaRiunioniLabel{
+	-fx-font-size: 18;
+	-fx-text-fill: white;
+}
+
+.NomeImpiegatoLabel{
 	-fx-font-size: 18;
 	-fx-text-fill: white;
 }
