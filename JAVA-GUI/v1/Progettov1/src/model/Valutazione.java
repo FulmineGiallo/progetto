@@ -1,9 +1,10 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Valutazione
 {
+	String titolo;
     String recensione;
     int stelle;
     Date dataV;
@@ -14,6 +15,14 @@ public class Valutazione
     {
 
     }
+    
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
 
     public String getRecensione() {
         return recensione;
@@ -35,8 +44,8 @@ public class Valutazione
         return dataV;
     }
 
-    public void setDataV(Date dataV) {
-        this.dataV = dataV;
+    public void setDataV(Date date) {
+        this.dataV = date;
     }
 
     public String getCFrecensore() {
@@ -56,8 +65,7 @@ public class Valutazione
     }
 
     @Override
-    public String toString()
-    {
-        return "Valutazione{}";
+    public String toString() {
+        return "\"" + titolo + "\" - " + String.valueOf(stelle) + " stelle";
     }
 }

@@ -33,6 +33,7 @@ public class ValutazioneDao implements ValutazioneDaoInterface
         while (rs.next())
         {
             valutazione = new Valutazione();
+            valutazione.setTitolo(rs.getString("titolo"));
             valutazione.setRecensito(impiegato);
             valutazione.setCFrecensore(rs.getString("cfrecensore"));
             valutazione.setDataV(rs.getDate("datavalutazione"));
@@ -40,9 +41,6 @@ public class ValutazioneDao implements ValutazioneDaoInterface
             valutazione.setRecensione(rs.getString("recensione"));
             lista.add(valutazione);
         }
-
-        System.out.println(lista.size());
-
         rs.close();
         return lista;
     }

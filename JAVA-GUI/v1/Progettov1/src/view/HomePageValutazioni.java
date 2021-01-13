@@ -20,14 +20,21 @@ public class HomePageValutazioni {
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepagevalutazioni.fxml"));
 	    Parent root = loader.load();
-	    Scene scene =  new Scene(root); 
+	    Scene scene =  new Scene(root);
+	    
+		window.hide();
+		window.setScene(scene);
 	    
 		controllerValutazioni = loader.getController();
 	    controllerValutazioni.inizializza(impiegato, window);
-	
-	    //window.setTitle("Homepage Valutazioni");
-	    window.setTitle(window.toString());
-	    window.setScene(scene);
-	    window.show();
+		
+		//window.setTitle("Home Page");
+		window.setTitle(window.toString());
+		window.setMaximized(true);
+		window.centerOnScreen();
+		window.setMinWidth(1100.0);
+		window.setMinHeight(500.0);
+		
+		window.show();	
 	}
 }
