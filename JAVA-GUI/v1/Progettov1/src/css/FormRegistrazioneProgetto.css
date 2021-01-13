@@ -143,6 +143,14 @@
 	-fx-border-color: -fx-primocolore;
 }
 
+.AmbitiMenuButton .context-menu{
+	-fx-background-color: -fx-secondocolore;
+}
+
+.AmbitiMenuButton .context-menu:hover{
+	-fx-background-color: -fx-primocolore;
+}
+
 .ButtonBar{
 	-fx-border-width: 5 0 0 0;
 	-fx-border-color: -fx-terzocolore;

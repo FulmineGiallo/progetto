@@ -63,10 +63,14 @@
                                           <HBox spacing="10.0">
                                              <children>
                                                 <Label fx:id="DataDiInizioLabel" prefHeight="30.0" prefWidth="118.0" styleClass="DataDiInizioLabel" text="* Data di inizio" />
-                                                <DatePicker fx:id="DataDiInizioDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiInizioDP" />
+                                                <VBox>
+                                                   <children>
+                                                      <DatePicker fx:id="DataDiInizioDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiInizioDP" />
+                                                      <Label fx:id="DataDiInizioErrorLabel" styleClass="DataDiNascitaErrorLabel" />
+                                                   </children>
+                                                </VBox>
                                              </children>
                                           </HBox>
-                                          <Label fx:id="DataDiInizioErrorLabel" styleClass="DataDiNascitaErrorLabel" />
                                        </children>
                                     </VBox>
                                     <VBox fx:id="DataDiScadenzaBox" spacing="3.0">
@@ -74,10 +78,14 @@
                                           <HBox spacing="10.0">
                                              <children>
                                                 <Label fx:id="DataDiScadenzaLabel" prefHeight="30.0" styleClass="DataDiScadenzaLabel" text="* Data di scadenza" />
-                                                <DatePicker fx:id="DataDiScadenzaDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiScadenzaDP" />
+                                                <VBox>
+                                                   <children>
+                                                      <DatePicker fx:id="DataDiScadenzaDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiScadenzaDP" />
+                                                      <Label fx:id="DataDiScadenzaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
+                                                   </children>
+                                                </VBox>
                                              </children>
                                           </HBox>
-                                          <Label fx:id="DataDiScadenzaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
                                        </children>
                                     </VBox>
                                     <HBox fx:id="TipologiaBox" spacing="10.0">
@@ -86,9 +94,9 @@
                                           <ComboBox fx:id="TipologiaComboBox" prefHeight="30.0" prefWidth="200.0" styleClass="TipologiaComboBox" />
                                        </children>
                                     </HBox>
-                                    <HBox fx:id="AmbitiBox" maxWidth="567.0" prefHeight="30.0" spacing="10.0">
+                                    <HBox fx:id="AmbitiBox" prefHeight="30.0" spacing="10.0">
                                        <children>
-                                          <Label fx:id="AmbitiLabel" prefHeight="30.0" prefWidth="111.0" styleClass="AmbitiLabel" text="Ambiti" />
+                                          <Label fx:id="AmbitiLabel" prefHeight="30.0" prefWidth="118.0" styleClass="AmbitiLabel" text="Ambiti" />
                                           <MenuButton fx:id="AmbitiMenuButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="AmbitiMenuButton" />
                                        </children>
                                     </HBox>
