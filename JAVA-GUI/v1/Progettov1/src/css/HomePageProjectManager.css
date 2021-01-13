@@ -1,4 +1,4 @@
-.HomePageValutazioni{
+.HomePageProjectManager{
 	-fx-primocolore: #7289da;
 	-fx-secondocolore: #424549;
 	-fx-terzocolore: #36393e;
@@ -7,7 +7,7 @@
 }
 
 .NomeImpiegatoLabel,
-.ListaValutazioniLabel{
+.ListaPartecipantiLabel{
 	-fx-font-size: 18;
 	-fx-text-fill: white;
 }
@@ -18,7 +18,9 @@
 	-fx-font-family: 'Roboto Light';
 }
 
-.HomePageImpiegatoButton{
+.HomePageImpiegatoButton,
+.NuovaRiunioneButton,
+.AggiungiImpiegatoButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-background-radius: 10;
 	-fx-text-fill: white;
@@ -29,7 +31,9 @@
 	-fx-background-radius: 10;
 }
 
-.HomePageImpiegatoButton:hover{
+.HomePageImpiegatoButton:hover,
+.NuovaRiunioneButton:hover,
+.AggiungiImpiegatoButton:hover{
 	-fx-background-color: -fx-primocolore;
 	-fx-background-radius: 10;
 }
@@ -41,43 +45,43 @@
 	-fx-font-style: italic;
 }
 
-.ListaValutazioniScrollPane{
+.ListaPartecipantiScrollPane{
 	-fx-border-width: 5;
 	-fx-border-color: white;
 }
 
-.ListaValutazioniScrollPane .viewport{
+.ListaPartecipantiScrollPane .viewport{
 	-fx-background-color: -fx-terzocolore;
 }
 
-.ListaValutazioniScrollPane:focused{
+.ListaPartecipantiScrollPane:focused{
     -fx-background-insets: 0;
 }
 
-.ListaValutazioniScrollPane .scroll-bar:vertical{
+.ListaPartecipantiScrollPane .scroll-bar:vertical{
 	-fx-background-color: -fx-terzocolore;
 }
 
-.ListaValutazioniScrollPane .scroll-bar:vertical .thumb,
-.ListaValutazioniScrollPane .scroll-bar:vertical .increment-button .increment-arrow,
-.ListaValutazioniScrollPane .scroll-bar:vertical .decrement-button .decrement-arrow{
+.ListaPartecipantiScrollPane .scroll-bar:vertical .thumb,
+.ListaPartecipantiScrollPane .scroll-bar:vertical .increment-button .increment-arrow,
+.ListaPartecipantiScrollPane .scroll-bar:vertical .decrement-button .decrement-arrow{
 	-fx-background-color: -fx-primocolore;
 }
 
-.ListaValutazioniLV{
+.ListaPartecipantiLV{
 	-fx-control-inner-background: -fx-terzocolore;
 	-fx-font-size: 18;
 }
 
-.ListaValutazioniLV .list-cell{
+.ListaPartecipantiLV .list-cell{
 	-fx-pref-height: 100;
 }
 
-.ListaValutazioniLV .list-cell:selected{
+.ListaPartecipantiLV .list-cell:selected{
 	-fx-background-color: -fx-primocolore;
 }
 
-.DescrizioneValutazionePane{
+.DescrizioneProgettoImpiegatoPane{
 	-fx-border-width: 5;
 	-fx-border-color: white;
 	-fx-background-color: -fx-terzocolore;

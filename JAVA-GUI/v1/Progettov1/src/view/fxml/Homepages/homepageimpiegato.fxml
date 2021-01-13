@@ -142,7 +142,7 @@
                   <Insets />
                </GridPane.margin>
             </GridPane>
-            <AnchorPane GridPane.rowIndex="1">
+            <AnchorPane fx:id="ListaRiunioniBox" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>

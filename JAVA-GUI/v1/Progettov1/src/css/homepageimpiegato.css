@@ -139,6 +139,11 @@
 	-fx-font-size: 18;
 }
 
+.ListaProgettiLV .list-cell,
+.ListaRiunioniLV .list-cell{
+	-fx-pref-height: 100;
+}
+
 .ListaProgettiLV .list-cell:selected,
 .ListaRiunioniLV .list-cell:selected{
 	-fx-background-color: -fx-primocolore;
