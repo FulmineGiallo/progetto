@@ -5,6 +5,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,7 +17,7 @@
 
 <AnchorPane fx:id="HomePageValutazioni" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="900.0" styleClass="HomePageValutazioni" stylesheets="@../../../css/HomePageValutazioni.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerValutazioni">
    <children>
-      <GridPane hgap="30.0" vgap="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane hgap="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
           <ColumnConstraints hgrow="SOMETIMES" percentWidth="70.0" />
@@ -48,6 +51,9 @@
                      </content>
                   </ScrollPane>
                </children>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
             </AnchorPane>
             <AnchorPane fx:id="IstruzioniBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
@@ -57,11 +63,103 @@
                      </children>
                   </HBox>
                </children>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
             </AnchorPane>
             <AnchorPane fx:id="DescrizioneValutazioneBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <AnchorPane fx:id="DescrizioneValutazionePane" styleClass="DescrizioneValutazionePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+                  <AnchorPane fx:id="DescrizioneValutazionePane" styleClass="DescrizioneValutazionePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+                     <children>
+                        <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <Label fx:id="TitoloValutazioneLabel" styleClass="TitoloValutazioneLabel" />
+                              <Label fx:id="RecensoreValutazioneLabel" styleClass="RecensoreValutazioneLabel" wrapText="true" />
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <HBox fx:id="StelleOkBox" alignment="CENTER_LEFT" spacing="1.0">
+                                       <children>
+                                          <ImageView fx:id="StellaOk1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../resources/img/starok.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="StellaOk2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../resources/img/starok.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="StellaOk3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../resources/img/starok.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="StellaOk4" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../resources/img/starok.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="StellaOk5" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                             <image>
+                                                <Image url="@../../resources/img/starok.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="StelleNoBox" alignment="CENTER_LEFT" spacing="1.0">
+                                       <children>
+                                          <ImageView fx:id="PrimaStellaNo" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../resources/img/starno.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="SecondaStellaNo" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../resources/img/starno.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="TerzaStellaNo" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../resources/img/starno.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="QuartaStellaNo" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../resources/img/starno.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="QuintaStellaNo" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../resources/img/starno.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label fx:id="DataValutazioneLabel" styleClass="DataValutazioneLabel" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                              <TextArea fx:id="DescrizioneValutazioneTA" editable="false" minHeight="60.0" styleClass="DescrizioneValutazioneTA" wrapText="true" />
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
                </children>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
             </AnchorPane>
          </children>
       </GridPane>

@@ -27,9 +27,7 @@
 	-fx-font-family: 'Roboto Light';
 }
 
-.ValutazioniButton,
-.NuovoProgettoButton,
-.LogoutButton{
+.ToolBarButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-background-radius: 10;
 	-fx-text-fill: white;
@@ -40,8 +38,9 @@
 	-fx-background-radius: 10;
 }
 
-.GestioneButton,
-.ModificaButton{
+.PartecipanteBoxButton,
+.OrganizzatoreBoxButton,
+.ProjectManagerBoxButton{
 	-fx-background-color: -fx-quartocolore;
 	-fx-background-radius: 10;
 	-fx-text-fill: white;
@@ -49,14 +48,14 @@
 	-fx-border-width: 2;
 	-fx-border-color: white;
 	-fx-border-radius: 10;
-	-fx-background-radius: 10;	
+	-fx-background-radius: 10;
 }
 
-.ValutazioniButton:hover,
-.NuovoProgettoButton:hover,
-.LogoutButton:hover,
-.GestioneButton:hover,
-.ModificaButton:hover{
+.HomePageImpiegatoButton:hover,
+.ToolBarButton:hover,
+.PartecipanteBoxButton:hover,
+.OrganizzatoreBoxButton:hover,
+.ProjectManagerBoxButton:hover{
 	-fx-background-color: -fx-primocolore;
 	-fx-background-radius: 10;
 }

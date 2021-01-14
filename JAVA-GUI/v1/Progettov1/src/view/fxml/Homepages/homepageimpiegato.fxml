@@ -42,9 +42,9 @@
                   </VBox>
                   <HBox fx:id="ToolBar" alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="ValutazioniButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#VisualizzaValutazioni" prefHeight="65.0" styleClass="ValutazioniButton" text="Le tue valutazioni" />
-                        <Button fx:id="NuovoProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#CreaProgetto" prefHeight="65.0" styleClass="NuovoProgettoButton" text="Nuovo progetto" />
-                        <Button fx:id="LogoutButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#EffettuaLogout" prefHeight="65.0" styleClass="LogoutButton" text="Logout" />
+                        <Button fx:id="ValutazioniButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#VisualizzaValutazioni" prefHeight="65.0" styleClass="ToolBarButton" text="Le tue valutazioni" />
+                        <Button fx:id="NuovoProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#CreaProgetto" prefHeight="65.0" styleClass="ToolBarButton" text="Nuovo progetto" />
+                        <Button fx:id="LogoutButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#EffettuaLogout" prefHeight="65.0" styleClass="ToolBarButton" text="Logout" />
                      </children>
                   </HBox>
                   <AnchorPane fx:id="ListaProgettiBox" GridPane.rowIndex="1">
@@ -64,7 +64,7 @@
                         <Insets top="15.0" />
                      </GridPane.margin>
                   </AnchorPane>
-                  <AnchorPane fx:id="IstruzioniBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <AnchorPane fx:id="IstruzioniBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -73,7 +73,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="DescrizioneProgettoBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <AnchorPane fx:id="DescrizioneProgettoBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <AnchorPane fx:id="DescrizioneProgettoPane" styleClass="DescrizionePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
                            <children>
@@ -109,8 +109,8 @@
                                        <children>
                                           <HBox alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Button fx:id="GestioneProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="GestioneButton" text="Gestisci progetto" />
-                                                <Button fx:id="ModificaProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="ModificaButton" text="Modifica informazioni" />
+                                                <Button fx:id="GestioneProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="ProjectManagerBoxButton" text="Gestisci progetto" />
+                                                <Button fx:id="ModificaProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="ProjectManagerBoxButton" text="Modifica informazioni" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -159,12 +159,22 @@
                                           </VBox>
                                        </children>
                                     </AnchorPane>
+                                    <AnchorPane fx:id="PartecipanteBox" visible="false" GridPane.rowIndex="1">
+                                       <children>
+                                          <HBox alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Button fx:id="PresenzaButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="PartecipanteBoxButton" text="Accetta l'invito" />
+                                                <Button fx:id="AssenzaButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="PartecipanteBoxButton" text="Rifiuta l'invito" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
                                     <AnchorPane fx:id="OrganizzatoreBox" visible="false" GridPane.rowIndex="1">
                                        <children>
                                           <HBox alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Button fx:id="GestioneRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="GestioneButton" text="Gestisci riunione" />
-                                                <Button fx:id="ModificaRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="ModificaButton" text="Modifica informazioni" />
+                                                <Button fx:id="GestioneRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="OrganizzatoreBoxButton" text="Gestisci riunione" />
+                                                <Button fx:id="ModificaRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="OrganizzatoreBoxButton" text="Modifica informazioni" />
                                              </children>
                                           </HBox>
                                        </children>

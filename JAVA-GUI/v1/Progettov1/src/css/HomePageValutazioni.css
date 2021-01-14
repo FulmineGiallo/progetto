@@ -12,7 +12,8 @@
 	-fx-text-fill: white;
 }
 
-.GradoImpiegatoLabel{
+.GradoImpiegatoLabel,
+.DataValutazioneLabel{
 	-fx-font-size: 16;
 	-fx-text-fill: white;
 	-fx-font-family: 'Roboto Light';
@@ -81,4 +82,42 @@
 	-fx-border-width: 5;
 	-fx-border-color: white;
 	-fx-background-color: -fx-terzocolore;
+}
+
+.TitoloValutazioneLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 24;
+}
+
+.RecensoreValutazioneLabel{
+	-fx-font-size: 20;
+	-fx-text-fill: white;
+	-fx-font-family: 'Roboto Light';
+}
+
+.DescrizioneValutazioneTA,
+.DescrizioneValutazioneTA .scroll-pane,
+.DescrizioneValutazioneTA .scroll-pane .viewport,
+.DescrizioneValutazioneTA .scroll-pane .viewport .content{
+	-fx-background-color: -fx-terzocolore;
+	-fx-padding: 0;
+}
+
+.DescrizioneValutazioneTA{
+	-fx-text-fill: white;
+	-fx-font-size: 18;
+}
+
+.DescrizioneValutazioneTA .scroll-pane{
+	-fx-hbar-policy: NEVER;
+}
+
+.DescrizioneValutazioneTA .scroll-pane .scroll-bar:vertical{
+	-fx-background-color: -fx-secondocolore;
+}
+
+.DescrizioneValutazioneTA .scroll-pane .scroll-bar:vertical .thumb,
+.DescrizioneValutazioneTA .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.DescrizioneValutazioneTA .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
 }

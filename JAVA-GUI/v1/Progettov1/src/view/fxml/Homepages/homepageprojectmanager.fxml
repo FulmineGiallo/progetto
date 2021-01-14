@@ -2,9 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,23 +16,23 @@
 
 <AnchorPane fx:id="HomePageProjectManager" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="900.0" styleClass="HomePageProjectManager" stylesheets="@../../../css/HomePageProjectManager.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageProgetto">
    <children>
-      <GridPane hgap="30.0" vgap="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane hgap="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
           <ColumnConstraints hgrow="SOMETIMES" percentWidth="70.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints vgrow="NEVER" />
-          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="20.0" vgrow="NEVER" />
+          <RowConstraints percentHeight="80.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox fx:id="ImpiegatoBox">
+            <VBox fx:id="ProjectManagerBox">
                <children>
-                  <Label fx:id="NomeImpiegatoLabel" styleClass="NomeImpiegatoLabel" wrapText="true" />
-                  <Label fx:id="GradoImpiegatoLabel" styleClass="GradoImpiegatoLabel" wrapText="true" />
+                  <Label fx:id="NomeProjectManagerLabel" styleClass="NomeProgectManagerLabel" wrapText="true" />
+                  <Label fx:id="NomeProgettoLabel" styleClass="NomeProgettoLabel" wrapText="true" />
                </children>
             </VBox>
-            <HBox fx:id="ToolBar" alignment="CENTER_RIGHT" spacing="50.0" GridPane.columnIndex="1">
+            <HBox fx:id="ToolBar" alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
                <children>
                   <Button fx:id="NuovaRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="NuovaRiunioneButton" text="Programma una riunione" textAlignment="CENTER" wrapText="true" />
                   <Button fx:id="AggiungiImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="AggiungiImpiegatoButton" text="Aggiungi partecipante" textAlignment="CENTER" wrapText="true" />
@@ -50,20 +52,95 @@
                      </content>
                   </ScrollPane>
                </children>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
             </AnchorPane>
             <AnchorPane fx:id="IstruzioniBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label fx:id="IstruzioniLabel" styleClass="IstruzioniLabel" text="Clicca su un impiegato per&#10;visualizzarne le informazioni" textAlignment="CENTER" visible="false" />
+                        <Label fx:id="IstruzioniLabel" styleClass="IstruzioniLabel" text="Clicca su un impiegato per&#10;visualizzarne le informazioni" textAlignment="CENTER" />
                      </children>
                   </HBox>
                </children>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
             </AnchorPane>
-            <AnchorPane fx:id="DescrizioneProgettoImpiegatoBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AnchorPane fx:id="DescrizioneProgettoImpiegatoBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <AnchorPane fx:id="DescrizioneProgettoImpiegatoPane" styleClass="DescrizioneProgettoImpiegatoPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+                  <AnchorPane fx:id="DescrizioneProgettoImpiegatoPane" styleClass="DescrizioneProgettoImpiegatoPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+                     <children>
+                        <GridPane vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints percentHeight="80.0" vgrow="SOMETIMES" />
+                            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label fx:id="NomePartecipanteLabel" styleClass="NomePartecipanteLabel" />
+                                          <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                             <children>
+                                                <Label fx:id="SkillComboBoxLabel" styleClass="SkillComboBoxLabel" text="Seleziona una skill da visualizzare: " />
+                                                <ComboBox fx:id="SkillComboBox" prefWidth="250.0" styleClass="SkillComboBox" visibleRowCount="5" />
+                                             </children>
+                                          </HBox>
+                                          <VBox fx:id="SkillBox" spacing="15.0">
+                                             <children>
+                                                <GridPane>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT">
+                                                         <children>
+                                                            <Label fx:id="TitoloSkillLabel" styleClass="TitoloSkillLabel" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
+                                                         <children>
+                                                            <Label fx:id="DataCertificazioneSkillLabel" styleClass="DataCertificazioneSkillLabel" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </GridPane>
+                                                <TextArea fx:id="DescrizioneSkillTA" editable="false" minHeight="60.0" styleClass="DescrizioneSkillTA" wrapText="true" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <HBox alignment="BOTTOM_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="RimuoviImpiegatoButton" text="Rimuovi dal progetto" wrapText="true" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children></AnchorPane>
                </children>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
             </AnchorPane>
          </children>
       </GridPane>
