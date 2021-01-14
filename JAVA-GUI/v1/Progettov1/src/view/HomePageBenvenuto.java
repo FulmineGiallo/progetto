@@ -19,7 +19,7 @@ public class HomePageBenvenuto
 
     }
 
-    public void start(Stage window) {
+    public void start(Stage window, Stage popup) {
         try {
         		    	
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepagebenvenuto.fxml"));
@@ -30,7 +30,7 @@ public class HomePageBenvenuto
 			window.setScene(scene);
 			
 			controllerHomePageBenvenuto = loader.getController();
-			controllerHomePageBenvenuto.recuperaStage(window);
+			controllerHomePageBenvenuto.setStage(window, popup);
 			
 			//window.setTitle("Home Page");
 			window.setTitle(window.toString());

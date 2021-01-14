@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Progetto;
 
 import java.io.PrintWriter;
 
@@ -19,14 +20,17 @@ public class HomePageProgetto
         this.writer = writer;
     }
 
-    public void start(Stage window) throws Exception {
+    public void start(Stage window, Stage popup) throws Exception {
     	
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepageprojectmanager.fxml"));
     	Parent root = loader.load();
     	
     	controllerHomePageProgetto = loader.getController();
+    	controllerHomePageProgetto.setStage(window, popup);
+    	controllerHomePageProgetto.inizializza(new Progetto(null)); //non deve essere nuovo ma deve essere recuperato
+    																//dalla HomePageImpiegato
     	
-    	Scene scene =  new Scene(root);
+    	Scene scene = new Scene(root);
         window.setScene(scene);
         
         window.setTitle(window.toString());

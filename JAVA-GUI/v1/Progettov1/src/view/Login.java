@@ -18,7 +18,7 @@ public class Login
 
     }
     
-    public void start(Stage window) {
+    public void start(Stage window, Stage popup) {
     	try {
     		    		
 			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Login.fxml"));
@@ -29,7 +29,7 @@ public class Login
 			window.setScene(scene);
 					
 			controllerLogin = loader.getController();
-			controllerLogin.recuperaStage(window);
+			controllerLogin.setStage(window, popup);
 			
 			//window.setTitle("Login");
 			window.setTitle(window.toString());

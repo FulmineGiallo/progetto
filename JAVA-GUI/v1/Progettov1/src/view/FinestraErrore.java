@@ -2,6 +2,7 @@ package view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import controller.ControllerFinestraErrore;
@@ -17,24 +18,25 @@ public class FinestraErrore {
 		this.errore = errore;
 	}
 
-	public void start(Stage window) throws Exception
+	public void start(Stage popup) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraErrore.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         
-        window.hide();
-        window.setScene(scene);
+        popup.hide();
+        popup.setScene(scene);
         
         controllerFinestraErrore = loader.getController();
         controllerFinestraErrore.inizializza(messaggioErrore, errore);
         
-        window.setTitle("Errore!");
-        window.setResizable(false);
-        window.setMinWidth(400.0);
-        window.setMinHeight(200.0);
-        window.centerOnScreen();
+        //window.setTitle("Errore!");
+        popup.setTitle(popup.toString());
+        popup.setResizable(false);
+        popup.setMinWidth(400.0);
+        popup.setMinHeight(200.0);
+        popup.centerOnScreen();
         
-        window.show();
+        popup.show();
     }
 }

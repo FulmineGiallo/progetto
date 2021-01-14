@@ -88,6 +88,7 @@ public class ControllerHomePageImpiegato {
 	HomePageValutazioni 				homePageValutazioni;
 	FormRegistrazioneProgetto 			registrazioneProgetto;
 	Stage 								window;
+	Stage								popup;
 	
 	Impiegato impiegato = null;
    
@@ -124,8 +125,12 @@ public class ControllerHomePageImpiegato {
         }
     }
     
-    public void inizializza(Impiegato impiegato, Stage window) throws SQLException {
+    public void setStage(Stage window, Stage popup) {
     	this.window = window;
+    	this.popup = popup;
+    }
+    
+    public void inizializza(Impiegato impiegato) throws SQLException {
     	this.impiegato = impiegato;
     	
     	NomeImpiegatoLabel.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
@@ -171,19 +176,19 @@ public class ControllerHomePageImpiegato {
     @FXML
     public void CreaProgetto(ActionEvent actionEvent) throws Exception {
         registrazioneProgetto = new FormRegistrazioneProgetto(impiegato);
-        registrazioneProgetto.start(window);
+        registrazioneProgetto.start(window, popup);
     }
     
     @FXML
     public void VisualizzaValutazioni(ActionEvent event) throws Exception {
         homePageValutazioni = new HomePageValutazioni(impiegato);
-        homePageValutazioni.start(window);
+        homePageValutazioni.start(window, popup);
     }
     
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
     	//inserire conferma di esecuzione logout
         homePageBenvenuto = new HomePageBenvenuto();
-        homePageBenvenuto.start(window);
+        homePageBenvenuto.start(window, popup);
     }
 }

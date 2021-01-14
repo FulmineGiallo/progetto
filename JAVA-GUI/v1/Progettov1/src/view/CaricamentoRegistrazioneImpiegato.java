@@ -20,7 +20,7 @@ public class CaricamentoRegistrazioneImpiegato {
     	
     }
 
-    public void start(Stage window) {
+    public void start(Stage popup) {
         try
 		{
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneImpiegato/CaricamentoRegistrazioneImpiegato.fxml"));
@@ -29,14 +29,15 @@ public class CaricamentoRegistrazioneImpiegato {
 			
 			controllerRegistrazioneImpiegato = loader.getController();
 			
-			window.setResizable(false);
-			window.setTitle("Caricamento in corso...");
-			window.centerOnScreen();
+			popup.setResizable(false);
+			popup.setTitle("Caricamento in corso...");
+			popup.centerOnScreen();
 			
-			window.setScene(scene);
-			window.show();
+			popup.setScene(scene);
+			popup.show();
+			
 			PauseTransition delay = new PauseTransition(Duration.seconds(3));
-			delay.setOnFinished( event -> window.close());
+			delay.setOnFinished( event -> popup.close());
 			delay.play();
 
 		} catch (IOException e)

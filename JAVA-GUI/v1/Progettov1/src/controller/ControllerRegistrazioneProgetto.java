@@ -41,69 +41,41 @@ import model.Progetto;
 public class ControllerRegistrazioneProgetto {
 
     @FXML private AnchorPane RegistrazioneProgetto;
-
     @FXML private HBox IstruzioniBox;
-
     @FXML private Label IstruzioniLabel;
-
     @FXML private Label IstruzioniLabel2;
-
     @FXML private HBox FormBox;
-
     @FXML private ScrollPane FormScrollPane;
-
     @FXML private VBox Form;
-
     @FXML private VBox TitoloBox;
-
     @FXML private Label TitoloLabel;
-
     @FXML private TextField TitoloTF;
-
     @FXML private Label TitoloErrorLabel;
-
     @FXML private VBox DescrizioneBox;
-
     @FXML private Label DescrizioneLabel;
-
     @FXML private TextArea DescrizioneTA;
-
     @FXML private VBox DataDiInizioBox;
-
     @FXML private Label DataDiInizioLabel;
-
     @FXML private DatePicker DataDiInizioDP;
-
     @FXML private Label DataDiInizioErrorLabel;
-
     @FXML private VBox DataDiScadenzaBox;
-
     @FXML private Label DataDiScadenzaLabel;
-
     @FXML private DatePicker DataDiScadenzaDP;
-
     @FXML private Label DataDiScadenzaErrorLabel;
-
     @FXML private HBox TipologiaBox;
-
     @FXML private Label TipologiaLabel;
-
     @FXML private ComboBox<?> TipologiaComboBox;
-
     @FXML private HBox AmbitiBox;
-
     @FXML private Label AmbitiLabel;
-
     @FXML private MenuButton AmbitiMenuButton;
-
     @FXML private AnchorPane ButtonBar;
-
     @FXML private Button AnnullaButton;
-
     @FXML private Button ConfermaButton;
     
-    Stage window;    
-    HomePageImpiegato homePageImpiegato;
+    private Stage window;
+    private Stage popup;
+    
+    private HomePageImpiegato homePageImpiegato;
     
     private Date dataInizioDate = null;
     private Date dataScadenzaDate = null;
@@ -134,10 +106,15 @@ public class ControllerRegistrazioneProgetto {
             throwables.printStackTrace();
         }
     }
+    
+    public void setStage(Stage window, Stage popup) {
+    	this.window = window;
+    	this.popup = popup;
+    }
 
     Impiegato impiegato;
-    public void inizializzaRegistrazioneProgetto(Impiegato impiegato, Stage window) {
-    	this.window = window;
+    
+    public void inizializzaRegistrazioneProgetto(Impiegato impiegato) {
         this.impiegato = impiegato;
     	int i = 0;
 
@@ -151,7 +128,7 @@ public class ControllerRegistrazioneProgetto {
     @FXML
     void annullaOperazione(ActionEvent event) throws Exception{
     	homePageImpiegato = new HomePageImpiegato(impiegato);
-    	homePageImpiegato.start(window);
+    	homePageImpiegato.start(window, popup);
     }
 
     @FXML
@@ -163,8 +140,6 @@ public class ControllerRegistrazioneProgetto {
     	boolean checkDataInizio = true;
     	boolean checkDataScadenza = true;
     	boolean checkDataFine = true;
-
-
 
     	if(DataDiInizioDP.getValue() != null)
     		dataInizioDate = java.sql.Date.valueOf(DataDiInizioDP.getValue());
@@ -180,11 +155,6 @@ public class ControllerRegistrazioneProgetto {
     		else
     			TitoloErrorLabel.setText("Il titolo puo contenere solo lettere e numeri");
     	}
-    	
-//    	if (( DescrizioneTA.getText().isBlank()) ) {
-//    		checkDescrizione = false;
-//    		DescrizioneLabel.setText("La descrizione non puo essere vuota");
-//    	}
     	
     	if(dataInizioDate == null || dataInizioDate.before(dataSupportata)) {
     		checkDataInizio = false;
@@ -206,8 +176,7 @@ public class ControllerRegistrazioneProgetto {
     	}
 
         int risultato;
-    	if(checkTitolo && checkDescrizione && checkDataInizio && checkDataScadenza)
-        {
+    	if(checkTitolo && checkDescrizione && checkDataInizio && checkDataScadenza) {
             try {
                 ProgettoDaoInterface progetto = new ProgettoDao(connection);
                 Progetto registrazione = new Progetto(TitoloTF.getText());
@@ -216,15 +185,13 @@ public class ControllerRegistrazioneProgetto {
                 registrazione.setDataInizio(DataDiInizioDP.getValue());
                 registrazione.setScadenza(DataDiScadenzaDP.getValue());
                 risultato = progetto.creaProgetto(registrazione);
-                if(risultato == 1)
-                {
+                if(risultato == 1) {
                     System.out.println("Dati inseriti");
                 }
                 else
                     System.out.println("Errore nella query");
 
-            } catch (SQLException throwables)
-            {
+            } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }

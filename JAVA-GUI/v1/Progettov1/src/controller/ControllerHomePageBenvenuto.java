@@ -19,16 +19,18 @@ public class ControllerHomePageBenvenuto
     Login 						loginPage;
     FinestraErrore				finestraErrore;
     
-    Stage window = null;
+    private Stage window;
+    private Stage popup;
     
-    public void recuperaStage(Stage window) {
+    public void setStage(Stage window, Stage popup) {
     	this.window = window;
+    	this.popup = popup;
     }
 
     public void inviaCurriculum(ActionEvent actionEvent){
         try {
 			registrazione = new FormRegistrazioneImpiegato();
-			registrazione.start(window);
+			registrazione.start(window, popup);
 		} catch (Exception e) {
 			e.printStackTrace();
 			//inserire inizializzazione della finestraErrore
@@ -38,7 +40,7 @@ public class ControllerHomePageBenvenuto
     public void effettua(ActionEvent actionEvent){
         try {
 			loginPage = new Login();
-			loginPage.start(window);
+			loginPage.start(window, popup);
 		} catch (Exception e) {
 			e.printStackTrace();
 			//inserire inizializzazione della finestraErrore

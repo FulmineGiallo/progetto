@@ -28,19 +28,6 @@ import model.Valutazione;
 import view.HomePageImpiegato;
 
 public class ControllerValutazioni {
-	Impiegato impiegato = new Impiegato(null);
-	
-    @FXML
-    private ListView<?> RecensiononeListView;
-
-    @FXML
-    private Label RecensoreLabel;
-
-    @FXML
-    private Label StelleLabel;
-
-    @FXML
-    private Label dataValutazioneLabel;
     
     @FXML private AnchorPane 			HomePageValutazioni;
     
@@ -62,8 +49,11 @@ public class ControllerValutazioni {
     @FXML private AnchorPane 			DescrizioneValutazioneBox;
     @FXML private AnchorPane 			DescrizioneValutazionePane;
     
-	HomePageImpiegato homePageImpiegato;
-    Stage window;
+    private HomePageImpiegato homePageImpiegato;
+    private Stage window;
+    private Stage popup;
+    
+    private Impiegato impiegato;
 
     Connection connection;
     DBConnection dbConnection;
@@ -84,9 +74,15 @@ public class ControllerValutazioni {
             throwables.printStackTrace();
         }
     }
-    public void inizializza(Impiegato impiegato, Stage window) throws SQLException {
+    
+    public void setStage(Stage window, Stage popup) {
     	this.window = window;
+    	this.popup = popup;
+    }
+    
+    public void inizializza(Impiegato impiegato) throws SQLException {
         this.impiegato = impiegato;
+        
         NomeImpiegatoLabel.setText(impiegato.getNome() + impiegato.getCognome());
         GradoImpiegatoLabel.setText(impiegato.getGrado());
         lista.addAll(valutazioni.getValutazioni(impiegato));
@@ -108,6 +104,6 @@ public class ControllerValutazioni {
     }
    public void backHomePageImpiegato(ActionEvent event) throws Exception {
    		homePageImpiegato = new HomePageImpiegato(impiegato);
-   		homePageImpiegato.start(window);
+   		homePageImpiegato.start(window, popup);
     }
 }

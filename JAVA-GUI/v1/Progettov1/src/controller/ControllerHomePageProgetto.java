@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.PrintWriter;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Impiegato;
+import model.Progetto;
 import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
 
@@ -41,15 +40,26 @@ public class ControllerHomePageProgetto {
     
     @FXML private AnchorPane 			DescrizioneProgettoImpiegatoBox;
     @FXML private AnchorPane 			DescrizioneProgettoImpiegatoPane;
-
-    /*void backHomePageImpiegato(ActionEvent event) throws Exception {
-
-            PrintWriter writer = null;
-            homeImpiegato = new HomePageImpiegato(writer);
-
-            Stage stage = (Stage) buttonHome.getScene().getWindow();
-            homeImpiegato.start(stage);
+    
+    private HomePageImpiegato homePageImpiegato;
+    private Stage window;
+    private Stage popup;
+    
+    Progetto progetto;
+    
+    public void setStage(Stage window, Stage popup) {
+    	this.window = window;
+    	this.popup = popup;
+    }
+    
+    public void inizializza(Progetto progetto) {
+    	this.progetto = progetto;
+    }
+    
+    @FXML
+    private void backHomePageImpiegato(ActionEvent event) throws Exception {
+    	homePageImpiegato = new HomePageImpiegato(null);
+    	homePageImpiegato.start(window, popup);
 
     }
-    */
 }

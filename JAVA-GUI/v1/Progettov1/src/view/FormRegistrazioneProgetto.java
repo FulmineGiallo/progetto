@@ -19,7 +19,7 @@ public class FormRegistrazioneProgetto
         this.impiegato = impiegato;
     }
 
-    public void start(Stage window) throws Exception {
+    public void start(Stage window, Stage popup) throws Exception {
     	
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneProgetto/FormRegistrazioneProgetto.fxml"));
         Parent root = loader.load();
@@ -29,7 +29,8 @@ public class FormRegistrazioneProgetto
 		window.setScene(scene);
 
         controllerRegistrazioneProgetto = loader.getController();
-        controllerRegistrazioneProgetto.inizializzaRegistrazioneProgetto(impiegato, window);
+        controllerRegistrazioneProgetto.setStage(window, popup);
+        controllerRegistrazioneProgetto.inizializzaRegistrazioneProgetto(impiegato);
         
         //window.setTitle("Registrazione");
         window.setTitle(window.toString());

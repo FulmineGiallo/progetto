@@ -27,7 +27,7 @@ public class ControllerLogin
 {
     HomePageBenvenuto benvenuto;
     HomePageImpiegato homeImpiegato;
-    FinestraErrore popup;
+    FinestraErrore finestraErrore;
 
     @FXML private Button AnnullaButton;
     @FXML private Button AccediButton;
@@ -35,17 +35,19 @@ public class ControllerLogin
     @FXML private TextField EmailTF;
     
     private Stage window;
+    private Stage popup;
     
     int accesso = 0;
     Connection connection;
     
-    public void recuperaStage(Stage window) {
+    public void setStage(Stage window, Stage popup) {
     	this.window = window;
+    	this.popup = popup;
     }
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception {
         benvenuto = new HomePageBenvenuto();
-        benvenuto.start(window);
+        benvenuto.start(window, popup);
     }
 
     public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception {
@@ -69,22 +71,20 @@ public class ControllerLogin
             {
                 impiegato = impiegatoDao.creaImpiegato(impiegatoDao.getCFWithEmail(EmailTF.getText()));
                 homeImpiegato = new HomePageImpiegato(impiegato);
-                homeImpiegato.start(window);
+                homeImpiegato.start(window, popup);
             }
             /* Non ci sono email e password corrispondenti */
             if(accesso == 0)
             {            	
-    			//PrintWriter writer = null;
-    			popup = new FinestraErrore("Email o password errati", null);
-    			popup.start(new Stage());
+    			finestraErrore = new FinestraErrore("Email o password errati", null);
+    			finestraErrore.start(popup);
             }
         }
         /* Se i campi sono vuoti */
         else
         {        	
-			//PrintWriter writer = null;
-			popup = new FinestraErrore("Autenticazione errata", null);
-			popup.start(new Stage());
+			finestraErrore = new FinestraErrore("Autenticazione errata", null);
+			finestraErrore.start(popup);
         }
     }
 }

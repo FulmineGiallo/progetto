@@ -36,7 +36,7 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Label 			EmailErrorLabel;
     
     @FXML private Label 			PasswordLabel;
-    @FXML private TextField 		PasswordTF;
+    @FXML private PasswordField 	PasswordTF;
     @FXML private Label 			PasswordErrorLabel;
     
     @FXML private Label 			NomeLabel;
@@ -78,7 +78,8 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Button 			AnnullaButton;
     @FXML private Button 			ConfermaButton;
     
-    private Stage window = null;
+    private Stage window;
+    private Stage popup;
 
     private Calendar Oggi = Calendar.getInstance();
     private int OggiGiorno = Oggi.get(Calendar.DAY_OF_MONTH);
@@ -88,18 +89,18 @@ public class ControllerRegistrazioneImpiegato {
     private LocalDate DataDiNascita = null;
     private LocalDate dataSupportata = null;
    
-    HomePageBenvenuto homePageBenvenuto;
-    CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
+    private HomePageBenvenuto homePageBenvenuto;
+    private CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
     
-	boolean checkEmail = true;
-	boolean checkPassword = true;
-    boolean checkNome = true;
-	boolean checkCognome = true;
-	boolean checkData = true;
-	boolean checkProvincia = true;
+    private boolean checkEmail = true;
+    private boolean checkPassword = true;
+    private boolean checkNome = true;
+    private boolean checkCognome = true;
+    private boolean checkData = true;
+    private boolean checkProvincia = true;
 
-    Connection connection;
-    DBConnection dbConnection;
+    private Connection connection;
+    private DBConnection dbConnection;
     
     {
         try
@@ -112,9 +113,9 @@ public class ControllerRegistrazioneImpiegato {
         }
     }
 
-    ObservableList<Grado> gradiList = FXCollections.observableArrayList();
-    ObservableList<Comune> comuneList = FXCollections.observableArrayList();
-    GradoDaoInterface gradi = null;
+    private ObservableList<Grado> gradiList = FXCollections.observableArrayList();
+    private ObservableList<Comune> comuneList = FXCollections.observableArrayList();
+    private GradoDaoInterface gradi = null;
     
     {
         try
@@ -127,7 +128,7 @@ public class ControllerRegistrazioneImpiegato {
         }
     }
         
-    ComuneDao comuni = null;
+    private ComuneDao comuni = null;
     
     {
         try
@@ -138,10 +139,13 @@ public class ControllerRegistrazioneImpiegato {
             throwables.printStackTrace();
         }
     }
-
-    public void inizializza(Stage window) throws SQLException {
+    
+    public void setStage(Stage window, Stage popup) {
     	this.window = window;
-    	
+    	this.popup = popup;
+    }
+
+    public void inizializza() throws SQLException {    	
         GradoComboBox.getItems().addAll(gradiList);
         GradoComboBox.getSelectionModel().select(2);
         
@@ -202,13 +206,13 @@ public class ControllerRegistrazioneImpiegato {
     
     @FXML private void annullaOperazione (ActionEvent actionEvent) throws Exception {
     	homePageBenvenuto = new HomePageBenvenuto();
-        homePageBenvenuto.start(window);
+        homePageBenvenuto.start(window, popup);
     }
     
     @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {
 		if(controlloCampi()) {
 		    caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
-		    caricamentoRegistrazioneImpiegato.start(new Stage());
+		    caricamentoRegistrazioneImpiegato.start(popup);
 		}	
     }
     

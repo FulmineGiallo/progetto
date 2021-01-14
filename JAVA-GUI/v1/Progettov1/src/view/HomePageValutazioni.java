@@ -16,7 +16,7 @@ public class HomePageValutazioni {
 		this.impiegato = impiegato;
 	}
 	
-	public void start(Stage window) throws Exception
+	public void start(Stage window, Stage popup) throws Exception
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepagevalutazioni.fxml"));
 	    Parent root = loader.load();
@@ -26,7 +26,8 @@ public class HomePageValutazioni {
 		window.setScene(scene);
 	    
 		controllerValutazioni = loader.getController();
-	    controllerValutazioni.inizializza(impiegato, window);
+		controllerValutazioni.setStage(window, popup);
+	    controllerValutazioni.inizializza(impiegato);
 		
 		//window.setTitle("Home Page");
 		window.setTitle(window.toString());
