@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -87,7 +89,11 @@ public class ControllerRegistrazioneImpiegato {
     private int OggiAnno = Oggi.get(Calendar.YEAR);
     
     private LocalDate DataDiNascita = null;
+    private Date dataDiNascitaDate;
+    private Date dataDiOggi = Calendar.getInstance().getTime();
+    private Date dataSupportataDate = null;
     private LocalDate dataSupportata = null;
+    
    
     private HomePageBenvenuto homePageBenvenuto;
     private CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
@@ -270,14 +276,20 @@ public class ControllerRegistrazioneImpiegato {
        
     	//CONTROLLO DATA DI NASCITA
         dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
-
-        if(DataDiNascita != null) {
-        	if(DataDiNascita.isAfter(dataSupportata)) {
+        dataSupportataDate = java.sql.Date.valueOf(dataSupportata);
+        
+        if(DataDiNascitaDP.getValue() != null) {
+        	dataDiNascitaDate = java.sql.Date.valueOf(DataDiNascitaDP.getValue()); 
+        }
+        
+        if(dataDiNascitaDate != null) {
+        	
+        	if(dataDiNascitaDate.after(dataSupportataDate)) {
     			checkData=false;
     			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
     		}
-        	
-        	if(DataDiNascita.isAfter(LocalDate.of(OggiAnno, OggiMese, OggiGiorno))){
+
+        	if(dataDiNascitaDate.after(dataDiOggi)){
         		checkData = false;
         		DataDiNascitaErrorLabel.setText("Inserisci una data di nascita corretta");
         	}
