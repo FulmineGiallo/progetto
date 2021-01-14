@@ -135,12 +135,49 @@ public class ControllerRegistrazioneProgetto {
     void confermaOperazione(ActionEvent event)
     {
     	
+
+        int risultato;
+    	if(controlloCampi()) {
+            try {
+                ProgettoDaoInterface progetto = new ProgettoDao(connection);
+                Progetto registrazione = new Progetto(TitoloTF.getText());
+                registrazione.setProjectManager(impiegato);
+                registrazione.setDescrizione(DescrizioneTA.getText());
+                registrazione.setDataInizio(DataDiInizioDP.getValue());
+                registrazione.setScadenza(DataDiScadenzaDP.getValue());
+                risultato = progetto.creaProgetto(registrazione);
+                if(risultato == 1) {
+                    System.out.println("Dati inseriti");
+                }
+                else
+                    System.out.println("Errore nella query");
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+    }
+
+    @FXML
+    void visualizzaNomeLabel(MouseEvent event) {
+
+    }
+    
+    public boolean controlloCampi(){
+    	
     	boolean checkTitolo = true;
     	boolean checkDescrizione = true;
     	boolean checkDataInizio = true;
     	boolean checkDataScadenza = true;
     	boolean checkDataFine = true;
+    	
+    	TitoloErrorLabel.setText("");
+    	DataDiInizioErrorLabel.setText("");
+    	DataDiScadenzaErrorLabel.setText("");
 
+    	
+    	
     	if(DataDiInizioDP.getValue() != null)
     		dataInizioDate = java.sql.Date.valueOf(DataDiInizioDP.getValue());
     	
@@ -174,33 +211,9 @@ public class ControllerRegistrazioneProgetto {
     		else
     			DataDiScadenzaErrorLabel.setText("il progetto non puo scadere prima del suo inizio");
     	}
-
-        int risultato;
-    	if(checkTitolo && checkDescrizione && checkDataInizio && checkDataScadenza) {
-            try {
-                ProgettoDaoInterface progetto = new ProgettoDao(connection);
-                Progetto registrazione = new Progetto(TitoloTF.getText());
-                registrazione.setProjectManager(impiegato);
-                registrazione.setDescrizione(DescrizioneTA.getText());
-                registrazione.setDataInizio(DataDiInizioDP.getValue());
-                registrazione.setScadenza(DataDiScadenzaDP.getValue());
-                risultato = progetto.creaProgetto(registrazione);
-                if(risultato == 1) {
-                    System.out.println("Dati inseriti");
-                }
-                else
-                    System.out.println("Errore nella query");
-
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-
-    }
-
-    @FXML
-    void visualizzaNomeLabel(MouseEvent event) {
-
+    	
+    	return checkTitolo && checkDataFine && checkDataInizio && checkDataScadenza && checkDescrizione;
+    	
     }
 
 }
