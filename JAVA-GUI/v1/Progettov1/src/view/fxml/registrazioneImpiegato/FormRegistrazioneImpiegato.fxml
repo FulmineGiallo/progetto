@@ -7,6 +7,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -53,7 +54,7 @@
                                     <VBox fx:id="PasswordBox">
                                        <children>
                                           <Label fx:id="PasswordLabel" styleClass="PasswordLabel" text="* Password" visible="false" />
-                                          <TextField fx:id="PasswordTF" onMouseClicked="#visualizzaCognomeLabel" prefWidth="223.0" promptText="* Password" styleClass="PasswordTF" />
+                                          <PasswordField fx:id="PasswordTF" promptText="* Password" styleClass="PasswordTF" />
                                           <Label fx:id="PasswordErrorLabel" styleClass="PasswordErrorLabel" textFill="RED" />
                                        </children>
                                     </VBox>
