@@ -203,15 +203,23 @@ public class ControllerRegistrazioneProgetto {
     			DataDiInizioErrorLabel.setText("il progetto non puo iniziare prima della data di oggi");
     	}
     	
-    	if(dataScadenzaDate == null || dataScadenzaDate.before(dataInizioDate)) {
+    	if(dataScadenzaDate == null) {
     		checkDataScadenza = false;
     		DataDiScadenzaErrorLabel.setTextFill(Color.RED);
-    		if(dataScadenzaDate == null)
-    			DataDiScadenzaErrorLabel.setText("inserire la data di scadenza del progetto");
-    		else
-    			DataDiScadenzaErrorLabel.setText("il progetto non puo scadere prima del suo inizio");
-    	}
-    	
+    		DataDiScadenzaErrorLabel.setText("inserire la data di scadenza del progetto");
+    	}else if(dataInizioDate != null) {
+    				if(dataScadenzaDate.before(dataInizioDate)) {
+    					checkDataScadenza = false;
+    					DataDiScadenzaErrorLabel.setTextFill(Color.RED);
+    					DataDiScadenzaErrorLabel.setText("il progetto non puo scadere prima del suo inizio");
+    				}
+    			}
+    		else {
+    				checkDataScadenza = false;
+    				DataDiScadenzaErrorLabel.setTextFill(Color.RED);
+    				DataDiScadenzaErrorLabel.setText("Inserire prima la data di inizio");
+    			}
+    		
     	return checkTitolo && checkDataFine && checkDataInizio && checkDataScadenza && checkDescrizione;
     	
     }
