@@ -62,6 +62,7 @@ public class ControllerRegistrazioneSkill {
     private TitoloDAO titoloDAO;
     
     private String descrizione;
+    private String tipoSkill;
     Skill skill;
 
     public void setStage(Stage popup) {
@@ -106,12 +107,15 @@ public class ControllerRegistrazioneSkill {
     @FXML private void confermaOperazione(ActionEvent event) {
     	if(controllocampi()) {
     		descrizione = DescrizioneTA.getText();
+    		tipoSkill = ((RadioButton)TipoSkill.getSelectedToggle()).getText();
     		
-    		skill = new Skill(TipoSkill.getSelectedToggle().toString(), DataCertificazioneDP.getValue(), TitoloComboBox.getSelectionModel().getSelectedItem().toString());
+    		skill = new Skill(tipoSkill, DataCertificazioneDP.getValue(), TitoloComboBox.getSelectionModel().getSelectedItem().toString());
     		
     		if(!(descrizione.isBlank())) {
     			skill.setDescrizione(descrizione);
     		}
+    		
+    		System.out.print(skill.getTipoSkill());
     	}
     }
 

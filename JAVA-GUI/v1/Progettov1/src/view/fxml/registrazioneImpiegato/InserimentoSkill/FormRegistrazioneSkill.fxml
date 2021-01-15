@@ -83,10 +83,10 @@
                                              <children>
                                                 <RadioButton fx:id="TipoSkillRB1" mnemonicParsing="false" selected="true" styleClass="TipoSkillRB1" text="Soft-Skill">
                                                    <toggleGroup>
-                                                      <ToggleGroup fx:id="TipoSkill" />
+                                                      <ToggleGroup fx:id="TipoSkillGroup" />
                                                    </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" styleClass="TipoSkillRB2" text="Hard-Skill" toggleGroup="$TipoSkill" />
+                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" styleClass="TipoSkillRB2" text="Hard-Skill" toggleGroup="$TipoSkillGroup" />
                                              </children>
                                           </HBox>
                                        </children></HBox>
