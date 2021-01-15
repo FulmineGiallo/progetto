@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Comune;
 import model.Grado;
@@ -28,6 +29,8 @@ import model.DaoInterface.TitoloDaoInterface;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,7 +66,11 @@ public class ControllerRegistrazioneSkill {
     
     private String descrizione;
     private String tipoSkill;
+    private Date dataCertificazioneDate;
+    private Date dataDiOggi = Calendar.getInstance().getTime();
     Skill skill;
+    
+    
 
     public void setStage(Stage popup) {
 		this.popup = popup;
@@ -97,7 +104,35 @@ public class ControllerRegistrazioneSkill {
     
     public boolean controllocampi() {
     	//controllo data
-    	return true;
+    	
+    	DataCertificazioneErrorLabel.setText("");
+    	DescrizioneLabel.setText("");
+    
+    	boolean checkDataCertificazione=true;
+    	boolean checkDescrizioneSkill=true;
+    	
+    	
+    	if(DataCertificazioneDP.getValue() != null)
+    		dataCertificazioneDate = java.sql.Date.valueOf(DataCertificazioneDP.getValue());
+    	
+    	if(dataCertificazioneDate == null || dataCertificazioneDate.after(dataDiOggi)) {
+    		checkDataCertificazione = false;
+    		DataCertificazioneErrorLabel.setTextFill(Color.RED);
+    		
+    		if(dataCertificazioneDate == null)
+    			DataCertificazioneErrorLabel.setText("inserire la data");
+    		else
+    			DataCertificazioneErrorLabel.setText("Inserire una data corretta");
+    	}
+    	
+    	if(DescrizioneTA.getText().isBlank()) {
+    		checkDescrizioneSkill = false;
+    		DescrizioneLabel.setVisible(true);
+    		DescrizioneLabel.setTextFill(Color.RED);
+    		DescrizioneLabel.setText("Inserire una descrizione");
+    	}
+    	
+    	return checkDataCertificazione && checkDescrizioneSkill;
     }
 
 	@FXML private void annullaOperazione(ActionEvent event) {
