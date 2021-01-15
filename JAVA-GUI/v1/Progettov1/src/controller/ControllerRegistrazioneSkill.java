@@ -48,7 +48,7 @@ public class ControllerRegistrazioneSkill {
 
     @FXML private Label 			TipoSkillLabel;
     @FXML private RadioButton 		TipoSkillRB1;
-    @FXML private ToggleGroup 		TipoSkill;
+    @FXML private ToggleGroup 		TipoSkillGroup;
     @FXML private RadioButton 		TipoSkillRB2;
 
     @FXML private Label 			DataCertificazioneLabel;
@@ -107,15 +107,13 @@ public class ControllerRegistrazioneSkill {
     @FXML private void confermaOperazione(ActionEvent event) {
     	if(controllocampi()) {
     		descrizione = DescrizioneTA.getText();
-    		tipoSkill = ((RadioButton)TipoSkill.getSelectedToggle()).getText();
+    		tipoSkill = ((RadioButton)TipoSkillGroup.getSelectedToggle()).getText();
     		
     		skill = new Skill(tipoSkill, DataCertificazioneDP.getValue(), TitoloComboBox.getSelectionModel().getSelectedItem().toString());
     		
     		if(!(descrizione.isBlank())) {
     			skill.setDescrizione(descrizione);
     		}
-    		
-    		System.out.print(skill.getTipoSkill());
     	}
     }
 
