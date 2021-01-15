@@ -49,7 +49,7 @@
 }
 
 .DescrizioneLabel{
-	-fx-font-size: 10;
+	-fx-font-size: 11.5;
 	-fx-text-fill: -fx-primocolore;
 }
 
@@ -116,7 +116,7 @@
 
 .DataCertificazioneErrorLabel,
 .NuovoTitoloErrorLabel{
-	-fx-font-size: 10;
+	-fx-font-size: 11.5;
 	-fx-text-fill: red;
 }
 

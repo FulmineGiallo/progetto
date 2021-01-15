@@ -63,7 +63,6 @@
 .ProvinciaTF,
 .ComuneComboBox,
 .CodiceFiscaleTF,
-.SkillMenuButton,
 .GradoComboBox{
 	-fx-text-fill: white;
 	-fx-prompt-text-fill: white;
@@ -81,7 +80,6 @@
 .DataDiNascitaDP:focused,
 .ComuneComboBox:focused,
 .CodiceFiscaleTF:focused,
-.SkillMenuButton:focused,
 .GradoComboBox:focused{
 	-fx-border-color: -fx-primocolore;
 }
@@ -168,34 +166,28 @@
 
 .DataDiNascitaDP .arrow-button,
 .ComuneComboBox .arrow-button,
-.SkillMenuButton .arrow-button,
 .GradoComboBox .arrow-button{
 	-fx-background-color: white;
 	-fx-border-width: 2;
 	-fx-border-color: white;
 }
 
-.SkillMenuButton .arrow-button{
-	-fx-background-insets: 0 0 0 -13;
-}
-
 .DataDiNascitaDP:focused .arrow-button,
 .ComuneComboBox:focused .arrow-button,
-.SkillMenuButton:focused .arrow-button,
 .GradoComboBox:focused .arrow-button{
 	-fx-background-color: -fx-primocolore;
 	-fx-border-color: -fx-primocolore;
 }
 
-.SkillMenuButton{
-	-fx-background-color: -fx-secondocolore;
-	-fx-border-width: 0 0 2 0;
-	-fx-border-color: white;
-}
-
-.SkillMenuButton .label .text{
-	-fx-fill: white;
+.SkillButton{
+	-fx-background-color: -fx-terzocolore;
+	-fx-background-radius: 10;
+	-fx-text-fill: white;
 	-fx-font-size: 14;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
 }
 
 .ButtonBar{
@@ -203,7 +195,8 @@
 	-fx-border-color: -fx-terzocolore;
 }
 
-.AnnullaButton, .ConfermaButton{
+.AnnullaButton,
+.ConfermaButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-background-radius: 10;
 	-fx-text-fill: white;
@@ -214,7 +207,9 @@
 	-fx-background-radius: 10;
 }
 
-.AnnullaButton:hover, .ConfermaButton:hover{
+.AnnullaButton:hover,
+.ConfermaButton:hover,
+.SkillButton:hover{
 	-fx-background-color: -fx-primocolore;
 	-fx-background-radius: 10;
 }

@@ -74,7 +74,7 @@
                                     <VBox fx:id="DescrizioneBox">
                                        <children>
                                           <Label fx:id="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
-                                          <TextArea fx:id="DescrizioneTA" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" />
+                                          <TextArea fx:id="DescrizioneTA" minHeight="60.0" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" />
                                        </children></VBox>
                                     <HBox fx:id="TipoSkillBox" alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
@@ -102,7 +102,7 @@
                                        <children>
                                           <Label fx:id="DataCertificazioneLabel" prefWidth="150.0" styleClass="DataCertificazioneLabel" text="* Data di certificazione" />
                                           <DatePicker fx:id="DataCertificazioneDP" styleClass="DataCertificazioneDP" GridPane.columnIndex="1" />
-                                          <Label fx:id="DataCertificazioneErrorLabel" styleClass="DataCertificazioneErrorLabel" GridPane.rowIndex="1" />
+                                          <Label fx:id="DataCertificazioneErrorLabel" styleClass="DataCertificazioneErrorLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>
