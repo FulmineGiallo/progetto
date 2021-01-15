@@ -32,6 +32,8 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -96,6 +98,17 @@ public class ControllerRegistrazioneSkill {
             titoloDAO = new TitoloDAO(connection);
             TitoloComboBox.setItems(titoloDAO.titoliList());
             TitoloComboBox.getSelectionModel().select(7);
+            
+            TitoloComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+
+                  
+                	if(TitoloComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro") )
+                    {
+                		NuovoTitoloTF.setVisible(true);	
+                    }
+                
+            });
+            
         } catch (SQLException ex)
         {
             ex.printStackTrace();
