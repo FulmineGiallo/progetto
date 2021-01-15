@@ -30,7 +30,10 @@ public class TitoloDAO implements TitoloDaoInterface {
         while (rs.next()) {
             lista.add(new Titolo(rs.getString("tipotitolo")));
         }
-
+        
+        Titolo titoloAltro = new Titolo("Altro");
+        lista.add(titoloAltro);
+        
         rs.close();
         return lista;
 	}
