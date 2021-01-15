@@ -106,6 +106,9 @@ public class ControllerRegistrazioneSkill {
                     {
                 		NuovoTitoloTF.setVisible(true);	
                     }
+                	else {
+                		NuovoTitoloTF.setVisible(false);	
+                	}
                 
             });
             
