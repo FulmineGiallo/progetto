@@ -108,6 +108,7 @@ public class ControllerRegistrazioneSkill {
                     }
                 	else {
                 		NuovoTitoloTF.setVisible(false);	
+                		NuovoTitoloErrorLabel.setText("");
                 	}
                 
             });
@@ -123,9 +124,11 @@ public class ControllerRegistrazioneSkill {
     	
     	DataCertificazioneErrorLabel.setText("");
     	DescrizioneLabel.setText("");
+    	NuovoTitoloErrorLabel.setText("");
     
     	boolean checkDataCertificazione=true;
     	boolean checkDescrizioneSkill=true;
+    	boolean checkNuovoTitolo=true;
     	
     	
     	if(DataCertificazioneDP.getValue() != null)
@@ -148,7 +151,15 @@ public class ControllerRegistrazioneSkill {
     		DescrizioneLabel.setText("Inserire una descrizione");
     	}
     	
-    	return checkDataCertificazione && checkDescrizioneSkill;
+    	if(NuovoTitoloTF.isVisible() && NuovoTitoloTF.getText().isBlank()) {
+    		checkNuovoTitolo = false;
+    		NuovoTitoloErrorLabel.setVisible(true);
+    		NuovoTitoloErrorLabel.setTextFill(Color.RED);;
+    		NuovoTitoloErrorLabel.setText("Inseisci il titolo");
+    		
+    	}
+    	
+    	return checkDataCertificazione && checkDescrizioneSkill && checkNuovoTitolo;
     }
 
 	@FXML private void annullaOperazione(ActionEvent event) {
