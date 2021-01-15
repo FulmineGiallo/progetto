@@ -7,35 +7,33 @@ import model.DaoInterface.GradoDaoInterface;
 import model.Grado;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class GradoDao implements GradoDaoInterface
 {
     Connection connection;
-    private PreparedStatement getGradi;
+    private Statement getGradi;
 
     public GradoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
-        getGradi = connection.prepareStatement("SELECT tipogrado FROM gradidisponibili");
+        getGradi = connection.createStatement();
     }
+    
     @Override
-
     public ObservableList<Grado> gradoList() throws SQLException
     {
         ObservableList<Grado> lista = FXCollections.observableArrayList();
         Grado grado;
 
-        ResultSet rs = getGradi.executeQuery();
-        int i = 0;
+        ResultSet rs = getGradi.executeQuery("SELECT tipogrado FROM gradidisponibili");
 
         while (rs.next())
         {
             grado = new Grado(rs.getString("tipogrado"));
             lista.addAll(grado);
-            i++;
         }
 
         rs.close();

@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -27,6 +27,7 @@ import model.calcoloCF;
 
 import view.HomePageBenvenuto;
 import view.CaricamentoRegistrazioneImpiegato;
+import view.FormRegistrazioneSkill;
 
 public class ControllerRegistrazioneImpiegato {
 
@@ -72,7 +73,8 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Label 			CodiceFiscaleErrorLabel;
     
     @FXML private Label 			SkillLabel;
-    @FXML private MenuButton 		SkillMenuButton;
+    @FXML private FlowPane			SkillFlowPane;
+    @FXML private Button			NuovaSkillButton;
     
     @FXML private Label				GradoLabel;
     @FXML private ComboBox<Grado> 	GradoComboBox;
@@ -94,9 +96,9 @@ public class ControllerRegistrazioneImpiegato {
     private Date dataSupportataDate = null;
     private LocalDate dataSupportata = null;
     
-   
     private HomePageBenvenuto homePageBenvenuto;
     private CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
+    private FormRegistrazioneSkill formRegistrazioneSkill;
     
     private boolean checkEmail = true;
     private boolean checkPassword = true;
@@ -210,6 +212,11 @@ public class ControllerRegistrazioneImpiegato {
 			}
     }
     
+    @FXML private void nuovaSkill(ActionEvent event) throws Exception{
+    	formRegistrazioneSkill = new FormRegistrazioneSkill();
+    	formRegistrazioneSkill.start(popup);
+    }
+
     @FXML private void annullaOperazione (ActionEvent actionEvent) throws Exception {
     	homePageBenvenuto = new HomePageBenvenuto();
         homePageBenvenuto.start(window, popup);

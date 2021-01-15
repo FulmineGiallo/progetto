@@ -32,7 +32,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         loginImpiegato = connection.prepareStatement("SELECT COUNT(*) FROM impiegatoaccount WHERE email = ? AND password = ?");
         getImpiegato = connection.prepareStatement("SELECT * FROM impiegato WHERE cf = ?");
         getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
-        getGrado = connection.prepareStatement("SELECT tipogrado FROM impiegato NATURAL JOIN grado WHERE impiegato.email = ?");
+        getGrado = connection.prepareStatement("SELECT tipogrado FROM impiegatoazienda WHERE cf = ?");
         insertImpiegato = connection.prepareStatement("");
     }
 
@@ -60,7 +60,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         Impiegato impiegato = null;
         while (rs.next())
         {
-            impiegato = new Impiegato(rs.getString("CF"));
+            impiegato = new Impiegato(rs.getString("cf"));
             impiegato.setNome(rs.getString("nome"));
             impiegato.setCognome(rs.getString("cognome"));
             impiegato.setComuneNascita(rs.getString("comunen"));
@@ -68,9 +68,9 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             impiegato.setEmail(rs.getString("email"));
             impiegato.setDataNascita(rs.getDate("datan"));
             impiegato.setPassword(rs.getString("password"));
-            impiegato.setIdgrado(rs.getInt("idgrado"));
-            impiegato.setIdimpegato(rs.getInt("idimpiegato"));
-            impiegato.setGrado(getGrado(rs.getString("email")));
+            //impiegato.setIdgrado(rs.getInt("idgrado")); vedere il perché del commento in Impiegato.java
+            impiegato.setIdImpiegato(rs.getInt("idimpiegato"));
+            impiegato.setGrado(getGrado(impiegato.getCF()));
         }
         rs.close();
         return impiegato;
@@ -91,16 +91,16 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         return CF;
     }
     @Override
-    public String getGrado(String email) throws SQLException
+    public String getGrado(String cf) throws SQLException
     {
         String grado = null;
-        getGrado.setString(1,email);
+        getGrado.setString(1, cf);
         ResultSet rs = getGrado.executeQuery();
 
-        while(rs.next())
-        {
+        while(rs.next()) {
             grado = rs.getString("tipogrado");
         }
+        
         rs.close();
         return grado;
     }
@@ -125,6 +125,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             impiegato.setEmail(rs.getString("email"));
             impiegato.setDataNascita(rs.getDate("datan"));
             impiegato.setPassword(rs.getString("password"));
+            impiegato.setGrado(getGrado(impiegato.getCF()));
         }
         rs.close();
         return list;

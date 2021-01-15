@@ -1,19 +1,23 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Impiegato
 {
-    private String CF;
-    private String nome;
-    private String cognome;
-    private String genere;
-    private Date dataNascita;
-    private String comuneNascita;
-    private String email;
-    private int idgrado;
-    private int idimpegato;
-    private String grado;
+    private int					IdImpiegato;
+    private String				CF;
+    private String				nome;
+    private String				cognome;
+    private String				genere;
+    private Date				dataNascita;
+    private String				comuneNascita;
+    private String				email;
+    private String				grado;
+    private ArrayList<Skill>	listaSkill;
+    
+    //private int idGrado; le associazioni in java non si risolvono come le associazioni nei DB,
+    //					   invece di 'int idGrado' mettiamo direttamente 'String grado';
 
     public String getGrado() {
         return grado;
@@ -30,21 +34,13 @@ public class Impiegato
         this.CF = CF;
     }
 
-    public int getIdgrado() {
-        return idgrado;
-    }
-
-    public void setIdgrado(int idgrado) {
-        this.idgrado = idgrado;
-    }
-
-    public int getIdimpegato() {
-        return idimpegato;
+    public int getIdImpiegato() {
+        return IdImpiegato;
     }
     
 
-    public void setIdimpegato(int idimpegato) {
-        this.idimpegato = idimpegato;
+    public void setIdImpiegato(int IdImpiegato) {
+        this.IdImpiegato = IdImpiegato;
     }
 
 
