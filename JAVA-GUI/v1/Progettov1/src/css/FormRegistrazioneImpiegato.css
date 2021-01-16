@@ -144,7 +144,7 @@
 }
 
 .CercaComuniButton{
-	-fx-background-color: -fx-terzocolore;
+	-fx-background-color: -fx-secondocolore;
 	-fx-text-fill: white;
 	-fx-font-size: 14;
 	-fx-border-width: 2;
@@ -164,6 +164,17 @@
 	-fx-font-size: 14;
 }
 
+.SkillButton{
+	-fx-background-color: -fx-terzocolore;
+	-fx-background-radius: 10;
+	-fx-text-fill: white;
+	-fx-font-size: 14;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
 .DataDiNascitaDP .arrow-button,
 .ComuneComboBox .arrow-button,
 .GradoComboBox .arrow-button{
@@ -177,17 +188,6 @@
 .GradoComboBox:focused .arrow-button{
 	-fx-background-color: -fx-primocolore;
 	-fx-border-color: -fx-primocolore;
-}
-
-.SkillButton{
-	-fx-background-color: -fx-terzocolore;
-	-fx-background-radius: 10;
-	-fx-text-fill: white;
-	-fx-font-size: 14;
-	-fx-border-width: 2;
-	-fx-border-color: white;
-	-fx-border-radius: 10;
-	-fx-background-radius: 10;
 }
 
 .ButtonBar{

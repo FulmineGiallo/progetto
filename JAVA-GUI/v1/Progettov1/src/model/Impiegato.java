@@ -13,25 +13,31 @@ public class Impiegato
     private Date				dataNascita;
     private String				comuneNascita;
     private String				email;
+    private String 				password;
     private String				grado;
-    private ArrayList<Skill>	listaSkill;
+    private ArrayList<Skill>	listaSkill = new ArrayList<Skill>();
     
     //private int idGrado; le associazioni in java non si risolvono come le associazioni nei DB,
     //					   invece di 'int idGrado' mettiamo direttamente 'String grado';
 
-    public String getGrado() {
+    public Impiegato(String CF) {
+        this.CF = CF;
+    }
+    
+    public Impiegato() {
+    	
+    }
+    
+    public ArrayList<Skill> getListaSkill() {
+		return listaSkill;
+	}
+
+	public String getGrado() {
         return grado;
     }
 
     public void setGrado(String grado) {
         this.grado = grado;
-    }
-
-    private String password;
-
-    public Impiegato( String CF)
-    {
-        this.CF = CF;
     }
 
     public int getIdImpiegato() {

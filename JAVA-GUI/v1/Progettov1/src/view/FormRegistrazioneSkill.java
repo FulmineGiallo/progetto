@@ -1,17 +1,20 @@
 package view;
 
+import controller.ControllerRegistrazioneImpiegato;
 import controller.ControllerRegistrazioneSkill;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Impiegato;
 
 public class FormRegistrazioneSkill {
 	
 	ControllerRegistrazioneSkill controllerRegistrazioneSkill;
+	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato = null;
 	
-	public FormRegistrazioneSkill() {
-		
+	public FormRegistrazioneSkill(ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato) {
+		this.controllerRegistrazioneImpiegato = controllerRegistrazioneImpiegato;
 	}
 	
 	public void start(Stage popup) throws Exception{
@@ -25,7 +28,7 @@ public class FormRegistrazioneSkill {
 
 		controllerRegistrazioneSkill = loader.getController();
 		controllerRegistrazioneSkill.setStage(popup);
-		controllerRegistrazioneSkill.inizializza();
+		controllerRegistrazioneSkill.inizializza(controllerRegistrazioneImpiegato);
         
         //popup.setTitle("Registrazione");
         popup.setTitle(popup.toString());

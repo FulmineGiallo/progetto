@@ -16,8 +16,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import model.Comune;
 import model.Grado;
+import model.Impiegato;
 import model.Skill;
 import model.Titolo;
 import model.Connection.DBConnection;
@@ -70,10 +72,12 @@ public class ControllerRegistrazioneSkill {
     private String tipoSkill;
     private Date dataCertificazioneDate;
     private Date dataDiOggi = Calendar.getInstance().getTime();
-    Skill skill;
     
+    private Impiegato impiegato = null;
+    private Skill skill = null;
     
-
+    ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
+    
     public void setStage(Stage popup) {
 		this.popup = popup;
 	}
@@ -92,7 +96,10 @@ public class ControllerRegistrazioneSkill {
         }
     }
     
-    public void inizializza() {
+    public void inizializza(ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato) {		
+		this.controllerRegistrazioneImpiegato = controllerRegistrazioneImpiegato;		
+    	impiegato = new Impiegato();
+    	
     	try
         {
             titoloDAO = new TitoloDAO(connection);
@@ -112,54 +119,38 @@ public class ControllerRegistrazioneSkill {
                 	}
                 
             });
-            
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
     
-    public boolean controllocampi() {
-    	//controllo data
-    	
+    public boolean controllocampi() { 	
     	DataCertificazioneErrorLabel.setText("");
     	DescrizioneLabel.setText("");
     	NuovoTitoloErrorLabel.setText("");
     
     	boolean checkDataCertificazione=true;
-    	boolean checkDescrizioneSkill=true;
     	boolean checkNuovoTitolo=true;
-    	
     	
     	if(DataCertificazioneDP.getValue() != null)
     		dataCertificazioneDate = java.sql.Date.valueOf(DataCertificazioneDP.getValue());
     	
     	if(dataCertificazioneDate == null || dataCertificazioneDate.after(dataDiOggi)) {
     		checkDataCertificazione = false;
-    		DataCertificazioneErrorLabel.setTextFill(Color.RED);
     		
     		if(dataCertificazioneDate == null)
-    			DataCertificazioneErrorLabel.setText("inserire la data");
+    			DataCertificazioneErrorLabel.setText("Inserire la data");
     		else
     			DataCertificazioneErrorLabel.setText("Inserire una data corretta");
-    	}
-    	
-    	if(DescrizioneTA.getText().isBlank()) {
-    		checkDescrizioneSkill = false;
-    		DescrizioneLabel.setVisible(true);
-    		DescrizioneLabel.setTextFill(Color.RED);
-    		DescrizioneLabel.setText("Inserire una descrizione");
     	}
     	
     	if(NuovoTitoloTF.isVisible() && NuovoTitoloTF.getText().isBlank()) {
     		checkNuovoTitolo = false;
     		NuovoTitoloErrorLabel.setVisible(true);
-    		NuovoTitoloErrorLabel.setTextFill(Color.RED);;
     		NuovoTitoloErrorLabel.setText("Inseisci il titolo");
-    		
     	}
     	
-    	return checkDataCertificazione && checkDescrizioneSkill && checkNuovoTitolo;
+    	return checkDataCertificazione && checkNuovoTitolo;
     }
 
 	@FXML private void annullaOperazione(ActionEvent event) {
@@ -176,6 +167,11 @@ public class ControllerRegistrazioneSkill {
     		if(!(descrizione.isBlank())) {
     			skill.setDescrizione(descrizione);
     		}
+    	    		
+    		impiegato.getListaSkill().add(skill);
+    		controllerRegistrazioneImpiegato.setNuovaSkillPerImpiegato(impiegato);
+    		
+    		popup.hide();
     	}
     }
 
