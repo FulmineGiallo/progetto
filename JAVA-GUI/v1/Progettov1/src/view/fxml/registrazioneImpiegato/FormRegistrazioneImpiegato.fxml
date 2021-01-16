@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
@@ -13,7 +14,6 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -97,7 +97,7 @@
                                                 <Label fx:id="DataDiNascitaLabel" prefHeight="30.0" styleClass="DataDiNascitaLabel" text="* Data di nascita" />
                                                 <VBox>
                                                    <children>
-                                                      <DatePicker fx:id="DataDiNascitaDP" editable="false" maxWidth="166.0" prefHeight="30.0" prefWidth="166.0" styleClass="DataDiNascitaDP" />
+                                                      <DatePicker fx:id="DataDiNascitaDP" editable="false" maxWidth="175.0" prefHeight="30.0" prefWidth="175.0" styleClass="DataDiNascitaDP" />
                                                       <Label fx:id="DataDiNascitaErrorLabel" styleClass="DataDiNascitaErrorLabel" />
                                                    </children>
                                                 </VBox>
@@ -117,7 +117,7 @@
                                           <VBox alignment="CENTER_LEFT">
                                              <children>
                                                 <Label fx:id="ComuneLabel" styleClass="ComuneLabel" text="* Comune di nascita:" />
-                                                <ComboBox fx:id="ComuneComboBox" maxWidth="280.0" prefHeight="30.0" prefWidth="280.0" styleClass="ComuneComboBox" />
+                                                <ComboBox fx:id="ComuneComboBox" prefWidth="289.0" styleClass="ComuneComboBox" />
                                                 <Label fx:id="ComuneErrorLabel" styleClass="ComuneErrorLabel" />
                                              </children>
                                           </VBox>
@@ -145,20 +145,32 @@
                                           <Insets top="30.0" />
                                        </VBox.margin>
                                     </VBox>
-                                    <HBox fx:id="SkillBox" alignment="CENTER_LEFT" spacing="10.0">
+                                    <GridPane fx:id="SkillBox" hgap="10.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="53.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="47.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints vgrow="SOMETIMES" />
+                                      </rowConstraints>
                                        <children>
-                                          <Label fx:id="SkillLabel" prefWidth="104.0" styleClass="SkillLabel" text="Le tue skills" />
-                                          <FlowPane fx:id="SkillFlowPane" alignment="CENTER_LEFT" hgap="15.0" prefWrapLength="447.0" vgap="15.0">
+                                          <VBox prefHeight="200.0" prefWidth="100.0">
                                              <children>
-                                                <Button fx:id="NuovaSkillButton" mnemonicParsing="false" onAction="#nuovaSkill" styleClass="SkillButton" text="Aggiungi una nuova skill" />
+                                                <Label fx:id="SkillLabel" prefWidth="104.0" styleClass="SkillLabel" text="Le tue skills" />
+                                                <ListView fx:id="SkillLV" editable="true" minHeight="60.0" styleClass="SkillLV" />
                                              </children>
-                                          </FlowPane>
+                                          </VBox>
+                                          <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Button fx:id="NuovaSkillButton" alignment="CENTER" mnemonicParsing="false" onAction="#nuovaSkill" styleClass="SkillButton" text="Aggiungi una nuova skill" />
+                                             </children>
+                                          </VBox>
                                        </children>
-                                    </HBox>
+                                    </GridPane>
                                     <VBox fx:id="GradoBox">
                                        <children>
                                           <Label fx:id="GradoLabel" styleClass="GradoLabel" text="Grado che vorresti ricoprire in azienda" />
-                                          <ComboBox fx:id="GradoComboBox" maxWidth="280.0" minHeight="30.0" prefWidth="280.0" styleClass="GradoComboBox" />
+                                          <ComboBox fx:id="GradoComboBox" maxWidth="289.0" minHeight="30.0" prefWidth="289.0" styleClass="GradoComboBox" />
                                        </children>
                                     </VBox>
                                  </children>

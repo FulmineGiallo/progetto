@@ -175,6 +175,15 @@
 	-fx-background-radius: 10;
 }
 
+.SkillLV{
+	-fx-control-inner-background: -fx-terzocolore;
+	-fx-font-size: 14;
+}
+
+.SkillLV .list-cell{
+	-fx-pref-height: 30;
+}
+
 .DataDiNascitaDP .arrow-button,
 .ComuneComboBox .arrow-button,
 .GradoComboBox .arrow-button{

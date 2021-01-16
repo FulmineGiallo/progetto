@@ -79,7 +79,7 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Label 			CodiceFiscaleErrorLabel;
     
     @FXML private Label 			SkillLabel;
-    @FXML private FlowPane			SkillFlowPane;
+    @FXML private ListView<Skill>	SkillLV;
 	@FXML private Button			NuovaSkillButton;
     
     @FXML private Label				GradoLabel;
@@ -87,24 +87,6 @@ public class ControllerRegistrazioneImpiegato {
     
     @FXML private Button 			AnnullaButton;
     @FXML private Button 			ConfermaButton;
-    
-    /*private String skillButtonStyleExited 	= "-fx-background-color: -fx-secondocolore;"
-    									  	+ "-fx-background-radius: 10;"
-    									  	+ "-fx-text-fill: white;"
-    									  	+ "-fx-font-size: 14;"
-    									  	+ "-fx-border-width: 2;"
-    									  	+ "-fx-border-color: white;"
-    									  	+ "-fx-border-radius: 10;"
-    									  	+ "-fx-background-radius: 10;";
-    
-    private String skillButtonStyleEntered 	= "-fx-background-color: -fx-primocolore;"
-		  									+ "-fx-background-radius: 10;"
-		  									+ "-fx-text-fill: white;"
-		  									+ "-fx-font-size: 14;"
-		  									+ "-fx-border-width: 2;"
-		  									+ "-fx-border-color: white;"
-		  									+ "-fx-border-radius: 10;"
-		  									+ "-fx-background-radius: 10;";*/
     
     private Stage window;
     private Stage popup;
@@ -127,15 +109,14 @@ public class ControllerRegistrazioneImpiegato {
     private Impiegato 	impiegato = null;
     private Skill		ultimaSkillInserita;
     
+    private ObservableList<Skill> listaSkillImpiegato = FXCollections.observableArrayList();
+    
     private boolean checkEmail = true;
     private boolean checkPassword = true;
     private boolean checkNome = true;
     private boolean checkCognome = true;
     private boolean checkData = true;
     private boolean checkProvincia = true;
-    
-    private Button skillButton;
-    private ListIterator<Node> SkillFlowPaneIterator;
 
     private Connection connection;
     private DBConnection dbConnection;
@@ -178,16 +159,11 @@ public class ControllerRegistrazioneImpiegato {
         }
     }
     
-    public void setNuovaSkillPerImpiegato(Impiegato impiegato) {
+    public void setSkillImpiegato(Impiegato impiegato) {
 		this.impiegato = impiegato;
 		
-		
-		for(Skill s: impiegato.getListaSkill()) {
-			ultimaSkillInserita = s;
-		}
-		
-		System.out.println(ultimaSkillInserita);
-		//updateSkillFlowPane();
+		listaSkillImpiegato.addAll(impiegato.getListaSkill());
+		SkillLV.setItems(listaSkillImpiegato);
     }
     
     public void setStage(Stage window, Stage popup) {
@@ -211,8 +187,6 @@ public class ControllerRegistrazioneImpiegato {
         });
 
         comuneList = comuni.gradoList(ProvinciaTF.getText().toUpperCase());
-        
-        //updateSkillButton();
     }
     
     public void updateComune() throws SQLException {
@@ -224,43 +198,6 @@ public class ControllerRegistrazioneImpiegato {
             ComuneComboBox.setItems(comuneList);
         }
     }
-    
-    /*private void updateSkillButton() {
-    	SkillFlowPaneIterator = (SkillFlowPane.getChildren()).listIterator();
-    	while(SkillFlowPaneIterator.hasNext()) {
-    		
-    		//System.out.println("indice: " + SkillFlowPaneIterator.nextIndex());
-    		//System.out.println("elemento: " + SkillFlowPane.getChildren().get(SkillFlowPaneIterator.nextIndex()));
-    		
-    		skillButton = (Button)SkillFlowPane.getChildren().get(SkillFlowPaneIterator.nextIndex());
-    		System.out.println(skillButton);
-    		
-        	skillButton.setStyle(skillButtonStyleExited);
-    		
-			skillButton.setOnMouseEntered(mouseEvent -> {
-				skillButton.setStyle(skillButtonStyleEntered);
-        	});
-        	
-    		skillButton.setOnMouseExited(mouseEvent -> {
-    			skillButton.setStyle(skillButtonStyleExited);
-        	});
-    		
-    		SkillFlowPaneIterator.next();
-    		
-    		//impostare setOnAction del bottone X per eliminare la skill --> rimuovi elemento da listaSkill
-        	//impostare setOnAction del bottone skill per visualizzare le informazioni della skill --> sfruttare finestra popup
-    	}
-    	
-    	System.out.print("\n\n");
-    }*/
-    
-    /*private void updateSkillFlowPane() {
-    	updateSkillButton();
-    	
-    	SkillFlowPane.getChildren().add(SkillFlowPaneIterator.previousIndex(), new Button(ultimaSkillInserita.toString(), new ImageView("view/resources/img/cancel.png")));
-    	
-    	updateSkillButton();
-    }*/
     
     @FXML private void cercaComuni(ActionEvent event) throws SQLException{
     	ComuneComboBox.setPromptText("");
@@ -304,6 +241,7 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {
+    	System.out.println(controlloCampi());
 		if(controlloCampi()) {
 		    caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
 		    caricamentoRegistrazioneImpiegato.start(popup);
@@ -345,7 +283,7 @@ public class ControllerRegistrazioneImpiegato {
     		checkNome = false;
     		NomeErrorLabel.setText("Questo campo è obbligatorio");
     	} else {
-    		if(!(NomeTF.getText().matches("[a-zA-Z]+"))) {
+    		if(!(NomeTF.getText().matches("[a-zA-Z\s]+"))) {
     			checkNome = false;
     			NomeErrorLabel.setText("Il nome può contenere solo lettere");
     		}
@@ -356,7 +294,7 @@ public class ControllerRegistrazioneImpiegato {
     		checkCognome = false;
     		CognomeErrorLabel.setText("Questo campo è obbligatorio");
     	} else {
-    		if(!(CognomeTF.getText().matches("[a-zA-Z]+"))) {
+    		if(!(CognomeTF.getText().matches("[a-zA-Z\s]+"))) {
     			checkCognome = false;
     			CognomeErrorLabel.setText("Il cognome può contenere solo lettere");
     		}

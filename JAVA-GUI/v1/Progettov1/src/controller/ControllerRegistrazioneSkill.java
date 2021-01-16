@@ -169,7 +169,7 @@ public class ControllerRegistrazioneSkill {
     		}
     	    		
     		impiegato.getListaSkill().add(skill);
-    		controllerRegistrazioneImpiegato.setNuovaSkillPerImpiegato(impiegato);
+    		controllerRegistrazioneImpiegato.setSkillImpiegato(impiegato);
     		
     		popup.hide();
     	}

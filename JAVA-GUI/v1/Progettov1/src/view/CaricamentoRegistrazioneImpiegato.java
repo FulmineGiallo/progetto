@@ -30,13 +30,14 @@ public class CaricamentoRegistrazioneImpiegato {
 			controllerRegistrazioneImpiegato = loader.getController();
 			
 			popup.setResizable(false);
-			popup.setTitle("Caricamento in corso...");
+			//popup.setTitle("Caricamento in corso...");
+			popup.setTitle(popup.toString());
 			popup.centerOnScreen();
 			
 			popup.setScene(scene);
 			popup.show();
 			
-			PauseTransition delay = new PauseTransition(Duration.seconds(3));
+			PauseTransition delay = new PauseTransition(Duration.seconds(5));
 			delay.setOnFinished( event -> popup.close());
 			delay.play();
 
