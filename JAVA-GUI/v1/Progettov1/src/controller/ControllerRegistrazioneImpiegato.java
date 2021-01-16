@@ -57,7 +57,7 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Label 			CognomeErrorLabel;
     
     @FXML private Label 			GenereLabel;
-    @FXML private ToggleGroup 		Genere;
+    @FXML private ToggleGroup 		GenereGroup;
     @FXML private RadioButton 		GenereRB1;
     @FXML private RadioButton 		GenereRB2;
 
@@ -88,6 +88,8 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Button 			AnnullaButton;
     @FXML private Button 			ConfermaButton;
     
+    @FXML private Label				CaricamentoLabel;
+    
     private Stage window;
     private Stage popup;
 
@@ -96,11 +98,13 @@ public class ControllerRegistrazioneImpiegato {
     private int OggiMese = Oggi.get(Calendar.MONTH) + 1;
     private int OggiAnno = Oggi.get(Calendar.YEAR);
     
-    private LocalDate DataDiNascita = null;
-    private Date dataDiNascitaDate;
-    private Date dataDiOggi = Calendar.getInstance().getTime();
-    private Date dataSupportataDate = null;
+    private LocalDate dataDiNascita = null;
     private LocalDate dataSupportata = null;
+    private LocalDate dataDiOggi = null;
+    
+    private String comune;
+    private String genere;
+    private calcoloCF cf = new calcoloCF();
     
     private HomePageBenvenuto homePageBenvenuto;
     private CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
@@ -111,12 +115,12 @@ public class ControllerRegistrazioneImpiegato {
     
     private ObservableList<Skill> listaSkillImpiegato = FXCollections.observableArrayList();
     
-    private boolean checkEmail = true;
-    private boolean checkPassword = true;
-    private boolean checkNome = true;
-    private boolean checkCognome = true;
-    private boolean checkData = true;
-    private boolean checkProvincia = true;
+    private boolean checkEmail;
+    private boolean checkPassword;
+    private boolean checkNome;
+    private boolean checkCognome;
+    private boolean checkData;
+    private boolean checkProvincia;
 
     private Connection connection;
     private DBConnection dbConnection;
@@ -207,23 +211,13 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private void CFRegistrazione() {
     	CodiceFiscaleErrorLabel.setText("");
 			try {
-				String comune = ComuneComboBox.getValue().getCodiceComune();
-				calcoloCF cf = null;
-
-				DataDiNascita = DataDiNascitaDP.getValue();
-
-				int AnnoNascita = DataDiNascita.getYear();
-				int MeseNascita = DataDiNascita.getMonthValue();
-				int GiornoNascita = DataDiNascita.getDayOfMonth();
-
-				if (GenereRB1.isSelected())
-					cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'M', GiornoNascita, MeseNascita,
-							AnnoNascita, comune);
-				else
-					cf = new calcoloCF(CognomeTF.getText(), NomeTF.getText(), 'F', GiornoNascita, MeseNascita,
-							AnnoNascita, comune);
-
-				CodiceFiscaleTF.setText(cf.toString());
+				comune 		  = ComuneComboBox.getValue().getCodiceComune();
+				genere 		  = ((RadioButton)GenereGroup.getSelectedToggle()).getText();
+				dataDiNascita = DataDiNascitaDP.getValue();
+				
+				CodiceFiscaleTF.setText(cf.toString(CognomeTF.getText(), NomeTF.getText(), genere,
+													dataDiNascita.getDayOfMonth(), dataDiNascita.getMonthValue(),
+													dataDiNascita.getYear(), comune));
 
 			} catch (Exception e) {
 				CodiceFiscaleErrorLabel.setText("Inserisci tutti i campi prima di calcolare il codice fiscale");
@@ -241,6 +235,7 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {
+    	System.out.println("----------RISULTATO----------");
     	System.out.println(controlloCampi());
 		if(controlloCampi()) {
 		    caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
@@ -255,6 +250,13 @@ public class ControllerRegistrazioneImpiegato {
     	CognomeErrorLabel.setText("");
     	DataDiNascitaErrorLabel.setText("");        
     	ProvinciaErrorLabel.setText("");
+    	
+    	checkEmail = true;
+    	checkPassword = true;
+    	checkNome = true;
+    	checkCognome = true;
+    	checkData = true;
+    	checkProvincia = true;
     	
     	//CONTROLLO EMAIL
     	if(EmailTF.getText().isBlank()) {
@@ -302,26 +304,21 @@ public class ControllerRegistrazioneImpiegato {
        
     	//CONTROLLO DATA DI NASCITA
         dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
-        dataSupportataDate = java.sql.Date.valueOf(dataSupportata);
+        dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
         
-        if(DataDiNascitaDP.getValue() != null) {
-        	dataDiNascitaDate = java.sql.Date.valueOf(DataDiNascitaDP.getValue()); 
-        }
-        
-        if(dataDiNascitaDate != null) {
-        	
-        	if(dataDiNascitaDate.after(dataSupportataDate)) {
-    			checkData=false;
-    			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
-    		}
+        if(DataDiNascitaDP.getValue() != null) {            	
+            	if(DataDiNascitaDP.getValue().isAfter(dataSupportata)) {
+        			checkData = false;
+        			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
+        		}
 
-        	if(dataDiNascitaDate.after(dataDiOggi)){
-        		checkData = false;
-        		DataDiNascitaErrorLabel.setText("Inserisci una data di nascita corretta");
-        	}
-        } else {
-        	checkData = false;
-        	DataDiNascitaErrorLabel.setText("Questo campo è obbligatorio");
+            	if(DataDiNascitaDP.getValue().isAfter(dataDiOggi)){
+            		checkData = false;
+            		DataDiNascitaErrorLabel.setText("Inserisci una data di nascita corretta");
+            	}
+            } else {
+            	checkData = false;
+            	DataDiNascitaErrorLabel.setText("Questo campo è obbligatorio");
         }
         
         //CONTROLLO PROVINCIA DI NASCITA

@@ -82,10 +82,10 @@
                                              <children>
                                                 <RadioButton fx:id="GenereRB1" mnemonicParsing="false" onMouseClicked="#coloraGenereLabel" prefHeight="30.0" selected="true" styleClass="GenereRB1" text="Uomo">
                                                    <toggleGroup>
-                                                      <ToggleGroup fx:id="Genere" />
+                                                      <ToggleGroup fx:id="GenereGroup" />
                                                    </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="GenereRB2" mnemonicParsing="false" onMouseClicked="#coloraGenereLabel" prefHeight="30.0" styleClass="GenereRB2" text="Donna" toggleGroup="$Genere" />
+                                                <RadioButton fx:id="GenereRB2" mnemonicParsing="false" onMouseClicked="#coloraGenereLabel" prefHeight="30.0" styleClass="GenereRB2" text="Donna" toggleGroup="$GenereGroup" />
                                              </children>
                                           </HBox>
                                        </children>
