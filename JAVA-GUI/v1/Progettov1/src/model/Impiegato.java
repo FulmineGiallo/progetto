@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ public class Impiegato
     private String				nome;
     private String				cognome;
     private String				genere;
-    private Date				dataNascita;
+    private LocalDate			dataNascita;
     private String				comuneNascita;
     private String				email;
     private String 				password;
@@ -89,11 +90,11 @@ public class Impiegato
         this.genere = genere;
     }
 
-    public Date getDataNascita() {
+    public LocalDate getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(Date dataNascita) {
+    public void setDataNascita(LocalDate dataNascita) {
         this.dataNascita = dataNascita;
     }
 

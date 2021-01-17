@@ -27,18 +27,22 @@ public class CaricamentoRegistrazioneImpiegato {
 			Parent root = loader.load();
 			Scene scene = new Scene(root, 400.0, 200.0);
 			
+			popup.hide();
+			popup.setScene(scene);
+			
 			controllerRegistrazioneImpiegato = loader.getController();
 			
-			popup.setResizable(false);
 			//popup.setTitle("Caricamento in corso...");
 			popup.setTitle(popup.toString());
+			popup.setResizable(false);
+			popup.setMinHeight(200.0);
+			popup.setMaxWidth(400.0);
+			
+			popup.show();
 			popup.centerOnScreen();
 			
-			popup.setScene(scene);
-			popup.show();
-			
 			PauseTransition delay = new PauseTransition(Duration.seconds(5));
-			delay.setOnFinished( event -> popup.close());
+			delay.setOnFinished(event -> popup.hide());
 			delay.play();
 
 		} catch (IOException e)

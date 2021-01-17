@@ -102,15 +102,20 @@ public class ControllerRegistrazioneImpiegato {
     private LocalDate dataSupportata = null;
     private LocalDate dataDiOggi = null;
     
+    private String email;
+    private String password;
+    private String nome;
+    private String cognome;
     private String comune;
     private String genere;
+    private String codiceFiscale;
     private calcoloCF cf = new calcoloCF();
     
     private HomePageBenvenuto homePageBenvenuto;
     private CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
     private FormRegistrazioneSkill formRegistrazioneSkill;
     
-    private Impiegato 	impiegato = null;
+    private Impiegato 	nuovoImpiegato = null;
     private Skill		ultimaSkillInserita;
     
     private ObservableList<Skill> listaSkillImpiegato = FXCollections.observableArrayList();
@@ -121,6 +126,9 @@ public class ControllerRegistrazioneImpiegato {
     private boolean checkCognome;
     private boolean checkData;
     private boolean checkProvincia;
+    private boolean checkComune;
+    private boolean checkAnagrafica;
+    private boolean checkCF;
 
     private Connection connection;
     private DBConnection dbConnection;
@@ -164,7 +172,7 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     public void setSkillImpiegato(Impiegato impiegato) {
-		this.impiegato = impiegato;
+		this.nuovoImpiegato = impiegato;
 		
 		listaSkillImpiegato.addAll(impiegato.getListaSkill());
 		SkillLV.setItems(listaSkillImpiegato);
@@ -190,38 +198,60 @@ public class ControllerRegistrazioneImpiegato {
             }
         });
 
-        comuneList = comuni.gradoList(ProvinciaTF.getText().toUpperCase());
+        //updateComune();
+        //comuneList = comuni.gradoList(ProvinciaTF.getText().toUpperCase());
     }
     
     public void updateComune() throws SQLException {
-        comuneList = comuni.gradoList(ProvinciaTF.getText().toUpperCase());
-        if(comuneList.isEmpty()) {
-        	ComuneComboBox.setPromptText("Nessun risultato trovato!");
-        } else {
-        	ComuneComboBox.setPromptText(String.valueOf(comuneList.size()) + " comuni trovati");
-            ComuneComboBox.setItems(comuneList);
-        }
+    	
+    	if(controlloProvincia()) {
+    		comuneList.clear();
+    		comuneList = comuni.gradoList(ProvinciaTF.getText().toUpperCase());
+    		
+            if(comuneList.isEmpty()) {
+            	checkComune = false;
+            	ComuneComboBox.setPromptText("Nessun risultato trovato!");
+    			ComuneErrorLabel.setText("Inserisci una provincia italiana esistente");
+            } else {
+            	ComuneComboBox.setPromptText(String.valueOf(comuneList.size()) + " comuni trovati");
+                ComuneComboBox.setItems(comuneList);
+            }
+    	}
     }
     
     @FXML private void cercaComuni(ActionEvent event) throws SQLException{
+    	
+    	checkProvincia = true;
+    	checkComune = true;
+    	
     	ComuneComboBox.setPromptText("");
+    	ComuneErrorLabel.setText("");
+    	ProvinciaErrorLabel.setText("");
+    	
+    	CodiceFiscaleTF.setText("");
+    	
     	updateComune();
     }
 
     @FXML private void CFRegistrazione() {
     	CodiceFiscaleErrorLabel.setText("");
-			try {
-				comune 		  = ComuneComboBox.getValue().getCodiceComune();
-				genere 		  = ((RadioButton)GenereGroup.getSelectedToggle()).getText();
-				dataDiNascita = DataDiNascitaDP.getValue();
-				
-				CodiceFiscaleTF.setText(cf.toString(CognomeTF.getText(), NomeTF.getText(), genere,
-													dataDiNascita.getDayOfMonth(), dataDiNascita.getMonthValue(),
-													dataDiNascita.getYear(), comune));
-
-			} catch (Exception e) {
-				CodiceFiscaleErrorLabel.setText("Inserisci tutti i campi prima di calcolare il codice fiscale");
-			}
+    	
+    	if(controlloCampiAnagrafica()) {
+    		
+ 			nome 		  = NomeTF.getText();
+    		cognome 	  = CognomeTF.getText();
+    		comune 		  = ComuneComboBox.getValue().getCodiceComune();
+    		genere 		  = ((RadioButton)GenereGroup.getSelectedToggle()).getText();
+    		dataDiNascita = DataDiNascitaDP.getValue();
+    		
+    		codiceFiscale = cf.toString(cognome, nome, genere, dataDiNascita.getDayOfMonth(),
+    										 dataDiNascita.getMonthValue(), dataDiNascita.getYear(), comune);
+    		
+    		CodiceFiscaleTF.setText(codiceFiscale);
+    	} else {
+    		
+    		CodiceFiscaleErrorLabel.setText("Inserisci tutti i campi prima di calcolare il codice fiscale");
+    	}
     }
     
     @FXML private void nuovaSkill(ActionEvent event) throws Exception{
@@ -234,51 +264,43 @@ public class ControllerRegistrazioneImpiegato {
         homePageBenvenuto.start(window, popup);
     }
     
-    @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {
-    	System.out.println("----------RISULTATO----------");
-    	System.out.println(controlloCampi());
+    @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {    	
 		if(controlloCampi()) {
 		    caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
 		    caricamentoRegistrazioneImpiegato.start(popup);
 		}	
     }
     
-    public boolean controlloCampi() {
-    	EmailErrorLabel.setText("");
-    	PasswordErrorLabel.setText("");
+    public boolean controlloProvincia() {
+    	ProvinciaErrorLabel.setText("");
+    	
+    	checkProvincia = true;
+    	
+        //CONTROLLO PROVINCIA DI NASCITA
+    	if(ProvinciaTF.getText().isBlank()) {
+    		checkProvincia = false;
+    		ProvinciaErrorLabel.setText("Questo campo è obbligatorio");
+    	} else {
+    		if(!(ProvinciaTF.getText().matches("[a-zA-Z]+"))) {
+    			checkProvincia = false;
+    			ProvinciaErrorLabel.setText("La provincia può contenere solo lettere");
+    		}
+    	}
+    	
+    	return checkProvincia;
+    }
+    
+    public boolean controlloCampiAnagrafica() {
     	NomeErrorLabel.setText("");
     	CognomeErrorLabel.setText("");
     	DataDiNascitaErrorLabel.setText("");        
-    	ProvinciaErrorLabel.setText("");
+    	ComuneErrorLabel.setText("");
     	
-    	checkEmail = true;
-    	checkPassword = true;
     	checkNome = true;
     	checkCognome = true;
     	checkData = true;
-    	checkProvincia = true;
-    	
-    	//CONTROLLO EMAIL
-    	if(EmailTF.getText().isBlank()) {
-    		checkEmail = false;
-    		EmailErrorLabel.setText("Questo campo è obbligatorio");
-    	} else {
-    		if(!(EmailTF.getText().matches("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))) {
-    			checkEmail = false;
-    			EmailErrorLabel.setText("La sintassi dell'email non è valida");
-    		}
-    	}
-    	
-    	//CONTROLLO PASSWORD
-    	if(PasswordTF.getText().isBlank()) {
-    		checkPassword = false;
-    		PasswordErrorLabel.setText("Questo campo è obbligatorio");
-    	} else {
-    		if(!(PasswordTF.getText().length() >= 4)) {
-    			checkPassword = false;
-    			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
-    		}
-    	}
+    	checkProvincia = controlloProvincia();
+    	checkComune = true;
     	
     	//CONTROLLO NOME
     	if(NomeTF.getText().isBlank()) {
@@ -320,19 +342,60 @@ public class ControllerRegistrazioneImpiegato {
             	checkData = false;
             	DataDiNascitaErrorLabel.setText("Questo campo è obbligatorio");
         }
-        
-        //CONTROLLO PROVINCIA DI NASCITA
-    	if(ProvinciaTF.getText().isBlank()) {
-    		checkProvincia = false;
-    		ProvinciaErrorLabel.setText("Questo campo è obbligatorio");
+    	
+    	//CONTROLLO COMUNE DI NASCITA
+        if(ComuneComboBox.getSelectionModel().isEmpty() && checkProvincia) {
+    		checkComune = false;
+    		ComuneErrorLabel.setText("Questo campo è obbligatorio");
+        }
+    	
+    	return checkNome && checkCognome && checkData && checkProvincia && checkComune;
+    }
+    
+    public boolean controlloCampi() {
+    	EmailErrorLabel.setText("");
+    	PasswordErrorLabel.setText("");
+    	CodiceFiscaleErrorLabel.setText("");
+   
+    	checkEmail = true;
+    	checkPassword = true;
+    	checkAnagrafica = controlloCampiAnagrafica();
+    	checkCF = true;
+    	
+    	//CONTROLLO EMAIL
+    	if(EmailTF.getText().isBlank()) {
+    		checkEmail = false;
+    		EmailErrorLabel.setText("Questo campo è obbligatorio");
     	} else {
-    		if(!(ProvinciaTF.getText().matches("[a-zA-Z]+"))) {
-    			checkProvincia = false;
-    			ProvinciaErrorLabel.setText("La provincia può contenere solo lettere");
+    		if(!(EmailTF.getText().matches("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))) {
+    			checkEmail = false;
+    			EmailErrorLabel.setText("La sintassi dell'email non è valida");
     		}
     	}
     	
-    	return checkNome && checkCognome && checkEmail && checkPassword && checkData && checkProvincia;
+    	//CONTROLLO PASSWORD
+    	if(PasswordTF.getText().isBlank()) {
+    		checkPassword = false;
+    		PasswordErrorLabel.setText("Questo campo è obbligatorio");
+    	} else {
+    		if(!(PasswordTF.getText().length() >= 4)) {
+    			checkPassword = false;
+    			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
+    		}
+    	}
+    	
+    	//CONTROLLO CODICE FISCALE
+    	if(CodiceFiscaleTF == null || codiceFiscale == null) {
+    		checkCF = false;
+    		CodiceFiscaleErrorLabel.setText("Questo campo è obbligatorio, inserisci tutti i campi e poi clicca qui per calcolare il codice fiscale");
+    	} else {
+        	if(codiceFiscale.isBlank()) {
+        		checkCF = false;
+        		CodiceFiscaleErrorLabel.setText("Questo campo è obbligatorio, inserisci tutti i campi e poi clicca qui per calcolare il codice fiscale");
+        	}
+    	}
+    	
+    	return checkEmail && checkPassword && checkAnagrafica && checkCF;
     }
 
     public void visualizzaNomeLabel(MouseEvent mouseEvent) {

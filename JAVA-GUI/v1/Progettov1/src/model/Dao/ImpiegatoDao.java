@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +67,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             impiegato.setComuneNascita(rs.getString("comunen"));
             impiegato.setGenere(rs.getString("genere"));
             impiegato.setEmail(rs.getString("email"));
-            impiegato.setDataNascita(rs.getDate("datan"));
+            impiegato.setDataNascita(rs.getObject("datan", LocalDate.class));
             impiegato.setPassword(rs.getString("password"));
             //impiegato.setIdgrado(rs.getInt("idgrado")); vedere il perché del commento in Impiegato.java
             impiegato.setIdImpiegato(rs.getInt("idimpiegato"));
@@ -123,7 +124,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             impiegato.setComuneNascita(rs.getString("comunen"));
             impiegato.setGenere(rs.getString("genere"));
             impiegato.setEmail(rs.getString("email"));
-            impiegato.setDataNascita(rs.getDate("datan"));
+            impiegato.setDataNascita(rs.getObject("datan", LocalDate.class));
             impiegato.setPassword(rs.getString("password"));
             impiegato.setGrado(getGrado(impiegato.getCF()));
         }
