@@ -19,6 +19,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
 
     private final PreparedStatement getImpiegati;
     private final PreparedStatement getNome;
+    private final PreparedStatement getCognome;    
     private final PreparedStatement loginImpiegato;
     private final PreparedStatement getImpiegato;
     private final PreparedStatement getCF;
@@ -30,6 +31,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         this.connection = connection;
         getImpiegati = connection.prepareStatement("SELECT * FROM impiegato");
         getNome = connection.prepareStatement("SELECT nome FROM impiegato WHERE email = ?");
+        getCognome = connection.prepareStatement("SELECT cognome FROM impiegato WHERE email = ?");
         loginImpiegato = connection.prepareStatement("SELECT COUNT(*) FROM impiegatoaccount WHERE email = ? AND password = ?");
         getImpiegato = connection.prepareStatement("SELECT * FROM impiegato WHERE cf = ?");
         getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
@@ -90,6 +92,24 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         }
         rs.close();
         return CF;
+    }
+    @Override
+    public String getNomeCognomeConCF(String CF) throws SQLException
+    {
+    	String nome = "";
+    	String cognome = "";
+    	
+        getImpiegato.setString(1,CF);
+        ResultSet rs = getImpiegato.executeQuery();
+
+        while(rs.next())
+        {
+            nome = rs.getString("nome");
+            cognome = rs.getString("cognome");
+        }
+        rs.close();
+        String nomeCognome = nome + " " + cognome;
+        return nomeCognome;
     }
     @Override
     public String getGrado(String cf) throws SQLException
