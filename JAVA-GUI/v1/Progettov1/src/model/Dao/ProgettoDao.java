@@ -15,13 +15,15 @@ public class ProgettoDao implements ProgettoDaoInterface
     private final PreparedStatement progettiImpiegato;
     private final PreparedStatement insertProgetto;
     private final PreparedStatement updateInfo;
+    private final PreparedStatement partecipanti;
+
 
     public ProgettoDao(Connection connection) throws SQLException {
         this.connection = connection;
         progettiImpiegato = connection.prepareStatement("SELECT * FROM listaprogetti  WHERE partecipante = ?");
         insertProgetto = connection.prepareStatement("INSERT INTO progetto VALUES (NEXTVAL('id_progetto_seq'), ?, ?, current_date, ?, ?,?, ?)");
         updateInfo = connection.prepareStatement("UPDATE progetto SET descrizione = ?, datainizio = ?, datafine = ?, scadenza = ? WHERE projectmanagerprogetto = ? AND titolo = ?");
-
+        partecipanti = connection.prepareStatement("SELECT impiegato.*FROM progetto NATURAL JOIN progettoimpiegato INNER JOIN impiegato ON progettoimpiegato.cf = impiegato.cf WHERE projectmanagerprogetto = ? AND titolo = ?");
     }
 
     @Override
@@ -60,6 +62,35 @@ public class ProgettoDao implements ProgettoDaoInterface
         insertProgetto.setDate(4, progetto.getScadenza());
         insertProgetto.setString(5,progetto.getProjectManager().getCF());
         return row;
+    }
+
+    @Override
+    public ObservableList<Impiegato> getPartecipanti(Progetto progetto) throws SQLException
+    {
+
+        ObservableList<Impiegato> lista = FXCollections.observableArrayList();
+        partecipanti.setString(1,progetto.getProjectManager().getCF());
+        partecipanti.setString(2,progetto.getTitolo());
+
+        ResultSet rs = partecipanti.executeQuery();
+        Impiegato impiegato;
+        while(rs.next())
+        {
+
+            impiegato = new Impiegato(rs.getString("cf"));
+            impiegato.setNome(rs.getString("nome"));
+            impiegato.setCognome(rs.getString("cognome"));
+            impiegato.setComuneNascita(rs.getString("comunen"));
+            impiegato.setGenere(rs.getString("genere"));
+            impiegato.setEmail(rs.getString("email"));
+            impiegato.setDataNascita(rs.getObject("datan", LocalDate.class));
+            impiegato.setPassword(rs.getString("password"));
+            impiegato.setIdImpiegato(rs.getInt("idimpiegato"));
+            lista.add(impiegato);
+        }
+        rs.close();
+
+        return lista;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,10 +12,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Connection.DBConnection;
+import model.Dao.ProgettoDao;
+import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Locale;
 
 public class ControllerHomePageProgetto {
 
@@ -22,8 +31,8 @@ public class ControllerHomePageProgetto {
     @FXML private AnchorPane 			HomePageProjectManager;
     
     @FXML private VBox 					ImpiegatoBox;
-    @FXML private Label 				NomeImpiegatoLabel;
-    @FXML private Label 				GradoImpiegatoLabel;
+    @FXML private Label 				NomeProjectManagerLabel;
+    @FXML private Label 				NomeProgettoLabel;
     
     @FXML private HBox 					ToolBar;
     @FXML private Button 				NuovaRiunioneButton;
@@ -46,20 +55,48 @@ public class ControllerHomePageProgetto {
     private Stage popup;
     
     Progetto progetto;
-    
-    public void setStage(Stage window, Stage popup) {
+    Impiegato impiegato;
+
+    public void setStage(Stage window, Stage popup)
+    {
     	this.window = window;
     	this.popup = popup;
     }
-    
-    public void inizializza(Progetto progetto) {
+
+
+    Connection connection;
+    DBConnection dbConnection;
+    ObservableList<Impiegato> lista = FXCollections.observableArrayList();
+    ProgettoDaoInterface progettoDao;
+
+    {
+        try {
+            dbConnection = new DBConnection();
+            connection = dbConnection.getConnection();
+            progettoDao = new ProgettoDao(connection);
+
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+
+    public void inizializza(Impiegato projectManager, Progetto progetto) throws SQLException {
     	this.progetto = progetto;
+    	this.impiegato = projectManager;
+        NomeProjectManagerLabel.setText((impiegato.getNome() + " " + impiegato.getCognome()).toUpperCase(Locale.ROOT));
+        NomeProgettoLabel.setText(progetto.getTitolo());
+        lista = progettoDao.getPartecipanti(progetto);
+        ListaPartecipantiLV.setItems(lista);
     }
     
     @FXML
-    private void backHomePageImpiegato(ActionEvent event) throws Exception {
-    	homePageImpiegato = new HomePageImpiegato(null);
+    private void backHomePageImpiegato(ActionEvent event) throws Exception
+    {
+    	homePageImpiegato = new HomePageImpiegato(impiegato);
     	homePageImpiegato.start(window, popup);
-
     }
 }

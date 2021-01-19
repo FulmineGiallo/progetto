@@ -97,7 +97,8 @@ public class ControllerHomePageImpiegato {
 	int updateEffettuato;
 
 	Impiegato impiegato = null;
-   
+
+
     ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
     ObservableList<Riunione> listaRiunioni = FXCollections.observableArrayList();
     
@@ -176,6 +177,19 @@ public class ControllerHomePageImpiegato {
                     ProjectManagerBox.setVisible(true);
                     salvaModifiche.setVisible(false);
                     /* Se il bottone gestione progetto viene cliccato */
+                    GestioneProgettoButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event)
+                        {
+                            HomePageProgetto homeProjectManger = new HomePageProgetto(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
+                            try {
+                                homeProjectManger.start(window, popup);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
 
                     /* Se il project manager vuole modificare le informazioni del progetto */
                     ModificaProgettoButton.setOnAction(new EventHandler<ActionEvent>()
