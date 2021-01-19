@@ -307,7 +307,7 @@ public class ControllerRegistrazioneImpiegato {
     		checkNome = false;
     		NomeErrorLabel.setText("Questo campo è obbligatorio");
     	} else {
-    		if(!(NomeTF.getText().matches("[a-zA-Z\s]+"))) {
+    		if(!(NomeTF.getText().matches("[a-zA-Z]+"))) {
     			checkNome = false;
     			NomeErrorLabel.setText("Il nome può contenere solo lettere");
     		}
@@ -318,7 +318,7 @@ public class ControllerRegistrazioneImpiegato {
     		checkCognome = false;
     		CognomeErrorLabel.setText("Questo campo è obbligatorio");
     	} else {
-    		if(!(CognomeTF.getText().matches("[a-zA-Z\s]+"))) {
+    		if(!(CognomeTF.getText().matches("[a-zA-Z]+"))) {
     			checkCognome = false;
     			CognomeErrorLabel.setText("Il cognome può contenere solo lettere");
     		}

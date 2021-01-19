@@ -1,7 +1,7 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Progetto
 {
@@ -71,9 +71,4 @@ public class Progetto
         return titolo;
     }
 
-    public void setDataInizio(LocalDate value) {
-    }
-
-    public void setScadenza(LocalDate value) {
-    }
 }

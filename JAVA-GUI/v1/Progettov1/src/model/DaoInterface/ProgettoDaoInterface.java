@@ -10,4 +10,6 @@ public interface ProgettoDaoInterface
 {
     ObservableList<Progetto> getProgettiImpiegato(Impiegato impiegato) throws SQLException;
     int creaProgetto(Progetto progetto) throws SQLException;
+    int updateInfoProgetto(Progetto progetto) throws SQLException;
+
 }

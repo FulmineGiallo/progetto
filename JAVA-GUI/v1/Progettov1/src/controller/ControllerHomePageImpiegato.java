@@ -1,9 +1,11 @@
 package controller;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Locale;
 
 import javafx.collections.FXCollections;
@@ -57,15 +59,17 @@ public class ControllerHomePageImpiegato {
 	@FXML private Label 				ProjectManagerProgettoLabel;
 	@FXML private Label 				TitoloProgettoLabel;
 	@FXML private TextArea 				DescrizioneProgettoTA;
-	@FXML private Label 				DataDiInizioProgettoLabel;
-	@FXML private Label 				DataDiFineProgettoLabel;
-	@FXML private Label 				DataDiScadenzaProgettoLabel;
+	@FXML private TextArea 				DataDiInizioProgettoLabel;
+	@FXML private TextArea 				DataDiFineProgettoLabel;
+	@FXML private TextArea 				DataDiScadenzaProgettoLabel;
 	@FXML private Label 				NoteProgettoLabel;
-	
+	@FXML private Label                 DescrizioneProgettoLabel;
+
 	@FXML private AnchorPane			ProjectManagerBox;
 	@FXML private Button 				GestioneProgettoButton;
 	@FXML private Button 				ModificaProgettoButton;
-	
+	@FXML private Button                salvaModifiche;
+
 	@FXML private AnchorPane			DescrizioneRiunioneBox;
 	@FXML private AnchorPane 			DescrizioneRiunionePane;
 	@FXML private Label 				OrganizzatoreRiunioneLabel;
@@ -83,13 +87,15 @@ public class ControllerHomePageImpiegato {
 	@FXML private Label 				ListaRiunioniLabel;
 	@FXML private ScrollPane 			ListaRiunioniScrollPane;
 	@FXML private ListView<Riunione> 	RiunioniLV;
-	
+	@FXML private Label                 salario;
+
 	HomePageBenvenuto 					homePageBenvenuto;
 	HomePageValutazioni 				homePageValutazioni;
 	FormRegistrazioneProgetto 			registrazioneProgetto;
 	Stage 								window;
 	Stage								popup;
-	
+	int updateEffettuato;
+
 	Impiegato impiegato = null;
    
     ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
@@ -99,7 +105,6 @@ public class ControllerHomePageImpiegato {
     DBConnection dbConnection;
     ProgettoDaoInterface progetti;
     RiunioneDaoInterface riunioni;
-    
     {
         try {
             dbConnection = new DBConnection();
@@ -125,7 +130,8 @@ public class ControllerHomePageImpiegato {
         }
     }
     
-    public void setStage(Stage window, Stage popup) {
+    public void setStage(Stage window, Stage popup)
+    {
     	this.window = window;
     	this.popup = popup;
     }
@@ -144,7 +150,9 @@ public class ControllerHomePageImpiegato {
         
         IstruzioniBox.setVisible(true);
         DescrizioneProgettoBox.setVisible(false);
-        
+        salario.setText("Calcolare");
+        /*RIchiamare Dao Salario */
+
         updateInfoProgetto();
     }
 
@@ -156,21 +164,76 @@ public class ControllerHomePageImpiegato {
             public void handle(MouseEvent mouseEvent) {
                 IstruzioniBox.setVisible(false);
                 DescrizioneProgettoBox.setVisible(true);
-                DescrizioneProgettoTA.setText("Descrizione: \n" + ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
-                DataDiInizioProgettoLabel.setText(String.valueOf("Data Inizio: " + ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
-                DataDiFineProgettoLabel.setText(String.valueOf("Data Fine: "  + ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
-                DataDiScadenzaProgettoLabel.setText(String.valueOf("Data Scadenza: " + ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
+                gestisciBox(false);
+
+                DescrizioneProgettoTA.setText(ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
+                DataDiInizioProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
+                DataDiFineProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
+                DataDiScadenzaProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
 
                 if(ListaProgettiLV.getSelectionModel().getSelectedItem().getProjectManager() == impiegato)
                 {
                     ProjectManagerBox.setVisible(true);
+                    salvaModifiche.setVisible(false);
                     /* Se il bottone gestione progetto viene cliccato */
+
+                    /* Se il project manager vuole modificare le informazioni del progetto */
+                    ModificaProgettoButton.setOnAction(new EventHandler<ActionEvent>()
+                    {
+                        @Override
+                        public void handle(ActionEvent event)
+                        {
+                            gestisciBox(true);
+                            salvaModifiche.setVisible(true);
+                            salvaModifiche.setOnAction(new EventHandler<ActionEvent>()
+                            {
+                                @Override
+                                public void handle(ActionEvent event)
+                                {
+                                    gestisciBox(false);
+                                    LocalDate datainizio;
+                                    LocalDate dataFine;
+                                    LocalDate dataScadenza;
+                                    try
+                                    {
+                                        ListaProgettiLV.getSelectionModel().getSelectedItem().setDescrizione(DescrizioneProgettoTA.getText());
+                                        datainizio = LocalDate.parse(DataDiInizioProgettoLabel.getText());
+                                        dataFine = LocalDate.parse(DataDiFineProgettoLabel.getText());
+                                        dataScadenza = LocalDate.parse(DataDiScadenzaProgettoLabel.getText());
+
+                                        ListaProgettiLV.getSelectionModel().getSelectedItem().setDataInizio(Date.valueOf(datainizio));
+                                        ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(Date.valueOf(dataFine));
+                                        ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(Date.valueOf(dataScadenza));
+
+
+                                        updateEffettuato = progetti.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
+                                        salvaModifiche.setVisible(false);
+
+                                    } catch (SQLException throwables)
+                                    {
+                                        throwables.printStackTrace();
+                                    }
+
+                                }
+                            });
+
+                        }
+                    });
 
                 }
                 else
                     ProjectManagerBox.setVisible(false);
             }
         });
+    }
+
+    /*Metodo che gestisce le modifice della box */
+    private void gestisciBox(boolean state)
+    {
+        DescrizioneProgettoTA.setEditable(state);
+        DataDiInizioProgettoLabel.setEditable(state);
+        DataDiFineProgettoLabel.setEditable(state);
+        DataDiScadenzaProgettoLabel.setEditable(state);
     }
 
     @FXML

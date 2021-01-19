@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -34,10 +35,17 @@
                 <RowConstraints percentHeight="80.0" valignment="BOTTOM" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <VBox fx:id="ImpiegatoBox">
+                  <VBox fx:id="ImpiegatoBox" prefHeight="102.0" prefWidth="172.0">
                      <children>
                         <Label fx:id="NomeImpiegatoLabel" styleClass="NomeImpiegatoLabel" wrapText="true" />
                         <Label fx:id="GradoImpiegatoLabel" styleClass="GradoImpiegatoLabel" />
+                        <Label id="NomeImpiegatoLabel" prefHeight="18.0" prefWidth="122.0" text="Salario:" textFill="WHITE">
+                           <stylesheets>
+                              <URL value="@../../../css/homepageimpiegato.css" />
+                              <URL value="@../../../css/HomePageBenvenuto.css" />
+                           </stylesheets>
+                        </Label>
+                        <Label id="NomeImpiegatoLabel" fx:id="salario" prefHeight="18.0" prefWidth="101.0" stylesheets="@../../../css/homepageimpiegato.css" text="1000" textFill="WHITE" />
                      </children>
                   </VBox>
                   <HBox fx:id="ToolBar" alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
@@ -91,15 +99,15 @@
                                           <VBox spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <Label fx:id="ProjectManagerProgettoLabel" styleClass="ProjectManagerProgettoLabel" />
-                                                <Label fx:id="TitoloProgettoLabel" styleClass="TitoloLabel" />
+                                                <Label fx:id="DescrizioneProgettoLabel" styleClass="TitoloLabel" text="Descrizione" />
                                                 <TextArea fx:id="DescrizioneProgettoTA" editable="false" minHeight="60.0" styleClass="DescrizioneTA" wrapText="true" />
                                                 <HBox spacing="10.0">
                                                    <children>
-                                                      <Label fx:id="DataDiInizioProgettoLabel" styleClass="DataDiInizioLabel" />
-                                                      <Label fx:id="DataDiFineProgettoLabel" styleClass="DataDiFineProgettoLabel" />
+                                                      <TextArea fx:id="DataDiInizioProgettoLabel" prefHeight="38.0" prefWidth="451.0" styleClass="DescrizioneTA" stylesheets="@../../../css/homepageimpiegato.css" />
+                                                      <TextArea fx:id="DataDiFineProgettoLabel" prefHeight="38.0" prefWidth="462.0" styleClass="DescrizioneTA" />
                                                    </children>
                                                 </HBox>
-                                                <Label fx:id="DataDiScadenzaProgettoLabel" styleClass="DataDiScadenzaProgettoLabel" />
+                                                <TextArea fx:id="DataDiScadenzaProgettoLabel" prefHeight="200.0" prefWidth="200.0" styleClass="DescrizioneTA" />
                                                 <Label fx:id="NoteProgettoLabel" styleClass="NoteLabel" />
                                              </children>
                                           </VBox>
@@ -111,6 +119,7 @@
                                              <children>
                                                 <Button fx:id="GestioneProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="ProjectManagerBoxButton" text="Gestisci progetto" />
                                                 <Button fx:id="ModificaProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="ProjectManagerBoxButton" text="Modifica informazioni" />
+                                                <Button fx:id="salvaModifiche" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="ProjectManagerBoxButton" text="Salva Modifiche" />
                                              </children>
                                           </HBox>
                                        </children>

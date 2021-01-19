@@ -3,6 +3,7 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -143,8 +144,8 @@ public class ControllerRegistrazioneProgetto {
                 Progetto registrazione = new Progetto(TitoloTF.getText());
                 registrazione.setProjectManager(impiegato);
                 registrazione.setDescrizione(DescrizioneTA.getText());
-                registrazione.setDataInizio(DataDiInizioDP.getValue());
-                registrazione.setScadenza(DataDiScadenzaDP.getValue());
+                registrazione.setDataInizio(java.sql.Date.valueOf(DataDiInizioDP.getValue()));
+                registrazione.setScadenza(java.sql.Date.valueOf(DataDiScadenzaDP.getValue()));
                 risultato = progetto.creaProgetto(registrazione);
                 if(risultato == 1) {
                     System.out.println("Dati inseriti");
