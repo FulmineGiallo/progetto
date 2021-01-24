@@ -25,10 +25,17 @@ public class ControllerFinestraErrore {
     @FXML private Button 		DettagliButton;
     @FXML private Button 		OkButton;
     
+    private String dettagliErrore;
+    
     public void inizializza(String messaggioErrore, Exception errore) {
     	MessaggioErroreLabel.setText(messaggioErrore);
-    	if(errore != null) {
-        	MessaggioErroreTA.setText(errore.toString());
+    	if(errore != null) {    		
+    		dettagliErrore = errore.toString() + "\n";
+			for(StackTraceElement STE: errore.getStackTrace()) {
+				dettagliErrore = dettagliErrore + "at " + STE.toString() + "\n";
+			}
+			
+        	MessaggioErroreTA.setText(dettagliErrore);
     	} else {
     		MessaggioErroreTA.setText("Nessun dettaglio da mostrare");
     	}
