@@ -291,6 +291,7 @@ public class ControllerHomePageImpiegato {
                 DescrizioneProgettoBox.setVisible(false);
                 DescrizioneRiunioneBox.setVisible(true);
                 OrganizzatoreBox.setVisible(false);
+                
             //    gestisciBox(false);
 
                 DescrizioneRiunioneTA.setText(RiunioniLV.getSelectionModel().getSelectedItem().getDescrizione());
@@ -303,6 +304,7 @@ public class ControllerHomePageImpiegato {
                 
                 if(RiunioniLV.getSelectionModel().getSelectedItem().getCFOrganizzatore().equals(impiegato.getCF()))
                 {
+                	PartecipanteBox.setVisible(false);
                     OrganizzatoreBox.setVisible(true);
             //        salvaModifiche.setVisible(false);
                     
@@ -322,12 +324,12 @@ public class ControllerHomePageImpiegato {
                     });
 
                 }
-                else
-                    
+                else {
                     PartecipanteBox.setVisible(true);
                     PresenzaButton.setVisible(true);
                     AssenzaButton.setVisible(true);
                     ProjectManagerBox.setVisible(false);
+                }
             }
         });
     }
