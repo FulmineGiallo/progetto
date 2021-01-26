@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="HomePageOrganizzatore" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="900.0" styleClass="HomePageOrganizzatore" stylesheets="@../../../css/HomePageOrganizzatore.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="HomePageOrganizzatore" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="900.0" styleClass="HomePageOrganizzatore" stylesheets="@../../../css/HomePageOrganizzatore.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageOrganizzatore">
    <children>
       <GridPane hgap="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -34,8 +34,8 @@
             </VBox>
             <HBox fx:id="ToolBar" alignment="CENTER_RIGHT" spacing="50.0" GridPane.columnIndex="1">
                <children>
+                  <Button fx:id="HomePageImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#backHomePageImpiegato" prefHeight="65.0" styleClass="HomePageImpiegatoButton" text="Torna alla tua homepage" textAlignment="CENTER" wrapText="true" />
                   <Button fx:id="AggiungiImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="AggiungiImpiegatoButton" text="Aggiungi partecipante" textAlignment="CENTER" wrapText="true" />
-                  <Button fx:id="HomePageImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="HomePageImpiegatoButton" text="Torna alla tua homepage" textAlignment="CENTER" wrapText="true" />
                </children>
             </HBox>
             <AnchorPane fx:id="ListaPartecipantiBox" GridPane.rowIndex="1">

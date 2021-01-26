@@ -17,7 +17,6 @@ import model.Dao.ProgettoDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
-import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
 
 import java.sql.Connection;

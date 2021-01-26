@@ -31,6 +31,7 @@ import model.Progetto;
 import model.Riunione;
 import view.FormRegistrazioneProgetto;
 import view.HomePageBenvenuto;
+import view.HomePageOrganizzatore;
 import view.HomePageProgetto;
 import view.HomePageValutazioni;
 
@@ -83,6 +84,11 @@ public class ControllerHomePageImpiegato {
 	@FXML private AnchorPane			OrganizzatoreBox;
 	@FXML private Button 				GestioneRiunioneButton;
 	@FXML private Button 				ModificaRiunioneButton;
+	
+	
+    @FXML private AnchorPane 			PartecipanteBox;
+    @FXML private Button 				PresenzaButton;
+    @FXML private Button 				AssenzaButton;
 	
 	@FXML private Label 				ListaRiunioniLabel;
 	@FXML private ScrollPane 			ListaRiunioniScrollPane;
@@ -149,12 +155,14 @@ public class ControllerHomePageImpiegato {
         listaRiunioni.addAll(riunioni.getRiunioniImpiegato(impiegato));
         RiunioniLV.setItems(listaRiunioni);
         
+        
         IstruzioniBox.setVisible(true);
         DescrizioneProgettoBox.setVisible(false);
         salario.setText("Calcolare");
         /*RIchiamare Dao Salario */
 
         updateInfoProgetto();
+        updateInfoRiunione();
     }
 
     public void updateInfoProgetto()
@@ -164,7 +172,9 @@ public class ControllerHomePageImpiegato {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 IstruzioniBox.setVisible(false);
+                DescrizioneRiunioneBox.setVisible(false);
                 DescrizioneProgettoBox.setVisible(true);
+                
                 gestisciBox(false);
 
                 DescrizioneProgettoTA.setText(ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
@@ -268,4 +278,60 @@ public class ControllerHomePageImpiegato {
         homePageBenvenuto = new HomePageBenvenuto();
         homePageBenvenuto.start(window, popup);
     }
+    
+    
+    
+    public void updateInfoRiunione()
+    {
+        RiunioniLV.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                IstruzioniBox.setVisible(false);
+                DescrizioneProgettoBox.setVisible(false);
+                DescrizioneRiunioneBox.setVisible(true);
+                OrganizzatoreBox.setVisible(false);
+            //    gestisciBox(false);
+
+                DescrizioneRiunioneTA.setText(RiunioniLV.getSelectionModel().getSelectedItem().getDescrizione());
+                DataDiInizioRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getData()));
+                OrganizzatoreRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getOrganizzatore()));
+                TitoloRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getTitolo()));
+                OrarioDiInizioRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getOrarioInizio()));
+                OrarioDiFineRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getOrarioFine()));
+
+                
+                if(RiunioniLV.getSelectionModel().getSelectedItem().getCFOrganizzatore().equals(impiegato.getCF()))
+                {
+                    OrganizzatoreBox.setVisible(true);
+            //        salvaModifiche.setVisible(false);
+                    
+                    
+                    /* Se il bottone gestione riunione viene cliccato */
+                    GestioneRiunioneButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event)
+                        {
+                            HomePageOrganizzatore homeOrganizzatore = new HomePageOrganizzatore(impiegato, RiunioniLV.getSelectionModel().getSelectedItem());
+                            try {
+                                homeOrganizzatore.start(window, popup);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                }
+                else
+                    
+                    PartecipanteBox.setVisible(true);
+                    PresenzaButton.setVisible(true);
+                    AssenzaButton.setVisible(true);
+                    ProjectManagerBox.setVisible(false);
+            }
+        });
+    }
 }
+
+
+

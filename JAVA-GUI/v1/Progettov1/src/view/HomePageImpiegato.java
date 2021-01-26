@@ -5,11 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
-import model.Progetto;
 
-import java.io.PrintWriter;
 
 public class HomePageImpiegato
 {

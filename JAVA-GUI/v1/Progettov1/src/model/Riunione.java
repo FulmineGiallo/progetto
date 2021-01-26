@@ -8,6 +8,7 @@ public class Riunione
     private String titolo;
     private String descrizione;
     private String organizzatore;
+    private String CFOrganizzatore;
     private Date data;
     private Time orarioInizio;
     private Time orarioFine;
@@ -42,6 +43,14 @@ public class Riunione
         this.organizzatore = organizzatore;
     }
     
+    
+    public String getCFOrganizzatore() {
+        return CFOrganizzatore;
+    }
+
+    public void setCFOrganizzatore(String CFOrganizzatore) {
+        this.CFOrganizzatore = CFOrganizzatore;
+    }
 
     public String getDescrizione() {
         return descrizione;
