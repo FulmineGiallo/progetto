@@ -7,6 +7,7 @@ import java.util.Locale;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -14,14 +15,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Impiegato;
 import model.Riunione;
+import model.Skill;
+import model.Titolo;
 import model.Connection.DBConnection;
 import model.Dao.RiunioneDao;
+import model.Dao.SkillDao;
+import model.Dao.TitoloDAO;
 import model.DaoInterface.RiunioneDaoInterface;
 import view.HomePageImpiegato;
 import view.HomePageOrganizzatore;
@@ -80,7 +86,7 @@ public class ControllerHomePageOrganizzatore {
     private Label SkillComboBoxLabel;
 
     @FXML
-    private ComboBox<?> SkillComboBox;
+    private ComboBox<Titolo> SkillComboBox;
 
     @FXML
     private VBox SkillBox;
@@ -105,6 +111,9 @@ public class ControllerHomePageOrganizzatore {
     
     private Stage window;
     private Stage popup;
+    
+    private TitoloDAO titoloDAO;
+    private SkillDao SkillDAO;
     
     Riunione riunione;
     Impiegato Organizzatore;
@@ -143,6 +152,8 @@ public class ControllerHomePageOrganizzatore {
         NomeRiunioneLabel.setText((riunione.getTitolo()));
         lista = riunioneDao.getPartecipanti(riunione);
         ListaPartecipantiLV.setItems(lista);
+        
+        updateInfoImpiegato();
     }
     
     @FXML
@@ -150,6 +161,49 @@ public class ControllerHomePageOrganizzatore {
     {
     	homePageImpiegato = new HomePageImpiegato(Organizzatore);
     	homePageImpiegato.start(window, popup);
+    }
+    
+    public void updateInfoImpiegato()
+    {
+        ListaPartecipantiLV.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                IstruzioniBox.setVisible(false);
+                DescrizioneRiunioneImpiegatoBox.setVisible(true);
+                NomeRiunioneLabel.setVisible(true);
+                NomePartecipanteLabel.setText(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getNome() + " " + ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCognome());
+
+                
+                
+            	try
+                {
+                    titoloDAO = new TitoloDAO(connection);
+                    SkillDAO = new SkillDao(connection);
+                    
+                    SkillComboBox.setItems(titoloDAO.titoliListImpiegato(ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
+
+                    
+                    SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+
+                    	SkillBox.setVisible(true);
+                    	TitoloSkillLabel.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
+                    	DataCertificazioneSkillLabel.setVisible(true);
+
+                    	try {
+							DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
+                    		DataCertificazioneSkillLabel.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+                    	
+                    });
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                
+            }
+        });
     }
     
 }
