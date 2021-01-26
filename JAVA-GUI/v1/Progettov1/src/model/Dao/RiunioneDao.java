@@ -22,7 +22,7 @@ public class RiunioneDao implements RiunioneDaoInterface
 
     public RiunioneDao(Connection connection) throws SQLException {
         this.connection = connection;
-        partecipanti = connection.prepareStatement("SELECT impiegato.*FROM riunioneimpiegato NATURAL JOIN impiegato WHERE organizzatore = ? AND titolo = ?");
+        partecipanti = connection.prepareStatement("SELECT DISTINCT i.*FROM riunioneimpiegato AS ri NATURAL JOIN riunione JOIN impiegato AS i ON ri.partecipante = i.cf  WHERE organizzatore = ? AND titolo = ?");
         riunioniImpiegato = connection.prepareStatement("SELECT r.orarioinizio, r.organizzatore, r.descrizione, r.orariofine, r.data, r.titolo, i.cognome , i.nome FROM riunione as r JOIN impiegato as i ON r.organizzatore = i.cf WHERE CF = ?");
     }
     
