@@ -170,6 +170,9 @@ public class ControllerHomePageOrganizzatore {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 IstruzioniBox.setVisible(false);
+                
+                DataCertificazioneSkillLabel.setVisible(false);
+                DescrizioneSkillTA.setVisible(false);
                 DescrizioneRiunioneImpiegatoBox.setVisible(true);
                 NomeRiunioneLabel.setVisible(true);
                 NomePartecipanteLabel.setText(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getNome() + " " + ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCognome());
@@ -189,7 +192,7 @@ public class ControllerHomePageOrganizzatore {
                     	SkillBox.setVisible(true);
                     	TitoloSkillLabel.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
                     	DataCertificazioneSkillLabel.setVisible(true);
-
+                    	DescrizioneSkillTA.setVisible(true);
                     	try {
 							DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
                     		DataCertificazioneSkillLabel.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
