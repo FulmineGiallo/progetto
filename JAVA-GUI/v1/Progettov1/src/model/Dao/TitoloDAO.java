@@ -34,7 +34,7 @@ public class TitoloDAO implements TitoloDaoInterface {
             lista.add(new Titolo(rs.getString("tipotitolo")));
         }
         
-        Titolo titoloAltro = new Titolo("Altro");
+        Titolo titoloAltro = new Titolo("Altro...");
         lista.add(titoloAltro);
         
         rs.close();

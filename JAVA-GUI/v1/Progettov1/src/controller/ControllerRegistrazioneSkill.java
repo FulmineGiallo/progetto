@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -45,22 +46,24 @@ public class ControllerRegistrazioneSkill {
     @FXML private Label 			IstruzioniLabel;
     @FXML private Label 			IstruzioniLabel2;
     
-    @FXML private Label 			TitoloLabel;
-    @FXML private ComboBox<Titolo> 	TitoloComboBox;
-    @FXML private TextField 		NuovoTitoloTF;
-    @FXML private Label 			NuovoTitoloErrorLabel;
-    
-    @FXML private Label 			DescrizioneLabel;
-    @FXML private TextArea 			DescrizioneTA;
-
     @FXML private Label 			TipoSkillLabel;
     @FXML private RadioButton 		TipoSkillRB1;
     @FXML private ToggleGroup 		TipoSkillGroup;
     @FXML private RadioButton 		TipoSkillRB2;
-
+    
+    @FXML private Label 			DescrizioneLabel;
+    @FXML private TextArea 			DescrizioneTA;
+    @FXML private Label				DescrizioneErrorLabel;
+    
     @FXML private Label 			DataCertificazioneLabel;
     @FXML private DatePicker 		DataCertificazioneDP;
     @FXML private Label 			DataCertificazioneErrorLabel;
+    
+    @FXML private GridPane			TitoloBox;    
+    @FXML private Label 			TitoloLabel;
+    @FXML private ComboBox<Titolo> 	TitoloComboBox;
+    @FXML private TextField 		NuovoTitoloTF;
+    @FXML private Label 			NuovoTitoloErrorLabel;
 
     @FXML private Button 			AnnullaButton;
     @FXML private Button 			ConfermaButton;
@@ -70,11 +73,16 @@ public class ControllerRegistrazioneSkill {
     
     private String descrizione;
     private String tipoSkill;
+    private final String DescrizioneTAPrompt = "Inserisci una descrizione";
     private Date dataCertificazioneDate;
     private Date dataDiOggi = Calendar.getInstance().getTime();
     
     private Impiegato impiegato = null;
     private Skill skill = null;
+    
+    private boolean checkDescrizione		= true;
+    private boolean checkDataCertificazione = true;
+    private boolean checkNuovoTitolo 		= true;
     
     ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
     
@@ -100,6 +108,8 @@ public class ControllerRegistrazioneSkill {
 		this.controllerRegistrazioneImpiegato = controllerRegistrazioneImpiegato;		
     	impiegato = new Impiegato();
     	
+    	DescrizioneTA.setPromptText("* " + DescrizioneTAPrompt);
+    	
     	try
         {
             titoloDAO = new TitoloDAO(connection);
@@ -109,7 +119,7 @@ public class ControllerRegistrazioneSkill {
             TitoloComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
 
                   
-                	if(TitoloComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro") )
+                	if(TitoloComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro..."))
                     {
                 		NuovoTitoloTF.setVisible(true);	
                     }
@@ -126,11 +136,15 @@ public class ControllerRegistrazioneSkill {
     
     public boolean controllocampi() { 	
     	DataCertificazioneErrorLabel.setText("");
-    	DescrizioneLabel.setText("");
+    	DescrizioneErrorLabel.setText("");
     	NuovoTitoloErrorLabel.setText("");
-    
-    	boolean checkDataCertificazione=true;
-    	boolean checkNuovoTitolo=true;
+    	
+    	if(!TitoloBox.isVisible()) {
+    		if(DescrizioneTA.getText().isBlank()) {
+    			checkDescrizione = false;
+    			DescrizioneErrorLabel.setText("Questo campo è obbligatorio");
+    		}
+    	}
     	
     	if(DataCertificazioneDP.getValue() != null)
     		dataCertificazioneDate = java.sql.Date.valueOf(DataCertificazioneDP.getValue());
@@ -139,18 +153,22 @@ public class ControllerRegistrazioneSkill {
     		checkDataCertificazione = false;
     		
     		if(dataCertificazioneDate == null)
-    			DataCertificazioneErrorLabel.setText("Inserire la data");
+    			DataCertificazioneErrorLabel.setText("Questo campo è obbligatorio");
     		else
-    			DataCertificazioneErrorLabel.setText("Inserire una data corretta");
+    			DataCertificazioneErrorLabel.setText("Inserisci una data corretta");
     	}
     	
-    	if(NuovoTitoloTF.isVisible() && NuovoTitoloTF.getText().isBlank()) {
-    		checkNuovoTitolo = false;
-    		NuovoTitoloErrorLabel.setVisible(true);
-    		NuovoTitoloErrorLabel.setText("Inseisci il titolo");
-    	}
+    	if (NuovoTitoloTF.isVisible()) {
+			if (NuovoTitoloTF.getText().isBlank()) {
+				checkNuovoTitolo = false;
+				NuovoTitoloErrorLabel.setVisible(true);
+				NuovoTitoloErrorLabel.setText("Questo campo è obbligatorio");
+			}
+		} else {
+			checkNuovoTitolo = false;
+		}
     	
-    	return checkDataCertificazione && checkNuovoTitolo;
+		return checkDataCertificazione && checkNuovoTitolo && checkDescrizione;
     }
 
 	@FXML private void annullaOperazione(ActionEvent event) {
@@ -173,6 +191,18 @@ public class ControllerRegistrazioneSkill {
     		
     		popup.hide();
     	}
+    }
+    
+    @FXML
+    void mostraTitolo(MouseEvent event) {
+    	TitoloBox.setVisible(true);
+    	DescrizioneTA.setPromptText(DescrizioneTAPrompt);
+    }
+
+    @FXML
+    void nascondiTitolo(MouseEvent event) {
+    	TitoloBox.setVisible(false);
+    	DescrizioneTA.setPromptText("* " + DescrizioneTAPrompt);
     }
 
 }

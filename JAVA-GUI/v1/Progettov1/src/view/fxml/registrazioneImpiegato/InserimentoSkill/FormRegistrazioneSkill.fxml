@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneSkill" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneSkill" stylesheets="@../../../../css/FormRegistrazioneSkill.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneSkill">
+<AnchorPane fx:id="RegistrazioneSkill" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="850.0" styleClass="RegistrazioneSkill" stylesheets="@../../../../css/FormRegistrazioneSkill.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneSkill">
    <children>
       <HBox fx:id="IstruzioniBox" alignment="CENTER" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -43,54 +43,27 @@
                            <children>
                               <VBox fx:id="Form" spacing="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <GridPane fx:id="TitoloBox" hgap="10.0">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="27.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="43.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
-                                          <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Label fx:id="TitoloLabel" styleClass="TitoloLabel" text="* Titolo" />
-                                          <AnchorPane GridPane.columnIndex="1">
-                                             <children>
-                                                <ComboBox fx:id="TitoloComboBox" styleClass="TitoloComboBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane GridPane.columnIndex="2">
-                                             <GridPane.margin>
-                                                <Insets right="10.0" />
-                                             </GridPane.margin>
-                                             <children>
-                                                <TextField fx:id="NuovoTitoloTF" promptText="* Inserisci un nuovo titolo" styleClass="NuovoTitoloTF" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
-                                             </children>
-                                          </AnchorPane>
-                                          <Label fx:id="NuovoTitoloErrorLabel" styleClass="NuovoTitoloErrorLabel" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                       </children>
-                                    </GridPane>
-                                    <VBox fx:id="DescrizioneBox">
-                                       <children>
-                                          <Label fx:id="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
-                                          <TextArea fx:id="DescrizioneTA" minHeight="60.0" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" />
-                                       </children></VBox>
                                     <HBox fx:id="TipoSkillBox" alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
                                           <Label fx:id="TipoSkillLabel" prefWidth="150.0" styleClass="TipoSkillLabel" text="* Tipo Skill" />
                                           <HBox fx:id="TipoSkillRBBox" spacing="25.0">
                                              <children>
-                                                <RadioButton fx:id="TipoSkillRB1" mnemonicParsing="false" selected="true" styleClass="TipoSkillRB1" text="Soft-Skill">
+                                                <RadioButton fx:id="TipoSkillRB1" mnemonicParsing="false" onMouseClicked="#nascondiTitolo" selected="true" styleClass="TipoSkillRB1" text="Soft-Skill">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="TipoSkillGroup" />
                                                    </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" styleClass="TipoSkillRB2" text="Hard-Skill" toggleGroup="$TipoSkillGroup" />
+                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" onMouseClicked="#mostraTitolo" styleClass="TipoSkillRB2" text="Hard-Skill" toggleGroup="$TipoSkillGroup" />
                                              </children>
                                           </HBox>
                                        </children></HBox>
-                                    <GridPane fx:id="DataCertificazioneBox" vgap="3.0">
+                                    <VBox fx:id="DescrizioneBox">
+                                       <children>
+                                          <Label fx:id="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
+                                          <TextArea fx:id="DescrizioneTA" minHeight="60.0" styleClass="DescrizioneTA" />
+                                          <Label fx:id="DescrizioneErrorLabel" styleClass="ErrorLabel" />
+                                       </children></VBox>
+                                    <GridPane fx:id="DataCertificazioneBox">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" percentWidth="27.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
@@ -102,7 +75,30 @@
                                        <children>
                                           <Label fx:id="DataCertificazioneLabel" prefWidth="150.0" styleClass="DataCertificazioneLabel" text="* Data di certificazione" />
                                           <DatePicker fx:id="DataCertificazioneDP" styleClass="DataCertificazioneDP" GridPane.columnIndex="1" />
-                                          <Label fx:id="DataCertificazioneErrorLabel" styleClass="DataCertificazioneErrorLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label fx:id="DataCertificazioneErrorLabel" styleClass="ErrorLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane fx:id="TitoloBox" visible="false">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="27.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="43.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
+                                          <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label fx:id="TitoloLabel" styleClass="TitoloLabel" text="* Titolo" />
+                                          <ComboBox fx:id="TitoloComboBox" prefWidth="169.0" styleClass="TitoloComboBox" GridPane.columnIndex="1" />
+                                          <TextField fx:id="NuovoTitoloTF" promptText="* Inserisci un nuovo titolo" styleClass="NuovoTitoloTF" visible="false" GridPane.columnIndex="2">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin></TextField>
+                                          <Label fx:id="NuovoTitoloErrorLabel" styleClass="ErrorLabel" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin></Label>
                                        </children>
                                     </GridPane>
                                  </children>
