@@ -12,5 +12,6 @@ public interface ProgettoDaoInterface
     int creaProgetto(Progetto progetto) throws SQLException;
     int updateInfoProgetto(Progetto progetto) throws SQLException;
     ObservableList<Impiegato> getPartecipanti(Progetto progetto) throws SQLException;
+    int GetIdProgetto(Progetto progetto) throws SQLException;
 
 }

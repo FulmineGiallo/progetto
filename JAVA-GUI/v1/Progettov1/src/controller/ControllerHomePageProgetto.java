@@ -20,6 +20,7 @@ import model.Connection.DBConnection;
 import model.Dao.ProgettoDao;
 import model.Dao.SkillDao;
 import model.Dao.TitoloDAO;
+import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
@@ -90,6 +91,7 @@ public class ControllerHomePageProgetto {
     
     private TitoloDAO titoloDAO;
     private SkillDao SkillDAO;
+    private progettoImpiegatoDao progettoImpiegatoDao;
     
     Progetto progetto;
     Impiegato impiegato;
@@ -189,6 +191,21 @@ public class ControllerHomePageProgetto {
         });
     }
     
+    
+    public void RimuoviImpiegato(ActionEvent event) throws Exception {
+   
+    	int idProgetto=0;
+    	int eliminato=0;
+    	
+    	idProgetto=progettoDao.GetIdProgetto(progetto);
+    	progettoImpiegatoDao = new progettoImpiegatoDao(connection);
+    	
+    	eliminato = progettoImpiegatoDao.EliminaImpiegatoDalProgetto(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), idProgetto);
+    	
+    	if(eliminato !=0)
+    		System.out.println("impiegato eliminato");
+    	
+    }
     
     @FXML
     private void backHomePageImpiegato(ActionEvent event) throws Exception

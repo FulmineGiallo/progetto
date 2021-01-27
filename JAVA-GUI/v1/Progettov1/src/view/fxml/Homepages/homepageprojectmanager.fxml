@@ -129,7 +129,7 @@
                                  <children>
                                     <HBox alignment="BOTTOM_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="RimuoviImpiegatoButton" text="Rimuovi dal progetto" wrapText="true" />
+                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" prefHeight="65.0" styleClass="RimuoviImpiegatoButton" text="Rimuovi dal progetto" wrapText="true" />
                                        </children>
                                     </HBox>
                                  </children>

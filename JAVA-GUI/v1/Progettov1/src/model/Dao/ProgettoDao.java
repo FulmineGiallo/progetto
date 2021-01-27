@@ -9,6 +9,8 @@ import model.Progetto;
 import java.sql.*;
 import java.time.LocalDate;
 
+import javax.naming.ReferralException;
+
 public class ProgettoDao implements ProgettoDaoInterface
 {
     private final Connection connection;
@@ -16,6 +18,7 @@ public class ProgettoDao implements ProgettoDaoInterface
     private final PreparedStatement insertProgetto;
     private final PreparedStatement updateInfo;
     private final PreparedStatement partecipanti;
+    private final PreparedStatement getId;
 
 
     public ProgettoDao(Connection connection) throws SQLException {
@@ -24,6 +27,7 @@ public class ProgettoDao implements ProgettoDaoInterface
         insertProgetto = connection.prepareStatement("INSERT INTO progetto VALUES (NEXTVAL('id_progetto_seq'), ?, ?, current_date, ?, ?,?, ?)");
         updateInfo = connection.prepareStatement("UPDATE progetto SET descrizione = ?, datainizio = ?, datafine = ?, scadenza = ? WHERE projectmanagerprogetto = ? AND titolo = ?");
         partecipanti = connection.prepareStatement("SELECT impiegato.*FROM progetto NATURAL JOIN progettoimpiegato INNER JOIN impiegato ON progettoimpiegato.cf = impiegato.cf WHERE projectmanagerprogetto = ? AND titolo = ?");
+        getId = connection.prepareStatement("SELECT idprogetto FROM progetto WHERE titolo LIKE ? AND descrizione LIKE ? AND datainizio = ? AND datafine = ? AND scadenza = ? AND projectmanagerprogetto LIKE ?");
     }
 
     @Override
@@ -107,5 +111,25 @@ public class ProgettoDao implements ProgettoDaoInterface
         System.out.println("Data inizio Update " + progetto.getDataInizio());
 
         return result;
+    }
+    
+    public int GetIdProgetto(Progetto progetto)throws SQLException {
+    	
+    	int id=0;
+    	
+    	getId.setString(1, progetto.getTitolo());
+    	getId.setString(2, progetto.getDescrizione());
+    	getId.setDate(3, progetto.getDataInizio());
+    	getId.setDate(4, progetto.getDataFine());
+    	getId.setDate(5, progetto.getScadenza());
+    	getId.setString(6, progetto.getProjectManager().getCF());
+    	
+    	ResultSet rs = getId.executeQuery();
+    	
+    	while(rs.next()) {
+    		id=rs.getInt("idprogetto");
+    	}
+    	
+    	return id;
     }
 }
