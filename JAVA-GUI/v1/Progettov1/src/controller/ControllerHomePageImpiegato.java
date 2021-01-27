@@ -329,6 +329,27 @@ public class ControllerHomePageImpiegato {
                     PresenzaButton.setVisible(true);
                     AssenzaButton.setVisible(true);
                     ProjectManagerBox.setVisible(false);
+                    
+                    PresenzaButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event)
+                        {
+                        	
+                        	try {
+								if(riunioni.isPresente(impiegato, RiunioniLV.getSelectionModel().getSelectedItem()) == 0) {
+									
+									
+									System.out.print("kk");
+								}else {
+									System.out.print("tt");	
+								}
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+                        	
+                        }
+                    });
                 }
             }
         });

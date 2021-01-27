@@ -11,4 +11,5 @@ public interface RiunioneDaoInterface {
 
 	 ObservableList<Riunione> getRiunioniImpiegato(Impiegato impiegato) throws SQLException;
 	 ObservableList<Impiegato> getPartecipanti(Riunione riunione) throws SQLException;
+	 int isPresente(Impiegato impiegato, Riunione riunione) throws SQLException;
 }

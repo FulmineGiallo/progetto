@@ -6,11 +6,15 @@ import model.DaoInterface.RiunioneDaoInterface;
 import model.Impiegato;
 import model.Riunione;
 
+//import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.*;
 
 public class RiunioneDao implements RiunioneDaoInterface
 {
@@ -18,12 +22,15 @@ public class RiunioneDao implements RiunioneDaoInterface
 	private final Connection connection;
     private final PreparedStatement riunioniImpiegato;
     private final PreparedStatement partecipanti;
+    private final Statement isImpiegatoPresente;
+    
     
 
     public RiunioneDao(Connection connection) throws SQLException {
         this.connection = connection;
         partecipanti = connection.prepareStatement("SELECT DISTINCT i.*FROM riunioneimpiegato AS ri NATURAL JOIN riunione JOIN impiegato AS i ON ri.partecipante = i.cf  WHERE organizzatore = ? AND titolo = ?");
         riunioniImpiegato = connection.prepareStatement("SELECT r.orarioinizio, r.organizzatore, r.descrizione, r.orariofine, r.data, r.titolo, i.cognome , i.nome FROM (impiegato as i join riunioneimpiegato as ri ON i.cf = ri.partecipante) JOIN riunione AS r ON ri.idriunione=r.idriunione WHERE CF = ?");
+        isImpiegatoPresente = connection.createStatement();
     }
     
     public ObservableList<Impiegato> getPartecipanti(Riunione riunione) throws SQLException
@@ -77,6 +84,20 @@ public class RiunioneDao implements RiunioneDaoInterface
         rs.close();
 
         return lista;
+    }
+    
+    public int isPresente(Impiegato impiegato, Riunione riunione) throws SQLException {
+    	
+    	int presente=0;
+    	
+    	ResultSet rs = isImpiegatoPresente.executeQuery("SELECT COUNT(*) FROM riunione AS r NATURAL JOIN riunioneimpiegato AS ri WHERE titolo LIKE '"+riunione.getTitolo()+"' AND orarioinizio = '"+riunione.getData().toString() + " "+ riunione.getOrarioInizio().toString()+"' AND orariofine = '"+ riunione.getData().toString() + " " + riunione.getOrarioFine().toString() +"' AND partecipante LIKE '"+impiegato.getCF()+"' AND presenza LIKE 'presente'");
+    	
+    	while(rs.next()) {
+    		presente = rs.getInt("count");
+    	}
+    	rs.close();
+
+    	return presente;
     }
 	
 	
