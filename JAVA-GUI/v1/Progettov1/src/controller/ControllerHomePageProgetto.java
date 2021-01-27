@@ -154,9 +154,13 @@ public class ControllerHomePageProgetto {
                 {
                     titoloDAO = new TitoloDAO(connection);
                     SkillDAO = new SkillDao(connection);
+                    RimuoviImpiegatoButton.setVisible(true);
                     
                     SkillComboBox.setItems(titoloDAO.titoliListImpiegato(ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
 
+                    if(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCF().equals( progetto.getProjectManager().getCF())) {
+                    	RimuoviImpiegatoButton.setVisible(false);
+                    }
                     
                     SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
 
