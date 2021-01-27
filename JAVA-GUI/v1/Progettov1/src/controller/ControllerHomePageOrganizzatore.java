@@ -190,7 +190,11 @@ public class ControllerHomePageOrganizzatore {
                     SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
 
                     	SkillBox.setVisible(true);
+
+                    if(SkillComboBox.getSelectionModel().getSelectedItem() != null) {	
+                    	TitoloSkillLabel.setVisible(true);
                     	TitoloSkillLabel.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
+                    	
                     	DataCertificazioneSkillLabel.setVisible(true);
                     	DescrizioneSkillTA.setVisible(true);
                     	try {
@@ -200,10 +204,17 @@ public class ControllerHomePageOrganizzatore {
 							e.printStackTrace();
 						}
                     	
-                    });
+                    }else {
+                    	TitoloSkillLabel.setVisible(false);
+                    	DataCertificazioneSkillLabel.setVisible(false);
+                    	DescrizioneSkillTA.setVisible(false);
+                    }
+                    
+                   });
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+                
                 
             }
         });
