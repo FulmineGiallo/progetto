@@ -28,25 +28,25 @@ public class RiunioneDao implements RiunioneDaoInterface
     private final Statement isImpiegatoPresente;
     private final Statement updateImpiegatoPresente;
     private final Statement updateImpiegatoAssente;
+    private final Statement getId;
     private int idRiunione;
+    
 
     public RiunioneDao(Connection connection) throws SQLException {
         this.connection = connection;
-        partecipanti = connection.prepareStatement("SELECT DISTINCT i.*FROM riunioneimpiegato AS ri NATURAL JOIN riunione JOIN impiegato AS i ON ri.partecipante = i.cf  WHERE organizzatore = ? AND titolo = ?");
+        partecipanti = connection.prepareStatement("SELECT DISTINCT i.*FROM riunioneimpiegato AS ri NATURAL JOIN riunione JOIN impiegato AS i ON ri.partecipante = i.cf  WHERE idriunione = ?");
         riunioniImpiegato = connection.prepareStatement("SELECT r.orarioinizio, r.organizzatore, r.descrizione, r.orariofine, r.data, r.titolo, i.cognome , i.nome FROM (impiegato as i join riunioneimpiegato as ri ON i.cf = ri.partecipante) JOIN riunione AS r ON ri.idriunione=r.idriunione WHERE CF = ?");
         isImpiegatoPresente = connection.createStatement();
         updateImpiegatoPresente = connection.createStatement();
         updateImpiegatoAssente = connection.createStatement();
-        
+        getId = connection.createStatement();
     }
     
-    public ObservableList<Impiegato> getPartecipanti(Riunione riunione) throws SQLException
+    public ObservableList<Impiegato> getPartecipanti(int idriunione) throws SQLException
     {
 
         ObservableList<Impiegato> lista = FXCollections.observableArrayList();
-        partecipanti.setString(1,riunione.getCFOrganizzatore());
-        partecipanti.setString(2,riunione.getTitolo());
-
+        partecipanti.setInt(1,idriunione);
         ResultSet rs = partecipanti.executeQuery();
         Impiegato partecipante;
         while(rs.next())
@@ -137,6 +137,19 @@ public class RiunioneDao implements RiunioneDaoInterface
     	rs.close();
     	
     	return assente;
+    }
+    
+    public int GetIdRiunione(Riunione riunione) throws SQLException{
+    	
+    	ResultSet rs = getId.executeQuery("SELECT r.idriunione FROM riunione AS r WHERE titolo LIKE '"+riunione.getTitolo()+"' AND orarioinizio = '"+riunione.getData().toString() + " "+ riunione.getOrarioInizio().toString()+"' AND orariofine = '"+ riunione.getData().toString() + " " + riunione.getOrarioFine().toString() +"' AND descrizione LIKE '"+riunione.getDescrizione()+"' AND organizzatore LIKE '"+ riunione.getCFOrganizzatore()+"'");
+    	
+    	while(rs.next()) {
+    		idRiunione=rs.getInt("idriunione");
+    	}
+    	rs.close();
+    	
+    	return idRiunione;
+    	
     }
     
 }

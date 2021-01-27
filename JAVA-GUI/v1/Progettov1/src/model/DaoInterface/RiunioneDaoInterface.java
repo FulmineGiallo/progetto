@@ -10,10 +10,11 @@ import model.Riunione;
 public interface RiunioneDaoInterface {
 
 	 ObservableList<Riunione> getRiunioniImpiegato(Impiegato impiegato) throws SQLException;
-	 ObservableList<Impiegato> getPartecipanti(Riunione riunione) throws SQLException;
+	 ObservableList<Impiegato> getPartecipanti(int idriunione) throws SQLException;
 	 int isPresente(Impiegato impiegato, Riunione riunione) throws SQLException;
 	 int UpdatePresenza(Impiegato impiegato, Riunione riunione) throws SQLException;
 	 int isAssente(Impiegato impiegato, Riunione riunione) throws SQLException;
 	 int UpdateAssenza(Impiegato impiegato, Riunione riunione) throws SQLException;
+	 int GetIdRiunione(Riunione riunione) throws SQLException;
 	 
 }

@@ -26,8 +26,10 @@ import model.Skill;
 import model.Titolo;
 import model.Connection.DBConnection;
 import model.Dao.RiunioneDao;
+import model.Dao.RiunioneImpiegatoDao;
 import model.Dao.SkillDao;
 import model.Dao.TitoloDAO;
+import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.RiunioneDaoInterface;
 import view.HomePageImpiegato;
 import view.HomePageOrganizzatore;
@@ -114,6 +116,8 @@ public class ControllerHomePageOrganizzatore {
     
     private TitoloDAO titoloDAO;
     private SkillDao SkillDAO;
+    private RiunioneImpiegatoDao riunioneImpiegatoDao;
+    private int idriunione;
     
     Riunione riunione;
     Impiegato Organizzatore;
@@ -150,7 +154,8 @@ public class ControllerHomePageOrganizzatore {
     	this.Organizzatore = Organizzatore;
         NomeOrganizzatoreLabel.setText((Organizzatore.getNome()+ " " + Organizzatore.getCognome()).toUpperCase(Locale.ROOT));
         NomeRiunioneLabel.setText((riunione.getTitolo()));
-        lista = riunioneDao.getPartecipanti(riunione);
+        idriunione = riunioneDao.GetIdRiunione(riunione);
+        lista = riunioneDao.getPartecipanti(idriunione);
         ListaPartecipantiLV.setItems(lista);
         
         updateInfoImpiegato();
@@ -183,10 +188,13 @@ public class ControllerHomePageOrganizzatore {
                 {
                     titoloDAO = new TitoloDAO(connection);
                     SkillDAO = new SkillDao(connection);
+                    RimuoviImpiegatoButton.setVisible(true);
                     
                     SkillComboBox.setItems(titoloDAO.titoliListImpiegato(ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
 
-                    
+                    if(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCF().equals( riunione.getCFOrganizzatore())) {
+                    	RimuoviImpiegatoButton.setVisible(false);
+                    }
                     SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
 
                     	SkillBox.setVisible(true);
@@ -218,6 +226,31 @@ public class ControllerHomePageOrganizzatore {
                 
             }
         });
+    }
+    
+    
+    public void RimuoviImpiegato(ActionEvent event) throws Exception {
+    	   
+    	int idImpiegato=0;
+    	int eliminato=0;
+    	
+    	idImpiegato=riunioneDao.GetIdRiunione(riunione);
+    	riunioneImpiegatoDao = new RiunioneImpiegatoDao(connection);
+    	
+    	eliminato = riunioneImpiegatoDao.EliminaImpiegatoDallaRiunione(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), idImpiegato);
+    	
+        idriunione = riunioneDao.GetIdRiunione(riunione);
+        lista = riunioneDao.getPartecipanti(idriunione);
+        ListaPartecipantiLV.setItems(lista);
+    	SkillBox.setVisible(false);
+        IstruzioniBox.setVisible(true);
+    	
+        
+    	if(eliminato !=0)
+    		System.out.println("impiegato eliminato");
+    		
+    	
+    	
     }
     
 }
