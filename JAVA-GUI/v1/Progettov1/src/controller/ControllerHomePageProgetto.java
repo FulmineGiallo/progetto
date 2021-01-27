@@ -202,8 +202,13 @@ public class ControllerHomePageProgetto {
     	
     	eliminato = progettoImpiegatoDao.EliminaImpiegatoDalProgetto(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), idProgetto);
     	
+        lista = progettoDao.getPartecipanti(progetto);
+        ListaPartecipantiLV.setItems(lista);
+    	
     	if(eliminato !=0)
     		System.out.println("impiegato eliminato");
+    	
+    	
     	
     }
     
