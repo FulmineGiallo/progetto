@@ -336,12 +336,17 @@ public class ControllerHomePageImpiegato {
                         {
                         	
                         	try {
-								if(riunioni.isPresente(impiegato, RiunioniLV.getSelectionModel().getSelectedItem()) == 0) {
+								if(riunioni.isPresente(impiegato, RiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
 									
+									int update;
 									
-									System.out.print("kk");
+									update=riunioni.UpdatePresenza(impiegato, RiunioniLV.getSelectionModel().getSelectedItem());
+									
+									if(update!=0)
+										System.out.print("presenza salvata");
+									
 								}else {
-									System.out.print("tt");	
+									System.out.print("sei gia presente");	
 								}
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
