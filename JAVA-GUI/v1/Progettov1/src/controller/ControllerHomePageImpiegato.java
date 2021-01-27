@@ -100,8 +100,11 @@ public class ControllerHomePageImpiegato {
 	FormRegistrazioneProgetto 			registrazioneProgetto;
 	Stage 								window;
 	Stage								popup;
+	
 	int updateEffettuato;
 
+	
+	
 	Impiegato impiegato = null;
 
 
@@ -339,14 +342,15 @@ public class ControllerHomePageImpiegato {
 								if(riunioni.isPresente(impiegato, RiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
 									
 									int update;
+	
 									
 									update=riunioni.UpdatePresenza(impiegato, RiunioniLV.getSelectionModel().getSelectedItem());
 									
 									if(update!=0)
-										System.out.print("presenza salvata");
+										System.out.println("presenza salvata");
 									
 								}else {
-									System.out.print("sei gia presente");	
+									System.out.println("errore presenza");
 								}
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
@@ -355,6 +359,37 @@ public class ControllerHomePageImpiegato {
                         	
                         }
                     });
+                    
+                    
+                    AssenzaButton.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event)
+                        {
+                        	
+                        	try {
+								if(riunioni.isAssente(impiegato, RiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
+									
+								int update;
+	
+									
+									update=riunioni.UpdateAssenza(impiegato, RiunioniLV.getSelectionModel().getSelectedItem());
+									
+									if(update!=0)
+										System.out.println("assenza salvata");
+									
+								}else {
+									System.out.println("errore assenza");
+								}
+								
+								
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+                        	
+                        }
+                    });
+                    
                 }
             }
         });
