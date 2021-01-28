@@ -9,13 +9,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+//import jdk.internal.org.objectweb.asm.Handle;
 import model.Impiegato;
 import model.Progetto;
+import model.Riunione;
 import model.Connection.DBConnection;
 import model.Dao.ProgettoDao;
+import model.Dao.RiunioneDao;
+import model.Dao.RiunioneImpiegatoDao;
 import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.ProgettoImpiegatoDaoInterface;
+import model.DaoInterface.RiunioneDaoInterface;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -23,6 +28,7 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 
 public class ControllerFinestraErrore {
@@ -41,9 +47,19 @@ public class ControllerFinestraErrore {
     
     private String dettagliErrore;
     
+    private Impiegato impiegatoRiunione;
+    private Riunione riunione;
+    private ControllerHomePageOrganizzatore homePageOrganizzatore;
+    
+    
+    private EventHandler<MouseEvent> progettoEvent;
+    private EventHandler<MouseEvent> riunioneEvent;
 	private ProgettoDaoInterface progettoDao;
 	private ProgettoImpiegatoDaoInterface progettoImpiegatoDao;
 	private ControllerHomePageProgetto homePageProgetto;
+    private RiunioneDaoInterface riunioneDao;
+    private RiunioneImpiegatoDao riunioneImpiegatoDao;
+    private int idriunione;
 	
 	private Impiegato impiegato;
 	private Progetto progetto;
@@ -59,7 +75,8 @@ public class ControllerFinestraErrore {
             connection = dbConnection.getConnection();
             progettoDao = new ProgettoDao(connection);
         	progettoImpiegatoDao = new progettoImpiegatoDao(connection);
-
+        	riunioneDao = new RiunioneDao(connection);
+            
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -104,14 +121,31 @@ public class ControllerFinestraErrore {
     	MessaggioErroreLabel.setText("Sei sicuro di voler eliminare questo impiegato dal progetto?");
     	OkButton.setText("Conferma");
     	DettagliButton.setText("Annulla");
+
+    	
     	EliminaImpiegatoDalProgetto();
+    	
+    	ChiudiFinestraEliminazioneImpiegato();
+    }
+    
+    public void inizializza(Impiegato impiegatoRiunione, Riunione riunione, ControllerHomePageOrganizzatore homePageOrganizzatore) {
+    	
+
+    	this.impiegatoRiunione=impiegatoRiunione;
+    	this.riunione=riunione;
+    	this.homePageOrganizzatore=homePageOrganizzatore;
+    	
+    	MessaggioErroreLabel.setText("Sei sicuro di voler eliminare questo impiegato dalla riunione?");
+    	OkButton.setText("Conferma");
+    	DettagliButton.setText("Annulla");
+    	EliminaImpiegatoDallaRiunione();
     	ChiudiFinestraEliminazioneImpiegato();
     }
     
     
     public void EliminaImpiegatoDalProgetto()
     {
-        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>()
+        OkButton.setOnMouseClicked( progettoEvent =new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -146,6 +180,7 @@ public class ControllerFinestraErrore {
         OkButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+            	
             	if (MessaggioErroreLabel.isVisible()) {
             		
             		MessaggioErroreLabel.setVisible(false);
@@ -179,4 +214,38 @@ public class ControllerFinestraErrore {
             }
         });
     }
+    
+    public void EliminaImpiegatoDallaRiunione()
+    {
+        OkButton.setOnMouseClicked(riunioneEvent=new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            	int eliminato=0;
+            	
+            	
+            	try {
+            	riunioneImpiegatoDao = new RiunioneImpiegatoDao(connection);
+            	idriunione = riunioneDao.GetIdRiunione(riunione);
+            	
+            	eliminato = riunioneImpiegatoDao.EliminaImpiegatoDallaRiunione(impiegatoRiunione, idriunione);
+
+            	if(eliminato!=0) {
+            		FinestraErrore.getScene().getWindow().hide();	
+            		homePageOrganizzatore.AggiornaLista();
+            		homePageOrganizzatore.DaDescrizioneRiunioneAdIstruzioniBox();
+            	}
+            	
+            	}catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+                
+            }
+        });
+    }
+    
+    
 }

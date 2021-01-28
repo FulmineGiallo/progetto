@@ -6,7 +6,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Impiegato;
 import model.Progetto;
+import model.Riunione;
 import controller.ControllerFinestraErrore;
+import controller.ControllerHomePageOrganizzatore;
 import controller.ControllerHomePageProgetto;
 
 public class FinestraErrore {
@@ -15,9 +17,12 @@ public class FinestraErrore {
 	private String						messaggioErrore;
 	private Exception					errore;
 	private ControllerHomePageProgetto homePageProgetto;
-
+	private ControllerHomePageOrganizzatore homePageOrganizzatore;
+	private Riunione riunione;
 	
 	private Impiegato impiegato;
+	private Impiegato impiegatoRiunione;
+	
 	private Progetto progetto;
 	
 	private String dettagliSkill;
@@ -32,6 +37,13 @@ public class FinestraErrore {
 		this.progetto = progetto;
 		this.homePageProgetto=homePageProgetto;
 	}
+
+	public FinestraErrore(Impiegato impiegatoRiunione, Riunione riunione, ControllerHomePageOrganizzatore homePageOrganizzatore) {
+		this.impiegatoRiunione = impiegatoRiunione;
+		this.riunione = riunione;
+		this.homePageOrganizzatore = homePageOrganizzatore;
+	}
+	
 	
 	public FinestraErrore(String dettagliSkill) {
 		this.dettagliSkill = dettagliSkill;
@@ -103,5 +115,25 @@ public class FinestraErrore {
         popup.show();
     }
 	
-	
+	public void startRiunione(Stage popup) throws Exception
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraErrore.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        
+        popup.hide();
+        popup.setScene(scene);
+        
+        controllerFinestraErrore = loader.getController();
+        controllerFinestraErrore.inizializza(impiegatoRiunione, riunione, homePageOrganizzatore);
+        
+        //window.setTitle("Errore!");
+        popup.setTitle(popup.toString());
+        popup.setResizable(false);
+        popup.setMinWidth(400.0);
+        popup.setMinHeight(200.0);
+        popup.centerOnScreen();
+        
+        popup.show();
+    }
 }

@@ -31,6 +31,7 @@ import model.Dao.SkillDao;
 import model.Dao.TitoloDAO;
 import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.RiunioneDaoInterface;
+import view.FinestraErrore;
 import view.HomePageImpiegato;
 import view.HomePageOrganizzatore;
 
@@ -118,6 +119,8 @@ public class ControllerHomePageOrganizzatore {
     private SkillDao SkillDAO;
     private RiunioneImpiegatoDao riunioneImpiegatoDao;
     private int idriunione;
+    private FinestraErrore finestraRimuoviImpiegatoDallaRiunione;
+    
     
     Riunione riunione;
     Impiegato Organizzatore;
@@ -243,27 +246,25 @@ public class ControllerHomePageOrganizzatore {
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
     	   
-    	int idImpiegato=0;
-    	int eliminato=0;
-    	
-    	
-    	idImpiegato=riunioneDao.GetIdRiunione(riunione);
-    	riunioneImpiegatoDao = new RiunioneImpiegatoDao(connection);
-    	
-    	eliminato = riunioneImpiegatoDao.EliminaImpiegatoDallaRiunione(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), idImpiegato);
-    	
+    	finestraRimuoviImpiegatoDallaRiunione = new FinestraErrore(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione, this);
+		finestraRimuoviImpiegatoDallaRiunione.startRiunione (popup);
+
         idriunione = riunioneDao.GetIdRiunione(riunione);
-        
         lista = riunioneDao.getPartecipanti(idriunione);
         ListaPartecipantiLV.setItems(lista);
-        
+
+    }
+    
+    public void AggiornaLista() throws SQLException {
     	
-        
-    	if(eliminato !=0)
-    		System.out.println("impiegato eliminato");
-    		
-    	
-    	
+        idriunione = riunioneDao.GetIdRiunione(riunione);
+        lista = riunioneDao.getPartecipanti(idriunione);
+        ListaPartecipantiLV.setItems(lista);
+    }
+    
+    public void DaDescrizioneRiunioneAdIstruzioniBox() throws SQLException {
+    	DescrizioneRiunioneImpiegatoBox.setVisible(false);
+    	IstruzioniBox.setVisible(true);
     }
     
 }
