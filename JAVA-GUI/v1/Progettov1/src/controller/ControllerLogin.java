@@ -77,14 +77,14 @@ public class ControllerLogin
             if(accesso == 0)
             {            	
     			finestraErrore = new FinestraErrore("Email o password errati", new Exception());
-    			finestraErrore.start(popup);
+    			finestraErrore.startPopupErrore(popup);
             }
         }
         /* Se i campi sono vuoti */
         else
         {        	
 			finestraErrore = new FinestraErrore("Autenticazione errata", new Exception());
-			finestraErrore.start(popup);
+			finestraErrore.startPopupErrore(popup);
         }
     }
 }

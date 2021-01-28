@@ -14,6 +14,13 @@ public class Skill
 		this.dataCertificazione = dataCertificazione;
 		this.titolo = titolo;
 	}
+	
+	public Skill(String tipoSkill, LocalDate dataCertificazione, String titolo, String descrizione) {
+		this.tipoSkill = tipoSkill;
+		this.dataCertificazione = dataCertificazione;
+		this.titolo = titolo;
+		this.descrizione = descrizione;
+	}
 
 	public String getDescrizione() {
 		return descrizione;

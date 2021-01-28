@@ -33,6 +33,7 @@ import model.calcoloCF;
 
 import view.HomePageBenvenuto;
 import view.CaricamentoRegistrazioneImpiegato;
+import view.FinestraErrore;
 import view.FormRegistrazioneSkill;
 
 public class ControllerRegistrazioneImpiegato {
@@ -111,12 +112,14 @@ public class ControllerRegistrazioneImpiegato {
     private String codiceFiscale;
     private calcoloCF cf = new calcoloCF();
     
-    private HomePageBenvenuto homePageBenvenuto;
+    private HomePageBenvenuto 				  homePageBenvenuto;
     private CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
-    private FormRegistrazioneSkill formRegistrazioneSkill;
+    private FormRegistrazioneSkill 			  formRegistrazioneSkill;
+    private FinestraErrore		   			  informazioniSkill;
     
     private Impiegato 	nuovoImpiegato = null;
     private Skill		ultimaSkillInserita;
+    private Skill 		infoSkill;
     
     private ObservableList<Skill> listaSkillImpiegato = FXCollections.observableArrayList();
     
@@ -176,6 +179,25 @@ public class ControllerRegistrazioneImpiegato {
 		
 		listaSkillImpiegato.addAll(impiegato.getListaSkill());
 		SkillLV.setItems(listaSkillImpiegato);
+		
+		//aggiungere listener per mostrare una finestra popup con informazioni skill
+		
+		SkillLV.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Skill> ObValue, Skill oldValue, Skill newValue) -> {
+			infoSkill = SkillLV.getSelectionModel().getSelectedItem();
+			
+			informazioniSkill = new FinestraErrore(infoSkill.getTipoSkill() + infoSkill.getDescrizione() + infoSkill.getDataCertificazione() + infoSkill.getTitolo());
+			try {
+				informazioniSkill.startPopupErrore(popup);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			System.out.println("Tipo: " + infoSkill.getTipoSkill());
+			System.out.println("Descrizione: " + infoSkill.getDescrizione());
+			System.out.println("Data di certificazione: " + infoSkill.getDataCertificazione());
+			System.out.println("Titolo: " + infoSkill.getTitolo());
+		});
     }
     
     public void setStage(Stage window, Stage popup) {
@@ -197,9 +219,6 @@ public class ControllerRegistrazioneImpiegato {
                 }
             }
         });
-
-        //updateComune();
-        //comuneList = comuni.gradoList(ProvinciaTF.getText().toUpperCase());
     }
     
     public void updateComune() throws SQLException {
@@ -293,7 +312,7 @@ public class ControllerRegistrazioneImpiegato {
     public boolean controlloCampiAnagrafica() {
     	NomeErrorLabel.setText("");
     	CognomeErrorLabel.setText("");
-    	DataDiNascitaErrorLabel.setText("");        
+    	DataDiNascitaErrorLabel.setText("");     
     	ComuneErrorLabel.setText("");
     	
     	checkNome = true;
@@ -307,7 +326,7 @@ public class ControllerRegistrazioneImpiegato {
     		checkNome = false;
     		NomeErrorLabel.setText("Questo campo è obbligatorio");
     	} else {
-    		if(!(NomeTF.getText().matches("[a-zA-Z]+"))) {
+    		if(!(NomeTF.getText().matches("[a-zA-Z\s]+"))) {
     			checkNome = false;
     			NomeErrorLabel.setText("Il nome può contenere solo lettere");
     		}
@@ -318,7 +337,7 @@ public class ControllerRegistrazioneImpiegato {
     		checkCognome = false;
     		CognomeErrorLabel.setText("Questo campo è obbligatorio");
     	} else {
-    		if(!(CognomeTF.getText().matches("[a-zA-Z]+"))) {
+    		if(!(CognomeTF.getText().matches("[a-zA-Z\s]+"))) {
     			checkCognome = false;
     			CognomeErrorLabel.setText("Il cognome può contenere solo lettere");
     		}

@@ -70,12 +70,12 @@
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
-                                        <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Label fx:id="DataCertificazioneLabel" prefWidth="150.0" styleClass="DataCertificazioneLabel" text="* Data di certificazione" />
                                           <DatePicker fx:id="DataCertificazioneDP" styleClass="DataCertificazioneDP" GridPane.columnIndex="1" />
-                                          <Label fx:id="DataCertificazioneErrorLabel" styleClass="ErrorLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label fx:id="DataCertificazioneErrorLabel" alignment="TOP_LEFT" styleClass="ErrorLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                     <GridPane fx:id="TitoloBox" visible="false">

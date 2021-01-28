@@ -86,12 +86,16 @@ public class ControllerFinestraErrore {
     	MostraNascondiDettagli();
     	ChiudiFinestraErrore();
     }
-
-
     
+    public void inizializza(String dettagliSkill) {
+    	MessaggioErroreTA.setVisible(true);
+    	MessaggioErroreLabel.setVisible(false);
+    	
+    	MessaggioErroreTA.setText(dettagliSkill);
+    	//altre cose da fare
+    }
     
-    
-    public void inizializzaEliminazioneImpiegato(Impiegato impiegato, Progetto progetto) {
+    public void inizializza(Impiegato impiegato, Progetto progetto) {
     	
     	this.impiegato=impiegato;
     	this.progetto=progetto;

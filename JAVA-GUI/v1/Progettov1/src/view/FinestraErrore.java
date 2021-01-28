@@ -17,6 +17,8 @@ public class FinestraErrore {
 	private Impiegato impiegato;
 	private Progetto progetto;
 	
+	private String dettagliSkill;
+	
 	public FinestraErrore(String messaggioErrore, Exception errore) {
 		this.messaggioErrore = messaggioErrore;
 		this.errore = errore;
@@ -27,9 +29,11 @@ public class FinestraErrore {
 		this.progetto = progetto;
 	}
 	
+	public FinestraErrore(String dettagliSkill) {
+		this.dettagliSkill = dettagliSkill;
+	}
 	
-
-	public void start(Stage popup) throws Exception
+	public void startPopupErrore(Stage popup) throws Exception
     {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraErrore.fxml"));
         Parent root = loader.load();
@@ -51,7 +55,27 @@ public class FinestraErrore {
         popup.show();
     }
 	
-	
+	public void startDettagliSkill(Stage popup) throws Exception
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraErrore.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        
+        popup.hide();
+        popup.setScene(scene);
+        
+        controllerFinestraErrore = loader.getController();
+        controllerFinestraErrore.inizializza(dettagliSkill);
+        
+        //window.setTitle("Errore!");
+        popup.setTitle(popup.toString());
+        popup.setResizable(false);
+        popup.setMinWidth(400.0);
+        popup.setMinHeight(200.0);
+        popup.centerOnScreen();
+        
+        popup.show();
+    }
 	
 	public void startProgetto(Stage popup) throws Exception
     {
@@ -63,7 +87,7 @@ public class FinestraErrore {
         popup.setScene(scene);
         
         controllerFinestraErrore = loader.getController();
-        controllerFinestraErrore.inizializzaEliminazioneImpiegato(impiegato, progetto);
+        controllerFinestraErrore.inizializza(impiegato, progetto);
         
         //window.setTitle("Errore!");
         popup.setTitle(popup.toString());

@@ -32,6 +32,7 @@ import model.DaoInterface.TitoloDaoInterface;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,11 +72,17 @@ public class ControllerRegistrazioneSkill {
     private Stage popup;
     private TitoloDAO titoloDAO;
     
-    private String descrizione;
     private String tipoSkill;
+    private String descrizioneSkill;
+    private LocalDate dataCertificazione;
+    private Titolo titoloSkill;
     private final String DescrizioneTAPrompt = "Inserisci una descrizione";
-    private Date dataCertificazioneDate;
-    private Date dataDiOggi = Calendar.getInstance().getTime();
+    
+    private Calendar  Oggi 		 = Calendar.getInstance();
+    private int 	  OggiGiorno = Oggi.get(Calendar.DAY_OF_MONTH);
+    private int 	  OggiMese 	 = Oggi.get(Calendar.MONTH) + 1;
+    private int 	  OggiAnno   = Oggi.get(Calendar.YEAR);
+    private LocalDate dataDiOggi;
     
     private Impiegato impiegato = null;
     private Skill skill = null;
@@ -104,41 +111,41 @@ public class ControllerRegistrazioneSkill {
         }
     }
     
-    public void inizializza(ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato) {		
-		this.controllerRegistrazioneImpiegato = controllerRegistrazioneImpiegato;		
+    public void inizializza(ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato) {
+		this.controllerRegistrazioneImpiegato = controllerRegistrazioneImpiegato;
     	impiegato = new Impiegato();
     	
     	DescrizioneTA.setPromptText("* " + DescrizioneTAPrompt);
     	
-    	try
-        {
+    	try {
             titoloDAO = new TitoloDAO(connection);
             TitoloComboBox.setItems(titoloDAO.titoliList());
             TitoloComboBox.getSelectionModel().select(7);
             
             TitoloComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
-
-                  
-                	if(TitoloComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro..."))
-                    {
-                		NuovoTitoloTF.setVisible(true);	
-                    }
-                	else {
-                		NuovoTitoloTF.setVisible(false);	
-                		NuovoTitoloErrorLabel.setText("");
-                	}
-                
+            	if(TitoloComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro...")) {
+            		NuovoTitoloTF.setVisible(true);	
+                } else {
+            		NuovoTitoloTF.setVisible(false);
+            		NuovoTitoloErrorLabel.setText("");
+            	}
             });
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
     
-    public boolean controllocampi() { 	
+    public boolean controllocampi() {
     	DataCertificazioneErrorLabel.setText("");
     	DescrizioneErrorLabel.setText("");
     	NuovoTitoloErrorLabel.setText("");
     	
+    	checkDescrizione 		= true;
+    	checkDataCertificazione = true;
+    	checkNuovoTitolo 		= true;
+    	
+    	//CONTROLLO DESCRIZIONE (SE OBBLIGATORIA)
     	if(!TitoloBox.isVisible()) {
     		if(DescrizioneTA.getText().isBlank()) {
     			checkDescrizione = false;
@@ -146,49 +153,61 @@ public class ControllerRegistrazioneSkill {
     		}
     	}
     	
-    	if(DataCertificazioneDP.getValue() != null)
-    		dataCertificazioneDate = java.sql.Date.valueOf(DataCertificazioneDP.getValue());
+    	//CONTROLLO DATA DI NASCITA
+        dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
+        
+        if(DataCertificazioneDP.getValue() != null) {
+        	if(DataCertificazioneDP.getValue().isAfter(dataDiOggi)) {
+        		checkDataCertificazione = false;
+        		DataCertificazioneErrorLabel.setText("Inserisci una data di certificazione corretta");
+        	}
+        } else {
+        	checkDataCertificazione = false;
+        	DataCertificazioneErrorLabel.setText("Questo campo è obbligatorio");
+        }
     	
-    	if(dataCertificazioneDate == null || dataCertificazioneDate.after(dataDiOggi)) {
-    		checkDataCertificazione = false;
-    		
-    		if(dataCertificazioneDate == null)
-    			DataCertificazioneErrorLabel.setText("Questo campo è obbligatorio");
-    		else
-    			DataCertificazioneErrorLabel.setText("Inserisci una data corretta");
-    	}
-    	
-    	if (NuovoTitoloTF.isVisible()) {
-			if (NuovoTitoloTF.getText().isBlank()) {
-				checkNuovoTitolo = false;
-				NuovoTitoloErrorLabel.setVisible(true);
-				NuovoTitoloErrorLabel.setText("Questo campo è obbligatorio");
+        //CONTROLLO NUOVO TITOLO (SE OBBLIGATORIO)
+    	if (TitoloBox.isVisible()) {
+			if (NuovoTitoloTF.isVisible()) {
+				if (NuovoTitoloTF.getText().isBlank()) {
+					checkNuovoTitolo = false;
+					NuovoTitoloErrorLabel.setVisible(true);
+					NuovoTitoloErrorLabel.setText("Questo campo è obbligatorio");
+				}
 			}
-		} else {
-			checkNuovoTitolo = false;
 		}
     	
 		return checkDataCertificazione && checkNuovoTitolo && checkDescrizione;
     }
 
 	@FXML private void annullaOperazione(ActionEvent event) {
-
+		//aggiungere conferma con FinestraErrore
+		popup.hide();
     }
 
     @FXML private void confermaOperazione(ActionEvent event) {
     	if(controllocampi()) {
-    		descrizione = DescrizioneTA.getText();
+    		descrizioneSkill = DescrizioneTA.getText();
     		tipoSkill = ((RadioButton)TipoSkillGroup.getSelectedToggle()).getText();
     		
-    		skill = new Skill(tipoSkill, DataCertificazioneDP.getValue(), TitoloComboBox.getSelectionModel().getSelectedItem().toString());
     		
-    		if(!(descrizione.isBlank())) {
-    			skill.setDescrizione(descrizione);
+    		if (tipoSkill.equals("Hard-Skill")) {
+				if (NuovoTitoloTF.isVisible()) {
+					titoloSkill = new Titolo(NuovoTitoloTF.getText());
+				} else {
+					titoloSkill = new Titolo(TitoloComboBox.getSelectionModel().getSelectedItem().toString());
+				}
+			} else {
+				titoloSkill = new Titolo(tipoSkill);
+			}
+    		
+			if(!descrizioneSkill.isBlank()) {
+    			impiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), descrizioneSkill));
+    		} else {
+    			impiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo()));
     		}
-    	    		
-    		impiegato.getListaSkill().add(skill);
-    		controllerRegistrazioneImpiegato.setSkillImpiegato(impiegato);
     		
+    		controllerRegistrazioneImpiegato.setSkillImpiegato(impiegato);
     		popup.hide();
     	}
     }
