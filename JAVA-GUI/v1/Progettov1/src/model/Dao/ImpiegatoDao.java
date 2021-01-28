@@ -5,6 +5,7 @@ import model.Impiegato;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -25,6 +26,8 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final PreparedStatement getCF;
     private final PreparedStatement getGrado;
     private final PreparedStatement insertImpiegato;
+    
+    private String direttoreRisorseUmane = "";
 
     public ImpiegatoDao(Connection connection) throws SQLException
     {
@@ -36,7 +39,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         getImpiegato = connection.prepareStatement("SELECT * FROM impiegato WHERE cf = ?");
         getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
         getGrado = connection.prepareStatement("SELECT tipogrado FROM impiegatoazienda WHERE cf = ?");
-        insertImpiegato = connection.prepareStatement("");
+        insertImpiegato = connection.prepareStatement("INSERT INTO Impiegato VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NEXTVAL('id_impiegato_seq');");
     }
 
     @Override
@@ -150,5 +153,20 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         }
         rs.close();
         return list;
+    }
+    
+    public String getDirettoreRisorseUmane() throws SQLException{
+    	ResultSet rs = connection.createStatement().executeQuery("SELECT I.nome, I.cognome FROM Impiegato I WHERE I.idGrado = 10;");
+    	
+    	while (rs.next()) {
+			if (rs.getString("nome").isBlank() || rs.getString("cognome").isBlank()) {
+				direttoreRisorseUmane = "";
+			} else {
+				direttoreRisorseUmane = " " + rs.getString("nome") + " " + rs.getString("cognome") + " ";
+			}
+		}
+    	
+		rs.close();
+    	return direttoreRisorseUmane;
     }
 }

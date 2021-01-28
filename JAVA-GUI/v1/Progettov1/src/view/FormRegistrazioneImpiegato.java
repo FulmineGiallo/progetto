@@ -27,7 +27,7 @@ public class FormRegistrazioneImpiegato
 		window.hide();
 		window.setScene(scene);
 
-        controllerRegistrazioneImpiegato = loader.getController();
+		controllerRegistrazioneImpiegato = loader.getController();
         controllerRegistrazioneImpiegato.setStage(window, popup);
         controllerRegistrazioneImpiegato.inizializza();
         

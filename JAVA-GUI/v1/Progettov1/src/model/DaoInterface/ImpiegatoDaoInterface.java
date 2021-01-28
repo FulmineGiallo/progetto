@@ -13,6 +13,6 @@ public interface ImpiegatoDaoInterface
     String getNomeCognomeConCF(String CF) throws SQLException;
     String getGrado(String email) throws SQLException;
     int insertRegistrazione(String nome, String cognome, String genere, Date datan, String comunen, String provincia);
-
+    String getDirettoreRisorseUmane() throws SQLException;
 
 }

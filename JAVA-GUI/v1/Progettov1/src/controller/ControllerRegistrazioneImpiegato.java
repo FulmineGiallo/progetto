@@ -25,7 +25,9 @@ import model.Comune;
 import model.Connection.DBConnection;
 import model.Dao.ComuneDao;
 import model.Dao.GradoDao;
+import model.Dao.ImpiegatoDao;
 import model.DaoInterface.GradoDaoInterface;
+import model.DaoInterface.ImpiegatoDaoInterface;
 import model.Grado;
 import model.Impiegato;
 import model.Skill;
@@ -89,7 +91,7 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Button 			AnnullaButton;
     @FXML private Button 			ConfermaButton;
     
-    @FXML private Label				CaricamentoLabel;
+    @FXML private Label 			CaricamentoLabel;
     
     private Stage window;
     private Stage popup;
@@ -117,8 +119,8 @@ public class ControllerRegistrazioneImpiegato {
     private FormRegistrazioneSkill 			  formRegistrazioneSkill;
     private FinestraErrore		   			  informazioniSkill;
     
-    private Skill		ultimaSkillInserita;
-    private Skill 		infoSkill;
+    private Skill ultimaSkillInserita;
+    private Skill infoSkill;
     
     private ObservableList<Skill> listaSkillImpiegato = FXCollections.observableArrayList();
     
@@ -183,7 +185,7 @@ public class ControllerRegistrazioneImpiegato {
     	this.popup = popup;
     }
 
-    public void inizializza() throws SQLException {
+    public void inizializza() throws SQLException {  	
         GradoComboBox.getItems().addAll(gradiList);
         GradoComboBox.getSelectionModel().select(2);
         
@@ -263,7 +265,7 @@ public class ControllerRegistrazioneImpiegato {
     
     @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {    	
 		if(controlloCampi()) {
-		    caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
+			caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
 		    caricamentoRegistrazioneImpiegato.start(popup);
 		}	
     }

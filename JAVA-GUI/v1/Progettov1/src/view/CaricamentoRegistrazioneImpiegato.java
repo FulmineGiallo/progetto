@@ -8,38 +8,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import controller.ControllerCaricamentoRegistrazione;
 import controller.ControllerRegistrazioneImpiegato;
 
 public class CaricamentoRegistrazioneImpiegato {
 	
-	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
-	HomePageBenvenuto homePageBenvenuto;
-
-    public CaricamentoRegistrazioneImpiegato() {
-    	
-    }
+	private ControllerCaricamentoRegistrazione controller;
+	private HomePageBenvenuto homePageBenvenuto;
 
     public void start(Stage popup) {
-        try
-		{
+        try {
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneImpiegato/CaricamentoRegistrazioneImpiegato.fxml"));
-			Parent root = loader.load();
+        	Parent root = loader.load();
 			Scene scene = new Scene(root, 400.0, 200.0);
 			
 			popup.hide();
 			popup.setScene(scene);
 			
-			controllerRegistrazioneImpiegato = loader.getController();
-			
 			//popup.setTitle("Caricamento in corso...");
 			popup.setTitle(popup.toString());
 			popup.setResizable(false);
+			popup.setMinWidth(400.0);
 			popup.setMinHeight(200.0);
-			popup.setMaxWidth(400.0);
 			
 			popup.show();
 			popup.centerOnScreen();
+			
+			controller = loader.getController();
+			controller.inizializza();
 			
 			PauseTransition delay = new PauseTransition(Duration.seconds(5));
 			delay.setOnFinished(event -> popup.hide());
