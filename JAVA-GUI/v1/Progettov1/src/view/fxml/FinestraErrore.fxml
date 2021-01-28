@@ -85,12 +85,12 @@
                <children>
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Button fx:id="DettagliButton" mnemonicParsing="false" onAction="#MostraNascondiDettagli" styleClass="DettagliButton" text="Mostra dettagli" />
+                        <Button fx:id="DettagliButton" mnemonicParsing="false" styleClass="DettagliButton" text="Mostra dettagli" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="OkButton" mnemonicParsing="false" onAction="#ChiudiFinestra" prefWidth="70.0" styleClass="OkButton" text="OK" />
+                        <Button fx:id="OkButton" mnemonicParsing="false" prefWidth="70.0" styleClass="OkButton" text="OK" />
                      </children>
                   </HBox>
                </children>

@@ -24,6 +24,8 @@ public class progettoImpiegatoDao implements ProgettoImpiegatoDaoInterface{
 		
 		int eliminato=0;
 		
+
+		
 		eliminato = eliminaImpiegato.executeUpdate("DELETE  FROM progettoimpiegato AS pi WHERE pi.idprogetto = " + idProgetto + "AND pi.cf LIKE '" + impiegato.getCF()+"'");
 				
 		

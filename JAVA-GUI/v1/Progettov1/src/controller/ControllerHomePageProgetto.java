@@ -95,8 +95,7 @@ public class ControllerHomePageProgetto {
     private SkillDao SkillDAO;
     private progettoImpiegatoDao progettoImpiegatoDao;
     
-    FinestraRimuoviImpiegatoDalProgetto finestraRimuoviImpiegatoDalProgetto;
-    
+    FinestraErrore finestraRimuoviImpiegatoDalProgetto;
     
     Progetto progetto;
     Impiegato impiegato;
@@ -203,10 +202,9 @@ public class ControllerHomePageProgetto {
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
     	
-    	
-		finestraRimuoviImpiegatoDalProgetto = new FinestraRimuoviImpiegatoDalProgetto(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto);
-		finestraRimuoviImpiegatoDalProgetto.start(popup);
-   
+
+		finestraRimuoviImpiegatoDalProgetto = new FinestraErrore(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto);
+		finestraRimuoviImpiegatoDalProgetto.startProgetto (popup);
 
     	
         lista = progettoDao.getPartecipanti(progetto);
