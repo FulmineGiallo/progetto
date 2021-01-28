@@ -48,12 +48,12 @@
                                           <Label fx:id="TipoSkillLabel" prefWidth="150.0" styleClass="TipoSkillLabel" text="* Tipo Skill" />
                                           <HBox fx:id="TipoSkillRBBox" spacing="25.0">
                                              <children>
-                                                <RadioButton fx:id="TipoSkillRB1" mnemonicParsing="false" onMouseClicked="#nascondiTitolo" selected="true" styleClass="TipoSkillRB1" text="Soft-Skill">
+                                                <RadioButton fx:id="TipoSkillRB1" mnemonicParsing="false" onMouseClicked="#visualizzaFormSoftSkill" selected="true" styleClass="TipoSkillRB1" text="Soft-Skill">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="TipoSkillGroup" />
                                                    </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" onMouseClicked="#mostraTitolo" styleClass="TipoSkillRB2" text="Hard-Skill" toggleGroup="$TipoSkillGroup" />
+                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" onMouseClicked="#visualizzaFormHardSkill" styleClass="TipoSkillRB2" text="Hard-Skill" toggleGroup="$TipoSkillGroup" />
                                              </children>
                                           </HBox>
                                        </children></HBox>
@@ -63,7 +63,7 @@
                                           <TextArea fx:id="DescrizioneTA" minHeight="60.0" styleClass="DescrizioneTA" />
                                           <Label fx:id="DescrizioneErrorLabel" styleClass="ErrorLabel" />
                                        </children></VBox>
-                                    <GridPane fx:id="DataCertificazioneBox">
+                                    <GridPane fx:id="DataCertificazioneBox" visible="false">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" percentWidth="27.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />

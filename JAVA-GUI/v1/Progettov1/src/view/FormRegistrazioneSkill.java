@@ -21,7 +21,7 @@ public class FormRegistrazioneSkill {
     	
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneImpiegato/InserimentoSkill/FormRegistrazioneSkill.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 850.0, 600.0);
         
 		popup.hide();
 		popup.setScene(scene);
@@ -32,9 +32,9 @@ public class FormRegistrazioneSkill {
         
         //popup.setTitle("Registrazione");
         popup.setTitle(popup.toString());
-        //popup.setMaximized(true);
+        popup.setResizable(true);
         popup.setMinWidth(850.0);
-        popup.setMinHeight(450.0);
+        popup.setMinHeight(600.0);
         
         popup.show();
         popup.centerOnScreen();

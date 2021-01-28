@@ -56,6 +56,7 @@ public class ControllerRegistrazioneSkill {
     @FXML private TextArea 			DescrizioneTA;
     @FXML private Label				DescrizioneErrorLabel;
     
+    @FXML private GridPane			DataCertificazioneBox;
     @FXML private Label 			DataCertificazioneLabel;
     @FXML private DatePicker 		DataCertificazioneDP;
     @FXML private Label 			DataCertificazioneErrorLabel;
@@ -153,20 +154,22 @@ public class ControllerRegistrazioneSkill {
     		}
     	}
     	
-    	//CONTROLLO DATA DI NASCITA
-        dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
-        
-        if(DataCertificazioneDP.getValue() != null) {
-        	if(DataCertificazioneDP.getValue().isAfter(dataDiOggi)) {
-        		checkDataCertificazione = false;
-        		DataCertificazioneErrorLabel.setText("Inserisci una data di certificazione corretta");
-        	}
-        } else {
-        	checkDataCertificazione = false;
-        	DataCertificazioneErrorLabel.setText("Questo campo è obbligatorio");
-        }
+    	//CONTROLLO DATA DI CERTIFICAZIONE
+    	if (DataCertificazioneBox.isVisible()) {
+			dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
+			
+			if (DataCertificazioneDP.getValue() != null) {
+				if (DataCertificazioneDP.getValue().isAfter(dataDiOggi)) {
+					checkDataCertificazione = false;
+					DataCertificazioneErrorLabel.setText("Inserisci una data di certificazione corretta");
+				}
+			} else {
+				checkDataCertificazione = false;
+				DataCertificazioneErrorLabel.setText("Questo campo è obbligatorio");
+			} 
+		}
     	
-        //CONTROLLO NUOVO TITOLO (SE OBBLIGATORIO)
+		//CONTROLLO NUOVO TITOLO (SE OBBLIGATORIO)
     	if (TitoloBox.isVisible()) {
 			if (NuovoTitoloTF.isVisible()) {
 				if (NuovoTitoloTF.getText().isBlank()) {
@@ -197,15 +200,15 @@ public class ControllerRegistrazioneSkill {
 				} else {
 					titoloSkill = new Titolo(TitoloComboBox.getSelectionModel().getSelectedItem().toString());
 				}
-			} else {
-				titoloSkill = new Titolo(tipoSkill);
+				
+				if(!descrizioneSkill.isBlank()) {
+	    			impiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), descrizioneSkill));
+	    		} else {
+	    			impiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), "Nessuna descrizione"));
+	    		}
+			} else if (tipoSkill.equals("Soft-Skill")){
+				impiegato.getListaSkill().add(new Skill(tipoSkill, descrizioneSkill));
 			}
-    		
-			if(!descrizioneSkill.isBlank()) {
-    			impiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), descrizioneSkill));
-    		} else {
-    			impiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo()));
-    		}
     		
     		controllerRegistrazioneImpiegato.setSkillImpiegato(impiegato);
     		popup.hide();
@@ -213,15 +216,25 @@ public class ControllerRegistrazioneSkill {
     }
     
     @FXML
-    void mostraTitolo(MouseEvent event) {
-    	TitoloBox.setVisible(true);
-    	DescrizioneTA.setPromptText(DescrizioneTAPrompt);
+    void visualizzaFormSoftSkill(MouseEvent event) {
+    	TitoloBox.setVisible(false);
+    	DescrizioneTA.setPromptText("* " + DescrizioneTAPrompt);
+    	
+    	DataCertificazioneBox.setVisible(false);
+    	
+    	DescrizioneErrorLabel.setText("");
     }
 
     @FXML
-    void nascondiTitolo(MouseEvent event) {
-    	TitoloBox.setVisible(false);
-    	DescrizioneTA.setPromptText("* " + DescrizioneTAPrompt);
+    void visualizzaFormHardSkill(MouseEvent event) {
+    	TitoloBox.setVisible(true);
+    	DescrizioneTA.setPromptText(DescrizioneTAPrompt);
+    	
+    	DataCertificazioneBox.setVisible(true);
+    	
+    	DescrizioneErrorLabel.setText("");
+    	DataCertificazioneErrorLabel.setText("");
+    	NuovoTitoloErrorLabel.setText("");
     }
 
 }

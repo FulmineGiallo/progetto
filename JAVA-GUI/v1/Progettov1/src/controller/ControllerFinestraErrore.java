@@ -100,8 +100,8 @@ public class ControllerFinestraErrore {
     	this.impiegato=impiegato;
     	this.progetto=progetto;
     	MessaggioErroreLabel.setText("Sei sicuro di voler eliminare questo impiegato dal progetto?");
-    	OkButton.setText("Elimina");
-    	DettagliButton.setText("annulla");
+    	OkButton.setText("Conferma");
+    	DettagliButton.setText("Annulla");
     	EliminaImpiegatoDalProgetto();
     	ChiudiFinestraEliminazioneImpiegato();
     }
@@ -118,37 +118,25 @@ public class ControllerFinestraErrore {
             	int eliminato=0;
             	
             	try {
-					idProgetto=progettoDao.GetIdProgetto(progetto);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-            	
-            	try {
+					idProgetto = progettoDao.GetIdProgetto(progetto);
 					eliminato = progettoImpiegatoDao.EliminaImpiegatoDalProgetto(impiegato, idProgetto);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             	
-            	
             	if(eliminato !=0) {
-            		System.out.println("impiegato eliminato");
-            		ChiudiFinestra(mouseEvent);
+            		//System.out.println("impiegato eliminato");
+            		FinestraErrore.getScene().getWindow().hide();
             	}
                 
             }
         });
     }
     
-    public void MostraNascondiDettagli()
-    {
-        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
+    public void MostraNascondiDettagli() {
+        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
             	if (MessaggioErroreLabel.isVisible()) {
             		
             		MessaggioErroreLabel.setVisible(false);
@@ -160,40 +148,25 @@ public class ControllerFinestraErrore {
             		MessaggioErroreTA.setVisible(false);
             		
             	}
-                
+            }
+        });
+    }    
+    
+    public void ChiudiFinestraEliminazioneImpiegato() {
+        DettagliButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+            	FinestraErrore.getScene().getWindow().hide();
+
             }
         });
     }
     
-    
-    
-    void ChiudiFinestra(MouseEvent event) {
-    	FinestraErrore.getScene().getWindow().hide();
-    }
-    
-    
-    public void ChiudiFinestraEliminazioneImpiegato()
-    {
-        DettagliButton.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
+    public void ChiudiFinestraErrore() {
+        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
-            	FinestraErrore.getScene().getWindow().hide();
-                
-            }
-        });
-    }
-    
-    public void ChiudiFinestraErrore()
-    {
-        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-            	FinestraErrore.getScene().getWindow().hide();
-                
+            	FinestraErrore.getScene().getWindow().hide(); 
             }
         });
     }

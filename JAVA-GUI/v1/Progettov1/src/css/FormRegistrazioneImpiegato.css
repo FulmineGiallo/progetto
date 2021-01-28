@@ -184,6 +184,13 @@
 	-fx-pref-height: 30;
 }
 
+.SkillLV .scroll-bar:horizontal .increment-arrow,
+.SkillLV .scroll-bar:horizontal .decrement-arrow,
+.SkillLV .scroll-bar:horizontal .increment-button,
+.SkillLV .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+
 .DataDiNascitaDP .arrow-button,
 .ComuneComboBox .arrow-button,
 .GradoComboBox .arrow-button{

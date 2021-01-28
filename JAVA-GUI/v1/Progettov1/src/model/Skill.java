@@ -9,16 +9,15 @@ public class Skill
 	private LocalDate	dataCertificazione;
 	private String		titolo;
 	
-	public Skill(String tipoSkill, LocalDate dataCertificazione, String titolo) {
-		this.tipoSkill = tipoSkill;
-		this.dataCertificazione = dataCertificazione;
-		this.titolo = titolo;
-	}
-	
 	public Skill(String tipoSkill, LocalDate dataCertificazione, String titolo, String descrizione) {
 		this.tipoSkill = tipoSkill;
 		this.dataCertificazione = dataCertificazione;
 		this.titolo = titolo;
+		this.descrizione = descrizione;
+	}
+	
+	public Skill(String tipoSkill, String descrizione) {
+		this.tipoSkill = tipoSkill;
 		this.descrizione = descrizione;
 	}
 
@@ -56,7 +55,15 @@ public class Skill
 	
 	@Override
 	public String toString() {
-		return titolo + " del " + dataCertificazione;
+		if(tipoSkill.equals("Hard-Skill")) {
+			return titolo + " del " + dataCertificazione;
+		}
+		
+		if(descrizione.length() <= 35) {
+			return descrizione;
+		} else {
+			return descrizione.substring(0, 32) + "...";
+		}
 	}
 	
 }
