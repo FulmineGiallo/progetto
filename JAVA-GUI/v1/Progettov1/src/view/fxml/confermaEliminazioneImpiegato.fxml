@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="621.0" style="-fx-background-color: #424549;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="finestraEliminazione" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="621.0" style="-fx-background-color: #424549;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerFinestraRimuoviImpiegatoDalProgetto">
    <children>
       <Label layoutX="56.0" layoutY="53.0" prefHeight="49.0" prefWidth="551.0" style="-fx-alignment: center;" text="Sei sicuro di voler eliminare questo impiegato da questo progetto?" textFill="WHITE" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="53.0">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Button id="ConfermaButton" layoutX="102.0" layoutY="116.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="108.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Conferma" AnchorPane.bottomAnchor="28.400000000000006" AnchorPane.leftAnchor="102.0">
+      <Button id="ConfermaButton" fx:id="ConfermaButton" layoutX="102.0" layoutY="116.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" prefHeight="41.0" prefWidth="108.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Conferma" AnchorPane.bottomAnchor="28.400000000000006" AnchorPane.leftAnchor="102.0">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button id="AnnullaButton" layoutX="428.0" layoutY="117.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="108.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Annulla" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="85.0">
+      <Button id="AnnullaButton" fx:id="AnnullaButton" layoutX="428.0" layoutY="117.0" mnemonicParsing="false" onAction="#ChiudiFinestra" prefHeight="41.0" prefWidth="108.0" style="-fx-background-color: #7289da; -fx-background-radius: 1em;" text="Annulla" AnchorPane.bottomAnchor="28.0" AnchorPane.rightAnchor="85.0">
          <font>
             <Font size="18.0" />
          </font>

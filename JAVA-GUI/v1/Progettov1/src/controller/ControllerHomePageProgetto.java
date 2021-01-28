@@ -25,6 +25,8 @@ import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 import model.Titolo;
+import view.FinestraErrore;
+import view.FinestraRimuoviImpiegatoDalProgetto;
 import view.HomePageImpiegato;
 
 import java.sql.Connection;
@@ -92,6 +94,9 @@ public class ControllerHomePageProgetto {
     private TitoloDAO titoloDAO;
     private SkillDao SkillDAO;
     private progettoImpiegatoDao progettoImpiegatoDao;
+    
+    FinestraRimuoviImpiegatoDalProgetto finestraRimuoviImpiegatoDalProgetto;
+    
     
     Progetto progetto;
     Impiegato impiegato;
@@ -197,21 +202,15 @@ public class ControllerHomePageProgetto {
     
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
+    	
+    	
+		finestraRimuoviImpiegatoDalProgetto = new FinestraRimuoviImpiegatoDalProgetto(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto);
+		finestraRimuoviImpiegatoDalProgetto.start(popup);
    
-    	int idProgetto=0;
-    	int eliminato=0;
-    	
-    	idProgetto=progettoDao.GetIdProgetto(progetto);
-    	progettoImpiegatoDao = new progettoImpiegatoDao(connection);
-    	
-    	eliminato = progettoImpiegatoDao.EliminaImpiegatoDalProgetto(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), idProgetto);
+
     	
         lista = progettoDao.getPartecipanti(progetto);
         ListaPartecipantiLV.setItems(lista);
-    	
-    	if(eliminato !=0)
-    		System.out.println("impiegato eliminato");
-    	
     	
     	
     }

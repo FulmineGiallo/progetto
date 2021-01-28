@@ -159,6 +159,7 @@ public class ControllerHomePageOrganizzatore {
         ListaPartecipantiLV.setItems(lista);
         
         updateInfoImpiegato();
+        updateInfoBox();
     }
     
     @FXML
@@ -228,11 +229,23 @@ public class ControllerHomePageOrganizzatore {
         });
     }
     
+    public void updateInfoBox()
+    {
+        RimuoviImpiegatoButton.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+            	DescrizioneRiunioneImpiegatoBox.setVisible(false);
+                IstruzioniBox.setVisible(true);
+            }
+        });
+    }
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
     	   
     	int idImpiegato=0;
     	int eliminato=0;
+    	
     	
     	idImpiegato=riunioneDao.GetIdRiunione(riunione);
     	riunioneImpiegatoDao = new RiunioneImpiegatoDao(connection);
@@ -240,10 +253,10 @@ public class ControllerHomePageOrganizzatore {
     	eliminato = riunioneImpiegatoDao.EliminaImpiegatoDallaRiunione(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), idImpiegato);
     	
         idriunione = riunioneDao.GetIdRiunione(riunione);
+        
         lista = riunioneDao.getPartecipanti(idriunione);
         ListaPartecipantiLV.setItems(lista);
-    	SkillBox.setVisible(false);
-        IstruzioniBox.setVisible(true);
+        
     	
         
     	if(eliminato !=0)
