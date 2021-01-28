@@ -223,4 +223,11 @@ public class ControllerHomePageProgetto {
         lista = progettoDao.getPartecipanti(progetto);
         ListaPartecipantiLV.setItems(lista);
     }
+    
+    public void DaDescrizioneProgettoAdIstruzioniBox() throws SQLException {
+    	DescrizioneProgettoImpiegatoBox.setVisible(false);
+    	IstruzioniBox.setVisible(true);
+    }
+    
+    
 }

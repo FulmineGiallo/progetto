@@ -131,6 +131,7 @@ public class ControllerFinestraErrore {
             		FinestraErrore.getScene().getWindow().hide();
             		try {
 						homePageProgetto.aggiornaLista();
+						homePageProgetto.DaDescrizioneProgettoAdIstruzioniBox();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
