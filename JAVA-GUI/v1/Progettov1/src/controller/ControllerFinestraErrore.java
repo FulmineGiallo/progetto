@@ -43,6 +43,7 @@ public class ControllerFinestraErrore {
     
 	private ProgettoDaoInterface progettoDao;
 	private ProgettoImpiegatoDaoInterface progettoImpiegatoDao;
+	private ControllerHomePageProgetto homePageProgetto;
 	
 	private Impiegato impiegato;
 	private Progetto progetto;
@@ -95,10 +96,11 @@ public class ControllerFinestraErrore {
     	//altre cose da fare
     }
     
-    public void inizializza(Impiegato impiegato, Progetto progetto) {
+    public void inizializza(Impiegato impiegato, Progetto progetto, ControllerHomePageProgetto homePageProgetto) {
     	
     	this.impiegato=impiegato;
     	this.progetto=progetto;
+    	this.homePageProgetto = homePageProgetto;
     	MessaggioErroreLabel.setText("Sei sicuro di voler eliminare questo impiegato dal progetto?");
     	OkButton.setText("Conferma");
     	DettagliButton.setText("Annulla");
@@ -127,6 +129,12 @@ public class ControllerFinestraErrore {
             	if(eliminato !=0) {
             		//System.out.println("impiegato eliminato");
             		FinestraErrore.getScene().getWindow().hide();
+            		try {
+						homePageProgetto.aggiornaLista();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
             	}
                 
             }

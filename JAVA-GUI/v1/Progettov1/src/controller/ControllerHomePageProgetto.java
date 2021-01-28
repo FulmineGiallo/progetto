@@ -203,13 +203,12 @@ public class ControllerHomePageProgetto {
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
     	
 
-		finestraRimuoviImpiegatoDalProgetto = new FinestraErrore(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto);
+		finestraRimuoviImpiegatoDalProgetto = new FinestraErrore(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto, this);
 		finestraRimuoviImpiegatoDalProgetto.startProgetto (popup);
 
-    	
         lista = progettoDao.getPartecipanti(progetto);
         ListaPartecipantiLV.setItems(lista);
-    	
+       
     	
     }
     
@@ -218,5 +217,10 @@ public class ControllerHomePageProgetto {
     {
     	homePageImpiegato = new HomePageImpiegato(impiegato);
     	homePageImpiegato.start(window, popup);
+    }
+    
+    public void aggiornaLista() throws SQLException {
+        lista = progettoDao.getPartecipanti(progetto);
+        ListaPartecipantiLV.setItems(lista);
     }
 }

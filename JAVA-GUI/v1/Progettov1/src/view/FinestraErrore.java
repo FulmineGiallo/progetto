@@ -7,12 +7,15 @@ import javafx.stage.Stage;
 import model.Impiegato;
 import model.Progetto;
 import controller.ControllerFinestraErrore;
+import controller.ControllerHomePageProgetto;
 
 public class FinestraErrore {
 	
 	private ControllerFinestraErrore 	controllerFinestraErrore;
 	private String						messaggioErrore;
 	private Exception					errore;
+	private ControllerHomePageProgetto homePageProgetto;
+
 	
 	private Impiegato impiegato;
 	private Progetto progetto;
@@ -24,9 +27,10 @@ public class FinestraErrore {
 		this.errore = errore;
 	}
 	
-	public FinestraErrore(Impiegato impiegato, Progetto progetto) {
+	public FinestraErrore(Impiegato impiegato, Progetto progetto, ControllerHomePageProgetto homePageProgetto) {
 		this.impiegato = impiegato;
 		this.progetto = progetto;
+		this.homePageProgetto=homePageProgetto;
 	}
 	
 	public FinestraErrore(String dettagliSkill) {
@@ -87,7 +91,7 @@ public class FinestraErrore {
         popup.setScene(scene);
         
         controllerFinestraErrore = loader.getController();
-        controllerFinestraErrore.inizializza(impiegato, progetto);
+        controllerFinestraErrore.inizializza(impiegato, progetto, homePageProgetto);
         
         //window.setTitle("Errore!");
         popup.setTitle(popup.toString());
