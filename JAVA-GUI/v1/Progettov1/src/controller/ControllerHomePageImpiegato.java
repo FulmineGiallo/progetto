@@ -29,6 +29,7 @@ import model.DaoInterface.RiunioneDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
+import view.FinestraErrore;
 import view.FormRegistrazioneProgetto;
 import view.HomePageBenvenuto;
 import view.HomePageOrganizzatore;
@@ -95,6 +96,10 @@ public class ControllerHomePageImpiegato {
 	@FXML private ListView<Riunione> 	RiunioniLV;
 	@FXML private Label                 salario;
 
+	
+	private FinestraErrore finestraErrore;
+	private Exception error;
+	
 	HomePageBenvenuto 					homePageBenvenuto;
 	HomePageValutazioni 				homePageValutazioni;
 	FormRegistrazioneProgetto 			registrazioneProgetto;
@@ -348,9 +353,23 @@ public class ControllerHomePageImpiegato {
 									
 									if(update!=0)
 										System.out.println("presenza salvata");
-									
+										finestraErrore=new FinestraErrore("presenza salvata", error);
+										try {
+											finestraErrore.startPopupErrore(popup);
+										} catch (Exception e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										
 								}else {
 									System.out.println("errore presenza");
+									finestraErrore=new FinestraErrore("impossibile salvare la presenza", error);
+									try {
+										finestraErrore.startPopupErrore(popup);
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 								}
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
@@ -376,9 +395,23 @@ public class ControllerHomePageImpiegato {
 									
 									if(update!=0)
 										System.out.println("assenza salvata");
+									finestraErrore=new FinestraErrore("assenza salvata", error);
+									try {
+										finestraErrore.startPopupErrore(popup);
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 									
 								}else {
 									System.out.println("errore assenza");
+									finestraErrore=new FinestraErrore("impossibile salvare l'assenza", error);
+									try {
+										finestraErrore.startPopupErrore(popup);
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 								}
 								
 								
