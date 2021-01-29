@@ -28,6 +28,7 @@ import model.Dao.GradoDao;
 import model.Dao.ImpiegatoDao;
 import model.DaoInterface.GradoDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
+import utilities.MetodiComuni;
 import model.Grado;
 import model.Impiegato;
 import model.Skill;
@@ -133,6 +134,8 @@ public class ControllerRegistrazioneImpiegato {
     private boolean checkComune;
     private boolean checkAnagrafica;
     private boolean checkCF;
+    
+    private MetodiComuni utils = new MetodiComuni();
 
     private Connection connection;
     private DBConnection dbConnection;
@@ -201,6 +204,157 @@ public class ControllerRegistrazioneImpiegato {
         });
     }
     
+    public boolean controlloProvincia() {
+    	ProvinciaErrorLabel.setText("");
+    	
+    	switch(utils.controlloStringa(ProvinciaTF.getText(), "[a-zA-Z]+")) {
+			case 1:
+				ProvinciaErrorLabel.setText("Questo campo è obbligatorio");
+				return false;
+			case 2:
+				ProvinciaErrorLabel.setText("La provincia può contenere solo lettere");
+				return false;
+			default:
+				return true;
+    	}
+    }
+    
+    public boolean controlloCampiAnagrafica() {
+    	NomeErrorLabel.setText("");
+    	CognomeErrorLabel.setText("");
+    	DataDiNascitaErrorLabel.setText("");     
+    	ComuneErrorLabel.setText("");
+    	
+    	checkNome = true;
+    	checkCognome = true;
+    	checkData = true;
+    	checkProvincia = controlloProvincia();
+    	checkComune = true;
+    	
+    	//CONTROLLO NOME
+    	switch(utils.controlloStringa(NomeTF.getText(), "[a-zA-Z\s]+")) {
+			case 1:
+				checkNome = false;
+				NomeErrorLabel.setText("Questo campo è obbligatorio");
+				break;
+			case 2:
+				checkNome = false;
+				NomeErrorLabel.setText("Il nome può contenere solo lettere");
+				break;
+			default:
+				checkNome = true;
+    	}
+    	
+    	//CONTROLLO COGNOME
+    	switch(utils.controlloStringa(CognomeTF.getText(), "[a-zA-Z\s]+")) {
+			case 1:
+				checkCognome = false;
+				CognomeErrorLabel.setText("Questo campo è obbligatorio");
+				break;
+			case 2:
+				checkCognome = false;
+				CognomeErrorLabel.setText("Il cognome può contenere solo lettere");
+				break;
+			default:
+				checkCognome = true;
+    	}
+       
+    	//CONTROLLO DATA DI NASCITA
+        dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
+        dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
+        
+        switch(utils.controlloData(DataDiNascitaDP.getValue(), dataDiOggi, dataSupportata)) {
+        	case 1:
+        		checkData = false;
+            	DataDiNascitaErrorLabel.setText("Questo campo è obbligatorio");
+            	break;
+        	case 2:
+        		checkData = false;
+        		DataDiNascitaErrorLabel.setText("Inserisci una data di nascita corretta");
+        		break;
+        	case 3:
+        		checkData = false;
+    			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
+    			break;
+			default:
+				checkData = true;
+        }
+    	
+    	//CONTROLLO COMUNE DI NASCITA
+        if(ComuneComboBox.getSelectionModel().isEmpty() && checkProvincia) {
+    		checkComune = false;
+    		ComuneErrorLabel.setText("Questo campo è obbligatorio");
+        }
+    	
+    	return checkNome && checkCognome && checkData && checkProvincia && checkComune;
+    }
+    
+    public boolean controlloCampi() {
+    	EmailErrorLabel.setText("");
+    	PasswordErrorLabel.setText("");
+    	CodiceFiscaleErrorLabel.setText("");
+   
+    	checkEmail = true;
+    	checkPassword = true;
+    	checkAnagrafica = controlloCampiAnagrafica();
+    	checkCF = true;
+    	
+    	//CONTROLLO EMAIL
+    	switch(utils.controlloStringa(EmailTF.getText(), "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+    		case 1:
+    			checkEmail = false;
+    			EmailErrorLabel.setText("Questo campo è obbligatorio");
+    			break;
+    		case 2:
+    			checkEmail = false;
+    			EmailErrorLabel.setText("La sintassi dell'email non è valida");
+    			break;
+    		default:
+    			checkEmail = true;
+    	}
+    	
+    	//CONTROLLO PASSWORD
+    	switch(utils.controlloPassword(PasswordTF.getText())) {
+			case 1:
+				checkPassword = false;
+	    		PasswordErrorLabel.setText("Questo campo è obbligatorio");
+				break;
+			case 2:
+				checkPassword = false;
+				PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
+				break;
+			default:
+				checkPassword = true;
+    	}
+    	
+    	//CONTROLLO CODICE FISCALE
+    	if(CodiceFiscaleTF == null || codiceFiscale == null) {
+    		checkCF = false;
+    		CodiceFiscaleErrorLabel.setText("Questo campo è obbligatorio, inserisci tutti i campi e poi clicca qui per calcolare il codice fiscale");
+    	} else {
+        	if(codiceFiscale.isBlank()) {
+        		checkCF = false;
+        		CodiceFiscaleErrorLabel.setText("Questo campo è obbligatorio, inserisci tutti i campi e poi clicca qui per calcolare il codice fiscale");
+        	}
+    	}
+    	
+    	return checkEmail && checkPassword && checkAnagrafica && checkCF;
+    }
+    
+    @FXML private void cercaComuni(ActionEvent event) throws SQLException{
+    	
+    	checkProvincia = true;
+    	checkComune = true;
+    	
+    	ComuneComboBox.setPromptText("");
+    	ComuneErrorLabel.setText("");
+    	ProvinciaErrorLabel.setText("");
+    	
+    	CodiceFiscaleTF.setText("");
+    	
+    	updateComune();
+    }
+    
     public void updateComune() throws SQLException {
     	
     	if(controlloProvincia()) {
@@ -216,20 +370,6 @@ public class ControllerRegistrazioneImpiegato {
                 ComuneComboBox.setItems(comuneList);
             }
     	}
-    }
-    
-    @FXML private void cercaComuni(ActionEvent event) throws SQLException{
-    	
-    	checkProvincia = true;
-    	checkComune = true;
-    	
-    	ComuneComboBox.setPromptText("");
-    	ComuneErrorLabel.setText("");
-    	ProvinciaErrorLabel.setText("");
-    	
-    	CodiceFiscaleTF.setText("");
-    	
-    	updateComune();
     }
 
     @FXML private void CFRegistrazione() {
@@ -253,6 +393,18 @@ public class ControllerRegistrazioneImpiegato {
     	}
     }
     
+    @FXML public void visualizzaInformazioniSkill(MouseEvent event) {    	
+    	infoSkill = SkillLV.getSelectionModel().getSelectedItem();
+		
+		informazioniSkill = new FinestraErrore(infoSkill.toString() 	  	+
+											   "\n\nTipologia: " 		  	+ infoSkill.getTipoSkill() 		+
+											   "\nTitolo del certificato: " + infoSkill.getTitolo()    		+
+											   "\nDescrizione: " 		  	+ infoSkill.getDescrizione()	+
+											   "\nData di certificazione: " + infoSkill.getDataCertificazione());
+		
+		try { informazioniSkill.startDettagliSkill(popup);} catch (Exception e) {}
+    }
+    
     @FXML private void nuovaSkill(ActionEvent event) throws Exception{
     	formRegistrazioneSkill = new FormRegistrazioneSkill(this);
     	formRegistrazioneSkill.start(popup);
@@ -265,148 +417,10 @@ public class ControllerRegistrazioneImpiegato {
     
     @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {    	
 		if(controlloCampi()) {
+			connection.close();
 			caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
 		    caricamentoRegistrazioneImpiegato.start(popup);
 		}	
-    }
-    
-    public boolean controlloProvincia() {
-    	ProvinciaErrorLabel.setText("");
-    	
-    	checkProvincia = true;
-    	
-        //CONTROLLO PROVINCIA DI NASCITA
-    	if(ProvinciaTF.getText().isBlank()) {
-    		checkProvincia = false;
-    		ProvinciaErrorLabel.setText("Questo campo è obbligatorio");
-    	} else {
-    		if(!(ProvinciaTF.getText().matches("[a-zA-Z]+"))) {
-    			checkProvincia = false;
-    			ProvinciaErrorLabel.setText("La provincia può contenere solo lettere");
-    		}
-    	}
-    	
-    	return checkProvincia;
-    }
-    
-    public boolean controlloCampiAnagrafica() {
-    	NomeErrorLabel.setText("");
-    	CognomeErrorLabel.setText("");
-    	DataDiNascitaErrorLabel.setText("");     
-    	ComuneErrorLabel.setText("");
-    	
-    	checkNome = true;
-    	checkCognome = true;
-    	checkData = true;
-    	checkProvincia = controlloProvincia();
-    	checkComune = true;
-    	
-    	//CONTROLLO NOME
-    	if(NomeTF.getText().isBlank()) {
-    		checkNome = false;
-    		NomeErrorLabel.setText("Questo campo è obbligatorio");
-    	} else {
-    		if(!(NomeTF.getText().matches("[a-zA-Z\s]+"))) {
-    			checkNome = false;
-    			NomeErrorLabel.setText("Il nome può contenere solo lettere");
-    		}
-    	}
-    	
-    	//CONTROLLO COGNOME
-    	if(CognomeTF.getText().isBlank()) {
-    		checkCognome = false;
-    		CognomeErrorLabel.setText("Questo campo è obbligatorio");
-    	} else {
-    		if(!(CognomeTF.getText().matches("[a-zA-Z\s]+"))) {
-    			checkCognome = false;
-    			CognomeErrorLabel.setText("Il cognome può contenere solo lettere");
-    		}
-    	}
-       
-    	//CONTROLLO DATA DI NASCITA
-        dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
-        dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
-        
-        if(DataDiNascitaDP.getValue() != null) {            	
-            	if(DataDiNascitaDP.getValue().isAfter(dataSupportata)) {
-        			checkData = false;
-        			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
-        		}
-
-            	if(DataDiNascitaDP.getValue().isAfter(dataDiOggi)){
-            		checkData = false;
-            		DataDiNascitaErrorLabel.setText("Inserisci una data di nascita corretta");
-            	}
-            } else {
-            	checkData = false;
-            	DataDiNascitaErrorLabel.setText("Questo campo è obbligatorio");
-        }
-    	
-    	//CONTROLLO COMUNE DI NASCITA
-        if(ComuneComboBox.getSelectionModel().isEmpty() && checkProvincia) {
-    		checkComune = false;
-    		ComuneErrorLabel.setText("Questo campo è obbligatorio");
-        }
-    	
-    	return checkNome && checkCognome && checkData && checkProvincia && checkComune;
-    }
-    
-    public boolean controlloCampi() {
-    	EmailErrorLabel.setText("");
-    	PasswordErrorLabel.setText("");
-    	CodiceFiscaleErrorLabel.setText("");
-   
-    	checkEmail = true;
-    	checkPassword = true;
-    	checkAnagrafica = controlloCampiAnagrafica();
-    	checkCF = true;
-    	
-    	//CONTROLLO EMAIL
-    	if(EmailTF.getText().isBlank()) {
-    		checkEmail = false;
-    		EmailErrorLabel.setText("Questo campo è obbligatorio");
-    	} else {
-    		if(!(EmailTF.getText().matches("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))) {
-    			checkEmail = false;
-    			EmailErrorLabel.setText("La sintassi dell'email non è valida");
-    		}
-    	}
-    	
-    	//CONTROLLO PASSWORD
-    	if(PasswordTF.getText().isBlank()) {
-    		checkPassword = false;
-    		PasswordErrorLabel.setText("Questo campo è obbligatorio");
-    	} else {
-    		if(!(PasswordTF.getText().length() >= 4)) {
-    			checkPassword = false;
-    			PasswordErrorLabel.setText("La password deve contenere almeno 4 caratteri");
-    		}
-    	}
-    	
-    	//CONTROLLO CODICE FISCALE
-    	if(CodiceFiscaleTF == null || codiceFiscale == null) {
-    		checkCF = false;
-    		CodiceFiscaleErrorLabel.setText("Questo campo è obbligatorio, inserisci tutti i campi e poi clicca qui per calcolare il codice fiscale");
-    	} else {
-        	if(codiceFiscale.isBlank()) {
-        		checkCF = false;
-        		CodiceFiscaleErrorLabel.setText("Questo campo è obbligatorio, inserisci tutti i campi e poi clicca qui per calcolare il codice fiscale");
-        	}
-    	}
-    	
-    	return checkEmail && checkPassword && checkAnagrafica && checkCF;
-    }
-    
-    @FXML public void visualizzaInformazioniSkill(MouseEvent event) {    	
-    	infoSkill = SkillLV.getSelectionModel().getSelectedItem();
-		
-		informazioniSkill = new FinestraErrore(infoSkill.toString() 	  	+
-											   "\n\nTipologia: " 		  	+ infoSkill.getTipoSkill() 		+
-											   "\nTitolo del certificato: " + infoSkill.getTitolo()    		+
-											   "\nDescrizione: " 		  	+ infoSkill.getDescrizione()	+
-											   "\nData di certificazione: " + infoSkill.getDataCertificazione());
-		
-		try { informazioniSkill.startDettagliSkill(popup);} catch (Exception e) {}
     }
 
     public void visualizzaNomeLabel(MouseEvent mouseEvent) {
