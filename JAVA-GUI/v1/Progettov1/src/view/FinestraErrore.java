@@ -25,6 +25,7 @@ public class FinestraErrore {
 	
 	private Progetto progetto;
 	
+	private String titoloMessaggioSkill;
 	private String dettagliSkill;
 	
 	public FinestraErrore(String messaggioErrore, Exception errore) {
@@ -43,9 +44,9 @@ public class FinestraErrore {
 		this.riunione = riunione;
 		this.homePageOrganizzatore = homePageOrganizzatore;
 	}
-	
-	
-	public FinestraErrore(String dettagliSkill) {
+
+	public FinestraErrore(String titoloMessaggioSkill, String dettagliSkill) {
+		this.titoloMessaggioSkill = titoloMessaggioSkill;
 		this.dettagliSkill = dettagliSkill;
 	}
 	
