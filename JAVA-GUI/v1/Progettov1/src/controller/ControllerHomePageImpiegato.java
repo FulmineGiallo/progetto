@@ -29,7 +29,7 @@ import model.DaoInterface.RiunioneDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
-import view.FinestraErrore;
+import view.FinestraPopup;
 import view.FormRegistrazioneProgetto;
 import view.HomePageBenvenuto;
 import view.HomePageOrganizzatore;
@@ -97,7 +97,7 @@ public class ControllerHomePageImpiegato {
 	@FXML private Label                 salario;
 
 	
-	private FinestraErrore finestraErrore;
+	private FinestraPopup finestraErrore;
 	private Exception error;
 	
 	HomePageBenvenuto 					homePageBenvenuto;
@@ -284,7 +284,7 @@ public class ControllerHomePageImpiegato {
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
     	
-    	finestraErrore = new FinestraErrore("sicuro di voler uscire?", error);
+    	finestraErrore = new FinestraPopup("Sei sicuro di voler uscire?", error);
     	finestraErrore.startLogout(window, popup);
     	
     	
@@ -356,7 +356,7 @@ public class ControllerHomePageImpiegato {
 									
 									if(update!=0)
 										System.out.println("presenza salvata");
-										finestraErrore=new FinestraErrore("presenza salvata", error);
+										finestraErrore=new FinestraPopup("presenza salvata", error);
 										try {
 											finestraErrore.startPopupErrore(popup);
 										} catch (Exception e) {
@@ -366,7 +366,7 @@ public class ControllerHomePageImpiegato {
 										
 								}else {
 									System.out.println("errore presenza");
-									finestraErrore=new FinestraErrore("impossibile salvare la presenza", error);
+									finestraErrore=new FinestraPopup("impossibile salvare la presenza", error);
 									try {
 										finestraErrore.startPopupErrore(popup);
 									} catch (Exception e) {
@@ -398,7 +398,7 @@ public class ControllerHomePageImpiegato {
 									
 									if(update!=0)
 										System.out.println("assenza salvata");
-									finestraErrore=new FinestraErrore("assenza salvata", error);
+									finestraErrore=new FinestraPopup("assenza salvata", error);
 									try {
 										finestraErrore.startPopupErrore(popup);
 									} catch (Exception e) {
@@ -408,7 +408,7 @@ public class ControllerHomePageImpiegato {
 									
 								}else {
 									System.out.println("errore assenza");
-									finestraErrore=new FinestraErrore("impossibile salvare l'assenza", error);
+									finestraErrore=new FinestraPopup("impossibile salvare l'assenza", error);
 									try {
 										finestraErrore.startPopupErrore(popup);
 									} catch (Exception e) {

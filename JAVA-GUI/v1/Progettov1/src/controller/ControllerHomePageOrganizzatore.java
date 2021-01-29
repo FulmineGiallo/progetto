@@ -31,7 +31,7 @@ import model.Dao.SkillDao;
 import model.Dao.TitoloDAO;
 import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.RiunioneDaoInterface;
-import view.FinestraErrore;
+import view.FinestraPopup;
 import view.HomePageImpiegato;
 import view.HomePageOrganizzatore;
 
@@ -119,7 +119,7 @@ public class ControllerHomePageOrganizzatore {
     private SkillDao SkillDAO;
     private RiunioneImpiegatoDao riunioneImpiegatoDao;
     private int idriunione;
-    private FinestraErrore finestraRimuoviImpiegatoDallaRiunione;
+    private FinestraPopup finestraRimuoviImpiegatoDallaRiunione;
     
     
     Riunione riunione;
@@ -246,7 +246,7 @@ public class ControllerHomePageOrganizzatore {
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
     	   
-    	finestraRimuoviImpiegatoDallaRiunione = new FinestraErrore(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione, this);
+    	finestraRimuoviImpiegatoDallaRiunione = new FinestraPopup(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione, this);
 		finestraRimuoviImpiegatoDallaRiunione.startRiunione (popup);
 
         idriunione = riunioneDao.GetIdRiunione(riunione);

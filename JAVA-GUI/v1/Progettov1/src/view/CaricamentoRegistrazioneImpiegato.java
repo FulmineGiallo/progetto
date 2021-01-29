@@ -8,38 +8,45 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Impiegato;
 import controller.ControllerCaricamentoRegistrazione;
 import controller.ControllerRegistrazioneImpiegato;
 
 public class CaricamentoRegistrazioneImpiegato {
 	
 	private ControllerCaricamentoRegistrazione controller;
-	private HomePageBenvenuto homePageBenvenuto;
+	//private HomePageBenvenuto homePageBenvenuto;
+	private Impiegato nuovoImpiegato;
+	
+	public CaricamentoRegistrazioneImpiegato(Impiegato nuovoImpiegato) {
+		this.nuovoImpiegato = nuovoImpiegato;
+	}
 
     public void start(Stage popup) {
         try {
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneImpiegato/CaricamentoRegistrazioneImpiegato.fxml"));
         	Parent root = loader.load();
-			Scene scene = new Scene(root, 400.0, 200.0);
+			Scene scene = new Scene(root);
 			
 			popup.hide();
 			popup.setScene(scene);
 			
-			//popup.setTitle("Caricamento in corso...");
-			popup.setTitle(popup.toString());
+			popup.setTitle("Caricamento in corso...");
 			popup.setResizable(false);
-			popup.setMinWidth(400.0);
-			popup.setMinHeight(200.0);
+			popup.setWidth(600.0);
+			popup.setMinWidth(600.0);
+			popup.setHeight(300.0);
+			popup.setMinHeight(300.0);
 			
 			popup.show();
 			popup.centerOnScreen();
 			
 			controller = loader.getController();
-			controller.inizializza();
+			controller.inizializza(nuovoImpiegato);
 			
-			PauseTransition delay = new PauseTransition(Duration.seconds(5));
+			/*PauseTransition delay = new PauseTransition(Duration.seconds(5));
 			delay.setOnFinished(event -> popup.hide());
-			delay.play();
+			delay.play();*/
 
 		} catch (IOException e)
 		{

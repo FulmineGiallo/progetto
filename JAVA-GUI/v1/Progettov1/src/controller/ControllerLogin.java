@@ -14,10 +14,11 @@ import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.Impiegato;
-import view.FinestraErrore;
+import view.FinestraPopup;
 import view.FormRegistrazioneImpiegato;
 import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
+
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class ControllerLogin
 {
     HomePageBenvenuto benvenuto;
     HomePageImpiegato homeImpiegato;
-    FinestraErrore finestraErrore;
+    FinestraPopup finestraErrore;
 
     @FXML private Button AnnullaButton;
     @FXML private Button AccediButton;
@@ -76,14 +77,14 @@ public class ControllerLogin
             /* Non ci sono email e password corrispondenti */
             if(accesso == 0)
             {            	
-    			finestraErrore = new FinestraErrore("Email o password errati", new Exception());
+    			finestraErrore = new FinestraPopup("Email o password errati", new Exception());
     			finestraErrore.startPopupErrore(popup);
             }
         }
         /* Se i campi sono vuoti */
         else
         {        	
-			finestraErrore = new FinestraErrore("Autenticazione errata", new Exception());
+			finestraErrore = new FinestraPopup("Autenticazione errata", new Exception());
 			finestraErrore.startPopupErrore(popup);
         }
     }

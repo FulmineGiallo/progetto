@@ -36,7 +36,7 @@ import model.calcoloCF;
 
 import view.HomePageBenvenuto;
 import view.CaricamentoRegistrazioneImpiegato;
-import view.FinestraErrore;
+import view.FinestraPopup;
 import view.FormRegistrazioneSkill;
 
 public class ControllerRegistrazioneImpiegato {
@@ -118,12 +118,14 @@ public class ControllerRegistrazioneImpiegato {
     private HomePageBenvenuto 				  homePageBenvenuto;
     private CaricamentoRegistrazioneImpiegato caricamentoRegistrazioneImpiegato;
     private FormRegistrazioneSkill 			  formRegistrazioneSkill;
-    private FinestraErrore		   			  informazioniSkill;
+    private FinestraPopup		   			  finestraInformazioniSkill;
     
     private Skill ultimaSkillInserita;
     private Skill infoSkill;
     
     private ObservableList<Skill> listaSkillImpiegato = FXCollections.observableArrayList();
+    
+	private Impiegato nuovoImpiegato;
     
     private boolean checkEmail;
     private boolean checkPassword;
@@ -178,8 +180,11 @@ public class ControllerRegistrazioneImpiegato {
         }
     }
     
-    public void setSkillImpiegato(Impiegato impiegato) {
-		listaSkillImpiegato.addAll(impiegato.getListaSkill());
+    public void setSkillImpiegato(Impiegato nuovoImpiegato) {
+    	this.nuovoImpiegato = nuovoImpiegato;
+    	
+    	listaSkillImpiegato.clear();
+		listaSkillImpiegato.addAll(nuovoImpiegato.getListaSkill());
 		SkillLV.setItems(listaSkillImpiegato);
     }
     
@@ -188,7 +193,9 @@ public class ControllerRegistrazioneImpiegato {
     	this.popup = popup;
     }
 
-    public void inizializza() throws SQLException {  	
+    public void inizializza() throws SQLException {
+    	nuovoImpiegato = new Impiegato();
+    	
         GradoComboBox.getItems().addAll(gradiList);
         GradoComboBox.getSelectionModel().select(2);
         
@@ -396,21 +403,19 @@ public class ControllerRegistrazioneImpiegato {
     @FXML public void visualizzaInformazioniSkill(MouseEvent event) {    	
     	infoSkill = SkillLV.getSelectionModel().getSelectedItem();
     	
-    	if(infoSkill.getTipoSkill().equals("Soft-Skill")) {
-    		informazioniSkill = new FinestraErrore(infoSkill.toString(), "Tipologia: "		+ infoSkill.getTipoSkill() +
-    																	 "\nDescrizione: " 	+ infoSkill.getDescrizione());
-    	} else {
-    		informazioniSkill = new FinestraErrore(infoSkill.toString(), "\n\nTipologia: " 		  	  + infoSkill.getTipoSkill() 	+
-					   							   						 "\nTitolo del certificato: " + infoSkill.getTitolo()    	+
-					   							   						 "\nDescrizione: " 		  	  + infoSkill.getDescrizione()	+
-					   							   						 "\nData di certificazione: " + infoSkill.getDataCertificazione());
-    	}
-		
-		try { informazioniSkill.startDettagliSkill(popup);} catch (Exception e) {}
+    	if (infoSkill != null) {
+			finestraInformazioniSkill = new FinestraPopup(infoSkill);
+			
+			try {
+				finestraInformazioniSkill.startDettagliSkill(popup);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		}
     }
     
     @FXML private void nuovaSkill(ActionEvent event) throws Exception{
-    	formRegistrazioneSkill = new FormRegistrazioneSkill(this);
+    	formRegistrazioneSkill = new FormRegistrazioneSkill(this, nuovoImpiegato);
     	formRegistrazioneSkill.start(popup);
     }
 
@@ -419,12 +424,12 @@ public class ControllerRegistrazioneImpiegato {
         homePageBenvenuto.start(window, popup);
     }
     
-    @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {    	
-		if(controlloCampi()) {
+    @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {
+    	if(controlloCampi()) {
 			connection.close();
-			caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato();
+			caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(nuovoImpiegato);
 		    caricamentoRegistrazioneImpiegato.start(popup);
-		}	
+		}
     }
 
     public void visualizzaNomeLabel(MouseEvent mouseEvent) {

@@ -13,7 +13,10 @@ public class FormRegistrazioneSkill {
 	ControllerRegistrazioneSkill controllerRegistrazioneSkill;
 	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato = null;
 	
-	public FormRegistrazioneSkill(ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato) {
+	private Impiegato nuovoImpiegato;
+	
+	public FormRegistrazioneSkill(ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato, Impiegato nuovoImpiegato) {
+		this.nuovoImpiegato = nuovoImpiegato;
 		this.controllerRegistrazioneImpiegato = controllerRegistrazioneImpiegato;
 	}
 	
@@ -21,19 +24,21 @@ public class FormRegistrazioneSkill {
     	
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneImpiegato/InserimentoSkill/FormRegistrazioneSkill.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root, 850.0, 600.0);
+        Scene scene = new Scene(root);
         
 		popup.hide();
 		popup.setScene(scene);
 
 		controllerRegistrazioneSkill = loader.getController();
 		controllerRegistrazioneSkill.setStage(popup);
-		controllerRegistrazioneSkill.inizializza(controllerRegistrazioneImpiegato);
+		controllerRegistrazioneSkill.inizializza(controllerRegistrazioneImpiegato, nuovoImpiegato);
         
         //popup.setTitle("Registrazione");
         popup.setTitle(popup.toString());
         popup.setResizable(true);
+        popup.setWidth(850.0);
         popup.setMinWidth(850.0);
+        popup.setHeight(600.0);
         popup.setMinHeight(600.0);
         
         popup.show();

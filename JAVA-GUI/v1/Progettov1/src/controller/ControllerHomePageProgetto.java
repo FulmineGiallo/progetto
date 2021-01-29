@@ -25,7 +25,7 @@ import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 import model.Titolo;
-import view.FinestraErrore;
+import view.FinestraPopup;
 import view.FinestraRimuoviImpiegatoDalProgetto;
 import view.HomePageImpiegato;
 
@@ -95,7 +95,7 @@ public class ControllerHomePageProgetto {
     private SkillDao SkillDAO;
     private progettoImpiegatoDao progettoImpiegatoDao;
     
-    FinestraErrore finestraRimuoviImpiegatoDalProgetto;
+    FinestraPopup finestraRimuoviImpiegatoDalProgetto;
     
     Progetto progetto;
     Impiegato impiegato;
@@ -203,7 +203,7 @@ public class ControllerHomePageProgetto {
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
     	
 
-		finestraRimuoviImpiegatoDalProgetto = new FinestraErrore(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto, this);
+		finestraRimuoviImpiegatoDalProgetto = new FinestraPopup(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto, this);
 		finestraRimuoviImpiegatoDalProgetto.startProgetto (popup);
 
         lista = progettoDao.getPartecipanti(progetto);

@@ -7,8 +7,8 @@ import javafx.event.ActionEvent;
 import java.io.PrintWriter;
 
 import view.Login;
+import view.FinestraPopup;
 import view.FormRegistrazioneImpiegato;
-import view.FinestraErrore;
 
 public class ControllerHomePageBenvenuto
 {
@@ -17,7 +17,7 @@ public class ControllerHomePageBenvenuto
 
     FormRegistrazioneImpiegato 	registrazione;
     Login 						loginPage;
-    FinestraErrore				finestraErrore;
+    FinestraPopup				finestraErrore;
     
     private Stage window;
     private Stage popup;

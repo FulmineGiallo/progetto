@@ -1,17 +1,8 @@
-package controller;
+package controller.ControllerFinestrePopup; // suddividere questo controller in tanti controller con responsabilità singole
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-//import jdk.internal.org.objectweb.asm.Handle;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
@@ -28,31 +19,17 @@ import view.HomePageBenvenuto;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import controller.ControllerHomePageOrganizzatore;
+import controller.ControllerHomePageProgetto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
-public class ControllerFinestraErrore {
+public class ControllerFinestraErrore extends ControllerFinestraPopup /*implements ControllerFinestraPopupInterface*/{
 
-    @FXML private AnchorPane 	FinestraPopup;
-    
-    @FXML private GridPane 		MessaggioBox;
-    @FXML private VBox 			TestoBox;
-    @FXML private Label 		TitoloLabel;
-    @FXML private TextArea 		MessaggioTA;
-    @FXML private Label 		MessaggioLabel;
-    
-    @FXML private VBox 			ImmagineBox;
-    @FXML private ImageView 	Immagine;
-    
-    @FXML private GridPane 		ButtonBar;
-    @FXML private Button 		SinistraButton;
-    @FXML private Button 		DestraButton;
-    
     private Image immagineAttenzione = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/warning.png"));
-    private Image immagineSkill = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/skill.png"));
     private Image immagineDomanda = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/question.png"));
     
     private String dettagliErrore;
@@ -111,17 +88,6 @@ public class ControllerFinestraErrore {
     	
     	MostraNascondiDettagli();
     	ChiudiFinestraErrore();
-    }
-    
-    public void inizializza(String dettagliSkill) {
-    	
-    	Immagine.setImage(immagineSkill);
-    	
-    	MessaggioTA.setVisible(true);
-    	MessaggioLabel.setVisible(false);
-    	
-    	MessaggioTA.setText(dettagliSkill);
-    	//altre cose da fare
     }
     
     public void inizializza(Impiegato impiegato, Progetto progetto, ControllerHomePageProgetto homePageProgetto) {

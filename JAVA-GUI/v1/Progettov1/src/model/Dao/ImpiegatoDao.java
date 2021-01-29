@@ -24,10 +24,14 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final PreparedStatement loginImpiegato;
     private final PreparedStatement getImpiegato;
     private final PreparedStatement getCF;
-    private final PreparedStatement getGrado;
+    private final PreparedStatement getTipoGrado;
+    private final PreparedStatement getIdGrado;
     private final PreparedStatement insertImpiegato;
+    private final PreparedStatement insertListaTitoli;
+    private final PreparedStatement insertListaSkill;
     
-    private String direttoreRisorseUmane = "";
+    private 	  String 			direttoreRisorseUmane = "";
+    private		  int				idGradoNuovoImpiegato;
 
     public ImpiegatoDao(Connection connection) throws SQLException
     {
@@ -38,8 +42,11 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         loginImpiegato = connection.prepareStatement("SELECT COUNT(*) FROM impiegatoaccount WHERE email = ? AND password = ?");
         getImpiegato = connection.prepareStatement("SELECT * FROM impiegato WHERE cf = ?");
         getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
-        getGrado = connection.prepareStatement("SELECT tipogrado FROM impiegatoazienda WHERE cf = ?");
+        getTipoGrado = connection.prepareStatement("SELECT tipogrado FROM impiegatoazienda WHERE cf = ?");
+        getIdGrado = connection.prepareStatement("SELECT idgrado FROM grado WHERE tipoGrado = ?");
         insertImpiegato = connection.prepareStatement("INSERT INTO Impiegato VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NEXTVAL('id_impiegato_seq');");
+        insertListaTitoli = connection.prepareStatement("INSERT INTO Titolo VALUES (NEXTVAL('id_titolo_seq'), ?);");
+        insertListaSkill = connection.prepareStatement("INSERT INTO Skill VALUES (NEXTVAL('id_skill_seq'), ?, ?, ?, ?, ?)"); //da fare
     }
 
     @Override
@@ -96,6 +103,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         rs.close();
         return CF;
     }
+    
     @Override
     public String getNomeCognomeConCF(String CF) throws SQLException
     {
@@ -114,12 +122,13 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         String nomeCognome = nome + " " + cognome;
         return nomeCognome;
     }
+    
     @Override
     public String getGrado(String cf) throws SQLException
     {
         String grado = null;
-        getGrado.setString(1, cf);
-        ResultSet rs = getGrado.executeQuery();
+        getTipoGrado.setString(1, cf);
+        ResultSet rs = getTipoGrado.executeQuery();
 
         while(rs.next()) {
             grado = rs.getString("tipogrado");
@@ -130,7 +139,34 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     }
 
     @Override
-    public int insertRegistrazione(String nome, String cognome, String genere, Date datan, String comunen, String provincia) {
+    public int insertRegistrazione(Impiegato nuovoImpiegato) throws SQLException{ // >> DA FARE
+    	
+        /*getIdGrado.setString(1, nuovoImpiegato.getGrado());
+        ResultSet rs = getIdGrado.executeQuery();
+        
+        while(rs.next()) {
+        	idGradoNuovoImpiegato = rs.getInt("idgrado");
+        }
+        
+        rs.close();*/
+    	
+    	//inserimento del nuovo impiegato
+    	insertImpiegato.setString(1, nuovoImpiegato.getNome());
+    	insertImpiegato.setString(2, nuovoImpiegato.getCognome());
+    	insertImpiegato.setString(3, nuovoImpiegato.getCF());
+    	insertImpiegato.setObject(4, nuovoImpiegato.getDataNascita());
+    	insertImpiegato.setString(5, nuovoImpiegato.getComuneNascita());
+    	insertImpiegato.setString(6, nuovoImpiegato.getEmail());
+    	insertImpiegato.setString(7, nuovoImpiegato.getGenere());
+    	//insertImpiegato.setInt	 (8, nuovoImpiegato.getGrado()); >> creare trigger in cui recupera l'id del grado e l'id del comune a partire dalle stringhe
+    	insertImpiegato.setString(9, nuovoImpiegato.getPassword());
+    	
+    	//inserimento dei nuovi titoli >> DA FARE
+    	//insertListaTitoli
+    	
+    	//inserimento delle skill >> DA FARE
+    	//insertListaSkill
+    	
         return 0;
     }
 

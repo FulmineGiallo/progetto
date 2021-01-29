@@ -85,7 +85,7 @@ public class ControllerRegistrazioneSkill {
     private int 	  OggiAnno   = Oggi.get(Calendar.YEAR);
     private LocalDate dataDiOggi;
     
-    private Impiegato impiegato = null;
+    private Impiegato nuovoImpiegato;
     private Skill skill = null;
     
     private boolean checkDescrizione		= true;
@@ -112,9 +112,9 @@ public class ControllerRegistrazioneSkill {
         }
     }
     
-    public void inizializza(ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato) {
+    public void inizializza(ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato, Impiegato nuovoImpiegato) {
 		this.controllerRegistrazioneImpiegato = controllerRegistrazioneImpiegato;
-    	impiegato = new Impiegato();
+    	this.nuovoImpiegato = nuovoImpiegato;
     	
     	DescrizioneTA.setPromptText("* " + DescrizioneTAPrompt);
     	
@@ -126,6 +126,7 @@ public class ControllerRegistrazioneSkill {
             TitoloComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
             	if(TitoloComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro...")) {
             		NuovoTitoloTF.setVisible(true);	
+            		NuovoTitoloTF.setText("");
                 } else {
             		NuovoTitoloTF.setVisible(false);
             		NuovoTitoloErrorLabel.setText("");
@@ -137,7 +138,7 @@ public class ControllerRegistrazioneSkill {
         }
     }
     
-    public boolean controllocampi() {
+    public boolean controllocampi() { // inserire controllo campi sfruttando i metodi della classe MetodiComuni
     	DataCertificazioneErrorLabel.setText("");
     	DescrizioneErrorLabel.setText("");
     	NuovoTitoloErrorLabel.setText("");
@@ -174,9 +175,13 @@ public class ControllerRegistrazioneSkill {
 			if (NuovoTitoloTF.isVisible()) {
 				if (NuovoTitoloTF.getText().isBlank()) {
 					checkNuovoTitolo = false;
-					NuovoTitoloErrorLabel.setVisible(true);
 					NuovoTitoloErrorLabel.setText("Questo campo è obbligatorio");
-				}
+				} else
+					for (Titolo t: TitoloComboBox.getItems())
+						if(NuovoTitoloTF.getText().toLowerCase().equals(t.toString().toLowerCase())) {
+							checkNuovoTitolo = false;
+							NuovoTitoloErrorLabel.setText("Questo titolo è già presente nella lista");
+						}
 			}
 		}
     	
@@ -202,15 +207,15 @@ public class ControllerRegistrazioneSkill {
 				}
 				
 				if(!descrizioneSkill.isBlank()) {
-	    			impiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), descrizioneSkill));
+	    			nuovoImpiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), descrizioneSkill));
 	    		} else {
-	    			impiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), "Nessuna descrizione"));
+	    			nuovoImpiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), "Nessuna descrizione"));
 	    		}
 			} else if (tipoSkill.equals("Soft-Skill")){
-				impiegato.getListaSkill().add(new Skill(tipoSkill, descrizioneSkill));
+				nuovoImpiegato.getListaSkill().add(new Skill(tipoSkill, descrizioneSkill));
 			}
     		
-    		controllerRegistrazioneImpiegato.setSkillImpiegato(impiegato);
+    		controllerRegistrazioneImpiegato.setSkillImpiegato(nuovoImpiegato);
     		popup.hide();
     	}
     }

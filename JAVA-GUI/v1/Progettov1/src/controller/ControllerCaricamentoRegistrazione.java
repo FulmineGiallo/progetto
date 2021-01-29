@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
+import model.Impiegato;
 import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
 import model.DaoInterface.ImpiegatoDaoInterface;
@@ -34,15 +35,18 @@ public class ControllerCaricamentoRegistrazione {
         }
     }
     
-    public void inizializza() {
+    public void inizializza(Impiegato nuovoImpiegato) {
 	    try {
 	    	impiegatoConnection = new ImpiegatoDao(connection);
 	    	direttoreRisorseUmane = impiegatoConnection.getDirettoreRisorseUmane();
+	    	
+	    	CaricamentoLabel.setText("Il direttore alle risorse umane " + direttoreRisorseUmane + "sta valutando la tua richiesta...");
+	    	
+	    	impiegatoConnection.insertRegistrazione(nuovoImpiegato);
 	    } catch(SQLException sqlEx){
 	    	sqlEx.printStackTrace();
 	    }
 	    
-	    CaricamentoLabel.setText("Il direttore alle risorse umane " + direttoreRisorseUmane + "sta valutando la tua richiesta...");
     }
 
 }
