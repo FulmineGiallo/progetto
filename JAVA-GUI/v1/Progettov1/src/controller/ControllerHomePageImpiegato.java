@@ -116,6 +116,7 @@ public class ControllerHomePageImpiegato {
     ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
     ObservableList<Riunione> listaRiunioni = FXCollections.observableArrayList();
     
+    
     Connection connection;
     DBConnection dbConnection;
     ProgettoDaoInterface progetti;
@@ -282,9 +283,11 @@ public class ControllerHomePageImpiegato {
     
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
-    	//inserire conferma di esecuzione logout
-        homePageBenvenuto = new HomePageBenvenuto();
-        homePageBenvenuto.start(window, popup);
+    	
+    	finestraErrore = new FinestraErrore("sicuro di voler uscire?", error);
+    	finestraErrore.startLogout(window, popup);
+    	
+    	
     }
     
     

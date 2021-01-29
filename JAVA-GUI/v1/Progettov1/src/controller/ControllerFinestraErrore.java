@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 //import jdk.internal.org.objectweb.asm.Handle;
 import model.Impiegato;
 import model.Progetto;
@@ -21,6 +22,7 @@ import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.ProgettoImpiegatoDaoInterface;
 import model.DaoInterface.RiunioneDaoInterface;
+import view.HomePageBenvenuto;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -59,10 +61,16 @@ public class ControllerFinestraErrore {
 	private ControllerHomePageProgetto homePageProgetto;
     private RiunioneDaoInterface riunioneDao;
     private RiunioneImpiegatoDao riunioneImpiegatoDao;
+    private HomePageBenvenuto homePageBenvenuto;
     private int idriunione;
 	
+    
+    private Stage window;
+    private Stage popup;
+    
 	private Impiegato impiegato;
 	private Progetto progetto;
+	
 	
     Connection connection;
     DBConnection dbConnection;
@@ -142,6 +150,19 @@ public class ControllerFinestraErrore {
     	ChiudiFinestraEliminazioneImpiegato();
     }
     
+    public void inizializza(String messaggioErrore, Stage window, Stage popup) {
+    	
+    	this.window=window;
+    	this.popup=popup;
+    	
+    	OkButton.setText("Ok");
+    	DettagliButton.setText("Annulla");
+    	
+    	MessaggioErroreLabel.setText(messaggioErrore);
+    	
+    	EffettuaLogout();
+    	ChiudiFinestraLogout();
+    }
     
     public void EliminaImpiegatoDalProgetto()
     {
@@ -172,6 +193,19 @@ public class ControllerFinestraErrore {
 					}
             	}
                 
+            }
+        });
+    }
+    
+    public void EffettuaLogout()
+    {
+        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+              homePageBenvenuto = new HomePageBenvenuto();
+              homePageBenvenuto.start(window, popup);
+              FinestraErrore.getScene().getWindow().hide();
             }
         });
     }
@@ -208,6 +242,15 @@ public class ControllerFinestraErrore {
     
     public void ChiudiFinestraErrore() {
         OkButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+            	FinestraErrore.getScene().getWindow().hide(); 
+            }
+        });
+    }
+    
+    public void ChiudiFinestraLogout() {
+        DettagliButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
             	FinestraErrore.getScene().getWindow().hide(); 

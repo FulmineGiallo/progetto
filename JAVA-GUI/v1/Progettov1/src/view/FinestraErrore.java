@@ -136,4 +136,26 @@ public class FinestraErrore {
         
         popup.show();
     }
+	
+	public void startLogout(Stage window, Stage popup) throws Exception
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraErrore.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        
+        popup.hide();
+        popup.setScene(scene);
+        
+        controllerFinestraErrore = loader.getController();
+        controllerFinestraErrore.inizializza(messaggioErrore, window, popup);
+        
+        //window.setTitle("Errore!");
+        popup.setTitle(popup.toString());
+        popup.setResizable(false);
+        popup.setMinWidth(400.0);
+        popup.setMinHeight(200.0);
+        popup.centerOnScreen();
+        
+        popup.show();
+    }
 }
