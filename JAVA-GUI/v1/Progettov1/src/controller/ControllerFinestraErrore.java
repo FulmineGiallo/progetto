@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -35,17 +36,24 @@ import javafx.event.EventHandler;
 
 public class ControllerFinestraErrore {
 
-    @FXML private AnchorPane 	FinestraErrore;
+    @FXML private AnchorPane 	FinestraPopup;
+    
     @FXML private GridPane 		MessaggioBox;
     @FXML private VBox 			TestoBox;
-    @FXML private Label 		AttenzioneLabel;
-    @FXML private TextArea 		MessaggioErroreTA;
-    @FXML private Label 		MessaggioErroreLabel;
+    @FXML private Label 		TitoloLabel;
+    @FXML private TextArea 		MessaggioTA;
+    @FXML private Label 		MessaggioLabel;
+    
     @FXML private VBox 			ImmagineBox;
-    @FXML private ImageView 	AttenzioneIV;
+    @FXML private ImageView 	Immagine;
+    
     @FXML private GridPane 		ButtonBar;
-    @FXML private Button 		DettagliButton;
-    @FXML private Button 		OkButton;
+    @FXML private Button 		SinistraButton;
+    @FXML private Button 		DestraButton;
+    
+    private Image immagineAttenzione = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/warning.png"));
+    private Image immagineSkill = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/skill.png"));
+    private Image immagineDomanda = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/question.png"));
     
     private String dettagliErrore;
     
@@ -53,30 +61,24 @@ public class ControllerFinestraErrore {
     private Riunione riunione;
     private ControllerHomePageOrganizzatore homePageOrganizzatore;
     
-    
-    private EventHandler<MouseEvent> progettoEvent;
-    private EventHandler<MouseEvent> riunioneEvent;
-	private ProgettoDaoInterface progettoDao;
+	private ProgettoDaoInterface 		  progettoDao;
 	private ProgettoImpiegatoDaoInterface progettoImpiegatoDao;
-	private ControllerHomePageProgetto homePageProgetto;
-    private RiunioneDaoInterface riunioneDao;
-    private RiunioneImpiegatoDao riunioneImpiegatoDao;
-    private HomePageBenvenuto homePageBenvenuto;
-    private int idriunione;
+	private ControllerHomePageProgetto	  homePageProgetto;
+    private RiunioneDaoInterface		  riunioneDao;
+    private RiunioneImpiegatoDao		  riunioneImpiegatoDao;
+    private HomePageBenvenuto			  homePageBenvenuto;
+    private int							  idriunione;
 	
-    
     private Stage window;
     private Stage popup;
     
 	private Impiegato impiegato;
 	private Progetto progetto;
 	
-	
     Connection connection;
     DBConnection dbConnection;
     ObservableList<Impiegato> lista = FXCollections.observableArrayList();
-  
-
+    
     {
         try {
             dbConnection = new DBConnection();
@@ -84,29 +86,27 @@ public class ControllerFinestraErrore {
             progettoDao = new ProgettoDao(connection);
         	progettoImpiegatoDao = new progettoImpiegatoDao(connection);
         	riunioneDao = new RiunioneDao(connection);
-            
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 	
-	
-    
     public void inizializza(String messaggioErrore, Exception errore) {
+
+    	Immagine.setImage(immagineAttenzione);
     	
-    	OkButton.setText("Ok");
+    	DestraButton.setText("Ok");
     	
-    	MessaggioErroreLabel.setText(messaggioErrore);
+    	MessaggioLabel.setText(messaggioErrore);
     	if(errore != null) {    		
     		dettagliErrore = errore.toString() + "\n";
 			for(StackTraceElement STE: errore.getStackTrace()) {
 				dettagliErrore = dettagliErrore + "at " + STE.toString() + "\n";
 			}
 			
-        	MessaggioErroreTA.setText(dettagliErrore);
+        	MessaggioTA.setText(dettagliErrore);
     	} else {
-    		MessaggioErroreTA.setText("Nessun dettaglio da mostrare");
+    		MessaggioTA.setText("Nessun dettaglio da mostrare");
     	}
     	
     	MostraNascondiDettagli();
@@ -114,10 +114,13 @@ public class ControllerFinestraErrore {
     }
     
     public void inizializza(String dettagliSkill) {
-    	MessaggioErroreTA.setVisible(true);
-    	MessaggioErroreLabel.setVisible(false);
     	
-    	MessaggioErroreTA.setText(dettagliSkill);
+    	Immagine.setImage(immagineSkill);
+    	
+    	MessaggioTA.setVisible(true);
+    	MessaggioLabel.setVisible(false);
+    	
+    	MessaggioTA.setText(dettagliSkill);
     	//altre cose da fare
     }
     
@@ -126,9 +129,9 @@ public class ControllerFinestraErrore {
     	this.impiegato=impiegato;
     	this.progetto=progetto;
     	this.homePageProgetto = homePageProgetto;
-    	MessaggioErroreLabel.setText("Sei sicuro di voler eliminare questo impiegato dal progetto?");
-    	OkButton.setText("Conferma");
-    	DettagliButton.setText("Annulla");
+    	MessaggioLabel.setText("Sei sicuro di voler eliminare questo impiegato dal progetto?");
+    	DestraButton.setText("Conferma");
+    	SinistraButton.setText("Annulla");
 
     	
     	EliminaImpiegatoDalProgetto();
@@ -143,9 +146,9 @@ public class ControllerFinestraErrore {
     	this.riunione=riunione;
     	this.homePageOrganizzatore=homePageOrganizzatore;
     	
-    	MessaggioErroreLabel.setText("Sei sicuro di voler eliminare questo impiegato dalla riunione?");
-    	OkButton.setText("Conferma");
-    	DettagliButton.setText("Annulla");
+    	MessaggioLabel.setText("Sei sicuro di voler eliminare questo impiegato dalla riunione?");
+    	DestraButton.setText("Conferma");
+    	SinistraButton.setText("Annulla");
     	EliminaImpiegatoDallaRiunione();
     	ChiudiFinestraEliminazioneImpiegato();
     }
@@ -155,10 +158,10 @@ public class ControllerFinestraErrore {
     	this.window=window;
     	this.popup=popup;
     	
-    	OkButton.setText("Ok");
-    	DettagliButton.setText("Annulla");
+    	DestraButton.setText("Ok");
+    	SinistraButton.setText("Annulla");
     	
-    	MessaggioErroreLabel.setText(messaggioErrore);
+    	MessaggioLabel.setText(messaggioErrore);
     	
     	EffettuaLogout();
     	ChiudiFinestraLogout();
@@ -166,7 +169,7 @@ public class ControllerFinestraErrore {
     
     public void EliminaImpiegatoDalProgetto()
     {
-        OkButton.setOnMouseClicked( progettoEvent =new EventHandler<MouseEvent>()
+        DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -182,13 +185,11 @@ public class ControllerFinestraErrore {
 				}
             	
             	if(eliminato !=0) {
-            		//System.out.println("impiegato eliminato");
-            		FinestraErrore.getScene().getWindow().hide();
+            		FinestraPopup.getScene().getWindow().hide();
             		try {
 						homePageProgetto.aggiornaLista();
 						homePageProgetto.DaDescrizioneProgettoAdIstruzioniBox();
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
             	}
@@ -199,31 +200,31 @@ public class ControllerFinestraErrore {
     
     public void EffettuaLogout()
     {
-        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>()
+        DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent mouseEvent) {
               homePageBenvenuto = new HomePageBenvenuto();
               homePageBenvenuto.start(window, popup);
-              FinestraErrore.getScene().getWindow().hide();
+              FinestraPopup.getScene().getWindow().hide();
             }
         });
     }
     
     public void MostraNascondiDettagli() {
-        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
             	
-            	if (MessaggioErroreLabel.isVisible()) {
+            	if (MessaggioLabel.isVisible()) {
             		
-            		MessaggioErroreLabel.setVisible(false);
-            		MessaggioErroreTA.setVisible(true);
+            		MessaggioLabel.setVisible(false);
+            		MessaggioTA.setVisible(true);
             		
-            	} else if (MessaggioErroreTA.isVisible()) {
+            	} else if (MessaggioTA.isVisible()) {
             		
-            		MessaggioErroreLabel.setVisible(true);
-            		MessaggioErroreTA.setVisible(false);
+            		MessaggioLabel.setVisible(true);
+            		MessaggioTA.setVisible(false);
             		
             	}
             }
@@ -231,36 +232,36 @@ public class ControllerFinestraErrore {
     }    
     
     public void ChiudiFinestraEliminazioneImpiegato() {
-        DettagliButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        SinistraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-            	FinestraErrore.getScene().getWindow().hide();
+            	FinestraPopup.getScene().getWindow().hide();
 
             }
         });
     }
     
     public void ChiudiFinestraErrore() {
-        OkButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-            	FinestraErrore.getScene().getWindow().hide(); 
+            	FinestraPopup.getScene().getWindow().hide(); 
             }
         });
     }
     
     public void ChiudiFinestraLogout() {
-        DettagliButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        SinistraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-            	FinestraErrore.getScene().getWindow().hide(); 
+            	FinestraPopup.getScene().getWindow().hide(); 
             }
         });
     }
     
     public void EliminaImpiegatoDallaRiunione()
     {
-        OkButton.setOnMouseClicked(riunioneEvent=new EventHandler<MouseEvent>()
+        DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -275,7 +276,7 @@ public class ControllerFinestraErrore {
             	eliminato = riunioneImpiegatoDao.EliminaImpiegatoDallaRiunione(impiegatoRiunione, idriunione);
 
             	if(eliminato!=0) {
-            		FinestraErrore.getScene().getWindow().hide();	
+            		FinestraPopup.getScene().getWindow().hide();	
             		homePageOrganizzatore.AggiornaLista();
             		homePageOrganizzatore.DaDescrizioneRiunioneAdIstruzioniBox();
             	}

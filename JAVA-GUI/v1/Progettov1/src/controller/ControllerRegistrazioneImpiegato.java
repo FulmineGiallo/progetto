@@ -395,12 +395,16 @@ public class ControllerRegistrazioneImpiegato {
     
     @FXML public void visualizzaInformazioniSkill(MouseEvent event) {    	
     	infoSkill = SkillLV.getSelectionModel().getSelectedItem();
-		
-		informazioniSkill = new FinestraErrore(infoSkill.toString() 	  	+
-											   "\n\nTipologia: " 		  	+ infoSkill.getTipoSkill() 		+
-											   "\nTitolo del certificato: " + infoSkill.getTitolo()    		+
-											   "\nDescrizione: " 		  	+ infoSkill.getDescrizione()	+
-											   "\nData di certificazione: " + infoSkill.getDataCertificazione());
+    	
+    	if(infoSkill.getTipoSkill().equals("Soft-Skill")) {
+    		informazioniSkill = new FinestraErrore(infoSkill.toString(), "Tipologia: "		+ infoSkill.getTipoSkill() +
+    																	 "\nDescrizione: " 	+ infoSkill.getDescrizione());
+    	} else {
+    		informazioniSkill = new FinestraErrore(infoSkill.toString(), "\n\nTipologia: " 		  	  + infoSkill.getTipoSkill() 	+
+					   							   						 "\nTitolo del certificato: " + infoSkill.getTitolo()    	+
+					   							   						 "\nDescrizione: " 		  	  + infoSkill.getDescrizione()	+
+					   							   						 "\nData di certificazione: " + infoSkill.getDataCertificazione());
+    	}
 		
 		try { informazioniSkill.startDettagliSkill(popup);} catch (Exception e) {}
     }
