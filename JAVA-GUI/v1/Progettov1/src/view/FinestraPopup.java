@@ -10,8 +10,7 @@ import model.Riunione;
 import model.Skill;
 import controller.ControllerHomePageOrganizzatore;
 import controller.ControllerHomePageProgetto;
-import controller.ControllerFinestrePopup.ControllerFinestraErrore;
-import controller.ControllerFinestrePopup.ControllerFinestraInformazioniSkill;
+import controller.ControllerFinestrePopup.*;
 
 public class FinestraPopup {
 	
@@ -31,6 +30,11 @@ public class FinestraPopup {
 	private Impiegato impiegatoRiunione;
 	
 	private Progetto progetto;
+	private ControllerFinestraConfermaRegistrazione controllerRegistrazione = new ControllerFinestraConfermaRegistrazione();
+	
+	public FinestraPopup() {
+		
+	}
 	
 	public FinestraPopup(String messaggioErrore, Exception errore) {
 		this.messaggioErrore = messaggioErrore;
@@ -187,4 +191,28 @@ public class FinestraPopup {
         
         popup.show();
     }
+	
+	public void startConfermaRegistrazione (Stage popup, Impiegato nuovoImpiegato) throws Exception {
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraPopup.fxml"));
+        loader.setController(controllerRegistrazione);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        
+        popup.hide();
+        popup.setScene(scene);
+        
+        controllerRegistrazione.inizializza("Perfetto!", "Il nuovo impiegato " + nuovoImpiegato.getCognome()
+        												 + " "				   + nuovoImpiegato.getNome()
+        												 + " è stato inserito correttamente nel database.");
+        
+        popup.setTitle("Operazione completata con successo!");
+        popup.setResizable(false);
+        popup.setWidth(600.0);
+        popup.setMinWidth(600.0);
+        popup.setHeight(300.0);
+        popup.setMinHeight(300.0);
+        popup.centerOnScreen();
+        
+        popup.show();
+	}
 }

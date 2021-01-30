@@ -22,7 +22,7 @@ public class CaricamentoRegistrazioneImpiegato {
 		this.nuovoImpiegato = nuovoImpiegato;
 	}
 
-    public void start(Stage popup) {
+    public void start(Stage window, Stage popup) {
         try {
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/registrazioneImpiegato/CaricamentoRegistrazioneImpiegato.fxml"));
         	Parent root = loader.load();
@@ -42,11 +42,8 @@ public class CaricamentoRegistrazioneImpiegato {
 			popup.centerOnScreen();
 			
 			controller = loader.getController();
+			controller.setStage(window, popup);
 			controller.inizializza(nuovoImpiegato);
-			
-			PauseTransition delay = new PauseTransition(Duration.seconds(5));
-			delay.setOnFinished(event -> popup.hide());
-			delay.play();
 
 		} catch (IOException e)
 		{

@@ -3,14 +3,19 @@ package controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Impiegato;
 import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
 import model.DaoInterface.ImpiegatoDaoInterface;
+import view.FinestraPopup;
+import view.HomePageBenvenuto;
 
 public class ControllerCaricamentoRegistrazione {
 
@@ -20,6 +25,12 @@ public class ControllerCaricamentoRegistrazione {
     
     private ImpiegatoDaoInterface impiegatoConnection;
     private String direttoreRisorseUmane;
+    
+    private Stage window;
+    private Stage popup;
+    
+    private HomePageBenvenuto homePageBenvenuto;
+    private FinestraPopup finestraConfermaRegistrazione;
     
     private Connection connection;
     private DBConnection dbConnection;
@@ -35,8 +46,14 @@ public class ControllerCaricamentoRegistrazione {
         }
     }
     
+    public void setStage(Stage window, Stage popup) {
+    	this.window = window;
+    	this.popup = popup;
+    }
+    
     public void inizializza(Impiegato nuovoImpiegato) {
 	    try {
+	    	
 	    	impiegatoConnection = new ImpiegatoDao(connection);
 	    	direttoreRisorseUmane = impiegatoConnection.getDirettoreRisorseUmane();
 	    	
@@ -46,8 +63,24 @@ public class ControllerCaricamentoRegistrazione {
 	    		CaricamentoLabel.setText("Il direttore alle risorse umane " + direttoreRisorseUmane + "sta valutando la tua richiesta...");
 	    	}
 	    	
-	    	System.out.println(impiegatoConnection.insertRegistrazione(nuovoImpiegato));
-	    } catch(SQLException sqlEx){
+	    	impiegatoConnection.insertRegistrazione(nuovoImpiegato);
+	    	
+			PauseTransition pausa = new PauseTransition(Duration.seconds(5));
+			pausa.setOnFinished(event -> {
+		    	homePageBenvenuto = new HomePageBenvenuto();
+		    	finestraConfermaRegistrazione = new FinestraPopup();
+		    	
+				try {
+					homePageBenvenuto.start(window, popup);
+			    	finestraConfermaRegistrazione.startConfermaRegistrazione(popup, nuovoImpiegato);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+			
+			pausa.play();
+	    	
+	    } catch (SQLException sqlEx){
 	    	sqlEx.printStackTrace();
 	    }
 	    

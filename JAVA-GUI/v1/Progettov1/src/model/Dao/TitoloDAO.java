@@ -28,7 +28,7 @@ public class TitoloDAO implements TitoloDaoInterface {
 	public ObservableList<Titolo> titoliList() throws SQLException {
         ObservableList<Titolo> lista = FXCollections.observableArrayList();
 
-        ResultSet rs = getTitoli.executeQuery("SELECT tipotitolo FROM titolo");
+        ResultSet rs = getTitoli.executeQuery("SELECT tipotitolo FROM titolo ORDER BY tipotitolo ASC");
 
         while (rs.next()) {
             lista.add(new Titolo(rs.getString("tipotitolo"), false));

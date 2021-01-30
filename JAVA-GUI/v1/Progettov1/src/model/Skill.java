@@ -55,14 +55,18 @@ public class Skill
 	
 	@Override
 	public String toString() {
+		
+		String valoreRitorno = "";
 		if(tipoSkill.equals("Hard-Skill")) {
-			return titolo.getTipoTitolo() + " del " + dataCertificazione;
+			valoreRitorno = titolo.getTipoTitolo() + " del " + dataCertificazione;
+		} else {
+			valoreRitorno = descrizione;
 		}
 		
-		if(descrizione.length() <= 35) {
-			return descrizione;
+		if(valoreRitorno.length() <= 35) {
+			return valoreRitorno;
 		} else {
-			return descrizione.substring(0, 32) + "...";
+			return valoreRitorno.substring(0, 32) + "...";
 		}
 	}
 	

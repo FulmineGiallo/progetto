@@ -4,24 +4,26 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
-public class ControllerFinestraInformazioniSkill extends ControllerFinestraPopup implements ControllerFinestraPopupInterface{
-    
-    private Image immagineSkill = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/skill.png"));
-    
-    public void inizializza(String titoloMessaggio, String messaggio) {
-    	
-    	Immagine.setImage(immagineSkill);
+public class ControllerFinestraConfermaRegistrazione extends ControllerFinestraPopup implements ControllerFinestraPopupInterface{
+
+	//private Image immagineConferma;
+	
+	@Override
+	public void inizializza(String titoloMessaggio, String messaggio) {
+    	//Immagine.setImage(immagineConferma);
     	setBottoneSinistro();
     	setBottoneDestro();
     	
     	setTitoloMessaggio(titoloMessaggio);
     	setMessaggio(messaggio);
-    }
-	
+	}
+
+	@Override
 	public void setBottoneSinistro() {
 		SinistraButton.setVisible(false);
-    }
-	
+	}
+
+	@Override
 	public void setBottoneDestro() {
 		DestraButton.setText("Ok");
 		DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -31,16 +33,19 @@ public class ControllerFinestraInformazioniSkill extends ControllerFinestraPopup
             }
         });
 	}
-	
+
+	@Override
 	public void setTitoloMessaggio(String titoloMessaggio) {
 		TitoloLabel.setStyle("-fx-text-fill: white;");
 		TitoloLabel.setText(titoloMessaggio);
 	}
-	
+
+	@Override
 	public void setMessaggio(String messaggio) {
-		MessaggioTA.setVisible(true);
-		MessaggioLabel.setVisible(false);
+		MessaggioTA.setVisible(false);
+		MessaggioLabel.setVisible(true);
 		
-		MessaggioTA.setText(messaggio);
+		MessaggioLabel.setText(messaggio);
 	}
+
 }

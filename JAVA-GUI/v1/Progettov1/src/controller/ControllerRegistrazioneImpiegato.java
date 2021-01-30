@@ -451,7 +451,7 @@ public class ControllerRegistrazioneImpiegato {
 			
 			inizializzaNuovoImpiegato();
 			caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(nuovoImpiegato);
-		    caricamentoRegistrazioneImpiegato.start(popup);
+		    caricamentoRegistrazioneImpiegato.start(window, popup);
 		}
     }
 
