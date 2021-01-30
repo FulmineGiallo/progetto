@@ -2,6 +2,7 @@ package model.Dao;
 
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.Impiegato;
+import model.Skill;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,12 +27,14 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final PreparedStatement getCF;
     private final PreparedStatement getTipoGrado;
     private final PreparedStatement getIdGrado;
+    private final PreparedStatement getIdTitolo;
     private final PreparedStatement insertImpiegato;
-    private final PreparedStatement insertListaTitoli;
-    private final PreparedStatement insertListaSkill;
+    private final PreparedStatement insertTitolo;
+    private final PreparedStatement insertSkill;
     
     private 	  String 			direttoreRisorseUmane = "";
     private		  int				idGradoNuovoImpiegato;
+    private		  int				idTitoloSkill;
 
     public ImpiegatoDao(Connection connection) throws SQLException
     {
@@ -44,9 +47,10 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
         getTipoGrado = connection.prepareStatement("SELECT tipogrado FROM impiegatoazienda WHERE cf = ?");
         getIdGrado = connection.prepareStatement("SELECT idgrado FROM grado WHERE tipoGrado = ?");
-        insertImpiegato = connection.prepareStatement("INSERT INTO Impiegato VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NEXTVAL('id_impiegato_seq');");
-        insertListaTitoli = connection.prepareStatement("INSERT INTO Titolo VALUES (NEXTVAL('id_titolo_seq'), ?);");
-        insertListaSkill = connection.prepareStatement("INSERT INTO Skill VALUES (NEXTVAL('id_skill_seq'), ?, ?, ?, ?, ?)"); //da fare
+        getIdTitolo = connection.prepareStatement("SELECT idtitolo FROM titolo WHERE tipoTitolo = ?");
+        insertImpiegato = connection.prepareStatement("INSERT INTO Impiegato VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NEXTVAL('id_impiegato_seq'))");
+        insertTitolo = connection.prepareStatement("INSERT INTO Titolo VALUES (NEXTVAL('id_titolo_seq'), ?)");
+        insertSkill = connection.prepareStatement("INSERT INTO Skill VALUES (NEXTVAL('id_skill_seq'), ?, ?, ?, ?, ?)");
     }
 
     @Override
@@ -139,18 +143,21 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     }
 
     @Override
-    public int insertRegistrazione(Impiegato nuovoImpiegato) throws SQLException{ // >> DA FARE
+    public String insertRegistrazione(Impiegato nuovoImpiegato) throws SQLException{
     	
-        /*getIdGrado.setString(1, nuovoImpiegato.getGrado());
+    	int impiegatiInseriti = 0;
+    	int titoliInseriti = 0;
+    	int skillInserite = 0;
+    	
+        getIdGrado.setString(1, nuovoImpiegato.getGrado());
         ResultSet rs = getIdGrado.executeQuery();
         
         while(rs.next()) {
         	idGradoNuovoImpiegato = rs.getInt("idgrado");
         }
         
-        rs.close();*/
+        rs.close();
     	
-    	//inserimento del nuovo impiegato
     	insertImpiegato.setString(1, nuovoImpiegato.getNome());
     	insertImpiegato.setString(2, nuovoImpiegato.getCognome());
     	insertImpiegato.setString(3, nuovoImpiegato.getCF());
@@ -158,16 +165,49 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     	insertImpiegato.setString(5, nuovoImpiegato.getComuneNascita());
     	insertImpiegato.setString(6, nuovoImpiegato.getEmail());
     	insertImpiegato.setString(7, nuovoImpiegato.getGenere());
-    	//insertImpiegato.setInt	 (8, nuovoImpiegato.getGrado()); >> creare trigger in cui recupera l'id del grado e l'id del comune a partire dalle stringhe
+    	insertImpiegato.setInt   (8, idGradoNuovoImpiegato);
     	insertImpiegato.setString(9, nuovoImpiegato.getPassword());
     	
-    	//inserimento dei nuovi titoli >> DA FARE
-    	//insertListaTitoli
+    	impiegatiInseriti = insertImpiegato.executeUpdate();
+
+    	for(Skill s: nuovoImpiegato.getListaSkill()) {
+    		
+			if (s.getDescrizione() != null) {
+				insertSkill.setString(1, s.getDescrizione());
+			} else {
+				insertSkill.setNull(1, java.sql.Types.NULL);
+			}
+			
+			insertSkill.setString(2, s.getTipoSkill());
+			insertSkill.setObject(3, s.getDataCertificazione());
+			
+    		if (s.getTitolo() != null) {
+				if (s.getTitolo().isNuovo()) {
+					insertTitolo.setString(1, s.getTitolo().getTipoTitolo());
+					titoliInseriti = titoliInseriti + insertTitolo.executeUpdate();
+				}
+				
+				getIdTitolo.setString(1, s.getTitolo().getTipoTitolo());
+				rs = getIdTitolo.executeQuery();
+				
+				while (rs.next()) {
+					idTitoloSkill = rs.getInt("idtitolo");
+				}
+				
+				rs.close();
+				
+				insertSkill.setInt(4, idTitoloSkill);
+			} else {
+				insertSkill.setNull(4, java.sql.Types.NULL);
+			}
+    		
+			insertSkill.setString(5, nuovoImpiegato.getCF());
+			skillInserite = skillInserite + insertSkill.executeUpdate();
+    	}
     	
-    	//inserimento delle skill >> DA FARE
-    	//insertListaSkill
-    	
-        return 0;
+        return "Impiegati inseriti: " + String.valueOf(impiegatiInseriti) +
+        	   "\nTitoli inseriti: "  + String.valueOf(titoliInseriti)	  +
+        	   "\nSkill inserite: "	  + String.valueOf(skillInserite);
     }
 
     public List<Impiegato> getAllImpiegati() throws SQLException

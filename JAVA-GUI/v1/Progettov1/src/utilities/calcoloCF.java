@@ -1,4 +1,4 @@
-package model;
+package utilities;
 
 import java.util.Date;
 import java.util.Scanner;

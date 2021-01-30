@@ -4,9 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Impiegato
-{
-    private int					IdImpiegato;
+public class Impiegato {
+	private int					idImpiegato;
     private String				CF;
     private String				nome;
     private String				cognome;
@@ -39,15 +38,6 @@ public class Impiegato
 
     public void setGrado(String grado) {
         this.grado = grado;
-    }
-
-    public int getIdImpiegato() {
-        return IdImpiegato;
-    }
-    
-
-    public void setIdImpiegato(int IdImpiegato) {
-        this.IdImpiegato = IdImpiegato;
     }
 
 
@@ -121,10 +111,34 @@ public class Impiegato
     public void setPassword(String password) {
         this.password = password;
     }
+    
+	public int getIdImpiegato() {
+		return idImpiegato;
+	}
+
+	public void setIdImpiegato(int idImpiegato) {
+		this.idImpiegato = idImpiegato;
+	}
 
     @Override
     public String toString()
     {
-        return nome +" "+ cognome;
+        //return nome +" "+ cognome;
+    	String s = getCF() + " " +
+    			   getCognome() + " " +
+    			   getComuneNascita() + " " +
+    			   getEmail() + " " +
+    			   getGenere() + " " +
+    			   getGrado()  + " " +
+    			   getNome() + " " +
+    			   getPassword() + " " +
+    			   getDataNascita();
+    	
+    	for(Skill sk: getListaSkill()) {
+    		s = s + " " + sk.toString(); 
+    	}
+    	
+    	return s;
+        	   
     }
 }

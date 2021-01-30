@@ -90,12 +90,19 @@ public class FinestraPopup {
         
         if(infoSkill.getTipoSkill().equals("Soft-Skill")) {
         	controllerSkill.inizializza(infoSkill.toString(), "Tipologia: "		+ infoSkill.getTipoSkill() +
-															  		  "\nDescrizione: " + infoSkill.getDescrizione());
+															  "\nDescrizione: " + infoSkill.getDescrizione());
 		} else {
-			controllerSkill.inizializza(infoSkill.toString(), "Tipologia: " 		   	   + infoSkill.getTipoSkill() 	+
-					   							   			  "\nTitolo del certificato: " + infoSkill.getTitolo()    	+
-					   							   			  "\nDescrizione: " 		   + infoSkill.getDescrizione()	+
-					   							   			  "\nData di certificazione: " + infoSkill.getDataCertificazione());
+			if (infoSkill.getDescrizione() == null) {
+				controllerSkill.inizializza(infoSkill.toString(), "Tipologia: " 			   + infoSkill.getTipoSkill() 	+
+																  "\nTitolo del certificato: " + infoSkill.getTitolo() 		+
+																  "\nDescrizione: " 		   + "Nessuna descrizione"		+
+																  "\nData di certificazione: " + infoSkill.getDataCertificazione());
+			} else {
+				controllerSkill.inizializza(infoSkill.toString(), "Tipologia: " 			   + infoSkill.getTipoSkill() 	+
+						  										  "\nTitolo del certificato: " + infoSkill.getTitolo() 		+
+						  										  "\nDescrizione: " 		   + infoSkill.getDescrizione() +
+						  										  "\nData di certificazione: " + infoSkill.getDataCertificazione());
+			}
 		}
         
         popup.setTitle(popup.toString());

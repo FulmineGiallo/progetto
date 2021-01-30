@@ -31,10 +31,10 @@ public class TitoloDAO implements TitoloDaoInterface {
         ResultSet rs = getTitoli.executeQuery("SELECT tipotitolo FROM titolo");
 
         while (rs.next()) {
-            lista.add(new Titolo(rs.getString("tipotitolo")));
+            lista.add(new Titolo(rs.getString("tipotitolo"), false));
         }
         
-        Titolo titoloAltro = new Titolo("Altro...");
+        Titolo titoloAltro = new Titolo("Altro...", false);
         lista.add(titoloAltro);
         
         rs.close();
@@ -48,7 +48,7 @@ public class TitoloDAO implements TitoloDaoInterface {
 
         
         while (rs.next()) {
-            lista.add(new Titolo(rs.getString("tipotitolo")));
+            lista.add(new Titolo(rs.getString("tipotitolo"), false));
         }
         
         

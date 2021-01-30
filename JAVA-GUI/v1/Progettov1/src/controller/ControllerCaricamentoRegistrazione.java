@@ -40,9 +40,13 @@ public class ControllerCaricamentoRegistrazione {
 	    	impiegatoConnection = new ImpiegatoDao(connection);
 	    	direttoreRisorseUmane = impiegatoConnection.getDirettoreRisorseUmane();
 	    	
-	    	CaricamentoLabel.setText("Il direttore alle risorse umane " + direttoreRisorseUmane + "sta valutando la tua richiesta...");
+	    	if(direttoreRisorseUmane.isBlank()) {
+	    		CaricamentoLabel.setText("Stiamo valutando la tua richiesta...");
+	    	} else {
+	    		CaricamentoLabel.setText("Il direttore alle risorse umane " + direttoreRisorseUmane + "sta valutando la tua richiesta...");
+	    	}
 	    	
-	    	impiegatoConnection.insertRegistrazione(nuovoImpiegato);
+	    	System.out.println(impiegatoConnection.insertRegistrazione(nuovoImpiegato));
 	    } catch(SQLException sqlEx){
 	    	sqlEx.printStackTrace();
 	    }
