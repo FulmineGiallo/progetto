@@ -2,9 +2,11 @@ package model;
 
 public class Titolo {
 	private String tipoTitolo;
+	private boolean nuovo;
 	
-	public Titolo(String tipoTitolo) {
+	public Titolo(String tipoTitolo, boolean nuovo) {
 		this.tipoTitolo = tipoTitolo;
+		this.setNuovo(nuovo);
 	}
 
 	public String getTipoTitolo() {
@@ -13,6 +15,14 @@ public class Titolo {
 
 	public void setTipoTitolo(String tipoTitolo) {
 		this.tipoTitolo = tipoTitolo;
+	}
+
+	public boolean isNuovo() {
+		return nuovo;
+	}
+
+	public void setNuovo(boolean nuovo) {
+		this.nuovo = nuovo;
 	}
 	
 	@Override

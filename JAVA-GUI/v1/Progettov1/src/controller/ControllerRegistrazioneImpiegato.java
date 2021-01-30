@@ -29,11 +29,10 @@ import model.Dao.ImpiegatoDao;
 import model.DaoInterface.GradoDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import utilities.MetodiComuni;
+import utilities.calcoloCF;
 import model.Grado;
 import model.Impiegato;
 import model.Skill;
-import model.calcoloCF;
-
 import view.HomePageBenvenuto;
 import view.CaricamentoRegistrazioneImpiegato;
 import view.FinestraPopup;
@@ -378,6 +377,27 @@ public class ControllerRegistrazioneImpiegato {
             }
     	}
     }
+    
+    private void inizializzaNuovoImpiegato() {
+    	nuovoImpiegato.setNome(nome);
+    	nuovoImpiegato.setCognome(cognome);
+    	nuovoImpiegato.setCF(codiceFiscale);
+    	nuovoImpiegato.setDataNascita(dataDiNascita);
+    	nuovoImpiegato.setComuneNascita(comune);
+    	nuovoImpiegato.setEmail(EmailTF.getText());
+    	
+    	switch (genere) {
+			case "UOMO":
+				nuovoImpiegato.setGenere("M");
+				break;
+			case "DONNA":
+				nuovoImpiegato.setGenere("F");
+				break;
+		}
+    	
+		nuovoImpiegato.setGrado(GradoComboBox.getSelectionModel().getSelectedItem().getTipoGrado());
+    	nuovoImpiegato.setPassword(PasswordTF.getText());
+    }
 
     @FXML private void CFRegistrazione() {
     	CodiceFiscaleErrorLabel.setText("");
@@ -425,8 +445,11 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {
-    	if(controlloCampi()) {
+    	
+    	if(controlloCampi()) { 		
 			connection.close();
+			
+			inizializzaNuovoImpiegato();
 			caricamentoRegistrazioneImpiegato = new CaricamentoRegistrazioneImpiegato(nuovoImpiegato);
 		    caricamentoRegistrazioneImpiegato.start(popup);
 		}

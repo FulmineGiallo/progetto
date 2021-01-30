@@ -201,15 +201,15 @@ public class ControllerRegistrazioneSkill {
     		
     		if (tipoSkill.equals("Hard-Skill")) {
 				if (NuovoTitoloTF.isVisible()) {
-					titoloSkill = new Titolo(NuovoTitoloTF.getText());
+					titoloSkill = new Titolo(NuovoTitoloTF.getText(), true);
 				} else {
-					titoloSkill = new Titolo(TitoloComboBox.getSelectionModel().getSelectedItem().toString());
+					titoloSkill = new Titolo(TitoloComboBox.getSelectionModel().getSelectedItem().toString(), false);
 				}
 				
-				if(!descrizioneSkill.isBlank()) {
-	    			nuovoImpiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), descrizioneSkill));
+				if(descrizioneSkill.isBlank()) {
+					nuovoImpiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill, null));
 	    		} else {
-	    			nuovoImpiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill.getTipoTitolo(), "Nessuna descrizione"));
+	    			nuovoImpiegato.getListaSkill().add(new Skill(tipoSkill, DataCertificazioneDP.getValue(), titoloSkill, descrizioneSkill));
 	    		}
 			} else if (tipoSkill.equals("Soft-Skill")){
 				nuovoImpiegato.getListaSkill().add(new Skill(tipoSkill, descrizioneSkill));

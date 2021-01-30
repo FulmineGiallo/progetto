@@ -44,9 +44,9 @@ public class CaricamentoRegistrazioneImpiegato {
 			controller = loader.getController();
 			controller.inizializza(nuovoImpiegato);
 			
-			/*PauseTransition delay = new PauseTransition(Duration.seconds(5));
+			PauseTransition delay = new PauseTransition(Duration.seconds(5));
 			delay.setOnFinished(event -> popup.hide());
-			delay.play();*/
+			delay.play();
 
 		} catch (IOException e)
 		{
