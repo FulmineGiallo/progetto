@@ -289,9 +289,7 @@ public class ControllerHomePageImpiegato {
     	
     	
     }
-    
-    
-    
+
     public void updateInfoRiunione()
     {
         RiunioniLV.setOnMouseClicked(new EventHandler<MouseEvent>()

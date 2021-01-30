@@ -11,6 +11,15 @@ public class Progetto
     Date dataFine;
     Date scadenza;
     Impiegato projectManager;
+    String ruolo;
+
+    public String getRuolo() {
+        return ruolo;
+    }
+
+    public void setRuolo(String ruolo) {
+        this.ruolo = ruolo;
+    }
 
     public Impiegato getProjectManager()
     {
@@ -67,8 +76,10 @@ public class Progetto
     }
 
     @Override
-    public String toString() {
-        return titolo;
+    public String toString()
+    {
+        return titolo + "\n" + ruolo;
     }
+
 
 }

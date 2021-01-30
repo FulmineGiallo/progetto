@@ -8,6 +8,7 @@ import model.Progetto;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.naming.ReferralException;
 
@@ -19,22 +20,28 @@ public class ProgettoDao implements ProgettoDaoInterface
     private final PreparedStatement updateInfo;
     private final PreparedStatement partecipanti;
     private final PreparedStatement getId;
+    private final PreparedStatement getRuoloImpiegato;
+    private final PreparedStatement getIdProgetto;
 
 
     public ProgettoDao(Connection connection) throws SQLException {
         this.connection = connection;
+        getIdProgetto = connection.prepareStatement("SELECT DISTINCT idprogetto FROM listaprogetti WHERE partecipante = ? OR projectmanager = ?");
         progettiImpiegato = connection.prepareStatement("SELECT * FROM listaprogetti  WHERE partecipante = ?");
         insertProgetto = connection.prepareStatement("INSERT INTO progetto VALUES (NEXTVAL('id_progetto_seq'), ?, ?, current_date, ?, ?,?, ?)");
         updateInfo = connection.prepareStatement("UPDATE progetto SET descrizione = ?, datainizio = ?, datafine = ?, scadenza = ? WHERE projectmanagerprogetto = ? AND titolo = ?");
         partecipanti = connection.prepareStatement("SELECT impiegato.*FROM progetto NATURAL JOIN progettoimpiegato INNER JOIN impiegato ON progettoimpiegato.cf = impiegato.cf WHERE projectmanagerprogetto = ? AND titolo = ?");
         getId = connection.prepareStatement("SELECT idprogetto FROM progetto WHERE titolo LIKE ? AND descrizione LIKE ? AND datainizio = ? AND datafine = ? AND scadenza = ? AND projectmanagerprogetto LIKE ?");
+        getRuoloImpiegato = connection.prepareStatement("SELECT ruolo.tipoRuolo FROM progettoImpiegato NATURAL JOIN ruolo WHERE cf = ? AND idProgetto = ?");
     }
+
 
     @Override
     public ObservableList<Progetto> getProgettiImpiegato(Impiegato impiegato) throws SQLException
     {
         ObservableList<Progetto> lista = FXCollections.observableArrayList();
         Progetto progetto;
+
         progettiImpiegato.setString(1,impiegato.getCF());
         ResultSet rs = progettiImpiegato.executeQuery();
 
@@ -45,14 +52,16 @@ public class ProgettoDao implements ProgettoDaoInterface
             progetto.setScadenza(rs.getDate("scadenza"));
             progetto.setDataFine(rs.getDate("datafine"));
             progetto.setDescrizione(rs.getString("descrizione"));
+            progetto.setRuolo(rs.getString("ruolo"));
             if(impiegato.getCF().equals(rs.getString("projectmanager")))
             {
                 progetto.setProjectManager(impiegato);
+                progetto.setRuolo("Project Manager");
             }
+
             lista.add(progetto);
         }
         rs.close();
-
         return lista;
     }
 
