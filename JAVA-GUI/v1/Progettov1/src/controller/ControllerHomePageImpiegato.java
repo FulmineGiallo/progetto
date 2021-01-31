@@ -42,6 +42,7 @@ public class ControllerHomePageImpiegato {
 	@FXML private VBox					ImpiegatoBox;
 	@FXML private Label 				NomeImpiegatoLabel;
 	@FXML private Label 				GradoImpiegatoLabel;
+	@FXML private Label                 SalarioLabel;
 	
 	@FXML private HBox					ToolBar;
 	@FXML private Button 				ValutazioniButton;
@@ -70,7 +71,7 @@ public class ControllerHomePageImpiegato {
 	@FXML private AnchorPane			ProjectManagerBox;
 	@FXML private Button 				GestioneProgettoButton;
 	@FXML private Button 				ModificaProgettoButton;
-	@FXML private Button                salvaModifiche;
+	@FXML private Button                SalvaModificheProgetto;
 
 	@FXML private AnchorPane			DescrizioneRiunioneBox;
 	@FXML private AnchorPane 			DescrizioneRiunionePane;
@@ -85,17 +86,15 @@ public class ControllerHomePageImpiegato {
 	@FXML private AnchorPane			OrganizzatoreBox;
 	@FXML private Button 				GestioneRiunioneButton;
 	@FXML private Button 				ModificaRiunioneButton;
-	
-	
+	@FXML private Button                SalvaModificheRiunioneButton;
+
     @FXML private AnchorPane 			PartecipanteBox;
     @FXML private Button 				PresenzaButton;
     @FXML private Button 				AssenzaButton;
 	
 	@FXML private Label 				ListaRiunioniLabel;
 	@FXML private ScrollPane 			ListaRiunioniScrollPane;
-	@FXML private ListView<Riunione> 	RiunioniLV;
-	@FXML private Label                 salario;
-
+	@FXML private ListView<Riunione> 	ListaRiunioniLV;
 	
 	private FinestraPopup finestraErrore;
 	private Exception error;
@@ -108,19 +107,16 @@ public class ControllerHomePageImpiegato {
 	
 	int updateEffettuato;
 
-	
-	
 	Impiegato impiegato = null;
-
 
     ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
     ObservableList<Riunione> listaRiunioni = FXCollections.observableArrayList();
-    
     
     Connection connection;
     DBConnection dbConnection;
     ProgettoDaoInterface progetti;
     RiunioneDaoInterface riunioni;
+    
     {
         try {
             dbConnection = new DBConnection();
@@ -159,109 +155,28 @@ public class ControllerHomePageImpiegato {
         GradoImpiegatoLabel.setText(impiegato.getGrado());
         
         listaProgetti.addAll(progetti.getProgettiImpiegato(impiegato));
-        ListaProgettiLV.setItems(listaProgetti);
+        if (listaProgetti.isEmpty()) {
+			ListaProgettiLV.getItems().add(new Progetto("Non ci sono ancora progetti"));
+		} else {
+			ListaProgettiLV.setItems(listaProgetti);
+		}
         
-        listaRiunioni.addAll(riunioni.getRiunioniImpiegato(impiegato));
-        RiunioniLV.setItems(listaRiunioni);
+		listaRiunioni.addAll(riunioni.getRiunioniImpiegato(impiegato));
+		
+        if (listaRiunioni.isEmpty()) {
+			ListaRiunioniLV.getItems().add(new Riunione("Non ci sono ancora riunioni"));
+		} else {
+			ListaRiunioniLV.setItems(listaRiunioni);
+		}
         
-        
-        IstruzioniBox.setVisible(true);
+		IstruzioniBox.setVisible(true);
         DescrizioneProgettoBox.setVisible(false);
-        salario.setText("Calcolare");
-        /*RIchiamare Dao Salario */
-
-        updateInfoProgetto();
-        updateInfoRiunione();
+        SalarioLabel.setText("Calcolare");
+        /*Richiamare Dao Salario */
     }
 
-    public void updateInfoProgetto()
-    {
-        ListaProgettiLV.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                IstruzioniBox.setVisible(false);
-                DescrizioneRiunioneBox.setVisible(false);
-                DescrizioneProgettoBox.setVisible(true);
-                
-                gestisciBox(false);
-
-                DescrizioneProgettoTA.setText(ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
-                DataDiInizioProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
-                DataDiFineProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
-                DataDiScadenzaProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
-
-                if(ListaProgettiLV.getSelectionModel().getSelectedItem().getProjectManager() == impiegato)
-                {
-                    ProjectManagerBox.setVisible(true);
-                    salvaModifiche.setVisible(false);
-                    /* Se il bottone gestione progetto viene cliccato */
-                    GestioneProgettoButton.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event)
-                        {
-                            HomePageProgetto homeProjectManger = new HomePageProgetto(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
-                            try {
-                                homeProjectManger.start(window, popup);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
-
-                    /* Se il project manager vuole modificare le informazioni del progetto */
-                    ModificaProgettoButton.setOnAction(new EventHandler<ActionEvent>()
-                    {
-                        @Override
-                        public void handle(ActionEvent event)
-                        {
-                            gestisciBox(true);
-                            salvaModifiche.setVisible(true);
-                            salvaModifiche.setOnAction(new EventHandler<ActionEvent>()
-                            {
-                                @Override
-                                public void handle(ActionEvent event)
-                                {
-                                    gestisciBox(false);
-                                    LocalDate datainizio;
-                                    LocalDate dataFine;
-                                    LocalDate dataScadenza;
-                                    try
-                                    {
-                                        ListaProgettiLV.getSelectionModel().getSelectedItem().setDescrizione(DescrizioneProgettoTA.getText());
-                                        datainizio = LocalDate.parse(DataDiInizioProgettoLabel.getText());
-                                        dataFine = LocalDate.parse(DataDiFineProgettoLabel.getText());
-                                        dataScadenza = LocalDate.parse(DataDiScadenzaProgettoLabel.getText());
-
-                                        ListaProgettiLV.getSelectionModel().getSelectedItem().setDataInizio(Date.valueOf(datainizio));
-                                        ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(Date.valueOf(dataFine));
-                                        ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(Date.valueOf(dataScadenza));
-
-
-                                        updateEffettuato = progetti.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
-                                        salvaModifiche.setVisible(false);
-
-                                    } catch (SQLException throwables)
-                                    {
-                                        throwables.printStackTrace();
-                                    }
-
-                                }
-                            });
-
-                        }
-                    });
-
-                }
-                else
-                    ProjectManagerBox.setVisible(false);
-            }
-        });
-    }
-
-    /*Metodo che gestisce le modifice della box */
-    private void gestisciBox(boolean state)
+    /*Metodo che gestisce le modifiche di DescrizioneProgettoBox */
+    private void gestisciProgettoBox(boolean state)
     {
         DescrizioneProgettoTA.setEditable(state);
         DataDiInizioProgettoLabel.setEditable(state);
@@ -283,152 +198,191 @@ public class ControllerHomePageImpiegato {
     
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
-    	
     	finestraErrore = new FinestraPopup("Sei sicuro di voler uscire?", error);
     	finestraErrore.startLogout(window, popup);
-    	
-    	
+
     }
 
-    public void updateInfoRiunione()
-    {
-        RiunioniLV.setOnMouseClicked(new EventHandler<MouseEvent>()
+    @FXML void accettaInvito(ActionEvent event) {
+    	try {
+			if(riunioni.isPresente(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
+				
+				int update;
+
+				
+				update=riunioni.UpdatePresenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
+				
+				if(update!=0)
+					System.out.println("presenza salvata");
+					finestraErrore=new FinestraPopup("presenza salvata", error);
+					try {
+						finestraErrore.startPopupErrore(popup);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+			}else {
+				System.out.println("errore presenza");
+				finestraErrore=new FinestraPopup("impossibile salvare la presenza", error);
+				try {
+					finestraErrore.startPopupErrore(popup);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    @FXML void rifutaInvito(ActionEvent event) {
+    	try {
+			if(riunioni.isAssente(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
+				
+			int update;
+
+				
+				update=riunioni.UpdateAssenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
+				
+				if(update!=0)
+					System.out.println("assenza salvata");
+				finestraErrore=new FinestraPopup("assenza salvata", error);
+				try {
+					finestraErrore.startPopupErrore(popup);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}else {
+				System.out.println("errore assenza");
+				finestraErrore=new FinestraPopup("impossibile salvare l'assenza", error);
+				try {
+					finestraErrore.startPopupErrore(popup);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+
+    //Se il GestioneProgettoButton viene cliccato
+    @FXML void gestisciProgetto(ActionEvent event) {
+        HomePageProgetto homeProjectManger = new HomePageProgetto(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
+        try {
+            homeProjectManger.start(window, popup);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML void gestisciRiunione(ActionEvent event) {
+        //Se il bottone gestione riunione viene cliccato
+    	HomePageOrganizzatore homeOrganizzatore = new HomePageOrganizzatore(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
+        try {
+            homeOrganizzatore.start(window, popup);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Se il project manager vuole modificare le informazioni del progetto
+    @FXML void modificaInformazioniProgetto(ActionEvent event) {
+        gestisciProgettoBox(true);
+        SalvaModificheProgetto.setVisible(true);
+    }
+
+    @FXML void modificaInformazioniRiunione(ActionEvent event) { // >> DA FARE
+
+    }
+
+    @FXML void salvaModificheProgetto(ActionEvent event) {
+    	gestisciProgettoBox(false);
+        
+        LocalDate datainizio;
+        LocalDate dataFine;
+        LocalDate dataScadenza;
+        
+        try {
+            ListaProgettiLV.getSelectionModel().getSelectedItem().setDescrizione(DescrizioneProgettoTA.getText());
+            datainizio = LocalDate.parse(DataDiInizioProgettoLabel.getText());
+            dataFine = LocalDate.parse(DataDiFineProgettoLabel.getText());
+            dataScadenza = LocalDate.parse(DataDiScadenzaProgettoLabel.getText());
+
+            ListaProgettiLV.getSelectionModel().getSelectedItem().setDataInizio(Date.valueOf(datainizio));
+            ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(Date.valueOf(dataFine));
+            ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(Date.valueOf(dataScadenza));
+
+
+            updateEffettuato = progetti.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
+            SalvaModificheProgetto.setVisible(false);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    @FXML void salvaModificheRiunione(ActionEvent event) { // >> DA FARE
+
+    }
+
+    @FXML void visualizzaInformazioniProgetto(MouseEvent event) {
+        IstruzioniBox.setVisible(false);
+        DescrizioneRiunioneBox.setVisible(false);
+        DescrizioneProgettoBox.setVisible(true);
+        
+        gestisciProgettoBox(false);
+
+        DescrizioneProgettoTA.setText(ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
+        DataDiInizioProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
+        DataDiFineProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
+        DataDiScadenzaProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
+
+        if(ListaProgettiLV.getSelectionModel().getSelectedItem().getProjectManager() == impiegato) {
+            ProjectManagerBox.setVisible(true);
+            SalvaModificheProgetto.setVisible(false);
+        } else
+            ProjectManagerBox.setVisible(false);
+    }
+
+    @FXML void visualizzaInformazioniRiunione(MouseEvent event) {
+        IstruzioniBox.setVisible(false);
+        DescrizioneProgettoBox.setVisible(false);
+        DescrizioneRiunioneBox.setVisible(true);
+        OrganizzatoreBox.setVisible(false);
+        
+        //gestisciBox(false);
+
+        DescrizioneRiunioneTA.setText(ListaRiunioniLV.getSelectionModel().getSelectedItem().getDescrizione());
+        DataDiInizioRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getData()));
+        OrganizzatoreRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getOrganizzatore()));
+        TitoloRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTitolo()));
+        OrarioDiInizioRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getOrarioInizio()));
+        OrarioDiFineRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getOrarioFine()));
+
+        
+        if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getCFOrganizzatore().equals(impiegato.getCF()))
         {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                IstruzioniBox.setVisible(false);
-                DescrizioneProgettoBox.setVisible(false);
-                DescrizioneRiunioneBox.setVisible(true);
-                OrganizzatoreBox.setVisible(false);
-                
-            //    gestisciBox(false);
+        	PartecipanteBox.setVisible(false);
+            OrganizzatoreBox.setVisible(true);
+            //SalvaModificheProgetto.setVisible(false);
 
-                DescrizioneRiunioneTA.setText(RiunioniLV.getSelectionModel().getSelectedItem().getDescrizione());
-                DataDiInizioRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getData()));
-                OrganizzatoreRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getOrganizzatore()));
-                TitoloRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getTitolo()));
-                OrarioDiInizioRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getOrarioInizio()));
-                OrarioDiFineRiunioneLabel.setText(String.valueOf(RiunioniLV.getSelectionModel().getSelectedItem().getOrarioFine()));
-
-                
-                if(RiunioniLV.getSelectionModel().getSelectedItem().getCFOrganizzatore().equals(impiegato.getCF()))
-                {
-                	PartecipanteBox.setVisible(false);
-                    OrganizzatoreBox.setVisible(true);
-            //        salvaModifiche.setVisible(false);
-                    
-                    
-                    /* Se il bottone gestione riunione viene cliccato */
-                    GestioneRiunioneButton.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event)
-                        {
-                            HomePageOrganizzatore homeOrganizzatore = new HomePageOrganizzatore(impiegato, RiunioniLV.getSelectionModel().getSelectedItem());
-                            try {
-                                homeOrganizzatore.start(window, popup);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
-                }
-                else {
-                    PartecipanteBox.setVisible(true);
-                    PresenzaButton.setVisible(true);
-                    AssenzaButton.setVisible(true);
-                    ProjectManagerBox.setVisible(false);
-                    
-                    PresenzaButton.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event)
-                        {
-                        	
-                        	try {
-								if(riunioni.isPresente(impiegato, RiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
-									
-									int update;
-	
-									
-									update=riunioni.UpdatePresenza(impiegato, RiunioniLV.getSelectionModel().getSelectedItem());
-									
-									if(update!=0)
-										System.out.println("presenza salvata");
-										finestraErrore=new FinestraPopup("presenza salvata", error);
-										try {
-											finestraErrore.startPopupErrore(popup);
-										} catch (Exception e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										
-								}else {
-									System.out.println("errore presenza");
-									finestraErrore=new FinestraPopup("impossibile salvare la presenza", error);
-									try {
-										finestraErrore.startPopupErrore(popup);
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-								}
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-                        	
-                        }
-                    });
-                    
-                    
-                    AssenzaButton.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event)
-                        {
-                        	
-                        	try {
-								if(riunioni.isAssente(impiegato, RiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
-									
-								int update;
-	
-									
-									update=riunioni.UpdateAssenza(impiegato, RiunioniLV.getSelectionModel().getSelectedItem());
-									
-									if(update!=0)
-										System.out.println("assenza salvata");
-									finestraErrore=new FinestraPopup("assenza salvata", error);
-									try {
-										finestraErrore.startPopupErrore(popup);
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									
-								}else {
-									System.out.println("errore assenza");
-									finestraErrore=new FinestraPopup("impossibile salvare l'assenza", error);
-									try {
-										finestraErrore.startPopupErrore(popup);
-									} catch (Exception e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-								}
-								
-								
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-                        	
-                        }
-                    });
-                    
-                }
-            }
-        });
+        }
+        else {
+            PartecipanteBox.setVisible(true);
+            PresenzaButton.setVisible(true);
+            AssenzaButton.setVisible(true);
+            ProjectManagerBox.setVisible(false);
+        }
     }
 }
-
-
-

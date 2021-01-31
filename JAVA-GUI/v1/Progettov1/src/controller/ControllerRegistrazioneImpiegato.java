@@ -183,6 +183,8 @@ public class ControllerRegistrazioneImpiegato {
     	this.nuovoImpiegato = nuovoImpiegato;
     	
     	listaSkillImpiegato.clear();
+		SkillLV.getItems().clear();
+		
 		listaSkillImpiegato.addAll(nuovoImpiegato.getListaSkill());
 		SkillLV.setItems(listaSkillImpiegato);
     }
@@ -208,6 +210,8 @@ public class ControllerRegistrazioneImpiegato {
                 }
             }
         });
+        
+        SkillLV.getItems().add((new Skill("Soft-Skill", "Non ci sono ancora skill")));
     }
     
     public boolean controlloProvincia() {
@@ -421,15 +425,16 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     @FXML public void visualizzaInformazioniSkill(MouseEvent event) {    	
-    	infoSkill = SkillLV.getSelectionModel().getSelectedItem();
-    	
-    	if (infoSkill != null) {
-			finestraInformazioniSkill = new FinestraPopup(infoSkill);
-			
-			try {
-				finestraInformazioniSkill.startDettagliSkill(popup);
-			} catch (Exception e) {
-				e.printStackTrace();
+    	if (!SkillLV.getItems().get(0).getDescrizione().equals("Non ci sono ancora skill")) {
+			infoSkill = SkillLV.getSelectionModel().getSelectedItem();
+			if (infoSkill != null) {
+				finestraInformazioniSkill = new FinestraPopup(infoSkill);
+
+				try {
+					finestraInformazioniSkill.startDettagliSkill(popup);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			} 
 		}
     }
@@ -445,7 +450,6 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     @FXML private void confermaOperazione (ActionEvent actionEvent) throws Exception {
-    	
     	if(controlloCampi()) { 		
 			connection.close();
 			
