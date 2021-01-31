@@ -123,8 +123,8 @@ public class Impiegato {
     @Override
     public String toString()
     {
-        //return nome +" "+ cognome;
-    	String s = getCF() + " " +
+        return cognome + " " + nome;
+    	/*String s = getCF() + " " +
     			   getCognome() + " " +
     			   getComuneNascita() + " " +
     			   getEmail() + " " +
@@ -138,7 +138,7 @@ public class Impiegato {
     		s = s + " " + sk.toString(); 
     	}
     	
-    	return s;
+    	return s;*/
         	   
     }
 }

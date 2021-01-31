@@ -4,26 +4,32 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
-public class ControllerFinestraInformazioniSkill extends ControllerFinestraPopup implements ControllerFinestraPopupInterface{
+public class ControllerFinestraInformazioniSkill extends ControllerFinestraPopup{
     
     private Image immagineSkill = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/skill.png"));
     
-    public void inizializza(String titoloMessaggio, String messaggio) {
+    @Override
+    public void inizializza(String titoloMessaggio, String messaggioLabel, String messaggioTextArea) {
     	
     	Immagine.setImage(immagineSkill);
+    	
     	setBottoneSinistro();
     	setBottoneDestro();
     	
     	setTitoloMessaggio(titoloMessaggio);
-    	setMessaggio(messaggio);
+    	//setMessaggioLabel(messaggioLabel);
+    	setMessaggioTextArea(messaggioTextArea);
     }
 	
-	public void setBottoneSinistro() {
+    @Override
+	protected void setBottoneSinistro() {
 		SinistraButton.setVisible(false);
     }
 	
-	public void setBottoneDestro() {
+    @Override
+    protected void setBottoneDestro() {
 		DestraButton.setText("Ok");
+		
 		DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -31,16 +37,28 @@ public class ControllerFinestraInformazioniSkill extends ControllerFinestraPopup
             }
         });
 	}
+    
+    @Override
+    protected void setTitoloMessaggio(String titoloMessaggio) {
+		if (titoloMessaggio != null) {
+			TitoloLabel.setStyle("-fx-text-fill: white;");
+			TitoloLabel.setText(titoloMessaggio);
+		}
+    }
 	
-	public void setTitoloMessaggio(String titoloMessaggio) {
-		TitoloLabel.setStyle("-fx-text-fill: white;");
-		TitoloLabel.setText(titoloMessaggio);
-	}
+    /*@Override >> non utilizzato
+    protected void setMessaggioLabel(String messaggioLabel) {
+    	if(messaggioLabel != null){
+    		
+    	}
+	}*/
 	
-	public void setMessaggio(String messaggio) {
-		MessaggioTA.setVisible(true);
-		MessaggioLabel.setVisible(false);
-		
-		MessaggioTA.setText(messaggio);
+    @Override
+    protected void setMessaggioTextArea(String messaggioTextArea) {
+		if (messaggioTextArea != null) {
+			MessaggioTA.setVisible(true);
+			MessaggioLabel.setVisible(false);
+			MessaggioTA.setText(messaggioTextArea);
+		}
 	}
 }

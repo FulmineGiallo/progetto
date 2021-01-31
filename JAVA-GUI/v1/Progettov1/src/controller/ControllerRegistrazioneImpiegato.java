@@ -105,8 +105,6 @@ public class ControllerRegistrazioneImpiegato {
     private LocalDate dataSupportata = null;
     private LocalDate dataDiOggi = null;
     
-    /*private String email;
-    private String password;*/
     private String nome;
     private String cognome;
     private String comune;
@@ -119,7 +117,6 @@ public class ControllerRegistrazioneImpiegato {
     private FormRegistrazioneSkill 			  formRegistrazioneSkill;
     private FinestraPopup		   			  finestraInformazioniSkill;
     
-    private Skill ultimaSkillInserita;
     private Skill infoSkill;
     
     private ObservableList<Skill> listaSkillImpiegato = FXCollections.observableArrayList();
@@ -428,10 +425,10 @@ public class ControllerRegistrazioneImpiegato {
     	if (!SkillLV.getItems().get(0).getDescrizione().equals("Non ci sono ancora skill")) {
 			infoSkill = SkillLV.getSelectionModel().getSelectedItem();
 			if (infoSkill != null) {
-				finestraInformazioniSkill = new FinestraPopup(infoSkill);
-
+				finestraInformazioniSkill = new FinestraPopup();
+				
 				try {
-					finestraInformazioniSkill.startDettagliSkill(popup);
+					finestraInformazioniSkill.startDettagliSkill(popup, infoSkill);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

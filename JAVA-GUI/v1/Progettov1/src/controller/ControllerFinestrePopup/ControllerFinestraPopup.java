@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 
 public class ControllerFinestraPopup {
 
-@FXML protected AnchorPane 	FinestraPopup;
+	@FXML protected AnchorPane 	FinestraPopup;
     
     @FXML protected GridPane 	MessaggioBox;
     @FXML protected VBox 		TestoBox;
@@ -25,4 +25,13 @@ public class ControllerFinestraPopup {
     @FXML protected GridPane 	ButtonBar;
     @FXML protected Button 		SinistraButton;
     @FXML protected Button 		DestraButton;
+    
+    public void inizializza(String titoloMessaggio, String messaggioLabel, String messaggioTextArea) {}
+	
+	protected void setBottoneSinistro() {}
+	protected void setBottoneDestro() {}
+	
+	protected void setTitoloMessaggio(String titoloMessaggio) {}
+	protected void setMessaggioLabel(String messaggioLabel) {}
+	protected void setMessaggioTextArea(String messaggioTextArea) {}
 }

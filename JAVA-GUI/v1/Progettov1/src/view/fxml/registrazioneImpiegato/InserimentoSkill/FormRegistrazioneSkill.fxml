@@ -60,7 +60,7 @@
                                     <VBox fx:id="DescrizioneBox">
                                        <children>
                                           <Label fx:id="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
-                                          <TextArea fx:id="DescrizioneTA" minHeight="60.0" styleClass="DescrizioneTA" />
+                                          <TextArea fx:id="DescrizioneTA" minHeight="60.0" styleClass="DescrizioneTA" wrapText="true" />
                                           <Label fx:id="DescrizioneErrorLabel" styleClass="ErrorLabel" />
                                        </children></VBox>
                                     <GridPane fx:id="DataCertificazioneBox" visible="false">

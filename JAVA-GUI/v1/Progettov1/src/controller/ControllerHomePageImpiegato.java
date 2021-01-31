@@ -1,4 +1,4 @@
-package controller;
+package controller; // da completare insieme alla gestione del ControllerFinestraErrore
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -199,7 +199,7 @@ public class ControllerHomePageImpiegato {
     
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
-    	finestraErrore = new FinestraPopup("Sei sicuro di voler uscire?", error);
+    	finestraErrore = new FinestraPopup();
     	finestraErrore.startLogout(window, popup);
 
     }
@@ -219,7 +219,6 @@ public class ControllerHomePageImpiegato {
 					try {
 						finestraErrore.startPopupErrore(popup);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					

@@ -106,10 +106,6 @@ public class ControllerHomePageOrganizzatore {
     @FXML
     private Button RimuoviImpiegatoButton;
 
-    
-    
-    
-    
     private HomePageImpiegato homePageImpiegato;
     
     private Stage window;
@@ -246,8 +242,8 @@ public class ControllerHomePageOrganizzatore {
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
     	   
-    	finestraRimuoviImpiegatoDallaRiunione = new FinestraPopup(ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione, this);
-		finestraRimuoviImpiegatoDallaRiunione.startRiunione (popup);
+    	finestraRimuoviImpiegatoDallaRiunione = new FinestraPopup();
+		finestraRimuoviImpiegatoDallaRiunione.startEliminazioneImpiegatoDaRiunione(popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione, this);
 
         idriunione = riunioneDao.GetIdRiunione(riunione);
         lista = riunioneDao.getPartecipanti(idriunione);
