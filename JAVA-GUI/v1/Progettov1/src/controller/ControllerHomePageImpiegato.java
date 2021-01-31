@@ -42,6 +42,7 @@ public class ControllerHomePageImpiegato {
 	@FXML private VBox					ImpiegatoBox;
 	@FXML private Label 				NomeImpiegatoLabel;
 	@FXML private Label 				GradoImpiegatoLabel;
+	@FXML private Label					TitoloSalarioLabel;
 	@FXML private Label                 SalarioLabel;
 	
 	@FXML private HBox					ToolBar;

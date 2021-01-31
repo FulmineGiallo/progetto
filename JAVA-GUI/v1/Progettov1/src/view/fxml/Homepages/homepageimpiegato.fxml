@@ -39,13 +39,13 @@
                      <children>
                         <Label fx:id="NomeImpiegatoLabel" styleClass="NomeImpiegatoLabel" wrapText="true" />
                         <Label fx:id="GradoImpiegatoLabel" styleClass="GradoImpiegatoLabel" />
-                        <Label id="NomeImpiegatoLabel" prefHeight="18.0" prefWidth="122.0" text="Salario:" textFill="WHITE">
+                        <Label id="NomeImpiegatoLabel" fx:id="TitoloSalarioLabel" prefHeight="18.0" prefWidth="122.0" text="Salario:" textFill="WHITE">
                            <stylesheets>
                               <URL value="@../../../css/homepageimpiegato.css" />
                               <URL value="@../../../css/HomePageBenvenuto.css" />
                            </stylesheets>
                         </Label>
-                        <Label id="NomeImpiegatoLabel" fx:id="salario" prefHeight="18.0" prefWidth="101.0" stylesheets="@../../../css/homepageimpiegato.css" text="1000" textFill="WHITE" />
+                        <Label id="NomeImpiegatoLabel" fx:id="SalarioLabel" prefHeight="18.0" prefWidth="101.0" stylesheets="@../../../css/homepageimpiegato.css" text="1000" textFill="WHITE" />
                      </children>
                   </VBox>
                   <HBox fx:id="ToolBar" alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
@@ -83,7 +83,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="DescrizioneProgettoBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <AnchorPane fx:id="DescrizioneProgettoPane" styleClass="DescrizionePane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+                        <AnchorPane fx:id="DescrizioneProgettoPane" styleClass="DescrizionePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
                            <children>
                               <GridPane vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columnConstraints>
@@ -113,7 +113,7 @@
                                           </VBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="ProjectManagerBox" visible="false" GridPane.rowIndex="1">
+                                    <AnchorPane fx:id="ProjectManagerBox" GridPane.rowIndex="1">
                                        <children>
                                           <HBox alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
