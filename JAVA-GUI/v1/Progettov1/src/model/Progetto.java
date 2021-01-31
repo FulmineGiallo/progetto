@@ -76,9 +76,11 @@ public class Progetto
     }
 
     @Override
-    public String toString()
-    {
-        return titolo + "\n" + ruolo;
+    public String toString() {
+    	if(ruolo != null)
+    		return titolo + "\n" + ruolo;
+    	else 
+    		return titolo;
     }
 
 

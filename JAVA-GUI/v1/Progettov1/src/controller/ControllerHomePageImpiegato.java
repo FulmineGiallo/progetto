@@ -338,52 +338,58 @@ public class ControllerHomePageImpiegato {
     }
 
     @FXML void visualizzaInformazioniProgetto(MouseEvent event) {
-        IstruzioniBox.setVisible(false);
-        DescrizioneRiunioneBox.setVisible(false);
-        DescrizioneProgettoBox.setVisible(true);
-        
-        gestisciProgettoBox(false);
-
-        DescrizioneProgettoTA.setText(ListaProgettiLV.getSelectionModel().getSelectedItem().getDescrizione());
-        DataDiInizioProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataInizio()));
-        DataDiFineProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getDataFine()));
-        DataDiScadenzaProgettoLabel.setText(String.valueOf(ListaProgettiLV.getSelectionModel().getSelectedItem().getScadenza()));
-
-        if(ListaProgettiLV.getSelectionModel().getSelectedItem().getProjectManager() == impiegato) {
-            ProjectManagerBox.setVisible(true);
-            SalvaModificheProgetto.setVisible(false);
-        } else
-            ProjectManagerBox.setVisible(false);
+        if (!ListaProgettiLV.getItems().get(0).getTitolo().equals("Non ci sono ancora progetti")) {
+        	
+			IstruzioniBox		  .setVisible(false);
+			DescrizioneRiunioneBox.setVisible(false);
+			DescrizioneProgettoBox.setVisible(true);
+			
+			gestisciProgettoBox(false);
+			
+			Progetto progettoSelezionato = ListaProgettiLV.getSelectionModel().getSelectedItem();
+			
+			DescrizioneProgettoTA		.setText(progettoSelezionato.getDescrizione());
+			DataDiInizioProgettoLabel	.setText(String.valueOf(progettoSelezionato.getDataInizio()));
+			DataDiFineProgettoLabel		.setText(String.valueOf(progettoSelezionato.getDataFine()));
+			DataDiScadenzaProgettoLabel .setText(String.valueOf(progettoSelezionato.getScadenza()));
+			
+			if (progettoSelezionato.getProjectManager() == impiegato) {
+				ProjectManagerBox.setVisible(true);
+				SalvaModificheProgetto.setVisible(false);
+			} else
+				ProjectManagerBox.setVisible(false);
+		}
     }
 
     @FXML void visualizzaInformazioniRiunione(MouseEvent event) {
-        IstruzioniBox.setVisible(false);
-        DescrizioneProgettoBox.setVisible(false);
-        DescrizioneRiunioneBox.setVisible(true);
-        OrganizzatoreBox.setVisible(false);
-        
         //gestisciBox(false);
+        if (!ListaRiunioniLV.getItems().get(0).getTitolo().equals("Non ci sono ancora riunioni")) {
+        	
+			IstruzioniBox		   .setVisible(false);
+			DescrizioneProgettoBox .setVisible(false);
+			DescrizioneRiunioneBox .setVisible(true);
+			OrganizzatoreBox	   .setVisible(false);
+			
+			Riunione riunioneSelezionata = ListaRiunioniLV.getSelectionModel().getSelectedItem();
+			
+			DescrizioneRiunioneTA		.setText(riunioneSelezionata.getDescrizione());
+			DataDiInizioRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getData()));
+			OrganizzatoreRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getOrganizzatore()));
+			TitoloRiunioneLabel			.setText(String.valueOf(riunioneSelezionata.getTitolo()));
+			OrarioDiInizioRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getOrarioInizio()));
+			OrarioDiFineRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getOrarioFine()));
+			
+			if (riunioneSelezionata.getCFOrganizzatore().equals(impiegato.getCF())) {
+				PartecipanteBox.setVisible(false);
+				OrganizzatoreBox.setVisible(true);
+				//SalvaModificheProgetto.setVisible(false);
 
-        DescrizioneRiunioneTA.setText(ListaRiunioniLV.getSelectionModel().getSelectedItem().getDescrizione());
-        DataDiInizioRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getData()));
-        OrganizzatoreRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getOrganizzatore()));
-        TitoloRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTitolo()));
-        OrarioDiInizioRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getOrarioInizio()));
-        OrarioDiFineRiunioneLabel.setText(String.valueOf(ListaRiunioniLV.getSelectionModel().getSelectedItem().getOrarioFine()));
-
-        
-        if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getCFOrganizzatore().equals(impiegato.getCF()))
-        {
-        	PartecipanteBox.setVisible(false);
-            OrganizzatoreBox.setVisible(true);
-            //SalvaModificheProgetto.setVisible(false);
-
-        }
-        else {
-            PartecipanteBox.setVisible(true);
-            PresenzaButton.setVisible(true);
-            AssenzaButton.setVisible(true);
-            ProjectManagerBox.setVisible(false);
-        }
+			} else {
+				PartecipanteBox.setVisible(true);
+				PresenzaButton.setVisible(true);
+				AssenzaButton.setVisible(true);
+				ProjectManagerBox.setVisible(false);
+			} 
+		}
     }
 }
