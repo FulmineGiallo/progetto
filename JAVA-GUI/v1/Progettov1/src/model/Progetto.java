@@ -11,7 +11,7 @@ public class Progetto
     Date dataFine;
     Date scadenza;
     Impiegato projectManager;
-    String ruolo;
+    String ruolo; // >> da sostituire in un oggetto Ruolo, dobbiamo creare una classe a parte
 
     public String getRuolo() {
         return ruolo;
