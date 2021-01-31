@@ -29,12 +29,14 @@ import model.Dao.GradoDao;
 import model.Dao.TitoloDAO;
 import model.DaoInterface.GradoDaoInterface;
 import model.DaoInterface.TitoloDaoInterface;
+import utilities.MetodiComuni;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -92,6 +94,8 @@ public class ControllerRegistrazioneSkill {
     private boolean checkDataCertificazione = true;
     private boolean checkNuovoTitolo 		= true;
     
+    private MetodiComuni utils = new MetodiComuni();
+    
     ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
     
     public void setStage(Stage popup) {
@@ -138,7 +142,7 @@ public class ControllerRegistrazioneSkill {
         }
     }
     
-    public boolean controllocampi() { // inserire controllo campi sfruttando i metodi della classe MetodiComuni
+    public boolean controllocampi() {
     	DataCertificazioneErrorLabel.setText("");
     	DescrizioneErrorLabel.setText("");
     	NuovoTitoloErrorLabel.setText("");
@@ -149,40 +153,53 @@ public class ControllerRegistrazioneSkill {
     	
     	//CONTROLLO DESCRIZIONE (SE OBBLIGATORIA)
     	if(!TitoloBox.isVisible()) {
-    		if(DescrizioneTA.getText().isBlank()) {
-    			checkDescrizione = false;
-    			DescrizioneErrorLabel.setText("Questo campo è obbligatorio");
+    		switch(utils.controlloStringaPattern(DescrizioneTA.getText(), "")) {
+				case 1:
+					DescrizioneErrorLabel.setText("Questo campo è obbligatorio");
+					checkDescrizione = false;
+					break;
+				default:
+					checkDescrizione = true;
     		}
     	}
     	
     	//CONTROLLO DATA DI CERTIFICAZIONE
     	if (DataCertificazioneBox.isVisible()) {
-			dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
-			
-			if (DataCertificazioneDP.getValue() != null) {
-				if (DataCertificazioneDP.getValue().isAfter(dataDiOggi)) {
-					checkDataCertificazione = false;
-					DataCertificazioneErrorLabel.setText("Inserisci una data di certificazione corretta");
-				}
-			} else {
-				checkDataCertificazione = false;
-				DataCertificazioneErrorLabel.setText("Questo campo è obbligatorio");
-			} 
+    		
+    		dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
+            
+            switch(utils.controlloData(DataCertificazioneDP.getValue(), dataDiOggi, null)) {
+            	case 1:
+            		checkDataCertificazione = false;
+            		DataCertificazioneErrorLabel.setText("Questo campo è obbligatorio");
+                	break;
+            	case 2:
+            		checkDataCertificazione = false;
+            		DataCertificazioneErrorLabel.setText("Inserisci una data di certificazione corretta");
+            		break;
+    			default:
+    				checkDataCertificazione = true;
+            }
 		}
     	
 		//CONTROLLO NUOVO TITOLO (SE OBBLIGATORIO)
-    	if (TitoloBox.isVisible()) {
-			if (NuovoTitoloTF.isVisible()) {
-				if (NuovoTitoloTF.getText().isBlank()) {
-					checkNuovoTitolo = false;
-					NuovoTitoloErrorLabel.setText("Questo campo è obbligatorio");
-				} else
-					for (Titolo t: TitoloComboBox.getItems())
-						if(NuovoTitoloTF.getText().toLowerCase().equals(t.toString().toLowerCase())) {
-							checkNuovoTitolo = false;
-							NuovoTitoloErrorLabel.setText("Questo titolo è già presente nella lista");
-						}
-			}
+    	if (TitoloBox.isVisible() && NuovoTitoloTF.isVisible()) {
+    		Iterator<Titolo> i = TitoloComboBox.getItems().iterator();
+    		
+    		while(checkNuovoTitolo && i.hasNext()){
+    			switch(utils.controlloStringaUguale(NuovoTitoloTF.getText().toLowerCase(), i.next().toString().toLowerCase())) {
+    				case 1:
+    					checkNuovoTitolo = false;
+    					NuovoTitoloErrorLabel.setText("Questo campo è obbligatorio");
+    					break;
+    				case 2:
+    					checkNuovoTitolo = false;
+						NuovoTitoloErrorLabel.setText("Questo titolo è già presente nella lista");
+						break;
+					default:
+						checkNuovoTitolo = true;
+    			}
+    		}
 		}
     	
 		return checkDataCertificazione && checkNuovoTitolo && checkDescrizione;

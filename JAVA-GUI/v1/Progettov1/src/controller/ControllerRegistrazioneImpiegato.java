@@ -217,7 +217,7 @@ public class ControllerRegistrazioneImpiegato {
     public boolean controlloProvincia() {
     	ProvinciaErrorLabel.setText("");
     	
-    	switch(utils.controlloStringa(ProvinciaTF.getText(), "[a-zA-Z]+")) {
+    	switch(utils.controlloStringaPattern(ProvinciaTF.getText(), "[a-zA-Z]+")) {
 			case 1:
 				ProvinciaErrorLabel.setText("Questo campo è obbligatorio");
 				return false;
@@ -242,7 +242,7 @@ public class ControllerRegistrazioneImpiegato {
     	checkComune = true;
     	
     	//CONTROLLO NOME
-    	switch(utils.controlloStringa(NomeTF.getText(), "[a-zA-Z\s]+")) {
+    	switch(utils.controlloStringaPattern(NomeTF.getText(), "[a-zA-Z\s]+")) {
 			case 1:
 				checkNome = false;
 				NomeErrorLabel.setText("Questo campo è obbligatorio");
@@ -256,7 +256,7 @@ public class ControllerRegistrazioneImpiegato {
     	}
     	
     	//CONTROLLO COGNOME
-    	switch(utils.controlloStringa(CognomeTF.getText(), "[a-zA-Z\s]+")) {
+    	switch(utils.controlloStringaPattern(CognomeTF.getText(), "[a-zA-Z\s]+")) {
 			case 1:
 				checkCognome = false;
 				CognomeErrorLabel.setText("Questo campo è obbligatorio");
@@ -310,7 +310,7 @@ public class ControllerRegistrazioneImpiegato {
     	checkCF = true;
     	
     	//CONTROLLO EMAIL
-    	switch(utils.controlloStringa(EmailTF.getText(), "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+    	switch(utils.controlloStringaPattern(EmailTF.getText(), "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
     		case 1:
     			checkEmail = false;
     			EmailErrorLabel.setText("Questo campo è obbligatorio");
