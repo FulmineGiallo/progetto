@@ -1,21 +1,18 @@
-package controller; // da completare insieme alla gestione del ControllerFinestraErrore
+package controller;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.Locale;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
@@ -97,6 +94,7 @@ public class ControllerHomePageImpiegato {
 	@FXML private ScrollPane 			ListaRiunioniScrollPane;
 	@FXML private ListView<Riunione> 	ListaRiunioniLV;
 	
+	private FinestraPopup finestraConferma;
 	private FinestraPopup finestraErrore;
 	private Exception error;
 	
@@ -200,7 +198,7 @@ public class ControllerHomePageImpiegato {
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
     	finestraErrore = new FinestraPopup();
-    	finestraErrore.startLogout(window, popup);
+    	finestraErrore.start(window, popup);
 
     }
 
@@ -215,25 +213,23 @@ public class ControllerHomePageImpiegato {
 				
 				if(update!=0)
 					System.out.println("presenza salvata");
-					finestraErrore=new FinestraPopup("presenza salvata", error);
+					finestraConferma = new FinestraPopup();
 					try {
-						finestraErrore.startPopupErrore(popup);
+						finestraConferma.start(popup, "Presenza registrata correttamente");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					
 			}else {
 				System.out.println("errore presenza");
-				finestraErrore=new FinestraPopup("impossibile salvare la presenza", error);
+				finestraErrore = new FinestraPopup();
 				try {
-					finestraErrore.startPopupErrore(popup);
+					finestraErrore.start(popup, "Impossibile registrare la presenza", error);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -249,28 +245,25 @@ public class ControllerHomePageImpiegato {
 				
 				if(update!=0)
 					System.out.println("assenza salvata");
-				finestraErrore=new FinestraPopup("assenza salvata", error);
+				finestraConferma = new FinestraPopup();
 				try {
-					finestraErrore.startPopupErrore(popup);
+					finestraErrore.start(popup, "Assenza registrata correttamente");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 			}else {
 				System.out.println("errore assenza");
-				finestraErrore=new FinestraPopup("impossibile salvare l'assenza", error);
+				finestraErrore = new FinestraPopup();
 				try {
-					finestraErrore.startPopupErrore(popup);
+					finestraErrore.start(popup, "Impossibile registrare l'assenza", error);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

@@ -4,7 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
-public class ControllerFinestraConfermaRegistrazione extends ControllerFinestraPopup{
+public class ControllerFinestraConferma extends ControllerFinestraPopup{
 
 	private Image immagineConferma = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/conferma.png"));
 	

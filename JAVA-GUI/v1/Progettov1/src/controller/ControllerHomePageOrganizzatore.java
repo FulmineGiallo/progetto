@@ -243,7 +243,7 @@ public class ControllerHomePageOrganizzatore {
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
     	   
     	finestraRimuoviImpiegatoDallaRiunione = new FinestraPopup();
-		finestraRimuoviImpiegatoDallaRiunione.startEliminazioneImpiegatoDaRiunione(popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione, this);
+		finestraRimuoviImpiegatoDallaRiunione.start(popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione, this);
 
         idriunione = riunioneDao.GetIdRiunione(riunione);
         lista = riunioneDao.getPartecipanti(idriunione);

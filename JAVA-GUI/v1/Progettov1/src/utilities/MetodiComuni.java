@@ -50,4 +50,20 @@ public class MetodiComuni {
 		
 		return 0;
 	}
+	
+	public String getMessaggioErrore(Exception errore) {
+		String dettagliErrore = "";
+		
+    	if(errore != null) {	
+    		dettagliErrore = errore.toString() + "\n";
+    		
+			for(StackTraceElement STE: errore.getStackTrace())
+				dettagliErrore = dettagliErrore + "at " + STE.toString() + "\n";
+			
+    	} else {
+    		dettagliErrore = "Nessun dettaglio da mostrare";
+    	}
+    	
+    	return dettagliErrore;
+	}
 }

@@ -2,27 +2,20 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.Impiegato;
 import view.FinestraPopup;
-import view.FormRegistrazioneImpiegato;
 import view.HomePageBenvenuto;
 import view.HomePageImpiegato;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-
 
 public class ControllerLogin
 {
@@ -77,15 +70,15 @@ public class ControllerLogin
             /* Non ci sono email e password corrispondenti */
             if(accesso == 0)
             {            	
-    			finestraErrore = new FinestraPopup("Email o password errati", new Exception());
-    			finestraErrore.startPopupErrore(popup);
+    			finestraErrore = new FinestraPopup();
+    			finestraErrore.start(popup, "Email o password errati", new Exception());
             }
         }
         /* Se i campi sono vuoti */
         else
         {        	
-			finestraErrore = new FinestraPopup("Autenticazione errata", new Exception());
-			finestraErrore.startPopupErrore(popup);
+			finestraErrore = new FinestraPopup();
+			finestraErrore.start(popup, "Autenticazione errata", new Exception());
         }
     }
 }

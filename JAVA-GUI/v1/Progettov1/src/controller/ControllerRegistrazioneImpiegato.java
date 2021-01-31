@@ -428,7 +428,7 @@ public class ControllerRegistrazioneImpiegato {
 				finestraInformazioniSkill = new FinestraPopup();
 				
 				try {
-					finestraInformazioniSkill.startDettagliSkill(popup, infoSkill);
+					finestraInformazioniSkill.start(popup, infoSkill);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

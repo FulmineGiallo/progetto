@@ -8,11 +8,14 @@ import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
 import model.Skill;
+import utilities.MetodiComuni;
 import controller.ControllerHomePageOrganizzatore;
 import controller.ControllerHomePageProgetto;
 import controller.ControllerFinestrePopup.*;
 
 public class FinestraPopup {
+	
+	private MetodiComuni utils = new MetodiComuni();
 	
 	private ControllerFinestraErrore						controllerErrore
 															= new ControllerFinestraErrore();
@@ -29,24 +32,20 @@ public class FinestraPopup {
 	private ControllerFinestraEliminazioneImpiegatoRiunione controllerEliminazioneImpiegatoRiunione
 															= new ControllerFinestraEliminazioneImpiegatoRiunione();
 	
-	private ControllerFinestraConfermaRegistrazione 		controllerRegistrazione
-															= new ControllerFinestraConfermaRegistrazione();
-
-	public void startPopupErrore(Stage popup,
-								 String messaggioErrore,
-								 Exception errore) throws Exception
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraPopup.fxml"));
-        loader.setController(controllerErrore);
+	private ControllerFinestraConferma 						controllerFinestraConferma
+															= new ControllerFinestraConferma();
+	
+	private void caricaStage(Stage popup, ControllerFinestraPopup controller, String titoloFinestra) throws Exception{
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraPopup.fxml"));
+        loader.setController(controller);
         Parent root = loader.load();
         Scene scene = new Scene(root);
         
         popup.hide();
         popup.setScene(scene);
-        
-        controllerErrore.inizializza(messaggioErrore, errore);
-        
-        popup.setTitle("Errore!");
+
+        popup.setTitle(titoloFinestra);
         popup.setResizable(false);
         popup.setWidth(600.0);
         popup.setMinWidth(600.0);
@@ -55,19 +54,17 @@ public class FinestraPopup {
         popup.centerOnScreen();
         
         popup.show();
+	}
+
+	//Inizializzazione della finestra popup di errore
+	public void start(Stage popup, String messaggioErrore, Exception errore) throws Exception {
+        caricaStage(popup, controllerErrore, "Errore!");
+        controllerErrore.inizializza("ATTENZIONE!", messaggioErrore, utils.getMessaggioErrore(errore));
     }
 	
-	public void startDettagliSkill(Stage popup,
-								   Skill infoSkill) throws Exception
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraPopup.fxml"));
-        loader.setController(controllerSkill);
-        
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        
-        popup.hide();
-        popup.setScene(scene);
+	//Inizializzazione della finestra popup per la visualizzazione delle informazioni di una Skill
+	public void start(Stage popup, Skill infoSkill) throws Exception {
+        caricaStage(popup, controllerSkill, "");
         
         if(infoSkill.getTipoSkill().equals("Soft-Skill")) {
         	controllerSkill.inizializza(infoSkill.getTipoSkill(), null,	"Descrizione: " + infoSkill.getDescrizione());
@@ -82,31 +79,13 @@ public class FinestraPopup {
 						  										  			"\nData di certificazione: " + infoSkill.getDataCertificazione());
 			}
 		}
-        
-        popup.setTitle(popup.toString());
-        popup.setResizable(false);
-        popup.setWidth(600.0);
-        popup.setMinWidth(600.0);
-        popup.setHeight(300.0);
-        popup.setMinHeight(300.0);
-        popup.centerOnScreen();
-        
-        popup.show();
     }
 	
-	public void startEliminazioneImpiegatoDaProgetto(Stage popup,
-													 Impiegato impiegatoDaEliminare,
-													 Progetto progettoImpiegatoDaEliminare,
-													 ControllerHomePageProgetto controllerHomePageProgetto) throws Exception {
+	//Inizializzazione della finestra popup per confermare l'eliminazione di un impiegato dalla lista di partecipanti ad un progetto
+	public void start(Stage popup, Impiegato impiegatoDaEliminare, Progetto progettoImpiegatoDaEliminare, ControllerHomePageProgetto controllerHomePageProgetto) throws Exception {
         
-		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraPopup.fxml"));
-        loader.setController(controllerEliminazioneImpiegatoProgetto);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        
-        popup.hide();
-        popup.setScene(scene);
-        
+		caricaStage(popup, controllerEliminazioneImpiegatoProgetto, "Attenzione");
+		
         controllerEliminazioneImpiegatoProgetto.setImpiegato(impiegatoDaEliminare);
         controllerEliminazioneImpiegatoProgetto.setProgetto(progettoImpiegatoDaEliminare);
         controllerEliminazioneImpiegatoProgetto.setControllerHomePageProgetto(controllerHomePageProgetto);
@@ -114,31 +93,13 @@ public class FinestraPopup {
         controllerErrore.inizializza(null, "Sei sicuro di voler eliminare " + impiegatoDaEliminare.toString() 		   +
         								   " dal progetto "					+ progettoImpiegatoDaEliminare.getTitolo() +
         								   "?", null);
-        
-        popup.setTitle("Attenzione");
-        popup.setResizable(false);
-        popup.setWidth(600.0);
-        popup.setMinWidth(600.0);
-        popup.setHeight(300.0);
-        popup.setMinHeight(300.0);
-        popup.centerOnScreen();
-        
-        popup.show();
     }
 	
-	public void startEliminazioneImpiegatoDaRiunione(Stage popup,
-							  						 Impiegato impiegatoDaEliminare,
-							  						 Riunione riunioneImpiegatoDaEliminare,
-							  						 ControllerHomePageOrganizzatore controllerHomePageOrganizzatore) throws Exception {
-        
-		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraPopup.fxml"));
-        loader.setController(controllerEliminazioneImpiegatoRiunione);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        
-        popup.hide();
-        popup.setScene(scene);
-        
+	//Inizializzazione della finestra popup per confermare l'eliminazione di un impiegato dalla lista di partecipanti ad una riunione
+	public void start(Stage popup, Impiegato impiegatoDaEliminare, Riunione riunioneImpiegatoDaEliminare, ControllerHomePageOrganizzatore controllerHomePageOrganizzatore) throws Exception {
+		
+		caricaStage(popup, controllerEliminazioneImpiegatoRiunione, "Attenzione");
+		
         controllerEliminazioneImpiegatoRiunione.setImpiegato(impiegatoDaEliminare);
         controllerEliminazioneImpiegatoRiunione.setRiunione(riunioneImpiegatoDaEliminare);
         controllerEliminazioneImpiegatoRiunione.setController(controllerHomePageOrganizzatore);
@@ -146,65 +107,31 @@ public class FinestraPopup {
         controllerEliminazioneImpiegatoRiunione.inizializza(null, "Sei sicuro di voler eliminare " + impiegatoDaEliminare.toString() 		  +
 				   												  " dalla riunione "			   + riunioneImpiegatoDaEliminare.getTitolo() +
 				   												  "?", null);
-        
-        popup.setTitle("Attenzione");
-        popup.setResizable(false);
-        popup.setWidth(600.0);
-        popup.setMinWidth(600.0);
-        popup.setHeight(300.0);
-        popup.setMinHeight(300.0);
-        popup.centerOnScreen();
-        
-        popup.show();
     }
 	
-	public void startLogout(Stage window, Stage popup) throws Exception
-    {
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraPopup.fxml"));
-        loader.setController(controllerLogout);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        
-        popup.hide();
-        popup.setScene(scene);
-        
+	//Inizializzazione della finestra popup per confermare l'uscita dall'area personale
+	public void start(Stage window, Stage popup) throws Exception {
+		
+		caricaStage(popup, controllerLogout, "Attenzione");
+                
         controllerLogout.setStage(window, popup);
         controllerLogout.inizializza(null, "Sei sicuro di voler uscire?", null);
-        
-        popup.setTitle("Logout");
-        popup.setResizable(false);
-        popup.setWidth(600.0);
-        popup.setMinWidth(600.0);
-        popup.setHeight(300.0);
-        popup.setMinHeight(300.0);
-        popup.centerOnScreen();
-        
-        popup.show();
     }
 	
-	public void startConfermaRegistrazione (Stage popup,
-											Impiegato nuovoImpiegato) throws Exception {
+	//Inizializzazione della finestra popup che conferma l'inserimento di un nuovo impiegato nel database
+	public void start(Stage popup, Impiegato nuovoImpiegato) throws Exception {
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/FinestraPopup.fxml"));
-        loader.setController(controllerRegistrazione);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        
-        popup.hide();
-        popup.setScene(scene);
-        
-        controllerRegistrazione.inizializza("Perfetto!", "Il nuovo impiegato " + nuovoImpiegato.getCognome()
-        												 + " "				   + nuovoImpiegato.getNome()
-        												 + " è stato inserito correttamente nel database.", null);
-        
-        popup.setTitle("Operazione completata con successo!");
-        popup.setResizable(false);
-        popup.setWidth(600.0);
-        popup.setMinWidth(600.0);
-        popup.setHeight(300.0);
-        popup.setMinHeight(300.0);
-        popup.centerOnScreen();
-        
-        popup.show();
+		caricaStage(popup, controllerFinestraConferma, "Operazione completata con successo!");
+		
+        controllerFinestraConferma.inizializza("Perfetto!", "Il nuovo impiegato " + nuovoImpiegato.getCognome() +
+        													" "					  + nuovoImpiegato.getNome()	+
+        													" è stato inserito correttamente nel database.", null);
+
+	}
+	
+	//Inizializzazione della finestra popup che conferma di aver eseguito correttamente un'operazione specificata in messaggioLabel
+	public void start(Stage popup, String messaggioLabel) throws Exception {
+		caricaStage(popup, controllerFinestraConferma, "Operazione completata con successo!");
+		controllerFinestraConferma.inizializza("Perfetto!", messaggioLabel, null);
 	}
 }

@@ -72,7 +72,7 @@ public class ControllerCaricamentoRegistrazione {
 		    	
 				try {
 					homePageBenvenuto.start(window, popup);
-			    	finestraConfermaRegistrazione.startConfermaRegistrazione(popup, nuovoImpiegato);
+			    	finestraConfermaRegistrazione.start(popup, nuovoImpiegato);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

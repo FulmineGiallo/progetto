@@ -202,7 +202,7 @@ public class ControllerHomePageProgetto {
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
 		finestraRimuoviImpiegatoDalProgetto = new FinestraPopup();
-		finestraRimuoviImpiegatoDalProgetto.startEliminazioneImpiegatoDaProgetto(popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto, this);
+		finestraRimuoviImpiegatoDalProgetto.start(popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto, this);
 
         lista = progettoDao.getPartecipanti(progetto);
         ListaPartecipantiLV.setItems(lista);
