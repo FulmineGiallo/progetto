@@ -7,8 +7,8 @@ public class Riunione
 {
     private String titolo;
     private String descrizione;
-    private String organizzatore;
-    private String CFOrganizzatore;
+    private Impiegato organizzatore;
+    private Impiegato CFOrganizzatore;
     private Date data;
     private Time orarioInizio;
     private Time orarioFine;
@@ -35,20 +35,20 @@ public class Riunione
         this.titolo = titolo;
     }
     
-    public String getOrganizzatore() {
+    public Impiegato getOrganizzatore() {
         return organizzatore;
     }
 
-    public void setOrganizzatore(String organizzatore) {
+    public void setOrganizzatore(Impiegato organizzatore) {
         this.organizzatore = organizzatore;
     }
     
     
-    public String getCFOrganizzatore() {
+    public Impiegato getCFOrganizzatore() {
         return CFOrganizzatore;
     }
 
-    public void setCFOrganizzatore(String CFOrganizzatore) {
+    public void setCFOrganizzatore(Impiegato CFOrganizzatore) {
         this.CFOrganizzatore = CFOrganizzatore;
     }
 

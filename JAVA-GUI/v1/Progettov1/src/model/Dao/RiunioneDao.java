@@ -83,9 +83,8 @@ public class RiunioneDao implements RiunioneDaoInterface
             riunione.setOrarioFine(rs.getTime("orariofine"));
             riunione.setData(rs.getDate("data"));
             riunione.setDescrizione(rs.getString("descrizione"));
-            riunione.setCFOrganizzatore(rs.getString("organizzatore"));
-            riunione.setOrganizzatore(rs.getString("nome"));
-            riunione.setOrganizzatore(riunione.getOrganizzatore() + " " + rs.getString("cognome"));
+            riunione.setCFOrganizzatore(impiegato);
+            riunione.setOrganizzatore(impiegato);
             lista.add(riunione);
         }
         rs.close();

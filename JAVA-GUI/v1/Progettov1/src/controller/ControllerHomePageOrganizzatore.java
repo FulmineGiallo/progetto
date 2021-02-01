@@ -192,7 +192,8 @@ public class ControllerHomePageOrganizzatore {
                     
                     SkillComboBox.setItems(titoloDAO.titoliListImpiegato(ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
 
-                    if(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCF().equals( riunione.getCFOrganizzatore())) {
+                    if(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCF().equals(riunione.getCFOrganizzatore()))
+                    {
                     	RimuoviImpiegatoButton.setVisible(false);
                     }
                     SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
