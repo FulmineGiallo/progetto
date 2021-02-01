@@ -1,4 +1,4 @@
-package controller;
+package controller; //quando si clicca su una cella del calendario
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +46,7 @@ import view.HomePageImpiegato;
 import model.Impiegato;
 import model.Progetto;
 import model.Tipologia;
+import model.Titolo;
 
 public class ControllerRegistrazioneProgetto {
 
@@ -177,20 +180,13 @@ public class ControllerRegistrazioneProgetto {
         setTipologiaComboBoxListener();        
         setAmbitiComboBoxListener();
         AmbitiLV.getItems().add(ambitoIniziale);
-        
-    	/*int i = 0;
-
-    	while(i<ambitoList.size()) {
-    		CheckMenuItem a = new CheckMenuItem(ambitoList.get(i).toString());
-    		AmbitiMenuButton.getItems().add(a);
-    		i++;
-    	}*/
     }
     
     private void setTipologiaComboBoxListener() {
     	TipologiaComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
         	if(TipologiaComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro...")) {
         		NuovaTipologiaBox.setVisible(true);
+        		NuovaTipologiaTF.setDisable(false);
         		NuovaTipologiaTF.setText("");
         		NuovaTipologiaErrorLabel.setText("");
             } else {
@@ -234,9 +230,9 @@ public class ControllerRegistrazioneProgetto {
     	checkTitolo			= true;
         checkDataInizio		= true;
         checkDataScadenza	= true;
-        checkNuovaTipologia = true;
-        checkAmbito			= true;
-        checkNuovoAmbito	= true;
+        checkNuovaTipologia = controlloNuovaTipologia();
+        checkAmbito			= controlloAmbito();
+        checkNuovoAmbito	= controlloNuovoAmbito();
         
         //CONTROLLO TITOLO
         switch(utils.controlloStringaPattern(TitoloTF.getText(), "a-zA-Z0-9\s")) {
@@ -251,37 +247,21 @@ public class ControllerRegistrazioneProgetto {
 			default:
 				checkTitolo = true;
         }
-        
-        //CONTROLLO DATA DI INIZIO
-        LocalDate dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
-        
-        switch(utils.controlloData(DataDiInizioDP.getValue(), dataDiOggi, null)) {
-	    	case 1:
-	    		checkDataInizio = false;
-	    		DataDiInizioErrorLabel.setText("Questo campo è obbligatorio");
-	        	break;
-	    	case 3:
-	    		checkDataInizio = false;
-	    		DataDiInizioErrorLabel.setText("Inserisci una data di inizio corretta");
-	    		break;
-			default:
-				checkDataInizio = true;
-        }
-        
+
         //CONTROLLO DATA DI SCADENZA
         LocalDate dataSupportata = null;
         
         if(checkDataInizio) {
             dataSupportata = DataDiInizioDP.getValue();
             
-            switch(utils.controlloData(DataDiScadenzaDP.getValue(), dataSupportata, null)) {
+            switch(utils.controlloData(DataDiScadenzaDP.getValue(), dataSupportata)) {
 		    	case 1:
 		    		checkDataScadenza = false;
 		    		DataDiScadenzaErrorLabel.setText("Questo campo è obbligatorio");
 		        	break;
 		    	case 3:
 		    		checkDataScadenza = false;
-		    		DataDiScadenzaErrorLabel.setText("Inserisci una data di scadenza corretta");
+		    		DataDiScadenzaErrorLabel.setText("La data di scadenza non può essere precedente a quella di inizio");
 		    		break;
 				default:
 					checkDataScadenza = true;
@@ -290,12 +270,6 @@ public class ControllerRegistrazioneProgetto {
         	checkDataScadenza = false;
         	DataDiScadenzaErrorLabel.setText("Prima di inserire una data di scadenza, inserisci una data di inizio corretta");
         }
-        
-        //CONTROLLO NUOVA TIPOLOGIA (SE OBBLIGATORIA)
-        
-        //CONTROLLO AMBITO
-        
-        //CONTROLLO NUOVO AMBITO (SE OBBLIGATORIO)
         
         return checkTitolo		   &&
         	   checkDataInizio	   &&
@@ -306,7 +280,90 @@ public class ControllerRegistrazioneProgetto {
 
     }
     
-    /*public boolean controlloCampi(){ //Questo elemento è già presente nella lista di ambiti
+    //CONTROLLO NUOVA TIPOLOGIA (SE OBBLIGATORIA)
+    private boolean controlloNuovaTipologia() {
+        if(NuovaTipologiaBox.isVisible()) {
+        	
+        	Iterator<Tipologia> i = listaTipologie.iterator();
+    		while(checkNuovaTipologia && i.hasNext()){
+    			switch(utils.controlloStringaUguale(NuovaTipologiaTF.getText().toLowerCase(), i.next().toString().toLowerCase())) {
+    				case 1:
+    					checkNuovaTipologia = false;
+    					NuovaTipologiaErrorLabel.setText("Questo campo è obbligatorio");
+    					break;
+    				case 2:
+    					checkNuovaTipologia = false;
+    					NuovaTipologiaErrorLabel.setText("Questa tipologia è già presente nella lista");
+						break;
+					default:
+						checkNuovaTipologia = true;
+    			}
+    		}
+        }
+    	
+    	return checkNuovaTipologia;
+    }
+    
+    //CONTROLLO AMBITO
+    private boolean controlloAmbito() {
+        Iterator<Ambito> i = AmbitiLV.getItems().iterator();
+        while(checkAmbito && i.hasNext()) {
+            switch(utils.controlloStringaUguale(AmbitiComboBox.getSelectionModel().getSelectedItem().toString(), i.next().toString())) {
+            	case 1:
+            		checkAmbito = false;
+            		AmbitiErrorLabel.setText("Questo campo è obbligatorio");
+            	case 2:
+            		checkAmbito = false;
+            		AmbitiErrorLabel.setText("Questo ambito è già presente nella lista di ambiti aggiunti");
+				default:
+					checkAmbito = true;
+            }
+        }
+    	
+    	return checkAmbito;
+    }
+    
+    //CONTROLLO NUOVO AMBITO (SE OBBLIGATORIO)
+    private boolean controlloNuovoAmbito() {
+        if(NuovoAmbitoBox.isVisible()) {
+        	
+        	Iterator<Ambito> i = listaAmbiti.iterator();
+    		while(checkNuovoAmbito && i.hasNext()){
+    			switch(utils.controlloStringaUguale(NuovaTipologiaTF.getText().toLowerCase(),
+    												i.next().toString().toLowerCase()))
+    			{
+    				case 1:
+    					checkNuovoAmbito = false;
+    					NuovoAmbitoErrorLabel.setText("Questo campo è obbligatorio");
+    					break;
+    				case 2:
+    					checkNuovoAmbito = false;
+    					NuovoAmbitoErrorLabel.setText("Questo ambito è già presente nella lista di ambiti forniti");
+						break;
+					default:
+						checkNuovoAmbito = true;
+    			}
+    		}
+			
+			i = AmbitiLV.getItems().iterator();
+    		while(checkNuovoAmbito && i.hasNext()) {
+				switch (utils.controlloStringaUguale(NuovaTipologiaTF.getText().toLowerCase(),
+													 i.next().toString().toLowerCase()))
+				{
+					case 2:
+						checkNuovoAmbito = false;
+    					NuovoAmbitoErrorLabel.setText("Questo ambito è già presente nella lista di ambiti aggiunti");
+    					break;
+    				default:
+    					checkNuovoAmbito = true;
+				}
+    		}
+        }
+        
+    	return checkNuovoAmbito;
+    }
+    
+    /*public boolean controlloCampi(){
     	
     	boolean checkTitolo = true;
     	boolean checkDescrizione = true;
@@ -367,12 +424,38 @@ public class ControllerRegistrazioneProgetto {
     	return true;
     }*/
     
+    //CONTROLLO DATA DI INIZIO
+    @FXML private boolean controlloDataDiInizio(MouseEvent event) { //quando si clicca su una cella del calendario
+        LocalDate dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
+        
+        checkDataInizio = true;
+        DataDiInizioErrorLabel.setText("");
+        
+        switch(utils.controlloData(DataDiInizioDP.getValue(), dataDiOggi)) {
+	    	case 1:
+	    		checkDataInizio = false;
+	    		DataDiInizioErrorLabel.setText("Questo campo è obbligatorio");
+	    		DataDiScadenzaDP.setDisable(true);	
+	        	break;
+	    	case 3:
+	    		checkDataInizio = false;
+	    		DataDiInizioErrorLabel.setText("La data di inizio non può essere precedente a quella di oggi");
+	    		DataDiScadenzaDP.setDisable(true);
+	    		break;
+			default:
+				checkDataInizio = true;
+				DataDiScadenzaDP.setDisable(false);	
+        }
+        
+        return checkDataInizio;
+    }
+    
     @FXML private void annullaOperazione(ActionEvent event) throws Exception{
     	homePageImpiegato = new HomePageImpiegato(projectManager);
     	homePageImpiegato.start(window, popup);
     }
 
-    @FXML void confermaOperazione(ActionEvent event) {/*
+    @FXML private void confermaOperazione(ActionEvent event) {
         int risultato;
     	if(controlloCampi()) {
             try {
@@ -393,23 +476,33 @@ public class ControllerRegistrazioneProgetto {
                 throwables.printStackTrace();
             }
         }
-	*/
     }
     
-    @FXML
-    void inserisciNuovaTipologia(KeyEvent invio) {
+    @FXML private void inserisciNuovaTipologia(KeyEvent invio) {
+    	if (invio.getCode().equals(KeyCode.ENTER)) {
+            if(controlloNuovaTipologia()) {
+            	NuovaTipologiaTF.setDisable(true);
+            	NuovaTipologiaErrorLabel.setText("");
+            }
+        }
     	/* se preme 'invio' • il textfield non è più modificabile
     	 * 					• quando clicca 'altro...' nella combobox, tf torna modificabile e si elimina il testo
     	 * */
     }
 
-    @FXML
-    void inserisciNuovoAmbito(KeyEvent invio) {
-    	/* if (invio.getCode().equals(KeyCode.ENTER)) {
-                
-           }
-         
-         * se preme 'invio' • il textfield non è più modificabile
+    @FXML private void inserisciNuovoAmbito(KeyEvent invio) {
+    	if (invio.getCode().equals(KeyCode.ENTER)) {
+            if(controlloNuovoAmbito()) {
+            	NuovoAmbitoBox.setVisible(false);
+            	
+            	NuovoAmbitoTF		 .setText("");
+            	NuovoAmbitoErrorLabel.setText("");
+            	
+            	AmbitiComboBox.getSelectionModel().select(0);
+            }
+        }
+    	
+    	/* se preme 'invio' • il textfield non è più modificabile
     	 * 					• se clicca nella listview e l'ambito da eliminare è nuovo, 
     	 * 					  allora elimina solo dalla lista, senza rimetterlo nella combobox
     	 * 					• se l'ambito da eliminare proviene dal DB,
@@ -417,8 +510,7 @@ public class ControllerRegistrazioneProgetto {
     	 * */
     }
     
-    @FXML
-    void rimuoviAmbito(MouseEvent event) {
+    @FXML private void rimuoviAmbito(MouseEvent event) {
     	Ambito ambitoSelezionato = AmbitiLV.getSelectionModel().getSelectedItem();
     	
     	if(!AmbitiLV.getItems().contains(ambitoIniziale)){

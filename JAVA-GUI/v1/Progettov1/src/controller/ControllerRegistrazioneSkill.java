@@ -168,14 +168,14 @@ public class ControllerRegistrazioneSkill {
     		
     		dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
             
-            switch(utils.controlloData(DataCertificazioneDP.getValue(), dataDiOggi, null)) {
+            switch(utils.controlloData(DataCertificazioneDP.getValue(), dataDiOggi)) {
             	case 1:
             		checkDataCertificazione = false;
             		DataCertificazioneErrorLabel.setText("Questo campo è obbligatorio");
                 	break;
             	case 2:
             		checkDataCertificazione = false;
-            		DataCertificazioneErrorLabel.setText("Inserisci una data di certificazione corretta");
+            		DataCertificazioneErrorLabel.setText("La data di certificazione non può superare la data di oggi");
             		break;
     			default:
     				checkDataCertificazione = true;

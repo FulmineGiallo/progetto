@@ -37,23 +37,19 @@ public class MetodiComuni {
 		return 0;
 	}
 	
-	public int controlloData(LocalDate check, LocalDate dataDiOggi, LocalDate dataSupportata) {
+	public int controlloData(LocalDate check, LocalDate dataSupportata) {
 		if(check == null)
 			return 1;
 		else {
-			if(check.isAfter(dataDiOggi))
-				return 2;
-			
-			if(check.isBefore(dataDiOggi))
-				return 3;
-			
-			if(dataSupportata != null && check.isAfter(dataSupportata))
+			if(dataSupportata != null) {
+				if(check.isAfter(dataSupportata))
+					return 2;
+				
+				if(check.isBefore(dataSupportata))
+					return 3;
+			} else
 				return 4;
-			
-			if(dataSupportata != null && check.isBefore(dataSupportata))
-				return 5;
 		}
-		
 		return 0;
 	}
 	

@@ -7,17 +7,13 @@ import javafx.stage.Stage;
 public class Driver extends Application
 {
 	
-	HomePageBenvenuto homePageBenvenuto;
+	HomePageBenvenuto homePageBenvenuto = new HomePageBenvenuto();
 	
     @Override
     public void start(Stage window) {
-        try
-        {
-        	homePageBenvenuto = new HomePageBenvenuto();
-        	
-        	Stage popup = new Stage();
-            popup.initModality(Modality.APPLICATION_MODAL);
-            
+    	Stage popup = new Stage();
+        popup.initModality(Modality.APPLICATION_MODAL);
+        try {
             homePageBenvenuto.start(window, popup);
         } catch (Exception e) {
             System.err.println("Impossibile caricare la finestra!");

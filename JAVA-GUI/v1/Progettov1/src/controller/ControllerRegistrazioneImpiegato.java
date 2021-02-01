@@ -258,21 +258,24 @@ public class ControllerRegistrazioneImpiegato {
         LocalDate dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
         LocalDate dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
         
-        switch(utils.controlloData(DataDiNascitaDP.getValue(), dataDiOggi, dataSupportata)) {
+        switch(utils.controlloData(DataDiNascitaDP.getValue(), dataDiOggi/*, dataSupportata*/)) {
         	case 1:
         		checkData = false;
             	DataDiNascitaErrorLabel.setText("Questo campo è obbligatorio");
             	break;
         	case 2:
         		checkData = false;
-        		DataDiNascitaErrorLabel.setText("Inserisci una data di nascita corretta");
+        		DataDiNascitaErrorLabel.setText("La data di nascita non può superare la data di oggi");
         		break;
-        	case 4:
-        		checkData = false;
-    			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
-    			break;
-			default:
-				checkData = true;
+        	default:
+				switch(utils.controlloData(DataDiNascitaDP.getValue(), dataSupportata)) {
+		        	case 2:
+		        		checkData = false;
+		    			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
+		    			break;
+	    			default:
+	    				checkData = true;
+				}
         }
     	
     	//CONTROLLO COMUNE DI NASCITA
