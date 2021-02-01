@@ -236,16 +236,16 @@ public class ControllerRegistrazioneProgetto {
         if(NuovaTipologiaBox.isVisible()) {
         	Iterator<Tipologia> i = listaTipologie.iterator();
     		while(checkNuovaTipologia && i.hasNext()){
-    			switch(utils.controlloStringaUguale(NuovaTipologiaTF.getText().toLowerCase(),
+    			switch(utils.controlloStringa(NuovaTipologiaTF.getText().toLowerCase(),
     												i.next().toString().toLowerCase()))
     			{
     				case 1:
     					checkNuovaTipologia = false;
-    					NuovaTipologiaErrorLabel.setText("Questo campo ï¿½ obbligatorio");
+    					NuovaTipologiaErrorLabel.setText("Questo campo è obbligatorio");
     					break;
-    				case 2:
+    				case 3:
     					checkNuovaTipologia = false;
-    					NuovaTipologiaErrorLabel.setText("Questa tipologia ï¿½ giï¿½ presente nella lista");
+    					NuovaTipologiaErrorLabel.setText("Questa tipologia è già presente nella lista");
 						break;
 					default:
 						checkNuovaTipologia = true;
@@ -263,14 +263,14 @@ public class ControllerRegistrazioneProgetto {
     	
         Iterator<Ambito> i = AmbitiLV.getItems().iterator();
         while(checkAmbito && i.hasNext()) {
-            switch(utils.controlloStringaUguale(ambitoSelezionato.toString(), i.next().toString())) {
+            switch(utils.controlloStringa(ambitoSelezionato.toString(), i.next().toString())) {
             	case 1:
             		checkAmbito = false;
-            		AmbitiErrorLabel.setText("Questo campo ï¿½ obbligatorio");
+            		AmbitiErrorLabel.setText("Questo campo è obbligatorio");
             		break;
-            	case 2:
+            	case 3:
             		checkAmbito = false;
-            		AmbitiErrorLabel.setText("Questo ambito ï¿½ giï¿½ presente nella lista di ambiti aggiunti");
+            		AmbitiErrorLabel.setText("Questo ambito è già presente nella lista di ambiti aggiunti");
             		break;
 				default:
 					checkAmbito = true;
@@ -288,16 +288,16 @@ public class ControllerRegistrazioneProgetto {
         if(NuovoAmbitoBox.isVisible()) {
         	Iterator<Ambito> i = listaAmbiti.iterator();
     		while(checkNuovoAmbito && i.hasNext()){
-    			switch(utils.controlloStringaUguale(NuovoAmbitoTF.getText().toLowerCase(),
+    			switch(utils.controlloStringa(NuovoAmbitoTF.getText().toLowerCase(),
     												i.next().toString().toLowerCase()))
     			{
     				case 1:
     					checkNuovoAmbito = false;
-    					NuovoAmbitoErrorLabel.setText("Questo campo ï¿½ obbligatorio");
+    					NuovoAmbitoErrorLabel.setText("Questo campo è obbligatorio");
     					break;
-    				case 2:
+    				case 3:
     					checkNuovoAmbito = false;
-    					NuovoAmbitoErrorLabel.setText("Questo ambito ï¿½ giï¿½ presente nella lista di ambiti forniti");
+    					NuovoAmbitoErrorLabel.setText("Questo ambito è già presente nella lista di ambiti forniti");
 						break;
 					default:
 						checkNuovoAmbito = true;
@@ -306,12 +306,12 @@ public class ControllerRegistrazioneProgetto {
 			
 			i = AmbitiLV.getItems().iterator();
     		while(checkNuovoAmbito && i.hasNext()) {
-				switch (utils.controlloStringaUguale(NuovoAmbitoTF.getText().toLowerCase(),
+				switch (utils.controlloStringa(NuovoAmbitoTF.getText().toLowerCase(),
 													 i.next().toString().toLowerCase()))
 				{
 					case 2:
 						checkNuovoAmbito = false;
-    					NuovoAmbitoErrorLabel.setText("Questo ambito ï¿½ giï¿½ presente nella lista di ambiti aggiunti");
+    					NuovoAmbitoErrorLabel.setText("Questo ambito è già presente nella lista di ambiti aggiunti");
     					break;
     				default:
     					checkNuovoAmbito = true;
@@ -331,12 +331,12 @@ public class ControllerRegistrazioneProgetto {
         switch(utils.controlloData(DataDiInizioDP.getValue(), dataDiOggi)) {
 	    	case 1:
 	    		checkDataInizio = false;
-	    		DataDiInizioErrorLabel.setText("Questo campo ï¿½ obbligatorio");
+	    		DataDiInizioErrorLabel.setText("Questo campo è obbligatorio");
 	    		DataDiScadenzaDP.setDisable(true);	
 	        	break;
 	    	case 3:
 	    		checkDataInizio = false;
-	    		DataDiInizioErrorLabel.setText("La data di inizio non puï¿½ essere precedente a quella di oggi");
+	    		DataDiInizioErrorLabel.setText("La data di inizio non può essere precedente a quella di oggi");
 	    		DataDiScadenzaDP.setDisable(true);
 	    		break;
 			default:
@@ -359,11 +359,11 @@ public class ControllerRegistrazioneProgetto {
             switch(utils.controlloData(DataDiScadenzaDP.getValue(), dataSupportata)) {
 		    	case 1:
 		    		checkDataScadenza = false;
-		    		DataDiScadenzaErrorLabel.setText("Questo campo ï¿½ obbligatorio");
+		    		DataDiScadenzaErrorLabel.setText("Questo campo è obbligatorio");
 		        	break;
 		    	case 3:
 		    		checkDataScadenza = false;
-		    		DataDiScadenzaErrorLabel.setText("La data di scadenza non puï¿½ essere precedente a quella di inizio");
+		    		DataDiScadenzaErrorLabel.setText("La data di scadenza non può essere precedente a quella di inizio");
 		    		break;
 				default:
 					checkDataScadenza = true;
@@ -391,14 +391,14 @@ public class ControllerRegistrazioneProgetto {
         checkNuovoAmbito	= controlloNuovoAmbito();
         
         //CONTROLLO TITOLO
-        switch(utils.controlloStringaPattern(TitoloTF.getText(), "[a-zA-Z0-9]+")) {
+        switch(utils.controlloStringa(TitoloTF.getText(), "[a-zA-Z0-9\s]+")) {
 	        case 1:
 	        	checkTitolo = false;
-	        	TitoloErrorLabel.setText("Questo campo ï¿½ obbligatorio");
+	        	TitoloErrorLabel.setText("Questo campo è obbligatorio");
 				break;
 			case 2:
 				checkTitolo = false;
-				TitoloErrorLabel.setText("Il titolo puï¿½ contenere solo caratteri alfanumerici");
+				TitoloErrorLabel.setText("Il titolo può contenere solo caratteri alfanumerici");
 				break;
 			default:
 				checkTitolo = true;

@@ -4,23 +4,14 @@ import java.time.LocalDate;
 
 public class MetodiComuni {
 	
-	public int controlloStringaPattern(String check, String pattern) {
+	public int controlloStringa(String check, String string) {
 		if(check.isBlank())
     		return 1;
     	else {
-    		if(!(check.matches(pattern)))
+    		if(!(check.matches(string)))
     			return 2;
-    	}
-		
-		return 0;
-	}
-	
-	public int controlloStringaUguale(String check, String uguale) {
-		if(check.isBlank())
-    		return 1;
-    	else {
-    		if(check.equals(uguale))
-    			return 2;
+    		if(check.equals(string))
+    			return 3;
     	}
 		
 		return 0;

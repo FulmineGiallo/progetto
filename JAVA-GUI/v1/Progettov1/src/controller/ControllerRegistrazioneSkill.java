@@ -153,7 +153,7 @@ public class ControllerRegistrazioneSkill {
     	
     	//CONTROLLO DESCRIZIONE (SE OBBLIGATORIA)
     	if(!TitoloBox.isVisible()) {
-    		switch(utils.controlloStringaPattern(DescrizioneTA.getText(), "")) {
+    		switch(utils.controlloStringa(DescrizioneTA.getText(), "")) {
 				case 1:
 					DescrizioneErrorLabel.setText("Questo campo è obbligatorio");
 					checkDescrizione = false;
@@ -187,7 +187,7 @@ public class ControllerRegistrazioneSkill {
     		Iterator<Titolo> i = TitoloComboBox.getItems().iterator();
     		
     		while(checkNuovoTitolo && i.hasNext()){
-    			switch(utils.controlloStringaUguale(NuovoTitoloTF.getText().toLowerCase(), i.next().toString().toLowerCase())) {
+    			switch(utils.controlloStringa(NuovoTitoloTF.getText().toLowerCase(), i.next().toString().toLowerCase())) {
     				case 1:
     					checkNuovoTitolo = false;
     					NuovoTitoloErrorLabel.setText("Questo campo è obbligatorio");
