@@ -44,8 +44,14 @@ public class MetodiComuni {
 			if(check.isAfter(dataDiOggi))
 				return 2;
 			
-			if(dataSupportata != null && check.isAfter(dataSupportata))
+			if(check.isBefore(dataDiOggi))
 				return 3;
+			
+			if(dataSupportata != null && check.isAfter(dataSupportata))
+				return 4;
+			
+			if(dataSupportata != null && check.isBefore(dataSupportata))
+				return 5;
 		}
 		
 		return 0;

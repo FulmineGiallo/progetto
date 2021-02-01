@@ -10,16 +10,9 @@ import model.Impiegato;
 
 public class FormRegistrazioneProgetto
 {
-	
 	ControllerRegistrazioneProgetto controllerRegistrazioneProgetto;
-    Impiegato impiegato;
 
-    public FormRegistrazioneProgetto(Impiegato impiegato)
-    {
-        this.impiegato = impiegato;
-    }
-
-    public void start(Stage window, Stage popup) throws Exception {
+    public void start(Stage window, Stage popup, Impiegato projectManager) throws Exception {
     	
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneProgetto/FormRegistrazioneProgetto.fxml"));
         Parent root = loader.load();
@@ -30,14 +23,15 @@ public class FormRegistrazioneProgetto
 
         controllerRegistrazioneProgetto = loader.getController();
         controllerRegistrazioneProgetto.setStage(window, popup);
-        controllerRegistrazioneProgetto.inizializzaRegistrazioneProgetto(impiegato);
+        controllerRegistrazioneProgetto.inizializza(projectManager);
         
-        //window.setTitle("Registrazione");
-        window.setTitle(window.toString());
+        window.setTitle("Registrazione nuovo progetto");
+        window.setWidth(850.0);
+        window.setMinWidth(850.0);
+        window.setHeight(450.0);
+        window.setMinHeight(450.0);
         window.setMaximized(true);
         window.centerOnScreen();
-        window.setMinWidth(850.0);
-        window.setMinHeight(450.0);
         
         window.show();
     }

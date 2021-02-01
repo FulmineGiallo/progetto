@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="850.0" styleClass="RegistrazioneProgetto" stylesheets="@../../../css/FormRegistrazioneProgetto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
+<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1200.0" minWidth="850.0" styleClass="RegistrazioneProgetto" stylesheets="@../../../css/FormRegistrazioneProgetto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
    <children>
       <HBox fx:id="IstruzioniBox" alignment="CENTER" layoutX="100.0" layoutY="10.0" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -94,32 +94,73 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <HBox fx:id="TipologiaBox" spacing="10.0">
+                                    <GridPane fx:id="TipologiaBox">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="22.5" />
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="35.5" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="42.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints vgrow="SOMETIMES" />
+                                      </rowConstraints>
                                        <children>
-                                          <Label fx:id="TipologiaLabel" prefHeight="30.0" prefWidth="118.0" styleClass="TipologiaLabel" text="* Tipologia" />
-                                          <ComboBox fx:id="TipologiaComboBox" prefHeight="30.0" prefWidth="200.0" styleClass="TipologiaComboBox" />
+                                          <HBox alignment="CENTER_LEFT">
+                                             <children>
+                                                <Label fx:id="TipologiaLabel" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="118.0" styleClass="TipologiaLabel" text="* Tipologia" />
+                                             </children>
+                                          </HBox>
+                                          <HBox GridPane.columnIndex="1">
+                                             <children>
+                                                <ComboBox fx:id="TipologiaComboBox" maxHeight="30.0" prefWidth="200.0" styleClass="TipologiaComboBox" />
+                                             </children>
+                                          </HBox>
+                                          <AnchorPane GridPane.columnIndex="2">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                             <children>
+                                                <VBox fx:id="NuovaTipologiaBox" spacing="3.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <TextField fx:id="NuovaTipologiaTF" onKeyPressed="#inserisciNuovaTipologia" prefHeight="30.0" promptText="* Nuova tipologia" styleClass="NuovaTipologiaTF" />
+                                                      <Label fx:id="NuovaTipologiaErrorLabel" styleClass="NuovaTipologiaErrorLabel" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
                                        </children>
-                                    </HBox>
+                                    </GridPane>
                                     <GridPane fx:id="AmbitiBox">
                                        <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="65.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="47.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="57.5" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="42.5" />
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints vgrow="SOMETIMES" />
+                                          <RowConstraints vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <VBox>
+                                          <Label fx:id="AmbitiLabel" minHeight="40.0" prefWidth="118.0" styleClass="AmbitiLabel" text="Ambiti di progetto selezionati" wrapText="true" />
+                                          <ListView fx:id="AmbitiLV" editable="true" maxHeight="150.0" onMouseClicked="#rimuoviAmbito" prefHeight="150.0" styleClass="AmbitiLV" GridPane.rowIndex="1" />
+                                          <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Label fx:id="AmbitiLabel" minHeight="40.0" prefWidth="118.0" styleClass="AmbitiLabel" text="Ambiti di progetto selezionati" wrapText="true" />
-                                                <ListView fx:id="AmbitiLV" editable="true" maxHeight="100.0" styleClass="AmbitiLV" />
+                                                <VBox fx:id="NuovoAmbitoBox" spacing="3.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <TextField fx:id="NuovoAmbitoTF" onKeyPressed="#inserisciNuovoAmbito" prefHeight="30.0" promptText="* Nuovo ambito" styleClass="NuovoAmbitoTF" />
+                                                      <Label fx:id="NuovoAmbitoErrorLabel" styleClass="NuovoAmbitoErrorLabel" wrapText="true" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox layoutX="10.0" layoutY="120.0" spacing="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">
+                                                   <children>
+                                                      <AnchorPane>
+                                                         <children>
+                                                            <ComboBox fx:id="AmbitiComboBox" prefHeight="30.0" styleClass="AmbitiComboBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <Label fx:id="AmbitiErrorLabel" styleClass="AmbitiErrorLabel" wrapText="true" />
+                                                   </children>
+                                                </VBox>
                                              </children>
-                                          </VBox>
-                                          <VBox alignment="BOTTOM_CENTER" GridPane.columnIndex="1">
-                                             <children>
-                                                <ComboBox fx:id="AmbitiComboBox" prefHeight="30.0" prefWidth="200.0" promptText="Scegli qui gli ambiti" styleClass="AmbitiComboBox" />
-                                             </children>
-                                          </VBox>
+                                          </AnchorPane>
                                        </children>
                                     </GridPane>
                                  </children>

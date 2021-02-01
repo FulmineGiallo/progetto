@@ -125,7 +125,7 @@ public class ControllerRegistrazioneSkill {
     	try {
             titoloDAO = new TitoloDAO(connection);
             TitoloComboBox.setItems(titoloDAO.titoliList());
-            TitoloComboBox.getSelectionModel().select(7);
+            TitoloComboBox.getSelectionModel().select(0);
             
             TitoloComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
             	if(TitoloComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro...")) {

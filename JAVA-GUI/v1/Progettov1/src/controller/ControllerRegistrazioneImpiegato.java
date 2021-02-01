@@ -102,8 +102,6 @@ public class ControllerRegistrazioneImpiegato {
     private int OggiAnno = Oggi.get(Calendar.YEAR);
     
     private LocalDate dataDiNascita = null;
-    private LocalDate dataSupportata = null;
-    private LocalDate dataDiOggi = null;
     
     private String nome;
     private String cognome;
@@ -174,16 +172,6 @@ public class ControllerRegistrazioneImpiegato {
         {
             throwables.printStackTrace();
         }
-    }
-    
-    public void setSkillImpiegato(Impiegato nuovoImpiegato) {
-    	this.nuovoImpiegato = nuovoImpiegato;
-    	
-    	listaSkillImpiegato.clear();
-		SkillLV.getItems().clear();
-		
-		listaSkillImpiegato.addAll(nuovoImpiegato.getListaSkill());
-		SkillLV.setItems(listaSkillImpiegato);
     }
     
     public void setStage(Stage window, Stage popup) {
@@ -267,8 +255,8 @@ public class ControllerRegistrazioneImpiegato {
     	}
        
     	//CONTROLLO DATA DI NASCITA
-        dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
-        dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
+        LocalDate dataSupportata = LocalDate.of(OggiAnno - 18, OggiMese, OggiGiorno);
+        LocalDate dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
         
         switch(utils.controlloData(DataDiNascitaDP.getValue(), dataDiOggi, dataSupportata)) {
         	case 1:
@@ -279,7 +267,7 @@ public class ControllerRegistrazioneImpiegato {
         		checkData = false;
         		DataDiNascitaErrorLabel.setText("Inserisci una data di nascita corretta");
         		break;
-        	case 3:
+        	case 4:
         		checkData = false;
     			DataDiNascitaErrorLabel.setText("L'impiegato deve avere almeno 18 anni");
     			break;
@@ -377,6 +365,16 @@ public class ControllerRegistrazioneImpiegato {
                 ComuneComboBox.setItems(comuneList);
             }
     	}
+    }
+    
+    public void setSkillImpiegato(Impiegato nuovoImpiegato) {
+    	this.nuovoImpiegato = nuovoImpiegato;
+    	
+    	listaSkillImpiegato.clear();
+		SkillLV.getItems().clear();
+		
+		listaSkillImpiegato.addAll(nuovoImpiegato.getListaSkill());
+		SkillLV.setItems(listaSkillImpiegato);
     }
     
     private void inizializzaNuovoImpiegato() {

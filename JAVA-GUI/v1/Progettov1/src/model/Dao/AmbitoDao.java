@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Ambito;
 import model.Comune;
+import model.Tipologia;
 import model.DaoInterface.AmbitoDaoInterface;
 import model.DaoInterface.ComuneDaoInterface;
 
@@ -18,25 +19,23 @@ public class AmbitoDao implements AmbitoDaoInterface {
     public AmbitoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
-        this.getAmbiti = connection.prepareStatement("SELECT tipoambito FROM ambito");
+        this.getAmbiti = connection.prepareStatement("SELECT tipoambito FROM ambito ORDER BY tipoambito ASC");
     }
 
     @Override
-    public ObservableList<Ambito> AmbitoList() throws SQLException
-    {
+    public ObservableList<Ambito> AmbitoList() throws SQLException {
         
-        Ambito ambito;
         ObservableList<Ambito> lista = FXCollections.observableArrayList();
         ResultSet rs = getAmbiti.executeQuery();
 
+        lista.add(new Ambito("-- Scegli qui gli ambiti --", false));
 
-        while ( rs.next() )
-        {
-            ambito = new Ambito(rs.getString("tipoambito"));
-            lista.add(ambito);
-        }
+        while (rs.next())
+            lista.add(new Ambito(rs.getString("tipoambito"), false));
+        
         rs.close();
 
+		lista.add(new Ambito("Altro...", false));
         return lista;
     }
 }

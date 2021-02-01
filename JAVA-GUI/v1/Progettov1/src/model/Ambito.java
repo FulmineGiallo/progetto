@@ -3,10 +3,11 @@ package model;
 public class Ambito {
 
 	String tipoAmbito;
+	boolean nuovo;
 
-	public Ambito(String tipoAmbito) {
-
+	public Ambito(String tipoAmbito, boolean nuovo) {
 		this.tipoAmbito = tipoAmbito;
+		this.nuovo = nuovo;
 	}
 
 	public String getTipoAmbito() {
@@ -16,12 +17,13 @@ public class Ambito {
 	public void setTipoAmbito(String tipoAmbito) {
 		this.tipoAmbito = tipoAmbito;
 	}
+	
+	public boolean isNuovo() {
+		return nuovo;
+	}
 
 	@Override
 	public String toString() {
-		return this.tipoAmbito;
+		return tipoAmbito;
 	}
-	
-	
-	
 }

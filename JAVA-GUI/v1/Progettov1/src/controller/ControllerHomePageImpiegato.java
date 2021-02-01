@@ -185,8 +185,8 @@ public class ControllerHomePageImpiegato {
 
     @FXML
     public void CreaProgetto(ActionEvent actionEvent) throws Exception {
-        registrazioneProgetto = new FormRegistrazioneProgetto(impiegato);
-        registrazioneProgetto.start(window, popup);
+        registrazioneProgetto = new FormRegistrazioneProgetto();
+        registrazioneProgetto.start(window, popup, impiegato);
     }
     
     @FXML
