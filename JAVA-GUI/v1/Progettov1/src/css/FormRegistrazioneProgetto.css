@@ -48,32 +48,23 @@
 
 .TitoloLabel,
 .DescrizioneLabel{
-	-fx-font-size: 10;
+	-fx-font-size: 11.5;
 	-fx-text-fill: -fx-primocolore;
 }
 
+.ProjectManagerTF,
 .TitoloTF,
 .DescrizioneTA,
 .DataDiInizioDP,
 .DataDiScadenzaDP,
-.TipologiaComboBox{
+.TipologiaComboBox,
+.AmbitiComboBox{
 	-fx-text-fill: white;
 	-fx-prompt-text-fill: white;
 	-fx-font-size: 14;
 	-fx-background-color: -fx-secondocolore;
 	-fx-border-width: 0 0 2 0;
 	-fx-border-color: white;
-}
-
-.AmbitiMenuButton{
-	-fx-background-color: -fx-secondocolore;
-	-fx-border-width: 0 0 2 0;
-	-fx-border-color: white;
-}
-
-.AmbitiMenuButton .label .text{
-	-fx-fill: white;
-	-fx-font-size: 14;
 }
 
 .TitoloTF:focused,
@@ -95,10 +86,11 @@
 .TitoloErrorLabel,
 .DataDiInizioErrorLabel,
 .DataDiScadenzaErrorLabel{
-	-fx-font-size: 10;
+	-fx-font-size: 11.5;
 	-fx-text-fill: red;
 }
 
+.ProjectManagerLabel,
 .DataDiInizioLabel,
 .DataDiScadenzaLabel,
 .TipologiaLabel,
@@ -117,38 +109,48 @@
 .DataDiInizioDP:focused,
 .DataDiScadenzaDP:focused,
 .TipologiaComboBox:focused,
-.AmbitiMenuButton:focused{
+.AmbitiComboBox:focused{
 	-fx-border-color: -fx-primocolore;
 }
 
 .DataDiInizioDP .arrow-button,
 .DataDiScadenzaDP .arrow-button,
-.TipologiaComboBox .arrow-button{
+.TipologiaComboBox .arrow-button,
+.AmbitiComboBox .arrow-button{
 	-fx-background-color: white;
 	-fx-border-width: 2;
-	-fx-border-color: white;
-}
-
-.AmbitiMenuButton .arrow-button{
-	-fx-background-color: white;
-	-fx-background-insets: 0 0 0 -18;
 	-fx-border-color: white;
 }
 
 .DataDiInizioDP:focused .arrow-button,
 .DataDiScadenzaDP:focused .arrow-button,
 .TipologiaComboBox:focused .arrow-button,
-.AmbitiMenuButton:focused .arrow-button{
+.AmbitiComboBox:focused .arrow-button{
 	-fx-background-color: -fx-primocolore;
 	-fx-border-color: -fx-primocolore;
 }
 
-.AmbitiMenuButton .context-menu{
+.AmbitiComboBox .list-cell{
 	-fx-background-color: -fx-secondocolore;
 }
+.AmbitiComboBox .list-cell .text{
+	-fx-fill: white;
+}
 
-.AmbitiMenuButton .context-menu:hover{
-	-fx-background-color: -fx-primocolore;
+.AmbitiLV{
+	-fx-control-inner-background: -fx-terzocolore;
+	-fx-font-size: 14;
+}
+
+.AmbitiLV .list-cell{
+	-fx-pref-height: 30;
+}
+
+.AmbitiLV .scroll-bar:horizontal .increment-arrow,
+.AmbitiLV .scroll-bar:horizontal .decrement-arrow,
+.AmbitiLV .scroll-bar:horizontal .increment-button,
+.AmbitiLV .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
 }
 
 .ButtonBar{

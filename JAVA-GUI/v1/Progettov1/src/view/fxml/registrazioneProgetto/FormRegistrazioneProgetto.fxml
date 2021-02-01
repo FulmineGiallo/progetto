@@ -6,7 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" styleClass="RegistrazioneProgetto" stylesheets="@../../../css/FormRegistrazioneProgetto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
+<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="850.0" styleClass="RegistrazioneProgetto" stylesheets="@../../../css/FormRegistrazioneProgetto.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
    <children>
       <HBox fx:id="IstruzioniBox" alignment="CENTER" layoutX="100.0" layoutY="10.0" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,10 +42,16 @@
                            <children>
                               <VBox fx:id="Form" alignment="CENTER" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
                                  <children>
+                                    <HBox fx:id="ProjectManagerBox" alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="ProjectManagerLabel" prefWidth="118.0" styleClass="ProjectManagerLabel" text="* Project Manager" />
+                                          <TextField fx:id="ProjectManagerTF" editable="false" styleClass="ProjectManagerTF" HBox.hgrow="SOMETIMES" />
+                                       </children>
+                                    </HBox>
                                     <VBox fx:id="TitoloBox" spacing="3.0">
                                        <children>
                                           <Label fx:id="TitoloLabel" styleClass="TitoloLabel" text="* Nome" visible="false" />
-                                          <TextField fx:id="TitoloTF" onMouseClicked="#visualizzaNomeLabel" prefWidth="223.0" promptText="* Titolo" styleClass="TitoloTF" />
+                                          <TextField fx:id="TitoloTF" onMouseClicked="#visualizzaTitoloLabel" prefWidth="223.0" promptText="* Titolo" styleClass="TitoloTF" />
                                           <Label fx:id="TitoloErrorLabel" styleClass="TitoloErrorLabel" textFill="RED" />
                                        </children>
                                        <VBox.margin>
@@ -55,7 +61,7 @@
                                     <VBox fx:id="DescrizioneBox">
                                        <children>
                                           <Label fx:id="DescrizioneLabel" styleClass="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
-                                          <TextArea fx:id="DescrizioneTA" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" wrapText="true" />
+                                          <TextArea fx:id="DescrizioneTA" onMouseClicked="#visualizzaDescrizioneLabel" promptText="Inserisci una descrizione" styleClass="DescrizioneTA" wrapText="true" />
                                        </children>
                                     </VBox>
                                     <VBox fx:id="DataDiInizioBox" spacing="3.0">
@@ -94,12 +100,28 @@
                                           <ComboBox fx:id="TipologiaComboBox" prefHeight="30.0" prefWidth="200.0" styleClass="TipologiaComboBox" />
                                        </children>
                                     </HBox>
-                                    <HBox fx:id="AmbitiBox" prefHeight="30.0" spacing="10.0">
+                                    <GridPane fx:id="AmbitiBox">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="65.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="47.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                       </rowConstraints>
                                        <children>
-                                          <Label fx:id="AmbitiLabel" prefHeight="30.0" prefWidth="118.0" styleClass="AmbitiLabel" text="Ambiti" />
-                                          <MenuButton fx:id="AmbitiMenuButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="AmbitiMenuButton" />
+                                          <VBox>
+                                             <children>
+                                                <Label fx:id="AmbitiLabel" minHeight="40.0" prefWidth="118.0" styleClass="AmbitiLabel" text="Ambiti di progetto selezionati" wrapText="true" />
+                                                <ListView fx:id="AmbitiLV" editable="true" maxHeight="100.0" styleClass="AmbitiLV" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="BOTTOM_CENTER" GridPane.columnIndex="1">
+                                             <children>
+                                                <ComboBox fx:id="AmbitiComboBox" prefHeight="30.0" prefWidth="200.0" promptText="Scegli qui gli ambiti" styleClass="AmbitiComboBox" />
+                                             </children>
+                                          </VBox>
                                        </children>
-                                    </HBox>
+                                    </GridPane>
                                  </children>
                                  <padding>
                                     <Insets bottom="50.0" top="50.0" />
