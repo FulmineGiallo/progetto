@@ -28,14 +28,11 @@ public class AmbitoDao implements AmbitoDaoInterface {
         ObservableList<Ambito> lista = FXCollections.observableArrayList();
         ResultSet rs = getAmbiti.executeQuery();
 
-        lista.add(new Ambito("-- Scegli qui gli ambiti --", false));
-
         while (rs.next())
             lista.add(new Ambito(rs.getString("tipoambito"), false));
         
         rs.close();
 
-		lista.add(new Ambito("Altro...", false));
         return lista;
     }
 }

@@ -71,7 +71,7 @@
                                                 <Label fx:id="DataDiInizioLabel" prefHeight="30.0" prefWidth="118.0" styleClass="DataDiInizioLabel" text="* Data di inizio" />
                                                 <VBox>
                                                    <children>
-                                                      <DatePicker fx:id="DataDiInizioDP" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiInizioDP" />
+                                                      <DatePicker fx:id="DataDiInizioDP" editable="false" onHiding="#controlloDataDiInizio" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiInizioDP" />
                                                       <Label fx:id="DataDiInizioErrorLabel" styleClass="DataDiInizioErrorLabel" />
                                                    </children>
                                                 </VBox>
@@ -86,7 +86,7 @@
                                                 <Label fx:id="DataDiScadenzaLabel" prefHeight="30.0" styleClass="DataDiScadenzaLabel" text="* Data di scadenza" />
                                                 <VBox>
                                                    <children>
-                                                      <DatePicker fx:id="DataDiScadenzaDP" disable="true" editable="false" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiScadenzaDP" />
+                                                      <DatePicker fx:id="DataDiScadenzaDP" disable="true" editable="false" onHiding="#controlloDataDiScadenza" prefHeight="30.0" prefWidth="200.0" styleClass="DataDiScadenzaDP" />
                                                       <Label fx:id="DataDiScadenzaErrorLabel" styleClass="DataDiScadenzaErrorLabel" />
                                                    </children>
                                                 </VBox>

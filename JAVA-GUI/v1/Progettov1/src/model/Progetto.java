@@ -12,6 +12,11 @@ public class Progetto
     Date scadenza;
     Impiegato projectManager;
     String ruolo; // >> da sostituire in un oggetto Ruolo, dobbiamo creare una classe a parte
+    
+    public Progetto(String titolo)
+    {
+        this.titolo = titolo;
+    }
 
     public String getRuolo() {
         return ruolo;
@@ -28,11 +33,6 @@ public class Progetto
 
     public void setProjectManager(Impiegato projectManager) {
         this.projectManager = projectManager;
-    }
-
-    public Progetto(String titolo)
-    {
-        this.titolo = titolo;
     }
 
     public String getTitolo() {

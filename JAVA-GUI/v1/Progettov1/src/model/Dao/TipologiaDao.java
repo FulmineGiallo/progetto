@@ -31,7 +31,6 @@ public class TipologiaDao implements TipologiaDaoInterface{
 		
 		rs.close();
 		
-		listaTipologie.add(new Tipologia("Altro...", false));
 		return listaTipologie;
 		
 	}

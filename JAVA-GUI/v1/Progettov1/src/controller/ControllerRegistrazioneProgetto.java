@@ -1,4 +1,4 @@
-package controller; //quando si clicca su una cella del calendario
+package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ComboBox;
@@ -133,10 +134,12 @@ public class ControllerRegistrazioneProgetto {
     
     private TipologiaDao			  tipologiaDao;
     private ObservableList<Tipologia> listaTipologie;
+    private Tipologia				  tipologiaAltro = new Tipologia("Altro...", false);
     
     private AmbitoDao 				  ambito;
     private ObservableList<Ambito>	  listaAmbiti;
-    private Ambito					  ambitoPrompt;
+    private Ambito					  ambitoPrompt	 = new Ambito("-- Scegli qui gli ambiti --", false);
+    private Ambito					  ambitoAltro	 = new Ambito("Altro...", false);
     private Ambito					  ambitoIniziale = new Ambito("Non ci sono ambiti di progetto", false);
     
     private Impiegato projectManager;
@@ -158,24 +161,28 @@ public class ControllerRegistrazioneProgetto {
             
             ambito = new AmbitoDao(connection);
             listaAmbiti = ambito.AmbitoList();
-            AmbitiComboBox.setItems(listaAmbiti);
+            
+            AmbitiComboBox.getItems().add(ambitoPrompt);
+            AmbitiComboBox.getItems().addAll(listaAmbiti);
+            AmbitiComboBox.getItems().add(ambitoAltro);
             
             tipologiaDao = new TipologiaDao(connection);
             listaTipologie = tipologiaDao.getListaTipologie();
+            
             TipologiaComboBox.setItems(listaTipologie);
+            TipologiaComboBox.getItems().add(tipologiaAltro);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     	
         this.projectManager = projectManager;
         
-        if (projectManager != null) {
-			ProjectManagerTF.setText(projectManager.toString());
+        if (this.projectManager != null) {
+			ProjectManagerTF.setText(this.projectManager.toString());
 		}
         
 		TipologiaComboBox.getSelectionModel().select(0);
-        AmbitiComboBox.getSelectionModel().select(0);
-        ambitoPrompt = AmbitiComboBox.getSelectionModel().getSelectedItem();
+        AmbitiComboBox.getSelectionModel().select(ambitoPrompt);
         
         setTipologiaComboBoxListener();        
         setAmbitiComboBoxListener();
@@ -184,14 +191,10 @@ public class ControllerRegistrazioneProgetto {
     
     private void setTipologiaComboBoxListener() {
     	TipologiaComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
-        	if(TipologiaComboBox.getSelectionModel().getSelectedItem().toString().equals("Altro...")) {
-        		NuovaTipologiaBox.setVisible(true);
-        		NuovaTipologiaTF.setDisable(false);
-        		NuovaTipologiaTF.setText("");
-        		NuovaTipologiaErrorLabel.setText("");
-            } else {
-            	NuovaTipologiaBox.setVisible(false);
-        	}
+    		NuovaTipologiaTF.setText("");
+    		NuovaTipologiaErrorLabel.setText("");
+    		
+        	NuovaTipologiaBox.setVisible(TipologiaComboBox.getSelectionModel().getSelectedItem() == tipologiaAltro);
         });
     }
     
@@ -200,18 +203,24 @@ public class ControllerRegistrazioneProgetto {
         	Ambito ambitoSelezionato = AmbitiComboBox.getSelectionModel().getSelectedItem();
         	
         	if(ambitoSelezionato != ambitoPrompt) {
-            	if(ambitoSelezionato.toString().equals("Altro...")) {
-            		NuovoAmbitoBox.setVisible(true);	
-            		NuovoAmbitoTF.setText("");
-            		NuovoAmbitoErrorLabel.setText("");
-                } else { // >> gestione del passaggio da combobox a listview
+        		NuovoAmbitoTF.setText("");
+        		NuovoAmbitoErrorLabel.setText("");
+        		
+        		AmbitiErrorLabel.setText("");
+        		
+            	if(ambitoSelezionato == ambitoAltro) {
+            		NuovoAmbitoBox.setVisible(true);
+                } else {
                 	NuovoAmbitoBox.setVisible(false);
                 	
                 	if(AmbitiLV.getItems().contains(ambitoIniziale)){
                 		AmbitiLV.getItems().clear();
                 	}
                 	
-                	AmbitiLV.getItems().add(ambitoSelezionato);
+                	if(controlloAmbito(ambitoSelezionato)) {
+                    	AmbitiLV.getItems().add(ambitoSelezionato);
+                	}
+                	
                 	AmbitiComboBox.getSelectionModel().select(ambitoPrompt);
             	}
         	}
@@ -219,74 +228,17 @@ public class ControllerRegistrazioneProgetto {
         });
     }
     
-    public boolean controlloCampi() {
-    	TitoloErrorLabel		.setText("");
-    	DataDiInizioErrorLabel	.setText("");
-    	DataDiScadenzaErrorLabel.setText("");
-    	NuovaTipologiaErrorLabel.setText("");
-    	AmbitiErrorLabel		.setText("");
-    	NuovoAmbitoErrorLabel	.setText("");
-    	
-    	checkTitolo			= true;
-        checkDataInizio		= true;
-        checkDataScadenza	= true;
-        checkNuovaTipologia = controlloNuovaTipologia();
-        checkAmbito			= controlloAmbito();
-        checkNuovoAmbito	= controlloNuovoAmbito();
-        
-        //CONTROLLO TITOLO
-        switch(utils.controlloStringaPattern(TitoloTF.getText(), "a-zA-Z0-9\s")) {
-	        case 1:
-	        	checkTitolo = false;
-	        	TitoloErrorLabel.setText("Questo campo è obbligatorio");
-				break;
-			case 2:
-				checkTitolo = false;
-				TitoloErrorLabel.setText("Il titolo può contenere solo caratteri alfanumerici");
-				break;
-			default:
-				checkTitolo = true;
-        }
-
-        //CONTROLLO DATA DI SCADENZA
-        LocalDate dataSupportata = null;
-        
-        if(checkDataInizio) {
-            dataSupportata = DataDiInizioDP.getValue();
-            
-            switch(utils.controlloData(DataDiScadenzaDP.getValue(), dataSupportata)) {
-		    	case 1:
-		    		checkDataScadenza = false;
-		    		DataDiScadenzaErrorLabel.setText("Questo campo è obbligatorio");
-		        	break;
-		    	case 3:
-		    		checkDataScadenza = false;
-		    		DataDiScadenzaErrorLabel.setText("La data di scadenza non può essere precedente a quella di inizio");
-		    		break;
-				default:
-					checkDataScadenza = true;
-            }
-        } else {
-        	checkDataScadenza = false;
-        	DataDiScadenzaErrorLabel.setText("Prima di inserire una data di scadenza, inserisci una data di inizio corretta");
-        }
-        
-        return checkTitolo		   &&
-        	   checkDataInizio	   &&
-        	   checkDataScadenza   &&
-        	   checkNuovaTipologia &&
-        	   checkAmbito		   &&
-        	   checkNuovoAmbito;
-
-    }
-    
     //CONTROLLO NUOVA TIPOLOGIA (SE OBBLIGATORIA)
     private boolean controlloNuovaTipologia() {
+    	checkNuovaTipologia = true;
+    	NuovaTipologiaErrorLabel.setText("");
+    	
         if(NuovaTipologiaBox.isVisible()) {
-        	
         	Iterator<Tipologia> i = listaTipologie.iterator();
     		while(checkNuovaTipologia && i.hasNext()){
-    			switch(utils.controlloStringaUguale(NuovaTipologiaTF.getText().toLowerCase(), i.next().toString().toLowerCase())) {
+    			switch(utils.controlloStringaUguale(NuovaTipologiaTF.getText().toLowerCase(),
+    												i.next().toString().toLowerCase()))
+    			{
     				case 1:
     					checkNuovaTipologia = false;
     					NuovaTipologiaErrorLabel.setText("Questo campo è obbligatorio");
@@ -305,16 +257,21 @@ public class ControllerRegistrazioneProgetto {
     }
     
     //CONTROLLO AMBITO
-    private boolean controlloAmbito() {
+    private boolean controlloAmbito(Ambito ambitoSelezionato) {
+    	checkAmbito = true;
+    	AmbitiErrorLabel.setText("");
+    	
         Iterator<Ambito> i = AmbitiLV.getItems().iterator();
         while(checkAmbito && i.hasNext()) {
-            switch(utils.controlloStringaUguale(AmbitiComboBox.getSelectionModel().getSelectedItem().toString(), i.next().toString())) {
+            switch(utils.controlloStringaUguale(ambitoSelezionato.toString(), i.next().toString())) {
             	case 1:
             		checkAmbito = false;
             		AmbitiErrorLabel.setText("Questo campo è obbligatorio");
+            		break;
             	case 2:
             		checkAmbito = false;
             		AmbitiErrorLabel.setText("Questo ambito è già presente nella lista di ambiti aggiunti");
+            		break;
 				default:
 					checkAmbito = true;
             }
@@ -325,11 +282,13 @@ public class ControllerRegistrazioneProgetto {
     
     //CONTROLLO NUOVO AMBITO (SE OBBLIGATORIO)
     private boolean controlloNuovoAmbito() {
+    	checkNuovoAmbito = true;
+    	NuovoAmbitoErrorLabel.setText("");
+    	
         if(NuovoAmbitoBox.isVisible()) {
-        	
         	Iterator<Ambito> i = listaAmbiti.iterator();
     		while(checkNuovoAmbito && i.hasNext()){
-    			switch(utils.controlloStringaUguale(NuovaTipologiaTF.getText().toLowerCase(),
+    			switch(utils.controlloStringaUguale(NuovoAmbitoTF.getText().toLowerCase(),
     												i.next().toString().toLowerCase()))
     			{
     				case 1:
@@ -347,7 +306,7 @@ public class ControllerRegistrazioneProgetto {
 			
 			i = AmbitiLV.getItems().iterator();
     		while(checkNuovoAmbito && i.hasNext()) {
-				switch (utils.controlloStringaUguale(NuovaTipologiaTF.getText().toLowerCase(),
+				switch (utils.controlloStringaUguale(NuovoAmbitoTF.getText().toLowerCase(),
 													 i.next().toString().toLowerCase()))
 				{
 					case 2:
@@ -363,71 +322,9 @@ public class ControllerRegistrazioneProgetto {
     	return checkNuovoAmbito;
     }
     
-    /*public boolean controlloCampi(){
-    	
-    	boolean checkTitolo = true;
-    	boolean checkDescrizione = true;
-    	boolean checkDataInizio = true;
-    	boolean checkDataScadenza = true;
-    	boolean checkDataFine = true;
-    	
-    	TitoloErrorLabel.setText("");
-    	DataDiInizioErrorLabel.setText("");
-    	DataDiScadenzaErrorLabel.setText("");
-
-    	
-    	
-    	if(DataDiInizioDP.getValue() != null)
-    		dataInizio = java.sql.Date.valueOf(DataDiInizioDP.getValue());
-    	
-    	if(DataDiScadenzaDP.getValue() != null)
-        	dataScadenza = java.sql.Date.valueOf(DataDiScadenzaDP.getValue()); 
-
-    	
-    	if (!(TitoloTF.getText().matches("[a-zA-Z0-9]+")) || ( TitoloTF.getText().isBlank()) ) {
-    		checkTitolo = false;
-    		if(TitoloTF.getText().isBlank())	
-    			TitoloErrorLabel.setText("Il titolo non puo essere vuoto");
-    		else
-    			TitoloErrorLabel.setText("Il titolo puo contenere solo lettere e numeri");
-    	}
-    	
-    	if(dataInizio == null || dataInizio.before(dataSupportata)) {
-    		checkDataInizio = false;
-    		DataDiInizioErrorLabel.setTextFill(Color.RED);
-    		
-    		if(dataInizio == null)
-    			DataDiInizioErrorLabel.setText("inserire la data di inizio del progetto");
-    		else
-    			DataDiInizioErrorLabel.setText("il progetto non puo iniziare prima della data di oggi");
-    	}
-    	
-    	if(dataScadenza == null) {
-    		checkDataScadenza = false;
-    		DataDiScadenzaErrorLabel.setTextFill(Color.RED);
-    		DataDiScadenzaErrorLabel.setText("inserire la data di scadenza del progetto");
-    	}else if(dataInizio != null) {
-    				if(dataScadenza.before(dataInizio)) {
-    					checkDataScadenza = false;
-    					DataDiScadenzaErrorLabel.setTextFill(Color.RED);
-    					DataDiScadenzaErrorLabel.setText("il progetto non puo scadere prima del suo inizio");
-    				}
-    			}
-    		else {
-    				checkDataScadenza = false;
-    				DataDiScadenzaErrorLabel.setTextFill(Color.RED);
-    				DataDiScadenzaErrorLabel.setText("Inserire prima la data di inizio");
-    			}
-    		
-    	return checkTitolo && checkDataFine && checkDataInizio && checkDataScadenza && checkDescrizione;
-     	
-    	return true;
-    }*/
-    
     //CONTROLLO DATA DI INIZIO
-    @FXML private boolean controlloDataDiInizio(MouseEvent event) { //quando si clicca su una cella del calendario
+    @FXML private boolean controlloDataDiInizio() {
         LocalDate dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
-        
         checkDataInizio = true;
         DataDiInizioErrorLabel.setText("");
         
@@ -450,64 +347,141 @@ public class ControllerRegistrazioneProgetto {
         return checkDataInizio;
     }
     
+    //CONTROLLO DATA DI SCADENZA
+    @FXML private boolean controlloDataDiScadenza() {
+        LocalDate dataSupportata = null;
+        checkDataScadenza = true;
+        DataDiScadenzaErrorLabel.setText("");
+        
+        if(checkDataInizio) {
+            dataSupportata = DataDiInizioDP.getValue();
+            
+            switch(utils.controlloData(DataDiScadenzaDP.getValue(), dataSupportata)) {
+		    	case 1:
+		    		checkDataScadenza = false;
+		    		DataDiScadenzaErrorLabel.setText("Questo campo è obbligatorio");
+		        	break;
+		    	case 3:
+		    		checkDataScadenza = false;
+		    		DataDiScadenzaErrorLabel.setText("La data di scadenza non può essere precedente a quella di inizio");
+		    		break;
+				default:
+					checkDataScadenza = true;
+            }
+        } else {
+        	checkDataScadenza = false;
+        	DataDiScadenzaErrorLabel.setText("Prima di inserire una data di scadenza, inserisci una data di inizio corretta");
+        }
+        
+        return checkDataScadenza;
+    }
+    
+    public boolean controlloCampi() {
+    	TitoloErrorLabel		.setText("");
+    	DataDiInizioErrorLabel	.setText("");
+    	DataDiScadenzaErrorLabel.setText("");
+    	NuovaTipologiaErrorLabel.setText("");
+    	AmbitiErrorLabel		.setText("");
+    	NuovoAmbitoErrorLabel	.setText("");
+    	
+    	checkTitolo			= true;
+    	checkDataInizio		= controlloDataDiInizio();
+    	checkDataScadenza	= controlloDataDiScadenza();
+        checkNuovaTipologia = controlloNuovaTipologia();
+        checkNuovoAmbito	= controlloNuovoAmbito();
+        
+        //CONTROLLO TITOLO
+        switch(utils.controlloStringaPattern(TitoloTF.getText(), "[a-zA-Z0-9\s]+")) {
+	        case 1:
+	        	checkTitolo = false;
+	        	TitoloErrorLabel.setText("Questo campo è obbligatorio");
+				break;
+			case 2:
+				checkTitolo = false;
+				TitoloErrorLabel.setText("Il titolo può contenere solo caratteri alfanumerici");
+				break;
+			default:
+				checkTitolo = true;
+        }
+        
+        return checkTitolo		   &&
+        	   checkDataInizio	   &&
+        	   checkDataScadenza   &&
+        	   checkNuovaTipologia &&
+        	   checkNuovoAmbito;
+
+    }
+    
     @FXML private void annullaOperazione(ActionEvent event) throws Exception{
+    	//aggiungere finestra di domanda conferma
     	homePageImpiegato = new HomePageImpiegato(projectManager);
     	homePageImpiegato.start(window, popup);
     }
 
     @FXML private void confermaOperazione(ActionEvent event) {
-        int risultato;
     	if(controlloCampi()) {
+    		int risultato;
             try {
-                ProgettoDaoInterface progetto = new ProgettoDao(connection);
+                ProgettoDaoInterface progetto = new ProgettoDao(connection);;
                 Progetto registrazione = new Progetto(TitoloTF.getText());
                 registrazione.setProjectManager(projectManager);
                 registrazione.setDescrizione(DescrizioneTA.getText());
                 registrazione.setDataInizio(java.sql.Date.valueOf(DataDiInizioDP.getValue()));
                 registrazione.setScadenza(java.sql.Date.valueOf(DataDiScadenzaDP.getValue()));
                 risultato = progetto.creaProgetto(registrazione);
+                
                 if(risultato == 1) {
                     System.out.println("Dati inseriti");
+                	//aggiungere finestra di conferma inserimento
                 }
-                else
+                else {
                     System.out.println("Errore nella query");
+                	//aggiungere finestra di errore inserimento
+                }
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-        }
+    	}    
     }
     
-    @FXML private void inserisciNuovaTipologia(KeyEvent invio) {
+    @FXML private void inserisciNuovaTipologia(KeyEvent invio) {    	
     	if (invio.getCode().equals(KeyCode.ENTER)) {
-            if(controlloNuovaTipologia()) {
-            	NuovaTipologiaTF.setDisable(true);
+        	checkNuovaTipologia = controlloNuovaTipologia();
+            if(checkNuovaTipologia) {
+            	NuovaTipologiaBox.setVisible(false);
+            	
+            	Tipologia nuovaTipologia = new Tipologia(NuovaTipologiaTF.getText(), true);
+            	
+            	TipologiaComboBox.getItems().remove(tipologiaAltro);
+            	TipologiaComboBox.getItems().add(nuovaTipologia);
+            	TipologiaComboBox.getItems().add(tipologiaAltro);
+            	
+            	TipologiaComboBox.getSelectionModel().select(nuovaTipologia);
+            	
+            	NuovaTipologiaTF.setText("");
             	NuovaTipologiaErrorLabel.setText("");
             }
         }
-    	/* se preme 'invio' • il textfield non è più modificabile
-    	 * 					• quando clicca 'altro...' nella combobox, tf torna modificabile e si elimina il testo
-    	 * */
     }
 
-    @FXML private void inserisciNuovoAmbito(KeyEvent invio) {
+    @FXML private void inserisciNuovoAmbito(KeyEvent invio) {    	
     	if (invio.getCode().equals(KeyCode.ENTER)) {
-            if(controlloNuovoAmbito()) {
+        	checkNuovoAmbito = controlloNuovoAmbito();
+            if(checkNuovoAmbito) {
             	NuovoAmbitoBox.setVisible(false);
+            	
+            	if(AmbitiLV.getItems().contains(ambitoIniziale)){
+            		AmbitiLV.getItems().clear();
+            	}
+            	
+            	AmbitiLV.getItems().add(new Ambito(NuovoAmbitoTF.getText(), true));
+            	AmbitiComboBox.getSelectionModel().select(ambitoPrompt);
             	
             	NuovoAmbitoTF		 .setText("");
             	NuovoAmbitoErrorLabel.setText("");
-            	
-            	AmbitiComboBox.getSelectionModel().select(0);
             }
         }
-    	
-    	/* se preme 'invio' • il textfield non è più modificabile
-    	 * 					• se clicca nella listview e l'ambito da eliminare è nuovo, 
-    	 * 					  allora elimina solo dalla lista, senza rimetterlo nella combobox
-    	 * 					• se l'ambito da eliminare proviene dal DB,
-    	 * 					  allora elimina l'ambito dalla lista e rimettilo nella combobox
-    	 * */
     }
     
     @FXML private void rimuoviAmbito(MouseEvent event) {
@@ -515,7 +489,6 @@ public class ControllerRegistrazioneProgetto {
     	
     	if(!AmbitiLV.getItems().contains(ambitoIniziale)){
 			AmbitiLV.getItems().remove(ambitoSelezionato);
-			
     	}
     	
     	if(AmbitiLV.getItems().isEmpty()) {
@@ -523,6 +496,9 @@ public class ControllerRegistrazioneProgetto {
     	}
     	
     	AmbitiComboBox.getSelectionModel().select(ambitoPrompt);
+    	NuovoAmbitoBox.setVisible(false);
+    	NuovoAmbitoTF.setText("");
+    	NuovoAmbitoErrorLabel.setText("");
     }
 
     @FXML
