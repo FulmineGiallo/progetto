@@ -7,21 +7,12 @@
 	-fx-font-family: 'Roboto';
 }
 
-.ListaProgettiLabel,
-.TitoloLabel,
-.OrganizzatoreRiunioneLabel,
-.ProjectManagerProgettoLabel,
-.ListaRiunioniLabel{
+.LabelGrande{
 	-fx-font-size: 18;
 	-fx-text-fill: white;
 }
 
-.NomeImpiegatoLabel{
-	-fx-font-size: 18;
-	-fx-text-fill: white;
-}
-
-.GradoImpiegatoLabel{
+.LabelPiccola{
 	-fx-font-size: 16;
 	-fx-text-fill: white;
 	-fx-font-family: 'Roboto Light';
@@ -30,8 +21,6 @@
 .ToolBarButton{
 	-fx-background-color: -fx-terzocolore;
 	-fx-background-radius: 10;
-	-fx-text-fill: white;
-	-fx-font-size: 18;
 	-fx-border-width: 2;
 	-fx-border-color: white;
 	-fx-border-radius: 10;
@@ -43,8 +32,6 @@
 .ProjectManagerBoxButton{
 	-fx-background-color: -fx-quartocolore;
 	-fx-background-radius: 10;
-	-fx-text-fill: white;
-	-fx-font-size: 18;
 	-fx-border-width: 2;
 	-fx-border-color: white;
 	-fx-border-radius: 10;
@@ -67,91 +54,78 @@
 	-fx-font-style: italic;
 }
 
+.TextField,
+.TextArea{
+	-fx-prompt-text-fill: white;
+	-fx-background-color: -fx-secondocolore;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: white;
+}
+
 .DescrizionePane{
 	-fx-border-width: 5;
 	-fx-border-color: white;
 	-fx-background-color: -fx-terzocolore;
 }
 
-.DescrizioneTA,
-.DescrizioneTA .scroll-pane,
-.DescrizioneTA .scroll-pane .viewport,
-.DescrizioneTA .scroll-pane .viewport .content{
-	-fx-background-color: -fx-terzocolore;
+.TextArea,
+.TextArea .scroll-pane,
+.TextArea .scroll-pane .viewport,
+.TextArea .scroll-pane .viewport .content{
+	-fx-background-color: -fx-secondocolore;
 	-fx-padding: 0;
 }
 
-.DescrizioneTA{
-	-fx-text-fill: white;
-	-fx-font-size: 18;
-}
-
-.DescrizioneTA .scroll-pane{
+.TextArea .scroll-pane{
 	-fx-hbar-policy: NEVER;
 }
 
-.DescrizioneTA .scroll-pane .scroll-bar:vertical{
+.TextArea .scroll-pane .scroll-bar:vertical{
 	-fx-background-color: -fx-secondocolore;
 }
 
-.DescrizioneTA .scroll-pane .scroll-bar:vertical .thumb,
-.DescrizioneTA .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
-.DescrizioneTA .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
-	-fx-background-color: -fx-primocolore;
-}
-
-.DataDiInizioLabel,
-.DataDiFineProgettoLabel,
-.DataDiScadenzaProgettoLabel,
-.OrarioDiInizioRiunioneLabel,
-.OrarioDiFineRiunioneLabel,
-.NoteLabel{
-	-fx-text-fill: white;
-	-fx-font-size: 18;
-}
-
-.ListaProgettiScrollPane,
-.ListaRiunioniScrollPane{
-	-fx-border-width: 5;
+.SchedaListaProgetti{
+	-fx-border-width: 5 5 1 5;
 	-fx-border-color: white;
 }
 
-.ListaProgettiScrollPane .viewport,
-.ListaRiunioniScrollPane .viewport{
-	-fx-background-color: -fx-terzocolore;
+.SchedaListaRiunioni{
+	-fx-border-width: 0 0 5 0;
+	-fx-border-color: white;
 }
 
-.ListaProgettiScrollPane:focused,
-.ListaRiunioniScrollPane:focused{
-    -fx-background-insets: 0;
+.ListaRiunioniLabel{
+	-fx-text-fill: derive(white, -50%);
+	-fx-font-size: 14;
 }
 
-.ListaProgettiScrollPane .scroll-bar:vertical,
-.ListaRiunioniScrollPane .scroll-bar:vertical{
-	-fx-background-color: -fx-terzocolore;
-}
-
-.ListaProgettiScrollPane .scroll-bar:vertical .thumb,
-.ListaProgettiScrollPane .scroll-bar:vertical .increment-button .increment-arrow,
-.ListaProgettiScrollPane .scroll-bar:vertical .decrement-button .decrement-arrow,
-.ListaRiunioniScrollPane .scroll-bar:vertical .thumb,
-.ListaRiunioniScrollPane .scroll-bar:vertical .increment-button .increment-arrow,
-.ListaRiunioniScrollPane .scroll-bar:vertical .decrement-button .decrement-arrow{
-	-fx-background-color: -fx-primocolore;
-}
-
-.ListaProgettiLV,
-.ListaRiunioniLV{
+.ListView{
 	-fx-control-inner-background: -fx-terzocolore;
 	-fx-font-size: 18;
+	-fx-border-width: 0 5 5 5;
+	-fx-border-color: white;
 }
 
-.ListaProgettiLV .list-cell,
-.ListaRiunioniLV .list-cell{
+.ListView .list-cell{
 	-fx-pref-height: 100;
 }
 
-.ListaProgettiLV .list-cell:selected,
-.ListaRiunioniLV .list-cell:selected{
+.ListView,
+.ListView .scroll-bar:vertical{
+	-fx-background-color: -fx-terzocolore;
+}
+
+.ListView .viewport{
+	-fx-background-color: transparent;
+}
+
+.ListView .list-cell:selected,
+.ListView .scroll-bar:vertical .thumb,
+.ListView .scroll-bar:vertical .increment-button .increment-arrow,
+.ListView .scroll-bar:vertical .decrement-button .decrement-arrow,
+
+.TextArea .scroll-pane .scroll-bar:vertical .thumb,
+.TextArea .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.TextArea .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
 	-fx-background-color: -fx-primocolore;
 }
