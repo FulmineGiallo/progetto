@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
@@ -16,9 +18,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="Login" prefHeight="550.0" prefWidth="850.0" styleClass="ConfermaRegistrazioneImpiegato" stylesheets="@../../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLogin">
+<AnchorPane fx:id="Login" prefHeight="550.0" prefWidth="850.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerLogin">
    <children>
-      <Label fx:id="TitoloLabel" alignment="CENTER" layoutX="20.0" layoutY="10.0" styleClass="TitoloLabel" text="Login" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+      <Label fx:id="TitoloLabel" alignment="CENTER" layoutX="20.0" layoutY="10.0" text="Login" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <graphic>
             <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -29,6 +31,10 @@
          <padding>
             <Insets bottom="10.0" />
          </padding>
+         <styleClass>
+            <String fx:value="TitoloLabel" />
+            <String fx:value="LabelUltra" />
+         </styleClass>
       </Label>
       <VBox alignment="CENTER" layoutX="200.0" layoutY="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
          <children>
@@ -44,7 +50,7 @@
                         <RowConstraints maxHeight="100.0" minHeight="100.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label fx:id="EmailLabel" styleClass="EmailLabel" text="Email" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                        <Label fx:id="EmailLabel" styleClass="LabelGrande" text="Email" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                            <graphic>
                               <ImageView fx:id="EmailIV" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -59,8 +65,12 @@
                               <Insets />
                            </GridPane.margin>
                         </Label>
-                        <TextField fx:id="EmailTF" styleClass="EmailTF" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER" />
-                        <Label fx:id="PasswordLabel" styleClass="PasswordLabel" text="Password" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                        <TextField fx:id="EmailTF" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                           <styleClass>
+                              <String fx:value="TextField" />
+                              <String fx:value="LabelPiccola" />
+                           </styleClass></TextField>
+                        <Label fx:id="PasswordLabel" styleClass="LabelGrande" text="Password" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
                            <graphic>
                               <ImageView fx:id="PasswordIV" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -72,7 +82,11 @@
                               <Insets />
                            </GridPane.margin>
                         </Label>
-                        <PasswordField fx:id="PasswordTF" onAction="#checkLogin" styleClass="PasswordTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="PasswordTF" onAction="#checkLogin" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <styleClass>
+                              <String fx:value="TextField" />
+                              <String fx:value="LabelPiccola" />
+                           </styleClass></PasswordField>
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -95,19 +109,27 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button fx:id="AnnullaButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" maxWidth="178.0" minWidth="178.0" mnemonicParsing="false" onAction="#backHomePageBenvenuto" prefHeight="45.0" styleClass="AnnullaButton" text="Annulla">
+                        <Button fx:id="AnnullaButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" maxWidth="178.0" minWidth="178.0" mnemonicParsing="false" onAction="#backHomePageBenvenuto" prefHeight="45.0" text="Annulla">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <styleClass>
+                              <String fx:value="Button" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass>
                         </Button>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="AccediButton" alignment="CENTER" focusTraversable="false" maxWidth="178.0" minWidth="178.0" mnemonicParsing="false" onAction="#checkLogin" prefHeight="45.0" styleClass="AccediButton" text="Accedi">
+                        <Button fx:id="AccediButton" alignment="CENTER" focusTraversable="false" maxWidth="178.0" minWidth="178.0" mnemonicParsing="false" onAction="#checkLogin" prefHeight="45.0" text="Accedi">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <styleClass>
+                              <String fx:value="Button" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass>
                         </Button>
                      </children>
                   </HBox>
@@ -119,4 +141,8 @@
          </padding>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../../css/login.css" />
+      <URL value="@../../css/StiliComuni.css" />
+   </stylesheets>
 </AnchorPane>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -18,14 +20,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneSkill" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="850.0" styleClass="RegistrazioneSkill" stylesheets="@../../../../css/FormRegistrazioneSkill.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneSkill">
+<AnchorPane fx:id="RegistrazioneSkill" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="850.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneSkill">
    <children>
       <HBox fx:id="IstruzioniBox" alignment="CENTER" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox spacing="3.0">
                <children>
-                  <Label fx:id="IstruzioniLabel" alignment="TOP_LEFT" styleClass="IstruzioniLabel" text="Inserisci qui i dati per la creazione di una nuova skill" textAlignment="CENTER" />
-                  <Label fx:id="IstruzioniLabel2" styleClass="IstruzioniLabel2" text="* Campo obbligatorio" />
+                  <Label fx:id="IstruzioniLabel" alignment="TOP_LEFT" styleClass="LabelUltra" text="Inserisci qui i dati per la creazione di una nuova skill" textAlignment="CENTER" />
+                  <Label fx:id="IstruzioniLabel2" style="-fx-text-fill: red;" styleClass="LabelGrande" text="* Campo obbligatorio" />
                </children>
             </VBox>
          </children>
@@ -37,7 +39,7 @@
          <children>
             <AnchorPane>
                <children>
-                  <ScrollPane fx:id="FormScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minViewportHeight="300.0" minViewportWidth="685.0" prefHeight="200.0" prefWidth="200.0" styleClass="FormScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ScrollPane fx:id="FormScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minViewportHeight="300.0" minViewportWidth="685.0" prefHeight="200.0" prefWidth="200.0" styleClass="ScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
                         <AnchorPane>
                            <children>
@@ -45,62 +47,86 @@
                                  <children>
                                     <HBox fx:id="TipoSkillBox" alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
-                                          <Label fx:id="TipoSkillLabel" prefWidth="150.0" styleClass="TipoSkillLabel" text="* Tipo Skill" />
+                                          <Label fx:id="TipoSkillLabel" prefWidth="185.0" styleClass="LabelGrande" text="* Tipo Skill" />
                                           <HBox fx:id="TipoSkillRBBox" spacing="25.0">
                                              <children>
-                                                <RadioButton fx:id="TipoSkillRB1" mnemonicParsing="false" onMouseClicked="#visualizzaFormSoftSkill" selected="true" styleClass="TipoSkillRB1" text="Soft-Skill">
+                                                <RadioButton fx:id="TipoSkillRB1" mnemonicParsing="false" onMouseClicked="#visualizzaFormSoftSkill" selected="true" text="Soft-Skill">
                                                    <toggleGroup>
                                                       <ToggleGroup fx:id="TipoSkillGroup" />
                                                    </toggleGroup>
+                                                   <styleClass>
+                                                      <String fx:value="RadioButton" />
+                                                      <String fx:value="LabelPiccola" />
+                                                   </styleClass>
                                                 </RadioButton>
-                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" onMouseClicked="#visualizzaFormHardSkill" styleClass="TipoSkillRB2" text="Hard-Skill" toggleGroup="$TipoSkillGroup" />
+                                                <RadioButton fx:id="TipoSkillRB2" mnemonicParsing="false" onMouseClicked="#visualizzaFormHardSkill" text="Hard-Skill" toggleGroup="$TipoSkillGroup">
+                                                   <styleClass>
+                                                      <String fx:value="RadioButton" />
+                                                      <String fx:value="LabelPiccola" />
+                                                   </styleClass></RadioButton>
                                              </children>
                                           </HBox>
                                        </children></HBox>
                                     <VBox fx:id="DescrizioneBox">
                                        <children>
-                                          <Label fx:id="DescrizioneLabel" text="Inserisci una descrizione" visible="false" />
-                                          <TextArea fx:id="DescrizioneTA" minHeight="60.0" styleClass="DescrizioneTA" wrapText="true" />
+                                          <Label fx:id="DescrizioneLabel" styleClass="LabelNascosta" text="Inserisci una descrizione" visible="false" />
+                                          <TextArea fx:id="DescrizioneTA" minHeight="60.0" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="TextArea" />
+                                                <String fx:value="LabelPiccola" />
+                                             </styleClass></TextArea>
                                           <Label fx:id="DescrizioneErrorLabel" styleClass="ErrorLabel" />
                                        </children></VBox>
-                                    <GridPane fx:id="DataCertificazioneBox" visible="false">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="27.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
-                                        <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
+                                    <VBox fx:id="DataCertificazioneBox" spacing="5.0" visible="false">
                                        <children>
-                                          <Label fx:id="DataCertificazioneLabel" prefWidth="150.0" styleClass="DataCertificazioneLabel" text="* Data di certificazione" />
-                                          <DatePicker fx:id="DataCertificazioneDP" styleClass="DataCertificazioneDP" GridPane.columnIndex="1" />
-                                          <Label fx:id="DataCertificazioneErrorLabel" alignment="TOP_LEFT" styleClass="ErrorLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                             <children>
+                                                <Label fx:id="DataCertificazioneLabel" styleClass="LabelGrande" text="* Data di certificazione" />
+                                                <AnchorPane HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <DatePicker fx:id="DataCertificazioneDP" editable="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <styleClass>
+                                                            <String fx:value="DatePicker" />
+                                                            <String fx:value="LabelPiccola" />
+                                                         </styleClass>
+                                                      </DatePicker>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="DataCertificazioneErrorLabel" alignment="TOP_LEFT" styleClass="ErrorLabel" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets left="195.0" />
+                                             </VBox.margin>
+                                          </Label>
                                        </children>
-                                    </GridPane>
-                                    <GridPane fx:id="TitoloBox" visible="false">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="27.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="43.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
-                                          <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
+                                    </VBox>
+                                    <VBox fx:id="TitoloBox" visible="false">
                                        <children>
-                                          <Label fx:id="TitoloLabel" styleClass="TitoloLabel" text="* Titolo" />
-                                          <ComboBox fx:id="TitoloComboBox" prefWidth="169.0" styleClass="TitoloComboBox" GridPane.columnIndex="1" />
-                                          <TextField fx:id="NuovoTitoloTF" promptText="* Inserisci un nuovo titolo" styleClass="NuovoTitoloTF" visible="false" GridPane.columnIndex="2">
-                                             <GridPane.margin>
-                                                <Insets left="10.0" />
-                                             </GridPane.margin></TextField>
-                                          <Label fx:id="NuovoTitoloErrorLabel" styleClass="ErrorLabel" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                             <GridPane.margin>
-                                                <Insets left="10.0" />
-                                             </GridPane.margin></Label>
+                                          <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                             <children>
+                                                <Label fx:id="TitoloLabel" prefWidth="185.0" styleClass="LabelGrande" text="* Titolo" />
+                                                <ComboBox fx:id="TitoloComboBox" prefWidth="170.0">
+                                                   <styleClass>
+                                                      <String fx:value="ComboBox" />
+                                                      <String fx:value="LabelPiccola" />
+                                                   </styleClass>
+                                                </ComboBox>
+                                                <TextField fx:id="NuovoTitoloTF" promptText="* Inserisci un nuovo titolo" visible="false" HBox.hgrow="ALWAYS">
+                                                   <styleClass>
+                                                      <String fx:value="TextField" />
+                                                      <String fx:value="LabelPiccola" />
+                                                   </styleClass>
+                                                </TextField>
+                                             </children>
+                                          </HBox>
+                                          <Label fx:id="NuovoTitoloErrorLabel" styleClass="ErrorLabel">
+                                             <VBox.margin>
+                                                <Insets left="375.0" />
+                                             </VBox.margin>
+                                          </Label>
                                        </children>
-                                    </GridPane>
+                                    </VBox>
                                  </children>
                                  <padding>
                                     <Insets bottom="50.0" top="50.0" />
@@ -127,19 +153,27 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#annullaOperazione" prefWidth="180.0" styleClass="AnnullaButton" text="Annulla">
+                        <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#annullaOperazione" prefWidth="180.0" text="Annulla">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <styleClass>
+                              <String fx:value="Button" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass>
                         </Button>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#confermaOperazione" prefWidth="180.0" styleClass="ConfermaButton" text="Conferma">
+                        <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#confermaOperazione" prefWidth="180.0" text="Conferma">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <styleClass>
+                              <String fx:value="Button" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass>
                         </Button>
                      </children>
                   </HBox>
@@ -151,4 +185,8 @@
          </padding>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../../../../css/FormRegistrazioneSkill.css" />
+      <URL value="@../../../../css/StiliComuni.css" />
+   </stylesheets>
 </AnchorPane>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="HomePageImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" styleClass="HomePageImpiegato" stylesheets="@../../../css/HomePageImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageImpiegato">
+<AnchorPane fx:id="HomePageImpiegato" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1100.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerHomePageImpiegato">
    <children>
       <GridPane hgap="15.0" layoutX="30.0" layoutY="30.0" vgap="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -46,17 +47,17 @@
                <children>
                   <Button fx:id="ValutazioniButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#VisualizzaValutazioni" prefHeight="65.0" text="Le tue valutazioni" wrapText="true">
                      <styleClass>
-                        <String fx:value="ToolBarButton" />
+                        <String fx:value="Button" />
                         <String fx:value="LabelGrande" />
                      </styleClass></Button>
                   <Button fx:id="NuovoProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#CreaProgetto" prefHeight="65.0" text="Nuovo progetto" wrapText="true">
                      <styleClass>
-                        <String fx:value="ToolBarButton" />
+                        <String fx:value="Button" />
                         <String fx:value="LabelGrande" />
                      </styleClass></Button>
                   <Button fx:id="LogoutButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#EffettuaLogout" prefHeight="65.0" text="Logout">
                      <styleClass>
-                        <String fx:value="ToolBarButton" />
+                        <String fx:value="Button" />
                         <String fx:value="LabelGrande" />
                      </styleClass></Button>
                </children>
@@ -86,8 +87,16 @@
                   </GridPane>
                   <AnchorPane fx:id="ListeBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                      <children>
-                        <ListView fx:id="ListaProgettiLV" onMouseClicked="#visualizzaInformazioniProgetto" styleClass="ListView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <ListView fx:id="ListaRiunioniLV" onMouseClicked="#visualizzaInformazioniRiunione" styleClass="ListView" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="ListaProgettiLV" onMouseClicked="#visualizzaInformazioniProgetto" style="-fx-border-width: 1 5 5 5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <styleClass>
+                              <String fx:value="ListView" />
+                              <String fx:value="LabelPiccola" />
+                           </styleClass></ListView>
+                        <ListView fx:id="ListaRiunioniLV" onMouseClicked="#visualizzaInformazioniRiunione" style="-fx-border-width: 1 5 5 5;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <styleClass>
+                              <String fx:value="ListView" />
+                              <String fx:value="LabelPiccola" />
+                           </styleClass></ListView>
                      </children>
                   </AnchorPane>
                </children>
@@ -99,7 +108,11 @@
                <children>
                   <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label fx:id="IstruzioniLabel" styleClass="IstruzioniLabel" text="Clicca un progetto&#10;per visualizzarne le informazioni" textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="IstruzioniLabel" text="Clicca un progetto&#10;per visualizzarne le informazioni" textAlignment="CENTER" wrapText="true">
+                           <styleClass>
+                              <String fx:value="IstruzioniLabel" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass></Label>
                      </children>
                   </HBox>
                </children>
@@ -188,7 +201,7 @@
                                     </VBox>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="ProjectManagerBox" GridPane.rowIndex="1">
+                              <AnchorPane fx:id="ProjectManagerBox" visible="false" GridPane.rowIndex="1">
                                  <children>
                                     <GridPane hgap="10.0" layoutX="73.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <columnConstraints>
@@ -201,15 +214,15 @@
                                        <children>
                                           <HBox alignment="BOTTOM_LEFT" spacing="10.0">
                                              <children>
-                                                <Button fx:id="GestioneProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#gestisciProgetto" prefHeight="65.0" text="Gestisci progetto">
+                                                <Button fx:id="GestioneProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#gestisciProgetto" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Gestisci progetto">
                                                    <styleClass>
-                                                      <String fx:value="ProjectManagerBoxButton" />
+                                                      <String fx:value="Button" />
                                                       <String fx:value="LabelGrande" />
                                                    </styleClass>
                                                 </Button>
-                                                <Button fx:id="ModificaProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#modificaInformazioniProgetto" prefHeight="65.0" text="Modifica informazioni">
+                                                <Button fx:id="ModificaProgettoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#modificaInformazioniProgetto" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Modifica informazioni">
                                                    <styleClass>
-                                                      <String fx:value="ProjectManagerBoxButton" />
+                                                      <String fx:value="Button" />
                                                       <String fx:value="LabelGrande" />
                                                    </styleClass>
                                                 </Button>
@@ -217,9 +230,9 @@
                                           </HBox>
                                           <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="1">
                                              <children>
-                                                <Button fx:id="SalvaModificheProgetto" minHeight="65.0" mnemonicParsing="false" onAction="#salvaModificheProgetto" prefHeight="65.0" text="Salva Modifiche">
+                                                <Button fx:id="SalvaModificheProgetto" minHeight="65.0" mnemonicParsing="false" onAction="#salvaModificheProgetto" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Salva Modifiche">
                                                    <styleClass>
-                                                      <String fx:value="ProjectManagerBoxButton" />
+                                                      <String fx:value="Button" />
                                                       <String fx:value="LabelGrande" />
                                                    </styleClass>
                                                 </Button>
@@ -332,14 +345,14 @@
                                  <children>
                                     <HBox alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Button fx:id="PresenzaButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#accettaInvito" prefHeight="65.0" text="Accetta l'invito">
+                                          <Button fx:id="PresenzaButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#accettaInvito" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Accetta l'invito">
                                              <styleClass>
-                                                <String fx:value="PartecipanteBoxButton" />
+                                                <String fx:value="Button" />
                                                 <String fx:value="LabelGrande" />
                                              </styleClass></Button>
-                                          <Button fx:id="AssenzaButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#rifutaInvito" prefHeight="65.0" text="Rifiuta l'invito">
+                                          <Button fx:id="AssenzaButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#rifutaInvito" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Rifiuta l'invito">
                                              <styleClass>
-                                                <String fx:value="PartecipanteBoxButton" />
+                                                <String fx:value="Button" />
                                                 <String fx:value="LabelGrande" />
                                              </styleClass></Button>
                                        </children>
@@ -359,15 +372,15 @@
                                        <children>
                                           <HBox alignment="BOTTOM_LEFT" spacing="10.0">
                                              <children>
-                                                <Button fx:id="GestioneRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#gestisciRiunione" prefHeight="65.0" text="Gestisci riunione">
+                                                <Button fx:id="GestioneRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#gestisciRiunione" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Gestisci riunione">
                                                    <styleClass>
-                                                      <String fx:value="OrganizzatoreBoxButton" />
+                                                      <String fx:value="Button" />
                                                       <String fx:value="LabelGrande" />
                                                    </styleClass>
                                                 </Button>
-                                                <Button fx:id="ModificaRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#modificaInformazioniRiunione" prefHeight="65.0" text="Modifica informazioni">
+                                                <Button fx:id="ModificaRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#modificaInformazioniRiunione" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Modifica informazioni">
                                                    <styleClass>
-                                                      <String fx:value="OrganizzatoreBoxButton" />
+                                                      <String fx:value="Button" />
                                                       <String fx:value="LabelGrande" />
                                                    </styleClass>
                                                 </Button>
@@ -375,9 +388,9 @@
                                           </HBox>
                                           <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="1">
                                              <children>
-                                                <Button fx:id="SalvaModificheRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#salvaModificheRiunione" prefHeight="65.0" text="Salva modifiche">
+                                                <Button fx:id="SalvaModificheRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#salvaModificheRiunione" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Salva modifiche">
                                                    <styleClass>
-                                                      <String fx:value="OrganizzatoreBoxButton" />
+                                                      <String fx:value="Button" />
                                                       <String fx:value="LabelGrande" />
                                                    </styleClass>
                                                 </Button>
@@ -405,4 +418,8 @@
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
+   <stylesheets>
+      <URL value="@../../../css/HomePageImpiegato.css" />
+      <URL value="@../../../css/StiliComuni.css" />
+   </stylesheets>
 </AnchorPane>

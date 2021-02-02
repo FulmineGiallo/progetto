@@ -1,11 +1,3 @@
-.HomePageBenvenuto{
-	-fx-primocolore: #7289da;
-	-fx-secondocolore: #424549;
-	-fx-terzocolore: #36393e;
-	-fx-background-color: -fx-secondocolore;
-	-fx-font-family: 'Roboto';
-}
-
 .TitoloLabel{
 	-fx-text-fill: white;
 	-fx-font-size: 50;
@@ -21,31 +13,8 @@
 	-fx-border-color: -fx-terzocolore;
 }
 
-.RegistrazioneLabel, .LoginLabel{
-	-fx-font-size: 30;
-	-fx-text-fill: white;
-}
-
 .RegistrazioneLabel2{
 	-fx-font-size: 28;
 	-fx-text-fill: white;
 	-fx-font-family: 'Roboto Light';
-}
-
-.RegistrazioneButton,
-.LoginButton{
-	-fx-background-color: -fx-terzocolore;
-	-fx-background-radius: 10;
-	-fx-text-fill: white;
-	-fx-font-weight: 900;
-	-fx-font-size: 30;
-	-fx-border-width: 2;
-	-fx-border-color: white;
-	-fx-border-radius: 10;
-}
-
-.RegistrazioneButton:hover,
-.LoginButton:hover{
-	-fx-background-color: -fx-primocolore;
-	-fx-background-radius: 10;
 }
