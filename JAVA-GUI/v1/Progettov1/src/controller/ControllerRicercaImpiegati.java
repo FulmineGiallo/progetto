@@ -2,12 +2,17 @@ package controller;
 
  
 
+import java.awt.Desktop.Action;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Observable;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -49,6 +54,8 @@ public class ControllerRicercaImpiegati {
     private Label IstruzioniLabel;
     @FXML
     private VBox Form;
+    @FXML
+    private AnchorPane FormAP;
     @FXML
     private ScrollPane FormScrollPane;
     @FXML
@@ -110,6 +117,10 @@ public class ControllerRicercaImpiegati {
     private Stage popup;
     
     private Progetto progetto;
+    private float salarioMedioInserito;
+    private String nomeInserito;
+    private String cognomeInserito;
+    private String ordinamentoSelezionato;
     ImpiegatoDaoInterface impiegatoDao;
     RuoloDaoInterface ruoliDao;
     TitoloDaoInterface titoloDao;
@@ -117,7 +128,9 @@ public class ControllerRicercaImpiegati {
     private ObservableList<Impiegato> listaImpiegati = FXCollections.observableArrayList();
     private ObservableList<Ruolo> listaRuoli = FXCollections.observableArrayList();
     private ObservableList<Titolo> listaTitoli = FXCollections.observableArrayList();
+    private ObservableList<String> listaOridinaPer = FXCollections.observableArrayList();
     
+ 
     
     public void setStage(Stage window, Stage popup)
     {
@@ -151,9 +164,74 @@ public class ControllerRicercaImpiegati {
     	ListaRicercaImpiegatiLV.setItems(listaImpiegati);
     	RicercaSkillComboBox.setItems(listaTitoli);
     	RuoloImpiegatoComboBox.setItems(listaRuoli);
+    	
+    	
+    	listaOridinaPer.add("Nome (Alfabetico)");
+    	listaOridinaPer.add("Cognome (Alfabetico)");
+    	listaOridinaPer.add("Salario (Crescente)");
+    	listaOridinaPer.add("Salario (Descrescente)");
+    	
+    	OrdinamentoComboBox.setItems(listaOridinaPer);
+    	OrdinamentoComboBox.getSelectionModel().select(1);
+    	
+    	InserisciSkill();
+    	
 //        lista = progettoDao.getPartecipanti(progetto);
 //        ListaPartecipantiLV.setItems(lista);
 //        updateInfoImpiegato();
     }
+    
+    
+    public void InserisciSkill(){
+    RicercaSkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+    	SkillAggiunteLV.getItems().add(RicercaSkillComboBox.getSelectionModel().getSelectedItem().toString());
+    	});
+    
+    }
+    
+    public void avviaRicerca(ActionEvent event) {
+    	
+    	String ordinamento = null;
+    	
+    	if(SalarioMedioTF.getText().equals("")) {
+    		salarioMedioInserito = -1;
+    	}
+    	else {
+    		salarioMedioInserito = Float.parseFloat(SalarioMedioTF.getText());
+    	}
+    	
+    	nomeInserito = NomeTF.getText();
+    	cognomeInserito = CognomeTF.getText();
+    	ordinamentoSelezionato = OrdinamentoComboBox.getSelectionModel().getSelectedItem();
+    	
+    	switch (ordinamentoSelezionato) {
+    	case "Nome (Alfabetico)":
+    		ordinamento = "Nome ASC";
+    		break;	
+    	case "Cognome (Alfabetico)":
+    		ordinamento = "Cognome ASC";
+    		break;
+    	case "Salario (Crescente)":
+    		ordinamento = "salarioMedio ASC";
+    		break;
+    	case "Salario (Descrescente)":
+    		ordinamento = "salarioMedio DESC";
+    		break;
+    	}
 
+    	
+    	nomeInserito="%" + nomeInserito + "%";
+    	cognomeInserito="%" + cognomeInserito + "%";
+
+    	
+    	
+    	try {
+			listaImpiegati = impiegatoDao.getAllImpiegatiByResearch(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento);
+			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
 }

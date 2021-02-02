@@ -35,7 +35,7 @@
             <RowConstraints vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <AnchorPane fx:id="Form">
+            <AnchorPane fx:id="FormAP">
                <children>
                   <ScrollPane fx:id="FormScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="0.0" maxWidth="0.0" styleClass="FormScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
@@ -142,7 +142,7 @@
                                           </VBox>
                                           <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="1">
                                              <children>
-                                                <Button fx:id="RicercaImpiegatiButton" alignment="TOP_LEFT" mnemonicParsing="false" text="Ricerca impiegati">
+                                                <Button fx:id="RicercaImpiegatiButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#avviaRicerca" text="Ricerca impiegati">
                                                    <styleClass>
                                                       <String fx:value="Button" />
                                                       <String fx:value="LabelPiccola" />

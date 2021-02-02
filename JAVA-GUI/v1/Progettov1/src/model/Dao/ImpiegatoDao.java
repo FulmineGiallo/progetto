@@ -23,6 +23,10 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final Connection connection;
 
     private final PreparedStatement getImpiegati;
+    private final PreparedStatement getImpiegatiByResearchNomeAsc;
+    private final PreparedStatement getImpiegatiByResearchCognomeAsc;
+    private final PreparedStatement getImpiegatiByResearchSalarioAsc;
+    private final PreparedStatement getImpiegatiByResearchSalarioDesc;
     private final PreparedStatement getNome;
     private final PreparedStatement getCognome;    
     private final PreparedStatement loginImpiegato;
@@ -42,7 +46,12 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     public ImpiegatoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
-        getImpiegati = connection.prepareStatement("SELECT * FROM impiegato");
+        getImpiegati = connection.prepareStatement("SELECT * FROM impiegato ORDER BY cognome");
+        getImpiegatiByResearchNomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY Nome ASC");
+        getImpiegatiByResearchCognomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY cognome ASC");
+        getImpiegatiByResearchSalarioAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY AVG(quantita) ASC");
+        getImpiegatiByResearchSalarioDesc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY AVG(quantita) DESC");
+        
         getNome = connection.prepareStatement("SELECT nome FROM impiegato WHERE email = ?");
         getCognome = connection.prepareStatement("SELECT cognome FROM impiegato WHERE email = ?");
         loginImpiegato = connection.prepareStatement("SELECT COUNT(*) FROM impiegatoaccount WHERE email = ? AND password = ?");
@@ -229,6 +238,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             impiegato.setDataNascita(rs.getObject("datan", LocalDate.class));
             impiegato.setPassword(rs.getString("password"));
             impiegato.setGrado(getGrado(impiegato.getCF()));
+            list.add(impiegato);
         }
         rs.close();
         return list;
@@ -247,5 +257,34 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     	
 		rs.close();
     	return direttoreRisorseUmane;
+    }
+    
+    public ObservableList<Impiegato> getAllImpiegatiByResearch(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato) throws SQLException{
+    	
+        getImpiegatiByResearchNomeAsc.setString(1,nomeInserito);
+        getImpiegatiByResearchNomeAsc.setString(2,cognomeInserito);
+        getImpiegatiByResearchNomeAsc.setFloat(3,salarioMedio-200);
+        getImpiegatiByResearchNomeAsc.setFloat(4,salarioMedio+200);
+        
+        
+        ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
+        Impiegato impiegato = new Impiegato();
+//       System.out.print(getImpiegatiByResearch);
+       
+        if(salarioMedio != -1) {
+        	ResultSet rs = getImpiegatiByResearchNomeAsc.executeQuery();
+        	while(rs.next())
+        	{
+        		impiegato.setNome(rs.getString("nome"));
+        		impiegato.setCognome(rs.getString("cognome"));
+        		impiegato.setCF(rs.getString("cf"));
+        		impiegati.add(impiegato);
+        	}
+        	rs.close();
+        	return impiegati;
+        }
+        else {
+        	return null;
+        }
     }
 }
