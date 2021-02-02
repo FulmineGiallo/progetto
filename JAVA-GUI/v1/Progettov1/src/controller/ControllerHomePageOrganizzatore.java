@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -37,75 +38,51 @@ import view.HomePageOrganizzatore;
 
 public class ControllerHomePageOrganizzatore {
 
-    @FXML
-    private AnchorPane HomePageOrganizzatore;
-
-    @FXML
-    private VBox OrganizzatoreBox;
-
-    @FXML
-    private Label NomeOrganizzatoreLabel;
-
-    @FXML
-    private Label NomeRiunioneLabel;
-
-    @FXML
-    private HBox ToolBar;
-
-    @FXML
-    private Button AggiungiImpiegatoButton;
-
-    @FXML
-    private Button HomePageImpiegatoButton;
-
-    @FXML
-    private AnchorPane ListaPartecipantiBox;
-
-    @FXML
-    private Label ListaPartecipantiLabel;
-
-    @FXML
-    private ScrollPane ListaPartecipantiScrollPane;
-
-    @FXML
-    private ListView<Impiegato> ListaPartecipantiLV;
-
-    @FXML
-    private AnchorPane IstruzioniBox;
-
-    @FXML
-    private Label IstruzioniLabel;
-
-    @FXML
-    private AnchorPane DescrizioneRiunioneImpiegatoBox;
-
-    @FXML
-    private AnchorPane DescrizioneRiunioneImpiegatoPane;
-
-    @FXML
-    private Label NomePartecipanteLabel;
-
-    @FXML
-    private Label SkillComboBoxLabel;
-
-    @FXML
-    private ComboBox<Titolo> SkillComboBox;
-
-    @FXML
-    private VBox SkillBox;
-
-    @FXML
-    private Label TitoloSkillLabel;
-
-    @FXML
-    private Label DataCertificazioneSkillLabel;
-
-    @FXML
-    private TextArea DescrizioneSkillTA;
-
-    @FXML
-    private Button RimuoviImpiegatoButton;
-
+    @FXML private AnchorPane 		  HomePageOrganizzatore;
+    @FXML private VBox   			  OrganizzatoreBox;
+    @FXML private Label 			  NomeOrganizzatoreLabel;
+    @FXML private Label 			  NomeRiunioneLabel;
+    @FXML private HBox 				  ToolBar;
+    @FXML private Button 			  HomePageImpiegatoButton;
+    @FXML private Button 			  AggiungiImpiegatoButton;
+    @FXML private AnchorPane 		  ListaPartecipantiBox;
+    @FXML private Label 			  ListaPartecipantiLabel;
+    @FXML private ListView<Impiegato> ListaPartecipantiLV;
+    @FXML private AnchorPane 		  IstruzioniBox;
+    @FXML private Label 			  IstruzioniLabel;
+    @FXML private AnchorPane 		  DescrizioneRiunioneImpiegatoBox;
+    @FXML private AnchorPane 		  DescrizioneRiunioneImpiegatoPane;
+    @FXML private AnchorPane 		  InformazioniImpiegatoBox;
+    @FXML private HBox 				  NomeImpiegatoBox;
+    @FXML private Label 			  NomeImpiegatoLabel;
+    @FXML private TextField 		  NomeImpiegatoTF;
+    @FXML private HBox 				  EmailBox;
+    @FXML private Label 			  EmailLabel;
+    @FXML private TextField 		  EmailTF;
+    @FXML private HBox 				  ComuneDiNascitaBox;
+    @FXML private Label 			  ComuneDiNascitaLabel;
+    @FXML private TextField 		  ComuneDiNascitaTF;
+    @FXML private HBox 				  DataDiNascitaBox;
+    @FXML private Label 			  DataDiNascitaLabel;
+    @FXML private TextField 		  DataDiNascitaTF;
+    @FXML private HBox 			  	  SelezionaSkillBox;
+    @FXML private Label 		  	  SkillComboBoxLabel;
+    @FXML private ComboBox<Skill> 	  SkillComboBox;
+    @FXML private HBox 				  TipologiaSkillBox;
+    @FXML private Label 			  TipologiaSkillLabel;
+    @FXML private TextField 		  TipologiaSkillTF;
+    @FXML private VBox 				  SkillBox;
+    @FXML private HBox 				  TitoloSkillBox;
+    @FXML private Label 			  TitoloSkillLabel;
+    @FXML private TextField 		  TitoloSkillTF;
+    @FXML private HBox 				  DataDiCertificazioneBox;
+    @FXML private Label 			  DataCertificazioneSkillLabel;
+    @FXML private TextField 		  DataCertificazioneTF;
+    @FXML private VBox 				  DescrizioneSkillBox;
+    @FXML private Label 			  DescrizioneLabel;
+    @FXML private TextArea 			  DescrizioneSkillTA;
+    @FXML private Button 			  RimuoviImpiegatoButton;
+    
     private HomePageImpiegato homePageImpiegato;
     
     private Stage window;
@@ -151,7 +128,7 @@ public class ControllerHomePageOrganizzatore {
     public void inizializza(Impiegato Organizzatore, Riunione riunione) throws SQLException {
     	this.riunione = riunione;
     	this.Organizzatore = Organizzatore;
-        NomeOrganizzatoreLabel.setText((Organizzatore.getNome()+ " " + Organizzatore.getCognome()).toUpperCase(Locale.ROOT));
+        NomeOrganizzatoreLabel.setText((Organizzatore.toString()).toUpperCase());
         NomeRiunioneLabel.setText((riunione.getTitolo()));
         idriunione = riunioneDao.GetIdRiunione(riunione);
         lista = riunioneDao.getPartecipanti(idriunione);
@@ -174,55 +151,59 @@ public class ControllerHomePageOrganizzatore {
         {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                IstruzioniBox.setVisible(false);
-                
-                DataCertificazioneSkillLabel.setVisible(false);
-                DescrizioneSkillTA.setVisible(false);
-                DescrizioneRiunioneImpiegatoBox.setVisible(true);
-                NomeRiunioneLabel.setVisible(true);
-                NomePartecipanteLabel.setText(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getNome() + " " + ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCognome());
+            	
+            	Impiegato infoImpiegato = ListaPartecipantiLV.getSelectionModel().getSelectedItem();
+            	
+                if (infoImpiegato != null) {
+					IstruzioniBox.setVisible(false);
+					DescrizioneRiunioneImpiegatoBox.setVisible(true);
+					SkillBox.setVisible(false);
+					NomeImpiegatoTF.setText(infoImpiegato.toString());
+					try {
+						titoloDAO = new TitoloDAO(connection);
+						SkillDAO = new SkillDao(connection);
+						RimuoviImpiegatoButton.setVisible(true);
 
-                
-                
-            	try
-                {
-                    titoloDAO = new TitoloDAO(connection);
-                    SkillDAO = new SkillDao(connection);
-                    RimuoviImpiegatoButton.setVisible(true);
-                    
-                    SkillComboBox.setItems(titoloDAO.titoliListImpiegato(ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
+						//SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
 
-                    if(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCF().equals(riunione.getCFOrganizzatore()))
-                    {
-                    	RimuoviImpiegatoButton.setVisible(false);
-                    }
-                    SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
-
-                    	SkillBox.setVisible(true);
-
-                    if(SkillComboBox.getSelectionModel().getSelectedItem() != null) {	
-                    	TitoloSkillLabel.setVisible(true);
-                    	TitoloSkillLabel.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
-                    	
-                    	DataCertificazioneSkillLabel.setVisible(true);
-                    	DescrizioneSkillTA.setVisible(true);
-                    	try {
-							DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
-                    		DataCertificazioneSkillLabel.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
-						} catch (SQLException e) {
-							e.printStackTrace();
+						if (infoImpiegato.getCF().equals(riunione.getCFOrganizzatore())) {
+							RimuoviImpiegatoButton.setVisible(false);
 						}
-                    	
-                    }else {
-                    	TitoloSkillLabel.setVisible(false);
-                    	DataCertificazioneSkillLabel.setVisible(false);
-                    	DescrizioneSkillTA.setVisible(false);
-                    }
-                    
-                   });
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+						
+						SkillComboBox.getSelectionModel().selectedItemProperty()
+								.addListener((options, oldValue, newValue) -> {
+
+									SkillBox.setVisible(true);
+
+									if (SkillComboBox.getSelectionModel().getSelectedItem() != null) {
+										TitoloSkillLabel.setVisible(true);
+										TitoloSkillLabel.setText(
+												SkillComboBox.getSelectionModel().getSelectedItem().toString());
+
+										DataCertificazioneSkillLabel.setVisible(true);
+										DescrizioneSkillTA.setVisible(true);
+										try {
+											DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(
+													SkillComboBox.getSelectionModel().getSelectedItem().toString(),
+													infoImpiegato));
+											DataCertificazioneSkillLabel.setText(SkillDAO.dataCertificazione(
+													SkillComboBox.getSelectionModel().getSelectedItem().toString(),
+													infoImpiegato));
+										} catch (SQLException e) {
+											e.printStackTrace();
+										}
+
+									} else {
+										TitoloSkillLabel.setVisible(false);
+										DataCertificazioneSkillLabel.setVisible(false);
+										DescrizioneSkillTA.setVisible(false);
+									}
+
+								});
+					} catch (SQLException ex) {
+						ex.printStackTrace();
+					} 
+				}
                 
                 
             }

@@ -14,7 +14,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -39,35 +43,50 @@ import view.FinestraPopup;
 import view.FormRegistrazioneSkill;
 
 public class ControllerRegistrazioneImpiegato {
+	
+	@FXML private AnchorPane		RegistrazioneImpiegato;
 
+	@FXML private HBox				IstruzioniBox;
     @FXML private Label 			IstruzioniLabel;
     @FXML private Label 			IstruzioniLabel2;
     
+    @FXML private HBox				FormBox;
+    @FXML private ScrollPane		FormScrollPane;
+    @FXML private VBox				Form;
+    
+    @FXML private VBox				EmailBox;
     @FXML private Label 			EmailLabel;
     @FXML private TextField 		EmailTF;
     @FXML private Label 			EmailErrorLabel;
     
+    @FXML private VBox				PasswordBox;
     @FXML private Label 			PasswordLabel;
     @FXML private PasswordField 	PasswordTF;
     @FXML private Label 			PasswordErrorLabel;
     
+    @FXML private VBox				NomeBox;
     @FXML private Label 			NomeLabel;
 	@FXML private TextField 		NomeTF;
     @FXML private Label 			NomeErrorLabel;
     
+    @FXML private VBox				CognomeBox;
     @FXML private Label				CognomeLabel;
     @FXML private TextField 		CognomeTF;
     @FXML private Label 			CognomeErrorLabel;
     
+    @FXML private HBox				GenereBox;
     @FXML private Label 			GenereLabel;
+    @FXML private HBox				GenereRBBox;
     @FXML private ToggleGroup 		GenereGroup;
     @FXML private RadioButton 		GenereRB1;
     @FXML private RadioButton 		GenereRB2;
 
+    @FXML private VBox				DataDiNascitaBox;
     @FXML private Label 			DataDiNascitaLabel;
     @FXML private DatePicker 		DataDiNascitaDP;
     @FXML private Label 			DataDiNascitaErrorLabel;
     
+    @FXML private GridPane			ComuneDiNascitaBox;
     @FXML private Label 			ComuneLabel;
     @FXML private ComboBox<Comune> 	ComuneComboBox;
     @FXML private Label				ComuneErrorLabel;
@@ -77,10 +96,12 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Label				ProvinciaErrorLabel;
     @FXML private Button        	CercaComuniButton;
     
+    @FXML private VBox				CodiceFiscaleBox;
     @FXML private Label 			CodiceFiscaleLabel;
     @FXML private TextField 		CodiceFiscaleTF;
     @FXML private Label 			CodiceFiscaleErrorLabel;
     
+    @FXML private GridPane			SkillBox;
     @FXML private Label 			SkillLabel;
     @FXML private ListView<Skill>	SkillLV;
 	@FXML private Button			NuovaSkillButton;
@@ -88,6 +109,7 @@ public class ControllerRegistrazioneImpiegato {
     @FXML private Label				GradoLabel;
     @FXML private ComboBox<Grado> 	GradoComboBox;
     
+    @FXML private AnchorPane		ButtonBar;
     @FXML private Button 			AnnullaButton;
     @FXML private Button 			ConfermaButton;
     
@@ -115,6 +137,7 @@ public class ControllerRegistrazioneImpiegato {
     private FormRegistrazioneSkill 			  formRegistrazioneSkill;
     private FinestraPopup		   			  finestraInformazioniSkill;
     
+    private Skill skillIniziale = new Skill("Soft-Skill", "Non ci sono ancora skill");
     private Skill infoSkill;
     
     private ObservableList<Skill> listaSkillImpiegato = FXCollections.observableArrayList();
@@ -196,7 +219,7 @@ public class ControllerRegistrazioneImpiegato {
             }
         });
         
-        SkillLV.getItems().add((new Skill("Soft-Skill", "Non ci sono ancora skill")));
+        SkillLV.getItems().add(skillIniziale);
     }
     
     public boolean controlloProvincia() {
@@ -423,7 +446,7 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     @FXML public void visualizzaInformazioniSkill(MouseEvent event) {    	
-    	if (!SkillLV.getItems().get(0).getDescrizione().equals("Non ci sono ancora skill")) {
+    	if (!SkillLV.getItems().contains(skillIniziale)) {
 			infoSkill = SkillLV.getSelectionModel().getSelectedItem();
 			if (infoSkill != null) {
 				finestraInformazioniSkill = new FinestraPopup();

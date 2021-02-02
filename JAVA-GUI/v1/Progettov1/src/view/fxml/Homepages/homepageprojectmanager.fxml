@@ -94,7 +94,7 @@
                                              <children>
                                                 <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <HBox fx:id="NomeImpiegatoLabel" alignment="CENTER_LEFT" spacing="10.0">
+                                                      <HBox fx:id="NomeImpiegatoBox" alignment="CENTER_LEFT" spacing="10.0">
                                                          <children>
                                                             <Label fx:id="NomeImpiegatoLabel" prefWidth="177.0" styleClass="LabelGrande" text="Impiegato:" />
                                                             <TextField fx:id="NomeImpiegatoTF" editable="false" HBox.hgrow="ALWAYS">
@@ -164,19 +164,19 @@
                                                             </AnchorPane>
                                                          </children>
                                                       </HBox>
-                                                      <HBox fx:id="TipologiaSkillBox" alignment="CENTER_LEFT" spacing="10.0">
-                                                         <children>
-                                                            <Label fx:id="TipologiaSkillLabel" prefWidth="177.0" styleClass="LabelGrande" text="Tipologia skill:" />
-                                                            <TextField fx:id="TipologiaSkillTF" editable="false" HBox.hgrow="ALWAYS">
-                                                               <styleClass>
-                                                                  <String fx:value="TextField" />
-                                                                  <String fx:value="LabelPiccola" />
-                                                               </styleClass>
-                                                            </TextField>
-                                                         </children>
-                                                      </HBox>
                                                       <VBox fx:id="SkillBox" spacing="15.0" visible="false">
                                                          <children>
+                                                            <HBox fx:id="TipologiaSkillBox" alignment="CENTER_LEFT" spacing="10.0">
+                                                               <children>
+                                                                  <Label fx:id="TipologiaSkillLabel" prefWidth="177.0" styleClass="LabelGrande" text="Tipologia skill:" />
+                                                                  <TextField fx:id="TipologiaSkillTF" editable="false" HBox.hgrow="ALWAYS">
+                                                                     <styleClass>
+                                                                        <String fx:value="TextField" />
+                                                                        <String fx:value="LabelPiccola" />
+                                                                     </styleClass>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
                                                             <HBox fx:id="TitoloSkillBox" alignment="CENTER_LEFT" spacing="10.0">
                                                                <children>
                                                                   <Label fx:id="TitoloSkillLabel" prefWidth="177.0" styleClass="LabelGrande" text="Titolo della skill:" />

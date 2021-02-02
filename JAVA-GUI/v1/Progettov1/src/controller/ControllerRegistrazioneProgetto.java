@@ -52,56 +52,44 @@ import model.Titolo;
 public class ControllerRegistrazioneProgetto {
 
     @FXML private AnchorPane 		  RegistrazioneProgetto;
-    
     @FXML private HBox 				  IstruzioniBox;
     @FXML private Label 			  IstruzioniLabel;
     @FXML private Label 			  IstruzioniLabel2;
-    
     @FXML private HBox 				  FormBox;
     @FXML private ScrollPane 		  FormScrollPane;
     @FXML private VBox 				  Form;
-    
-    @FXML private HBox				  ProjectManagerBox;
-    @FXML private Label				  ProjectManagerLabel;
-    @FXML private TextField			  ProjectManagerTF;
-    
+    @FXML private HBox 				  ProjectManagerBox;
+    @FXML private Label 			  ProjectManagerLabel;
+    @FXML private TextField 		  ProjectManagerTF;
     @FXML private VBox 				  TitoloBox;
     @FXML private Label 			  TitoloLabel;
     @FXML private TextField 		  TitoloTF;
     @FXML private Label 			  TitoloErrorLabel;
-    
     @FXML private VBox 				  DescrizioneBox;
     @FXML private Label 			  DescrizioneLabel;
     @FXML private TextArea 			  DescrizioneTA;
-    
     @FXML private VBox 				  DataDiInizioBox;
     @FXML private Label 			  DataDiInizioLabel;
     @FXML private DatePicker 		  DataDiInizioDP;
     @FXML private Label 			  DataDiInizioErrorLabel;
-    
     @FXML private VBox 				  DataDiScadenzaBox;
     @FXML private Label 			  DataDiScadenzaLabel;
     @FXML private DatePicker 		  DataDiScadenzaDP;
     @FXML private Label 			  DataDiScadenzaErrorLabel;
-    
     @FXML private GridPane 			  TipologiaBox;
     @FXML private Label 			  TipologiaLabel;
     @FXML private ComboBox<Tipologia> TipologiaComboBox;
-    
-    @FXML private VBox				  NuovaTipologiaBox;
-    @FXML private TextField			  NuovaTipologiaTF;
-    @FXML private Label				  NuovaTipologiaErrorLabel;
-    
-    @FXML private GridPane			  AmbitiBox;
-    @FXML private Label				  AmbitiLabel;
+    @FXML private VBox 				  NuovaTipologiaBox;
+    @FXML private TextField 		  NuovaTipologiaTF;
+    @FXML private Label 			  NuovaTipologiaErrorLabel;
+    @FXML private GridPane 			  AmbitiBox;
+    @FXML private Label 			  AmbitiLabel;
     @FXML private ListView<Ambito> 	  AmbitiLV;
+    @FXML private VBox 				  NuovoAmbitoBox;
+    @FXML private TextField 		  NuovoAmbitoTF;
+    @FXML private Label 			  NuovoAmbitoErrorLabel;
     @FXML private ComboBox<Ambito> 	  AmbitiComboBox;
-    @FXML private Label				  AmbitiErrorLabel;
-    
-    @FXML private VBox				  NuovoAmbitoBox;
-    @FXML private TextField			  NuovoAmbitoTF;
-    @FXML private Label				  NuovoAmbitoErrorLabel;
-    
+    @FXML private Label 			  AmbitiErrorLabel;
     @FXML private AnchorPane 		  ButtonBar;
     @FXML private Button 			  AnnullaButton;
     @FXML private Button 			  ConfermaButton;
@@ -289,7 +277,7 @@ public class ControllerRegistrazioneProgetto {
         	Iterator<Ambito> i = listaAmbiti.iterator();
     		while(checkNuovoAmbito && i.hasNext()){
     			switch(utils.controlloStringa(NuovoAmbitoTF.getText().toLowerCase(),
-    												i.next().toString().toLowerCase()))
+    										  i.next().toString().toLowerCase()))
     			{
     				case 1:
     					checkNuovoAmbito = false;
@@ -309,7 +297,7 @@ public class ControllerRegistrazioneProgetto {
 				switch (utils.controlloStringa(NuovoAmbitoTF.getText().toLowerCase(),
 													 i.next().toString().toLowerCase()))
 				{
-					case 2:
+					case 3:
 						checkNuovoAmbito = false;
     					NuovoAmbitoErrorLabel.setText("Questo ambito è già presente nella lista di ambiti aggiunti");
     					break;

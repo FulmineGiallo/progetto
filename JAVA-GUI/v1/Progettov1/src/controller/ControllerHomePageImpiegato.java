@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
@@ -47,10 +48,15 @@ public class ControllerHomePageImpiegato {
 	@FXML private Button 				NuovoProgettoButton;
 	@FXML private Button 				LogoutButton;
 	
-	@FXML private AnchorPane 			ListaProgettiBox;
+	@FXML private GridPane				SchedeBox;
+	@FXML private HBox					SchedaListaProgetti;			
 	@FXML private Label 				ListaProgettiLabel;
-	@FXML private ScrollPane 			ListaProgettiScrollPane;
+	@FXML private HBox					SchedaListaRiunioni;
+	@FXML private Label					ListaRiunioniLabel;
+	
+	@FXML private AnchorPane			ListeBox;
 	@FXML private ListView<Progetto>	ListaProgettiLV;
+	@FXML private ListView<Riunione> 	ListaRiunioniLV;
 	
 	@FXML private AnchorPane			IstruzioniBox;
 	@FXML private Label					IstruzioniLabel;
@@ -58,13 +64,17 @@ public class ControllerHomePageImpiegato {
 	@FXML private AnchorPane			DescrizioneProgettoBox;
 	@FXML private AnchorPane 			DescrizioneProgettoPane;
 	@FXML private Label 				ProjectManagerProgettoLabel;
-	@FXML private Label 				TitoloProgettoLabel;
+	@FXML private TextField				ProjectManagerTF;
+	@FXML private Label					DescrizioneProgettoLabel;
 	@FXML private TextArea 				DescrizioneProgettoTA;
-	@FXML private TextArea 				DataDiInizioProgettoLabel;
-	@FXML private TextArea 				DataDiFineProgettoLabel;
-	@FXML private TextArea 				DataDiScadenzaProgettoLabel;
+	@FXML private Label 				DataDiInizioProgettoLabel;
+	@FXML private TextField				DataDiInizioProgettoTF;
+	@FXML private Label 				DataDiFineProgettoLabel;
+	@FXML private TextField				DataDiFineProgettoTF;
+	@FXML private Label 				DataDiScadenzaProgettoLabel;
+	@FXML private TextField				DataDiScadenzaProgettoTF;
 	@FXML private Label 				NoteProgettoLabel;
-	@FXML private Label                 DescrizioneProgettoLabel;
+	@FXML private TextArea				NoteProgettoTA;
 
 	@FXML private AnchorPane			ProjectManagerBox;
 	@FXML private Button 				GestioneProgettoButton;
@@ -74,12 +84,15 @@ public class ControllerHomePageImpiegato {
 	@FXML private AnchorPane			DescrizioneRiunioneBox;
 	@FXML private AnchorPane 			DescrizioneRiunionePane;
 	@FXML private Label 				OrganizzatoreRiunioneLabel;
-	@FXML private Label 				TitoloRiunioneLabel;
+	@FXML private TextField				OrganizzatoreRiunioneTF;
+	@FXML private Label 				DescrizioneRiunioneLabel;
 	@FXML private TextArea 				DescrizioneRiunioneTA;
-	@FXML private Label 				DataDiInizioRiunioneLabel;
 	@FXML private Label 				OrarioDiInizioRiunioneLabel;
+	@FXML private TextField				OrarioDiInizioRiunioneTF;
 	@FXML private Label 				OrarioDiFineRiunioneLabel;
+	@FXML private TextField				OrarioDiFineRiunioneTF;
 	@FXML private Label 				NoteRiunioneLabel;
+	@FXML private TextArea				NoteRiunioneTA;
 	
 	@FXML private AnchorPane			OrganizzatoreBox;
 	@FXML private Button 				GestioneRiunioneButton;
@@ -89,10 +102,9 @@ public class ControllerHomePageImpiegato {
     @FXML private AnchorPane 			PartecipanteBox;
     @FXML private Button 				PresenzaButton;
     @FXML private Button 				AssenzaButton;
-	
-	@FXML private Label 				ListaRiunioniLabel;
-	@FXML private ScrollPane 			ListaRiunioniScrollPane;
-	@FXML private ListView<Riunione> 	ListaRiunioniLV;
+    
+    private final String istruzioniProgetto = "Clicca un progetto\r\n" + "per visualizzarne le informazioni";
+    private final String istruzioniRiunione = "Clicca una riunione\r\n" + "per visualizzarne le informazioni";
 	
 	private FinestraPopup finestraConferma;
 	private FinestraPopup finestraErrore;
@@ -172,15 +184,17 @@ public class ControllerHomePageImpiegato {
         DescrizioneProgettoBox.setVisible(false);
         SalarioLabel.setText("Calcolare");
         /*Richiamare Dao Salario */
+        
+        ListaRiunioniLabel.setStyle("-fx-text-fill: derive(white, -50%);");
     }
 
     /*Metodo che gestisce le modifiche di DescrizioneProgettoBox */
     private void gestisciProgettoBox(boolean state)
     {
         DescrizioneProgettoTA.setEditable(state);
-        DataDiInizioProgettoLabel.setEditable(state);
-        DataDiFineProgettoLabel.setEditable(state);
-        DataDiScadenzaProgettoLabel.setEditable(state);
+        DataDiInizioProgettoTF.setEditable(state);
+        DataDiFineProgettoTF.setEditable(state);
+        DataDiScadenzaProgettoTF.setEditable(state);
     }
 
     @FXML
@@ -325,8 +339,27 @@ public class ControllerHomePageImpiegato {
 
     }
 
-    @FXML void salvaModificheRiunione(ActionEvent event) { // >> DA FARE
+    @FXML private void salvaModificheRiunione(ActionEvent event) { // >> DA FARE
 
+    }
+    
+    @FXML private void visualizzaProgetti(MouseEvent event) {
+    	if (!ListaProgettiLV.isVisible()) {
+			ListaRiunioniLabel.setStyle("-fx-text-fill: derive(white, -50%);");
+			SchedaListaRiunioni.setStyle("-fx-border-width: 0 0 5 0;");
+			
+			ListaProgettiLabel.setStyle("-fx-text-fill: white;");
+			SchedaListaProgetti.setStyle("-fx-border-width: 5 5 1 5");
+			
+			ListaRiunioniLV.setVisible(false);
+			ListaProgettiLV.setVisible(true);
+			
+			DescrizioneRiunioneBox.setVisible(false);
+			DescrizioneProgettoBox.setVisible(false);
+			IstruzioniBox.setVisible(true);
+			
+			IstruzioniLabel.setText(istruzioniProgetto);
+		}
     }
 
     @FXML void visualizzaInformazioniProgetto(MouseEvent event) {
@@ -352,6 +385,25 @@ public class ControllerHomePageImpiegato {
 				ProjectManagerBox.setVisible(false);
 		}
     }
+    
+    @FXML private void visualizzaRiunioni(MouseEvent event){		
+    	if (!ListaRiunioniLV.isVisible()) {
+			ListaProgettiLabel.setStyle("-fx-text-fill: derive(white, -50%);");
+			SchedaListaProgetti.setStyle("-fx-border-width: 0 0 5 0;");
+			
+			ListaRiunioniLabel.setStyle("-fx-text-fill: white;");
+			SchedaListaRiunioni.setStyle("-fx-border-width: 5 5 1 5");
+			
+			ListaProgettiLV.setVisible(false);
+			ListaRiunioniLV.setVisible(true);
+			
+			DescrizioneRiunioneBox.setVisible(false);
+			DescrizioneProgettoBox.setVisible(false);
+			IstruzioniBox.setVisible(true);
+			
+			IstruzioniLabel.setText(istruzioniRiunione);
+		}
+    }
 
     @FXML void visualizzaInformazioniRiunione(MouseEvent event) {
         //gestisciBox(false);
@@ -365,9 +417,9 @@ public class ControllerHomePageImpiegato {
 			Riunione riunioneSelezionata = ListaRiunioniLV.getSelectionModel().getSelectedItem();
 			
 			DescrizioneRiunioneTA		.setText(riunioneSelezionata.getDescrizione());
-			DataDiInizioRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getData()));
-			OrganizzatoreRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getOrganizzatore()));
-			TitoloRiunioneLabel			.setText(String.valueOf(riunioneSelezionata.getTitolo()));
+			//DataDiInizioRiunioneTF		.setText(String.valueOf(riunioneSelezionata.getData()));
+			OrganizzatoreRiunioneTF		.setText(String.valueOf(riunioneSelezionata.getOrganizzatore()));
+			//TitoloRiunioneLabel			.setText(String.valueOf(riunioneSelezionata.getTitolo()));
 			OrarioDiInizioRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getOrarioInizio()));
 			OrarioDiFineRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getOrarioFine()));
 			

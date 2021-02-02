@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -24,6 +25,7 @@ import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
+import model.Skill;
 import model.Titolo;
 import view.FinestraAggiungiPartecipanteAlProgetto;
 import view.FinestraPopup;
@@ -36,58 +38,55 @@ import java.util.Locale;
 
 public class ControllerHomePageProgetto {
 
-	HomePageImpiegato homeImpiegato;
-	
-    @FXML private AnchorPane 			HomePageProjectManager;
-    
-    @FXML private VBox 					ImpiegatoBox;
-    @FXML private Label 				NomeProjectManagerLabel;
-    @FXML private Label 				NomeProgettoLabel;
-    
-    @FXML private HBox 					ToolBar;
-    @FXML private Button 				NuovaRiunioneButton;
-    @FXML private Button 				AggiungiImpiegatoButton;
-    @FXML private Button 				HomePageImpiegatoButton;
-    
-    @FXML private AnchorPane 			ListaPartecipantiBox;
-    @FXML private Label 				ListaPartecipantiLabel;
-    @FXML private ScrollPane 			ListaPartecipantiScrollPane;
-    @FXML private ListView<Impiegato> 	ListaPartecipantiLV;
-    
-    @FXML private AnchorPane 			IstruzioniBox;
-    @FXML private Label 				IstruzioniLabel;
-    
-    @FXML private AnchorPane 			DescrizioneProgettoImpiegatoBox;
-    @FXML private AnchorPane 			DescrizioneProgettoImpiegatoPane;
-    
-    @FXML
-    private VBox ProjectManagerBox;
-
-    @FXML
-    private Label NomePartecipanteLabel;
-
-    @FXML
-    private Label SkillComboBoxLabel;
-
-    @FXML
-    private ComboBox<Titolo> SkillComboBox;
-
-    @FXML
-    private VBox SkillBox;
-
-    @FXML
-    private Label TitoloSkillLabel;
-
-    @FXML
-    private Label DataCertificazioneSkillLabel;
-
-    @FXML
-    private TextArea DescrizioneSkillTA;
-
-    @FXML
-    private Button RimuoviImpiegatoButton;
-    
-    
+    @FXML private AnchorPane 		  HomePageProjectManager;
+    @FXML private VBox 				  ProjectManagerBox;
+    @FXML private Label 			  NomeProjectManagerLabel;
+    @FXML private Label 			  NomeProgettoLabel;
+    @FXML private HBox 				  ToolBar;
+    @FXML private Button 			  NuovaRiunioneButton;
+    @FXML private Button 			  AggiungiImpiegatoButton;
+    @FXML private Button 			  HomePageImpiegatoButton;
+    @FXML private AnchorPane 		  ListaPartecipantiBox;
+    @FXML private Label 			  ListaPartecipantiLabel;
+    @FXML private ListView<Impiegato> ListaPartecipantiLV;
+    @FXML private AnchorPane 		  IstruzioniBox;
+    @FXML private Label 			  IstruzioniLabel;
+    @FXML private AnchorPane 		  DescrizioneProgettoImpiegatoBox;
+    @FXML private AnchorPane 		  DescrizioneProgettoImpiegatoPane;
+    @FXML private AnchorPane 		  InformazioniImpiegatoBox;
+    @FXML private HBox 				  NomeImpiegatoBox;
+    @FXML private Label 			  NomeImpiegatoLabel;
+    @FXML private TextField 		  NomeImpiegatoTF;
+    @FXML private HBox 				  EmailBox;
+    @FXML private Label 			  EmailLabel;
+    @FXML private TextField 		  EmailTF;
+    @FXML private HBox 				  ComuneDiNascitaBox;
+    @FXML private Label 			  ComuneDiNascitaLabel;
+    @FXML private TextField 		  ComuneDiNascitaTF;
+    @FXML private HBox 				  DataDiNascitaBox;
+    @FXML private Label 			  DataDiNascitaLabel;
+    @FXML private TextField 		  DataDiNascitaTF;
+    @FXML private HBox 				  RuoloImpiegatoBox;
+    @FXML private Label 			  RuoloImpiegatoLabel;
+    @FXML private TextField 		  RuoloImpiegatoTF;
+    @FXML private HBox 				  SelezionaSkillBox;
+    @FXML private Label 			  SkillComboBoxLabel;
+    @FXML private ComboBox<Skill> 	  SkillComboBox;
+    @FXML private VBox 				  SkillBox;
+    @FXML private HBox 				  TipologiaSkillBox;
+    @FXML private Label 			  TipologiaSkillLabel;
+    @FXML private TextField 		  TipologiaSkillTF;
+    @FXML private HBox 				  TitoloSkillBox;
+    @FXML private Label 			  TitoloSkillLabel;
+    @FXML private TextField 		  TitoloSkillTF;
+    @FXML private HBox 				  DataDiCertificazioneBox;
+    @FXML private Label 			  DataCertificazioneSkillLabel;
+    @FXML private TextField 		  DataCertificazioneTF;
+    @FXML private VBox 				  DescrizioneSkillBox;
+    @FXML private Label 			  DescrizioneLabel;
+    @FXML private TextArea 			  DescrizioneSkillTA;
+    @FXML private Button 			  RimuoviImpiegatoButton;
+        
     private HomePageImpiegato homePageImpiegato;
     private Stage window;
     private Stage popup;
@@ -145,26 +144,24 @@ public class ControllerHomePageProgetto {
         {
             @Override
             public void handle(MouseEvent mouseEvent) {
+            	
+            	Impiegato infoImpiegato = ListaPartecipantiLV.getSelectionModel().getSelectedItem();
+            	
                 IstruzioniBox.setVisible(false);
-                
                 DescrizioneProgettoImpiegatoBox.setVisible(true);
-                NomeProgettoLabel.setVisible(true);
                 
-                DataCertificazioneSkillLabel.setVisible(false);
-                DescrizioneSkillTA.setVisible(false);
-                NomePartecipanteLabel.setText(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getNome() + " " + ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCognome());
+                SkillBox.setVisible(false);
+                NomeImpiegatoTF.setText(infoImpiegato.toString());
 
-                
-                
             	try
                 {
                     titoloDAO = new TitoloDAO(connection);
                     SkillDAO = new SkillDao(connection);
                     RimuoviImpiegatoButton.setVisible(true);
                     
-                    SkillComboBox.setItems(titoloDAO.titoliListImpiegato(ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
+                    //SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
 
-                    if(ListaPartecipantiLV.getSelectionModel().getSelectedItem().getCF().equals( progetto.getProjectManager().getCF())) {
+                    if(infoImpiegato.getCF().equals( progetto.getProjectManager().getCF())) {
                     	RimuoviImpiegatoButton.setVisible(false);
                     }
                     
@@ -179,8 +176,8 @@ public class ControllerHomePageProgetto {
                     	DataCertificazioneSkillLabel.setVisible(true);
                     	DescrizioneSkillTA.setVisible(true);
                     	try {
-							DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
-                    		DataCertificazioneSkillLabel.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), ListaPartecipantiLV.getSelectionModel().getSelectedItem()));
+							DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
+                    		DataCertificazioneSkillLabel.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}

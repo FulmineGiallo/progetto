@@ -73,14 +73,14 @@
                         <RowConstraints vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <HBox fx:id="SchedaListaProgetti" alignment="CENTER" prefHeight="50.0" styleClass="SchedaListaProgetti">
+                        <HBox fx:id="SchedaListaProgetti" alignment="CENTER" onMouseClicked="#visualizzaProgetti" prefHeight="50.0" styleClass="SchedaListaProgetti">
                            <children>
-                              <Label fx:id="ListaProgettiLabel" text="I tuoi progetti" textAlignment="CENTER" />
+                              <Label fx:id="ListaProgettiLabel" styleClass="LabelGrande" text="I tuoi progetti" textAlignment="CENTER" />
                            </children>
                         </HBox>
-                        <HBox fx:id="SchedaListaRiunioni" alignment="CENTER" styleClass="SchedaListaRiunioni" GridPane.columnIndex="1">
+                        <HBox fx:id="SchedaListaRiunioni" alignment="CENTER" onMouseClicked="#visualizzaRiunioni" styleClass="SchedaListaRiunioni" GridPane.columnIndex="1">
                            <children>
-                              <Label fx:id="ListaRiunioniLabel" alignment="CENTER_RIGHT" text="Le tue riunioni" textAlignment="CENTER" />
+                              <Label fx:id="ListaRiunioniLabel" alignment="CENTER_RIGHT" styleClass="LabelGrande" text="Le tue riunioni" textAlignment="CENTER" />
                            </children>
                         </HBox>
                      </children>
@@ -169,19 +169,31 @@
                                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                    <children>
                                                       <Label fx:id="DataDiInizioProgettoLabel" minWidth="150.0" styleClass="LabelGrande" text="Data di inizio:" />
-                                                      <TextField fx:id="DataDiInizioProgettoTF" editable="false" styleClass="TextField" HBox.hgrow="ALWAYS" />
+                                                      <TextField fx:id="DataDiInizioProgettoTF" editable="false" HBox.hgrow="ALWAYS">
+                                                         <styleClass>
+                                                            <String fx:value="TextField" />
+                                                            <String fx:value="LabelPiccola" />
+                                                         </styleClass></TextField>
                                                    </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1">
                                                    <children>
                                                       <Label fx:id="DataDiFineProgettoLabel" minWidth="150.0" styleClass="LabelGrande" text="Data di fine:" />
-                                                      <TextField fx:id="DataDiFineProgettoTF" editable="false" styleClass="TextField" HBox.hgrow="ALWAYS" />
+                                                      <TextField fx:id="DataDiFineProgettoTF" editable="false" HBox.hgrow="ALWAYS">
+                                                         <styleClass>
+                                                            <String fx:value="TextField" />
+                                                            <String fx:value="LabelPiccola" />
+                                                         </styleClass></TextField>
                                                    </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.rowIndex="1">
                                                    <children>
                                                       <Label fx:id="DataDiScadenzaProgettoLabel" minWidth="150.0" styleClass="LabelGrande" text="Data di scadenza:" />
-                                                      <TextField fx:id="DataDiScadenzaProgettoTF" editable="false" styleClass="TextField" HBox.hgrow="ALWAYS" />
+                                                      <TextField fx:id="DataDiScadenzaProgettoTF" editable="false" HBox.hgrow="ALWAYS">
+                                                         <styleClass>
+                                                            <String fx:value="TextField" />
+                                                            <String fx:value="LabelPiccola" />
+                                                         </styleClass></TextField>
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -329,7 +341,7 @@
                                           <VBox>
                                              <children>
                                                 <Label fx:id="NoteRiunioneLabel" styleClass="LabelGrande" text="Note:" />
-                                                <TextArea fx:id="NoteRiunioneTF" editable="false" maxHeight="120.0" minHeight="90.0">
+                                                <TextArea fx:id="NoteRiunioneTA" editable="false" maxHeight="120.0" minHeight="90.0">
                                                    <styleClass>
                                                       <String fx:value="TextArea" />
                                                       <String fx:value="LabelPiccola" />

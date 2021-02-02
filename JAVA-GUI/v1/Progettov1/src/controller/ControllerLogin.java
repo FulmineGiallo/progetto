@@ -3,8 +3,12 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.Connection.DBConnection;
 import model.Dao.ImpiegatoDao;
@@ -17,19 +21,28 @@ import view.HomePageImpiegato;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ControllerLogin
-{
-    HomePageBenvenuto benvenuto;
-    HomePageImpiegato homeImpiegato;
-    FinestraPopup finestraErrore;
+public class ControllerLogin {
 
-    @FXML private Button AnnullaButton;
-    @FXML private Button AccediButton;
+    @FXML private AnchorPane 	Login;
+    @FXML private Label 		TitoloLabel;
+    @FXML private GridPane 		Form;
+    @FXML private Label 		EmailLabel;
+    @FXML private ImageView 	EmailIV;
+    @FXML private TextField 	EmailTF;
+    @FXML private Label 		PasswordLabel;
+    @FXML private ImageView 	PasswordIV;
     @FXML private PasswordField PasswordTF;
-    @FXML private TextField EmailTF;
+    @FXML private AnchorPane 	ButtonBar;
+    @FXML private Button 		AnnullaButton;
+    @FXML private Button 		AccediButton;
+    
+    private HomePageBenvenuto homePageBenvenuto;
+    private HomePageImpiegato homePageImpiegato;
     
     private Stage window;
     private Stage popup;
+    
+    private FinestraPopup finestraErrore;
     
     int accesso = 0;
     Connection connection;
@@ -40,8 +53,8 @@ public class ControllerLogin
     }
 
     public void backHomePageBenvenuto(ActionEvent actionEvent) throws Exception {
-        benvenuto = new HomePageBenvenuto();
-        benvenuto.start(window, popup);
+        homePageBenvenuto = new HomePageBenvenuto();
+        homePageBenvenuto.start(window, popup);
     }
 
     public void checkLogin(ActionEvent actionEvent) throws SQLException, Exception {
@@ -64,8 +77,8 @@ public class ControllerLogin
             if(accesso == 1)
             {
                 impiegato = impiegatoDao.creaImpiegato(impiegatoDao.getCFWithEmail(EmailTF.getText()));
-                homeImpiegato = new HomePageImpiegato(impiegato);
-                homeImpiegato.start(window, popup);
+                homePageImpiegato = new HomePageImpiegato(impiegato);
+                homePageImpiegato.start(window, popup);
             }
             /* Non ci sono email e password corrispondenti */
             if(accesso == 0)

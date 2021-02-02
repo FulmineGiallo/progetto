@@ -106,7 +106,7 @@
                                           <HBox alignment="CENTER_LEFT" spacing="10.0">
                                              <children>
                                                 <Label fx:id="TitoloLabel" prefWidth="185.0" styleClass="LabelGrande" text="* Titolo" />
-                                                <ComboBox fx:id="TitoloComboBox" prefWidth="170.0">
+                                                <ComboBox fx:id="TitoloComboBox" prefWidth="165.0">
                                                    <styleClass>
                                                       <String fx:value="ComboBox" />
                                                       <String fx:value="LabelPiccola" />
@@ -122,7 +122,7 @@
                                           </HBox>
                                           <Label fx:id="NuovoTitoloErrorLabel" styleClass="ErrorLabel">
                                              <VBox.margin>
-                                                <Insets left="375.0" />
+                                                <Insets left="370.0" />
                                              </VBox.margin>
                                           </Label>
                                        </children>

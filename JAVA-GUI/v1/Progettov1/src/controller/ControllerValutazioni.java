@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -33,76 +32,37 @@ import model.Valutazione;
 import view.HomePageImpiegato;
 
 public class ControllerValutazioni {
-    
+
     @FXML private AnchorPane 			HomePageValutazioni;
-    
     @FXML private VBox 					ImpiegatoBox;
     @FXML private Label 				NomeImpiegatoLabel;
     @FXML private Label 				GradoImpiegatoLabel;
-    
     @FXML private HBox 					ToolBar;
     @FXML private Button 				HomePageImpiegatoButton;
-    
     @FXML private AnchorPane 			ListaValutazioniBox;
     @FXML private Label 				ListaValutazioniLabel;
-    @FXML private ScrollPane 			ListaValutazioniScrollPane;
     @FXML private ListView<Valutazione> ListaValutazioniLV;
-    
     @FXML private AnchorPane 			IstruzioniBox;
     @FXML private Label 				IstruzioniLabel;
-    
     @FXML private AnchorPane 			DescrizioneValutazioneBox;
     @FXML private AnchorPane 			DescrizioneValutazionePane;
-   
-    @FXML
-    private Label TitoloValutazioneLabel;
-
-    @FXML
-    private Label RecensoreValutazioneLabel;
-
-    @FXML
-    private HBox StelleOkBox;
-
-    @FXML
-    private ImageView StellaOk1;
-
-    @FXML
-    private ImageView StellaOk2;
-
-    @FXML
-    private ImageView StellaOk3;
-
-    @FXML
-    private ImageView StellaOk4;
-
-    @FXML
-    private ImageView StellaOk5;
-
-    @FXML
-    private HBox StelleNoBox;
-
-    @FXML
-    private ImageView PrimaStellaNo;
-
-    @FXML
-    private ImageView SecondaStellaNo;
-
-    @FXML
-    private ImageView TerzaStellaNo;
-
-    @FXML
-    private ImageView QuartaStellaNo;
-
-    @FXML
-    private ImageView QuintaStellaNo;
-
-    @FXML
-    private Label DataValutazioneLabel;
-
-    @FXML
-    private TextArea DescrizioneValutazioneTA;
-    
-    
+    @FXML private Label 				TitoloValutazioneLabel;
+    @FXML private Label 				RecensoreValutazioneLabel;
+    @FXML private HBox 					StelleOkBox;
+    @FXML private ImageView 			StellaOk1;
+    @FXML private ImageView 			StellaOk2;
+    @FXML private ImageView 			StellaOk3;
+    @FXML private ImageView 			StellaOk4;
+    @FXML private ImageView 			StellaOk5;
+    @FXML private HBox 					StelleNoBox;
+    @FXML private ImageView 			PrimaStellaNo;
+    @FXML private ImageView 			SecondaStellaNo;
+    @FXML private ImageView 			TerzaStellaNo;
+    @FXML private ImageView 			QuartaStellaNo;
+    @FXML private ImageView 			QuintaStellaNo;
+    @FXML private Label 				DataValutazioneLabel;
+    @FXML private TextArea 				DescrizioneValutazioneTA;
+        
     private HomePageImpiegato homePageImpiegato;
     private Stage window;
     private Stage popup;
@@ -149,7 +109,7 @@ public class ControllerValutazioni {
     public void inizializza(Impiegato impiegato) throws SQLException {
         this.impiegato = impiegato;
         
-        NomeImpiegatoLabel.setText(impiegato.getNome() + impiegato.getCognome());
+        NomeImpiegatoLabel.setText(impiegato.toString().toUpperCase());
         GradoImpiegatoLabel.setText(impiegato.getGrado());
         lista.addAll(valutazioni.getValutazioni(impiegato));
         ListaValutazioniLV.setItems(lista);

@@ -64,7 +64,7 @@ public class FinestraPopup {
 	
 	//Inizializzazione della finestra popup per la visualizzazione delle informazioni di una Skill
 	public void start(Stage popup, Skill infoSkill) throws Exception {
-        caricaStage(popup, controllerSkill, "");
+        caricaStage(popup, controllerSkill, "Informazioni skill");
         
         if(infoSkill.getTipoSkill().equals("Soft-Skill")) {
         	controllerSkill.inizializza(infoSkill.getTipoSkill(), null,	"Descrizione: " + infoSkill.getDescrizione());

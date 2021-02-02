@@ -1,7 +1,5 @@
 package controller;
 
- 
-
 import java.awt.Desktop.Action;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -19,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -42,77 +41,72 @@ import model.DaoInterface.RuoloDaoInterface;
 import model.DaoInterface.SkillDaoInterface;
 import model.DaoInterface.TitoloDaoInterface;
 
- 
-
 public class ControllerRicercaImpiegati {
 
-	@FXML
-    private AnchorPane RicercaImpiegati;
-   @FXML
-    private HBox IstruzioniBox;
-    @FXML
-    private Label IstruzioniLabel;
-    @FXML
-    private VBox Form;
-    @FXML
-    private AnchorPane FormAP;
-    @FXML
-    private ScrollPane FormScrollPane;
-    @FXML
-    private VBox RicercaSkillBox;
-    @FXML
-    private Label RicercaSkillLabel;
-    @FXML
-    private ComboBox<Titolo> RicercaSkillComboBox;
-    @FXML
-    private VBox SkillAggiunteBox;
-    @FXML
-    private Label SkillAggiunteLabel;
-    @FXML
-    private ListView<String> SkillAggiunteLV;
-    @FXML
-    private HBox SalarioMedioBox;
-    @FXML
-    private Label SalarioMedioLabel;
-    @FXML
-    private TextField SalarioMedioTF;
-    @FXML
-    private HBox NomeBox;
-    @FXML
-    private Label NomeLabel;
-   	@FXML
-    private TextField NomeTF;
-    @FXML
-    private HBox CognomeBox;
-    @FXML
-    private Label CognomeLabel;
-    @FXML
-    private TextField CognomeTF;
-    @FXML
-    private GridPane RIcercaImpiegatiButtonBar;
-    @FXML
-    private VBox OrdinamentoBox;
-    @FXML
-    private Label OrdinamentoLabel;
-    @FXML
-    private ComboBox<String> OrdinamentoComboBox;
-    @FXML
-    private Button RicercaImpiegatiButton;
-    @FXML
-    private AnchorPane ListaRicercaImpiegatiBox;
-    @FXML
-    private ListView<Impiegato> ListaRicercaImpiegatiLV;
-    @FXML
-    private AnchorPane ListaImpiegatiDaInserireBox;
-    @FXML
-    private VBox RuoloImpiegatoBox;
-    @FXML
-    private Label RuoloImpiegatoLabel;
-    @FXML
-    private ComboBox<Ruolo> RuoloImpiegatoComboBox;
-    @FXML
-    private Button AggiungiImpiegatoButton;
-
+    @FXML private AnchorPane 			RicercaImpiegati;
+    @FXML private HBox 					IstruzioniBox;
+    @FXML private Label 				IstruzioniLabel;
+    @FXML private AnchorPane 			FormRicercaImpiegati;
+    @FXML private AnchorPane 			FormAP;
+    @FXML private VBox 					RicercaSkillBox;
+    @FXML private Label 				RicercaSkillLabel;
+    @FXML private ComboBox<Titolo> 		RicercaSkillComboBox;
+    @FXML private VBox 					SkillAggiunteBox;
+    @FXML private Label 				SkillAggiunteLabel;
+    @FXML private ListView<String> 		SkillAggiunteLV;
+    @FXML private HBox 					SalarioMedioBox;
+    @FXML private Label 				SalarioMedioLabel;
+    @FXML private TextField 			SalarioMedioTF;
+    @FXML private HBox 					NomeBox;
+    @FXML private Label 				NomeLabel;
+    @FXML private TextField 			NomeTF;
+    @FXML private HBox 					CognomeBox;
+    @FXML private Label 				CognomeLabel;
+    @FXML private TextField 			CognomeTF;
+    @FXML private GridPane 				RIcercaImpiegatiButtonBar;
+    @FXML private VBox 					OrdinamentoBox;
+    @FXML private Label 				OrdinamentoLabel;
+    @FXML private ComboBox<String> 		OrdinamentoComboBox;
+    @FXML private Button 				RicercaImpiegatiButton;
+    @FXML private AnchorPane 			ListaRicercaImpiegatiBox;
+    @FXML private ListView<Impiegato> 	ListaRicercaImpiegatiLV;
+    @FXML private AnchorPane 			ConfermaBox;
+    @FXML private AnchorPane 			InformazioniImpiegatoBox;
+    @FXML private Label 				NomeImpiegatoLabel;
+    @FXML private TextField 			NomeImpiegatoTF;
+    @FXML private HBox 					EmailBox;
+    @FXML private Label 				EmailLabel;
+    @FXML private TextField 			EmailTF;
+    @FXML private HBox 					ComuneDiNascitaBox;
+    @FXML private Label 				ComuneDiNascitaLabel;
+    @FXML private TextField 			ComuneDiNascitaTF;
+    @FXML private HBox 					DataDiNascitaBox;
+    @FXML private Label 				DataDiNascitaLabel;
+    @FXML private TextField 			DataDiNascitaTF;
+    @FXML private HBox 					SelezionaSkillBox;
+    @FXML private Label 				SkillComboBoxLabel;
+    @FXML private ComboBox<Skill> 		SkillComboBox;
+    @FXML private VBox 					SkillBox;
+    @FXML private HBox 					TipologiaSkillBox;
+    @FXML private Label 				TipologiaSkillLabel;
+    @FXML private TextField 			TipologiaSkillTF;
+    @FXML private HBox 					TitoloSkillBox;
+    @FXML private Label 				TitoloSkillLabel;
+    @FXML private TextField 			TitoloSkillTF;
+    @FXML private HBox 					DataDiCertificazioneBox;
+    @FXML private Label 				DataCertificazioneSkillLabel;
+    @FXML private TextField 			DataCertificazioneTF;
+    @FXML private VBox 					DescrizioneSkillBox;
+    @FXML private Label 				DescrizioneLabel;
+    @FXML private TextArea 				DescrizioneSkillTA;
+    @FXML private AnchorPane 			AggiungiImpiegatoBox;
+    @FXML private VBox 					RuoloImpiegatoBox;
+    @FXML private Label 				RuoloImpiegatoLabel;
+    @FXML private ComboBox<Ruolo> 		RuoloImpiegatoComboBox;
+    @FXML private Button 				AggiungiImpiegatoButton;
+    @FXML private AnchorPane 			IstruzioniBox2;
+    @FXML private Label 				IstruzioniLabel2;
+    
     private Stage window;
     private Stage popup;
     
@@ -129,9 +123,7 @@ public class ControllerRicercaImpiegati {
     private ObservableList<Ruolo> listaRuoli = FXCollections.observableArrayList();
     private ObservableList<Titolo> listaTitoli = FXCollections.observableArrayList();
     private ObservableList<String> listaOridinaPer = FXCollections.observableArrayList();
-    
- 
-    
+
     public void setStage(Stage window, Stage popup)
     {
     	this.window = window;

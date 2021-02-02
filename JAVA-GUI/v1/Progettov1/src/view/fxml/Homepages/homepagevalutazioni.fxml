@@ -76,7 +76,7 @@
                   <Insets />
                </GridPane.margin>
             </AnchorPane>
-            <AnchorPane fx:id="DescrizioneValutazioneBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AnchorPane fx:id="DescrizioneValutazioneBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <AnchorPane fx:id="DescrizioneValutazionePane" styleClass="DescrizioneValutazionePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
                      <children>

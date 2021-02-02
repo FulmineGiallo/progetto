@@ -133,7 +133,10 @@
                                                 </AnchorPane>
                                              </children>
                                           </HBox>
-                                          <Label fx:id="DataDiNascitaErrorLabel" styleClass="ErrorLabel" />
+                                          <Label fx:id="DataDiNascitaErrorLabel" styleClass="ErrorLabel">
+                                             <VBox.margin>
+                                                <Insets left="143.0" />
+                                             </VBox.margin></Label>
                                        </children>
                                     </VBox>
                                     <GridPane fx:id="ComuneDiNascitaBox" hgap="10.0">

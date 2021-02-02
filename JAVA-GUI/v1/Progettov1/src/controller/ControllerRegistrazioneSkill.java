@@ -45,30 +45,39 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class ControllerRegistrazioneSkill {
-
+	
+	@FXML private AnchorPane 		RegistrazioneSkill;
+    @FXML private HBox 				IstruzioniBox;
     @FXML private Label 			IstruzioniLabel;
     @FXML private Label 			IstruzioniLabel2;
     
+    @FXML private HBox 				FormBox;
+    @FXML private ScrollPane 		FormScrollPane;
+    @FXML private VBox 				Form;
+    @FXML private HBox 				TipoSkillBox;
     @FXML private Label 			TipoSkillLabel;
+    @FXML private HBox 				TipoSkillRBBox;
     @FXML private RadioButton 		TipoSkillRB1;
     @FXML private ToggleGroup 		TipoSkillGroup;
     @FXML private RadioButton 		TipoSkillRB2;
     
+    @FXML private VBox 				DescrizioneBox;
     @FXML private Label 			DescrizioneLabel;
     @FXML private TextArea 			DescrizioneTA;
     @FXML private Label				DescrizioneErrorLabel;
     
-    @FXML private GridPane			DataCertificazioneBox;
+    @FXML private VBox				DataCertificazioneBox;
     @FXML private Label 			DataCertificazioneLabel;
     @FXML private DatePicker 		DataCertificazioneDP;
     @FXML private Label 			DataCertificazioneErrorLabel;
     
-    @FXML private GridPane			TitoloBox;    
+    @FXML private VBox				TitoloBox;    
     @FXML private Label 			TitoloLabel;
     @FXML private ComboBox<Titolo> 	TitoloComboBox;
     @FXML private TextField 		NuovoTitoloTF;
     @FXML private Label 			NuovoTitoloErrorLabel;
 
+    @FXML private AnchorPane 		ButtonBar;
     @FXML private Button 			AnnullaButton;
     @FXML private Button 			ConfermaButton;
     
@@ -192,7 +201,7 @@ public class ControllerRegistrazioneSkill {
     					checkNuovoTitolo = false;
     					NuovoTitoloErrorLabel.setText("Questo campo è obbligatorio");
     					break;
-    				case 2:
+    				case 3:
     					checkNuovoTitolo = false;
 						NuovoTitoloErrorLabel.setText("Questo titolo è già presente nella lista");
 						break;
