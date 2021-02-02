@@ -25,6 +25,7 @@ import model.DaoInterface.ProgettoDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 import model.Titolo;
+import view.FinestraAggiungiPartecipanteAlProgetto;
 import view.FinestraPopup;
 import view.FinestraRimuoviImpiegatoDalProgetto;
 import view.HomePageImpiegato;
@@ -96,6 +97,7 @@ public class ControllerHomePageProgetto {
     private progettoImpiegatoDao progettoImpiegatoDao;
     
     FinestraPopup finestraRimuoviImpiegatoDalProgetto;
+    FinestraAggiungiPartecipanteAlProgetto finestraAggiungiImpiegatoAlProgetto;
     
     Progetto progetto;
     Impiegato impiegato;
@@ -225,5 +227,10 @@ public class ControllerHomePageProgetto {
     	IstruzioniBox.setVisible(true);
     }
     
-    
+    public void AggiungiImpiegatoAlProgetto(ActionEvent event) throws Exception {
+		finestraAggiungiImpiegatoAlProgetto = new FinestraAggiungiPartecipanteAlProgetto();
+		finestraAggiungiImpiegatoAlProgetto.start(window, popup, progetto);
+
+    }
+      
 }

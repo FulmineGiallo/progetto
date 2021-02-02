@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class ImpiegatoDao implements ImpiegatoDaoInterface
 {
 
@@ -210,10 +213,10 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         	   "\nSkill inserite: "	  + String.valueOf(skillInserite);
     }
 
-    public List<Impiegato> getAllImpiegati() throws SQLException
+    public ObservableList<Impiegato> getAllImpiegati() throws SQLException
     {
         ResultSet rs = getImpiegati.executeQuery();
-        List<Impiegato> list = new ArrayList<Impiegato>();
+        ObservableList<Impiegato> list = FXCollections.observableArrayList();
 
         while(rs.next())
         {

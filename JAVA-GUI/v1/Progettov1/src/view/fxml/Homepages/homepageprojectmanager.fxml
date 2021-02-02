@@ -35,7 +35,7 @@
             <HBox fx:id="ToolBar" alignment="TOP_RIGHT" spacing="50.0" GridPane.columnIndex="1">
                <children>
                   <Button fx:id="NuovaRiunioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="NuovaRiunioneButton" text="Programma una riunione" textAlignment="CENTER" wrapText="true" />
-                  <Button fx:id="AggiungiImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" styleClass="AggiungiImpiegatoButton" text="Aggiungi partecipante" textAlignment="CENTER" wrapText="true" />
+                  <Button fx:id="AggiungiImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#AggiungiImpiegatoAlProgetto" prefHeight="65.0" styleClass="AggiungiImpiegatoButton" text="Aggiungi partecipante" textAlignment="CENTER" wrapText="true" />
                   <Button fx:id="HomePageImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#backHomePageImpiegato" prefHeight="65.0" styleClass="HomePageImpiegatoButton" text="Torna alla tua homepage" textAlignment="CENTER" wrapText="true" />
                </children>
             </HBox>
