@@ -11,6 +11,7 @@ import java.util.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -19,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -87,7 +89,7 @@ public class ControllerRicercaImpiegati {
     @FXML private TextField 			DataDiNascitaTF;
     @FXML private HBox 					SelezionaSkillBox;
     @FXML private Label 				SkillComboBoxLabel;
-    @FXML private ComboBox<Skill> 		SkillComboBox;
+    @FXML private ComboBox<Titolo> 		SkillComboBox;
     @FXML private VBox 					SkillBox;
     @FXML private HBox 					TipologiaSkillBox;
     @FXML private Label 				TipologiaSkillLabel;
@@ -109,11 +111,13 @@ public class ControllerRicercaImpiegati {
     @FXML private AnchorPane 			IstruzioniBox2;
     @FXML private Label 				IstruzioniLabel2;
     @FXML private HBox 					NomeImpiegatoBox;
+    @FXML private Button 				AnnullaButton;
 
     
     private Stage window;
     private Stage popup;
     
+    private int idProgetto;
     private Progetto progetto;
     private float salarioMedioInserito;
     private String nomeInserito;
@@ -122,6 +126,10 @@ public class ControllerRicercaImpiegati {
     ImpiegatoDaoInterface impiegatoDao;
     RuoloDaoInterface ruoliDao;
     TitoloDaoInterface titoloDao;
+    ProgettoDaoInterface progettoDao;
+    SkillDaoInterface SkillDAO;
+    TitoloDaoInterface titoloDAO;
+    
     
     private ObservableList<Impiegato> listaImpiegati = FXCollections.observableArrayList();
     private ObservableList<Ruolo> listaRuoli = FXCollections.observableArrayList();
@@ -145,6 +153,7 @@ public class ControllerRicercaImpiegati {
             impiegatoDao = new ImpiegatoDao(connection);
             ruoliDao = new RuoloDao(connection);
             titoloDao = new TitoloDAO(connection);
+            progettoDao = new ProgettoDao(connection);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -154,13 +163,15 @@ public class ControllerRicercaImpiegati {
     
     public void inizializza(Progetto progetto) throws SQLException {
     	this.progetto = progetto;
-    	listaImpiegati = impiegatoDao.getAllImpiegati();
+    	idProgetto = progettoDao.getIdProgetto(progetto);
+    	listaImpiegati = impiegatoDao.getAllImpiegati(idProgetto);
     	listaRuoli = ruoliDao.GetAllRuoli();
     	listaTitoli = titoloDao.titoliList();
     	ListaRicercaImpiegatiLV.setItems(listaImpiegati);
     	RicercaSkillComboBox.setItems(listaTitoli);
     	RuoloImpiegatoComboBox.setItems(listaRuoli);
     	RicercaImpiegatiButton.setDisable(false);
+    	
     	
     	listaOridinaPer.add("Nome (Alfabetico)");
     	listaOridinaPer.add("Cognome (Alfabetico)");
@@ -171,10 +182,8 @@ public class ControllerRicercaImpiegati {
     	OrdinamentoComboBox.getSelectionModel().select(1);
     	
     	InserisciSkill();
+    	updateInfoImpiegato();
     	
-//        lista = progettoDao.getPartecipanti(progetto);
-//        ListaPartecipantiLV.setItems(lista);
-//        updateInfoImpiegato();
     }
     
     
@@ -222,17 +231,101 @@ public class ControllerRicercaImpiegati {
     	cognomeInserito="%" + cognomeInserito + "%";
     	
     	if(SkillAggiunteLV.getItems().isEmpty()) {
+    		ObservableList<String> listaVuota = FXCollections.observableArrayList();
     		skillAggiunte.add("%%");
+    		SkillAggiunteLV.setItems(listaVuota);
     	}
     	
     	
+    	
     	try {
-			listaImpiegati = impiegatoDao.getAllImpiegatiOrdinatiPerNome(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size());
+			listaImpiegati = impiegatoDao.getAllImpiegatiOrdinatiPerNome(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto);
 			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
     }
+    
+    public void annullaOperazione() {
+    	
+    }
+    
+    
+    public void updateInfoImpiegato()
+    {
+        ListaRicercaImpiegatiLV.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+            	
+            	Impiegato infoImpiegato = ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem();
+            	
+                IstruzioniBox2.setVisible(false);
+                ConfermaBox.setVisible(true);
+                InformazioniImpiegatoBox.setVisible(true);
+                
+                SkillBox.setVisible(false);
+                NomeImpiegatoTF.setText(infoImpiegato.toString());
+                EmailTF.setText(infoImpiegato.getEmail());
+                ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+                DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
+                
+                
+                
+            	try
+                {
+                    titoloDAO = new TitoloDAO(connection);
+                    SkillDAO = new SkillDao(connection);
+//                    RimuoviImpiegatoButton.setVisible(true);
+                    
+                    SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
+
+
+                    
+                    SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
+
+                    	SkillBox.setVisible(true);
+
+                    if(SkillComboBox.getSelectionModel().getSelectedItem() != null) {	
+                    	TitoloSkillTF.setVisible(true);
+                    	TitoloSkillTF.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
+                    	
+                        try {
+							TipologiaSkillTF.setText(SkillDAO.getTipologiaSkill(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+                    	
+                    	DataCertificazioneSkillLabel.setVisible(true);
+                    	DescrizioneSkillTA.setVisible(true);
+                    	try {
+							if((SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato) == null)){
+								DescrizioneSkillTA.setText("Nessuna descrizione");
+							}else {
+								DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
+							}
+							
+                    		DataCertificazioneTF.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+                    	
+                    }else {
+                    	TitoloSkillTF.setVisible(false);
+                    	DataCertificazioneTF.setVisible(false);
+                    	DescrizioneSkillTA.setVisible(false);
+                    }
+                    
+                   });
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                
+                
+            }
+        });
+    }
+    
 }
