@@ -3,8 +3,11 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
-public class Impiegato {
+public class Impiegato
+{
 	private int					idImpiegato;
     private String				CF;
     private String				nome;
@@ -16,11 +19,13 @@ public class Impiegato {
     private String 				password;
     private String				grado;
     private ArrayList<Skill>	listaSkill = new ArrayList<Skill>();
-    
-    //private int idGrado; le associazioni in java non si risolvono come le associazioni nei DB,
-    //					   invece di 'int idGrado' mettiamo direttamente 'String grado';
+    private List<CoppiaProgettiRuolo<Progetto, Ruolo>> ruoliProgetti = new ArrayList<>();
+    private ArrayList<Riunione> riunioni = new ArrayList<>();
+    private ArrayList<Valutazione> valutazioni = new ArrayList<>();
 
-    public Impiegato(String CF) {
+
+    public Impiegato(String CF)
+    {
         this.CF = CF;
     }
     
