@@ -17,7 +17,7 @@ public class Impiegato
     private String				comuneNascita;
     private String				email;
     private String 				password;
-    private String				grado;
+    private String				grado;   //Implementare Grado grado
     private ArrayList<Skill>	listaSkill = new ArrayList<Skill>();
     private List<CoppiaProgettiRuolo<Progetto, Ruolo>> ruoliProgetti = new ArrayList<>();
     private ArrayList<Riunione> riunioni = new ArrayList<>();

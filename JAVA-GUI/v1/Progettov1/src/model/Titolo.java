@@ -2,9 +2,10 @@ package model;
 
 public class Titolo {
 	private String tipoTitolo;
-	private boolean nuovo;
+	private boolean nuovo; /* Attributo che serve per inserire una nuova skill all'interno del db */
 	
-	public Titolo(String tipoTitolo, boolean nuovo) {
+	public Titolo(String tipoTitolo, boolean nuovo)
+	{
 		this.tipoTitolo = tipoTitolo;
 		this.setNuovo(nuovo);
 	}

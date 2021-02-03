@@ -9,14 +9,16 @@ public class Skill
 	private LocalDate	dataCertificazione;
 	private Titolo		titolo;
 	
-	public Skill(String tipoSkill, LocalDate dataCertificazione, Titolo titolo, String descrizione) {
+	public Skill(String tipoSkill, LocalDate dataCertificazione, Titolo titolo, String descrizione)
+	{
 		this.tipoSkill = tipoSkill;
 		this.dataCertificazione = dataCertificazione;
 		this.titolo = titolo;
 		this.descrizione = descrizione;
 	}
 	
-	public Skill(String tipoSkill, String descrizione) {
+	public Skill(String tipoSkill, String descrizione)
+	{
 		this.tipoSkill = tipoSkill;
 		this.descrizione = descrizione;
 	}
