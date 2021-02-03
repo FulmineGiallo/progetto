@@ -3,7 +3,7 @@ package model;
 public class Tipologia {
 
 	private String tipoProgetto;
-	private boolean nuovo;
+	private boolean nuovo;  /* Attributo che serve per inserire una nuova Tipologia all'interno del db */
 
 	public Tipologia(String tipoProgetto, boolean nuovo) {
 		this.tipoProgetto = tipoProgetto;
