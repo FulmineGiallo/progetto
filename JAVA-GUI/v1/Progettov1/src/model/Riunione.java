@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Riunione
@@ -12,17 +13,10 @@ public class Riunione
     private Date data;
     private Time orarioInizio;
     private Time orarioFine;
+    private ArrayList<Impiegato> partecipantiRiunione = new ArrayList<>();
 
-//    public Riunione(String titolo, String descrizione, Date data, Time orarioInizio, Time orarioFine, String organizzatore) {
-//        this.titolo = titolo;
-//        this.descrizione = descrizione;
-//        this.data = data;
-//        this.orarioInizio = orarioInizio;
-//        this.orarioFine = orarioFine;
-//        this.organizzatore = organizzatore;
-//    }
-
-    public Riunione(String titolo) {
+    public Riunione(String titolo)
+    {
         this.titolo = titolo;        
     }
     
