@@ -9,5 +9,7 @@ import java.sql.SQLException;
 public interface ComuneDaoInterface
 {
     public ObservableList<Comune> gradoList(String provincia) throws SQLException;
+    public Comune getComuneBySigla(String sigla) throws SQLException;
+    
 
 }

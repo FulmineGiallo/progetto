@@ -26,22 +26,26 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Comune;
 import model.Impiegato;
 import model.Progetto;
 import model.Ruolo;
 import model.Skill;
 import model.Titolo;
 import model.Connection.DBConnection;
+import model.Dao.ComuneDao;
 import model.Dao.ImpiegatoDao;
 import model.Dao.ProgettoDao;
 import model.Dao.RuoloDao;
 import model.Dao.SkillDao;
 import model.Dao.TitoloDAO;
+import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.RuoloDaoInterface;
 import model.DaoInterface.SkillDaoInterface;
 import model.DaoInterface.TitoloDaoInterface;
+import view.HomePageProgetto;
 
 public class ControllerRicercaImpiegati {
 
@@ -129,13 +133,16 @@ public class ControllerRicercaImpiegati {
     ProgettoDaoInterface progettoDao;
     SkillDaoInterface SkillDAO;
     TitoloDaoInterface titoloDAO;
-    
+	ComuneDaoInterface comuneNacitaDao;
     
     private ObservableList<Impiegato> listaImpiegati = FXCollections.observableArrayList();
     private ObservableList<Ruolo> listaRuoli = FXCollections.observableArrayList();
     private ObservableList<Titolo> listaTitoli = FXCollections.observableArrayList();
     private ObservableList<String> listaOridinaPer = FXCollections.observableArrayList();
 
+    HomePageProgetto homePageProgetto;
+    
+    
     public void setStage(Stage window, Stage popup)
     {
     	this.window = window;
@@ -154,6 +161,7 @@ public class ControllerRicercaImpiegati {
             ruoliDao = new RuoloDao(connection);
             titoloDao = new TitoloDAO(connection);
             progettoDao = new ProgettoDao(connection);
+            comuneNacitaDao = new ComuneDao(connection);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -247,8 +255,9 @@ public class ControllerRicercaImpiegati {
     	
     }
     
-    public void annullaOperazione() {
-    	
+    public void annullaOperazione() throws Exception {
+    	homePageProgetto = new HomePageProgetto(progetto.getProjectManager(), progetto);
+    	homePageProgetto.start(window, popup);
     }
     
     
@@ -268,7 +277,15 @@ public class ControllerRicercaImpiegati {
                 SkillBox.setVisible(false);
                 NomeImpiegatoTF.setText(infoImpiegato.toString());
                 EmailTF.setText(infoImpiegato.getEmail());
-                ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+                
+                
+                try {
+					ComuneDiNascitaTF.setText(comuneNacitaDao.getComuneBySigla(infoImpiegato.getComuneNascita().toString()).toString().substring(8));
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+               
                 DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
                 
                 
