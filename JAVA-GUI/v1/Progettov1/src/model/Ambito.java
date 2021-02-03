@@ -3,9 +3,10 @@ package model;
 public class Ambito {
 
 	String tipoAmbito;
-	boolean nuovo;
+	boolean nuovo;  /* Attributo che serve per inserire una nuovo ambito all'interno del db */
 
-	public Ambito(String tipoAmbito, boolean nuovo) {
+	public Ambito(String tipoAmbito, boolean nuovo)
+	{
 		this.tipoAmbito = tipoAmbito;
 		this.nuovo = nuovo;
 	}
