@@ -277,7 +277,6 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+") GROUP BY cf HAVING AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + " ORDER BY " + ordinamentoSelezionato;
         
         ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
-     	System.out.print(daEseguire);
         
   
      	while(rs.next())
@@ -304,7 +303,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+")GROUP BY cf ORDER BY " + ordinamentoSelezionato;
             
             ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
-         	System.out.print(daEseguire);
+
             
       
          	while(rs.next())

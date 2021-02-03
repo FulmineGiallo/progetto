@@ -152,6 +152,8 @@ public class ControllerHomePageProgetto {
                 
                 SkillBox.setVisible(false);
                 NomeImpiegatoTF.setText(infoImpiegato.toString());
+                EmailTF.setText(infoImpiegato.getEmail());
+                ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
 
             	try
                 {
@@ -171,13 +173,14 @@ public class ControllerHomePageProgetto {
 
                     if(SkillComboBox.getSelectionModel().getSelectedItem() != null) {	
                     	TitoloSkillLabel.setVisible(true);
-                    	TitoloSkillLabel.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
+                    	TitoloSkillTF.setVisible(true);
+                    	TitoloSkillTF.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
                     	
                     	DataCertificazioneSkillLabel.setVisible(true);
                     	DescrizioneSkillTA.setVisible(true);
                     	try {
 							DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
-                    		DataCertificazioneSkillLabel.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
+                    		DataCertificazioneTF.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
@@ -186,6 +189,8 @@ public class ControllerHomePageProgetto {
                     	TitoloSkillLabel.setVisible(false);
                     	DataCertificazioneSkillLabel.setVisible(false);
                     	DescrizioneSkillTA.setVisible(false);
+                    	TitoloSkillTF.setVisible(false);
+                    	DataCertificazioneTF.setVisible(false);
                     }
                     
                    });

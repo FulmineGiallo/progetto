@@ -179,7 +179,7 @@ public class ControllerRicercaImpiegati {
     	RicercaSkillComboBox.setItems(listaTitoli);
     	RuoloImpiegatoComboBox.setItems(listaRuoli);
     	RicercaImpiegatiButton.setDisable(false);
-    	
+    	RuoloImpiegatoComboBox.getSelectionModel().select(1);
     	
     	listaOridinaPer.add("Nome (Alfabetico)");
     	listaOridinaPer.add("Cognome (Alfabetico)");
@@ -253,6 +253,8 @@ public class ControllerRicercaImpiegati {
 			e.printStackTrace();
 		}
     	
+    	
+    	updateInfoImpiegato();
     }
     
     public void annullaOperazione() throws Exception {
@@ -277,7 +279,7 @@ public class ControllerRicercaImpiegati {
                 SkillBox.setVisible(false);
                 NomeImpiegatoTF.setText(infoImpiegato.toString());
                 EmailTF.setText(infoImpiegato.getEmail());
-                
+//                ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
                 
                 try {
 					ComuneDiNascitaTF.setText(comuneNacitaDao.getComuneBySigla(infoImpiegato.getComuneNascita().toString()).toString().substring(8));
@@ -294,7 +296,6 @@ public class ControllerRicercaImpiegati {
                 {
                     titoloDAO = new TitoloDAO(connection);
                     SkillDAO = new SkillDao(connection);
-//                    RimuoviImpiegatoButton.setVisible(true);
                     
                     SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
 
@@ -344,5 +345,8 @@ public class ControllerRicercaImpiegati {
             }
         });
     }
+    
+    
+    
     
 }
