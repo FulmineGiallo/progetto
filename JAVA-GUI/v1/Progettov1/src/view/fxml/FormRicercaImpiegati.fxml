@@ -27,7 +27,7 @@
             <Insets bottom="10.0" top="10.0" />
          </padding>
       </HBox>
-      <GridPane hgap="15.0" layoutX="295.0" layoutY="100.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+      <GridPane hgap="15.0" layoutX="295.0" layoutY="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
          <columnConstraints>
             <ColumnConstraints percentWidth="37.5" />
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
@@ -212,7 +212,7 @@
                                        <children>
                                           <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <HBox fx:id="NomeImpiegatoLabel" alignment="CENTER_LEFT" spacing="10.0">
+                                                <HBox fx:id="NomeImpiegatoBox" alignment="CENTER_LEFT" spacing="10.0">
                                                    <children>
                                                       <Label fx:id="NomeImpiegatoLabel" prefWidth="177.0" styleClass="LabelGrande" text="Impiegato:" />
                                                       <TextField fx:id="NomeImpiegatoTF" editable="false" HBox.hgrow="ALWAYS">
@@ -386,6 +386,19 @@
             </AnchorPane>
          </children>
       </GridPane>
+      <HBox fx:id="ButtonBar" layoutX="1353.0" styleClass="ButtonBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="AnnullaButton" mnemonicParsing="false" onAction="#annullaOperazione" text="Annulla">
+               <styleClass>
+                  <String fx:value="Button" />
+                  <String fx:value="LabelUltra" />
+               </styleClass>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="30.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
    <stylesheets>
       <URL value="@../../css/FormRicercaImpiegati.css" />

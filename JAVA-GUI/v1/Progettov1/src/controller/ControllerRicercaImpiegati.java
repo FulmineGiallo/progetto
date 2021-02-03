@@ -43,6 +43,8 @@ import model.DaoInterface.TitoloDaoInterface;
 
 public class ControllerRicercaImpiegati {
 
+	
+	
     @FXML private AnchorPane 			RicercaImpiegati;
     @FXML private HBox 					IstruzioniBox;
     @FXML private Label 				IstruzioniLabel;
@@ -106,6 +108,8 @@ public class ControllerRicercaImpiegati {
     @FXML private Button 				AggiungiImpiegatoButton;
     @FXML private AnchorPane 			IstruzioniBox2;
     @FXML private Label 				IstruzioniLabel2;
+    @FXML private HBox 					NomeImpiegatoBox;
+
     
     private Stage window;
     private Stage popup;
@@ -156,7 +160,7 @@ public class ControllerRicercaImpiegati {
     	ListaRicercaImpiegatiLV.setItems(listaImpiegati);
     	RicercaSkillComboBox.setItems(listaTitoli);
     	RuoloImpiegatoComboBox.setItems(listaRuoli);
-    	
+    	RicercaImpiegatiButton.setDisable(false);
     	
     	listaOridinaPer.add("Nome (Alfabetico)");
     	listaOridinaPer.add("Cognome (Alfabetico)");
@@ -184,6 +188,8 @@ public class ControllerRicercaImpiegati {
     public void avviaRicerca(ActionEvent event) {
     	
     	String ordinamento = null;
+    	ObservableList<String> skillAggiunte = FXCollections.observableArrayList();
+    	skillAggiunte = SkillAggiunteLV.getItems();
     	
     	if(SalarioMedioTF.getText().equals("")) {
     		salarioMedioInserito = -1;
@@ -214,11 +220,14 @@ public class ControllerRicercaImpiegati {
     	
     	nomeInserito="%" + nomeInserito + "%";
     	cognomeInserito="%" + cognomeInserito + "%";
-
+    	
+    	if(SkillAggiunteLV.getItems().isEmpty()) {
+    		skillAggiunte.add("%%");
+    	}
     	
     	
     	try {
-			listaImpiegati = impiegatoDao.getAllImpiegatiByResearch(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento);
+			listaImpiegati = impiegatoDao.getAllImpiegatiOrdinatiPerNome(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size());
 			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

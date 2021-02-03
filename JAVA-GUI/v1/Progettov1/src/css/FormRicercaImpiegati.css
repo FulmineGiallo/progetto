@@ -8,6 +8,11 @@
 	-fx-font-style: italic;
 }
 
+.ButtonBar{
+	-fx-border-width: 5 0 0 0;
+	-fx-border-color: -fx-terzocolore;
+}
+
 .SkillListView .list-cell{
 	-fx-pref-height: 40;
 }
