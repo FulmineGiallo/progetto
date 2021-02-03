@@ -18,8 +18,8 @@ public interface ImpiegatoDaoInterface
     String getGrado(String email) throws SQLException;
     String insertRegistrazione(Impiegato nuovoImpiegato) throws SQLException;
     String getDirettoreRisorseUmane() throws SQLException;
-    ObservableList<Impiegato> getAllImpiegati() throws SQLException;
-    ObservableList<Impiegato> getAllImpiegatiOrdinatiPerNome(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill) throws SQLException;
+    ObservableList<Impiegato> getAllImpiegati(int idProgetto) throws SQLException;
+    ObservableList<Impiegato> getAllImpiegatiOrdinatiPerNome(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, int idProgetto) throws SQLException;
 
     	
 }

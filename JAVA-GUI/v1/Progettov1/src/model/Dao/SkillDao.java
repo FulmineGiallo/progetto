@@ -69,6 +69,20 @@ public class SkillDao implements SkillDaoInterface
     	return descrizione;
     }
         
-    
+    public String getTipologiaSkill(String titolo, Impiegato impiegato) throws SQLException {
+    	
+    	String descrizione=null;
+    	
+        
+        ResultSet rs = descrizioneCertificazioneImpiegato.executeQuery("SELECT tiposkill FROM skill NATURAL JOIN titolo WHERE impiegato LIKE '" + impiegato.getCF() +"' AND tipotitolo LIKE '" + titolo + "'");
+        
+        while (rs.next())
+        {
+        	descrizione=rs.getString("tiposkill");
+        }
+        
+    	
+    	return descrizione;
+    }
     
 }

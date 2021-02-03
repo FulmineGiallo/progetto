@@ -71,7 +71,7 @@ public class ControllerHomePageProgetto {
     @FXML private TextField 		  RuoloImpiegatoTF;
     @FXML private HBox 				  SelezionaSkillBox;
     @FXML private Label 			  SkillComboBoxLabel;
-    @FXML private ComboBox<Skill> 	  SkillComboBox;
+    @FXML private ComboBox<Titolo> 	  SkillComboBox;
     @FXML private VBox 				  SkillBox;
     @FXML private HBox 				  TipologiaSkillBox;
     @FXML private Label 			  TipologiaSkillLabel;
@@ -159,7 +159,7 @@ public class ControllerHomePageProgetto {
                     SkillDAO = new SkillDao(connection);
                     RimuoviImpiegatoButton.setVisible(true);
                     
-                    //SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
+                    SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
 
                     if(infoImpiegato.getCF().equals( progetto.getProjectManager().getCF())) {
                     	RimuoviImpiegatoButton.setVisible(false);

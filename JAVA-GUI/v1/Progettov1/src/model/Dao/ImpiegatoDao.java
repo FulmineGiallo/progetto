@@ -23,11 +23,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final Connection connection;
 
     private final PreparedStatement getImpiegati;
-    private final PreparedStatement getImpiegatiConSalarioNomeAsc;
-    private final PreparedStatement getImpiegatiSenzaSalarioNomeAsc;
-    private final PreparedStatement getImpiegatiByResearchCognomeAsc;
-    private final PreparedStatement getImpiegatiByResearchSalarioAsc;
-    private final PreparedStatement getImpiegatiByResearchSalarioDesc;
+
     private final PreparedStatement getNome;
     private final PreparedStatement getCognome;    
     private final PreparedStatement loginImpiegato;
@@ -51,13 +47,8 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     public ImpiegatoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
-        getImpiegati = connection.prepareStatement("SELECT * FROM impiegato ORDER BY cognome");
-        getImpiegatiConSalarioNomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY Nome ASC");
-        getImpiegatiSenzaSalarioNomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf FROM impiegato AS i WHERE nome LIKE ? AND cognome LIKE ? ORDER BY Nome ASC");
-        getImpiegatiByResearchCognomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY cognome ASC");
-        getImpiegatiByResearchSalarioAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY AVG(quantita) ASC");
-        getImpiegatiByResearchSalarioDesc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY AVG(quantita) DESC");
-        
+        getImpiegati = connection.prepareStatement("SELECT * FROM impiegato AS i WHERE i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = ?) ORDER BY cognome");
+  
         getImpiegatiConSalarioMedio = connection.createStatement();
         getImpiegatiSenzaSalarioMedio = connection.createStatement();
         
@@ -231,8 +222,9 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         	   "\nSkill inserite: "	  + String.valueOf(skillInserite);
     }
 
-    public ObservableList<Impiegato> getAllImpiegati() throws SQLException
+    public ObservableList<Impiegato> getAllImpiegati(int idProgetto) throws SQLException
     {
+    	getImpiegati.setInt(1, idProgetto);
         ResultSet rs = getImpiegati.executeQuery();
         ObservableList<Impiegato> list = FXCollections.observableArrayList();
 
@@ -268,7 +260,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     	return direttoreRisorseUmane;
     }
     
-    public ObservableList<Impiegato> getAllImpiegatiOrdinatiPerNome(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill) throws SQLException{
+    public ObservableList<Impiegato> getAllImpiegatiOrdinatiPerNome(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, int idProgetto) throws SQLException{
     	
        
     if(salarioMedio != -1) {	
@@ -282,7 +274,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
         }
         
-        daEseguire = daEseguire + ")GROUP BY cf HAVING AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + " ORDER BY " + ordinamentoSelezionato;
+        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+") GROUP BY cf HAVING AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + " ORDER BY " + ordinamentoSelezionato;
         
         ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
      	System.out.print(daEseguire);
@@ -303,13 +295,13 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
             Impiegato impiegato = new Impiegato();
         
-            String daEseguire = "SELECT DISTINCT nome, cognome, cf FROM((impiegato AS i LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (false ";
+            String daEseguire = "SELECT DISTINCT nome, cognome, cf FROM((impiegato AS i LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (true ";
             
             for (String s:skillSelezionate) {
             	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
             }
             
-            daEseguire = daEseguire + ")GROUP BY cf ORDER BY " + ordinamentoSelezionato;
+            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+")GROUP BY cf ORDER BY " + ordinamentoSelezionato;
             
             ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
          	System.out.print(daEseguire);
