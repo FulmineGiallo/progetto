@@ -30,6 +30,7 @@ import model.Titolo;
 import view.FinestraAggiungiPartecipanteAlProgetto;
 import view.FinestraPopup;
 import view.FinestraRimuoviImpiegatoDalProgetto;
+import view.FormRegistrazioneRiunione;
 import view.HomePageImpiegato;
 
 import java.sql.Connection;
@@ -95,11 +96,12 @@ public class ControllerHomePageProgetto {
     private SkillDao SkillDAO;
     private progettoImpiegatoDao progettoImpiegatoDao;
     
-    FinestraPopup finestraRimuoviImpiegatoDalProgetto;
+    FinestraPopup 						   finestraRimuoviImpiegatoDalProgetto;
     FinestraAggiungiPartecipanteAlProgetto finestraAggiungiImpiegatoAlProgetto;
+    FormRegistrazioneRiunione			   formRegistrazioneRiunione;
     
     Progetto progetto;
-    Impiegato impiegato;
+    Impiegato projectManager;
 
     public void setStage(Stage window, Stage popup)
     {
@@ -130,8 +132,8 @@ public class ControllerHomePageProgetto {
 
     public void inizializza(Impiegato projectManager, Progetto progetto) throws SQLException {
     	this.progetto = progetto;
-    	this.impiegato = projectManager;
-        NomeProjectManagerLabel.setText((impiegato.getNome() + " " + impiegato.getCognome()).toUpperCase(Locale.ROOT));
+    	this.projectManager = projectManager;
+        NomeProjectManagerLabel.setText(projectManager.toString().toUpperCase());
         NomeProgettoLabel.setText(progetto.getTitolo());
         lista = progettoDao.getPartecipanti(progetto);
         ListaPartecipantiLV.setItems(lista);
@@ -215,7 +217,7 @@ public class ControllerHomePageProgetto {
     @FXML
     private void backHomePageImpiegato(ActionEvent event) throws Exception
     {
-    	homePageImpiegato = new HomePageImpiegato(impiegato);
+    	homePageImpiegato = new HomePageImpiegato(projectManager);
     	homePageImpiegato.start(window, popup);
     }
     
@@ -233,6 +235,11 @@ public class ControllerHomePageProgetto {
 		finestraAggiungiImpiegatoAlProgetto = new FinestraAggiungiPartecipanteAlProgetto();
 		finestraAggiungiImpiegatoAlProgetto.start(window, popup, progetto);
 
+    }
+    
+    @FXML private void programmaRiunione(ActionEvent event) {
+    	formRegistrazioneRiunione = new FormRegistrazioneRiunione();
+    	formRegistrazioneRiunione.start(window, popup, projectManager, progetto);
     }
       
 }

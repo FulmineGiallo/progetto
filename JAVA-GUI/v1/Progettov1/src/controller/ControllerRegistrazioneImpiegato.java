@@ -335,7 +335,7 @@ public class ControllerRegistrazioneImpiegato {
     	}
     	
     	//CONTROLLO PASSWORD
-    	switch(utils.controlloPassword(PasswordTF.getText())) {
+    	switch(utils.controlloPassword(PasswordTF.getText(), 4)) {
 			case 1:
 				checkPassword = false;
 	    		PasswordErrorLabel.setText("Questo campo è obbligatorio");

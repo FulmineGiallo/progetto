@@ -37,7 +37,15 @@ public class HomePageProgetto
 
         window.setScene(scene);
         
-        window.setTitle(window.toString());
+        window.setTitle("Home page \"" + progetto.getTitolo() + "\"");
+        
+        window.setWidth(850.0);
+        window.setMinWidth(850.0);
+        window.setHeight(450.0);
+        window.setMinHeight(450.0);
+        window.setMaximized(true);
+        window.centerOnScreen();
+        
         window.show();
     }
 }

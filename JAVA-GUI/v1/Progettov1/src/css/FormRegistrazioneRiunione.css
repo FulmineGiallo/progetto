@@ -8,6 +8,25 @@
 	-fx-border-color: -fx-terzocolore;
 }
 
-.ListView .list-cell{
-	-fx-pref-height: 40;
+.Slider{
+	-fx-control-inner-background: #424549;
+}
+
+.Slider .thumb{
+	-fx-background-color: #7289da;
+	-fx-pref-width: 20;
+	-fx-pref-height: 20;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+}
+
+.Slider .track{
+	-fx-pref-height: 15;
+	-fx-border-width: 10;
+}
+
+.Slider .axis{
+	-fx-tick-label-fill: white;
+	-fx-tick-label-font: 12 'Roboto Light';
 }

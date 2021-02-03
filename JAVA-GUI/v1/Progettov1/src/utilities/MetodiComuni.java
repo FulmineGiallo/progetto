@@ -17,11 +17,11 @@ public class MetodiComuni {
 		return 0;
 	}
 	
-	public int controlloPassword(String password) {
+	public int controlloPassword(String password, int lunghezza) {
 		if(password.isBlank())
     		return 1;
     	else {
-    		if(password.length() < 4)
+    		if(password.length() < lunghezza)
     			return 2;
     	}
 		

@@ -5,10 +5,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -49,7 +51,7 @@
                                  <children>
                                     <HBox fx:id="OrganizzatoreBox" alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
-                                          <Label fx:id="OrganizzatoreLabel" styleClass="LabelGrande" text="Organizzatore:" />
+                                          <Label fx:id="OrganizzatoreLabel" prefWidth="131.0" styleClass="LabelGrande" text="Organizzatore:" />
                                           <TextField fx:id="OrganizzatoreTF" editable="false" HBox.hgrow="ALWAYS">
                                              <styleClass>
                                                 <String fx:value="TextField" />
@@ -81,30 +83,78 @@
                                           </TextArea>
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="OrarioDiInizioBox">
+                                    <GridPane hgap="10.0" vgap="10.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="59.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="41.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints vgrow="SOMETIMES" />
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                      </rowConstraints>
                                        <children>
-                                          <Label fx:id="OrarioDiInizioLabel" styleClass="LabelNascosta" text="* Orario di inizio" visible="false" />
-                                          <TextField fx:id="OrarioDiInizioTF" onMouseClicked="#visualizzaOrarioDiInizioLabel" promptText="* Orario di inizio">
-                                             <styleClass>
-                                                <String fx:value="TextField" />
-                                                <String fx:value="LabelPiccola" />
-                                             </styleClass>
-                                          </TextField>
-                                          <Label fx:id="OrarioDiInizioErrorLabel" styleClass="ErrorLabel" />
+                                          <HBox fx:id="DataDiInizioBox" spacing="10.0">
+                                             <children>
+                                                <Label fx:id="OrarioDiInizioLabel" styleClass="LabelGrande" text="* Orario di inizio">
+                                                   <HBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <AnchorPane>
+                                                         <children>
+                                                            <DatePicker fx:id="DataDiInizioDP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <styleClass>
+                                                                  <String fx:value="DatePicker" />
+                                                                  <String fx:value="LabelPiccola" />
+                                                               </styleClass>
+                                                            </DatePicker>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <Label fx:id="DataDiInizioErrorLabel" maxWidth="260.0" minHeight="30.0" prefHeight="30.0" styleClass="ErrorLabel" wrapText="true" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <VBox fx:id="OrarioDiInizioBox" GridPane.columnIndex="1">
+                                             <children>
+                                                <Slider fx:id="OrarioDiInizioOreSlider" majorTickUnit="12.0" max="23.0" showTickLabels="true" styleClass="Slider" />
+                                                <Slider fx:id="OrarioDiInizioOreSlider" majorTickUnit="10.0" max="59.0" showTickLabels="true" styleClass="Slider" />
+                                             </children>
+                                          </VBox>
+                                          <HBox fx:id="DataDiFineBox" spacing="10.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="OrarioDiFineLabel" prefWidth="131.0" styleClass="LabelGrande" text="* Orario di fine">
+                                                   <HBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <AnchorPane>
+                                                         <children>
+                                                            <DatePicker fx:id="DataDiFineDP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <styleClass>
+                                                                  <String fx:value="DatePicker" />
+                                                                  <String fx:value="LabelPiccola" />
+                                                               </styleClass>
+                                                            </DatePicker>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <Label fx:id="DataDiFineErrorLabel" maxWidth="260.0" minHeight="30.0" prefHeight="30.0" styleClass="ErrorLabel" wrapText="true" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <VBox fx:id="OrarioDiFineBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Slider fx:id="OrarioDiFineOreSlider" majorTickUnit="12.0" max="23.0" showTickLabels="true" styleClass="Slider" />
+                                                <Slider fx:id="OrarioDiFineMinutiSlider" majorTickUnit="10.0" max="59.0" showTickLabels="true" styleClass="Slider" />
+                                             </children>
+                                          </VBox>
                                        </children>
-                                    </VBox>
-                                    <VBox fx:id="OrarioDiFineBox">
-                                       <children>
-                                          <Label fx:id="OrarioDiFineLabel" styleClass="LabelNascosta" text="* Orario di fine" visible="false" />
-                                          <TextField fx:id="OrarioDiFineTF" onMouseClicked="#visualizzaOrarioDiFineLabel" promptText="* Orario di fine">
-                                             <styleClass>
-                                                <String fx:value="TextField" />
-                                                <String fx:value="LabelPiccola" />
-                                             </styleClass>
-                                          </TextField>
-                                          <Label fx:id="OrarioDiFineErrorLabel" styleClass="ErrorLabel" />
-                                       </children>
-                                    </VBox>
+                                    </GridPane>
                                     <HBox fx:id="ModalitaRiunioneBox" alignment="CENTER_LEFT" spacing="10.0">
                                        <children>
                                           <Label fx:id="ModalitaRiunioneLabel" prefWidth="120.0" styleClass="LabelGrande" text="Modalità:" />

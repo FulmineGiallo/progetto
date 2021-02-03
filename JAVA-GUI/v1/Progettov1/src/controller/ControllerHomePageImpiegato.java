@@ -286,11 +286,10 @@ public class ControllerHomePageImpiegato {
     }
 
     //Se il GestioneProgettoButton viene cliccato
-    @FXML void gestisciProgetto(ActionEvent event)
-	{
-        HomePageProgetto homeProjectManger = new HomePageProgetto(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
+    @FXML void gestisciProgetto(ActionEvent event) {
+        HomePageProgetto homeProjectManager = new HomePageProgetto(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
         try {
-            homeProjectManger.start(window, popup);
+            homeProjectManager.start(window, popup);
         } catch (Exception e) {
             e.printStackTrace();
         }

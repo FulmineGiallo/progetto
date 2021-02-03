@@ -9,10 +9,10 @@ public class Riunione
     private String titolo;
     private String descrizione;
     private Impiegato organizzatore;
-    private Impiegato CFOrganizzatore;
-    private Date data;
-    private Time orarioInizio;
-    private Time orarioFine;
+    private Impiegato CFOrganizzatore; //DA ELIMINARE
+    private Date data; //DA ELIMINARE
+    private Time orarioInizio; //DA CAMBIARE IN LOCALDATETIME
+    private Time orarioFine; //DA CAMBIARE IN LOCALDATETIME
     private ArrayList<Impiegato> partecipantiRiunione = new ArrayList<>();
 
     public Riunione(String titolo)
