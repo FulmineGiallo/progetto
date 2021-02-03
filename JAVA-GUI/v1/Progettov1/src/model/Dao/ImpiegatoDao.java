@@ -23,7 +23,8 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final Connection connection;
 
     private final PreparedStatement getImpiegati;
-    private final PreparedStatement getImpiegatiByResearchNomeAsc;
+    private final PreparedStatement getImpiegatiConSalarioNomeAsc;
+    private final PreparedStatement getImpiegatiSenzaSalarioNomeAsc;
     private final PreparedStatement getImpiegatiByResearchCognomeAsc;
     private final PreparedStatement getImpiegatiByResearchSalarioAsc;
     private final PreparedStatement getImpiegatiByResearchSalarioDesc;
@@ -38,6 +39,10 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final PreparedStatement insertImpiegato;
     private final PreparedStatement insertTitolo;
     private final PreparedStatement insertSkill;
+    private final Statement getImpiegatiConSalarioMedio;
+    private final Statement getImpiegatiSenzaSalarioMedio;
+    
+    
     
     private 	  String 			direttoreRisorseUmane = "";
     private		  int				idGradoNuovoImpiegato;
@@ -47,10 +52,14 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     {
         this.connection = connection;
         getImpiegati = connection.prepareStatement("SELECT * FROM impiegato ORDER BY cognome");
-        getImpiegatiByResearchNomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY Nome ASC");
+        getImpiegatiConSalarioNomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY Nome ASC");
+        getImpiegatiSenzaSalarioNomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf FROM impiegato AS i WHERE nome LIKE ? AND cognome LIKE ? ORDER BY Nome ASC");
         getImpiegatiByResearchCognomeAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY cognome ASC");
         getImpiegatiByResearchSalarioAsc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY AVG(quantita) ASC");
         getImpiegatiByResearchSalarioDesc = connection.prepareStatement("SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM impiegato AS i JOIN salario AS s ON i.cf = s.impiegato WHERE nome LIKE ? AND cognome LIKE ? GROUP BY cf HAVING AVG(quantita) BETWEEN ? AND ? ORDER BY AVG(quantita) DESC");
+        
+        getImpiegatiConSalarioMedio = connection.createStatement();
+        getImpiegatiSenzaSalarioMedio = connection.createStatement();
         
         getNome = connection.prepareStatement("SELECT nome FROM impiegato WHERE email = ?");
         getCognome = connection.prepareStatement("SELECT cognome FROM impiegato WHERE email = ?");
@@ -259,22 +268,29 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     	return direttoreRisorseUmane;
     }
     
-    public ObservableList<Impiegato> getAllImpiegatiByResearch(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato) throws SQLException{
+    public ObservableList<Impiegato> getAllImpiegatiOrdinatiPerNome(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill) throws SQLException{
     	
-        getImpiegatiByResearchNomeAsc.setString(1,nomeInserito);
-        getImpiegatiByResearchNomeAsc.setString(2,cognomeInserito);
-        getImpiegatiByResearchNomeAsc.setFloat(3,salarioMedio-200);
-        getImpiegatiByResearchNomeAsc.setFloat(4,salarioMedio+200);
-        
-        
+       
+    if(salarioMedio != -1) {	
+
         ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
         Impiegato impiegato = new Impiegato();
-//       System.out.print(getImpiegatiByResearch);
-       
-        if(salarioMedio != -1) {
-        	ResultSet rs = getImpiegatiByResearchNomeAsc.executeQuery();
-        	while(rs.next())
+    
+        String daEseguire = "SELECT DISTINCT nome, cognome, cf, AVG(quantita) AS salarioMedio FROM (((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (false ";
+        
+        for (String s:skillSelezionate) {
+        	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
+        }
+        
+        daEseguire = daEseguire + ")GROUP BY cf HAVING AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + " ORDER BY " + ordinamentoSelezionato;
+        
+        ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
+     	System.out.print(daEseguire);
+        
+  
+     	while(rs.next())
         	{
+     			impiegato=new Impiegato();
         		impiegato.setNome(rs.getString("nome"));
         		impiegato.setCognome(rs.getString("cognome"));
         		impiegato.setCF(rs.getString("cf"));
@@ -284,7 +300,31 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         	return impiegati;
         }
         else {
-        	return null;
+            ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
+            Impiegato impiegato = new Impiegato();
+        
+            String daEseguire = "SELECT DISTINCT nome, cognome, cf FROM((impiegato AS i LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (false ";
+            
+            for (String s:skillSelezionate) {
+            	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
+            }
+            
+            daEseguire = daEseguire + ")GROUP BY cf ORDER BY " + ordinamentoSelezionato;
+            
+            ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
+         	System.out.print(daEseguire);
+            
+      
+         	while(rs.next())
+            	{
+         			impiegato=new Impiegato();
+            		impiegato.setNome(rs.getString("nome"));
+            		impiegato.setCognome(rs.getString("cognome"));
+            		impiegato.setCF(rs.getString("cf"));
+            		impiegati.add(impiegato);
+            	}
+            	rs.close();
+            	return impiegati;
         }
     }
 }

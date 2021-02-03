@@ -3,6 +3,7 @@ package model.DaoInterface;
 import model.Impiegato;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,5 +19,7 @@ public interface ImpiegatoDaoInterface
     String insertRegistrazione(Impiegato nuovoImpiegato) throws SQLException;
     String getDirettoreRisorseUmane() throws SQLException;
     ObservableList<Impiegato> getAllImpiegati() throws SQLException;
-    ObservableList<Impiegato> getAllImpiegatiByResearch(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato) throws SQLException;
+    ObservableList<Impiegato> getAllImpiegatiOrdinatiPerNome(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill) throws SQLException;
+
+    	
 }
