@@ -129,7 +129,6 @@ public class ControllerHomePageImpiegato {
     DBConnection dbConnection;
     ProgettoDaoInterface progetti;
     RiunioneDaoInterface riunioni;
-    
     {
         try {
             dbConnection = new DBConnection();
@@ -161,16 +160,17 @@ public class ControllerHomePageImpiegato {
     	this.popup = popup;
     }
     
-    public void inizializza(Impiegato impiegato) throws SQLException {
+    public void inizializza(Impiegato impiegato) throws SQLException
+	{
     	this.impiegato = impiegato;
-    	
     	NomeImpiegatoLabel.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
         GradoImpiegatoLabel.setText(impiegato.getGrado());
-        
         listaProgetti.addAll(progetti.getProgettiImpiegato(impiegato));
-        if (listaProgetti.isEmpty()) {
+        if (listaProgetti.isEmpty())
+        {
 			ListaProgettiLV.getItems().add(new Progetto("Non ci sono ancora progetti"));
-		} else {
+		}
+        else {
 			ListaProgettiLV.setItems(listaProgetti);
 		}
         
@@ -178,7 +178,8 @@ public class ControllerHomePageImpiegato {
 		
         if (listaRiunioni.isEmpty()) {
 			ListaRiunioniLV.getItems().add(new Riunione("Non ci sono ancora riunioni"));
-		} else {
+		} else
+			{
 			ListaRiunioniLV.setItems(listaRiunioni);
 		}
         
@@ -215,7 +216,7 @@ public class ControllerHomePageImpiegato {
     public void EffettuaLogout(ActionEvent event) throws Exception {
     	finestraErrore = new FinestraPopup();
     	finestraErrore.start(window, popup);
-
+		connection.close();
     }
 
     @FXML void accettaInvito(ActionEvent event) {
@@ -285,7 +286,8 @@ public class ControllerHomePageImpiegato {
     }
 
     //Se il GestioneProgettoButton viene cliccato
-    @FXML void gestisciProgetto(ActionEvent event) {
+    @FXML void gestisciProgetto(ActionEvent event)
+	{
         HomePageProgetto homeProjectManger = new HomePageProgetto(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
         try {
             homeProjectManger.start(window, popup);
@@ -305,23 +307,28 @@ public class ControllerHomePageImpiegato {
     }
 
     //Se il project manager vuole modificare le informazioni del progetto
-    @FXML void modificaInformazioniProgetto(ActionEvent event) {
+    @FXML
+	void modificaInformazioniProgetto(ActionEvent event)
+	{
         gestisciProgettoBox(true);
         SalvaModificheProgetto.setVisible(true);
     }
 
-    @FXML void modificaInformazioniRiunione(ActionEvent event) { // >> DA FARE
+    @FXML void modificaInformazioniRiunione(ActionEvent event)
+	{ // >> DA FARE
 
     }
 
-    @FXML void salvaModificheProgetto(ActionEvent event) {
+    @FXML void salvaModificheProgetto(ActionEvent event)
+	{
     	gestisciProgettoBox(false);
         
         LocalDate datainizio;
         LocalDate dataFine;
         LocalDate dataScadenza;
         
-        try {
+        try
+		{
             ListaProgettiLV.getSelectionModel().getSelectedItem().setDescrizione(DescrizioneProgettoTA.getText());
             datainizio = LocalDate.parse(DataDiInizioProgettoTF.getText());
             dataFine = LocalDate.parse(DataDiFineProgettoTF.getText());
@@ -335,13 +342,16 @@ public class ControllerHomePageImpiegato {
             updateEffettuato = progetti.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
             SalvaModificheProgetto.setVisible(false);
 
-        } catch (SQLException throwables) {
+        }
+        catch (SQLException throwables)
+		{
             throwables.printStackTrace();
         }
 
     }
 
-    @FXML private void salvaModificheRiunione(ActionEvent event) { // >> DA FARE
+    @FXML private void salvaModificheRiunione(ActionEvent event)
+	{ // >> DA FARE
 
     }
     
