@@ -5,7 +5,8 @@ public class Comune
     String codiceComune;
     String nomeComune;
 
-    public Comune(String nomeComune, String codiceComune) {
+    public Comune(String nomeComune, String codiceComune)
+    {
         this.nomeComune = nomeComune;
         this.codiceComune = codiceComune;
     }

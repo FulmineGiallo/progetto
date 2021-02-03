@@ -14,7 +14,7 @@ public class Impiegato
     private String				cognome;
     private String				genere;
     private LocalDate			dataNascita;
-    private String				comuneNascita;
+    private String				comuneNascita; //Implementare oggetto Comune
     private String				email;
     private String 				password;
     private String				grado;   //Implementare Grado grado
