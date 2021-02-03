@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="850.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
+<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="850.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
    <children>
       <HBox fx:id="IstruzioniBox" alignment="CENTER" layoutX="100.0" layoutY="10.0" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
