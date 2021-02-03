@@ -16,7 +16,7 @@ public class ValutazioneDao implements ValutazioneDaoInterface
 {
     Connection connection;
     PreparedStatement getValutazioni;
-
+    ImpiegatoDao impiegatoDao;
     public ValutazioneDao(Connection connection) throws SQLException
     {
         this.connection = connection;
