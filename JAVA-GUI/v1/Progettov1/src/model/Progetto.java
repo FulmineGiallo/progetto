@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Progetto
@@ -13,9 +14,11 @@ public class Progetto
     Impiegato projectManager;
     Tipologia tipoProgetto;
     List<Ambito> listaAmbiti;
-	String ruolo; // >> da sostituire in un oggetto Ruolo, dobbiamo creare una classe a parte
+    List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti = new ArrayList<>();
+	String ruolo; // da gestire con classe CoppiaProgettiRuolo
 
-	public Progetto (String titolo) {
+	public Progetto (String titolo)
+    {
 		this.titolo = titolo;
 	}
 
