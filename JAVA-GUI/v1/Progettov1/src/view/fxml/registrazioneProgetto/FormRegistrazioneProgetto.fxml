@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1200.0" minWidth="850.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
+<AnchorPane fx:id="RegistrazioneProgetto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="850.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneProgetto">
    <children>
       <HBox fx:id="IstruzioniBox" alignment="CENTER" layoutX="100.0" layoutY="10.0" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -163,7 +163,7 @@
                                                             <String fx:value="TextField" />
                                                             <String fx:value="LabelPiccola" />
                                                          </styleClass></TextField>
-                                                      <Label fx:id="NuovaTipologiaErrorLabel" styleClass="ErrorLabel" />
+                                                      <Label fx:id="NuovaTipologiaErrorLabel" minHeight="30.0" styleClass="ErrorLabel" wrapText="true" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -172,8 +172,8 @@
                                     </GridPane>
                                     <GridPane fx:id="AmbitiBox">
                                        <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="57.5" />
-                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="42.5" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="55.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="45.0" />
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints vgrow="SOMETIMES" />
@@ -195,7 +195,7 @@
                                                             <String fx:value="TextField" />
                                                             <String fx:value="LabelPiccola" />
                                                          </styleClass></TextField>
-                                                      <Label fx:id="NuovoAmbitoErrorLabel" styleClass="ErrorLabel" wrapText="true" />
+                                                      <Label fx:id="NuovoAmbitoErrorLabel" minHeight="30.0" styleClass="ErrorLabel" wrapText="true" />
                                                    </children>
                                                 </VBox>
                                                 <VBox layoutX="10.0" layoutY="120.0" spacing="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">

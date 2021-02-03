@@ -1,24 +1,33 @@
 package model;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Progetto
 {
     String titolo;
     String descrizione;
-    Date dataInizio;
-    Date dataFine;
-    Date scadenza;
+    LocalDate dataInizio;
+    LocalDate dataFine;
+    LocalDate scadenza;
     Impiegato projectManager;
-    String ruolo; // >> da sostituire in un oggetto Ruolo, dobbiamo creare una classe a parte
-    
-    public Progetto(String titolo)
-    {
-        this.titolo = titolo;
-    }
+    Tipologia tipoProgetto;
+    List<Ambito> listaAmbiti;
+	String ruolo; // >> da sostituire in un oggetto Ruolo, dobbiamo creare una classe a parte
 
-    public String getRuolo() {
+	public Progetto (String titolo) {
+		this.titolo = titolo;
+	}
+
+    public Progetto(Impiegato projectManager, String titolo, LocalDate dataInizio, LocalDate scadenza, Tipologia tipoProgetto) {
+		this.projectManager = projectManager;
+    	this.titolo = titolo;
+		this.dataInizio = dataInizio;
+		this.scadenza = scadenza;
+		this.tipoProgetto = tipoProgetto;
+	}
+
+	public String getRuolo() {
         return ruolo;
     }
 
@@ -51,29 +60,45 @@ public class Progetto
         this.descrizione = descrizione;
     }
 
-    public Date getDataInizio() {
+    public LocalDate getDataInizio() {
         return dataInizio;
     }
 
-    public void setDataInizio(Date dataInizio) {
+    public void setDataInizio(LocalDate dataInizio) {
         this.dataInizio = dataInizio;
     }
 
-    public Date getDataFine() {
+    public LocalDate getDataFine() {
         return dataFine;
     }
 
-    public void setDataFine(Date dataFine) {
+    public void setDataFine(LocalDate dataFine) {
         this.dataFine = dataFine;
     }
 
-    public Date getScadenza() {
+    public LocalDate getScadenza() {
         return scadenza;
     }
 
-    public void setScadenza(Date scadenza) {
+    public void setScadenza(LocalDate scadenza) {
         this.scadenza = scadenza;
     }
+    
+    public Tipologia getTipoProgetto() {
+		return tipoProgetto;
+	}
+
+	public void setTipoProgetto(Tipologia tipoProgetto) {
+		this.tipoProgetto = tipoProgetto;
+	}
+
+	public List<Ambito> getListaAmbiti() {
+		return listaAmbiti;
+	}
+
+	public void setListaAmbiti(List<Ambito> listaAmbiti) {
+		this.listaAmbiti = listaAmbiti;
+	}
 
     @Override
     public String toString() {

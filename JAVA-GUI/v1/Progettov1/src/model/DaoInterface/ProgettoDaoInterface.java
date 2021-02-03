@@ -8,10 +8,10 @@ import java.sql.SQLException;
 
 public interface ProgettoDaoInterface
 {
-    ObservableList<Progetto> getProgettiImpiegato(Impiegato impiegato) throws SQLException;
-    int creaProgetto(Progetto progetto) throws SQLException;
-    int updateInfoProgetto(Progetto progetto) throws SQLException;
-    ObservableList<Impiegato> getPartecipanti(Progetto progetto) throws SQLException;
-    int GetIdProgetto(Progetto progetto) throws SQLException;
+    public ObservableList<Progetto> getProgettiImpiegato(Impiegato impiegato) throws SQLException;
+    public String creaProgetto(Progetto progetto) throws SQLException;
+    public int updateInfoProgetto(Progetto progetto) throws SQLException;
+    public ObservableList<Impiegato> getPartecipanti(Progetto progetto) throws SQLException;
+    public int getIdProgetto(Progetto progetto) throws SQLException;
 
 }

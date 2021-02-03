@@ -7,3 +7,7 @@
 	-fx-font-family: 'Roboto Light';
 	-fx-font-style: italic;
 }
+
+.SkillListView .list-cell{
+	-fx-pref-height: 40;
+}

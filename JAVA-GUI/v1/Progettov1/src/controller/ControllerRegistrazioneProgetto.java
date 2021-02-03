@@ -4,23 +4,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -31,13 +24,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Ambito;
-import model.Comune;
 import model.Connection.DBConnection;
 import model.Dao.AmbitoDao;
-import model.Dao.ComuneDao;
 import model.Dao.ProgettoDao;
 import model.Dao.TipologiaDao;
 import model.DaoInterface.ProgettoDaoInterface;
@@ -47,7 +37,6 @@ import view.HomePageImpiegato;
 import model.Impiegato;
 import model.Progetto;
 import model.Tipologia;
-import model.Titolo;
 
 public class ControllerRegistrazioneProgetto {
 
@@ -131,7 +120,6 @@ public class ControllerRegistrazioneProgetto {
     private Ambito					  ambitoIniziale = new Ambito("Non ci sono ambiti di progetto", false);
     
     private Impiegato projectManager;
-    private Progetto  nuovoProgetto;
     
     private Connection connection;
     private DBConnection dbConnection;
@@ -214,6 +202,28 @@ public class ControllerRegistrazioneProgetto {
         	}
 
         });
+    }
+    
+    private Progetto inizializzaNuovoProgetto() {
+    	Progetto nuovoProgetto = new Progetto(projectManager,
+    										  TitoloTF.getText(),
+    										  DataDiInizioDP.getValue(),
+    										  DataDiScadenzaDP.getValue(),
+    										  TipologiaComboBox.getSelectionModel().getSelectedItem());
+    	
+    	if(!AmbitiLV.getItems().contains(ambitoIniziale)) {
+    		nuovoProgetto.setListaAmbiti(AmbitiLV.getItems());
+    	}
+    	
+    	switch(utils.controlloStringa(DescrizioneTA.getText(), "")) {
+	    	case 1:
+	    		nuovoProgetto.setDescrizione(null);
+	    		break;
+    		default:
+    			nuovoProgetto.setDescrizione(DescrizioneTA.getText());
+    	}
+    	
+    	return nuovoProgetto;
     }
     
     //CONTROLLO NUOVA TIPOLOGIA (SE OBBLIGATORIA)
@@ -408,27 +418,26 @@ public class ControllerRegistrazioneProgetto {
 
     @FXML private void confermaOperazione(ActionEvent event) {
     	if(controlloCampi()) {
-    		int risultato;
             try {
-                ProgettoDaoInterface progetto = new ProgettoDao(connection);;
-                Progetto registrazione = new Progetto(TitoloTF.getText());
-                registrazione.setProjectManager(projectManager);
-                registrazione.setDescrizione(DescrizioneTA.getText());
-                registrazione.setDataInizio(java.sql.Date.valueOf(DataDiInizioDP.getValue()));
-                registrazione.setScadenza(java.sql.Date.valueOf(DataDiScadenzaDP.getValue()));
-                risultato = progetto.creaProgetto(registrazione);
+            	ProgettoDaoInterface progettoDao = new ProgettoDao(connection);
+                progettoDao.creaProgetto(inizializzaNuovoProgetto());
                 
-                if(risultato == 1) {
-                    System.out.println("Dati inseriti");
-                	//aggiungere finestra di conferma inserimento
-                }
-                else {
-                    System.out.println("Errore nella query");
-                	//aggiungere finestra di errore inserimento
-                }
+				homePageImpiegato = new HomePageImpiegato(projectManager);
+				finestraConferma = new FinestraPopup();
+                try {
+					homePageImpiegato.start(window, popup);
+					finestraConferma .start(popup, "Il progetto è stato registrato correttamente nel database.");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
             } catch (SQLException throwables) {
-                throwables.printStackTrace();
+				finestraErrore = new FinestraPopup();
+            	try {
+					finestraErrore.start(popup, "Errore durante la registrazione", throwables);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
             }
     	}    
     }

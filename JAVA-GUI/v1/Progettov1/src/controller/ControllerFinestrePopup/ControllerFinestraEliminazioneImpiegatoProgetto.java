@@ -89,7 +89,7 @@ public class ControllerFinestraEliminazioneImpiegatoProgetto extends ControllerF
             	int eliminato = 0;
             	
             	try {
-					idProgetto = progettoDao.GetIdProgetto(progettoImpiegatoDaEliminare);
+					idProgetto = progettoDao.getIdProgetto(progettoImpiegatoDaEliminare);
 					eliminato = progettoImpiegatoDao.EliminaImpiegatoDalProgetto(impiegatoDaEliminare, idProgetto);
 				} catch (SQLException e) {
 					e.printStackTrace();

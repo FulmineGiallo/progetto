@@ -90,6 +90,12 @@
 	-fx-background-color: -fx-secondocolore;
 }
 
+.TextArea .scroll-pane .scroll-bar:vertical .thumb,
+.TextArea .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.TextArea .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
 /*STILE LISTVIEW*/
 .ListView{
 	-fx-control-inner-background: -fx-terzocolore;

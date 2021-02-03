@@ -70,7 +70,7 @@ public class ControllerFinestraRimuoviImpiegatoDalProgetto {
     	int idProgetto=0;
     	int eliminato=0;
     	
-    	idProgetto=progettoDao.GetIdProgetto(progetto);
+    	idProgetto=progettoDao.getIdProgetto(progetto);
 
     	
     	eliminato = progettoImpiegatoDao.EliminaImpiegatoDalProgetto(impiegato, idProgetto);

@@ -24,6 +24,7 @@ import model.Dao.ProgettoDao;
 import model.Dao.RiunioneDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.RiunioneDaoInterface;
+import utilities.MetodiComuni;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
@@ -110,15 +111,16 @@ public class ControllerHomePageImpiegato {
 	private FinestraPopup finestraErrore;
 	private Exception error;
 	
-	HomePageBenvenuto 					homePageBenvenuto;
-	HomePageValutazioni 				homePageValutazioni;
-	FormRegistrazioneProgetto 			registrazioneProgetto;
-	Stage 								window;
-	Stage								popup;
+	private HomePageBenvenuto 					homePageBenvenuto;
+	private HomePageValutazioni 				homePageValutazioni;
+	private FormRegistrazioneProgetto 			registrazioneProgetto;
+	private Stage 								window;
+	private Stage								popup;
 	
-	int updateEffettuato;
+	private int updateEffettuato;
 
-	Impiegato impiegato = null;
+	private Impiegato impiegato;
+	private MetodiComuni utils = new MetodiComuni();
 
     ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
     ObservableList<Riunione> listaRiunioni = FXCollections.observableArrayList();
@@ -321,13 +323,13 @@ public class ControllerHomePageImpiegato {
         
         try {
             ListaProgettiLV.getSelectionModel().getSelectedItem().setDescrizione(DescrizioneProgettoTA.getText());
-            datainizio = LocalDate.parse(DataDiInizioProgettoLabel.getText());
-            dataFine = LocalDate.parse(DataDiFineProgettoLabel.getText());
-            dataScadenza = LocalDate.parse(DataDiScadenzaProgettoLabel.getText());
+            datainizio = LocalDate.parse(DataDiInizioProgettoTF.getText());
+            dataFine = LocalDate.parse(DataDiFineProgettoTF.getText());
+            dataScadenza = LocalDate.parse(DataDiScadenzaProgettoTF.getText());
 
-            ListaProgettiLV.getSelectionModel().getSelectedItem().setDataInizio(Date.valueOf(datainizio));
-            ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(Date.valueOf(dataFine));
-            ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(Date.valueOf(dataScadenza));
+            ListaProgettiLV.getSelectionModel().getSelectedItem().setDataInizio(datainizio);
+            ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(dataFine);
+            ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(dataScadenza);
 
 
             updateEffettuato = progetti.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
@@ -373,10 +375,25 @@ public class ControllerHomePageImpiegato {
 			
 			Progetto progettoSelezionato = ListaProgettiLV.getSelectionModel().getSelectedItem();
 			
-			DescrizioneProgettoTA		.setText(progettoSelezionato.getDescrizione());
-			DataDiInizioProgettoLabel	.setText(String.valueOf(progettoSelezionato.getDataInizio()));
-			DataDiFineProgettoLabel		.setText(String.valueOf(progettoSelezionato.getDataFine()));
-			DataDiScadenzaProgettoLabel .setText(String.valueOf(progettoSelezionato.getScadenza()));
+			ProjectManagerTF		.setText(progettoSelezionato.getProjectManager().toString());
+			DescrizioneProgettoTA	.setText(progettoSelezionato.getDescrizione());
+			DataDiInizioProgettoTF	.setText(String.valueOf(progettoSelezionato.getDataInizio()));
+			
+			if (progettoSelezionato.getDataFine() != null) {
+				DataDiFineProgettoTF.setText(String.valueOf(progettoSelezionato.getDataFine()));
+			} else {
+				DataDiFineProgettoTF.setText("Ancora da consegnare");
+			}
+			
+			switch(utils.controlloStringa(progettoSelezionato.getDescrizione(), "")) {
+	    		case 1:
+	    			DescrizioneProgettoTA.setText("Nessuna descrizione");
+	    			break;
+	    		default:
+	    			DescrizioneProgettoTA.setText(progettoSelezionato.getDescrizione());
+			}
+			
+			DataDiScadenzaProgettoTF.setText(String.valueOf(progettoSelezionato.getScadenza()));
 			
 			if (progettoSelezionato.getProjectManager() == impiegato) {
 				ProjectManagerBox.setVisible(true);
@@ -416,12 +433,12 @@ public class ControllerHomePageImpiegato {
 			
 			Riunione riunioneSelezionata = ListaRiunioniLV.getSelectionModel().getSelectedItem();
 			
-			DescrizioneRiunioneTA		.setText(riunioneSelezionata.getDescrizione());
+			OrganizzatoreRiunioneTF	.setText(String.valueOf(riunioneSelezionata.getOrganizzatore().toString()));
+			DescrizioneRiunioneTA	.setText(riunioneSelezionata.getDescrizione());
 			//DataDiInizioRiunioneTF		.setText(String.valueOf(riunioneSelezionata.getData()));
-			OrganizzatoreRiunioneTF		.setText(String.valueOf(riunioneSelezionata.getOrganizzatore()));
 			//TitoloRiunioneLabel			.setText(String.valueOf(riunioneSelezionata.getTitolo()));
-			OrarioDiInizioRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getOrarioInizio()));
-			OrarioDiFineRiunioneLabel	.setText(String.valueOf(riunioneSelezionata.getOrarioFine()));
+			OrarioDiInizioRiunioneTF.setText(String.valueOf(riunioneSelezionata.getOrarioInizio()));
+			OrarioDiFineRiunioneTF	.setText(String.valueOf(riunioneSelezionata.getOrarioFine()));
 			
 			if (riunioneSelezionata.getCFOrganizzatore().equals(impiegato.getCF())) {
 				PartecipanteBox.setVisible(false);

@@ -7,3 +7,7 @@
 	-fx-border-width: 5 0 0 0;
 	-fx-border-color: -fx-terzocolore;
 }
+
+.ListView .list-cell{
+	-fx-pref-height: 40;
+}
