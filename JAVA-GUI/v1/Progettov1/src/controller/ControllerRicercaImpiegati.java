@@ -249,6 +249,7 @@ public class ControllerRicercaImpiegati {
     	try {
 			listaImpiegati = impiegatoDao.getAllImpiegatiOrdinatiPerNome(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto);
 			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
+			updateInfoImpiegato();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
