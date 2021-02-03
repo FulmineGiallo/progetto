@@ -8,13 +8,10 @@ public class Valutazione
     String recensione;
     int stelle;
     Date dataV;
-    String CFrecensore;
+    String CFrecensore; //Implementare Impiegato recensore
     Impiegato recensito;
 
-    public Valutazione()
-    {
-
-    }
+    public Valutazione(){ }
     
 	public String getTitolo() {
 		return titolo;
