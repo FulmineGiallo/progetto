@@ -124,21 +124,5 @@ public class Impiegato
     public String toString()
     {
         return cognome + " " + nome;
-    	/*String s = getCF() + " " +
-    			   getCognome() + " " +
-    			   getComuneNascita() + " " +
-    			   getEmail() + " " +
-    			   getGenere() + " " +
-    			   getGrado()  + " " +
-    			   getNome() + " " +
-    			   getPassword() + " " +
-    			   getDataNascita();
-    	
-    	for(Skill sk: getListaSkill()) {
-    		s = s + " " + sk.toString(); 
-    	}
-    	
-    	return s;*/
-        	   
     }
 }

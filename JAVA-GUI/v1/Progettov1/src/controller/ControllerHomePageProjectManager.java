@@ -41,7 +41,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Locale;
 
-public class ControllerHomePageProjectManager {
+public class ControllerHomePageProjectManager
+{
 
     @FXML private AnchorPane 		  HomePageProjectManager;
     @FXML private VBox 				  ProjectManagerBox;
@@ -91,7 +92,9 @@ public class ControllerHomePageProjectManager {
     @FXML private Label 			  DescrizioneLabel;
     @FXML private TextArea 			  DescrizioneSkillTA;
     @FXML private Button 			  RimuoviImpiegatoButton;
-        
+    @FXML private HBox                BoxButton;
+    @FXML private VBox                BoxInfo;
+
     private HomePageImpiegato homePageImpiegato;
     private Stage window;
     private Stage popup;
@@ -107,6 +110,7 @@ public class ControllerHomePageProjectManager {
     
     Progetto progetto;
     Impiegato projectManager;
+    Impiegato impiegatoIniziale = null;
 
     public void setStage(Stage window, Stage popup)
     {
@@ -119,7 +123,6 @@ public class ControllerHomePageProjectManager {
     DBConnection dbConnection;
     ObservableList<Impiegato> lista = FXCollections.observableArrayList();
     ProgettoDaoInterface progettoDao;
-
     {
         try {
             dbConnection = new DBConnection();
@@ -128,7 +131,6 @@ public class ControllerHomePageProjectManager {
             progettoImpiegatoDao = new progettoImpiegatoDao(connection);
             comuneDao = new ComuneDao(connection);
 
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -136,14 +138,23 @@ public class ControllerHomePageProjectManager {
 
 
 
-    public void inizializza(Impiegato projectManager, Progetto progetto) throws SQLException {
+    public void inizializza(Impiegato projectManager, Progetto progetto) throws SQLException
+    {
     	this.progetto = progetto;
     	this.projectManager = projectManager;
         NomeProjectManagerLabel.setText(projectManager.toString().toUpperCase());
         NomeProgettoLabel.setText(progetto.getTitolo());
         lista = progettoDao.getPartecipanti(progetto);
-        ListaPartecipantiLV.setItems(lista);
-        updateInfoImpiegato();
+        if(lista.isEmpty())
+        {
+            ListaPartecipantiLV.getItems().add(impiegatoIniziale);
+            IstruzioniLabel.setText("Non ci sono partecipanti a questo progetto");
+        }
+        else
+            {
+            ListaPartecipantiLV.setItems(lista);
+            updateInfoImpiegato();
+        }
     }
     
     public void updateInfoImpiegato()
@@ -231,6 +242,7 @@ public class ControllerHomePageProjectManager {
 
         lista = progettoDao.getPartecipanti(progetto);
         ListaPartecipantiLV.setItems(lista);
+
     }
     
     @FXML
