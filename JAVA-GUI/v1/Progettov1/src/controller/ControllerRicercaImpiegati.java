@@ -122,6 +122,7 @@ public class ControllerRicercaImpiegati {
     private Stage popup;
     FinestraPopup finestraAggiungiImpiegatoAlProgetto;
     
+    
     private int idProgetto;
     private Progetto progetto;
     private float salarioMedioInserito;
@@ -353,17 +354,19 @@ public class ControllerRicercaImpiegati {
     
     public void AggiungiImpiegato() throws Exception {
     	
-    	int idRuolo;
-    	int inserito;
+    	finestraAggiungiImpiegatoAlProgetto = new FinestraPopup();
+    	finestraAggiungiImpiegatoAlProgetto.start(popup, ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem(), idProgetto, this, RuoloImpiegatoComboBox.getSelectionModel().getSelectedItem());
     	
-    	idRuolo = ruoliDao.getIdRuolo(RuoloImpiegatoComboBox.getSelectionModel().getSelectedItem());
     	
-    	inserito = progettoImpiegatoDao.InserisciImpiegatoNelProgetto(ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem(), idProgetto, idRuolo);
-    	
-    	if (inserito != 0)
-    		System.out.print("Impiegato inserito");
-    	else
-    		System.out.print("Impiegato non inserito");
     }
+    
+    public void NascondiInfoImpiegato() {
+        ConfermaBox.setVisible(false);
+        InformazioniImpiegatoBox.setVisible(false);
+        IstruzioniBox2.setVisible(true);
+        SkillBox.setVisible(true);
+        updateInfoImpiegato();
+    }
+    
     
 }

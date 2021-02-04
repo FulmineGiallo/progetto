@@ -7,10 +7,15 @@ import javafx.stage.Stage;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
+import model.Ruolo;
 import model.Skill;
 import utilities.MetodiComuni;
 import controller.ControllerHomePageOrganizzatore;
+
 import controller.ControllerHomePageProjectManager;
+
+import controller.ControllerRicercaImpiegati;
+
 import controller.ControllerFinestrePopup.*;
 
 public class FinestraPopup {
@@ -34,6 +39,9 @@ public class FinestraPopup {
 	
 	private ControllerFinestraConferma 						controllerFinestraConferma
 															= new ControllerFinestraConferma();
+	
+	private ControllerFinestraAggiungiImpiegatoAlProgetto controllerAggiuntaImpiegatoProgetto
+															= new ControllerFinestraAggiungiImpiegatoAlProgetto();
 	
 	private void caricaStage(Stage popup, ControllerFinestraPopup controller, String titoloFinestra) throws Exception{
 		
@@ -134,4 +142,19 @@ public class FinestraPopup {
 		caricaStage(popup, controllerFinestraConferma, "Operazione completata con successo!");
 		controllerFinestraConferma.inizializza("Perfetto!", messaggioLabel, null);
 	}
+	
+	
+	//Inizializzazione della finestra popup per confermare l'aggiunta di un impiegato in un progetto
+	public void start(Stage popup, Impiegato impiegatoDaAggiungere, int idProgetto, ControllerRicercaImpiegati controllerRicercaImpiegati, Ruolo ruoloImpiegatoDaAggiungere) throws Exception {
+		
+		caricaStage(popup, controllerAggiuntaImpiegatoProgetto, "Attenzione");
+		
+		controllerAggiuntaImpiegatoProgetto.setImpiegato(impiegatoDaAggiungere);
+		controllerAggiuntaImpiegatoProgetto.setIdProgetto(idProgetto);;
+		controllerAggiuntaImpiegatoProgetto.setControllerRicercaImpiegati(controllerRicercaImpiegati);
+		controllerAggiuntaImpiegatoProgetto.setRuolo(ruoloImpiegatoDaAggiungere);
+        
+        controllerAggiuntaImpiegatoProgetto.inizializza(null, "Sei sicuro di voler aggiungere " + impiegatoDaAggiungere.toString() 		  +
+				   												  " nel progetto? ", null);
+    }
 }
