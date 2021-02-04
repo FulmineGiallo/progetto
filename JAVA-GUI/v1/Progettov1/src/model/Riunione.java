@@ -14,6 +14,7 @@ public class Riunione
     private Date data; //DA ELIMINARE
     private Time orarioInizio; //DA CAMBIARE IN LOCALDATETIME
     private Time orarioFine; //DA CAMBIARE IN LOCALDATETIME
+    private String note;
     private ArrayList<Impiegato> partecipantiRiunione = new ArrayList<>();
 
     public Riunione(String titolo)

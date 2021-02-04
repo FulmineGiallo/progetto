@@ -16,5 +16,6 @@ public interface RiunioneDaoInterface {
 	 int isAssente(Impiegato impiegato, Riunione riunione) throws SQLException;
 	 int UpdateAssenza(Impiegato impiegato, Riunione riunione) throws SQLException;
 	 int GetIdRiunione(Riunione riunione) throws SQLException;
-	 
+	 public int updateRiunione(Riunione riunione) throws SQLException;
+
 }

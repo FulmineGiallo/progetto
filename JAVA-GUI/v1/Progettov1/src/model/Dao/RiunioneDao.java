@@ -23,6 +23,9 @@ public class RiunioneDao implements RiunioneDaoInterface
 {
 
 	private final Connection connection;
+
+
+
     private final PreparedStatement riunioniImpiegato;
     private final PreparedStatement partecipanti;
     private final Statement isImpiegatoPresente;
@@ -30,7 +33,7 @@ public class RiunioneDao implements RiunioneDaoInterface
     private final Statement updateImpiegatoAssente;
     private final Statement getId;
     private int idRiunione;
-    
+    private  PreparedStatement updateInfo;
 
     public RiunioneDao(Connection connection) throws SQLException {
         this.connection = connection;
@@ -39,9 +42,16 @@ public class RiunioneDao implements RiunioneDaoInterface
         isImpiegatoPresente = connection.createStatement();
         updateImpiegatoPresente = connection.createStatement();
         updateImpiegatoAssente = connection.createStatement();
+        updateInfo = connection.prepareStatement("");
         getId = connection.createStatement();
     }
-    
+    @Override
+    public int updateRiunione(Riunione riunione) throws SQLException
+    {
+
+        int result = updateInfo.executeUpdate();
+        return result;
+    }
     public ObservableList<Impiegato> getPartecipanti(int idriunione) throws SQLException
     {
 
