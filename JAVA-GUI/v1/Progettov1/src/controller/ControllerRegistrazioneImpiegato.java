@@ -250,7 +250,7 @@ public class ControllerRegistrazioneImpiegato {
     	checkComune = true;
     	
     	//CONTROLLO NOME
-    	switch(utils.controlloStringa(NomeTF.getText(), "[a-zA-Z\s]+")) {
+    	switch(utils.controlloStringa(NomeTF.getText(), "[a-zA-Z]+")) {
 			case 1:
 				checkNome = false;
 				NomeErrorLabel.setText("Questo campo è obbligatorio");
@@ -264,7 +264,7 @@ public class ControllerRegistrazioneImpiegato {
     	}
     	
     	//CONTROLLO COGNOME
-    	switch(utils.controlloStringa(CognomeTF.getText(), "[a-zA-Z\s]+")) {
+    	switch(utils.controlloStringa(CognomeTF.getText(), "[a-zA-Z]+")) {
 			case 1:
 				checkCognome = false;
 				CognomeErrorLabel.setText("Questo campo è obbligatorio");
