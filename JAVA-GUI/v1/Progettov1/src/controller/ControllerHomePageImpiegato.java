@@ -314,14 +314,13 @@ public class ControllerHomePageImpiegato {
     }
 
     @FXML void modificaInformazioniRiunione(ActionEvent event)
-	{ // >> DA FARE
+	{
 
     }
 
     @FXML void salvaModificheProgetto(ActionEvent event)
 	{
     	gestisciProgettoBox(false);
-        
         LocalDate datainizio;
         LocalDate dataFine;
         LocalDate dataScadenza;
@@ -412,8 +411,10 @@ public class ControllerHomePageImpiegato {
 		}
     }
     
-    @FXML private void visualizzaRiunioni(MouseEvent event){		
-    	if (!ListaRiunioniLV.isVisible()) {
+    @FXML private void visualizzaRiunioni(MouseEvent event)
+	{
+    	if (!ListaRiunioniLV.isVisible())
+    	{
 			ListaProgettiLabel.setStyle("-fx-text-fill: derive(white, -50%);");
 			SchedaListaProgetti.setStyle("-fx-border-width: 0 0 5 0;");
 			
@@ -449,11 +450,10 @@ public class ControllerHomePageImpiegato {
 			OrarioDiInizioRiunioneTF.setText(String.valueOf(riunioneSelezionata.getOrarioInizio()));
 			OrarioDiFineRiunioneTF	.setText(String.valueOf(riunioneSelezionata.getOrarioFine()));
 			
-			if (riunioneSelezionata.getCFOrganizzatore().equals(impiegato.getCF())) {
+			if (impiegato.equals(riunioneSelezionata.getOrganizzatore()))
+			{
 				PartecipanteBox.setVisible(false);
 				OrganizzatoreBox.setVisible(true);
-				//SalvaModificheProgetto.setVisible(false);
-
 			} else {
 				PartecipanteBox.setVisible(true);
 				PresenzaButton.setVisible(true);
