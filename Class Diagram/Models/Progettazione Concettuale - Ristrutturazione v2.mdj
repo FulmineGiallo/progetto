@@ -1393,13 +1393,30 @@
 											"height": 13,
 											"text": "+OrarioFine: Time[1]",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF3bN8mkzwF+1E=",
+											"_parent": {
+												"$ref": "AAAAAAF2TePvYVnhaSg="
+											},
+											"model": {
+												"$ref": "AAAAAAF3bN8mgjwCnzk="
+											},
+											"font": "Arial;13;0",
+											"left": 1109,
+											"top": 1492,
+											"width": 205.841796875,
+											"height": 13,
+											"text": "+Note: String[1]",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1104,
 									"top": 1397,
 									"width": 215.841796875,
-									"height": 98
+									"height": 113
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -1412,7 +1429,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 1104,
-									"top": 1495,
+									"top": 1510,
 									"width": 215.841796875,
 									"height": 10
 								},
@@ -10905,6 +10922,16 @@
 							},
 							"name": "OrarioFine",
 							"type": "Time",
+							"multiplicity": "1"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF3bN8mgjwCnzk=",
+							"_parent": {
+								"$ref": "AAAAAAF2TePvYFnZ74U="
+							},
+							"name": "Note",
+							"type": "String",
 							"multiplicity": "1"
 						}
 					]
