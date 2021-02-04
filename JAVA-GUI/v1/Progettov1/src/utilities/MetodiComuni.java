@@ -59,4 +59,37 @@ public class MetodiComuni {
     	
     	return dettagliErrore;
 	}
+	
+	public int controlloOrario(int oreInizio, int minutiInizio,
+							   int oreFine,   int minutiFine)
+	{
+		if(oreFine < oreInizio)
+			return 1;
+		else if (oreFine == oreInizio) {
+			if(minutiFine < minutiInizio)
+				return 2;
+			if(minutiFine == minutiInizio)
+				return 3;
+		}
+		
+		return 0;
+	}
+	
+	public String getOrario(int ore, int minuti) {
+		String orario;
+		
+		if(ore >= 0 && ore <= 9)
+			orario = "0" + String.valueOf(ore);
+		else
+			orario = String.valueOf(ore);
+		
+		orario = orario + ":";
+		
+		if(minuti >= 0 && minuti <= 9)
+			orario = orario + "0" + String.valueOf(minuti);
+		else
+			orario = orario + String.valueOf(minuti);
+		
+		return orario;
+	}
 }
