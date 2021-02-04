@@ -32,6 +32,12 @@ public class Impiegato
     public Impiegato() {
     	
     }
+
+    public Impiegato(String nome, String cognome)
+    {
+        this.nome = nome;
+        this.cognome = cognome;
+    }
     
     public ArrayList<Skill> getListaSkill() {
 		return listaSkill;

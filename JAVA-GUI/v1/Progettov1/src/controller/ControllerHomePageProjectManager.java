@@ -110,7 +110,7 @@ public class ControllerHomePageProjectManager
     
     Progetto progetto;
     Impiegato projectManager;
-    Impiegato impiegatoIniziale = null;
+    Impiegato impiegatoIniziale = new Impiegato("!", "Lista Vuota");
 
     public void setStage(Stage window, Stage popup)
     {
