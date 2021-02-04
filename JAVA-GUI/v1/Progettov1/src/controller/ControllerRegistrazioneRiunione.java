@@ -1,24 +1,23 @@
-package controller; // >> completare gestione slider orari
+package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -29,15 +28,10 @@ import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
 import model.Connection.DBConnection;
-import model.Dao.AmbitoDao;
-import model.Dao.ProgettoDao;
 import model.Dao.RiunioneDao;
-import model.Dao.TipologiaDao;
-import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.RiunioneDaoInterface;
 import utilities.MetodiComuni;
 import view.FinestraPopup;
-import view.HomePageImpiegato;
 import view.HomePageProjectManager;
 
 public class ControllerRegistrazioneRiunione {
@@ -65,15 +59,21 @@ public class ControllerRegistrazioneRiunione {
     @FXML private Label 			DescrizioneLabel;
     @FXML private TextArea 			DescrizioneTA;
     
-    @FXML private VBox 				OrarioDiInizioBox;
+    @FXML private HBox 				DataDiInizioBox;
     @FXML private Label 			OrarioDiInizioLabel;
-    @FXML private TextField 		OrarioDiInizioTF;
-    @FXML private Label 			OrarioDiInizioErrorLabel;
+    @FXML private DatePicker 		DataDiInizioDP;
+    @FXML private Label 			DataDiInizioErrorLabel;
+    @FXML private VBox 				OrarioDiInizioBox;
+    @FXML private Slider 			OrarioDiInizioOreSlider;
+    @FXML private Slider 			OrarioDiInizioMinutiSlider;
     
-    @FXML private VBox 				OrarioDiFineBox;
+    @FXML private HBox 				DataDiFineBox;
     @FXML private Label 			OrarioDiFineLabel;
-    @FXML private TextField 		OrarioDiFineTF;
-    @FXML private Label 			OrarioDiFineErrorLabel;
+    @FXML private DatePicker 		DataDiFineDP;
+    @FXML private Label 			DataDiFineErrorLabel;
+    @FXML private VBox 				OrarioDiFineBox;
+    @FXML private Slider 			OrarioDiFineOreSlider;
+    @FXML private Slider 			OrarioDiFineMinutiSlider;
     
     @FXML private HBox 				ModalitaRiunioneBox;
     @FXML private ToggleGroup 		ModalitaRiunioneGroup;
@@ -121,8 +121,14 @@ public class ControllerRegistrazioneRiunione {
     private Impiegato organizzatore;
     private Progetto  progetto;
     
+    private Calendar Oggi = Calendar.getInstance();
+    private int OggiGiorno = Oggi.get(Calendar.DAY_OF_MONTH);
+    private int OggiMese = Oggi.get(Calendar.MONTH) + 1;
+    private int OggiAnno = Oggi.get(Calendar.YEAR);
+    
     private boolean checkTitolo;
-    private boolean checkOrarioDiInizio;
+    private boolean checkDataInizio;
+    private boolean checkDataFine;
     private boolean checkOrarioDiFine;
     private boolean checkFormRiunioneFisica;
     private boolean checkSede;
@@ -132,8 +138,8 @@ public class ControllerRegistrazioneRiunione {
     private boolean checkNomePiattaforma;
     private boolean checkCodiceAccesso;
     
-    private LocalTime orarioDiInizio;
-    private LocalTime orarioDiFine;
+    private LocalDateTime orarioDiInizio;
+    private LocalDateTime orarioDiFine;
     
     private MetodiComuni utils = new MetodiComuni();
     
@@ -165,33 +171,24 @@ public class ControllerRegistrazioneRiunione {
     	if(organizzatore != null)
     		OrganizzatoreTF.setText(organizzatore.toString());
     	
-    	OrarioDiInizioTF.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if(OrarioDiInizioTF.getText().length() > 5)
-                {
-                    s = OrarioDiInizioTF.getText().substring(0, 5);
-                    OrarioDiInizioTF.setText(s);
-                }
-            }
-        });
-    	
-    	OrarioDiFineTF.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if(OrarioDiFineTF.getText().length() > 5)
-                {
-                    s = OrarioDiFineTF.getText().substring(0, 5);
-                    OrarioDiFineTF.setText(s);
-                }
-            }
-        });
+    	setOrarioDiInizioLabel();    	
+    	setOrarioDiFineLabel();
     }
     
     private Riunione inizializzaNuovaRiunione() { // >> da creare
     	Riunione nuovaRiunione = new Riunione(null);
     	
     	return nuovaRiunione;
+    }
+    
+    @FXML void setOrarioDiInizioLabel() {
+    	OrarioDiInizioLabel.setText(utils.getOrario((int)OrarioDiInizioOreSlider	.getValue(),
+													(int)OrarioDiInizioMinutiSlider	.getValue()));
+    }
+    
+    @FXML void setOrarioDiFineLabel() {
+    	OrarioDiFineLabel.setText(utils.getOrario  ((int)OrarioDiFineOreSlider		.getValue(),
+													(int)OrarioDiFineMinutiSlider	.getValue()));
     }
     
     @FXML void visualizzaFormRiunioneFisica(ActionEvent event) {
@@ -219,6 +216,123 @@ public class ControllerRegistrazioneRiunione {
     	CodiceAccessoErrorLabel		.setText("");
     }
     
+    //CONTROLLO DATA DI INIZIO
+    @FXML private boolean controlloDataDiInizio() {
+        LocalDate dataDiOggi = LocalDate.of(OggiAnno, OggiMese, OggiGiorno);
+        checkDataInizio = true;
+        DataDiInizioErrorLabel.setText("");
+        
+        switch(utils.controlloData(DataDiInizioDP.getValue(), dataDiOggi)) {
+	    	case 1:
+	    		checkDataInizio = false;
+	    		DataDiInizioErrorLabel.setText("Questo campo è obbligatorio");
+	    		DataDiFineDP.setDisable(true);
+	        	break;
+	    	case 3:
+	    		checkDataInizio = false;
+	    		DataDiInizioErrorLabel.setText("La data di inizio non può essere precedente a quella di oggi");
+	    		DataDiFineDP.setValue(null);
+	    		DataDiFineDP.setDisable(true);
+	    		break;
+			default:
+				checkDataInizio = true;
+				DataDiFineDP.setDisable(false);
+				if (DataDiFineDP.getValue() == null)
+					DataDiFineDP.setValue(DataDiInizioDP.getValue());
+        }
+        
+        return checkDataInizio;
+    }
+    
+    //CONTROLLO DATA DI FINE
+    @FXML private boolean controlloDataDiFine() {
+        LocalDate dataSupportata = null;
+        checkDataFine = true;
+        DataDiFineErrorLabel.setText("");
+        
+        if(checkDataInizio) {
+            dataSupportata = DataDiInizioDP.getValue().plusDays(1);
+            
+            switch(utils.controlloData(DataDiFineDP.getValue(), dataSupportata)) {
+		    	case 1:
+		    		checkDataFine = false;
+		    		DataDiFineErrorLabel.setText("Questo campo è obbligatorio");
+		        	break;
+		    	case 2:
+		    		checkDataFine = false;
+		    		DataDiFineErrorLabel.setText("La riunione non può durare più di un giorno");
+		    		break;
+				default:
+					if(DataDiFineDP.getValue().isBefore(DataDiInizioDP.getValue())){
+			    		checkDataFine = false;
+			    		DataDiFineErrorLabel.setText("La data di fine non può essere\nprecedente a quella di inizio");
+					} else
+						checkDataFine = true;
+            }
+        } else {
+        	checkDataFine = false;
+        	DataDiFineErrorLabel.setText("Prima di inserire una data di fine,\ninserisci una data di inizio corretta");
+        }
+        
+        return checkDataFine;
+    }
+    
+    //CONTROLLO ORARIO DI FINE
+    private boolean controlloOrarioDiFine() {
+    	checkOrarioDiFine = true;
+    	checkDataFine = controlloDataDiFine();
+    	
+    	if(checkDataFine) {
+    		if(DataDiInizioDP.getValue().isEqual(DataDiFineDP.getValue())) {
+    			switch(utils.controlloOrario((int)OrarioDiInizioOreSlider	.getValue(),
+    										 (int)OrarioDiInizioMinutiSlider.getValue(),
+    										 (int)OrarioDiFineOreSlider		.getValue(),
+    										 (int)OrarioDiFineMinutiSlider	.getValue()))
+    			{
+    				case 1:
+    					checkOrarioDiFine = false;
+    					DataDiFineErrorLabel.setText("Il valore delle ore inserito non è corretto");
+    					break;
+    				case 2:
+    					checkOrarioDiFine = false;
+    					DataDiFineErrorLabel.setText("Il valore dei minuti inserito non è corretto");
+    					break;
+    				case 3:
+    					checkOrarioDiFine = false;
+    					DataDiFineErrorLabel.setText("L'orario di inizio e di fine della riunione\nnon possono coincidere");
+    					break;
+					default:
+						checkOrarioDiFine = true;
+    			}
+    		} else {
+    			switch(utils.controlloOrario((int)OrarioDiInizioOreSlider	.getValue(),
+						 					 (int)OrarioDiInizioMinutiSlider.getValue(),
+						 					 (int)OrarioDiFineOreSlider		.getValue(),
+						 					 (int)OrarioDiFineMinutiSlider	.getValue()))
+    			{
+					case 1:
+						checkOrarioDiFine = true;
+						break;
+					case 2:
+						checkOrarioDiFine = true;
+						break;
+					case 3:
+						checkOrarioDiFine = true;
+						break;
+					default:
+						checkOrarioDiFine = false;
+						DataDiFineErrorLabel.setText("La riunione non può durare più di un giorno");
+    			}
+    		}
+    	} else {
+    		checkOrarioDiFine = false;
+    	}
+    	
+    	return checkOrarioDiFine;
+    	
+    }
+    
+    //CONTROLLO CAMPI DI FormRiunioneFisicaBox
     private boolean controlloCampiRiunioneFisica() {
     	SedeErrorLabel				.setText("");
     	NomeStanzaErrorLabel		.setText("");
@@ -265,6 +379,7 @@ public class ControllerRegistrazioneRiunione {
     			checkPianoStanza;
     }
     
+    //CONTROLLO CAMPI DI FormRiunioneTelematicaBox
     private boolean controlloCampiRiunioneTelematica() {
     	NomePiattaformaErrorLabel	.setText("");
     	CodiceAccessoErrorLabel		.setText("");
@@ -298,14 +413,13 @@ public class ControllerRegistrazioneRiunione {
     			checkCodiceAccesso;
     }
     
+    //CONTROLLO TUTTI I CAMPI PRIMA DELLA CONFERMA
     private boolean controlloCampi() {
     	TitoloErrorLabel			.setText("");
-    	OrarioDiInizioErrorLabel	.setText("");
-    	OrarioDiFineErrorLabel		.setText("");
     	
     	checkTitolo 				= true;
-    	checkOrarioDiInizio 		= true;
-    	checkOrarioDiFine 			= true;
+    	checkDataInizio				= controlloDataDiInizio();
+    	checkOrarioDiFine 			= controlloOrarioDiFine();
     	checkFormRiunioneFisica 	= true;
     	checkFormRiunioneTelematica = true;
     	
@@ -327,46 +441,8 @@ public class ControllerRegistrazioneRiunione {
     			checkTitolo = true;
     	}
     	
-    	switch(utils.controlloStringa(OrarioDiInizioTF.getText(), "[0-2][0-9][:][0-5][0-9]")) {
-			case 1:
-				checkOrarioDiInizio = false;
-				OrarioDiInizioErrorLabel.setText("Questo campo è obbligatorio");
-				break;
-			case 2:
-				checkOrarioDiInizio = false;
-				OrarioDiInizioErrorLabel.setText("La sintassi dell'orario di inizio inserito non è corretta");
-				break;
-			default:
-				try {
-					orarioDiInizio = LocalTime.parse(OrarioDiInizioTF.getText() + ":00");
-					checkOrarioDiInizio = true;
-				} catch (DateTimeParseException e) {
-					checkOrarioDiInizio = false;
-					OrarioDiInizioErrorLabel.setText("Il valore delle ore inserito nell'orario di inizio non è corretto");
-				}
-    	}
-    	
-    	switch(utils.controlloStringa(OrarioDiFineTF.getText(), "[0-2][0-9][:][0-5][0-9]")) {
-			case 1:
-				checkOrarioDiFine = false;
-				OrarioDiFineErrorLabel.setText("Questo campo è obbligatorio");
-				break;
-			case 2:
-				checkOrarioDiFine = false;
-				OrarioDiFineErrorLabel.setText("La sintassi dell'orario di fine inserito non è corretta");
-				break;
-			default:
-				try {
-					orarioDiFine = LocalTime.parse(OrarioDiInizioTF.getText() + ":00");
-					checkOrarioDiFine = true;
-				} catch (DateTimeParseException e) {
-					checkOrarioDiFine = false;
-					OrarioDiFineErrorLabel.setText("Il valore delle ore inserito nell'orario di fine non è corretto");
-				}
-    	}
-    	
     	return 	checkTitolo				&&
-    			checkOrarioDiInizio 	&&
+    			checkDataInizio			&&
     			checkOrarioDiFine		&&
     			checkFormRiunioneFisica &&
     			checkFormRiunioneTelematica;
@@ -375,6 +451,7 @@ public class ControllerRegistrazioneRiunione {
 
     @FXML private void confermaOperazione(ActionEvent event) {
     	if(controlloCampi()) {
+    		
             try {
             	RiunioneDaoInterface riunioneDao = new RiunioneDao(connection);
                 //riunioneDao.creaRiunione(inizializzaNuovaRiunione()); >> da creare
@@ -396,7 +473,7 @@ public class ControllerRegistrazioneRiunione {
 					e.printStackTrace();
 				}
             }
-    	}    
+    	}
     }
     
     @FXML void annullaOperazione(ActionEvent event) {
