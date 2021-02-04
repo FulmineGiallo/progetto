@@ -339,7 +339,7 @@ public class ControllerHomePageImpiegato {
 
 
             updateEffettuato = progetti.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
-            SalvaModificheProgetto.setVisible(false);
+			SalvaModificheProgetto.setVisible(false); //una volta premuoto salva, il bottone scompare.
 
         }
         catch (SQLException throwables)
