@@ -8,6 +8,24 @@ public class Progetto
 {
     String titolo;
     String descrizione;
+    String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> getPartecipanti() {
+        return partecipanti;
+    }
+
+    public void setPartecipanti(List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti) {
+        this.partecipanti = partecipanti;
+    }
+
     LocalDate dataInizio;
     LocalDate dataFine;
     LocalDate scadenza;
