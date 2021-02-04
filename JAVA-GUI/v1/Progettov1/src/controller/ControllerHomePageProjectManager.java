@@ -151,7 +151,9 @@ public class ControllerHomePageProjectManager
             IstruzioniLabel.setText("Non ci sono partecipanti a questo progetto");
         }
         else
-            {
+        {
+            /* Rimuovere l'impiegato iniziale */
+            ListaPartecipantiLV.getItems().remove(impiegatoIniziale);
             ListaPartecipantiLV.setItems(lista);
             updateInfoImpiegato();
         }
@@ -232,7 +234,13 @@ public class ControllerHomePageProjectManager
                 
                 
             }
+
         });
+        if(lista.isEmpty())
+        {
+            ListaPartecipantiLV.getItems().add(impiegatoIniziale);
+            IstruzioniLabel.setText("Non ci sono partecipanti a questo progetto");
+        }
     }
     
     
