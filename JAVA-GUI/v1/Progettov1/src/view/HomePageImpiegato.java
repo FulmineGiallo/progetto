@@ -34,8 +34,8 @@ public class HomePageImpiegato
 		window.setTitle("La tua homepage");
 		window.setMaximized(true);
 		window.centerOnScreen();
-		window.setMinHeight(630.0);
-		window.setMinWidth(900.0);
+		window.setMinHeight(650.0);
+		window.setMinWidth(950.0);
 		
 		window.show();
     }

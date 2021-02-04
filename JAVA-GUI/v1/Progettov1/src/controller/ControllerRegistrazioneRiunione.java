@@ -176,9 +176,10 @@ public class ControllerRegistrazioneRiunione {
     }
     
     private Riunione inizializzaNuovaRiunione() { // >> da creare
-    	Riunione nuovaRiunione = new Riunione(null);
+    	//Riunione nuovaRiunione = new Riunione(null);
     	
-    	return nuovaRiunione;
+    	//return nuovaRiunione;
+    	return null;
     }
     
     @FXML void setOrarioDiInizioLabel() {

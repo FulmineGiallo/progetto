@@ -130,7 +130,7 @@ public class ControllerHomePageOrganizzatore {
     	this.Organizzatore = Organizzatore;
         NomeOrganizzatoreLabel.setText((Organizzatore.toString()).toUpperCase());
         NomeRiunioneLabel.setText((riunione.getTitolo()));
-        idriunione = riunioneDao.GetIdRiunione(riunione);
+        idriunione = riunioneDao.getIdRiunione(riunione);
         lista = riunioneDao.getPartecipanti(idriunione);
         ListaPartecipantiLV.setItems(lista);
         
@@ -166,7 +166,7 @@ public class ControllerHomePageOrganizzatore {
 
 						//SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
 
-						if (infoImpiegato.getCF().equals(riunione.getCFOrganizzatore())) {
+						if (infoImpiegato.getCF().equals(riunione.getOrganizzatore())) {
 							RimuoviImpiegatoButton.setVisible(false);
 						}
 						
@@ -227,7 +227,7 @@ public class ControllerHomePageOrganizzatore {
     	finestraRimuoviImpiegatoDallaRiunione = new FinestraPopup();
 		finestraRimuoviImpiegatoDallaRiunione.start(popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione, this);
 
-        idriunione = riunioneDao.GetIdRiunione(riunione);
+        idriunione = riunioneDao.getIdRiunione(riunione);
         lista = riunioneDao.getPartecipanti(idriunione);
         ListaPartecipantiLV.setItems(lista);
 
@@ -235,7 +235,7 @@ public class ControllerHomePageOrganizzatore {
     
     public void AggiornaLista() throws SQLException {
     	
-        idriunione = riunioneDao.GetIdRiunione(riunione);
+        idriunione = riunioneDao.getIdRiunione(riunione);
         lista = riunioneDao.getPartecipanti(idriunione);
         ListaPartecipantiLV.setItems(lista);
     }

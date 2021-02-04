@@ -88,7 +88,7 @@ public class ControllerFinestraEliminazioneImpiegatoRiunione extends ControllerF
 
             	try {
 	            	riunioneImpiegatoDao = new RiunioneImpiegatoDao(connection);
-	            	idriunione = riunioneDao.GetIdRiunione(riunioneImpiegatoDaEliminare);
+	            	idriunione = riunioneDao.getIdRiunione(riunioneImpiegatoDaEliminare);
 	            	
 	            	eliminato = riunioneImpiegatoDao.EliminaImpiegatoDallaRiunione(impiegatoDaEliminare, idriunione);
 	

@@ -109,7 +109,9 @@
 }
 
 .ListView,
-.ListView .scroll-bar:vertical{
+.ListView .scroll-bar:vertical,
+.ListView .scroll-bar:horizontal,
+.ListView .corner{
 	-fx-background-color: -fx-terzocolore;
 }
 
@@ -120,7 +122,10 @@
 .ListView .list-cell:selected,
 .ListView .scroll-bar:vertical .thumb,
 .ListView .scroll-bar:vertical .increment-button .increment-arrow,
-.ListView .scroll-bar:vertical .decrement-button .decrement-arrow{
+.ListView .scroll-bar:vertical .decrement-button .decrement-arrow,
+.ListView .scroll-bar:horizontal .thumb,
+.ListView .scroll-bar:horizontal .increment-button .increment-arrow,
+.ListView .scroll-bar:horizontal .decrement-button .decrement-arrow{
 	-fx-background-color: -fx-primocolore;
 }
 
