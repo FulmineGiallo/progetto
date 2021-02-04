@@ -1,17 +1,26 @@
 package model;
 
-public class RiunioneTelematica extends Riunione
-{
-    String Piattaforma;
-    String codiceAccesso;
-    Riunione r;
+import java.time.LocalDateTime;
 
-    public String getPiattaforma() {
-        return Piattaforma;
+public class RiunioneTelematica extends Riunione {
+	
+	private String piattaforma;
+    private String codiceAccesso;
+
+	public RiunioneTelematica(Impiegato organizzatore, String titolo,
+							  LocalDateTime orarioDiInizio, LocalDateTime orarioDiFine,
+							  String piattaforma, String codiceAccesso) {
+		super(organizzatore, titolo, orarioDiInizio, orarioDiFine, "Riunione in modalità telematica");
+		this.piattaforma = piattaforma;
+		this.codiceAccesso = codiceAccesso;
+	}
+    
+	public String getPiattaforma() {
+        return piattaforma;
     }
 
     public void setPiattaforma(String piattaforma) {
-        Piattaforma = piattaforma;
+        this.piattaforma = piattaforma;
     }
 
     public String getCodiceAccesso() {
@@ -20,10 +29,5 @@ public class RiunioneTelematica extends Riunione
 
     public void setCodiceAccesso(String codiceAccesso) {
         this.codiceAccesso = codiceAccesso;
-    }
-
-    public RiunioneTelematica(String titolo)
-    {
-        super(titolo);
     }
 }

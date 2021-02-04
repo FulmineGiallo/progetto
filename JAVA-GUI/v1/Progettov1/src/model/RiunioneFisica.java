@@ -1,26 +1,37 @@
 package model;
 
-public class RiunioneFisica extends Riunione
-{
-    String Sede;
-    String Piano;
-    String nomeStanza;
-    Riunione r;
+import java.time.LocalDateTime;
+
+public class RiunioneFisica extends Riunione {
+
+	private String sede;
+    private String piano;
+    private String nomeStanza;
+    
+    public RiunioneFisica(Impiegato organizzatore, String titolo,
+    					  LocalDateTime orarioDiInizio, LocalDateTime orarioDiFine,
+    					  String sede, String piano, String nomeStanza)
+    {
+		super(organizzatore, titolo, orarioDiInizio, orarioDiFine, "Riunione in sede fisica");
+		this.sede = sede;
+		this.piano = piano;
+		this.nomeStanza = nomeStanza;
+	}
 
     public String getSede() {
-        return Sede;
+        return sede;
     }
 
     public void setSede(String sede) {
-        Sede = sede;
+        this.sede = sede;
     }
 
     public String getPiano() {
-        return Piano;
+        return piano;
     }
 
     public void setPiano(String piano) {
-        Piano = piano;
+        this.piano = piano;
     }
 
     public String getNomeStanza() {
@@ -29,18 +40,5 @@ public class RiunioneFisica extends Riunione
 
     public void setNomeStanza(String nomeStanza) {
         this.nomeStanza = nomeStanza;
-    }
-
-    public Riunione getR() {
-        return r;
-    }
-
-    public void setR(Riunione r) {
-        this.r = r;
-    }
-
-    public RiunioneFisica(String titolo)
-    {
-        super(titolo);
     }
 }

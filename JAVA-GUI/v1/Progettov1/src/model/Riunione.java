@@ -1,26 +1,32 @@
 package model;
 
-import java.sql.Time;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
-public class Riunione
-{
-    private String titolo;
-    private String descrizione;
-    private Impiegato organizzatore;
-    private Impiegato CFOrganizzatore; //DA ELIMINARE
-    private Date data; //DA ELIMINARE
-    private Date orarioInizio;
-    private Date orarioFine;
-    private String note;
-    private ArrayList<Impiegato> partecipantiRiunione = new ArrayList<>();
+import utilities.MetodiComuni;
 
-    public Riunione(String titolo)
+public class Riunione {
+    protected Impiegato organizzatore;
+    protected String titolo;
+    protected String descrizione;
+    protected LocalDateTime orarioDiInizio;
+    protected LocalDateTime orarioDiFine;
+    protected String note;
+    protected ArrayList<Impiegato> partecipantiRiunione = new ArrayList<>();
+    
+    private String tipologia;
+    
+    private MetodiComuni utils = new MetodiComuni();
+
+    protected Riunione(Impiegato organizzatore, String titolo,
+    				   LocalDateTime orarioDiInizio, LocalDateTime orarioDiFine,
+    				   String tipologia)
     {
-        this.titolo = titolo;        
+        this.organizzatore = organizzatore;
+        this.titolo = titolo;
+        this.orarioDiInizio = orarioDiInizio;
+        this.orarioDiFine = orarioDiFine;
+        this.tipologia = tipologia;
     }
 
     public String getTitolo() {
@@ -47,57 +53,51 @@ public class Riunione
         this.organizzatore = organizzatore;
     }
 
-    public Impiegato getCFOrganizzatore() {
-        return CFOrganizzatore;
+    public String getDescrizione() {
+        return descrizione;
     }
 
-    public void setCFOrganizzatore(Impiegato CFOrganizzatore) {
-        this.CFOrganizzatore = CFOrganizzatore;
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
+    
+    public LocalDateTime getOrarioDiInizio() {
+		return orarioDiInizio;
+	}
 
-    public Date getData() {
-        return data;
-    }
+	public void setOrarioDiInizio(LocalDateTime orarioDiInizio) {
+		this.orarioDiInizio = orarioDiInizio;
+	}
+	
+	public void setOrarioDiFine(LocalDateTime orarioDiFine) {
+		this.orarioDiFine = orarioDiFine;
+	}
 
-    public void setData(Date data) {
-        this.data = data;
-    }
+	public String getNote() {
+		return note;
+	}
 
-    public Date getOrarioInizio() {
-        return orarioInizio;
-    }
+	public void setNote(String note) {
+		this.note = note;
+	}
 
-    public void setOrarioInizio(Date orarioInizio) {
-        this.orarioInizio = orarioInizio;
-    }
+	public ArrayList<Impiegato> getPartecipantiRiunione() {
+		return partecipantiRiunione;
+	}
 
-    public Date getOrarioFine() {
-        return orarioFine;
-    }
-
-    public void setOrarioFine(Date orarioFine) {
-        this.orarioFine = orarioFine;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public ArrayList<Impiegato> getPartecipantiRiunione() {
-        return partecipantiRiunione;
-    }
-
-    public void setPartecipantiRiunione(ArrayList<Impiegato> partecipantiRiunione) {
-        this.partecipantiRiunione = partecipantiRiunione;
-    }
-
-    @Override
-    public String toString()
-    {
-    	return titolo.toUpperCase(Locale.ROOT) + "-" + (organizzatore.getNome() + organizzatore.getCognome()).toUpperCase();
+	public void setPartecipantiRiunione(ArrayList<Impiegato> partecipantiRiunione) {
+		this.partecipantiRiunione = partecipantiRiunione;
+	}
+	
+	public String getTipologia() {
+		return tipologia;
+	}
+	
+	@Override
+    public String toString() {
+    	if (orarioDiInizio != null)
+			return utils.orarioToString(titolo, orarioDiInizio.toLocalDate(), orarioDiInizio.toLocalTime());
+    	else
+    		return titolo;
     }
 }

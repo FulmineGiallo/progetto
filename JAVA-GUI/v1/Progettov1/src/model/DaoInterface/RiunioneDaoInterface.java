@@ -11,11 +11,10 @@ public interface RiunioneDaoInterface {
 
 	 ObservableList<Riunione> getRiunioniImpiegato(Impiegato impiegato) throws SQLException;
 	 ObservableList<Impiegato> getPartecipanti(int idriunione) throws SQLException;
-	 int isPresente(Impiegato impiegato, Riunione riunione) throws SQLException;
+	 boolean isInvitato(Impiegato impiegato, Riunione riunione) throws SQLException;
 	 int UpdatePresenza(Impiegato impiegato, Riunione riunione) throws SQLException;
-	 int isAssente(Impiegato impiegato, Riunione riunione) throws SQLException;
 	 int UpdateAssenza(Impiegato impiegato, Riunione riunione) throws SQLException;
-	 int GetIdRiunione(Riunione riunione) throws SQLException;
+	 int getIdRiunione(Riunione riunione) throws SQLException;
 	 public int updateRiunione(Riunione riunione) throws SQLException;
 
 }

@@ -1,6 +1,7 @@
 package utilities;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class MetodiComuni {
 	
@@ -91,5 +92,16 @@ public class MetodiComuni {
 			orario = orario + String.valueOf(minuti);
 		
 		return orario;
+	}
+	
+	public String orarioToString(String titolo, LocalDate dataDiInizio, LocalTime orarioDiInizio) {	
+		if (dataDiInizio != null && orarioDiInizio != null) {
+			if (titolo != null)
+				return titolo + " del " + dataDiInizio.toString() + " alle " + orarioDiInizio.toString();
+			else
+				return dataDiInizio.toString() + " alle " + orarioDiInizio.toString();
+		}
+		
+		return "";
 	}
 }
