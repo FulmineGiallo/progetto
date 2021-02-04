@@ -3,6 +3,7 @@ package model;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class Riunione
 {
@@ -78,14 +79,8 @@ public class Riunione
         this.orarioFine = orarioFine;
     }
     @Override
-    public String toString() {
-    	if(data != null) {
-    		return "titolo: " 		 + titolo 								  +
-    			   " data: "  		 + data   								  +
-    			   " orario inizio " + orarioInizio.toString().substring(0,5) +
-    			   " orario fine "   + orarioFine.toString().substring(0,5);
-    	} else {
-    		return titolo;
-    	}
+    public String toString()
+    {
+    	return titolo.toUpperCase(Locale.ROOT) + "-" + (organizzatore.getNome() + organizzatore.getCognome()).toUpperCase();
     }
 }
