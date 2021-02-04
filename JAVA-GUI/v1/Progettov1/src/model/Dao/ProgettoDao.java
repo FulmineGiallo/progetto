@@ -2,6 +2,8 @@ package model.Dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.DaoInterface.AmbitoDaoInterface;
+import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
 import utilities.MetodiComuni;
 import model.Ambito;
@@ -31,13 +33,16 @@ public class ProgettoDao implements ProgettoDaoInterface
     private final PreparedStatement getIdProgetto;
     private final PreparedStatement getRuoloImpiegato;
     
-    private ImpiegatoDao impiegatoDao;
+    private ImpiegatoDaoInterface 	impiegatoDao;
+    private AmbitoDaoInterface 		ambitoDao;
 
     private MetodiComuni utils = new MetodiComuni();
 
     public ProgettoDao(Connection connection) throws SQLException {
         this.connection = connection;
-        impiegatoDao = new ImpiegatoDao(connection);
+        impiegatoDao 	= new ImpiegatoDao(connection);
+        ambitoDao 		= new AmbitoDao(connection);
+        
         progettiImpiegato = connection.prepareStatement("SELECT * FROM listaprogetti WHERE partecipante = ?");
         updateInfo = connection.prepareStatement("UPDATE progetto SET descrizione = ?, datainizio = ?, datafine = ?, scadenza = ? WHERE projectmanagerprogetto = ? AND titolo = ?");
         partecipanti = connection.prepareStatement("SELECT impiegato.*FROM progetto NATURAL JOIN progettoimpiegato INNER JOIN impiegato ON progettoimpiegato.cf = impiegato.cf WHERE projectmanagerprogetto = ? AND titolo = ?");
@@ -82,7 +87,9 @@ public class ProgettoDao implements ProgettoDaoInterface
         	progetto.setDataFine(rs.getObject("datafine", LocalDate.class));
         	progetto.setDescrizione(rs.getString("descrizione"));
             
-            progetto.setRuolo(rs.getString("ruolo"));
+            progetto.setRuolo(rs.getString("ruolo")); //da eliminare
+            
+            progetto.setListaAmbiti(ambitoDao.getAmbitiProgetto(rs.getInt("idprogetto")));
 
             lista.add(progetto);
         }

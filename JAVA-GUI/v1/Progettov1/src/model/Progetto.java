@@ -4,37 +4,22 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Progetto
-{
-    String titolo;
-    String descrizione;
-    String note;
+import javafx.collections.ObservableList;
 
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> getPartecipanti() {
-        return partecipanti;
-    }
-
-    public void setPartecipanti(List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti) {
-        this.partecipanti = partecipanti;
-    }
-
-    LocalDate dataInizio;
-    LocalDate dataFine;
-    LocalDate scadenza;
-    Impiegato projectManager;
-    Tipologia tipoProgetto;
-    List<Ambito> listaAmbiti;
-    List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti = new ArrayList<>();
-	String ruolo; // da gestire con classe CoppiaProgettiRuolo
-
+public class Progetto {
+    private Impiegato projectManager;
+    private String titolo;
+    private String descrizione;
+    private LocalDate dataInizio;
+    private LocalDate dataFine;
+    private LocalDate scadenza;
+    private Tipologia tipoProgetto;
+    private ObservableList<Ambito> listaAmbiti;
+    private List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti = new ArrayList<>();
+	private String note;
+	
+    private String ruolo; // da gestire con classe CoppiaProgettiRuolo
+	
 	public Progetto (String titolo)
     {
 		this.titolo = titolo;
@@ -113,13 +98,29 @@ public class Progetto
 		this.tipoProgetto = tipoProgetto;
 	}
 
-	public List<Ambito> getListaAmbiti() {
+	public ObservableList<Ambito> getListaAmbiti() {
 		return listaAmbiti;
 	}
 
-	public void setListaAmbiti(List<Ambito> listaAmbiti) {
+	public void setListaAmbiti(ObservableList<Ambito> listaAmbiti) {
 		this.listaAmbiti = listaAmbiti;
 	}
+	
+	    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+	
+	public List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> getPartecipanti() {
+        return partecipanti;
+    }
+
+    public void setPartecipanti(List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti) {
+        this.partecipanti = partecipanti;
+    }
 
     @Override
     public String toString() {
@@ -128,6 +129,4 @@ public class Progetto
     	else 
     		return titolo;
     }
-
-
 }

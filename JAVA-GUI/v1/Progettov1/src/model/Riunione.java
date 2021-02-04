@@ -52,14 +52,6 @@ public class Riunione {
     public void setOrganizzatore(Impiegato organizzatore) {
         this.organizzatore = organizzatore;
     }
-
-    public String getDescrizione() {
-        return descrizione;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
     
     public LocalDateTime getOrarioDiInizio() {
 		return orarioDiInizio;
@@ -67,6 +59,10 @@ public class Riunione {
 
 	public void setOrarioDiInizio(LocalDateTime orarioDiInizio) {
 		this.orarioDiInizio = orarioDiInizio;
+	}
+	
+	public LocalDateTime getOrarioDiFine() {
+		return orarioDiFine;
 	}
 	
 	public void setOrarioDiFine(LocalDateTime orarioDiFine) {
