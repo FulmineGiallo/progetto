@@ -15,8 +15,8 @@ public class ControllerFinestraErrore extends ControllerFinestraPopup{
 		setBottoneSinistro();
 		setBottoneDestro();
 		
-		MessaggioLabel	.setVisible(true);
-		MessaggioTA		.setVisible(false);
+		MessaggioLabel.setVisible(true);
+		MessaggioTA	.setVisible(false);
 		
 		setTitoloMessaggio(titoloMessaggio);
 		setMessaggioLabel(messaggioLabel);

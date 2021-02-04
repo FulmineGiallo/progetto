@@ -81,7 +81,7 @@ public class ControllerFinestraEliminazioneImpiegatoProgetto extends ControllerF
 	protected void setBottoneDestro() {
 		DestraButton.setText("Conferma");
 		
-		SinistraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
             	

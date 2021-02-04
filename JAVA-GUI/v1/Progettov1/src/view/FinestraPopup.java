@@ -98,7 +98,7 @@ public class FinestraPopup {
         controllerEliminazioneImpiegatoProgetto.setProgetto(progettoImpiegatoDaEliminare);
         controllerEliminazioneImpiegatoProgetto.setControllerHomePageProgetto(controllerHomePageProgetto);
         
-        controllerErrore.inizializza(null, "Sei sicuro di voler eliminare " + impiegatoDaEliminare.toString() 		   +
+        controllerEliminazioneImpiegatoProgetto.inizializza(null, "Sei sicuro di voler eliminare " + impiegatoDaEliminare.toString() 		   +
         								   " dal progetto "					+ progettoImpiegatoDaEliminare.getTitolo() +
         								   "?", null);
     }
