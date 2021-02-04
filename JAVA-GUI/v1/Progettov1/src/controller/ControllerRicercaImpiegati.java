@@ -26,6 +26,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Ambito;
 import model.Comune;
 import model.Impiegato;
 import model.Progetto;
@@ -249,15 +250,27 @@ public class ControllerRicercaImpiegati {
     	}
     	
     	
+   
     	
-    	try {
-			listaImpiegati = impiegatoDao.getAllImpiegatiOrdinatiPerNome(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto);
-			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
-			updateInfoImpiegato();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+    	if(SalarioMedioTF.getText().isBlank() && NomeTF.getText().isBlank() && CognomeTF.getText().isBlank() && SkillAggiunteLV.getItems().isEmpty()) {
+        	try {
+    			listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto);
+    			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
+    			updateInfoImpiegato();
+    		} catch (SQLException e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	else {
     	
+    		try {
+				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto);
+				ListaRicercaImpiegatiLV.setItems(listaImpiegati);
+				updateInfoImpiegato();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+    	}
     	
     	updateInfoImpiegato();
     }
@@ -351,6 +364,14 @@ public class ControllerRicercaImpiegati {
         });
     }
     
+    
+    @FXML private void rimuoviSkill(MouseEvent event) {
+
+    	String skillSelezionata = SkillAggiunteLV.getSelectionModel().getSelectedItem();
+    	
+			SkillAggiunteLV.getItems().remove(skillSelezionata);
+    	
+    }
     
     public void AggiungiImpiegato() throws Exception {
     	

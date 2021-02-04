@@ -85,7 +85,7 @@
                                                             <Label fx:id="SkillAggiunteLabel" styleClass="LabelGrande" text="Skill aggiunte" />
                                                             <AnchorPane>
                                                                <children>
-                                                                  <ListView fx:id="SkillAggiunteLV" maxHeight="100.0" prefWidth="0.0" style="-fx-border-width: 1; -fx-background-color: -fx-secondocolore;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <ListView fx:id="SkillAggiunteLV" maxHeight="100.0" onMouseClicked="#rimuoviSkill" prefWidth="0.0" style="-fx-border-width: 1; -fx-background-color: -fx-secondocolore;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                      <styleClass>
                                                                         <String fx:value="ListView" />
                                                                         <String fx:value="SkillListView" />
