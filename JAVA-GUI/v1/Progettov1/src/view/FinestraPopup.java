@@ -10,6 +10,9 @@ import model.Riunione;
 import model.Ruolo;
 import model.Skill;
 import utilities.MetodiComuni;
+
+import java.sql.Connection;
+
 import controller.ControllerHomePageOrganizzatore;
 
 import controller.ControllerHomePageProjectManager;
@@ -118,11 +121,12 @@ public class FinestraPopup {
     }
 	
 	//Inizializzazione della finestra popup per confermare l'uscita dall'area personale
-	public void start(Stage window, Stage popup) throws Exception {
+	public void start(Stage window, Stage popup, Connection connection) throws Exception {
 		
 		caricaStage(popup, controllerLogout, "Attenzione");
                 
         controllerLogout.setStage(window, popup);
+        controllerLogout.setConnection(connection);
         controllerLogout.inizializza(null, "Sei sicuro di voler uscire?", null);
     }
 	

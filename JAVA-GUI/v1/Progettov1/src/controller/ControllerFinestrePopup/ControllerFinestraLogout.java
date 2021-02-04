@@ -1,5 +1,8 @@
 package controller.ControllerFinestrePopup;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -14,9 +17,15 @@ public class ControllerFinestraLogout extends ControllerFinestraPopup {
     private Stage window;
     private Stage popup;
     
+    private Connection connection;
+    
     public void setStage(Stage window, Stage popup) {
     	this.window = window;
     	this.popup = popup;
+    }
+    
+    public void setConnection(Connection connection) {
+    	this.connection = connection;
     }
 	
 	@Override
@@ -55,6 +64,12 @@ public class ControllerFinestraLogout extends ControllerFinestraPopup {
                 
                 homePageBenvenuto = new HomePageBenvenuto();
                 homePageBenvenuto.start(window, popup);
+                
+                try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
         });
 	}
