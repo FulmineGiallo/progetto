@@ -10,7 +10,7 @@ import model.Riunione;
 import model.Skill;
 import utilities.MetodiComuni;
 import controller.ControllerHomePageOrganizzatore;
-import controller.ControllerHomePageProgetto;
+import controller.ControllerHomePageProjectManager;
 import controller.ControllerFinestrePopup.*;
 
 public class FinestraPopup {
@@ -82,7 +82,7 @@ public class FinestraPopup {
     }
 	
 	//Inizializzazione della finestra popup per confermare l'eliminazione di un impiegato dalla lista di partecipanti ad un progetto
-	public void start(Stage popup, Impiegato impiegatoDaEliminare, Progetto progettoImpiegatoDaEliminare, ControllerHomePageProgetto controllerHomePageProgetto) throws Exception {
+	public void start(Stage popup, Impiegato impiegatoDaEliminare, Progetto progettoImpiegatoDaEliminare, ControllerHomePageProjectManager controllerHomePageProgetto) throws Exception {
         
 		caricaStage(popup, controllerEliminazioneImpiegatoProgetto, "Attenzione");
 		

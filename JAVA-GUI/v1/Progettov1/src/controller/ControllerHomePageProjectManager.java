@@ -41,7 +41,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Locale;
 
-public class ControllerHomePageProgetto {
+public class ControllerHomePageProjectManager {
 
     @FXML private AnchorPane 		  HomePageProjectManager;
     @FXML private VBox 				  ProjectManagerBox;

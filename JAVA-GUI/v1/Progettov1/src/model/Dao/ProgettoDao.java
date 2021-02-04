@@ -137,28 +137,30 @@ public class ProgettoDao implements ProgettoDaoInterface
     	idNuovoProgetto = getIdProgetto(nuovoProgetto);
     	
     	int idAmbitoNuovoProgetto = 2;
-    	for(Ambito a: nuovoProgetto.getListaAmbiti()) {
-    		if(a.isNuovo()) {
-    			insertNuovoAmbito.setString(1, a.toString());
-    			nuoviAmbitiInseriti = nuoviAmbitiInseriti + insertNuovoAmbito.executeUpdate();
-    		}
-    		
-    		getIdAmbito.setString(1, a.toString());
-    		rs = getIdAmbito.executeQuery();
-    		
-    		while(rs.next()) {
-    			idAmbitoNuovoProgetto = rs.getInt("idambito");
-    		}
-    		
-    		rs.close();
-    		
-    		insertAmbitiProgetto.setInt(1, idNuovoProgetto);
-    		insertAmbitiProgetto.setInt(2, idAmbitoNuovoProgetto);
-    		
-    		ambitiProgettoInseriti = ambitiProgettoInseriti + insertAmbitiProgetto.executeUpdate();
-    	}
-    	
-        return "Progetti inseriti: "					+ String.valueOf(progettiInseriti)			+
+		if (nuovoProgetto.getListaAmbiti() != null) {
+			for (Ambito a : nuovoProgetto.getListaAmbiti()) {
+				if (a.isNuovo()) {
+					insertNuovoAmbito.setString(1, a.toString());
+					nuoviAmbitiInseriti = nuoviAmbitiInseriti + insertNuovoAmbito.executeUpdate();
+				}
+
+				getIdAmbito.setString(1, a.toString());
+				rs = getIdAmbito.executeQuery();
+
+				while (rs.next()) {
+					idAmbitoNuovoProgetto = rs.getInt("idambito");
+				}
+
+				rs.close();
+
+				insertAmbitiProgetto.setInt(1, idNuovoProgetto);
+				insertAmbitiProgetto.setInt(2, idAmbitoNuovoProgetto);
+
+				ambitiProgettoInseriti = ambitiProgettoInseriti + insertAmbitiProgetto.executeUpdate();
+			}
+		}
+		
+		return "Progetti inseriti: "					+ String.valueOf(progettiInseriti)			+
          	   "\nNuove tipologie inserite: " 			+ String.valueOf(nuovaTipologiaInserita)	+
          	   "\nNuovi ambiti inseriti: "				+ String.valueOf(nuoviAmbitiInseriti)		+
 			   "\nAmbiti per il progetto inseriti: " 	+ String.valueOf(ambitiProgettoInseriti);

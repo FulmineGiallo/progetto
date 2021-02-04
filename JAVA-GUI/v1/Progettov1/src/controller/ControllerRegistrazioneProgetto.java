@@ -34,6 +34,7 @@ import model.DaoInterface.ProgettoDaoInterface;
 import utilities.MetodiComuni;
 import view.FinestraPopup;
 import view.HomePageImpiegato;
+import view.HomePageProjectManager;
 import model.Impiegato;
 import model.Progetto;
 import model.Tipologia;
@@ -104,9 +105,10 @@ public class ControllerRegistrazioneProgetto {
     private int OggiMese = Oggi.get(Calendar.MONTH) + 1;
     private int OggiAnno = Oggi.get(Calendar.YEAR);
     
-    private HomePageImpiegato homePageImpiegato;
-    private FinestraPopup	  finestraConferma;
-    private FinestraPopup	  finestraErrore;
+    private HomePageImpiegato		homePageImpiegato;
+    private HomePageProjectManager 	homePageProjectManager;
+    private FinestraPopup			finestraConferma;
+    private FinestraPopup			finestraErrore;
     
     private boolean checkTitolo;
     private boolean checkDataInizio;
@@ -127,7 +129,8 @@ public class ControllerRegistrazioneProgetto {
     private Ambito					  ambitoAltro	 = new Ambito("Altro...", false);
     private Ambito					  ambitoIniziale = new Ambito("Non ci sono ambiti di progetto", false);
     
-    private Impiegato projectManager;
+    private Impiegato 	projectManager;
+    private Progetto	nuovoProgetto;
     
     private Connection connection;
     private DBConnection dbConnection;
@@ -210,28 +213,6 @@ public class ControllerRegistrazioneProgetto {
         	}
 
         });
-    }
-    
-    private Progetto inizializzaNuovoProgetto() {
-    	Progetto nuovoProgetto = new Progetto(projectManager,
-    										  TitoloTF.getText(),
-    										  DataDiInizioDP.getValue(),
-    										  DataDiScadenzaDP.getValue(),
-    										  TipologiaComboBox.getSelectionModel().getSelectedItem());
-    	
-    	if(!AmbitiLV.getItems().contains(ambitoIniziale)) {
-    		nuovoProgetto.setListaAmbiti(AmbitiLV.getItems());
-    	}
-    	
-    	switch(utils.controlloStringa(DescrizioneTA.getText(), "")) {
-	    	case 1:
-	    		nuovoProgetto.setDescrizione(null);
-	    		break;
-    		default:
-    			nuovoProgetto.setDescrizione(DescrizioneTA.getText());
-    	}
-    	
-    	return nuovoProgetto;
     }
     
     //CONTROLLO NUOVA TIPOLOGIA (SE OBBLIGATORIA)
@@ -423,17 +404,42 @@ public class ControllerRegistrazioneProgetto {
     	homePageImpiegato = new HomePageImpiegato(projectManager);
     	homePageImpiegato.start(window, popup);
     }
+    
+    private Progetto inizializzaNuovoProgetto() {
+    	Progetto nuovoProgetto = new Progetto(projectManager,
+    										  TitoloTF.getText(),
+    										  DataDiInizioDP.getValue(),
+    										  DataDiScadenzaDP.getValue(),
+    										  TipologiaComboBox.getSelectionModel().getSelectedItem());
+    	
+    	if(!AmbitiLV.getItems().contains(ambitoIniziale)) {
+    		nuovoProgetto.setListaAmbiti(AmbitiLV.getItems());
+    	}
+    	
+    	switch(utils.controlloStringa(DescrizioneTA.getText(), "")) {
+	    	case 1:
+	    		nuovoProgetto.setDescrizione(null);
+	    		break;
+    		default:
+    			nuovoProgetto.setDescrizione(DescrizioneTA.getText());
+    	}
+    	
+    	return nuovoProgetto;
+    }
 
     @FXML private void confermaOperazione(ActionEvent event) {
     	if(controlloCampi()) {
             try {
+            	
+            	nuovoProgetto = inizializzaNuovoProgetto();
+            	
             	ProgettoDaoInterface progettoDao = new ProgettoDao(connection);
-                progettoDao.creaProgetto(inizializzaNuovoProgetto());
+                progettoDao.creaProgetto(nuovoProgetto);
                 
-				homePageImpiegato = new HomePageImpiegato(projectManager);
+				homePageProjectManager = new HomePageProjectManager(projectManager, nuovoProgetto);
 				finestraConferma = new FinestraPopup();
                 try {
-					homePageImpiegato.start(window, popup);
+                	homePageProjectManager.start(window, popup);
 					finestraConferma .start(popup, "Il progetto è stato registrato correttamente nel database.");
 				} catch (Exception e) {
 					e.printStackTrace();

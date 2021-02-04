@@ -47,11 +47,9 @@ import model.DaoInterface.RuoloDaoInterface;
 import model.DaoInterface.SkillDaoInterface;
 import model.DaoInterface.TitoloDaoInterface;
 import view.FinestraPopup;
-import view.HomePageProgetto;
+import view.HomePageProjectManager;
 
 public class ControllerRicercaImpiegati {
-
-	
 	
     @FXML private AnchorPane 			RicercaImpiegati;
     @FXML private HBox 					IstruzioniBox;
@@ -144,7 +142,7 @@ public class ControllerRicercaImpiegati {
     private ObservableList<Titolo> listaTitoli = FXCollections.observableArrayList();
     private ObservableList<String> listaOridinaPer = FXCollections.observableArrayList();
 
-    HomePageProgetto homePageProgetto;
+    HomePageProjectManager homePageProgetto;
     
     
     public void setStage(Stage window, Stage popup)
@@ -264,7 +262,7 @@ public class ControllerRicercaImpiegati {
     }
     
     public void annullaOperazione() throws Exception {
-    	homePageProgetto = new HomePageProgetto(progetto.getProjectManager(), progetto);
+    	homePageProgetto = new HomePageProjectManager(progetto.getProjectManager(), progetto);
     	homePageProgetto.start(window, popup);
     }
     

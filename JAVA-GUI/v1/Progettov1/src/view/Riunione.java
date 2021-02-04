@@ -1,6 +1,6 @@
 package view;
 
-import controller.ControllerHomePageProgetto;
+import controller.ControllerHomePageProjectManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 
 public class Riunione
     {
-        ControllerHomePageProgetto controllerRiunione;
+        ControllerHomePageProjectManager controllerRiunione;
         private final PrintWriter writer;
 
         public Riunione(PrintWriter writer)

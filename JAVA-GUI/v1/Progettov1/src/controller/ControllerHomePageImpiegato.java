@@ -32,7 +32,7 @@ import view.FinestraPopup;
 import view.FormRegistrazioneProgetto;
 import view.HomePageBenvenuto;
 import view.HomePageOrganizzatore;
-import view.HomePageProgetto;
+import view.HomePageProjectManager;
 import view.HomePageValutazioni;
 
 public class ControllerHomePageImpiegato {
@@ -287,7 +287,7 @@ public class ControllerHomePageImpiegato {
 
     //Se il GestioneProgettoButton viene cliccato
     @FXML void gestisciProgetto(ActionEvent event) {
-        HomePageProgetto homeProjectManager = new HomePageProgetto(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
+        HomePageProjectManager homeProjectManager = new HomePageProjectManager(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
         try {
             homeProjectManager.start(window, popup);
         } catch (Exception e) {

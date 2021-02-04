@@ -31,8 +31,7 @@ public class HomePageImpiegato
 		controllerHomePageImpiegato.setStage(window, popup);
 		controllerHomePageImpiegato.inizializza(impiegato);
 		
-		//window.setTitle("La tua homepage");
-		window.setTitle(window.toString());
+		window.setTitle("La tua homepage");
 		window.setMaximized(true);
 		window.centerOnScreen();
 		window.setMinHeight(630.0);

@@ -3,7 +3,7 @@ package controller.ControllerFinestrePopup;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import controller.ControllerHomePageProgetto;
+import controller.ControllerHomePageProjectManager;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -27,7 +27,7 @@ public class ControllerFinestraEliminazioneImpiegatoProgetto extends ControllerF
 	
 	private Impiegato 					  impiegatoDaEliminare;
 	private Progetto  					  progettoImpiegatoDaEliminare;
-	private ControllerHomePageProgetto	  controllerHomePageProgetto;
+	private ControllerHomePageProjectManager	  controllerHomePageProgetto;
 
 	{
         try {
@@ -48,7 +48,7 @@ public class ControllerFinestraEliminazioneImpiegatoProgetto extends ControllerF
 		this.progettoImpiegatoDaEliminare = progettoImpiegatoDaEliminare;
 	}
 	
-    public void setControllerHomePageProgetto(ControllerHomePageProgetto controllerHomePageProgetto) {
+    public void setControllerHomePageProgetto(ControllerHomePageProjectManager controllerHomePageProgetto) {
 		this.controllerHomePageProgetto = controllerHomePageProgetto;
 	}
 	

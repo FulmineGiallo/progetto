@@ -38,7 +38,7 @@ import model.DaoInterface.RiunioneDaoInterface;
 import utilities.MetodiComuni;
 import view.FinestraPopup;
 import view.HomePageImpiegato;
-import view.HomePageProgetto;
+import view.HomePageProjectManager;
 
 public class ControllerRegistrazioneRiunione {
 
@@ -137,7 +137,7 @@ public class ControllerRegistrazioneRiunione {
     
     private MetodiComuni utils = new MetodiComuni();
     
-    private HomePageProgetto homePageProjectManager;
+    private HomePageProjectManager homePageProjectManager;
     private FinestraPopup	 finestraConferma;
     private FinestraPopup	 finestraDomanda;
     private FinestraPopup	 finestraErrore;
@@ -379,7 +379,7 @@ public class ControllerRegistrazioneRiunione {
             	RiunioneDaoInterface riunioneDao = new RiunioneDao(connection);
                 //riunioneDao.creaRiunione(inizializzaNuovaRiunione()); >> da creare
                 
-				homePageProjectManager = new HomePageProgetto(organizzatore, progetto);
+				homePageProjectManager = new HomePageProjectManager(organizzatore, progetto);
 				finestraConferma = new FinestraPopup();
                 try {
                 	homePageProjectManager.start(window, popup);
@@ -400,7 +400,7 @@ public class ControllerRegistrazioneRiunione {
     }
     
     @FXML void annullaOperazione(ActionEvent event) {
-    	homePageProjectManager = new HomePageProgetto(organizzatore, progetto);
+    	homePageProjectManager = new HomePageProjectManager(organizzatore, progetto);
     	
     	try {
 			homePageProjectManager.start(window, popup);
