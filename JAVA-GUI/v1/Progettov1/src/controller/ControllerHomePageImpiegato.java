@@ -1,11 +1,9 @@
 package controller;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,9 +23,12 @@ import model.Dao.RiunioneDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.RiunioneDaoInterface;
 import utilities.MetodiComuni;
+import model.Ambito;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
+import model.RiunioneFisica;
+import model.RiunioneTelematica;
 import view.FinestraPopup;
 import view.FormRegistrazioneProgetto;
 import view.HomePageBenvenuto;
@@ -36,77 +37,148 @@ import view.HomePageProjectManager;
 import view.HomePageValutazioni;
 
 public class ControllerHomePageImpiegato {
-	@FXML private AnchorPane 			HomePageImpiegato;
-	
-	@FXML private VBox					ImpiegatoBox;
-	@FXML private Label 				NomeImpiegatoLabel;
-	@FXML private Label 				GradoImpiegatoLabel;
-	@FXML private Label					TitoloSalarioLabel;
-	@FXML private Label                 SalarioLabel;
-	
-	@FXML private HBox					ToolBar;
-	@FXML private Button 				ValutazioniButton;
-	@FXML private Button 				NuovoProgettoButton;
-	@FXML private Button 				LogoutButton;
-	
-	@FXML private GridPane				SchedeBox;
-	@FXML private HBox					SchedaListaProgetti;			
-	@FXML private Label 				ListaProgettiLabel;
-	@FXML private HBox					SchedaListaRiunioni;
-	@FXML private Label					ListaRiunioniLabel;
-	
-	@FXML private AnchorPane			ListeBox;
-	@FXML private ListView<Progetto>	ListaProgettiLV;
-	@FXML private ListView<Riunione> 	ListaRiunioniLV;
-	
-	@FXML private AnchorPane			IstruzioniBox;
-	@FXML private Label					IstruzioniLabel;
-	
-	@FXML private AnchorPane			DescrizioneProgettoBox;
-	@FXML private AnchorPane 			DescrizioneProgettoPane;
-	@FXML private Label 				ProjectManagerProgettoLabel;
-	@FXML private TextField				ProjectManagerTF;
-	@FXML private Label					DescrizioneProgettoLabel;
-	@FXML private TextArea 				DescrizioneProgettoTA;
-	@FXML private Label 				DataDiInizioProgettoLabel;
-	@FXML private TextField				DataDiInizioProgettoTF;
-	@FXML private Label 				DataDiFineProgettoLabel;
-	@FXML private TextField				DataDiFineProgettoTF;
-	@FXML private Label 				DataDiScadenzaProgettoLabel;
-	@FXML private TextField				DataDiScadenzaProgettoTF;
-	@FXML private Label 				NoteProgettoLabel;
-	@FXML private TextArea				NoteProgettoTA;
 
-	@FXML private AnchorPane			ProjectManagerBox;
-	@FXML private Button 				GestioneProgettoButton;
-	@FXML private Button 				ModificaProgettoButton;
-	@FXML private Button                SalvaModificheProgetto;
+    @FXML  private AnchorPane 			HomePageImpiegato;
+    
+    @FXML  private VBox 				ImpiegatoBox;
+    @FXML  private Label 				NomeImpiegatoLabel;
+    @FXML  private Label 				GradoImpiegatoLabel;
+    @FXML  private Label 				TitoloSalarioLabel;
+    @FXML  private Label 				SalarioLabel;
+    
+    @FXML  private HBox 				ToolBar;
+    @FXML  private Button 				ValutazioniButton;
+    @FXML  private Button 				NuovoProgettoButton;
+    @FXML  private Button 				LogoutButton;
+    
+    @FXML  private AnchorPane 			ElencoProgettiRiunioniBox;
+    @FXML  private GridPane 			SchedeBox;
+    @FXML  private HBox 				SchedaListaProgetti;
+    @FXML  private Label 				ListaProgettiLabel;
+    @FXML  private HBox 				SchedaListaRiunioni;
+    @FXML  private Label 				ListaRiunioniLabel;
+    
+    @FXML  private AnchorPane 			ListeBox;
+    @FXML  private ListView<Progetto> 	ListaProgettiLV;
+    @FXML  private ListView<Riunione> 	ListaRiunioniLV;
+    
+    @FXML  private AnchorPane 			IstruzioniBox;
+    @FXML  private Label 				IstruzioniLabel;
+    
+    @FXML  private AnchorPane 			DescrizioneProgettoBox;
+    @FXML  private AnchorPane 			DescrizioneProgettoPane;
+    
+    @FXML  private Label 				ProjectManagerProgettoLabel;
+    @FXML  private TextField 			ProjectManagerTF;
+    
+    @FXML  private HBox 				TitoloProgettoBox;
+    @FXML  private Label 				TitoloProgettoLabel;
+    @FXML  private TextField 			TitoloProgettoTF;
+    
+    @FXML  private Label 				DescrizioneProgettoLabel;
+    @FXML  private TextArea 			DescrizioneProgettoTA;
+    
+    @FXML  private GridPane 			DataBox;
+    
+    @FXML  private HBox 				DataDiInizioBox;
+    @FXML  private Label 				DataDiInizioProgettoLabel;
+    @FXML  private TextField 			DataDiInizioProgettoTF;
+    
+    @FXML  private HBox 				DataDiFineBox;
+    @FXML  private Label 				DataDiFineProgettoLabel;
+    @FXML  private TextField 			DataDiFineProgettoTF;
+    
+    @FXML  private HBox 				DataDiScadenzaBox;
+    @FXML  private Label 				DataDiScadenzaProgettoLabel;
+    @FXML  private TextField 			DataDiScadenzaProgettoTF;
+    
+    @FXML  private HBox 				TipologiaProgettoBox;
+    @FXML  private Label 				TipologiaProgettoLabel;
+    @FXML  private TextField 			TipologiaProgettoTF;
+    
+    @FXML  private HBox 				AmbitiProgettoBox;
+    @FXML  private Label 				AmbitiProgettoLabel;
+    @FXML  private ListView<Ambito> 	AmbitiProgettoLV;
+    
+    @FXML  private VBox 				NoteProgettoBox;
+    @FXML  private Label 				NoteProgettoLabel;
+    @FXML  private TextArea 			NoteProgettoTA;
+    
+    @FXML  private AnchorPane			ProjectManagerBox;
+    @FXML  private Button 				GestioneProgettoButton;
+    @FXML  private Button 				ModificaProgettoButton;
+    @FXML  private Button 				SalvaModificheProgetto;
+    
+    @FXML  private AnchorPane 			DescrizioneRiunioneBox;
+    @FXML  private AnchorPane 			DescrizioneRiunionePane;
 
-	@FXML private AnchorPane			DescrizioneRiunioneBox;
-	@FXML private AnchorPane 			DescrizioneRiunionePane;
-	@FXML private Label 				OrganizzatoreRiunioneLabel;
-	@FXML private TextField				OrganizzatoreRiunioneTF;
-	@FXML private Label 				DescrizioneRiunioneLabel;
-	@FXML private TextArea 				DescrizioneRiunioneTA;
-	@FXML private Label 				OrarioDiInizioRiunioneLabel;
-	@FXML private TextField				OrarioDiInizioRiunioneTF;
-	@FXML private Label 				OrarioDiFineRiunioneLabel;
-	@FXML private TextField				OrarioDiFineRiunioneTF;
-	@FXML private Label 				NoteRiunioneLabel;
-	@FXML private TextArea				NoteRiunioneTA;
-	
-	@FXML private AnchorPane			OrganizzatoreBox;
-	@FXML private Button 				GestioneRiunioneButton;
-	@FXML private Button 				ModificaRiunioneButton;
-	@FXML private Button                SalvaModificheRiunioneButton;
-
-    @FXML private AnchorPane 			PartecipanteBox;
-    @FXML private Button 				PresenzaButton;
-    @FXML private Button 				AssenzaButton;
+    @FXML  private Label 				OrganizzatoreRiunioneLabel;
+    @FXML  private TextField 			OrganizzatoreRiunioneTF;
+    
+    @FXML  private HBox 				TitoloRiunioneBox;
+    @FXML  private Label 				TitoloRiunione;
+    @FXML  private TextField 			TitoloRiunioneTF;
+    
+    @FXML  private Label 				DescrizioneRiunioneLabel;
+    @FXML  private TextArea 			DescrizioneRiunioneTA;
+    @FXML  private GridPane 			OrarioRiunioneBox;
+    
+    @FXML  private HBox 				OrarioDiInizioRiunioneBox;
+    @FXML  private Label 				OrarioDiInizioRiunioneLabel;
+    @FXML  private TextField 			OrarioDiInizioRiunioneTF;
+    
+    @FXML  private HBox 				OrarioDiFineRiunioneBox;
+    @FXML  private Label 				OrarioDiFineRiunioneLabel;
+    @FXML  private TextField 			OrarioDiFineRiunioneTF;
+    
+    @FXML  private HBox 				TipologiaRiunioneBox;
+    @FXML  private Label 				TipologiaRiunioneLabel;
+    @FXML  private TextField 			TipologiaRiunioneTF;
+    
+    @FXML  private VBox 				CampiRiunioneFisica;
+    
+    @FXML  private HBox 				SedeBox;
+    @FXML  private Label 				SedeLabel;
+    @FXML  private TextField 			SedeTF;
+    
+    @FXML  private HBox 				NomeStanzaBox;
+    @FXML  private Label 				NomeStanzaLabel;
+    @FXML  private TextField 			NomeStanzaTF;
+    
+    @FXML  private HBox 				PianoStanzaBox;
+    @FXML  private Label 				PianoStanzaLabel;
+    @FXML  private TextField 			PianoStanzaTF;
+    
+    @FXML  private VBox 				CampiRiunioneTelematica;
+    
+    @FXML  private HBox 				NomePiattaformaBox;
+    @FXML  private Label 				NomePiattaformaLabel;
+    @FXML  private TextField 			NomePiattaformaTF;
+    
+    @FXML  private HBox 				CodiceAccessoBox;
+    @FXML  private Label 				CodiceAccessoLabel;
+    @FXML  private TextField 			CodiceAccessoTF;
+    
+    @FXML  private VBox 				NoteRiunioneBox;
+    @FXML  private Label 				NoteRiunioneLabel;
+    @FXML  private TextArea 			NoteRiunioneTA;
+    
+    @FXML  private AnchorPane 			PartecipanteBox;
+    @FXML  private Button 				PresenzaButton;
+    @FXML  private Button 				AssenzaButton;
+    
+    @FXML  private AnchorPane 			OrganizzatoreBox;
+    @FXML  private Button 				GestioneRiunioneButton;
+    @FXML  private Button 				ModificaRiunioneButton;
+    @FXML  private Button 				SalvaModificheRiunioneButton;
     
     private final String istruzioniProgetto = "Clicca un progetto\r\n" + "per visualizzarne le informazioni";
+    private Progetto progettoIniziale = new Progetto("Non ci sono ancora progetti");
+    
     private final String istruzioniRiunione = "Clicca una riunione\r\n" + "per visualizzarne le informazioni";
+    private RiunioneFisica riunioneIniziale = new RiunioneFisica(null, "Non ci sono ancora riunioni", null, null, "", "", "");
 	
+    private FinestraPopup finestraDomanda;
 	private FinestraPopup finestraConferma;
 	private FinestraPopup finestraErrore;
 	private Exception error;
@@ -129,30 +201,6 @@ public class ControllerHomePageImpiegato {
     DBConnection dbConnection;
     ProgettoDaoInterface progetti;
     RiunioneDaoInterface riunioni;
-    {
-        try {
-            dbConnection = new DBConnection();
-            connection = dbConnection.getConnection();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-    
-    {
-        try {
-            progetti = new ProgettoDao(connection);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-    
-    {
-        try {
-            riunioni = new RiunioneDao(connection);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
     
     public void setStage(Stage window, Stage popup)
     {
@@ -160,28 +208,34 @@ public class ControllerHomePageImpiegato {
     	this.popup = popup;
     }
     
-    public void inizializza(Impiegato impiegato) throws SQLException
-	{
+    public void inizializza(Impiegato impiegato) throws SQLException {
+    	
+    	try {
+            dbConnection = new DBConnection();
+            connection = dbConnection.getConnection();
+            
+            progetti = new ProgettoDao(connection);
+            listaProgetti.addAll(progetti.getProgettiImpiegato(impiegato));
+            
+            riunioni = new RiunioneDao(connection);
+    		listaRiunioni.addAll(riunioni.getRiunioniImpiegato(impiegato));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    	
     	this.impiegato = impiegato;
-    	NomeImpiegatoLabel.setText((impiegato.getNome() +" "+ impiegato.getCognome()).toUpperCase(Locale.ROOT));
+    	NomeImpiegatoLabel.setText(impiegato.toString().toUpperCase());
         GradoImpiegatoLabel.setText(impiegato.getGrado());
-        listaProgetti.addAll(progetti.getProgettiImpiegato(impiegato));
-        if (listaProgetti.isEmpty())
-        {
-			ListaProgettiLV.getItems().add(new Progetto("Non ci sono ancora progetti"));
-		}
-        else {
-			ListaProgettiLV.setItems(listaProgetti);
-		}
         
-		listaRiunioni.addAll(riunioni.getRiunioniImpiegato(impiegato));
+        if (listaProgetti.isEmpty())
+			ListaProgettiLV.getItems().add(progettoIniziale);
+		else
+			ListaProgettiLV.setItems(listaProgetti);
 		
-        if (listaRiunioni.isEmpty()) {
-			ListaRiunioniLV.getItems().add(new Riunione("Non ci sono ancora riunioni"));
-		} else
-			{
+        if (listaRiunioni.isEmpty())
+			ListaRiunioniLV.getItems().add(riunioneIniziale);
+		else
 			ListaRiunioniLV.setItems(listaRiunioni);
-		}
         
 		IstruzioniBox.setVisible(true);
         DescrizioneProgettoBox.setVisible(false);
@@ -214,18 +268,15 @@ public class ControllerHomePageImpiegato {
     
     @FXML
     public void EffettuaLogout(ActionEvent event) throws Exception {
-    	finestraErrore = new FinestraPopup();
-    	finestraErrore.start(window, popup);
-		connection.close();
+    	finestraDomanda = new FinestraPopup();
+    	finestraDomanda.start(window, popup, connection);
     }
 
     @FXML void accettaInvito(ActionEvent event) {
     	try {
-			if(riunioni.isPresente(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
+			if(riunioni.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
 				
 				int update;
-
-				
 				update=riunioni.UpdatePresenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
 				
 				if(update!=0)
@@ -253,23 +304,21 @@ public class ControllerHomePageImpiegato {
     
     @FXML void rifutaInvito(ActionEvent event) {
     	try {
-			if(riunioni.isAssente(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem()) != 0) {
+			if(riunioni.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
 				
-			int update;
-
-				
+				int update;
 				update=riunioni.UpdateAssenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
 				
 				if(update!=0)
 					System.out.println("assenza salvata");
 				finestraConferma = new FinestraPopup();
 				try {
-					finestraErrore.start(popup, "Assenza registrata correttamente");
+					finestraConferma.start(popup, "Assenza registrata correttamente");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
-			}else {
+			} else {
 				System.out.println("errore assenza");
 				finestraErrore = new FinestraPopup();
 				try {
@@ -285,7 +334,7 @@ public class ControllerHomePageImpiegato {
 		}
     }
 
-    //Se il GestioneProgettoButton viene cliccato
+    //Se GestioneProgettoButton viene cliccato
     @FXML void gestisciProgetto(ActionEvent event) {
         HomePageProjectManager homeProjectManager = new HomePageProjectManager(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
         try {
@@ -295,8 +344,8 @@ public class ControllerHomePageImpiegato {
         }
     }
 
+    //Se GestioneRiunioneButton viene cliccato
     @FXML void gestisciRiunione(ActionEvent event) {
-        //Se il bottone gestione riunione viene cliccato
     	HomePageOrganizzatore homeOrganizzatore = new HomePageOrganizzatore(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
         try {
             homeOrganizzatore.start(window, popup);
@@ -311,11 +360,6 @@ public class ControllerHomePageImpiegato {
 	{
         gestisciProgettoBox(true);
         SalvaModificheProgetto.setVisible(true);
-    }
-
-    @FXML void modificaInformazioniRiunione(ActionEvent event)
-	{
-
     }
 
     @FXML void salvaModificheProgetto(ActionEvent event)
@@ -348,8 +392,11 @@ public class ControllerHomePageImpiegato {
 
     }
 
-    @FXML private void salvaModificheRiunione(ActionEvent event)
-	{ // >> DA FARE
+    @FXML void modificaInformazioniRiunione(ActionEvent event) { // >> DA FARE
+
+    }
+    
+    @FXML private void salvaModificheRiunione(ActionEvent event) { // >> DA FARE
 
     }
     
@@ -373,7 +420,7 @@ public class ControllerHomePageImpiegato {
     }
 
     @FXML void visualizzaInformazioniProgetto(MouseEvent event) {
-        if (!ListaProgettiLV.getItems().get(0).getTitolo().equals("Non ci sono ancora progetti")) {
+        if (!ListaProgettiLV.getItems().contains(progettoIniziale)) {
         	
 			IstruzioniBox		  .setVisible(false);
 			DescrizioneRiunioneBox.setVisible(false);
@@ -384,7 +431,16 @@ public class ControllerHomePageImpiegato {
 			Progetto progettoSelezionato = ListaProgettiLV.getSelectionModel().getSelectedItem();
 			
 			ProjectManagerTF		.setText(progettoSelezionato.getProjectManager().toString());
-			DescrizioneProgettoTA	.setText(progettoSelezionato.getDescrizione());
+			TitoloProgettoTF		.setText(progettoSelezionato.getTitolo());
+			
+			switch(utils.controlloStringa(progettoSelezionato.getDescrizione(), "")) {
+				case 1:
+					DescrizioneProgettoTA.setText("Nessuna descrizione");
+					break;
+				default:
+					DescrizioneProgettoTA.setText(progettoSelezionato.getDescrizione());
+			}
+			
 			DataDiInizioProgettoTF	.setText(String.valueOf(progettoSelezionato.getDataInizio()));
 			
 			if (progettoSelezionato.getDataFine() != null) {
@@ -393,15 +449,15 @@ public class ControllerHomePageImpiegato {
 				DataDiFineProgettoTF.setText("Ancora da consegnare");
 			}
 			
-			switch(utils.controlloStringa(progettoSelezionato.getDescrizione(), "")) {
-	    		case 1:
-	    			DescrizioneProgettoTA.setText("Nessuna descrizione");
-	    			break;
-	    		default:
-	    			DescrizioneProgettoTA.setText(progettoSelezionato.getDescrizione());
-			}
-			
 			DataDiScadenzaProgettoTF.setText(String.valueOf(progettoSelezionato.getScadenza()));
+			
+			TipologiaProgettoTF		.setText(progettoSelezionato.getTipoProgetto().toString());
+			
+			if(progettoSelezionato.getListaAmbiti().isEmpty()) {
+				AmbitiProgettoLV.getItems().add(new Ambito("Nessun ambito specificato", false));
+			} else {
+				AmbitiProgettoLV.setItems(progettoSelezionato.getListaAmbiti());
+			}
 			
 			if (progettoSelezionato.getProjectManager() == impiegato) {
 				ProjectManagerBox.setVisible(true);
@@ -434,32 +490,56 @@ public class ControllerHomePageImpiegato {
 
     @FXML void visualizzaInformazioniRiunione(MouseEvent event) {
         //gestisciBox(false);
-        if (!ListaRiunioniLV.getItems().get(0).getTitolo().equals("Non ci sono ancora riunioni")) {
-        	
-			IstruzioniBox		   .setVisible(false);
-			DescrizioneProgettoBox .setVisible(false);
-			DescrizioneRiunioneBox .setVisible(true);
-			OrganizzatoreBox	   .setVisible(false);
-			
-			Riunione riunioneSelezionata = ListaRiunioniLV.getSelectionModel().getSelectedItem();
-			
-			OrganizzatoreRiunioneTF	.setText(String.valueOf(riunioneSelezionata.getOrganizzatore().toString()));
-			DescrizioneRiunioneTA	.setText(riunioneSelezionata.getDescrizione());
-			//DataDiInizioRiunioneTF		.setText(String.valueOf(riunioneSelezionata.getData()));
-			//TitoloRiunioneLabel			.setText(String.valueOf(riunioneSelezionata.getTitolo()));
-			OrarioDiInizioRiunioneTF.setText(String.valueOf(riunioneSelezionata.getOrarioInizio()));
-			OrarioDiFineRiunioneTF	.setText(String.valueOf(riunioneSelezionata.getOrarioFine()));
-			
-			if (impiegato.equals(riunioneSelezionata.getOrganizzatore()))
-			{
-				PartecipanteBox.setVisible(false);
-				OrganizzatoreBox.setVisible(true);
-			} else {
-				PartecipanteBox.setVisible(true);
-				PresenzaButton.setVisible(true);
-				AssenzaButton.setVisible(true);
-				ProjectManagerBox.setVisible(false);
-			} 
+        if (!ListaRiunioniLV.getItems().contains(riunioneIniziale)) {
+        	//System.out.println(ListaRiunioniLV.getSelectionModel().getSelectedItem().getClass());
+			if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in sede fisica")) {
+				RiunioneFisica infoRiunione = (RiunioneFisica)ListaRiunioniLV.getSelectionModel().getSelectedItem();
+				setCampiRiunione(infoRiunione);
+				
+				CampiRiunioneFisica.setVisible(true);
+				CampiRiunioneTelematica.setVisible(false);
+				
+				SedeTF.setText(infoRiunione.getSede());
+				NomeStanzaTF.setText(infoRiunione.getNomeStanza());
+				PianoStanzaTF.setText(infoRiunione.getPiano());
+			} else if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in modalità telematica")){
+				RiunioneTelematica infoRiunione = (RiunioneTelematica)ListaRiunioniLV.getSelectionModel().getSelectedItem();
+				setCampiRiunione(infoRiunione);
+				
+				CampiRiunioneFisica.setVisible(false);
+				CampiRiunioneTelematica.setVisible(true);
+				
+				NomePiattaformaTF.setText(infoRiunione.getPiattaforma());
+				CodiceAccessoTF.setText(infoRiunione.getCodiceAccesso());
+			}
 		}
+    }
+    
+    private void setCampiRiunione(Riunione riunioneSelezionata) {
+    	IstruzioniBox		   .setVisible(false);
+		DescrizioneProgettoBox .setVisible(false);
+		DescrizioneRiunioneBox .setVisible(true);
+		
+		OrganizzatoreBox.setVisible(riunioneSelezionata.getOrganizzatore() == impiegato);
+		PartecipanteBox.setVisible(!(riunioneSelezionata.getOrganizzatore() == impiegato));
+		
+		
+		OrganizzatoreRiunioneTF	.setText(riunioneSelezionata.getOrganizzatore().toString());
+		TitoloRiunioneTF		.setText(riunioneSelezionata.getTitolo());
+		
+		switch(utils.controlloStringa(riunioneSelezionata.getDescrizione(), "")) {
+			case 1:
+				DescrizioneRiunioneTA.setText("Nessuna descrizione");
+				break;
+			default:
+				DescrizioneRiunioneTA	.setText(riunioneSelezionata.getDescrizione());
+		}
+		
+		OrarioDiInizioRiunioneTF.setText(utils.orarioToString(null, riunioneSelezionata.getOrarioDiInizio().toLocalDate(),
+															  riunioneSelezionata.getOrarioDiInizio().toLocalTime()));
+		OrarioDiFineRiunioneTF	.setText(utils.orarioToString(null, riunioneSelezionata.getOrarioDiFine().toLocalDate(),
+				  											  riunioneSelezionata.getOrarioDiFine().toLocalTime()));
+		
+		TipologiaRiunioneTF		.setText(riunioneSelezionata.getTipologia());
     }
 }
