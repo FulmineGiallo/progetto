@@ -42,9 +42,11 @@ import model.Dao.TitoloDAO;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
+import model.DaoInterface.ProgettoImpiegatoDaoInterface;
 import model.DaoInterface.RuoloDaoInterface;
 import model.DaoInterface.SkillDaoInterface;
 import model.DaoInterface.TitoloDaoInterface;
+import view.FinestraPopup;
 import view.HomePageProgetto;
 
 public class ControllerRicercaImpiegati {
@@ -120,6 +122,7 @@ public class ControllerRicercaImpiegati {
     
     private Stage window;
     private Stage popup;
+    FinestraPopup finestraAggiungiImpiegatoAlProgetto;
     
     private int idProgetto;
     private Progetto progetto;
@@ -134,6 +137,7 @@ public class ControllerRicercaImpiegati {
     SkillDaoInterface SkillDAO;
     TitoloDaoInterface titoloDAO;
 	ComuneDaoInterface comuneNacitaDao;
+	ProgettoImpiegatoDaoInterface progettoImpiegatoDao;
     
     private ObservableList<Impiegato> listaImpiegati = FXCollections.observableArrayList();
     private ObservableList<Ruolo> listaRuoli = FXCollections.observableArrayList();
@@ -162,6 +166,7 @@ public class ControllerRicercaImpiegati {
             titoloDao = new TitoloDAO(connection);
             progettoDao = new ProgettoDao(connection);
             comuneNacitaDao = new ComuneDao(connection);
+            progettoImpiegatoDao = new model.Dao.progettoImpiegatoDao(connection);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -348,6 +353,19 @@ public class ControllerRicercaImpiegati {
     }
     
     
-    
+    public void AggiungiImpiegato() throws Exception {
+    	
+    	int idRuolo;
+    	int inserito;
+    	
+    	idRuolo = ruoliDao.getIdRuolo(RuoloImpiegatoComboBox.getSelectionModel().getSelectedItem());
+    	
+    	inserito = progettoImpiegatoDao.InserisciImpiegatoNelProgetto(ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem(), idProgetto, idRuolo);
+    	
+    	if (inserito != 0)
+    		System.out.print("Impiegato inserito");
+    	else
+    		System.out.print("Impiegato non inserito");
+    }
     
 }

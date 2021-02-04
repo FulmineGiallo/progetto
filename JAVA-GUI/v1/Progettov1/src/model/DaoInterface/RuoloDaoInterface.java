@@ -8,5 +8,6 @@ import model.Ruolo;
 public interface RuoloDaoInterface {
 
 	 public ObservableList<Ruolo> GetAllRuoli() throws SQLException;
+	 public int getIdRuolo(Ruolo ruolo) throws SQLException;
 	
 }

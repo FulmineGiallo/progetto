@@ -355,7 +355,7 @@
                                     </VBox>
                                     <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="1">
                                        <children>
-                                          <Button fx:id="AggiungiImpiegatoButton" alignment="TOP_LEFT" mnemonicParsing="false" text="Aggiungi impiegato" textAlignment="CENTER" wrapText="true">
+                                          <Button fx:id="AggiungiImpiegatoButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#AggiungiImpiegato" text="Aggiungi impiegato" textAlignment="CENTER" wrapText="true">
                                              <styleClass>
                                                 <String fx:value="Button" />
                                                 <String fx:value="LabelPiccola" />

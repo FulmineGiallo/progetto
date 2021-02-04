@@ -1,6 +1,7 @@
 package model.Dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,11 +15,14 @@ public class RuoloDao implements RuoloDaoInterface{
 
     Connection connection;
     private Statement getRuoli;
+    private PreparedStatement getIdRuoloStatement;
+    
 	
     public RuoloDao(Connection connection) throws SQLException
     {
         this.connection = connection;
         getRuoli = connection.createStatement();
+        getIdRuoloStatement = connection.prepareStatement("SELECT idruolo FROM ruolo WHERE tiporuolo LIKE ?");
     }
 	
 	public ObservableList<Ruolo> GetAllRuoli() throws SQLException{
@@ -38,4 +42,19 @@ public class RuoloDao implements RuoloDaoInterface{
         return lista;
 	}
 	
+	
+	 public int getIdRuolo(Ruolo ruolo) throws SQLException{
+		 
+		 int idRuolo=-1;
+		 
+		 getIdRuoloStatement.setString(1, ruolo.getTipoRuolo());
+		 
+		 ResultSet rs = getIdRuoloStatement.executeQuery();
+		 
+		 while(rs.next()) {
+			 idRuolo = rs.getInt("idRuolo");
+		 }
+		 
+		 return idRuolo;
+	 }
 }

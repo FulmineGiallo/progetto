@@ -18,11 +18,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Connection.DBConnection;
+import model.Dao.ComuneDao;
 import model.Dao.ProgettoDao;
 import model.Dao.SkillDao;
 import model.Dao.TitoloDAO;
 import model.Dao.progettoImpiegatoDao;
+import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
+import model.DaoInterface.SkillDaoInterface;
+import model.DaoInterface.TitoloDaoInterface;
 import model.Impiegato;
 import model.Progetto;
 import model.Skill;
@@ -92,9 +96,10 @@ public class ControllerHomePageProgetto {
     private Stage window;
     private Stage popup;
     
-    private TitoloDAO titoloDAO;
-    private SkillDao SkillDAO;
+    private TitoloDaoInterface titoloDAO;
+    private SkillDaoInterface SkillDAO;
     private progettoImpiegatoDao progettoImpiegatoDao;
+    private ComuneDaoInterface comuneDao;
     
     FinestraPopup 						   finestraRimuoviImpiegatoDalProgetto;
     FinestraAggiungiPartecipanteAlProgetto finestraAggiungiImpiegatoAlProgetto;
@@ -120,7 +125,7 @@ public class ControllerHomePageProgetto {
             dbConnection = new DBConnection();
             connection = dbConnection.getConnection();
             progettoDao = new ProgettoDao(connection);
-
+            comuneDao = new ComuneDao(connection);
 
 
         } catch (SQLException throwables) {
@@ -155,7 +160,13 @@ public class ControllerHomePageProgetto {
                 SkillBox.setVisible(false);
                 NomeImpiegatoTF.setText(infoImpiegato.toString());
                 EmailTF.setText(infoImpiegato.getEmail());
-                ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+                
+                try {
+					ComuneDiNascitaTF.setText(comuneDao.getComuneBySigla(infoImpiegato.getComuneNascita().toString().toUpperCase()).toString().substring(8));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
             	try
                 {
