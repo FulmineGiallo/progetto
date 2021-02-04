@@ -125,6 +125,7 @@ public class ControllerHomePageProjectManager {
             dbConnection = new DBConnection();
             connection = dbConnection.getConnection();
             progettoDao = new ProgettoDao(connection);
+            progettoImpiegatoDao = new progettoImpiegatoDao(connection);
             comuneDao = new ComuneDao(connection);
 
 
@@ -160,6 +161,13 @@ public class ControllerHomePageProjectManager {
                 SkillBox.setVisible(false);
                 NomeImpiegatoTF.setText(infoImpiegato.toString());
                 EmailTF.setText(infoImpiegato.getEmail());
+                DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
+              
+                try {
+					RuoloImpiegatoTF.setText(progettoImpiegatoDao.getRuoloImpiegato(infoImpiegato, progettoDao.getIdProgetto(progetto)).toString());
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
                 
                 try {
 					ComuneDiNascitaTF.setText(comuneDao.getComuneBySigla(infoImpiegato.getComuneNascita().toString().toUpperCase()).toString().substring(8));
