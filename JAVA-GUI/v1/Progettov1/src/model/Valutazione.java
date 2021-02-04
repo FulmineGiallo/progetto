@@ -1,18 +1,22 @@
 package model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
-public class Valutazione
-{
+public class Valutazione {
 	String titolo;
     String recensione;
     int stelle;
-    Date dataV;
-    String CFrecensore; //Implementare Impiegato recensore
+    LocalDate dataValutazione;
+    Impiegato recensore;
     Impiegato recensito;
-
-    public Valutazione(){ }
+    boolean nuovo;
     
+	public Valutazione(String titolo, int stelle, boolean nuovo) {
+		this.titolo = titolo;
+		this.stelle = stelle;
+		this.nuovo = nuovo;
+	}
+
 	public String getTitolo() {
 		return titolo;
 	}
@@ -37,20 +41,20 @@ public class Valutazione
         this.stelle = stelle;
     }
 
-    public Date getDataV() {
-        return dataV;
+    public LocalDate getDataValutazione() {
+		return dataValutazione;
+	}
+
+	public void setDataValutazione(LocalDate dataValutazione) {
+		this.dataValutazione = dataValutazione;
+	}
+
+	public Impiegato getRecensore() {
+        return recensore;
     }
 
-    public void setDataV(Date date) {
-        this.dataV = date;
-    }
-
-    public String getCFrecensore() {
-        return CFrecensore;
-    }
-
-    public void setCFrecensore(String CFrecensore) {
-        this.CFrecensore = CFrecensore;
+    public void setRecensore(Impiegato recensore) {
+        this.recensore = recensore;
     }
 
     public Impiegato getRecensito() {
@@ -60,9 +64,16 @@ public class Valutazione
     public void setRecensito(Impiegato recensito) {
         this.recensito = recensito;
     }
+	
+	public boolean isNuovo(){
+		return nuovo;
+	}
 
     @Override
     public String toString() {
-        return "\"" + titolo + "\" - " + String.valueOf(stelle) + " stelle";
+    	if(stelle != -1)
+    		return "\"" + titolo + "\" - " + String.valueOf(stelle) + " stelle";
+    	else
+    		return titolo;
     }
 }

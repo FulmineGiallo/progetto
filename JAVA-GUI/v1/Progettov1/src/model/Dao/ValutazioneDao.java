@@ -2,6 +2,7 @@ package model.Dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ValutazioneDaoInterface;
 import model.Impiegato;
 import model.Progetto;
@@ -11,15 +12,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class ValutazioneDao implements ValutazioneDaoInterface
 {
     Connection connection;
     PreparedStatement getValutazioni;
-    ImpiegatoDao impiegatoDao;
+    ImpiegatoDaoInterface impiegatoDao;
     public ValutazioneDao(Connection connection) throws SQLException
     {
         this.connection = connection;
+        impiegatoDao = new ImpiegatoDao(connection);
         getValutazioni = connection.prepareStatement("SELECT * FROM valutazioni WHERE cfrecensito = ?");
     }
 
@@ -32,15 +35,15 @@ public class ValutazioneDao implements ValutazioneDaoInterface
 
         while (rs.next())
         {
-            valutazione = new Valutazione();
-            valutazione.setTitolo(rs.getString("titolo"));
+            valutazione = new Valutazione(rs.getString("titolo"), rs.getInt("stelle"), false);
             valutazione.setRecensito(impiegato);
-            valutazione.setCFrecensore(rs.getString("cfrecensore"));
-            valutazione.setDataV(rs.getDate("datavalutazione"));
-            valutazione.setStelle(rs.getInt("stelle"));
+            valutazione.setRecensore(impiegatoDao.creaImpiegato(rs.getString("cfrecensore")));
+            valutazione.setDataValutazione(rs.getObject("datavalutazione", LocalDate.class));
             valutazione.setRecensione(rs.getString("recensione"));
+            
             lista.add(valutazione);
         }
+        
         rs.close();
         return lista;
     }

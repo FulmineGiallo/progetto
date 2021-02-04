@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +27,7 @@ import model.Dao.ProgettoDao;
 import model.Dao.ValutazioneDao;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ValutazioneDaoInterface;
+import utilities.MetodiComuni;
 import model.Grado;
 import model.Impiegato;
 import model.Valutazione;
@@ -34,150 +36,159 @@ import view.HomePageImpiegato;
 public class ControllerValutazioni {
 
     @FXML private AnchorPane 			HomePageValutazioni;
+    
     @FXML private VBox 					ImpiegatoBox;
     @FXML private Label 				NomeImpiegatoLabel;
-    @FXML private Label 				GradoImpiegatoLabel;
+    @FXML private Label 				NumeroValutazioniLabel;
+    
     @FXML private HBox 					ToolBar;
     @FXML private Button 				HomePageImpiegatoButton;
+    
     @FXML private AnchorPane 			ListaValutazioniBox;
     @FXML private Label 				ListaValutazioniLabel;
     @FXML private ListView<Valutazione> ListaValutazioniLV;
+    
     @FXML private AnchorPane 			IstruzioniBox;
     @FXML private Label 				IstruzioniLabel;
+    
     @FXML private AnchorPane 			DescrizioneValutazioneBox;
-    @FXML private AnchorPane 			DescrizioneValutazionePane;
+    @FXML private ScrollPane 			DescrizioneValutazioneScrollPane;
+    
+    @FXML private HBox					TitoloValutazioneBox;
     @FXML private Label 				TitoloValutazioneLabel;
+    @FXML private TextField				TitoloValutazioneTF;
+    
+    @FXML private HBox					RecensoreValutazioneBox;
     @FXML private Label 				RecensoreValutazioneLabel;
+    @FXML private TextField				RecensoreValutazioneTF;
+    
     @FXML private HBox 					StelleOkBox;
     @FXML private ImageView 			StellaOk1;
     @FXML private ImageView 			StellaOk2;
     @FXML private ImageView 			StellaOk3;
     @FXML private ImageView 			StellaOk4;
     @FXML private ImageView 			StellaOk5;
+    
     @FXML private HBox 					StelleNoBox;
-    @FXML private ImageView 			PrimaStellaNo;
-    @FXML private ImageView 			SecondaStellaNo;
-    @FXML private ImageView 			TerzaStellaNo;
-    @FXML private ImageView 			QuartaStellaNo;
-    @FXML private ImageView 			QuintaStellaNo;
+    @FXML private ImageView 			StellaNo1;
+    @FXML private ImageView 			StellaNo2;
+    @FXML private ImageView 			StellaNo3;
+    @FXML private ImageView 			StellaNo4;
+    @FXML private ImageView 			StellaNo5;
+    
     @FXML private Label 				DataValutazioneLabel;
+    
     @FXML private TextArea 				DescrizioneValutazioneTA;
+    
+    private MetodiComuni utils = new MetodiComuni();
         
     private HomePageImpiegato homePageImpiegato;
+    
     private Stage window;
     private Stage popup;
     
-    private Impiegato impiegato;
-	private ImpiegatoDaoInterface Recensore;
+    private Impiegato	recensito;
+    private Valutazione infoValutazione;
+    
+    private ImpiegatoDaoInterface impiegatoDao;
+    private ValutazioneDaoInterface valutazioniDao;
+	
+	private Valutazione valutazioneIniziale = new Valutazione("Non ci sono ancora valutazioni", -1, false);
 
     Connection connection;
-    DBConnection dbConnection;
-    {
-        try {
-            dbConnection = new DBConnection();
-            connection = dbConnection.getConnection();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+    DBConnection dbConnection;    
     
-    
-    {
-        try {
-            Recensore = new ImpiegatoDao(connection);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-    
-    
-    ObservableList<Valutazione> lista = FXCollections.observableArrayList();
-    ValutazioneDaoInterface valutazioni;
-    {
-        try {
-            valutazioni = new ValutazioneDao(connection);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+    ObservableList<Valutazione> listaValutazioni = FXCollections.observableArrayList();
     
     public void setStage(Stage window, Stage popup) {
     	this.window = window;
     	this.popup = popup;
     }
     
-    public void inizializza(Impiegato impiegato) throws SQLException {
-        this.impiegato = impiegato;
+    public void inizializza(Impiegato recensito) throws SQLException {
+    	this.recensito = recensito;
+    	
+        try {
+            dbConnection = new DBConnection();
+            connection = dbConnection.getConnection();
+            
+            valutazioniDao = new ValutazioneDao(connection);
+            listaValutazioni.addAll(valutazioniDao.getValutazioni(recensito));
+            
+            impiegatoDao = new ImpiegatoDao(connection);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         
-        NomeImpiegatoLabel.setText(impiegato.toString().toUpperCase());
-        GradoImpiegatoLabel.setText(impiegato.getGrado());
-        lista.addAll(valutazioni.getValutazioni(impiegato));
-        ListaValutazioniLV.setItems(lista);
-        updateValutazioni();
+		NomeImpiegatoLabel.setText(recensito.toString().toUpperCase());
+        
+        if (listaValutazioni.isEmpty()) {
+			ListaValutazioniLV.getItems().add(valutazioneIniziale);
+			NumeroValutazioniLabel.setText("Nessuna valutazione");
+		} else {
+			ListaValutazioniLV.setItems(listaValutazioni);
+			NumeroValutazioniLabel.setText(listaValutazioni.size() + " valutazioni");
+		}
     }
-
-    public void updateValutazioni()
-    {
-        ListaValutazioniLV.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent mouseEvent)
-            {
-            	int NumeroStelle;
-            	StellaOk1.setVisible(false);
-            	StellaOk2.setVisible(false);
-            	StellaOk3.setVisible(false);
-            	StellaOk4.setVisible(false);
-            	StellaOk5.setVisible(false);
-            	
-                IstruzioniBox.setVisible(false);
-                DescrizioneValutazioneBox.setVisible(true);
-                TitoloValutazioneLabel.setText("Titolo: " + ListaValutazioniLV.getSelectionModel().getSelectedItem().getTitolo());
-                String CFrecensore = ListaValutazioniLV.getSelectionModel().getSelectedItem().getCFrecensore();
-                
-                try {
-                	RecensoreValutazioneLabel.setText("Recensore: " + Recensore.getNomeCognomeConCF(CFrecensore).toUpperCase());
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-                
-                DataValutazioneLabel.setText("Data recensione: " + ListaValutazioniLV.getSelectionModel().getSelectedItem().getDataV().toString());
-                DescrizioneValutazioneTA.setText("Descrizione valutazione: " + ListaValutazioniLV.getSelectionModel().getSelectedItem().getRecensione());
-                
-                NumeroStelle = ListaValutazioniLV.getSelectionModel().getSelectedItem().getStelle();
-                
-                switch(NumeroStelle) {
-                case 5:
-                	StellaOk1.setVisible(true);
-                	StellaOk2.setVisible(true);
-                	StellaOk3.setVisible(true);
-                	StellaOk4.setVisible(true);
-                	StellaOk5.setVisible(true);
-                case 4:
-                	StellaOk1.setVisible(true);
-                	StellaOk2.setVisible(true);
-                	StellaOk3.setVisible(true);
-                	StellaOk4.setVisible(true);
-                case 3:
-                	StellaOk1.setVisible(true);
-                	StellaOk2.setVisible(true);
-                	StellaOk3.setVisible(true);
-                case 2:
-                	StellaOk1.setVisible(true);
-                	StellaOk2.setVisible(true);
-                case 1:
-                	StellaOk1.setVisible(true);
-                }
-                
-                	
-                StellaOk1.setVisible(true);
-                
-
-            }
-        });
+    
+    @FXML private void visualizzaInformazioniValutazione(MouseEvent event) {
+    	if (!ListaValutazioniLV.getItems().contains(valutazioneIniziale)) {
+    		
+    		infoValutazione = ListaValutazioniLV.getSelectionModel().getSelectedItem();
+    		
+			StellaOk1.setVisible(false);
+			StellaOk2.setVisible(false);
+			StellaOk3.setVisible(false);
+			StellaOk4.setVisible(false);
+			StellaOk5.setVisible(false);
+			
+			IstruzioniBox.setVisible(false);
+			DescrizioneValutazioneBox.setVisible(true);
+			
+			TitoloValutazioneTF.setText(infoValutazione.getTitolo());
+			RecensoreValutazioneTF.setText(infoValutazione.getRecensore().toString());
+			
+			DataValutazioneLabel.setText("Data recensione: " + infoValutazione.getDataValutazione());
+			switch(utils.controlloStringa(infoValutazione.getRecensione(), "")) {
+				case 1:
+					DescrizioneValutazioneTA.setText("Nessun commento");
+					break;
+				default:
+					DescrizioneValutazioneTA.setText(infoValutazione.getRecensione());
+			}
+			
+			switch (infoValutazione.getStelle()) {
+				case 5:
+					StellaOk1.setVisible(true);
+					StellaOk2.setVisible(true);
+					StellaOk3.setVisible(true);
+					StellaOk4.setVisible(true);
+					StellaOk5.setVisible(true);
+					break;
+				case 4:
+					StellaOk1.setVisible(true);
+					StellaOk2.setVisible(true);
+					StellaOk3.setVisible(true);
+					StellaOk4.setVisible(true);
+					break;
+				case 3:
+					StellaOk1.setVisible(true);
+					StellaOk2.setVisible(true);
+					StellaOk3.setVisible(true);
+					break;
+				case 2:
+					StellaOk1.setVisible(true);
+					StellaOk2.setVisible(true);
+					break;
+				case 1:
+					StellaOk1.setVisible(true);
+					break;
+			}
+		}
     }
-   public void backHomePageImpiegato(ActionEvent event) throws Exception {
-   		homePageImpiegato = new HomePageImpiegato(impiegato);
+    
+    @FXML private void backHomePageImpiegato(ActionEvent event) throws Exception {
+   		homePageImpiegato = new HomePageImpiegato(recensito);
    		homePageImpiegato.start(window, popup);
     }
 }

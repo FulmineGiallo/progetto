@@ -48,16 +48,11 @@ public class Impiegato
 
     public String getCF()
     {
-        /* metodo da implemantare */
-
-
         return CF;
     }
 
     public void setCF(String CF)
     {
-        /* metodo da implemantare */
-
         this.CF = CF;
     }
 
