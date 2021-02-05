@@ -11,11 +11,9 @@ import controller.ControllerHomePageProjectManager;
 
 public class HomePageProjectManager
 {
-	ControllerHomePageProjectManager controllerHomePageProjectManager;
-
-
-    Progetto progetto;
-    Impiegato projectManager;
+	private ControllerHomePageProjectManager controllerHomePageProjectManager;
+    private Progetto progetto;
+    private Impiegato projectManager;
 
     public HomePageProjectManager(Impiegato projectManager, Progetto progetto)
     {

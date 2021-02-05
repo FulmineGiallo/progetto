@@ -10,16 +10,14 @@ import model.Riunione;
 
 public class HomePageOrganizzatore {
 	
-	ControllerHomePageOrganizzatore controllerHomePageOrganizzatore;
+	private ControllerHomePageOrganizzatore controllerHomePageOrganizzatore;
+    private Riunione riunione;
+    private Impiegato organizzatore;
 
-
-    Riunione riunione;
-    Impiegato Organizzatore;
-
-    public HomePageOrganizzatore(Impiegato Organizzatore, Riunione riunione)
+    public HomePageOrganizzatore(Impiegato organizzatore, Riunione riunione)
     {
         this.riunione = riunione;
-        this.Organizzatore = Organizzatore;
+        this.organizzatore = organizzatore;
     }
 
     public void start(Stage window, Stage popup) throws Exception {
@@ -27,17 +25,21 @@ public class HomePageOrganizzatore {
     	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/Homepages/homepageorganizzatore.fxml"));
     	Parent root = loader.load();
         Scene scene = new Scene(root);
-
-        window.setScene(scene);
         
     	controllerHomePageOrganizzatore = loader.getController();
     	controllerHomePageOrganizzatore.setStage(window, popup);
-    	controllerHomePageOrganizzatore.inizializza(Organizzatore, riunione);
+    	controllerHomePageOrganizzatore.inizializza(organizzatore, riunione);
         
-        window.setTitle(window.toString());
+    	window.hide();
+    	window.setScene(scene);
+        
+        window.setTitle("Home page \"" + riunione.getTitolo() + "\"");
+        
+        window.setMaximized(true);
+        window.setMinWidth(850.0);
+        window.setMinHeight(650.0);
+        window.centerOnScreen();
+        
         window.show();
-        
-        
-        
     }
 }
