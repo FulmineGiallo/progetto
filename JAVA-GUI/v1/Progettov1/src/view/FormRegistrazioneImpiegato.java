@@ -9,14 +9,9 @@ import java.io.PrintWriter;
 
 import controller.ControllerRegistrazioneImpiegato;
 
-public class FormRegistrazioneImpiegato
-{
+public class FormRegistrazioneImpiegato {
 	
 	ControllerRegistrazioneImpiegato controllerRegistrazioneImpiegato;
-
-    public FormRegistrazioneImpiegato() {
-    	
-    }
 
     public void start(Stage window, Stage popup) throws Exception {
     	  	 	
@@ -31,12 +26,11 @@ public class FormRegistrazioneImpiegato
         controllerRegistrazioneImpiegato.setStage(window, popup);
         controllerRegistrazioneImpiegato.inizializza();
         
-        //window.setTitle("Registrazione");
-        window.setTitle(window.toString());
+        window.setTitle("Registrazione di un nuovo impiegato");
         window.setMaximized(true);
         window.centerOnScreen();
         window.setMinWidth(850.0);
-        window.setMinHeight(450.0);
+        window.setMinHeight(650.0);
         
         window.show();
     }

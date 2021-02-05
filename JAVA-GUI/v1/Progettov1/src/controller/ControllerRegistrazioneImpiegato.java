@@ -404,14 +404,14 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     private void inizializzaNuovoImpiegato() {
-    	nuovoImpiegato.setNome(nome);
-    	nuovoImpiegato.setCognome(cognome);
+    	nuovoImpiegato.setNome(NomeTF.getText());    	
+    	nuovoImpiegato.setCognome(CognomeTF.getText());    	
     	nuovoImpiegato.setCF(codiceFiscale);
-    	nuovoImpiegato.setDataNascita(dataDiNascita);
-    	nuovoImpiegato.setComuneNascita(comune);
+    	nuovoImpiegato.setDataNascita(DataDiNascitaDP.getValue());
+    	nuovoImpiegato.setComuneNascita(ComuneComboBox.getValue().getCodiceComune());
     	nuovoImpiegato.setEmail(EmailTF.getText());
     	
-    	switch (genere) {
+    	switch (((RadioButton)GenereGroup.getSelectedToggle()).getText()) {
 			case "Uomo":
 				nuovoImpiegato.setGenere("M");
 				break;

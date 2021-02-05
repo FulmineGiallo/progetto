@@ -35,8 +35,8 @@ public class Impiegato
 
     public Impiegato(String nome, String cognome)
     {
-        this.nome = nome;
-        this.cognome = cognome;
+        setNome(nome);
+        setCognome(cognome);
     }
     
     public ArrayList<Skill> getListaSkill() {
@@ -67,7 +67,17 @@ public class Impiegato
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+    	String nomeUpperCase = "";
+    	
+    	for(String s: nome.split("\s")) {
+    		if (!s.isBlank()) {
+	    		nomeUpperCase = nomeUpperCase 								+
+	            				String.valueOf(s.charAt(0)).toUpperCase() 	+
+	            				s.substring(1).toLowerCase() + " ";
+    		}
+    	}
+    	
+    	this.nome = nomeUpperCase.substring(0, nomeUpperCase.length()-1);
     }
 
     public String getCognome() {
@@ -75,7 +85,17 @@ public class Impiegato
     }
 
     public void setCognome(String cognome) {
-        this.cognome = cognome;
+    	String cognomeUpperCase = "";
+    	
+    	for(String s: cognome.split("\s")) {
+    		if (!s.isBlank()) {
+				cognomeUpperCase = cognomeUpperCase 						 +
+								   String.valueOf(s.charAt(0)).toUpperCase() +
+								   s.substring(1).toLowerCase() + " ";
+			}
+    	}
+    	
+    	this.cognome = cognomeUpperCase.substring(0, cognomeUpperCase.length()-1);
     }
 
     public String getGenere() {
