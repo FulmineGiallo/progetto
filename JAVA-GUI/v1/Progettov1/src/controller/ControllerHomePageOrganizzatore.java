@@ -26,6 +26,7 @@ import model.Riunione;
 import model.Skill;
 import model.Titolo;
 import model.Connection.DBConnection;
+import model.Dao.ComuneDao;
 import model.Dao.RiunioneDao;
 import model.Dao.RiunioneImpiegatoDao;
 import model.Dao.SkillDao;
@@ -109,6 +110,7 @@ public class ControllerHomePageOrganizzatore {
     private SkillDao skillDao;
     private RiunioneImpiegatoDao riunioneImpiegatoDao;
     private RiunioneDaoInterface riunioneDao;
+    private ComuneDao comuneDao;
     
     private int idriunione;
     private FinestraPopup finestraRimuoviImpiegatoDallaRiunione;
@@ -172,7 +174,14 @@ public class ControllerHomePageOrganizzatore {
 			
 			NomeImpiegatoTF	.setText(infoImpiegato.toString());
 			EmailTF			.setText(infoImpiegato.getEmail());
-			ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+
+			try {
+				comuneDao = new ComuneDao(connection);
+				ComuneDiNascitaTF.setText(comuneDao.getComuneBySigla(infoImpiegato.getComuneNascita()).getNomeComune());
+			} catch (SQLException e) {
+				ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+			}
+			
 			DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
 			
 			try {

@@ -189,8 +189,20 @@ public class ControllerHomePageProjectManager
 			
 			NomeImpiegatoTF	.setText(infoImpiegato.toString());
 			EmailTF			.setText(infoImpiegato.getEmail());
-			ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+			
+			try {
+				ComuneDiNascitaTF.setText(comuneDao.getComuneBySigla(infoImpiegato.getComuneNascita()).getNomeComune());
+			} catch (SQLException e) {
+				ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+			}
+			
 			DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
+			
+			try {
+				RuoloImpiegatoTF.setText(progettoDao.getRuoloByImpiegatoProgetto(infoImpiegato, progetto));
+			} catch (SQLException e) {
+				RuoloImpiegatoTF.setText("");
+			}
 			
 			try {
 				skillDao = new SkillDao(connection);

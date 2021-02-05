@@ -1,4 +1,4 @@
-package model.Dao;
+package model.Dao; //creare metodo getRuoloByImpiegatoProgetto
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +9,7 @@ import utilities.MetodiComuni;
 import model.Ambito;
 import model.Impiegato;
 import model.Progetto;
+import model.Ruolo;
 import model.Skill;
 import model.Tipologia;
 
@@ -21,17 +22,22 @@ import javax.naming.ReferralException;
 public class ProgettoDao implements ProgettoDaoInterface
 {
     private final Connection 		connection;
+    
     private final PreparedStatement progettiImpiegato;
     private final PreparedStatement insertNuovoProgetto;
+    
     private final PreparedStatement getIdTipologia;
     private final PreparedStatement insertNuovaTipologia;
+    
     private final PreparedStatement getIdAmbito;
     private final PreparedStatement insertNuovoAmbito;
     private final PreparedStatement insertAmbitiProgetto;
+    
     private final PreparedStatement updateInfo;
     private final PreparedStatement partecipanti;
     private final PreparedStatement getIdProgetto;
-    private final PreparedStatement getRuoloImpiegato;
+    
+    private final PreparedStatement queryRuoloImpiegatoProgetto;
     
     private ImpiegatoDaoInterface 	impiegatoDao;
     private AmbitoDaoInterface 		ambitoDao;
@@ -52,7 +58,9 @@ public class ProgettoDao implements ProgettoDaoInterface
         
         //partecipanti = connection.prepareStatement("SELECT impiegato.*FROM progetto NATURAL JOIN progettoimpiegato INNER JOIN impiegato ON progettoimpiegato.cf = impiegato.cf WHERE projectmanagerprogetto = ? AND titolo = ?");
         
-        getRuoloImpiegato = connection.prepareStatement("SELECT ruolo.tipoRuolo FROM progettoImpiegato NATURAL JOIN ruolo WHERE cf = ? AND idProgetto = ?");
+        queryRuoloImpiegatoProgetto = connection.prepareStatement("SELECT tiporuolo " 							+
+        														  "FROM progettoimpiegato NATURAL JOIN ruolo " 	+
+        														  "WHERE cf = ? AND idprogetto = ?");
         
         getIdProgetto 			= connection.prepareStatement("SELECT idprogetto FROM progetto WHERE titolo LIKE ? AND projectmanagerprogetto LIKE ?");
         insertNuovoProgetto 	= connection.prepareStatement("INSERT INTO progetto VALUES (NEXTVAL('id_progetto_seq'), ?, ?, ?, NULL, ?, ?, ?)");
@@ -231,5 +239,22 @@ public class ProgettoDao implements ProgettoDaoInterface
     	rs.close();
     	
     	return id;
+    }
+    
+    public String getRuoloByImpiegatoProgetto(Impiegato impiegato, Progetto progetto) throws SQLException{
+    	String ruolo = null;
+    	
+    	queryRuoloImpiegatoProgetto.setString(1, impiegato.getCF());
+    	queryRuoloImpiegatoProgetto.setInt(2, getIdProgetto(progetto));
+    	
+    	ResultSet rs = queryRuoloImpiegatoProgetto.executeQuery();
+    	
+    	while(rs.next()) {
+    		ruolo = rs.getString("tiporuolo");
+    	}
+    	
+    	rs.close();
+    	
+    	return ruolo;
     }
 }
