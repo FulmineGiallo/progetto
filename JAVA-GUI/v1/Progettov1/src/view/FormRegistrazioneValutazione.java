@@ -41,14 +41,14 @@ public class FormRegistrazioneValutazione {
 	
 	//Caricamento della finestra per l'inserimento di una valutazione di progetto
     public void start(Stage window, Stage popup, Impiegato recensito, Progetto progetto) {
-    	caricaStage(window, "Valutazione per " + recensito.toString());
+    	caricaStage(window, "Nuova valutazione per " + recensito.toString());
 		controllerRegistrazioneValutazione.setStage(window, popup);
 		controllerRegistrazioneValutazione.inizializza(recensito, progetto);
     }
     
     //Caricamento della finestra per l'inserimento di una valutazione di riunione
     public void start(Stage window, Stage popup, Impiegato recensito, Riunione riunione) {
-    	caricaStage(window, "Valutazione per " + recensito.toString());
+    	caricaStage(window, "Nuova valutazione per " + recensito.toString());
 		controllerRegistrazioneValutazione.setStage(window, popup);
 		controllerRegistrazioneValutazione.inizializza(recensito, riunione);
     }
