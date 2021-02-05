@@ -23,7 +23,7 @@ public class ValutazioneDao implements ValutazioneDaoInterface
     {
         this.connection = connection;
         impiegatoDao = new ImpiegatoDao(connection);
-        getValutazioni = connection.prepareStatement("SELECT * FROM valutazioni WHERE cfrecensito = ?");
+        getValutazioni = connection.prepareStatement("SELECT * FROM listavalutazioni WHERE cfrecensito = ?");
     }
 
     @Override

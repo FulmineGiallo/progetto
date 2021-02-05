@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="RegistrazioneRiunione" prefHeight="650.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneValutazione">
+   <children>
+      <HBox fx:id="IstruzioniBox" alignment="CENTER" layoutX="100.0" layoutY="10.0" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox spacing="3.0">
+               <children>
+                  <Label fx:id="IstruzioniLabel" alignment="TOP_LEFT" styleClass="LabelUltra" text="Inserisci qui i dati per scrivere una nuova valutazione" textAlignment="CENTER" />
+                  <Label fx:id="IstruzioniLabel2" style="-fx-text-fill: red;" styleClass="LabelGrande" text="* Campo obbligatorio" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox fx:id="FormBox" alignment="CENTER" layoutX="100.0" layoutY="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <ScrollPane fx:id="FormScrollPane" fitToWidth="true" hbarPolicy="NEVER" minViewportWidth="800.0" styleClass="ScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <VBox fx:id="FormValutazione" alignment="CENTER" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
+                                 <padding>
+                                    <Insets bottom="50.0" right="10.0" top="50.0" />
+                                 </padding>
+                                 <children>
+                                    <HBox fx:id="RecensoreBox" alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="RecensoreLabel" minWidth="170.0" prefWidth="170.0" styleClass="LabelGrande" text="Recensore" />
+                                          <TextField fx:id="RecensoreTF" editable="false" HBox.hgrow="ALWAYS">
+                                             <styleClass>
+                                                <String fx:value="TextField" />
+                                                <String fx:value="LabelPiccola" />
+                                             </styleClass>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="RecensitoBox" alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="RecensitoLabel" minWidth="170.0" prefWidth="170.0" styleClass="LabelGrande" text="Recensito" />
+                                          <TextField fx:id="RecensitoTF" editable="false" HBox.hgrow="ALWAYS">
+                                             <styleClass>
+                                                <String fx:value="TextField" />
+                                                <String fx:value="LabelPiccola" />
+                                             </styleClass>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="StelleBox" alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="StelleLabel" minWidth="170.0" prefWidth="170.0" styleClass="LabelGrande" text="* Stelle" />
+                                          <GridPane>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <HBox fx:id="StelleOkBox" alignment="CENTER_LEFT" spacing="1.0">
+                                                   <children>
+                                                      <ImageView fx:id="StellaOk1" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starok.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="StellaOk2" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starok.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="StellaOk3" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starok.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="StellaOk4" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starok.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="StellaOk5" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starok.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <HBox fx:id="StelleNoBox" alignment="CENTER_LEFT" spacing="1.0">
+                                                   <children>
+                                                      <ImageView fx:id="StellaNo1" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starno.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="StellaNo2" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starno.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="StellaNo3" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starno.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="StellaNo4" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starno.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fx:id="StellaNo5" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../resources/img/starno.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </HBox>
+                                    <VBox fx:id="TitoloBox">
+                                       <children>
+                                          <Label fx:id="TitoloLabel" styleClass="LabelNascosta" text="* Titolo:" visible="false" />
+                                          <TextField fx:id="TitoloTF" onMouseClicked="#visualizzaTitoloLabel" promptText="* Titolo">
+                                             <styleClass>
+                                                <String fx:value="TextField" />
+                                                <String fx:value="LabelPiccola" />
+                                             </styleClass>
+                                          </TextField>
+                                          <Label fx:id="TitoloErrorLabel" styleClass="ErrorLabel" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="RecensioneBox">
+                                       <children>
+                                          <Label fx:id="RecensioneLabel" styleClass="LabelNascosta" text="Descrizione:" visible="false" />
+                                          <TextArea fx:id="RecensioneTA" onMouseClicked="#visualizzaRecensioneLabel" prefHeight="200.0" prefWidth="200.0" promptText="Inserisci una recensione" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="TextArea" />
+                                                <String fx:value="LabelPiccola" />
+                                             </styleClass>
+                                          </TextArea>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="ButtonBar" styleClass="ButtonBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <GridPane layoutX="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#annullaOperazione" prefWidth="180.0" text="Annulla">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="Button" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#confermaOperazione" prefWidth="180.0" text="Conferma">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="Button" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@../../../css/FormRegistrazioneRiunione.css" />
+      <URL value="@../../../css/StiliComuni.css" />
+   </stylesheets>
+</AnchorPane>

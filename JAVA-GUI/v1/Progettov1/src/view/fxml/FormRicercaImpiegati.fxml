@@ -89,7 +89,6 @@
                                                                   <ListView fx:id="SkillAggiunteLV" maxHeight="100.0" onMouseClicked="#rimuoviSkill" prefWidth="0.0" style="-fx-border-width: 1; -fx-background-color: -fx-secondocolore;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                      <styleClass>
                                                                         <String fx:value="ListView" />
-                                                                        <String fx:value="SkillListView" />
                                                                         <String fx:value="LabelPiccola" />
                                                                      </styleClass>
                                                                   </ListView>
@@ -201,7 +200,11 @@
             </AnchorPane>
             <AnchorPane fx:id="ListaRicercaImpiegatiBox" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
                <children>
-                  <ListView fx:id="ListaRicercaImpiegatiLV" prefHeight="0.0" prefWidth="0.0" styleClass="ListView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ListView fx:id="ListaRicercaImpiegatiLV" prefHeight="0.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <styleClass>
+                        <String fx:value="ListView" />
+                        <String fx:value="LabelPiccola" />
+                     </styleClass></ListView>
                </children>
                <GridPane.margin>
                   <Insets />
