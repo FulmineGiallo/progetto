@@ -1,12 +1,8 @@
 package controller;
 
-import java.awt.Desktop.Action;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Observable;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -27,12 +22,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Ambito;
-import model.Comune;
 import model.Impiegato;
 import model.Progetto;
 import model.Ruolo;
-import model.Skill;
 import model.Titolo;
 import model.Connection.DBConnection;
 import model.Dao.ComuneDao;
@@ -40,7 +32,7 @@ import model.Dao.ImpiegatoDao;
 import model.Dao.ProgettoDao;
 import model.Dao.RuoloDao;
 import model.Dao.SkillDao;
-import model.Dao.TitoloDao;
+import model.Dao.TitoloDAO;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
@@ -164,7 +156,7 @@ public class ControllerRicercaImpiegati {
             connection = dbConnection.getConnection();
             impiegatoDao = new ImpiegatoDao(connection);
             ruoliDao = new RuoloDao(connection);
-            titoloDao = new TitoloDao(connection);
+            titoloDao = new TitoloDAO(connection);
             progettoDao = new ProgettoDao(connection);
             comuneNacitaDao = new ComuneDao(connection);
             progettoImpiegatoDao = new model.Dao.progettoImpiegatoDao(connection);
@@ -329,7 +321,7 @@ public class ControllerRicercaImpiegati {
                 
             	try
                 {
-                    titoloDao = new TitoloDao(connection);
+                    titoloDao = new TitoloDAO(connection);
                     SkillDAO = new SkillDao(connection);
                     
                     SkillComboBox.setItems(titoloDao.titoliListImpiegato(infoImpiegato));
@@ -390,12 +382,17 @@ public class ControllerRicercaImpiegati {
     	
     }
     
-    public void AggiungiImpiegato() throws Exception {
-    	
+    public void AggiungiImpiegato() throws Exception
+    {
     	finestraAggiungiImpiegatoAlProgetto = new FinestraPopup();
     	finestraAggiungiImpiegatoAlProgetto.start(popup, ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem(), idProgetto, this, RuoloImpiegatoComboBox.getSelectionModel().getSelectedItem());
-    	
-    	
+    	Impiegato impiegatoSalario = ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem();
+        /* Procedure del database che fa un insert in Salario */
+        String CF = impiegatoSalario.getCF();
+        CallableStatement aggiungiSalarioProgetto = connection.prepareCall("CALL insalarioprogetto(?)");
+        aggiungiSalarioProgetto.setString(1, impiegatoSalario.getCF());
+        aggiungiSalarioProgetto.execute();
+
     }
     
     public void NascondiInfoImpiegato() {
