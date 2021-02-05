@@ -101,6 +101,7 @@ public class ControllerHomePageOrganizzatore {
     @FXML private Label 			  DescrizioneLabel;
     @FXML private TextArea 			  DescrizioneSkillTA;
     
+    @FXML private HBox				  ButtonBox;
     @FXML private Button 			  RimuoviImpiegatoButton;
     @FXML private Button			  NuovaValutazioneButton;
     
@@ -170,10 +171,11 @@ public class ControllerHomePageOrganizzatore {
     	Impiegato infoImpiegato = ListaPartecipantiLV.getSelectionModel().getSelectedItem();
     	
         if (infoImpiegato != null) {
+        	
 			IstruzioniBox.setVisible(false);
 			DescrizioneRiunioneImpiegatoBox.setVisible(true);
-			
 			SkillBox.setVisible(false);
+			ButtonBox.setVisible(!infoImpiegato.getCF().equals(riunione.getOrganizzatore().getCF()));
 			
 			NomeImpiegatoTF	.setText(infoImpiegato.toString());
 			EmailTF			.setText(infoImpiegato.getEmail());

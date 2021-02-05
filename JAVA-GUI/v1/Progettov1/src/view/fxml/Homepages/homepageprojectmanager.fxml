@@ -239,7 +239,7 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <HBox fx:id="BoxButton" alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <HBox fx:id="ButtonBox" alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" prefHeight="65.0" text="Rimuovi dal progetto" wrapText="true">
                                              <styleClass>

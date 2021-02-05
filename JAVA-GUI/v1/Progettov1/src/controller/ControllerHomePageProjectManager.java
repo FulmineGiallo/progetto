@@ -114,7 +114,7 @@ public class ControllerHomePageProjectManager
     @FXML private Button 			  RimuoviImpiegatoButton;
     @FXML private Button			  NuovaValutazioneButton;
     
-    @FXML private HBox                BoxButton;
+    @FXML private HBox                ButtonBox;
     @FXML private VBox                BoxInfo;
 
     private HomePageImpiegato homePageImpiegato;
@@ -203,10 +203,16 @@ public class ControllerHomePageProjectManager
 			
 			DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
 			
-			try {
-				RuoloImpiegatoTF.setText(progettoDao.getRuoloByImpiegatoProgetto(infoImpiegato, progetto));
-			} catch (SQLException e) {
-				RuoloImpiegatoTF.setText("");
+			if (infoImpiegato.getCF().equals(progetto.getProjectManager().getCF())) {
+				RuoloImpiegatoTF.setText("Project Manager");
+				ButtonBox.setVisible(false);
+			} else {
+				ButtonBox.setVisible(true);
+				try {
+					RuoloImpiegatoTF.setText(progettoDao.getRuoloByImpiegatoProgetto(infoImpiegato, progetto));
+				} catch (SQLException e) {
+					RuoloImpiegatoTF.setText("");
+				} 
 			}
 			
 			try {
