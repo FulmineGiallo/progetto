@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -409,18 +410,18 @@ public class ControllerHomePageImpiegato {
         SalvaModificheRiunioneButton.setVisible(true);
     }
     
-    @FXML private void salvaModificheRiunione(ActionEvent event)
+    @FXML private void salvaModificheRiunione(ActionEvent event) throws SQLException
     {
         gestioneRiunioneBox(false);
-        String titoloRiunione;
-        String descrizioneRiunione;
-        String sedeRiunione;
-        String nomeStanza;
-        String noteRiunione;
-        LocalDate orarioInizio;
-        LocalDate orarioFine;
+        int update = 0;
+        Riunione riunioneSelezionata = ListaRiunioniLV.getSelectionModel().getSelectedItem();
+        riunioneSelezionata.setDescrizione(DescrizioneRiunioneTA.getText());
+        riunioneSelezionata.setTitolo(TitoloRiunioneTF.getText());
+        riunioneSelezionata.setOrarioDiInizio(LocalDateTime.from(LocalDate.parse(OrarioDiInizioRiunioneTF.getText())));
+        riunioneSelezionata.setOrarioDiFine(LocalDateTime.from(LocalDate.parse(OrarioDiFineRiunioneLabel.getText())));
+        riunioneSelezionata.setNote(NoteRiunioneTA.getText());
 
-
+        update = riunioneDao.updateRiunione(riunioneSelezionata);
 
         SalvaModificheRiunioneButton.setVisible(false);
     }

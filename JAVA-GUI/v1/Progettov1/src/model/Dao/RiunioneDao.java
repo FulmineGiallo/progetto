@@ -44,7 +44,8 @@ public class RiunioneDao implements RiunioneDaoInterface {
     
     private ImpiegatoDaoInterface impiegatoDao;
 
-    public RiunioneDao(Connection connection) throws SQLException {
+    public RiunioneDao(Connection connection) throws SQLException
+	{
         this.connection = connection;
         impiegatoDao = new ImpiegatoDao(connection);
         
@@ -80,12 +81,23 @@ public class RiunioneDao implements RiunioneDaoInterface {
         
         updateImpiegatoPresente = connection.createStatement();
         updateImpiegatoAssente = connection.createStatement();
-        updateInfo = connection.prepareStatement("");
+        updateInfo = connection.prepareStatement("UPDATE riunione" +
+							"SET orarioinizio = ?, orariofine = ?, titolo = ?, descrizione = ?, note = ?" +
+							"WHERE organizzatore = ?");
     }
     
     @Override
-    public int updateRiunione(Riunione riunione) throws SQLException {
-        int result = updateInfo.executeUpdate();
+    public int updateRiunione(Riunione riunione) throws SQLException
+	{
+
+
+        updateInfo.setObject(1, riunione.getOrarioDiInizio());
+        updateInfo.setObject(2, riunione.getOrarioDiFine());
+        updateInfo.setString(3, riunione.getTitolo());
+        updateInfo.setString(4, riunione.getDescrizione());
+        updateInfo.setString(5, riunione.getNote());
+        updateInfo.setString(6, riunione.getOrganizzatore().getCF());
+		int result = updateInfo.executeUpdate();
         return result;
     }
     
