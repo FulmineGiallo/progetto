@@ -52,12 +52,12 @@ public class RiunioneDao implements RiunioneDaoInterface {
         queryRiunioneFisica 	= connection.prepareStatement("SELECT * FROM riunionefisica WHERE idriunione = ?");
         queryRiunioneTelematica = connection.prepareStatement("SELECT * FROM riunionetelematica WHERE idriunione = ?");
         
-        queryImpiegatoInvitato 	= connection.prepareStatement("SELECT COUNT(*) " 										+
+        queryImpiegatoInvitato 	= connection.prepareStatement("SELECT COUNT(*), idriunione " 										+
 														  	  "FROM riunione AS r NATURAL JOIN riunioneimpiegato AS ri "+
 														  	  "WHERE r.titolo LIKE ? "									+
 														  	  "AND r.organizzatore LIKE ? "								+
 														  	  "AND ri.partecipante LIKE ? "								+
-														  	  "AND presenza LIKE 'null' "								+
+														  	  "AND presenza IS null "								+
 														  	  "GROUP BY idriunione");
         
         queryIdRiunione 		= connection.prepareStatement("SELECT idriunione " 		+
@@ -178,11 +178,15 @@ public class RiunioneDao implements RiunioneDaoInterface {
     	queryImpiegatoInvitato.setString(2, riunione.getOrganizzatore().getCF());
     	queryImpiegatoInvitato.setString(3, impiegato.getCF());
     	
+    	System.out.println(queryImpiegatoInvitato);
+
+    	
     	ResultSet rs = queryImpiegatoInvitato.executeQuery();
     	
-    	while(rs.next())
+    	while(rs.next()) {
     		invitato = rs.getInt("count");
-    	
+    		idRiunione = rs.getInt("idriunione");
+    	}
     	rs.close();
     	
     	if(invitato == 0) {
@@ -196,7 +200,7 @@ public class RiunioneDao implements RiunioneDaoInterface {
     	
     	int successoUpdatePresenza;
     	successoUpdatePresenza =  updateImpiegatoPresente.executeUpdate("UPDATE riunioneimpiegato SET presenza = 'presente' WHERE partecipante LIKE '" + impiegato.getCF()+ "' AND idriunione = '" + idRiunione + "'");
-    	
+    	System.out.print("UPDATE riunioneimpiegato SET presenza = 'presente' WHERE partecipante LIKE '" + impiegato.getCF()+ "' AND idriunione = '" + idRiunione + "'");
     	return successoUpdatePresenza;
     }
     
