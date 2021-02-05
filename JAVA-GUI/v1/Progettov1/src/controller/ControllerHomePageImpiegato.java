@@ -239,6 +239,7 @@ public class ControllerHomePageImpiegato {
         
 		IstruzioniBox.setVisible(true);
         DescrizioneProgettoBox.setVisible(false);
+        SalvaModificheRiunioneButton.setVisible(false);
         SalarioLabel.setText("Calcolare");
         /*Richiamare Dao Salario */
         
@@ -417,16 +418,20 @@ public class ControllerHomePageImpiegato {
         Riunione riunioneSelezionata = ListaRiunioniLV.getSelectionModel().getSelectedItem();
         riunioneSelezionata.setDescrizione(DescrizioneRiunioneTA.getText());
         riunioneSelezionata.setTitolo(TitoloRiunioneTF.getText());
-        riunioneSelezionata.setOrarioDiInizio(LocalDateTime.from(LocalDate.parse(OrarioDiInizioRiunioneTF.getText())));
-        riunioneSelezionata.setOrarioDiFine(LocalDateTime.from(LocalDate.parse(OrarioDiFineRiunioneLabel.getText())));
         riunioneSelezionata.setNote(NoteRiunioneTA.getText());
-
-        update = riunioneDao.updateRiunione(riunioneSelezionata);
-
+        try
+        {
+            update = riunioneDao.updateRiunione(riunioneSelezionata);
+            System.out.println(update);
+        }catch (SQLException error)
+        {
+            error.printStackTrace();
+        }
         SalvaModificheRiunioneButton.setVisible(false);
     }
     
-    @FXML private void visualizzaProgetti(MouseEvent event) {
+    @FXML private void visualizzaProgetti(MouseEvent event)
+    {
     	if (!ListaProgettiLV.isVisible()) {
 			ListaRiunioniLabel.setStyle("-fx-text-fill: derive(white, -50%);");
 			SchedaListaRiunioni.setStyle("-fx-border-width: 0 0 5 0;");

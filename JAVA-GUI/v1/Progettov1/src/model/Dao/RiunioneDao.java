@@ -9,12 +9,7 @@ import model.Riunione;
 import model.RiunioneFisica;
 import model.RiunioneTelematica;
 
-import java.sql.Timestamp;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 
 import com.sun.net.httpserver.Authenticator.Result;
@@ -81,22 +76,16 @@ public class RiunioneDao implements RiunioneDaoInterface {
         
         updateImpiegatoPresente = connection.createStatement();
         updateImpiegatoAssente = connection.createStatement();
-        updateInfo = connection.prepareStatement("UPDATE riunione" +
-							"SET orarioinizio = ?, orariofine = ?, titolo = ?, descrizione = ?, note = ?" +
-							"WHERE organizzatore = ?");
+        updateInfo = connection.prepareStatement("UPDATE riunione SET titolo = ?, descrizione = ?, note = ? WHERE idriunione = ?");
     }
     
     @Override
     public int updateRiunione(Riunione riunione) throws SQLException
 	{
-
-
-        updateInfo.setObject(1, riunione.getOrarioDiInizio());
-        updateInfo.setObject(2, riunione.getOrarioDiFine());
-        updateInfo.setString(3, riunione.getTitolo());
-        updateInfo.setString(4, riunione.getDescrizione());
-        updateInfo.setString(5, riunione.getNote());
-        updateInfo.setString(6, riunione.getOrganizzatore().getCF());
+        updateInfo.setString(1, riunione.getTitolo());
+        updateInfo.setString(2, riunione.getDescrizione());
+        updateInfo.setString(3, riunione.getNote());
+        updateInfo.setInt(4, getIdRiunione(riunione));
 		int result = updateInfo.executeUpdate();
         return result;
     }
