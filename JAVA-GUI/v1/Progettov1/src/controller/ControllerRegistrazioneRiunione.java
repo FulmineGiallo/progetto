@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 
 import javafx.event.ActionEvent;
@@ -27,11 +28,14 @@ import javafx.stage.Stage;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
+import model.RiunioneFisica;
+import model.RiunioneTelematica;
 import model.Connection.DBConnection;
 import model.Dao.RiunioneDao;
 import model.DaoInterface.RiunioneDaoInterface;
 import utilities.MetodiComuni;
 import view.FinestraPopup;
+import view.HomePageOrganizzatore;
 import view.HomePageProjectManager;
 
 public class ControllerRegistrazioneRiunione {
@@ -143,10 +147,11 @@ public class ControllerRegistrazioneRiunione {
     
     private MetodiComuni utils = new MetodiComuni();
     
-    private HomePageProjectManager homePageProjectManager;
-    private FinestraPopup	 finestraConferma;
-    private FinestraPopup	 finestraDomanda;
-    private FinestraPopup	 finestraErrore;
+    private HomePageOrganizzatore 	homePageOrganizzatore;
+    private HomePageProjectManager	homePageProjectManager;
+    private FinestraPopup	 		finestraConferma;
+    private FinestraPopup	 		finestraDomanda;
+    private FinestraPopup	 		finestraErrore;
     
     private Connection connection;
     private DBConnection dbConnection;
@@ -175,11 +180,40 @@ public class ControllerRegistrazioneRiunione {
     	setOrarioDiFineLabel();
     }
     
-    private Riunione inizializzaNuovaRiunione() { // >> da creare
-    	//Riunione nuovaRiunione = new Riunione(null);
+    private RiunioneFisica inizializzaNuovaRiunioneFisica() {
     	
-    	//return nuovaRiunione;
-    	return null;
+    	RiunioneFisica nuovaRiunioneFisica
+    		= new RiunioneFisica(organizzatore, TitoloTF.getText(),
+    							 orarioDiInizio, orarioDiFine,
+    							 SedeTF.getText(), PianoStanzaTF.getText(), NomeStanzaTF.getText());
+    	
+    	switch(utils.controlloStringa(DescrizioneTA.getText(), "")) {
+	    	case 1:
+	    		nuovaRiunioneFisica.setDescrizione(null);
+	    		break;
+    		default:
+    			nuovaRiunioneFisica.setDescrizione(DescrizioneTA.getText());
+    	}    	
+    	
+    	return nuovaRiunioneFisica;
+    }
+    
+    private RiunioneTelematica inizializzaNuovaRiunioneTelematica() {
+    	
+    	RiunioneTelematica nuovaRiunioneTelematica
+    		= new RiunioneTelematica(organizzatore, TitoloTF.getText(),
+    								 orarioDiInizio, orarioDiFine,
+    								 NomePiattaformaTF.getText(), CodiceAccessoPF.getText());
+    	
+    	switch(utils.controlloStringa(DescrizioneTA.getText(), "")) {
+	    	case 1:
+	    		nuovaRiunioneTelematica.setDescrizione(null);
+	    		break;
+			default:
+				nuovaRiunioneTelematica.setDescrizione(DescrizioneTA.getText());
+    	}
+    	
+    	return nuovaRiunioneTelematica;
     }
     
     @FXML void setOrarioDiInizioLabel() {
@@ -333,7 +367,7 @@ public class ControllerRegistrazioneRiunione {
     	
     }
     
-    //CONTROLLO CAMPI DI FormRiunioneFisicaBox
+    //CONTROLLO CAMPI DI FormRiunioneFisica
     private boolean controlloCampiRiunioneFisica() {
     	SedeErrorLabel				.setText("");
     	NomeStanzaErrorLabel		.setText("");
@@ -380,7 +414,7 @@ public class ControllerRegistrazioneRiunione {
     			checkPianoStanza;
     }
     
-    //CONTROLLO CAMPI DI FormRiunioneTelematicaBox
+    //CONTROLLO CAMPI DI FormRiunioneTelematica
     private boolean controlloCampiRiunioneTelematica() {
     	NomePiattaformaErrorLabel	.setText("");
     	CodiceAccessoErrorLabel		.setText("");
@@ -450,18 +484,35 @@ public class ControllerRegistrazioneRiunione {
     	
     }
 
-    @FXML private void confermaOperazione(ActionEvent event) {
+    @FXML private void confermaOperazione(ActionEvent event) {    	
     	if(controlloCampi()) {
     		
+            orarioDiInizio 	= LocalDateTime.of(DataDiInizioDP.getValue(),
+					   						   LocalTime.parse(OrarioDiInizioLabel.getText()));
+            orarioDiFine 	= LocalDateTime.of(DataDiFineDP.getValue(),
+					   						   LocalTime.parse(OrarioDiFineLabel.getText()));
+            
             try {
             	RiunioneDaoInterface riunioneDao = new RiunioneDao(connection);
-                //riunioneDao.creaRiunione(inizializzaNuovaRiunione()); >> da creare
-                
-				homePageProjectManager = new HomePageProjectManager(organizzatore, progetto);
+            	
+            	if(FormRiunioneFisica.isVisible()) {
+            		
+            		RiunioneFisica nuovaRiunioneFisica = inizializzaNuovaRiunioneFisica();
+            		riunioneDao.creaRiunione(nuovaRiunioneFisica);
+            		homePageOrganizzatore = new HomePageOrganizzatore(organizzatore, nuovaRiunioneFisica);
+            		
+            	} else if(FormRiunioneTelematica.isVisible()) {
+            		
+            		RiunioneTelematica nuovaRiunioneTelematica = inizializzaNuovaRiunioneTelematica();
+            		riunioneDao.creaRiunione(nuovaRiunioneTelematica);
+            		homePageOrganizzatore = new HomePageOrganizzatore(organizzatore, nuovaRiunioneTelematica);
+            		
+            	}
+            	
 				finestraConferma = new FinestraPopup();
                 try {
-                	homePageProjectManager.start(window, popup);
-					finestraConferma .start(popup, "La riunione è stato registrata correttamente nel database.");
+                	homePageOrganizzatore.start(window, popup);
+					finestraConferma .start(popup, "La riunione è stata registrata correttamente nel database.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

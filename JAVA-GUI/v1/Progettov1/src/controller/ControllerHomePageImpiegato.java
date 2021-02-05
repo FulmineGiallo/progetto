@@ -181,7 +181,6 @@ public class ControllerHomePageImpiegato {
     private FinestraPopup finestraDomanda;
 	private FinestraPopup finestraConferma;
 	private FinestraPopup finestraErrore;
-	private Exception error;
 	
 	private HomePageBenvenuto 					homePageBenvenuto;
 	private HomePageValutazioni 				homePageValutazioni;
@@ -292,7 +291,7 @@ public class ControllerHomePageImpiegato {
 				System.out.println("errore presenza");
 				finestraErrore = new FinestraPopup();
 				try {
-					finestraErrore.start(popup, "Impossibile registrare la presenza", error);
+					finestraErrore.start(popup, "Impossibile registrare la presenza", new Exception());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -322,7 +321,7 @@ public class ControllerHomePageImpiegato {
 				System.out.println("errore assenza");
 				finestraErrore = new FinestraPopup();
 				try {
-					finestraErrore.start(popup, "Impossibile registrare l'assenza", error);
+					finestraErrore.start(popup, "Impossibile registrare l'assenza", new Exception());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

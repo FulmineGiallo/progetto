@@ -132,12 +132,22 @@
                                                       </TextField>
                                                    </children>
                                                 </HBox>
-                                                <HBox fx:id="ValutazioneMediaBox" alignment="CENTER_LEFT" spacing="10.0">
+                                                <VBox fx:id="ValutazioneMediaBox" spacing="5.0">
                                                    <children>
-                                                      <Label fx:id="ValutazioneMediaLabel" styleClass="LabelGrande" text="Valutazione media" />
-                                                      <Slider fx:id="ValutazioneMediaSlider" majorTickUnit="1.0" max="5.0" minorTickCount="5" showTickLabels="true" showTickMarks="true" styleClass="Slider" HBox.hgrow="ALWAYS" />
+                                                      <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                                         <children>
+                                                            <Label fx:id="ValutazioneMediaLabel" styleClass="LabelGrande" text="Valutazione media" />
+                                                            <Slider fx:id="ValutazioneMediaSlider" disable="true" majorTickUnit="1.0" max="5.0" minorTickCount="5" showTickLabels="true" showTickMarks="true" styleClass="Slider" HBox.hgrow="ALWAYS" />
+                                                         </children>
+                                                      </HBox>
+                                                      <Button fx:id="ValutazioneMediaButton" maxWidth="151.0" minWidth="151.0" mnemonicParsing="false" onAction="#abilitaRicercaValutazione" prefWidth="151.0" text="Abilita ricerca&#10;per valutazione" textAlignment="CENTER" wrapText="true">
+                                                         <styleClass>
+                                                            <String fx:value="Button" />
+                                                            <String fx:value="LabelPiccola" />
+                                                         </styleClass>
+                                                      </Button>
                                                    </children>
-                                                </HBox>
+                                                </VBox>
                                              </children>
                                           </VBox>
                                        </children>

@@ -25,6 +25,11 @@ public class RiunioneDao implements RiunioneDaoInterface {
 	private final Connection connection;
 
     private final PreparedStatement riunioniImpiegato;
+    
+    private	final PreparedStatement insertNuovaRiunione;
+    private final PreparedStatement	insertNuovaRiunioneFisica;
+    private final PreparedStatement insertNuovaRiunioneTelematica;
+    
     private final PreparedStatement queryRiunione;
     private final PreparedStatement queryRiunioneFisica;
     private final PreparedStatement queryRiunioneTelematica;
@@ -51,6 +56,10 @@ public class RiunioneDao implements RiunioneDaoInterface {
         queryRiunione			= connection.prepareStatement("SELECT * FROM riunione WHERE idriunione = ?");
         queryRiunioneFisica 	= connection.prepareStatement("SELECT * FROM riunionefisica WHERE idriunione = ?");
         queryRiunioneTelematica = connection.prepareStatement("SELECT * FROM riunionetelematica WHERE idriunione = ?");
+        
+        insertNuovaRiunione				= connection.prepareStatement("INSERT INTO riunione VALUES (NEXTVAL('id_riunione_seq'), ?, ?, ?, ?, ?, null)");
+        insertNuovaRiunioneFisica		= connection.prepareStatement("INSERT INTO riunionefisica VALUES (?, ?, ?, ?)");
+        insertNuovaRiunioneTelematica	= connection.prepareStatement("INSERT INTO riunionetelematica VALUES (?, ?, ?)");
         
         queryImpiegatoInvitato 	= connection.prepareStatement("SELECT COUNT(*), idriunione " 										+
 														  	  "FROM riunione AS r NATURAL JOIN riunioneimpiegato AS ri "+
@@ -169,7 +178,57 @@ public class RiunioneDao implements RiunioneDaoInterface {
     	
     	return listaRiunioni;
     }
-
+    
+    @Override
+    public String creaRiunione(RiunioneFisica nuovaRiunioneFisica) throws SQLException{
+    	
+    	int riunioniInserite = 0;
+    	
+    	insertNuovaRiunioneFisica.setString(1, nuovaRiunioneFisica.getSede());
+    	insertNuovaRiunioneFisica.setString(2, nuovaRiunioneFisica.getPiano());
+    	insertNuovaRiunioneFisica.setString(3, nuovaRiunioneFisica.getNomeStanza());
+    	insertNuovaRiunioneFisica.setInt   (4, getIdNuovaRiunione(nuovaRiunioneFisica));
+    	
+    	riunioniInserite = insertNuovaRiunioneFisica.executeUpdate();
+    	
+    	return "Riunioni inserite: " + riunioniInserite;
+    }
+    
+    @Override
+    public String creaRiunione(RiunioneTelematica nuovaRiunioneTelematica) throws SQLException{
+    	
+    	int riunioniInserite = 0;
+    	
+    	insertNuovaRiunioneTelematica.setString(1, nuovaRiunioneTelematica.getPiattaforma());
+    	insertNuovaRiunioneTelematica.setString(2, nuovaRiunioneTelematica.getCodiceAccesso());
+    	insertNuovaRiunioneTelematica.setInt   (3, getIdNuovaRiunione(nuovaRiunioneTelematica));
+    	
+    	riunioniInserite = insertNuovaRiunioneTelematica.executeUpdate();
+    	
+    	return "Riunioni inserite: " + riunioniInserite;
+    }
+    
+    private int getIdNuovaRiunione(Riunione nuovaRiunione) throws SQLException{
+    	int idRiunione = 0;
+    	
+    	insertNuovaRiunione.setObject(1, nuovaRiunione.getOrarioDiInizio());
+    	insertNuovaRiunione.setObject(2, nuovaRiunione.getOrarioDiFine());
+    	insertNuovaRiunione.setString(3, nuovaRiunione.getTitolo());
+    	
+    	if(nuovaRiunione.getDescrizione() != null) {
+    		insertNuovaRiunione.setString(4, nuovaRiunione.getDescrizione());
+    	} else {
+    		insertNuovaRiunione.setNull(4, java.sql.Types.NULL);
+    	}
+    	
+    	insertNuovaRiunione.setString(5, nuovaRiunione.getOrganizzatore().getCF());
+    	
+    	insertNuovaRiunione.executeUpdate();
+    	idRiunione = getIdRiunione(nuovaRiunione);
+    	
+    	return idRiunione;
+    }
+    
     public boolean isInvitato(Impiegato impiegato, Riunione riunione) throws SQLException {
     	
     	int invitato = 0;
