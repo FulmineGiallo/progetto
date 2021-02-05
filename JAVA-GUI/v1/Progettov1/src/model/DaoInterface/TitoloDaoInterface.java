@@ -9,4 +9,5 @@ public interface TitoloDaoInterface {
 
     public ObservableList<Titolo> titoliList() throws SQLException;
 	public ObservableList<Titolo> titoliListImpiegato(Impiegato impiegato) throws SQLException;
+	public Titolo getTitoloById(int idTitolo) throws SQLException;
 }

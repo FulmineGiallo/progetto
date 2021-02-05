@@ -29,9 +29,10 @@ import model.Connection.DBConnection;
 import model.Dao.RiunioneDao;
 import model.Dao.RiunioneImpiegatoDao;
 import model.Dao.SkillDao;
-import model.Dao.TitoloDAO;
+import model.Dao.TitoloDao;
 import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.RiunioneDaoInterface;
+import utilities.MetodiComuni;
 import view.FinestraPopup;
 import view.HomePageImpiegato;
 import view.HomePageOrganizzatore;
@@ -39,48 +40,65 @@ import view.HomePageOrganizzatore;
 public class ControllerHomePageOrganizzatore {
 
     @FXML private AnchorPane 		  HomePageOrganizzatore;
+    
     @FXML private VBox   			  OrganizzatoreBox;
     @FXML private Label 			  NomeOrganizzatoreLabel;
     @FXML private Label 			  NomeRiunioneLabel;
+    
     @FXML private HBox 				  ToolBar;
     @FXML private Button 			  HomePageImpiegatoButton;
     @FXML private Button 			  AggiungiImpiegatoButton;
+    
     @FXML private AnchorPane 		  ListaPartecipantiBox;
     @FXML private Label 			  ListaPartecipantiLabel;
     @FXML private ListView<Impiegato> ListaPartecipantiLV;
+    
     @FXML private AnchorPane 		  IstruzioniBox;
     @FXML private Label 			  IstruzioniLabel;
+    
     @FXML private AnchorPane 		  DescrizioneRiunioneImpiegatoBox;
     @FXML private AnchorPane 		  DescrizioneRiunioneImpiegatoPane;
+    
     @FXML private AnchorPane 		  InformazioniImpiegatoBox;
+    
     @FXML private HBox 				  NomeImpiegatoBox;
     @FXML private Label 			  NomeImpiegatoLabel;
     @FXML private TextField 		  NomeImpiegatoTF;
+    
     @FXML private HBox 				  EmailBox;
     @FXML private Label 			  EmailLabel;
     @FXML private TextField 		  EmailTF;
+    
     @FXML private HBox 				  ComuneDiNascitaBox;
     @FXML private Label 			  ComuneDiNascitaLabel;
     @FXML private TextField 		  ComuneDiNascitaTF;
+    
     @FXML private HBox 				  DataDiNascitaBox;
     @FXML private Label 			  DataDiNascitaLabel;
     @FXML private TextField 		  DataDiNascitaTF;
+    
     @FXML private HBox 			  	  SelezionaSkillBox;
     @FXML private Label 		  	  SkillComboBoxLabel;
     @FXML private ComboBox<Skill> 	  SkillComboBox;
+    
     @FXML private HBox 				  TipologiaSkillBox;
     @FXML private Label 			  TipologiaSkillLabel;
     @FXML private TextField 		  TipologiaSkillTF;
+    
     @FXML private VBox 				  SkillBox;
+    
     @FXML private HBox 				  TitoloSkillBox;
     @FXML private Label 			  TitoloSkillLabel;
     @FXML private TextField 		  TitoloSkillTF;
+    
     @FXML private HBox 				  DataDiCertificazioneBox;
     @FXML private Label 			  DataCertificazioneSkillLabel;
     @FXML private TextField 		  DataCertificazioneTF;
+    
     @FXML private VBox 				  DescrizioneSkillBox;
     @FXML private Label 			  DescrizioneLabel;
     @FXML private TextArea 			  DescrizioneSkillTA;
+    
     @FXML private Button 			  RimuoviImpiegatoButton;
     
     private HomePageImpiegato homePageImpiegato;
@@ -88,15 +106,23 @@ public class ControllerHomePageOrganizzatore {
     private Stage window;
     private Stage popup;
     
-    private TitoloDAO titoloDAO;
-    private SkillDao SkillDAO;
+    private SkillDao skillDao;
     private RiunioneImpiegatoDao riunioneImpiegatoDao;
+    private RiunioneDaoInterface riunioneDao;
+    
     private int idriunione;
     private FinestraPopup finestraRimuoviImpiegatoDallaRiunione;
     
+    private Riunione riunione;
+    private Impiegato Organizzatore;
     
-    Riunione riunione;
-    Impiegato Organizzatore;
+    private Connection connection;
+    private DBConnection dbConnection;
+    
+    ObservableList<Impiegato> lista = FXCollections.observableArrayList();
+    private ObservableList<Skill> listaSkill;
+    
+    private MetodiComuni utils = new MetodiComuni();
 
     public void setStage(Stage window, Stage popup)
     {
@@ -104,38 +130,28 @@ public class ControllerHomePageOrganizzatore {
     	this.popup = popup;
     }
 
-
-    Connection connection;
-    DBConnection dbConnection;
-    ObservableList<Impiegato> lista = FXCollections.observableArrayList();
-    RiunioneDaoInterface riunioneDao;
-
-    {
-        try {
-            dbConnection = new DBConnection();
-            connection = dbConnection.getConnection();
-            riunioneDao = new RiunioneDao(connection);
-
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-
-
     public void inizializza(Impiegato Organizzatore, Riunione riunione) throws SQLException {
     	this.riunione = riunione;
     	this.Organizzatore = Organizzatore;
+    	
+        try {
+            dbConnection = new DBConnection();
+            connection = dbConnection.getConnection();
+            
+            riunioneDao = new RiunioneDao(connection);
+            idriunione = riunioneDao.getIdRiunione(riunione);
+            lista = riunioneDao.getPartecipanti(idriunione);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    	
         NomeOrganizzatoreLabel.setText((Organizzatore.toString()).toUpperCase());
         NomeRiunioneLabel.setText((riunione.getTitolo()));
-        idriunione = riunioneDao.getIdRiunione(riunione);
-        lista = riunioneDao.getPartecipanti(idriunione);
         ListaPartecipantiLV.setItems(lista);
         
-        updateInfoImpiegato();
-        updateInfoBox();
+        if(lista.size() == 1) {
+        	IstruzioniLabel.setText("Non ci sono ancora partecipanti a questa riunione");
+        }
     }
     
     @FXML
@@ -145,81 +161,72 @@ public class ControllerHomePageOrganizzatore {
     	homePageImpiegato.start(window, popup);
     }
     
-    public void updateInfoImpiegato()
-    {
-        ListaPartecipantiLV.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-            	
-            	Impiegato infoImpiegato = ListaPartecipantiLV.getSelectionModel().getSelectedItem();
-            	
-                if (infoImpiegato != null) {
-					IstruzioniBox.setVisible(false);
-					DescrizioneRiunioneImpiegatoBox.setVisible(true);
-					SkillBox.setVisible(false);
-					NomeImpiegatoTF.setText(infoImpiegato.toString());
-					try {
-						titoloDAO = new TitoloDAO(connection);
-						SkillDAO = new SkillDao(connection);
-						RimuoviImpiegatoButton.setVisible(true);
+    @FXML private void updateInfoImpiegato() {
+    	Impiegato infoImpiegato = ListaPartecipantiLV.getSelectionModel().getSelectedItem();
+    	
+        if (infoImpiegato != null) {
+			IstruzioniBox.setVisible(false);
+			DescrizioneRiunioneImpiegatoBox.setVisible(true);
+			
+			SkillBox.setVisible(false);
+			
+			NomeImpiegatoTF	.setText(infoImpiegato.toString());
+			EmailTF			.setText(infoImpiegato.getEmail());
+			ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+			DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
+			
+			try {
+				skillDao = new SkillDao(connection);
+				listaSkill = skillDao.getListaSkill(infoImpiegato);				
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			
+			if (listaSkill.isEmpty()) {
+				SkillComboBox.setPromptText("Nessuna skill specificata");
+				SkillComboBox.setDisable(true);
+				
+			} else {
+				SkillComboBox.setItems(listaSkill);
+				
+				SkillComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+					Skill infoSkill = SkillComboBox.getSelectionModel().getSelectedItem();
 
-						//SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
-
-						if (infoImpiegato.getCF().equals(riunione.getOrganizzatore())) {
-							RimuoviImpiegatoButton.setVisible(false);
+					if (infoSkill != null) {
+						SkillBox.setVisible(true);
+						
+						TipologiaSkillTF.setText(infoSkill.getTipoSkill());
+						
+						if(infoSkill.getTipoSkill().equals("Soft-Skill")) {
+							TitoloSkillBox.setVisible(false);
+							DataDiCertificazioneBox.setVisible(false);
+						} else {
+							TitoloSkillBox.setVisible(true);
+							DataDiCertificazioneBox.setVisible(true);
+							
+							TitoloSkillTF.setText(infoSkill.getTitolo().toString());
+							DataCertificazioneTF.setText(infoSkill.getDataCertificazione().toString());
 						}
 						
-						SkillComboBox.getSelectionModel().selectedItemProperty()
-								.addListener((options, oldValue, newValue) -> {
-
-									SkillBox.setVisible(true);
-
-									if (SkillComboBox.getSelectionModel().getSelectedItem() != null) {
-										TitoloSkillLabel.setVisible(true);
-										TitoloSkillLabel.setText(
-												SkillComboBox.getSelectionModel().getSelectedItem().toString());
-
-										DataCertificazioneSkillLabel.setVisible(true);
-										DescrizioneSkillTA.setVisible(true);
-										try {
-											DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(
-													SkillComboBox.getSelectionModel().getSelectedItem().toString(),
-													infoImpiegato));
-											DataCertificazioneSkillLabel.setText(SkillDAO.dataCertificazione(
-													SkillComboBox.getSelectionModel().getSelectedItem().toString(),
-													infoImpiegato));
-										} catch (SQLException e) {
-											e.printStackTrace();
-										}
-
-									} else {
-										TitoloSkillLabel.setVisible(false);
-										DataCertificazioneSkillLabel.setVisible(false);
-										DescrizioneSkillTA.setVisible(false);
-									}
-
-								});
-					} catch (SQLException ex) {
-						ex.printStackTrace();
-					} 
-				}
-                
-                
-            }
-        });
+						switch(utils.controlloStringa(infoSkill.getDescrizione(), "")) {
+							case 1:
+								DescrizioneSkillTA.setText("Nessuna descrizione");
+								break;
+							default:
+								DescrizioneSkillTA.setText(infoSkill.getDescrizione());
+						}
+						
+					} else {
+						SkillBox.setVisible(false);
+					}
+				});
+			}
+		}
     }
     
-    public void updateInfoBox()
-    {
-        RimuoviImpiegatoButton.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-            	DescrizioneRiunioneImpiegatoBox.setVisible(false);
-                IstruzioniBox.setVisible(true);
-            }
-        });
+    @FXML private void updateInfoBox(){
+    	DescrizioneRiunioneImpiegatoBox.setVisible(false);
+        IstruzioniBox.setVisible(true);
     }
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {

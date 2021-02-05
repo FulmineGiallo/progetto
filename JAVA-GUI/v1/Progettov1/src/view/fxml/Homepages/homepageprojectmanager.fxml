@@ -48,7 +48,7 @@
                         <Label fx:id="ListaPartecipantiLabel" styleClass="LabelGrande" text="Partecipanti al progetto" />
                      </children>
                   </HBox>
-                  <ListView fx:id="ListaPartecipantiLV" layoutY="28.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+                  <ListView fx:id="ListaPartecipantiLV" layoutY="28.0" onMouseClicked="#updateInfoImpiegato" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
                      <styleClass>
                         <String fx:value="ListView" />
                         <String fx:value="LabelPiccola" />

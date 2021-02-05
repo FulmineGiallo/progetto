@@ -40,7 +40,7 @@ import model.Dao.ImpiegatoDao;
 import model.Dao.ProgettoDao;
 import model.Dao.RuoloDao;
 import model.Dao.SkillDao;
-import model.Dao.TitoloDAO;
+import model.Dao.TitoloDao;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
@@ -165,7 +165,7 @@ public class ControllerRicercaImpiegati {
             connection = dbConnection.getConnection();
             impiegatoDao = new ImpiegatoDao(connection);
             ruoliDao = new RuoloDao(connection);
-            titoloDao = new TitoloDAO(connection);
+            titoloDao = new TitoloDao(connection);
             progettoDao = new ProgettoDao(connection);
             comuneNacitaDao = new ComuneDao(connection);
             progettoImpiegatoDao = new model.Dao.progettoImpiegatoDao(connection);
@@ -322,7 +322,7 @@ public class ControllerRicercaImpiegati {
                 
             	try
                 {
-                    titoloDAO = new TitoloDAO(connection);
+                    titoloDAO = new TitoloDao(connection);
                     SkillDAO = new SkillDao(connection);
                     
                     SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));

@@ -26,7 +26,7 @@ import model.Titolo;
 import model.Connection.DBConnection;
 import model.Dao.ComuneDao;
 import model.Dao.GradoDao;
-import model.Dao.TitoloDAO;
+import model.Dao.TitoloDao;
 import model.DaoInterface.GradoDaoInterface;
 import model.DaoInterface.TitoloDaoInterface;
 import utilities.MetodiComuni;
@@ -82,7 +82,7 @@ public class ControllerRegistrazioneSkill {
     @FXML private Button 			ConfermaButton;
     
     private Stage popup;
-    private TitoloDAO titoloDAO;
+    private TitoloDao titoloDAO;
     
     private String tipoSkill;
     private String descrizioneSkill;
@@ -132,7 +132,7 @@ public class ControllerRegistrazioneSkill {
     	DescrizioneTA.setPromptText("* " + DescrizioneTAPrompt);
     	
     	try {
-            titoloDAO = new TitoloDAO(connection);
+            titoloDAO = new TitoloDao(connection);
             TitoloComboBox.setItems(titoloDAO.titoliList());
             TitoloComboBox.getSelectionModel().select(0);
             

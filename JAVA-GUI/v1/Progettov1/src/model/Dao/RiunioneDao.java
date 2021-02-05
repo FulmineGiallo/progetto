@@ -48,7 +48,9 @@ public class RiunioneDao implements RiunioneDaoInterface {
         this.connection = connection;
         impiegatoDao = new ImpiegatoDao(connection);
         
-        partecipanti = connection.prepareStatement("SELECT DISTINCT i.* FROM riunioneimpiegato AS ri NATURAL JOIN riunione JOIN impiegato AS i ON ri.partecipante = i.cf  WHERE idriunione = ?");
+        partecipanti			= connection.prepareStatement("SELECT DISTINCT partecipante " +
+				  											  "FROM listariunioni " 		  +
+				  											  "WHERE idriunione = ?");
         
         riunioniImpiegato 		= connection.prepareStatement("SELECT idriunione " 		+
         													  "FROM listariunioni " 	+
@@ -87,27 +89,20 @@ public class RiunioneDao implements RiunioneDaoInterface {
         return result;
     }
     
-    public ObservableList<Impiegato> getPartecipanti(int idriunione) throws SQLException
-    {
-
+    public ObservableList<Impiegato> getPartecipanti(int idriunione) throws SQLException {
+    	
         ObservableList<Impiegato> lista = FXCollections.observableArrayList();
-        partecipanti.setInt(1,idriunione);
-        ResultSet rs = partecipanti.executeQuery();
         Impiegato partecipante;
-        while(rs.next())
-        {
+        
+        partecipanti.setInt(1, idriunione);
+        ResultSet rs = partecipanti.executeQuery();
+        
+        while(rs.next()) {
 
-            partecipante = new Impiegato(rs.getString("cf"));
-            partecipante.setNome(rs.getString("nome"));
-            partecipante.setCognome(rs.getString("cognome"));
-            partecipante.setComuneNascita(rs.getString("comunen"));
-            partecipante.setGenere(rs.getString("genere"));
-            partecipante.setEmail(rs.getString("email"));
-            partecipante.setDataNascita(rs.getObject("datan", LocalDate.class));
-            partecipante.setPassword(rs.getString("password"));
-            partecipante.setIdImpiegato(rs.getInt("idimpiegato"));
+        	partecipante = impiegatoDao.creaImpiegato(rs.getString("partecipante"));
             lista.add(partecipante);
         }
+        
         rs.close();
 
         return lista;

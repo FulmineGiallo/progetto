@@ -21,12 +21,13 @@ import model.Connection.DBConnection;
 import model.Dao.ComuneDao;
 import model.Dao.ProgettoDao;
 import model.Dao.SkillDao;
-import model.Dao.TitoloDAO;
+import model.Dao.TitoloDao;
 import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.SkillDaoInterface;
 import model.DaoInterface.TitoloDaoInterface;
+import utilities.MetodiComuni;
 import model.Impiegato;
 import model.Progetto;
 import model.Skill;
@@ -45,53 +46,72 @@ public class ControllerHomePageProjectManager
 {
 
     @FXML private AnchorPane 		  HomePageProjectManager;
+    
     @FXML private VBox 				  ProjectManagerBox;
     @FXML private Label 			  NomeProjectManagerLabel;
     @FXML private Label 			  NomeProgettoLabel;
+    
     @FXML private HBox 				  ToolBar;
     @FXML private Button 			  NuovaRiunioneButton;
     @FXML private Button 			  AggiungiImpiegatoButton;
     @FXML private Button 			  HomePageImpiegatoButton;
+    
     @FXML private AnchorPane 		  ListaPartecipantiBox;
     @FXML private Label 			  ListaPartecipantiLabel;
     @FXML private ListView<Impiegato> ListaPartecipantiLV;
+    
     @FXML private AnchorPane 		  IstruzioniBox;
     @FXML private Label 			  IstruzioniLabel;
+    
     @FXML private AnchorPane 		  DescrizioneProgettoImpiegatoBox;
     @FXML private AnchorPane 		  DescrizioneProgettoImpiegatoPane;
+    
     @FXML private AnchorPane 		  InformazioniImpiegatoBox;
+    
     @FXML private HBox 				  NomeImpiegatoBox;
     @FXML private Label 			  NomeImpiegatoLabel;
     @FXML private TextField 		  NomeImpiegatoTF;
+    
     @FXML private HBox 				  EmailBox;
     @FXML private Label 			  EmailLabel;
     @FXML private TextField 		  EmailTF;
+    
     @FXML private HBox 				  ComuneDiNascitaBox;
     @FXML private Label 			  ComuneDiNascitaLabel;
     @FXML private TextField 		  ComuneDiNascitaTF;
+    
     @FXML private HBox 				  DataDiNascitaBox;
     @FXML private Label 			  DataDiNascitaLabel;
     @FXML private TextField 		  DataDiNascitaTF;
+    
     @FXML private HBox 				  RuoloImpiegatoBox;
     @FXML private Label 			  RuoloImpiegatoLabel;
     @FXML private TextField 		  RuoloImpiegatoTF;
+    
     @FXML private HBox 				  SelezionaSkillBox;
     @FXML private Label 			  SkillComboBoxLabel;
-    @FXML private ComboBox<Titolo> 	  SkillComboBox;
+    @FXML private ComboBox<Skill> 	  SkillComboBox;
+    
     @FXML private VBox 				  SkillBox;
+    
     @FXML private HBox 				  TipologiaSkillBox;
     @FXML private Label 			  TipologiaSkillLabel;
     @FXML private TextField 		  TipologiaSkillTF;
+    
     @FXML private HBox 				  TitoloSkillBox;
     @FXML private Label 			  TitoloSkillLabel;
     @FXML private TextField 		  TitoloSkillTF;
+    
     @FXML private HBox 				  DataDiCertificazioneBox;
     @FXML private Label 			  DataCertificazioneSkillLabel;
     @FXML private TextField 		  DataCertificazioneTF;
+    
     @FXML private VBox 				  DescrizioneSkillBox;
     @FXML private Label 			  DescrizioneLabel;
     @FXML private TextArea 			  DescrizioneSkillTA;
+    
     @FXML private Button 			  RimuoviImpiegatoButton;
+    
     @FXML private HBox                BoxButton;
     @FXML private VBox                BoxInfo;
 
@@ -118,11 +138,17 @@ public class ControllerHomePageProjectManager
     	this.popup = popup;
     }
 
-
     Connection connection;
     DBConnection dbConnection;
     ObservableList<Impiegato> lista = FXCollections.observableArrayList();
     ProgettoDaoInterface progettoDao;
+
+
+	private SkillDao skillDao;
+
+	private ObservableList<Skill> listaSkill;
+	
+	private MetodiComuni utils = new MetodiComuni();
     {
         try {
             dbConnection = new DBConnection();
@@ -137,112 +163,83 @@ public class ControllerHomePageProjectManager
     }
 
 
-
     public void inizializza(Impiegato projectManager, Progetto progetto) throws SQLException
     {
     	this.progetto = progetto;
     	this.projectManager = projectManager;
+    	
         NomeProjectManagerLabel.setText(projectManager.toString().toUpperCase());
         NomeProgettoLabel.setText(progetto.getTitolo());
+        
         lista = progettoDao.getPartecipanti(progetto);
-        if(lista.isEmpty())
-        {
-            ListaPartecipantiLV.getItems().add(impiegatoIniziale);
+        ListaPartecipantiLV.setItems(lista);
+        
+        if(lista.size() == 1)
             IstruzioniLabel.setText("Non ci sono partecipanti a questo progetto");
-        }
-        else
-        {
-            /* Rimuovere l'impiegato iniziale */
-            ListaPartecipantiLV.getItems().remove(impiegatoIniziale);
-            ListaPartecipantiLV.setItems(lista);
-            updateInfoImpiegato();
-        }
     }
     
-    public void updateInfoImpiegato()
-    {
-        ListaPartecipantiLV.setOnMouseClicked(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-            	
-            	Impiegato infoImpiegato = ListaPartecipantiLV.getSelectionModel().getSelectedItem();
-            	
-                IstruzioniBox.setVisible(false);
-                DescrizioneProgettoImpiegatoBox.setVisible(true);
-                
-                SkillBox.setVisible(false);
-                NomeImpiegatoTF.setText(infoImpiegato.toString());
-                EmailTF.setText(infoImpiegato.getEmail());
-                DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
-              
-                try {
-					RuoloImpiegatoTF.setText(progettoImpiegatoDao.getRuoloImpiegato(infoImpiegato, progettoDao.getIdProgetto(progetto)).toString());
-				} catch (SQLException e2) {
-					e2.printStackTrace();
-				}
-                
-                try {
-					ComuneDiNascitaTF.setText(comuneDao.getComuneBySigla(infoImpiegato.getComuneNascita().toString().toUpperCase()).toString().substring(8));
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+    @FXML private void updateInfoImpiegato() {
+    	Impiegato infoImpiegato = ListaPartecipantiLV.getSelectionModel().getSelectedItem();
+    	
+        if (infoImpiegato != null) {
+			IstruzioniBox.setVisible(false);
+			DescrizioneProgettoImpiegatoBox.setVisible(true);
+			
+			SkillBox.setVisible(false);
+			
+			NomeImpiegatoTF	.setText(infoImpiegato.toString());
+			EmailTF			.setText(infoImpiegato.getEmail());
+			ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
+			DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
+			
+			try {
+				skillDao = new SkillDao(connection);
+				listaSkill = skillDao.getListaSkill(infoImpiegato);				
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+			
+			if (listaSkill.isEmpty()) {
+				SkillComboBox.setPromptText("Nessuna skill specificata");
+				SkillComboBox.setDisable(true);
+				
+			} else {
+				SkillComboBox.setItems(listaSkill);
+				
+				SkillComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+					Skill infoSkill = SkillComboBox.getSelectionModel().getSelectedItem();
 
-            	try
-                {
-                    titoloDAO = new TitoloDAO(connection);
-                    SkillDAO = new SkillDao(connection);
-                    RimuoviImpiegatoButton.setVisible(true);
-                    
-                    SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
-
-                    if(infoImpiegato.getCF().equals( progetto.getProjectManager().getCF())) {
-                    	RimuoviImpiegatoButton.setVisible(false);
-                    }
-                    
-                    SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
-
-                    	SkillBox.setVisible(true);
-
-                    if(SkillComboBox.getSelectionModel().getSelectedItem() != null) {	
-                    	TitoloSkillLabel.setVisible(true);
-                    	TitoloSkillTF.setVisible(true);
-                    	TitoloSkillTF.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
-                    	
-                    	DataCertificazioneSkillLabel.setVisible(true);
-                    	DescrizioneSkillTA.setVisible(true);
-                    	try {
-							DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
-                    		DataCertificazioneTF.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
-						} catch (SQLException e) {
-							e.printStackTrace();
+					if (infoSkill != null) {
+						SkillBox.setVisible(true);
+						
+						TipologiaSkillTF.setText(infoSkill.getTipoSkill());
+						
+						if(infoSkill.getTipoSkill().equals("Soft-Skill")) {
+							TitoloSkillBox.setVisible(false);
+							DataDiCertificazioneBox.setVisible(false);
+						} else {
+							TitoloSkillBox.setVisible(true);
+							DataDiCertificazioneBox.setVisible(true);
+							
+							TitoloSkillTF.setText(infoSkill.getTitolo().toString());
+							DataCertificazioneTF.setText(infoSkill.getDataCertificazione().toString());
 						}
-                    	
-                    }else {
-                    	TitoloSkillLabel.setVisible(false);
-                    	DataCertificazioneSkillLabel.setVisible(false);
-                    	DescrizioneSkillTA.setVisible(false);
-                    	TitoloSkillTF.setVisible(false);
-                    	DataCertificazioneTF.setVisible(false);
-                    }
-                    
-                   });
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-                
-                
-            }
-
-        });
-        if(lista.isEmpty())
-        {
-            ListaPartecipantiLV.getItems().add(impiegatoIniziale);
-            IstruzioniLabel.setText("Non ci sono partecipanti a questo progetto");
-        }
+						
+						switch(utils.controlloStringa(infoSkill.getDescrizione(), "")) {
+							case 1:
+								DescrizioneSkillTA.setText("Nessuna descrizione");
+								break;
+							default:
+								DescrizioneSkillTA.setText(infoSkill.getDescrizione());
+						}
+						
+					} else {
+						SkillBox.setVisible(false);
+					}
+				});
+			}
+		}
     }
-    
     
     public void RimuoviImpiegato(ActionEvent event) throws Exception {
 		finestraRimuoviImpiegatoDalProgetto = new FinestraPopup();
@@ -250,7 +247,6 @@ public class ControllerHomePageProjectManager
 
         lista = progettoDao.getPartecipanti(progetto);
         ListaPartecipantiLV.setItems(lista);
-
     }
     
     @FXML

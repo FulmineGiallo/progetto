@@ -56,7 +56,7 @@
                         <Label fx:id="ListaPartecipantiLabel" styleClass="LabelGrande" text="Invitati alla riunione" />
                      </children>
                   </HBox>
-                  <ListView fx:id="ListaPartecipantiLV" layoutY="28.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+                  <ListView fx:id="ListaPartecipantiLV" layoutY="28.0" onMouseClicked="#updateInfoImpiegato" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
                      <styleClass>
                         <String fx:value="ListView" />
                         <String fx:value="LabelPiccola" />
@@ -100,7 +100,7 @@
                            <children>
                               <AnchorPane fx:id="InformazioniImpiegatoBox">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="ScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-border-width: 0;" styleClass="ScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
                                           <AnchorPane>
                                              <children>
@@ -225,7 +225,7 @@
                                  <children>
                                     <HBox alignment="BOTTOM_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Rimuovi dalla riunione" wrapText="true">
+                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" onMouseClicked="#updateInfoBox" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Rimuovi dalla riunione" wrapText="true">
                                              <styleClass>
                                                 <String fx:value="Button" />
                                                 <String fx:value="LabelGrande" />

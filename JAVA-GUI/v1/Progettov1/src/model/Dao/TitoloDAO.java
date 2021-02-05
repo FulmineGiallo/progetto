@@ -1,6 +1,7 @@
 package model.Dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,17 +12,21 @@ import model.DaoInterface.TitoloDaoInterface;
 import model.Impiegato;
 import model.Titolo;
 
-public class TitoloDAO implements TitoloDaoInterface {
+public class TitoloDao implements TitoloDaoInterface {
 	
 	Connection connection;
     private Statement getTitoli;
     private Statement getTitoliImpiegato;
     
-    public TitoloDAO(Connection connection) throws SQLException
+    private final PreparedStatement queryIdTitolo;
+    
+    public TitoloDao(Connection connection) throws SQLException
     {
         this.connection = connection;
         getTitoli = connection.createStatement();
-        getTitoliImpiegato = connection.createStatement();        
+        getTitoliImpiegato = connection.createStatement();
+        
+        queryIdTitolo = connection.prepareStatement("SELECT tipotitolo FROM titolo WHERE idtitolo = ?");
     }
 
 	@Override
@@ -56,5 +61,15 @@ public class TitoloDAO implements TitoloDaoInterface {
         return lista;
 	}
 	
-	
+	public Titolo getTitoloById(int idTitolo) throws SQLException{
+		Titolo titolo = null;
+		
+		queryIdTitolo.setInt(1, idTitolo);
+		ResultSet rs = queryIdTitolo.executeQuery();
+		
+		while(rs.next())
+			titolo = new Titolo(rs.getString("tipotitolo"), false);
+		
+		return titolo;
+	}
 }

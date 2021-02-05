@@ -45,7 +45,13 @@ public class ProgettoDao implements ProgettoDaoInterface
         
         progettiImpiegato = connection.prepareStatement("SELECT * FROM listaprogetti WHERE partecipante = ?");
         updateInfo = connection.prepareStatement("UPDATE progetto SET descrizione = ?, datainizio = ?, datafine = ?, scadenza = ? WHERE projectmanagerprogetto = ? AND titolo = ?");
-        partecipanti = connection.prepareStatement("SELECT impiegato.*FROM progetto NATURAL JOIN progettoimpiegato INNER JOIN impiegato ON progettoimpiegato.cf = impiegato.cf WHERE projectmanagerprogetto = ? AND titolo = ?");
+        
+        partecipanti = connection.prepareStatement("SELECT DISTINCT partecipante " +
+				  								   "FROM listaprogetti " 		   +
+				  								   "WHERE idprogetto = ?");
+        
+        //partecipanti = connection.prepareStatement("SELECT impiegato.*FROM progetto NATURAL JOIN progettoimpiegato INNER JOIN impiegato ON progettoimpiegato.cf = impiegato.cf WHERE projectmanagerprogetto = ? AND titolo = ?");
+        
         getRuoloImpiegato = connection.prepareStatement("SELECT ruolo.tipoRuolo FROM progettoImpiegato NATURAL JOIN ruolo WHERE cf = ? AND idProgetto = ?");
         
         getIdProgetto 			= connection.prepareStatement("SELECT idprogetto FROM progetto WHERE titolo LIKE ? AND projectmanagerprogetto LIKE ?");
@@ -178,24 +184,15 @@ public class ProgettoDao implements ProgettoDaoInterface
     {
 
         ObservableList<Impiegato> lista = FXCollections.observableArrayList();
-        partecipanti.setString(1,progetto.getProjectManager().getCF());
-        partecipanti.setString(2,progetto.getTitolo());
+        Impiegato partecipante;
+        
+        partecipanti.setInt(1, getIdProgetto(progetto));
 
         ResultSet rs = partecipanti.executeQuery();
-        Impiegato impiegato;
-        while(rs.next())
-        {
+        while(rs.next()) {
 
-            impiegato = new Impiegato(rs.getString("cf"));
-            impiegato.setNome(rs.getString("nome"));
-            impiegato.setCognome(rs.getString("cognome"));
-            impiegato.setComuneNascita(rs.getString("comunen"));
-            impiegato.setGenere(rs.getString("genere"));
-            impiegato.setEmail(rs.getString("email"));
-            impiegato.setDataNascita(rs.getObject("datan", LocalDate.class));
-            impiegato.setPassword(rs.getString("password"));
-            impiegato.setIdImpiegato(rs.getInt("idimpiegato"));
-            lista.add(impiegato);
+        	partecipante = impiegatoDao.creaImpiegato(rs.getString("partecipante"));
+            lista.add(partecipante);
         }
         rs.close();
 
