@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -117,7 +118,7 @@ public class ControllerRicercaImpiegati {
     @FXML private Label 				IstruzioniLabel2;
     @FXML private HBox 					NomeImpiegatoBox;
     @FXML private Button 				AnnullaButton;
-
+    @FXML private Slider 				ValutazioneMediaSlider;
     
     private Stage window;
     private Stage popup;
@@ -194,6 +195,8 @@ public class ControllerRicercaImpiegati {
     	OrdinamentoComboBox.setItems(listaOridinaPer);
     	OrdinamentoComboBox.getSelectionModel().select(1);
     	
+    	ValutazioneMediaSlider.setBlockIncrement(1);
+    	
     	InserisciSkill();
     	updateInfoImpiegato();
     	
@@ -264,7 +267,7 @@ public class ControllerRicercaImpiegati {
     	else {
     	
     		try {
-				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto);
+				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto, ValutazioneMediaSlider.getValue());
 				ListaRicercaImpiegatiLV.setItems(listaImpiegati);
 				updateInfoImpiegato();
 			}catch (SQLException e) {
@@ -278,6 +281,8 @@ public class ControllerRicercaImpiegati {
     public void annullaOperazione() throws Exception {
     	homePageProgetto = new HomePageProjectManager(progetto.getProjectManager(), progetto);
     	homePageProgetto.start(window, popup);
+//    	System.out.print(ValutazioneMediaSlider.getValue());
+
     }
     
     
