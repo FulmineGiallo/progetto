@@ -251,7 +251,6 @@ public class ControllerRicercaImpiegati {
     		cognomeInserito = cognomeInserito.substring(0,1).toUpperCase() + cognomeInserito.substring(1);
     	}
     	
-    	System.out.println(nomeInserito + cognomeInserito);
     	
     	nomeInserito="%" + nomeInserito + "%";
     	cognomeInserito="%" + cognomeInserito + "%";
