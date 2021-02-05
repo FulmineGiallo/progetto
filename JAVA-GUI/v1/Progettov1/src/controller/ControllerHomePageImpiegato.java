@@ -198,8 +198,8 @@ public class ControllerHomePageImpiegato {
     
     Connection connection;
     DBConnection dbConnection;
-    ProgettoDaoInterface progetti;
-    RiunioneDaoInterface riunioni;
+    ProgettoDaoInterface progettoDao;
+    RiunioneDaoInterface riunioneDao;
     
     public void setStage(Stage window, Stage popup)
     {
@@ -213,11 +213,11 @@ public class ControllerHomePageImpiegato {
             dbConnection = new DBConnection();
             connection = dbConnection.getConnection();
             
-            progetti = new ProgettoDao(connection);
-            listaProgetti.addAll(progetti.getProgettiImpiegato(impiegato));
+            progettoDao = new ProgettoDao(connection);
+            listaProgetti.addAll(progettoDao.getProgettiImpiegato(impiegato));
             
-            riunioni = new RiunioneDao(connection);
-    		listaRiunioni.addAll(riunioni.getRiunioniImpiegato(impiegato));
+            riunioneDao = new RiunioneDao(connection);
+    		listaRiunioni.addAll(riunioneDao.getRiunioniImpiegato(impiegato));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -273,10 +273,10 @@ public class ControllerHomePageImpiegato {
 
     @FXML void accettaInvito(ActionEvent event) {
     	try {
-			if(riunioni.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
+			if(riunioneDao.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
 				
 				int update;
-				update=riunioni.UpdatePresenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
+				update=riunioneDao.UpdatePresenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
 				
 				if(update!=0)
 					System.out.println("presenza salvata");
@@ -303,10 +303,10 @@ public class ControllerHomePageImpiegato {
     
     @FXML void rifutaInvito(ActionEvent event) {
     	try {
-			if(riunioni.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
+			if(riunioneDao.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
 				
 				int update;
-				update=riunioni.UpdateAssenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
+				update=riunioneDao.UpdateAssenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
 				
 				if(update!=0)
 					System.out.println("assenza salvata");
@@ -380,7 +380,7 @@ public class ControllerHomePageImpiegato {
             ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(dataScadenza);
 
 
-            updateEffettuato = progetti.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
+            updateEffettuato = progettoDao.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
 			SalvaModificheProgetto.setVisible(false); //una volta premuoto salva, il bottone scompare.
 
         }
@@ -484,7 +484,7 @@ public class ControllerHomePageImpiegato {
     @FXML void visualizzaInformazioniRiunione(MouseEvent event) {
         //gestisciBox(false);
         if (!ListaRiunioniLV.getItems().contains(riunioneIniziale)) {
-        	//System.out.println(ListaRiunioniLV.getSelectionModel().getSelectedItem().getClass());
+        	
 			if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in sede fisica")) {
 				RiunioneFisica infoRiunione = (RiunioneFisica)ListaRiunioniLV.getSelectionModel().getSelectedItem();
 				setCampiRiunione(infoRiunione);
@@ -496,6 +496,7 @@ public class ControllerHomePageImpiegato {
 				NomeStanzaTF.setText(infoRiunione.getNomeStanza());
 				PianoStanzaTF.setText(infoRiunione.getPiano());
 			} else if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in modalità telematica")){
+				
 				RiunioneTelematica infoRiunione = (RiunioneTelematica)ListaRiunioniLV.getSelectionModel().getSelectedItem();
 				setCampiRiunione(infoRiunione);
 				
@@ -513,9 +514,8 @@ public class ControllerHomePageImpiegato {
 		DescrizioneProgettoBox .setVisible(false);
 		DescrizioneRiunioneBox .setVisible(true);
 		
-		OrganizzatoreBox.setVisible(riunioneSelezionata.getOrganizzatore() == impiegato);
-		PartecipanteBox.setVisible(!(riunioneSelezionata.getOrganizzatore() == impiegato));
-		
+		OrganizzatoreBox.setVisible(riunioneSelezionata.getOrganizzatore().getCF().equals(impiegato.getCF()));
+		PartecipanteBox.setVisible(!(riunioneSelezionata.getOrganizzatore().getCF().equals(impiegato.getCF())));
 		
 		OrganizzatoreRiunioneTF	.setText(riunioneSelezionata.getOrganizzatore().toString());
 		TitoloRiunioneTF		.setText(riunioneSelezionata.getTitolo());

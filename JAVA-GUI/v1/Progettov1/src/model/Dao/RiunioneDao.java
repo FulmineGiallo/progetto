@@ -29,6 +29,7 @@ public class RiunioneDao implements RiunioneDaoInterface {
     private	final PreparedStatement insertNuovaRiunione;
     private final PreparedStatement	insertNuovaRiunioneFisica;
     private final PreparedStatement insertNuovaRiunioneTelematica;
+    private final PreparedStatement insertOrganizzatoreRiunione;
     
     private final PreparedStatement queryRiunione;
     private final PreparedStatement queryRiunioneFisica;
@@ -50,7 +51,7 @@ public class RiunioneDao implements RiunioneDaoInterface {
         partecipanti = connection.prepareStatement("SELECT DISTINCT i.* FROM riunioneimpiegato AS ri NATURAL JOIN riunione JOIN impiegato AS i ON ri.partecipante = i.cf  WHERE idriunione = ?");
         
         riunioniImpiegato 		= connection.prepareStatement("SELECT idriunione " 		+
-        													  "FROM riunioneimpiegato " +
+        													  "FROM listariunioni " 	+
         													  "WHERE partecipante = ?");
         
         queryRiunione			= connection.prepareStatement("SELECT * FROM riunione WHERE idriunione = ?");
@@ -60,13 +61,14 @@ public class RiunioneDao implements RiunioneDaoInterface {
         insertNuovaRiunione				= connection.prepareStatement("INSERT INTO riunione VALUES (NEXTVAL('id_riunione_seq'), ?, ?, ?, ?, ?, null)");
         insertNuovaRiunioneFisica		= connection.prepareStatement("INSERT INTO riunionefisica VALUES (?, ?, ?, ?)");
         insertNuovaRiunioneTelematica	= connection.prepareStatement("INSERT INTO riunionetelematica VALUES (?, ?, ?)");
+        insertOrganizzatoreRiunione		= connection.prepareStatement("INSERT INTO riunioneimpiegato VALUES (?, ?, 'presente')");
         
-        queryImpiegatoInvitato 	= connection.prepareStatement("SELECT COUNT(*), idriunione " 										+
+        queryImpiegatoInvitato 	= connection.prepareStatement("SELECT COUNT(*), idriunione " 							+
 														  	  "FROM riunione AS r NATURAL JOIN riunioneimpiegato AS ri "+
 														  	  "WHERE r.titolo LIKE ? "									+
 														  	  "AND r.organizzatore LIKE ? "								+
 														  	  "AND ri.partecipante LIKE ? "								+
-														  	  "AND presenza IS null "								+
+														  	  "AND presenza IS null "									+
 														  	  "GROUP BY idriunione");
         
         queryIdRiunione 		= connection.prepareStatement("SELECT idriunione " 		+
@@ -122,6 +124,7 @@ public class RiunioneDao implements RiunioneDaoInterface {
     	String 			titolo			= null;
     	String 			descrizione		= null;
     	Impiegato 		organizzatore	= null;
+    	String			note			= null;
     	
     	riunioniImpiegato.setString(1, impiegato.getCF());
     	ResultSet riunioniResultSet = riunioniImpiegato.executeQuery();
@@ -138,6 +141,7 @@ public class RiunioneDao implements RiunioneDaoInterface {
     			titolo			= queryRiunioneResultSet.getString("titolo");
     			descrizione		= queryRiunioneResultSet.getString("descrizione");
     			organizzatore	= impiegatoDao.creaImpiegato(queryRiunioneResultSet.getString("organizzatore"));
+    			note			= queryRiunioneResultSet.getString("note");
     		}
     		
     		queryRiunioneResultSet.close();
@@ -153,7 +157,8 @@ public class RiunioneDao implements RiunioneDaoInterface {
     									 queryRiunioneFisicaResultSet.getString("piano"),
     									 queryRiunioneFisicaResultSet.getString("nomestanza"));
     			
-    			nuovaRiunioneFisica.setDescrizione(descrizione);    			
+    			nuovaRiunioneFisica.setDescrizione(descrizione);  
+    			nuovaRiunioneFisica.setNote(note);
     			listaRiunioni.add(nuovaRiunioneFisica);
     		}
     		
@@ -169,7 +174,8 @@ public class RiunioneDao implements RiunioneDaoInterface {
     										 queryRiunioneTelematicaResultSet.getString("piattaforma"),
     										 queryRiunioneTelematicaResultSet.getString("codiceaccesso"));
     			
-    			nuovaRiunioneTelematica.setDescrizione(descrizione);			
+    			nuovaRiunioneTelematica.setDescrizione(descrizione);
+    			nuovaRiunioneTelematica.setNote(note);
     			listaRiunioni.add(nuovaRiunioneTelematica);
     		}
     		
@@ -225,6 +231,11 @@ public class RiunioneDao implements RiunioneDaoInterface {
     	
     	insertNuovaRiunione.executeUpdate();
     	idRiunione = getIdRiunione(nuovaRiunione);
+    	
+    	insertOrganizzatoreRiunione.setInt	 (1, idRiunione);
+    	insertOrganizzatoreRiunione.setString(2, nuovaRiunione.getOrganizzatore().getCF());
+    	
+    	insertOrganizzatoreRiunione.executeUpdate();
     	
     	return idRiunione;
     }
