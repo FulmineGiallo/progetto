@@ -392,6 +392,7 @@ public class ControllerHomePageImpiegato {
         }
 
     }
+    
     void gestioneRiunioneBox(boolean state)
     {
         DescrizioneRiunioneTA.setEditable(state);
@@ -515,7 +516,6 @@ public class ControllerHomePageImpiegato {
     }
 
     @FXML void visualizzaInformazioniRiunione(MouseEvent event) {
-        //gestisciBox(false);
         if (!ListaRiunioniLV.getItems().contains(riunioneIniziale)) {
         	
 			if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in sede fisica")) {

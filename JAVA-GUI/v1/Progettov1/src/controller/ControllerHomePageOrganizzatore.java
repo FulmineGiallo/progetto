@@ -197,8 +197,9 @@ public class ControllerHomePageOrganizzatore {
 			if (listaSkill.isEmpty()) {
 				SkillComboBox.setPromptText("Nessuna skill specificata");
 				SkillComboBox.setDisable(true);
-				
 			} else {
+				SkillComboBox.setPromptText("Seleziona una skill");
+				SkillComboBox.setDisable(false);
 				SkillComboBox.setItems(listaSkill);
 				
 				SkillComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {

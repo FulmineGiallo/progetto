@@ -221,6 +221,8 @@ public class ControllerHomePageProjectManager
 				SkillComboBox.setDisable(true);
 				
 			} else {
+				SkillComboBox.setPromptText("Seleziona una skill");
+				SkillComboBox.setDisable(false);
 				SkillComboBox.setItems(listaSkill);
 				
 				SkillComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {

@@ -1,4 +1,4 @@
-package model.Dao; //creare metodo getRuoloByImpiegatoProgetto
+package model.Dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
