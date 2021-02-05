@@ -264,28 +264,42 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     	
     	double stellemin;
     	double stellemax;
+    	String queryPerValutazioneMedia;
+    	String condizionePerRicercaSkill;
     	
-    	if(valutazioneMedia == 6) {
-    		stellemin = 0;
-    		stellemax = 5;
+    	if(skillSelezionate.contains("%%") && skillSelezionate.size()==1) {
+    		condizionePerRicercaSkill = "true";
     	}else {
-    		stellemin = valutazioneMedia-1;
-    		stellemax = valutazioneMedia+1;
-    	}
+    		condizionePerRicercaSkill = "false";
+        }
+    	
+
        
     if(salarioMedio != -1) {	
 
+    	
+    	if(valutazioneMedia != 6) {
+    		stellemin = valutazioneMedia-1;
+    		stellemax = valutazioneMedia+1;
+    		queryPerValutazioneMedia = "AND (AVG(v.stelle) BETWEEN " + stellemin + " AND "+ stellemax +") ";
+    	}else {
+    		stellemin = valutazioneMedia-1;
+    		stellemax = valutazioneMedia+1;
+    		queryPerValutazioneMedia = " ";
+    	}
+    	
         ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
         Impiegato impiegato = new Impiegato();
     
-        String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(v.stelle), AVG(quantita) AS salarioMedio FROM ((((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) LEFT OUTER JOIN valutazioni AS v on i.cf = v.cfrecensito) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (false ";
+        String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(quantita) AS salarioMedio FROM ((((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) LEFT OUTER JOIN valutazioni AS v on i.cf = v.cfrecensito) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND ("+condizionePerRicercaSkill+ " ";
         
         for (String s:skillSelezionate) {
         	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
         }
         
-        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+") GROUP BY cf, stelle HAVING (AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + ") AND (AVG(v.stelle) BETWEEN " + stellemin + " AND "+ stellemax +") ORDER BY " + ordinamentoSelezionato;
+        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+") GROUP BY cf, stelle HAVING (AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + ") "+ queryPerValutazioneMedia + "ORDER BY " + ordinamentoSelezionato;
         
+        System.out.println(daEseguire);
         
         ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
         
@@ -307,18 +321,30 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         	return impiegati;
         }
         else {
+        	
+        	if(valutazioneMedia != 6) {
+        		stellemin = valutazioneMedia-1;
+        		stellemax = valutazioneMedia+1;
+        		queryPerValutazioneMedia = "HAVING (AVG(v.stelle) BETWEEN " + stellemin + " AND "+ stellemax +") ";
+        	}else {
+        		stellemin = valutazioneMedia-1;
+        		stellemax = valutazioneMedia+1;
+        		queryPerValutazioneMedia = " ";
+        	}
+        	
             ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
             Impiegato impiegato = new Impiegato();
         
-            String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG (v.stelle) FROM(((impiegato AS i LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) LEFT OUTER JOIN valutazioni AS v on i.cf = v.cfrecensito) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (false ";
+            String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan FROM(((impiegato AS i LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) LEFT OUTER JOIN valutazioni AS v on i.cf = v.cfrecensito) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (" + condizionePerRicercaSkill + " ";
             
             for (String s:skillSelezionate) {
             	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
             }
             
-            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+")GROUP BY cf, stelle HAVING AVG(stelle) BETWEEN "+stellemin+"AND "+stellemax +" ORDER BY " + ordinamentoSelezionato;
+            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+")GROUP BY cf, stelle " + queryPerValutazioneMedia +" ORDER BY " + ordinamentoSelezionato;
+
             System.out.println(daEseguire);
-            
+                
             ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
 
             while(rs.next())

@@ -119,6 +119,7 @@ public class ControllerRicercaImpiegati {
     @FXML private HBox 					NomeImpiegatoBox;
     @FXML private Button 				AnnullaButton;
     @FXML private Slider 				ValutazioneMediaSlider;
+    @FXML private Button 				ValutazioneMediaButton;
     
     private Stage window;
     private Stage popup;
@@ -215,6 +216,7 @@ public class ControllerRicercaImpiegati {
     	String ordinamento = null;
     	ObservableList<String> skillAggiunte = FXCollections.observableArrayList();
     	skillAggiunte = SkillAggiunteLV.getItems();
+    	double valutazioneMediaInserita = ValutazioneMediaSlider.getValue();
     	
     	if(SalarioMedioTF.getText().equals("")) {
     		salarioMedioInserito = -1;
@@ -252,10 +254,13 @@ public class ControllerRicercaImpiegati {
     		SkillAggiunteLV.setItems(listaVuota);
     	}
     	
+    	if(ValutazioneMediaSlider.isDisable()) {
+    		valutazioneMediaInserita = 6;
+    	}
     	
    
     	
-    	if(SalarioMedioTF.getText().isBlank() && NomeTF.getText().isBlank() && CognomeTF.getText().isBlank() && SkillAggiunteLV.getItems().isEmpty()) {
+    	if(SalarioMedioTF.getText().isBlank() && NomeTF.getText().isBlank() && CognomeTF.getText().isBlank() && SkillAggiunteLV.getItems().isEmpty() && ValutazioneMediaSlider.isDisable()) {
         	try {
     			listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto);
     			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
@@ -267,7 +272,7 @@ public class ControllerRicercaImpiegati {
     	else {
     	
     		try {
-				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto, ValutazioneMediaSlider.getValue());
+				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto, valutazioneMediaInserita);
 				ListaRicercaImpiegatiLV.setItems(listaImpiegati);
 				updateInfoImpiegato();
 			}catch (SQLException e) {
@@ -394,5 +399,16 @@ public class ControllerRicercaImpiegati {
         updateInfoImpiegato();
     }
     
+    public void abilitaRicercaValutazione() {
+    
+    	if(ValutazioneMediaSlider.isDisable()) {
+    		ValutazioneMediaSlider.setDisable(false);
+    		ValutazioneMediaButton.setText("Disabilita ricerca per valutazione");
+    	}
+    	else {
+    		ValutazioneMediaSlider.setDisable(true);
+    		ValutazioneMediaButton.setText("Abilita ricerca per valutazione");
+    	}
+    }
     
 }
