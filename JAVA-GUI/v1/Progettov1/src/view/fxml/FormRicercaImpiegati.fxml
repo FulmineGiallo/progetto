@@ -223,7 +223,7 @@
                      <children>
                         <AnchorPane fx:id="InformazioniImpiegatoBox">
                            <children>
-                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" styleClass="ScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-border-width: 0;" styleClass="ScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
                                     <AnchorPane>
                                        <children>
@@ -337,6 +337,9 @@
                                                    </children>
                                                 </VBox>
                                              </children>
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
                                           </VBox>
                                        </children>
                                     </AnchorPane>
