@@ -81,27 +81,27 @@
                                              <children>
                                                 <HBox fx:id="StelleOkBox" alignment="CENTER_LEFT" spacing="1.0">
                                                    <children>
-                                                      <ImageView fx:id="StellaOk1" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                      <ImageView fx:id="StellaOk1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                                          <image>
                                                             <Image url="@../../resources/img/starok.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="StellaOk2" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                      <ImageView fx:id="StellaOk2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                                          <image>
                                                             <Image url="@../../resources/img/starok.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="StellaOk3" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                      <ImageView fx:id="StellaOk3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                                          <image>
                                                             <Image url="@../../resources/img/starok.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="StellaOk4" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                      <ImageView fx:id="StellaOk4" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                                          <image>
                                                             <Image url="@../../resources/img/starok.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="StellaOk5" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true" visible="false">
+                                                      <ImageView fx:id="StellaOk5" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                                          <image>
                                                             <Image url="@../../resources/img/starok.png" />
                                                          </image>
@@ -110,27 +110,27 @@
                                                 </HBox>
                                                 <HBox fx:id="StelleNoBox" alignment="CENTER_LEFT" spacing="1.0">
                                                    <children>
-                                                      <ImageView fx:id="StellaNo1" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="StellaNo1" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStellaOk1" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../resources/img/starno.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="StellaNo2" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="StellaNo2" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStellaOk2" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../resources/img/starno.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="StellaNo3" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="StellaNo3" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStellaOk3" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../resources/img/starno.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="StellaNo4" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="StellaNo4" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStellaOk4" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../resources/img/starno.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="StellaNo5" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStella" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="StellaNo5" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#clickStellaOk5" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../../resources/img/starno.png" />
                                                          </image>

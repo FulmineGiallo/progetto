@@ -33,11 +33,10 @@ public class ValutazioneDao implements ValutazioneDaoInterface
         getValutazioni.setString(1, impiegato.getCF());
         ResultSet rs = getValutazioni.executeQuery();
 
-        while (rs.next())
-        {
-            valutazione = new Valutazione(rs.getString("titolo"), rs.getInt("stelle"), false);
-            valutazione.setRecensito(impiegato);
-            valutazione.setRecensore(impiegatoDao.creaImpiegato(rs.getString("cfrecensore")));
+        while (rs.next()) {
+            valutazione = new Valutazione(impiegatoDao.creaImpiegato(rs.getString("cfrecensore")), impiegato,
+            							  rs.getString("titolo"), rs.getInt("stelle"), false);
+            
             valutazione.setDataValutazione(rs.getObject("datavalutazione", LocalDate.class));
             valutazione.setRecensione(rs.getString("recensione"));
             

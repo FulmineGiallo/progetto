@@ -35,6 +35,7 @@ import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.RiunioneDaoInterface;
 import utilities.MetodiComuni;
 import view.FinestraPopup;
+import view.FormRegistrazioneValutazione;
 import view.HomePageImpiegato;
 import view.HomePageOrganizzatore;
 
@@ -101,6 +102,7 @@ public class ControllerHomePageOrganizzatore {
     @FXML private TextArea 			  DescrizioneSkillTA;
     
     @FXML private Button 			  RimuoviImpiegatoButton;
+    @FXML private Button			  NuovaValutazioneButton;
     
     private HomePageImpiegato homePageImpiegato;
     
@@ -114,6 +116,7 @@ public class ControllerHomePageOrganizzatore {
     
     private int idriunione;
     private FinestraPopup finestraRimuoviImpiegatoDallaRiunione;
+    private FormRegistrazioneValutazione formRegistrazioneValutazione;
     
     private Riunione riunione;
     private Impiegato Organizzatore;
@@ -259,6 +262,11 @@ public class ControllerHomePageOrganizzatore {
     public void DaDescrizioneRiunioneAdIstruzioniBox() throws SQLException {
     	DescrizioneRiunioneImpiegatoBox.setVisible(false);
     	IstruzioniBox.setVisible(true);
+    }
+    
+    @FXML private void aggiungiValutazione() {
+    	formRegistrazioneValutazione = new FormRegistrazioneValutazione();
+    	formRegistrazioneValutazione.start(window, popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione);
     }
     
 }

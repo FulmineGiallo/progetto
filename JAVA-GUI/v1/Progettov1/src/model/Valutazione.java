@@ -11,7 +11,11 @@ public class Valutazione {
     Impiegato recensito;
     boolean nuovo;
     
-	public Valutazione(String titolo, int stelle, boolean nuovo) {
+	public Valutazione(Impiegato recensore, Impiegato recensito,
+					   String titolo, int stelle, boolean nuovo)
+	{
+		this.recensore = recensore;
+		this.recensito = recensito;
 		this.titolo = titolo;
 		this.stelle = stelle;
 		this.nuovo = nuovo;

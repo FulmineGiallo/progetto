@@ -36,6 +36,7 @@ import view.FinestraAggiungiPartecipanteAlProgetto;
 import view.FinestraPopup;
 import view.FinestraRimuoviImpiegatoDalProgetto;
 import view.FormRegistrazioneRiunione;
+import view.FormRegistrazioneValutazione;
 import view.HomePageImpiegato;
 
 import java.sql.Connection;
@@ -111,6 +112,7 @@ public class ControllerHomePageProjectManager
     @FXML private TextArea 			  DescrizioneSkillTA;
     
     @FXML private Button 			  RimuoviImpiegatoButton;
+    @FXML private Button			  NuovaValutazioneButton;
     
     @FXML private HBox                BoxButton;
     @FXML private VBox                BoxInfo;
@@ -124,9 +126,11 @@ public class ControllerHomePageProjectManager
     private progettoImpiegatoDao progettoImpiegatoDao;
     private ComuneDaoInterface comuneDao;
     
-    FinestraPopup 						   finestraRimuoviImpiegatoDalProgetto;
-    FinestraAggiungiPartecipanteAlProgetto finestraAggiungiImpiegatoAlProgetto;
-    FormRegistrazioneRiunione			   formRegistrazioneRiunione;
+    private FinestraPopup 							finestraRimuoviImpiegatoDalProgetto;
+    private FinestraAggiungiPartecipanteAlProgetto 	finestraAggiungiImpiegatoAlProgetto;
+    private FormRegistrazioneRiunione			   	formRegistrazioneRiunione;
+    
+	private FormRegistrazioneValutazione formRegistrazioneValutazione;
     
     Progetto progetto;
     Impiegato projectManager;
@@ -149,6 +153,7 @@ public class ControllerHomePageProjectManager
 	private ObservableList<Skill> listaSkill;
 	
 	private MetodiComuni utils = new MetodiComuni();
+
     {
         try {
             dbConnection = new DBConnection();
@@ -287,6 +292,11 @@ public class ControllerHomePageProjectManager
     @FXML private void programmaRiunione(ActionEvent event) {
     	formRegistrazioneRiunione = new FormRegistrazioneRiunione();
     	formRegistrazioneRiunione.start(window, popup, projectManager, progetto);
+    }
+    
+    @FXML private void aggiungiValutazione() {
+    	formRegistrazioneValutazione = new FormRegistrazioneValutazione();
+    	formRegistrazioneValutazione.start(window, popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), progetto);
     }
       
 }

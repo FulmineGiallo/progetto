@@ -90,10 +90,9 @@ public class ControllerValutazioni {
     private Impiegato	recensito;
     private Valutazione infoValutazione;
     
-    private ImpiegatoDaoInterface impiegatoDao;
     private ValutazioneDaoInterface valutazioniDao;
 	
-	private Valutazione valutazioneIniziale = new Valutazione("Non ci sono ancora valutazioni", -1, false);
+	private Valutazione valutazioneIniziale = new Valutazione(null, null, "Non ci sono ancora valutazioni", -1, false);
 
     Connection connection;
     DBConnection dbConnection;    
@@ -114,8 +113,6 @@ public class ControllerValutazioni {
             
             valutazioniDao = new ValutazioneDao(connection);
             listaValutazioni.addAll(valutazioniDao.getValutazioni(recensito));
-            
-            impiegatoDao = new ImpiegatoDao(connection);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
