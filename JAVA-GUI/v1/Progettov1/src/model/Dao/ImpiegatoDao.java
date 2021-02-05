@@ -273,7 +273,6 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     		condizionePerRicercaSkill = "false";
         }
     	
-
        
     if(salarioMedio != -1) {	
 
@@ -299,7 +298,6 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         
         daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+") GROUP BY cf, stelle HAVING (AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + ") "+ queryPerValutazioneMedia + "ORDER BY " + ordinamentoSelezionato;
         
-        System.out.println(daEseguire);
         
         ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
         
@@ -343,7 +341,6 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             
             daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+")GROUP BY cf, stelle " + queryPerValutazioneMedia +" ORDER BY " + ordinamentoSelezionato;
 
-            System.out.println(daEseguire);
                 
             ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
 

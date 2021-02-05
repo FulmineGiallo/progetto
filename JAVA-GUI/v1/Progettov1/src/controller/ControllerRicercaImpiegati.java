@@ -243,7 +243,8 @@ public class ControllerRicercaImpiegati {
     		break;
     	}
 
-    	
+    	nomeInserito = nomeInserito.substring(0,1).toUpperCase() + nomeInserito.substring(1);
+    	cognomeInserito = cognomeInserito.substring(0,1).toUpperCase() + cognomeInserito.substring(1);
     	nomeInserito="%" + nomeInserito + "%";
     	cognomeInserito="%" + cognomeInserito + "%";
     	

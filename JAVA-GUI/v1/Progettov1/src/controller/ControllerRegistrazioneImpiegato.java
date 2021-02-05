@@ -404,6 +404,10 @@ public class ControllerRegistrazioneImpiegato {
     }
     
     private void inizializzaNuovoImpiegato() {
+    	
+    	nome = nome.substring(0,1).toUpperCase() + nome.substring(1);
+    	cognome = cognome.substring(0,1).toUpperCase() + cognome.substring(1);
+    	
     	nuovoImpiegato.setNome(nome);
     	nuovoImpiegato.setCognome(cognome);
     	nuovoImpiegato.setCF(codiceFiscale);
