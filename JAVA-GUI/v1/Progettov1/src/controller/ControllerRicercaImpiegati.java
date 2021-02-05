@@ -243,8 +243,16 @@ public class ControllerRicercaImpiegati {
     		break;
     	}
 
-    	nomeInserito = nomeInserito.substring(0,1).toUpperCase() + nomeInserito.substring(1);
-    	cognomeInserito = cognomeInserito.substring(0,1).toUpperCase() + cognomeInserito.substring(1);
+    	if(nomeInserito.length()!=0) {
+    		nomeInserito = nomeInserito.substring(0,1).toUpperCase() + nomeInserito.substring(1);
+    	}
+    	
+    	if(cognomeInserito.length() != 0) {
+    		cognomeInserito = cognomeInserito.substring(0,1).toUpperCase() + cognomeInserito.substring(1);
+    	}
+    	
+    	System.out.println(nomeInserito + cognomeInserito);
+    	
     	nomeInserito="%" + nomeInserito + "%";
     	cognomeInserito="%" + cognomeInserito + "%";
     	
