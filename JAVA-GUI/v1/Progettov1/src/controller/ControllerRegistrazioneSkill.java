@@ -82,7 +82,7 @@ public class ControllerRegistrazioneSkill {
     @FXML private Button 			ConfermaButton;
     
     private Stage popup;
-    private TitoloDao titoloDAO;
+    private TitoloDao titoloDao;
     
     private String tipoSkill;
     private String descrizioneSkill;
@@ -132,8 +132,8 @@ public class ControllerRegistrazioneSkill {
     	DescrizioneTA.setPromptText("* " + DescrizioneTAPrompt);
     	
     	try {
-            titoloDAO = new TitoloDao(connection);
-            TitoloComboBox.setItems(titoloDAO.titoliList());
+            titoloDao = new TitoloDao(connection);
+            TitoloComboBox.setItems(titoloDao.titoliList());
             TitoloComboBox.getSelectionModel().select(0);
             
             TitoloComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {

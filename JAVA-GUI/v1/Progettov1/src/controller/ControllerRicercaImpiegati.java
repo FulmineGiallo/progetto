@@ -137,7 +137,6 @@ public class ControllerRicercaImpiegati {
     TitoloDaoInterface titoloDao;
     ProgettoDaoInterface progettoDao;
     SkillDaoInterface SkillDAO;
-    TitoloDaoInterface titoloDAO;
 	ComuneDaoInterface comuneNacitaDao;
 	ProgettoImpiegatoDaoInterface progettoImpiegatoDao;
     
@@ -322,10 +321,10 @@ public class ControllerRicercaImpiegati {
                 
             	try
                 {
-                    titoloDAO = new TitoloDao(connection);
+                    titoloDao = new TitoloDao(connection);
                     SkillDAO = new SkillDao(connection);
                     
-                    SkillComboBox.setItems(titoloDAO.titoliListImpiegato(infoImpiegato));
+                    SkillComboBox.setItems(titoloDao.titoliListImpiegato(infoImpiegato));
 
 
                     
