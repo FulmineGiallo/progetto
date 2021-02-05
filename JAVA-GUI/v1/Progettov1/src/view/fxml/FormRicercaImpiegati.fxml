@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -100,7 +101,7 @@
                                                 </GridPane>
                                                 <HBox fx:id="SalarioMedioBox" alignment="CENTER_LEFT" spacing="10.0">
                                                    <children>
-                                                      <Label fx:id="SalarioMedioLabel" prefWidth="120.0" styleClass="LabelGrande" text="Salario medio" />
+                                                      <Label fx:id="SalarioMedioLabel" prefWidth="151.0" styleClass="LabelGrande" text="Salario medio" />
                                                       <TextField fx:id="SalarioMedioTF" HBox.hgrow="ALWAYS">
                                                          <styleClass>
                                                             <String fx:value="TextField" />
@@ -111,7 +112,7 @@
                                                 </HBox>
                                                 <HBox fx:id="NomeBox" alignment="CENTER_LEFT" spacing="10.0">
                                                    <children>
-                                                      <Label fx:id="NomeLabel" prefWidth="120.0" styleClass="LabelGrande" text="Nome" />
+                                                      <Label fx:id="NomeLabel" prefWidth="151.0" styleClass="LabelGrande" text="Nome" />
                                                       <TextField fx:id="NomeTF" HBox.hgrow="ALWAYS">
                                                          <styleClass>
                                                             <String fx:value="TextField" />
@@ -122,13 +123,19 @@
                                                 </HBox>
                                                 <HBox fx:id="CognomeBox" alignment="CENTER_LEFT" spacing="10.0">
                                                    <children>
-                                                      <Label fx:id="CognomeLabel" prefWidth="120.0" styleClass="LabelGrande" text="Cognome" />
+                                                      <Label fx:id="CognomeLabel" prefWidth="151.0" styleClass="LabelGrande" text="Cognome" />
                                                       <TextField fx:id="CognomeTF" HBox.hgrow="ALWAYS">
                                                          <styleClass>
                                                             <String fx:value="TextField" />
                                                             <String fx:value="LabelPiccola" />
                                                          </styleClass>
                                                       </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox fx:id="ValutazioneMediaBox" alignment="CENTER_LEFT" spacing="10.0">
+                                                   <children>
+                                                      <Label fx:id="ValutazioneMediaLabel" styleClass="LabelGrande" text="Valutazione media" />
+                                                      <Slider fx:id="ValutazioneMediaSlider" majorTickUnit="1.0" max="5.0" minorTickCount="5" showTickLabels="true" showTickMarks="true" styleClass="Slider" HBox.hgrow="ALWAYS" />
                                                    </children>
                                                 </HBox>
                                              </children>

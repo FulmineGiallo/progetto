@@ -2,6 +2,9 @@ package utilities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+
+import model.Ambito;
 
 public class MetodiComuni {
 	
@@ -103,5 +106,25 @@ public class MetodiComuni {
 		}
 		
 		return "";
+	}
+	
+	public String ambitiToString(List<Ambito> listaAmbiti) {
+		if (listaAmbiti != null) {
+			if (!listaAmbiti.isEmpty()) {
+				int elenco = 0;
+				String ambitiString = "";
+				
+				for (Ambito a : listaAmbiti) {
+					elenco++;
+					ambitiString = ambitiString + elenco + ". " + a.toString();
+					if (listaAmbiti.size() != elenco)
+						ambitiString = ambitiString + "\n";
+				}
+				
+				return ambitiString;
+			}
+		}
+		
+		return "Nessun ambito specificato";
 	}
 }

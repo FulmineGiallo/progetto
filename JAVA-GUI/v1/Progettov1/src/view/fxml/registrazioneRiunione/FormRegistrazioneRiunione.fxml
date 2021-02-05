@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RegistrazioneRiunione" minWidth="850.0" prefHeight="900.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneRiunione">
+<AnchorPane fx:id="RegistrazioneRiunione" prefHeight="650.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneRiunione">
    <children>
       <HBox fx:id="IstruzioniBox" alignment="CENTER" layoutX="100.0" layoutY="10.0" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -180,7 +180,7 @@
                                                       <ToggleGroup fx:id="ModalitaRiunioneGroup" />
                                                    </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton fx:id="ModalitaRiunioneRB2" mnemonicParsing="false" onAction="#visualizzaFormRiunioneTelematica" text="Riunione su piattaforma telematica" toggleGroup="$ModalitaRiunioneGroup">
+                                                <RadioButton fx:id="ModalitaRiunioneRB2" mnemonicParsing="false" onAction="#visualizzaFormRiunioneTelematica" text="Riunione in modalità telematica" toggleGroup="$ModalitaRiunioneGroup">
                                                    <styleClass>
                                                       <String fx:value="RadioButton" />
                                                       <String fx:value="LabelPiccola" />

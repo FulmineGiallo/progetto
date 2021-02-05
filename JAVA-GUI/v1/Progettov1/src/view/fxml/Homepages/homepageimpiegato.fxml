@@ -118,7 +118,7 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="DescrizioneProgettoBox" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AnchorPane fx:id="DescrizioneProgettoBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <AnchorPane fx:id="DescrizioneProgettoPane" styleClass="DescrizionePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                      <children>
@@ -229,12 +229,12 @@
                                                 <HBox fx:id="AmbitiProgettoBox" alignment="CENTER_LEFT" spacing="10.0">
                                                    <children>
                                                       <Label fx:id="AmbitiProgettoLabel" minWidth="150.0" styleClass="LabelGrande" text="Ambiti:" />
-                                                      <ListView fx:id="AmbitiProgettoLV" maxHeight="150.0" minHeight="120.0" style="-fx-border-width: 0 0 2 0; -fx-background-color: -fx-secondocolore;" HBox.hgrow="ALWAYS">
+                                                      <TextArea fx:id="AmbitiProgettoTA" maxHeight="80.0" minHeight="80.0" prefHeight="80.0" HBox.hgrow="ALWAYS">
                                                          <styleClass>
-                                                            <String fx:value="ListView" />
+                                                            <String fx:value="TextArea" />
                                                             <String fx:value="LabelPiccola" />
                                                          </styleClass>
-                                                      </ListView>
+                                                      </TextArea>
                                                    </children>
                                                 </HBox>
                                                 <VBox fx:id="NoteProgettoBox">

@@ -98,7 +98,7 @@ public class ControllerHomePageImpiegato {
     
     @FXML  private HBox 				AmbitiProgettoBox;
     @FXML  private Label 				AmbitiProgettoLabel;
-    @FXML  private ListView<Ambito> 	AmbitiProgettoLV;
+    @FXML  private TextArea 			AmbitiProgettoTA;
     
     @FXML  private VBox 				NoteProgettoBox;
     @FXML  private Label 				NoteProgettoLabel;
@@ -450,14 +450,8 @@ public class ControllerHomePageImpiegato {
 			}
 			
 			DataDiScadenzaProgettoTF.setText(String.valueOf(progettoSelezionato.getScadenza()));
-			
-			TipologiaProgettoTF		.setText(progettoSelezionato.getTipoProgetto().toString());
-			
-			if(progettoSelezionato.getListaAmbiti().isEmpty()) {
-				AmbitiProgettoLV.getItems().add(new Ambito("Nessun ambito specificato", false));
-			} else {
-				AmbitiProgettoLV.setItems(progettoSelezionato.getListaAmbiti());
-			}
+			TipologiaProgettoTF		.setText(progettoSelezionato.getTipoProgetto().toString());			
+			AmbitiProgettoTA		.setText(utils.ambitiToString(progettoSelezionato.getListaAmbiti()));
 			
 			if (progettoSelezionato.getProjectManager() == impiegato) {
 				ProjectManagerBox.setVisible(true);
