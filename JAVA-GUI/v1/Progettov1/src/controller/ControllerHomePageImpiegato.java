@@ -390,13 +390,39 @@ public class ControllerHomePageImpiegato {
         }
 
     }
+    void gestioneRiunioneBox(boolean state)
+    {
+        DescrizioneRiunioneTA.setEditable(state);
+        OrarioDiInizioRiunioneTF.setEditable(state);
+        OrarioDiFineRiunioneTF.setEditable(state);
+        TitoloRiunioneTF.setEditable(state);
+        TipologiaRiunioneTF.setEditable(state);
+        SedeTF.setEditable(state);
+        NomeStanzaTF.setEditable(state);
+        PianoStanzaTF.setEditable(state);
+        NoteRiunioneTA.setEditable(state);
+    }
 
-    @FXML void modificaInformazioniRiunione(ActionEvent event) { // >> DA FARE
-
+    @FXML void modificaInformazioniRiunione(ActionEvent event)
+    {
+        gestioneRiunioneBox(true);
+        SalvaModificheRiunioneButton.setVisible(true);
     }
     
-    @FXML private void salvaModificheRiunione(ActionEvent event) { // >> DA FARE
+    @FXML private void salvaModificheRiunione(ActionEvent event)
+    {
+        gestioneRiunioneBox(false);
+        String titoloRiunione;
+        String descrizioneRiunione;
+        String sedeRiunione;
+        String nomeStanza;
+        String noteRiunione;
+        LocalDate orarioInizio;
+        LocalDate orarioFine;
 
+
+
+        SalvaModificheRiunioneButton.setVisible(false);
     }
     
     @FXML private void visualizzaProgetti(MouseEvent event) {
@@ -418,7 +444,8 @@ public class ControllerHomePageImpiegato {
 		}
     }
 
-    @FXML void visualizzaInformazioniProgetto(MouseEvent event) {
+    @FXML void visualizzaInformazioniProgetto(MouseEvent event)
+    {
         if (!ListaProgettiLV.getItems().contains(progettoIniziale)) {
         	
 			IstruzioniBox		  .setVisible(false);
@@ -495,7 +522,7 @@ public class ControllerHomePageImpiegato {
 				SedeTF.setText(infoRiunione.getSede());
 				NomeStanzaTF.setText(infoRiunione.getNomeStanza());
 				PianoStanzaTF.setText(infoRiunione.getPiano());
-			} else if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in modalità telematica")){
+			} else if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in modalitï¿½ telematica")){
 				
 				RiunioneTelematica infoRiunione = (RiunioneTelematica)ListaRiunioniLV.getSelectionModel().getSelectedItem();
 				setCampiRiunione(infoRiunione);
