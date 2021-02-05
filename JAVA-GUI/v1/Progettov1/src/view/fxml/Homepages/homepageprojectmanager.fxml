@@ -75,7 +75,11 @@
                <children>
                   <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label fx:id="IstruzioniLabel" styleClass="IstruzioniLabel" text="Clicca su un impiegato per&#10;visualizzarne le informazioni" textAlignment="CENTER" />
+                        <Label fx:id="IstruzioniLabel" text="Clicca su un impiegato per&#10;visualizzarne le informazioni" textAlignment="CENTER">
+                           <styleClass>
+                              <String fx:value="IstruzioniLabel" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass></Label>
                      </children>
                   </HBox>
                </children>
@@ -237,14 +241,14 @@
                                  <children>
                                     <HBox fx:id="BoxButton" alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Rimuovi dal progetto" wrapText="true">
+                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" prefHeight="65.0" text="Rimuovi dal progetto" wrapText="true">
                                              <styleClass>
-                                                <String fx:value="Button" />
+                                                <String fx:value="DescrizioneProgettoImpiegatoButton" />
                                                 <String fx:value="LabelGrande" />
                                              </styleClass></Button>
-                                          <Button fx:id="NuovaValutazioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onMouseClicked="#aggiungiValutazione" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Aggiungi una valutazione">
+                                          <Button fx:id="NuovaValutazioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onMouseClicked="#aggiungiValutazione" prefHeight="65.0" text="Aggiungi una valutazione">
                                              <styleClass>
-                                                <String fx:value="Button" />
+                                                <String fx:value="DescrizioneProgettoImpiegatoButton" />
                                                 <String fx:value="LabelGrande" />
                                              </styleClass>
                                           </Button>
