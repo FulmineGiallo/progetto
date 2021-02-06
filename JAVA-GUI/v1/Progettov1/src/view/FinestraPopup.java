@@ -101,9 +101,9 @@ public class FinestraPopup {
         controllerEliminazioneImpiegatoProgetto.setProgetto(progettoImpiegatoDaEliminare);
         controllerEliminazioneImpiegatoProgetto.setControllerHomePageProgetto(controllerHomePageProgetto);
         
-        controllerEliminazioneImpiegatoProgetto.inizializza(null, "Sei sicuro di voler eliminare " + impiegatoDaEliminare.toString() 		   +
-        								   " dal progetto "					+ progettoImpiegatoDaEliminare.getTitolo() +
-        								   "?", null);
+        controllerEliminazioneImpiegatoProgetto.inizializza(null, "Sei sicuro di voler eliminare " + impiegatoDaEliminare.toString() 		   		+
+        								   						  " dal progetto \""					+ progettoImpiegatoDaEliminare.getTitolo() 	+
+        								   						  "\"?", null);
     }
 	
 	//Inizializzazione della finestra popup per confermare l'eliminazione di un impiegato dalla lista di partecipanti ad una riunione
@@ -116,8 +116,8 @@ public class FinestraPopup {
         controllerEliminazioneImpiegatoRiunione.setController(controllerHomePageOrganizzatore);
         
         controllerEliminazioneImpiegatoRiunione.inizializza(null, "Sei sicuro di voler eliminare " + impiegatoDaEliminare.toString() 		  +
-				   												  " dalla riunione "			   + riunioneImpiegatoDaEliminare.getTitolo() +
-				   												  "?", null);
+				   												  " dalla riunione \""			   + riunioneImpiegatoDaEliminare.getTitolo() +
+				   												  "\"?", null);
     }
 	
 	//Inizializzazione della finestra popup per confermare l'uscita dall'area personale
