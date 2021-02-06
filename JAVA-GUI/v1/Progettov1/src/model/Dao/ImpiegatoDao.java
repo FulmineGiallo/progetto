@@ -394,7 +394,7 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
             Impiegato impiegato = new Impiegato();
         
-            String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan FROM((impiegato AS i LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (true ";
+            String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(quantita) AS salariomedio FROM(((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (true ";
             
             for (String s:skillSelezionate) {
             	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
