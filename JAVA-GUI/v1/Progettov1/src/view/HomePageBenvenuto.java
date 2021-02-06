@@ -30,7 +30,7 @@ public class HomePageBenvenuto
 			controllerHomePageBenvenuto.setStage(window, popup);
 			
 			window.setTitle("Home Page");
-			window.setFullScreen(true);
+			window.setFullScreen(false);
 			window.setMaximized(true);
 			window.centerOnScreen();
 			window.setMinWidth(1100.0);

@@ -36,6 +36,7 @@ public class HomePageValutazioni {
 			
 			window.setTitle("Le tue valutazioni");
 			window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 			window.setMaximized(true);
 			window.centerOnScreen();
 			window.setMinWidth(1100.0);

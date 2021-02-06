@@ -40,6 +40,7 @@ public class HomePageOrganizzatore {
 			window.setTitle("Home page \"" + riunione.getTitolo() + "\"");
 			
 			window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 			window.setMaximized(true);
 			window.setMinWidth(850.0);
 			window.setMinHeight(650.0);

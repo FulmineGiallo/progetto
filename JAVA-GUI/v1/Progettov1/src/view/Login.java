@@ -30,6 +30,7 @@ public class Login
 			
 			window.setTitle("Login");
 			window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 			window.setMaximized(true);
 			window.centerOnScreen();
 			window.setMinHeight(550.0);

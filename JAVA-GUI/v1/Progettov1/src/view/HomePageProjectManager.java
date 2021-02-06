@@ -43,6 +43,7 @@ public class HomePageProjectManager
 			
 			window.setMaximized(true);
 			window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 			window.setMinWidth(850.0);
 			window.setMinHeight(650.0);
 			window.centerOnScreen();

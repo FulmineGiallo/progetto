@@ -36,6 +36,7 @@ public class HomePageImpiegato
 			
 			window.setTitle("La tua homepage");
 			window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 			window.setMaximized(true);
 			window.centerOnScreen();
 			window.setMinHeight(650.0);

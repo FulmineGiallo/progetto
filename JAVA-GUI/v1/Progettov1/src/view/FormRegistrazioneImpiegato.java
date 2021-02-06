@@ -32,6 +32,7 @@ public class FormRegistrazioneImpiegato {
 			
 			window.setTitle("Registrazione di un nuovo impiegato");
 			window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 			window.setMaximized(true);
 			window.centerOnScreen();
 			window.setMinWidth(850.0);

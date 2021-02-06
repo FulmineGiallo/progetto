@@ -26,6 +26,8 @@ public class FormRegistrazioneProgetto
         controllerRegistrazioneProgetto.inizializza(projectManager);
         
         window.setTitle("Registrazione nuovo progetto");
+        window.setFullScreen(true);
+		window.setFullScreenExitHint("");
         window.setMinWidth(850.0);
         window.setMinHeight(650.0);
         window.setMaximized(true);

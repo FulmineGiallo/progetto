@@ -30,6 +30,8 @@ public class FormRegistrazioneRiunione {
 			controllerRegistrazioneRiunione.inizializza(organizzatore, progetto);
 	        
 	        window.setTitle("Registrazione nuova riunione");
+	        window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 	        window.setWidth(850.0);
 	        window.setMinWidth(850.0);
 	        window.setHeight(450.0);

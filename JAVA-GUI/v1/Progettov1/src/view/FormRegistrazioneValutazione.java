@@ -28,6 +28,8 @@ public class FormRegistrazioneValutazione {
 			controllerRegistrazioneValutazione = loader.getController();
 	        
 	        window.setTitle(titoloFinestra);
+	        window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 	        window.setWidth(850.0);
 	        window.setMinWidth(850.0);
 	        window.setHeight(450.0);
