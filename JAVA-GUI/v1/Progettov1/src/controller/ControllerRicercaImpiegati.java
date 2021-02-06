@@ -321,7 +321,10 @@ public class ControllerRicercaImpiegati {
     	}
     	
     	
-    	if (!(SalarioMedioTF.getText().isBlank() && ordinamento.contains("salariomedio"))) {
+    	
+    	
+    	
+    	
     		
     		listaImpiegati.clear();
     		
@@ -370,7 +373,7 @@ public class ControllerRicercaImpiegati {
 			
 			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
 			updateInfoImpiegato();
-		}
+		
     }
     
     public void annullaOperazione() throws Exception {
