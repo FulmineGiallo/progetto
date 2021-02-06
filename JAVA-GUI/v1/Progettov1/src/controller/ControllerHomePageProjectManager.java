@@ -3,16 +3,13 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -21,7 +18,6 @@ import model.Connection.DBConnection;
 import model.Dao.ComuneDao;
 import model.Dao.ProgettoDao;
 import model.Dao.SkillDao;
-import model.Dao.TitoloDao;
 import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
@@ -31,17 +27,15 @@ import utilities.MetodiComuni;
 import model.Impiegato;
 import model.Progetto;
 import model.Skill;
-import model.Titolo;
 import view.FinestraAggiungiPartecipanteAlProgetto;
 import view.FinestraPopup;
-import view.FinestraRimuoviImpiegatoDalProgetto;
 import view.FormRegistrazioneRiunione;
 import view.FormRegistrazioneValutazione;
 import view.HomePageImpiegato;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Locale;
 
 public class ControllerHomePageProjectManager
 {
@@ -272,6 +266,10 @@ public class ControllerHomePageProjectManager
 
         lista = progettoDao.getPartecipanti(progetto);
         ListaPartecipantiLV.setItems(lista);
+        CallableStatement diminuisciSalarioProgetto = connection.prepareCall("CALL outsalarioprogetto(?)");
+        Impiegato impiegatoSalario = ListaPartecipantiLV.getSelectionModel().getSelectedItem();
+        diminuisciSalarioProgetto.setString(1, impiegatoSalario.getCF());
+        diminuisciSalarioProgetto.execute();
     }
     
     @FXML
