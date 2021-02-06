@@ -382,11 +382,16 @@ public class ControllerHomePageImpiegato {
 		{
             ListaProgettiLV.getSelectionModel().getSelectedItem().setDescrizione(DescrizioneProgettoTA.getText());
             datainizio = LocalDate.parse(DataDiInizioProgettoTF.getText());
-            dataFine = LocalDate.parse(DataDiFineProgettoTF.getText());
             dataScadenza = LocalDate.parse(DataDiScadenzaProgettoTF.getText());
             String note = NoteProgettoTA.getText();
             ListaProgettiLV.getSelectionModel().getSelectedItem().setDataInizio(datainizio);
-            ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(dataFine);
+            if(DataDiFineProgettoTF.getText().equals("Ancora da consegnare"))
+                ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(null);
+            else
+            {
+                dataFine = LocalDate.parse(DataDiFineProgettoTF.getText());
+                ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(dataFine);
+            }
             ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(dataScadenza);
             ListaProgettiLV.getSelectionModel().getSelectedItem().setNote(note);
             progettoDao.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
