@@ -26,8 +26,9 @@ public class SalarioDao implements SalarioDaoInterface
         int salarioImpiegato = 0;
         salarioMedio.setString(1, impiegato.getCF());
         ResultSet r = salarioMedio.executeQuery();
-        r.next();
-        salarioImpiegato = r.getInt("avg");
+        while(r.next()) {
+            salarioImpiegato = r.getInt("avg");
+        }
         return salarioImpiegato;
     }
 
