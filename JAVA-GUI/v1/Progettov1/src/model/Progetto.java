@@ -15,7 +15,6 @@ public class Progetto {
     private LocalDate scadenza;
     private Tipologia tipoProgetto;
     private ObservableList<Ambito> listaAmbiti;
-    private List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti = new ArrayList<>();
 	private String note;
 	
     private String ruolo;
@@ -113,14 +112,7 @@ public class Progetto {
     public void setNote(String note) {
         this.note = note;
     }
-	
-	public List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> getPartecipanti() {
-        return partecipanti;
-    }
 
-    public void setPartecipanti(List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti) {
-        this.partecipanti = partecipanti;
-    }
 
     @Override
     public String toString() {
