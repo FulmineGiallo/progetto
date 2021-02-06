@@ -21,8 +21,10 @@ import javafx.stage.Stage;
 import model.Connection.DBConnection;
 import model.Dao.ProgettoDao;
 import model.Dao.RiunioneDao;
+import model.Dao.SalarioDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.RiunioneDaoInterface;
+import model.DaoInterface.SalarioDaoInterface;
 import utilities.MetodiComuni;
 import model.Impiegato;
 import model.Progetto;
@@ -235,9 +237,11 @@ public class ControllerHomePageImpiegato {
 		IstruzioniBox.setVisible(true);
         DescrizioneProgettoBox.setVisible(false);
         SalvaModificheRiunioneButton.setVisible(false);
-        SalarioLabel.setText("Calcolare");
         /*Richiamare Dao Salario */
-        
+        int salario;
+        SalarioDaoInterface salarioMedio = new SalarioDao(connection);
+        salario = salarioMedio.salarioMedioImpiegato(impiegato);
+        SalarioLabel.setText(String.valueOf(salario));
         ListaRiunioniLabel.setStyle("-fx-text-fill: derive(white, -50%);");
     }
 
@@ -306,7 +310,7 @@ public class ControllerHomePageImpiegato {
 				
 				int update;
 				update=riunioneDao.UpdateAssenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
-				
+
 				if(update!=0)
 					System.out.println("assenza salvata");
 				finestraConferma = new FinestraPopup();
