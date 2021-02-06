@@ -3,11 +3,10 @@ package view;
 import javafx.application.Application;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Impiegato;
 
 public class Driver extends Application
 {
-	HomePageBenvenuto homePageBenvenuto = new HomePageBenvenuto();
+	private HomePageBenvenuto homePageBenvenuto = new HomePageBenvenuto();
 	
     @Override
     public void start(Stage window) {
@@ -16,7 +15,7 @@ public class Driver extends Application
         try {
             homePageBenvenuto.start(window, popup);
         } catch (Exception e) {
-        	e.printStackTrace();
+        	System.err.println("Impossibile caricare l'applicazione");
         }
     }
     
