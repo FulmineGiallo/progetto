@@ -13,9 +13,10 @@ import model.Riunione;
 
 public class FormRegistrazioneValutazione {
 
-	ControllerRegistrazioneValutazione controllerRegistrazioneValutazione;
+	private ControllerRegistrazioneValutazione 	controllerRegistrazioneValutazione;
+	private FinestraPopup						finestraErrore;
 	
-	private void caricaStage(Stage window, String titoloFinestra) {
+	private void caricaStage(Stage window, Stage popup, String titoloFinestra) {
 		FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneValutazione/FormRegistrazioneValutazione.fxml"));
         Parent root;
 		try {
@@ -38,19 +39,27 @@ public class FormRegistrazioneValutazione {
 	        window.centerOnScreen();
 	        
 	        window.show();
-		} catch (IOException erroreCaricamento) {}
+		} catch (IOException erroreCaricamento) {
+			finestraErrore = new FinestraPopup();
+			
+			try {
+				finestraErrore.start(popup, "Impossibile caricare la finestra di registrazione di una nuova valutazione", erroreCaricamento);
+			} catch (Exception e) {
+				System.err.println("Impossibile caricare la finestra di registrazione di una nuova valutazione");
+			}
+		}
 	}
 	
 	//Caricamento della finestra per l'inserimento di una valutazione di progetto
     public void start(Stage window, Stage popup, Impiegato recensito, Progetto progetto) {
-    	caricaStage(window, "Nuova valutazione per " + recensito.toString());
+    	caricaStage(window, popup, "Nuova valutazione per " + recensito.toString());
 		controllerRegistrazioneValutazione.setStage(window, popup);
 		controllerRegistrazioneValutazione.inizializza(recensito, progetto);
     }
     
     //Caricamento della finestra per l'inserimento di una valutazione di riunione
     public void start(Stage window, Stage popup, Impiegato recensito, Riunione riunione) {
-    	caricaStage(window, "Nuova valutazione per " + recensito.toString());
+    	caricaStage(window, popup, "Nuova valutazione per " + recensito.toString());
 		controllerRegistrazioneValutazione.setStage(window, popup);
 		controllerRegistrazioneValutazione.inizializza(recensito, riunione);
     }
