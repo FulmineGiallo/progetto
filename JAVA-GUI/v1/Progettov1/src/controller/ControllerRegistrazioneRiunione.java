@@ -260,12 +260,12 @@ public class ControllerRegistrazioneRiunione {
         switch(utils.controlloData(DataDiInizioDP.getValue(), dataDiOggi)) {
 	    	case 1:
 	    		checkDataInizio = false;
-	    		DataDiInizioErrorLabel.setText("Questo campo è obbligatorio");
+	    		DataDiInizioErrorLabel.setText("Questo campo ï¿½ obbligatorio");
 	    		DataDiFineDP.setDisable(true);
 	        	break;
 	    	case 3:
 	    		checkDataInizio = false;
-	    		DataDiInizioErrorLabel.setText("La data di inizio non può essere precedente a quella di oggi");
+	    		DataDiInizioErrorLabel.setText("La data di inizio non puï¿½ essere precedente a quella di oggi");
 	    		DataDiFineDP.setValue(null);
 	    		DataDiFineDP.setDisable(true);
 	    		break;
@@ -291,16 +291,16 @@ public class ControllerRegistrazioneRiunione {
             switch(utils.controlloData(DataDiFineDP.getValue(), dataSupportata)) {
 		    	case 1:
 		    		checkDataFine = false;
-		    		DataDiFineErrorLabel.setText("Questo campo è obbligatorio");
+		    		DataDiFineErrorLabel.setText("Questo campo ï¿½ obbligatorio");
 		        	break;
 		    	case 2:
 		    		checkDataFine = false;
-		    		DataDiFineErrorLabel.setText("La riunione non può durare più di un giorno");
+		    		DataDiFineErrorLabel.setText("La riunione non puï¿½ durare piï¿½ di un giorno");
 		    		break;
 				default:
 					if(DataDiFineDP.getValue().isBefore(DataDiInizioDP.getValue())){
 			    		checkDataFine = false;
-			    		DataDiFineErrorLabel.setText("La data di fine non può essere\nprecedente a quella di inizio");
+			    		DataDiFineErrorLabel.setText("La data di fine non puï¿½ essere\nprecedente a quella di inizio");
 					} else
 						checkDataFine = true;
             }
@@ -326,11 +326,11 @@ public class ControllerRegistrazioneRiunione {
     			{
     				case 1:
     					checkOrarioDiFine = false;
-    					DataDiFineErrorLabel.setText("Il valore delle ore inserito non è corretto");
+    					DataDiFineErrorLabel.setText("Il valore delle ore inserito non ï¿½ corretto");
     					break;
     				case 2:
     					checkOrarioDiFine = false;
-    					DataDiFineErrorLabel.setText("Il valore dei minuti inserito non è corretto");
+    					DataDiFineErrorLabel.setText("Il valore dei minuti inserito non ï¿½ corretto");
     					break;
     				case 3:
     					checkOrarioDiFine = false;
@@ -356,7 +356,7 @@ public class ControllerRegistrazioneRiunione {
 						break;
 					default:
 						checkOrarioDiFine = false;
-						DataDiFineErrorLabel.setText("La riunione non può durare più di un giorno");
+						DataDiFineErrorLabel.setText("La riunione non puï¿½ durare piï¿½ di un giorno");
     			}
     		}
     	} else {
@@ -380,7 +380,7 @@ public class ControllerRegistrazioneRiunione {
     	switch(utils.controlloStringa(SedeTF.getText(), "")) {
     		case 1:
     			checkSede = false;
-    			SedeErrorLabel.setText("Questo campo è obbligatorio");
+    			SedeErrorLabel.setText("Questo campo ï¿½ obbligatorio");
     			break;
 			default:
 				checkSede = true;
@@ -389,7 +389,7 @@ public class ControllerRegistrazioneRiunione {
     	switch(utils.controlloStringa(NomeStanzaTF.getText(), "")) {
 			case 1:
 				checkNomeStanza = false;
-				NomeStanzaErrorLabel.setText("Questo campo è obbligatorio");
+				NomeStanzaErrorLabel.setText("Questo campo ï¿½ obbligatorio");
 				break;
 			default:
 				checkNomeStanza = true;
@@ -398,11 +398,11 @@ public class ControllerRegistrazioneRiunione {
     	switch(utils.controlloStringa(PianoStanzaTF.getText(), "[-]{0,1}[0-9]+")) {
 	    	case 1:
 	    		checkPianoStanza = false;
-	    		PianoStanzaErrorLabel.setText("Questo campo è obbligatorio");
+	    		PianoStanzaErrorLabel.setText("Questo campo ï¿½ obbligatorio");
 	    		break;
 	    	case 2:
 	    		checkPianoStanza = false;
-	    		PianoStanzaErrorLabel.setText("Il piano può essere composto al massimo da due cifre.\n" +
+	    		PianoStanzaErrorLabel.setText("Il piano puï¿½ essere composto al massimo da due cifre.\n" +
 	    							  		  "Per indicare un piano sotterraneo, usa il -");
 	    		break;
 	    	default:
@@ -425,7 +425,7 @@ public class ControllerRegistrazioneRiunione {
     	switch(utils.controlloStringa(NomePiattaformaTF.getText(), "")) {
 	    	case 1:
 	    		checkNomePiattaforma = false;
-	    		NomePiattaformaErrorLabel.setText("Questo campo è obbligatorio");
+	    		NomePiattaformaErrorLabel.setText("Questo campo ï¿½ obbligatorio");
 	    		break;
 	    	default:
 	    		checkNomePiattaforma = true;
@@ -434,7 +434,7 @@ public class ControllerRegistrazioneRiunione {
     	switch(utils.controlloPassword(CodiceAccessoPF.getText(), 6)) {
     		case 1:
     			checkCodiceAccesso = false;
-    			CodiceAccessoErrorLabel.setText("Questo campo è obbligatorio");
+    			CodiceAccessoErrorLabel.setText("Questo campo ï¿½ obbligatorio");
     			break;
     		case 2:
     			checkCodiceAccesso = false;
@@ -463,14 +463,14 @@ public class ControllerRegistrazioneRiunione {
     	else if(FormRiunioneTelematica.isVisible())
     		checkFormRiunioneTelematica = controlloCampiRiunioneTelematica();
     	
-    	switch(utils.controlloStringa(TitoloTF.getText(), "[A-Za-z0-9\s-]+")) {
+    	switch(utils.controlloStringa(TitoloTF.getText(), "[A-Za-z0-9-]+")) {
     		case 1:
     			checkTitolo = false;
-    			TitoloErrorLabel.setText("Questo campo è obbligatorio");
+    			TitoloErrorLabel.setText("Questo campo ï¿½ obbligatorio");
     			break;
     		case 2:
     			checkTitolo = false;
-    			TitoloErrorLabel.setText("Il titolo può contenere solo caratteri alfanumerici");
+    			TitoloErrorLabel.setText("Il titolo puï¿½ contenere solo caratteri alfanumerici");
 				break;
     		default:
     			checkTitolo = true;
@@ -512,7 +512,7 @@ public class ControllerRegistrazioneRiunione {
 				finestraConferma = new FinestraPopup();
                 try {
                 	homePageOrganizzatore.start(window, popup);
-					finestraConferma .start(popup, "La riunione è stata registrata correttamente nel database.");
+					finestraConferma .start(popup, "La riunione ï¿½ stata registrata correttamente nel database.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
