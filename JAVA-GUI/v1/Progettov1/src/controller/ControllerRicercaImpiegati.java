@@ -22,17 +22,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Dao.*;
 import model.Impiegato;
 import model.Progetto;
 import model.Ruolo;
 import model.Titolo;
 import model.Connection.DBConnection;
-import model.Dao.ComuneDao;
-import model.Dao.ImpiegatoDao;
-import model.Dao.ProgettoDao;
-import model.Dao.RuoloDao;
-import model.Dao.SkillDao;
-import model.Dao.TitoloDao;
+import model.Dao.TitoloDAO;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
@@ -156,7 +152,7 @@ public class ControllerRicercaImpiegati {
             connection = dbConnection.getConnection();
             impiegatoDao = new ImpiegatoDao(connection);
             ruoliDao = new RuoloDao(connection);
-            titoloDao = new TitoloDao(connection);
+            titoloDao = new TitoloDAO(connection);
             progettoDao = new ProgettoDao(connection);
             comuneNacitaDao = new ComuneDao(connection);
             progettoImpiegatoDao = new model.Dao.progettoImpiegatoDao(connection);
@@ -320,7 +316,7 @@ public class ControllerRicercaImpiegati {
                 
             	try
                 {
-                    titoloDao = new TitoloDao(connection);
+                    titoloDao = new TitoloDAO(connection);
                     SkillDAO = new SkillDao(connection);
                     
                     SkillComboBox.setItems(titoloDao.titoliListImpiegato(infoImpiegato));
