@@ -12,14 +12,13 @@ import model.Progetto;
 
 public class FormRegistrazioneRiunione {
 
-	ControllerRegistrazioneRiunione controllerRegistrazioneRiunione;
+	private ControllerRegistrazioneRiunione controllerRegistrazioneRiunione;
+	private FinestraPopup					finestraErrore;
 	
     public void start(Stage window, Stage popup, Impiegato organizzatore, Progetto progetto) {
-    	
-    	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneRiunione/FormRegistrazioneRiunione.fxml"));
-        Parent root;
 		try {
-			root = loader.load();
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/fxml/registrazioneRiunione/FormRegistrazioneRiunione.fxml"));
+			Parent root = loader.load();
 	        Scene scene = new Scene(root);
 	        
 			window.hide();
@@ -30,6 +29,8 @@ public class FormRegistrazioneRiunione {
 			controllerRegistrazioneRiunione.inizializza(organizzatore, progetto);
 	        
 	        window.setTitle("Registrazione nuova riunione");
+	        window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 	        window.setWidth(850.0);
 	        window.setMinWidth(850.0);
 	        window.setHeight(450.0);
@@ -39,14 +40,13 @@ public class FormRegistrazioneRiunione {
 	        
 	        window.show();
 		} catch (IOException erroreCaricamento) {
-			erroreCaricamento.printStackTrace();
-			/*FinestraPopup finestraErrore = new FinestraPopup();
+			finestraErrore = new FinestraPopup();
 			
 			try {
-				finestraErrore.start(popup, "Impossibile caricare la finestra", erroreCaricamento);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}*/
+				finestraErrore.start(popup, "Impossibile caricare la finestra di registazione di una nuova riunione", erroreCaricamento);
+			} catch (Exception e) {
+				System.err.println("Impossibile caricare la finestra di registrazione di una nuova riunione");
+			}
 		}
     }
 }

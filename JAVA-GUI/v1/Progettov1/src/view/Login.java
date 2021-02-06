@@ -12,11 +12,8 @@ import controller.ControllerLogin;
 
 public class Login
 {
-	ControllerLogin controllerLogin;
-
-    public Login() {
-
-    }
+	private ControllerLogin controllerLogin;
+	private FinestraPopup	finestraErrore;
     
     public void start(Stage window, Stage popup) {
     	try {
@@ -31,17 +28,23 @@ public class Login
 			controllerLogin = loader.getController();
 			controllerLogin.setStage(window, popup);
 			
-			//window.setTitle("Login");
-			window.setTitle(window.toString());
+			window.setTitle("Login");
+			window.setFullScreen(true);
+			window.setFullScreenExitHint("");
 			window.setMaximized(true);
 			window.centerOnScreen();
 			window.setMinHeight(550.0);
 			window.setMinWidth(850.0);
 			
 			window.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-			//inserire inizializzazione della finestraErrore
+    	} catch (IOException erroreCaricamento) {
+			finestraErrore = new FinestraPopup();
+			
+			try {
+				finestraErrore.start(popup, "Impossibile caricare la finestra di login", erroreCaricamento);
+			} catch (Exception e) {
+				System.err.println("Impossibile caricare la finestra di login");
+			}
 		}
         
     }

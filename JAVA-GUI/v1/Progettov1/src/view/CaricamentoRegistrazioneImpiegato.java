@@ -14,8 +14,8 @@ import controller.ControllerRegistrazioneImpiegato;
 
 public class CaricamentoRegistrazioneImpiegato {
 	
-	private ControllerCaricamentoRegistrazione controller;
-	//private HomePageBenvenuto homePageBenvenuto;
+	private ControllerCaricamentoRegistrazione	controller;
+	private FinestraPopup						finestraErrore;
 	private Impiegato nuovoImpiegato;
 	
 	public CaricamentoRegistrazioneImpiegato(Impiegato nuovoImpiegato) {
@@ -45,12 +45,14 @@ public class CaricamentoRegistrazioneImpiegato {
 			controller.setStage(window, popup);
 			controller.inizializza(nuovoImpiegato);
 
-		} catch (IOException e)
-		{
-			System.err.println("Impossibile caricare la finestra!");
-
-		} catch (Exception e) {
-			e.printStackTrace();
+        } catch (IOException erroreCaricamento) {
+			finestraErrore = new FinestraPopup();
+			
+			try {
+				finestraErrore.start(popup, "Impossibile caricare la finestra di caricamento", erroreCaricamento);
+			} catch (Exception e) {
+				System.err.println("Impossibile caricare la finestra di finestra di caricamento");
+			}
 		}
 	}
 }

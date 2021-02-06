@@ -223,16 +223,16 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
-                                    <HBox alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <HBox fx:id="ButtonBox" alignment="BOTTOM_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" onMouseClicked="#updateInfoBox" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Rimuovi dalla riunione" wrapText="true">
+                                          <Button fx:id="RimuoviImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#RimuoviImpiegato" onMouseClicked="#updateInfoBox" prefHeight="65.0" text="Rimuovi dalla riunione" wrapText="true">
                                              <styleClass>
-                                                <String fx:value="Button" />
+                                                <String fx:value="DescrizioneRiunioneImpiegatoButton" />
                                                 <String fx:value="LabelGrande" />
                                              </styleClass></Button>
-                                          <Button fx:id="NuovaValutazioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onMouseClicked="#aggiungiValutazione" prefHeight="65.0" style="-fx-background-color: -fx-quartocolore;" text="Aggiungi una valutazione">
+                                          <Button fx:id="NuovaValutazioneButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onMouseClicked="#aggiungiValutazione" prefHeight="65.0" text="Aggiungi una valutazione">
                                              <styleClass>
-                                                <String fx:value="Button" />
+                                                <String fx:value="DescrizioneRiunioneImpiegatoButton" />
                                                 <String fx:value="LabelGrande" />
                                              </styleClass>
                                           </Button>

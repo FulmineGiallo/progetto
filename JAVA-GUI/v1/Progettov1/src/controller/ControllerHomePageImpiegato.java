@@ -392,16 +392,10 @@ public class ControllerHomePageImpiegato {
         }
 
     }
-    void gestioneRiunioneBox(boolean state)
-    {
+    
+    void gestioneRiunioneBox(boolean state) {
         DescrizioneRiunioneTA.setEditable(state);
-        OrarioDiInizioRiunioneTF.setEditable(state);
-        OrarioDiFineRiunioneTF.setEditable(state);
         TitoloRiunioneTF.setEditable(state);
-        TipologiaRiunioneTF.setEditable(state);
-        SedeTF.setEditable(state);
-        NomeStanzaTF.setEditable(state);
-        PianoStanzaTF.setEditable(state);
         NoteRiunioneTA.setEditable(state);
     }
 
@@ -450,8 +444,7 @@ public class ControllerHomePageImpiegato {
 		}
     }
 
-    @FXML void visualizzaInformazioniProgetto(MouseEvent event)
-    {
+    @FXML void visualizzaInformazioniProgetto(MouseEvent event) {
         if (!ListaProgettiLV.getItems().contains(progettoIniziale)) {
         	
 			IstruzioniBox		  .setVisible(false);
@@ -515,10 +508,12 @@ public class ControllerHomePageImpiegato {
     }
 
     @FXML void visualizzaInformazioniRiunione(MouseEvent event) {
-        //gestisciBox(false);
+    	
         if (!ListaRiunioniLV.getItems().contains(riunioneIniziale)) {
         	
-			if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in sede fisica")) {
+        	gestioneRiunioneBox(false);
+        	
+			if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().contains("fisica")) {
 				RiunioneFisica infoRiunione = (RiunioneFisica)ListaRiunioniLV.getSelectionModel().getSelectedItem();
 				setCampiRiunione(infoRiunione);
 				
@@ -528,8 +523,7 @@ public class ControllerHomePageImpiegato {
 				SedeTF.setText(infoRiunione.getSede());
 				NomeStanzaTF.setText(infoRiunione.getNomeStanza());
 				PianoStanzaTF.setText(infoRiunione.getPiano());
-			} else if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().equals("Riunione in modalit� telematica")){
-				
+			} else if(ListaRiunioniLV.getSelectionModel().getSelectedItem().getTipologia().contains("telematica")){
 				RiunioneTelematica infoRiunione = (RiunioneTelematica)ListaRiunioniLV.getSelectionModel().getSelectedItem();
 				setCampiRiunione(infoRiunione);
 				

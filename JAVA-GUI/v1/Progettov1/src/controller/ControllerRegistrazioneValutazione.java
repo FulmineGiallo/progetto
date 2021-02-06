@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
+import model.Valutazione;
 import model.Connection.DBConnection;
 import model.Dao.ValutazioneDao;
 import model.DaoInterface.ValutazioneDaoInterface;
@@ -132,42 +133,82 @@ public class ControllerRegistrazioneValutazione {
 
     @FXML private void clickStellaOk1(MouseEvent event) {
     	StellaOk1.setVisible(!StellaOk1.isVisible());
+    	StellaOk2.setVisible(false);
+    	StellaOk3.setVisible(false);
+    	StellaOk4.setVisible(false);
+    	StellaOk5.setVisible(false);
     }
     
     @FXML private void clickStellaOk2(MouseEvent event) {
-    	
+		StellaOk1.setVisible(true);
+    	StellaOk2.setVisible(!StellaOk2.isVisible());
+    	StellaOk3.setVisible(false);
+    	StellaOk4.setVisible(false);
+    	StellaOk5.setVisible(false);
     }
     
     @FXML private void clickStellaOk3(MouseEvent event) {
-    	
+		StellaOk1.setVisible(true);
+		StellaOk2.setVisible(true);
+    	StellaOk3.setVisible(!StellaOk3.isVisible());
+    	StellaOk4.setVisible(false);
+    	StellaOk5.setVisible(false);
     }
     
     @FXML private void clickStellaOk4(MouseEvent event) {
-    	
+		StellaOk1.setVisible(true);
+		StellaOk2.setVisible(true);
+		StellaOk3.setVisible(true);
+    	StellaOk4.setVisible(!StellaOk4.isVisible());
+    	StellaOk5.setVisible(false);
     }
     
     @FXML private void clickStellaOk5(MouseEvent event) {
-    	
+    	StellaOk1.setVisible(true);
+    	StellaOk2.setVisible(true);
+    	StellaOk3.setVisible(true);
+    	StellaOk4.setVisible(true);
+    	StellaOk5.setVisible(!StellaOk5.isVisible());
     }
     
     private boolean controlloCampi() {
-    	TitoloTF.setText("");
+    	TitoloErrorLabel.setText("");
     	checkTitolo = true;
     	
-    	switch(utils.controlloStringa(TitoloTF.getText(), "[A-Za-z\s0-9-]+")) {
+    	switch(utils.controlloStringa(TitoloTF.getText(), "")) {
     		case 1:
     			checkTitolo = false;
-    			TitoloTF.setText("Questo campo è obbligatorio");
-    			break;
-    		case 2:
-    			checkTitolo = false;
-    			TitoloTF.setText("Il titolo della valutazione può contenere solo caratteri alfanumerici");
+    			TitoloErrorLabel.setText("Questo campo è obbligatorio");
     			break;
 			default:
 				checkTitolo = true;
     	}
     	
     	return checkTitolo;
+    }
+    
+    private int getStelle() {
+    	if(StellaOk5.isVisible())
+    		return 5;
+    	if(StellaOk4.isVisible())
+    		return 4;
+    	if(StellaOk3.isVisible())
+    		return 3;
+    	if(StellaOk2.isVisible())
+    		return 2;
+    	if(StellaOk1.isVisible())
+    		return 1;
+    	
+    	return 0;
+    }
+    
+    private Valutazione inizializzaNuovaValutazione() {
+    	Valutazione nuovaValutazione = new Valutazione(progetto.getProjectManager(), recensito,
+    												   TitoloTF.getText(), getStelle(), true);
+    	
+    	nuovaValutazione.setRecensione(RecensioneTA.getText());
+    	
+    	return nuovaValutazione;
     }
 
     @FXML private void confermaOperazione(ActionEvent event) {
@@ -177,25 +218,39 @@ public class ControllerRegistrazioneValutazione {
 				dbConnection = new DBConnection();
 				connection = dbConnection.getConnection();
 				
+				
 				valutazioneDao = new ValutazioneDao(connection);
+				Valutazione nuovaValutazione = inizializzaNuovaValutazione();
+				
 				
 				if(progetto != null && riunione == null) {
-					//inserimento tramite valutazioneDao di una nuova valutazione di progetto
+					
+					valutazioneDao.insertValutazione(recensito, progetto, nuovaValutazione);
 					homePageProjectManager = new HomePageProjectManager(recensito, progetto);
+					
+					finestraConferma = new FinestraPopup();
+					try {
+						homePageProjectManager.start(window, popup);
+						finestraConferma.start(popup, "La valutazione è stata registrata correttamente nel database.");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				} else if(progetto == null && riunione != null) {
-					//inserimento tramite valutazioneDao di una nuova valutazione di riunione
+					
+					valutazioneDao.insertValutazione(recensito, riunione, nuovaValutazione);
 					homePageOrganizzatore  = new HomePageOrganizzatore(recensito, riunione);
+					
+					finestraConferma = new FinestraPopup();
+					try {
+	                	homePageOrganizzatore.start(window, popup);
+						finestraConferma.start(popup, "La valutazione è stata registrata correttamente nel database.");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				} else {
 					throw new SQLException();
 				}
 				
-				finestraConferma = new FinestraPopup();
-                try {
-                	homePageOrganizzatore.start(window, popup);
-					finestraConferma .start(popup, "La riunione è stata registrata correttamente nel database.");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			} catch (SQLException throwables) {
 				finestraErrore = new FinestraPopup();
 				
