@@ -1426,7 +1426,7 @@
 											"top": 1477,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+Note: String[1]",
+											"text": "+Note: String[0...1]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -10623,7 +10623,7 @@
 							},
 							"name": "Note",
 							"type": "String",
-							"multiplicity": "1"
+							"multiplicity": "0...1"
 						}
 					]
 				},

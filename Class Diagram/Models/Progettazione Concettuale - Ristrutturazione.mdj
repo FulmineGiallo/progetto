@@ -1426,7 +1426,7 @@
 											"top": 1477,
 											"width": 205.841796875,
 											"height": 13,
-											"text": "+Note: String[1]",
+											"text": "+Note: String[0...1]",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3478,9 +3478,9 @@
 										"$ref": "AAAAAAF2h0zf3Xea4+0="
 									},
 									"font": "Arial;13;0",
-									"left": 2535,
+									"left": 2530,
 									"top": 2022,
-									"width": 22.0517578125,
+									"width": 32.88720703125,
 									"height": 13,
 									"alpha": -1.0636979888070717,
 									"distance": 20.591260281974,
@@ -3519,9 +3519,9 @@
 										"$ref": "AAAAAAF2h0zf3Xea4+0="
 									},
 									"font": "Arial;13;0",
-									"left": 2512,
+									"left": 2505,
 									"top": 2021,
-									"width": 7.22998046875,
+									"width": 21.68359375,
 									"height": 13,
 									"alpha": -5.368084908929173,
 									"distance": 16.401219466856727,
@@ -5349,7 +5349,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 800,
+									"left": 792,
 									"top": -82,
 									"width": 10,
 									"height": 10
@@ -5365,7 +5365,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 800,
+									"left": 792,
 									"top": -82,
 									"width": 10,
 									"height": 10
@@ -10978,7 +10978,7 @@
 							},
 							"name": "Note",
 							"type": "String",
-							"multiplicity": "1"
+							"multiplicity": "0...1"
 						}
 					]
 				},
