@@ -2,7 +2,7 @@ package model;
 
 public class Grado
 {
-    String tipoGrado;
+    private String tipoGrado;
 
     public Grado(String tipoGrado)
     {

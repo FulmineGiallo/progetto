@@ -8,10 +8,12 @@ public class Ruolo
 	{
 		this.tipoRuolo = tipoRuolo;
 	}
+	
 	public String getTipoRuolo()
 	{
 		return tipoRuolo;
 	}
+	
 	public void setTipoRuolo(String tipoRuolo)
 	{
 		this.tipoRuolo = tipoRuolo;

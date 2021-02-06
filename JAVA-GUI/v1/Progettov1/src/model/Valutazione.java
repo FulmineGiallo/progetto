@@ -3,12 +3,12 @@ package model;
 import java.time.LocalDate;
 
 public class Valutazione {
-	String titolo;
-    String recensione;
-    int stelle;
-    LocalDate dataValutazione;
-    Impiegato recensore;
-    Impiegato recensito;
+	private String titolo;
+	private String recensione;
+	private int stelle;
+	private LocalDate dataValutazione;
+	private Impiegato recensore;
+	private Impiegato recensito;
     boolean nuovo;
     
 	public Valutazione(Impiegato recensore, Impiegato recensito,

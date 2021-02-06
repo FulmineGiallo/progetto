@@ -2,8 +2,6 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class Impiegato
@@ -22,7 +20,6 @@ public class Impiegato
     private List<CoppiaProgettiRuolo<Progetto, Ruolo>> ruoliProgetti = new ArrayList<>();
     private ArrayList<Riunione> riunioni = new ArrayList<>();
     private ArrayList<Valutazione> valutazioni = new ArrayList<>();
-
 
     public Impiegato(String CF)
     {

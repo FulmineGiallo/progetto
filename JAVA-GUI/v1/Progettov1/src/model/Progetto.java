@@ -18,7 +18,7 @@ public class Progetto {
     private List<CoppiaImpiegatiRuolo<Impiegato, Ruolo>> partecipanti = new ArrayList<>();
 	private String note;
 	
-    private String ruolo; // da gestire con classe CoppiaProgettiRuolo
+    private String ruolo;
 	
 	public Progetto (String titolo)
     {

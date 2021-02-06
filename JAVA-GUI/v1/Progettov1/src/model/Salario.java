@@ -2,8 +2,8 @@ package model;
 
 public class Salario
 {
-    int salario;
-    Impiegato impiegato;
+    private int salario;
+    private Impiegato impiegato;
 
     public Salario(Impiegato impiegato)
     {

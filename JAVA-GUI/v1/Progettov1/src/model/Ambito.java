@@ -2,8 +2,8 @@ package model;
 
 public class Ambito {
 
-	String tipoAmbito;
-	boolean nuovo;  /* Attributo che serve per inserire una nuovo ambito all'interno del db */
+	private String tipoAmbito;
+	private boolean nuovo;  /* Attributo che serve per inserire una nuovo ambito all'interno del db */
 
 	public Ambito(String tipoAmbito, boolean nuovo)
 	{

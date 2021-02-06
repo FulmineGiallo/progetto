@@ -2,8 +2,8 @@ package model;
 
 public class Comune
 {
-    String codiceComune; /* Codice Catastale di un comune */
-    String nomeComune;
+    private String codiceComune; /* Codice Catastale di un comune */
+    private String nomeComune;
 
     public Comune(String nomeComune, String codiceComune)
     {
