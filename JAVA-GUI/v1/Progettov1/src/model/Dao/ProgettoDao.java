@@ -40,7 +40,7 @@ public class ProgettoDao implements ProgettoDaoInterface
         this.connection = connection;
         
         progettiImpiegato = connection.prepareStatement("SELECT * FROM listaprogetti WHERE partecipante = ?");
-        updateInfo = connection.prepareStatement("UPDATE progetto SET descrizione = ?, datainizio = ?, datafine = ?, scadenza = ? WHERE projectmanagerprogetto = ? AND titolo = ?");
+        updateInfo = connection.prepareStatement("UPDATE progetto SET descrizione = ?, datainizio = ?, datafine = ?, scadenza = ?, note = ? WHERE projectmanagerprogetto = ? AND titolo = ?");
         
         partecipanti = connection.prepareStatement("SELECT DISTINCT partecipante " +
 				  								   "FROM listaprogetti " 		   +
@@ -206,11 +206,11 @@ public class ProgettoDao implements ProgettoDaoInterface
         updateInfo.setObject(2, progetto.getDataInizio());
         updateInfo.setObject(3, progetto.getDataFine());
         updateInfo.setObject(4, progetto.getScadenza());
-        updateInfo.setString(5, progetto.getProjectManager().getCF());
-        updateInfo.setString(6, progetto.getTitolo());
+        updateInfo.setString(5, progetto.getNote());
+        updateInfo.setString(6, progetto.getProjectManager().getCF());
+        updateInfo.setString(7, progetto.getTitolo());
         int result = updateInfo.executeUpdate();
 
-        System.out.println("Data inizio Update " + progetto.getDataInizio());
 
         return result;
     }

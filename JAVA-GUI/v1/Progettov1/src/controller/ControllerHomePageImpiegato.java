@@ -252,6 +252,7 @@ public class ControllerHomePageImpiegato {
         DataDiInizioProgettoTF.setEditable(state);
         DataDiFineProgettoTF.setEditable(state);
         DataDiScadenzaProgettoTF.setEditable(state);
+        NoteProgettoTA.setEditable(state);
     }
 
     @FXML private void CreaProgetto(ActionEvent actionEvent) throws Exception {
@@ -272,7 +273,6 @@ public class ControllerHomePageImpiegato {
     @FXML private void accettaInvito(ActionEvent event) {
     	try {
 			if(riunioneDao.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
-				
 				int update;
 				update=riunioneDao.UpdatePresenza(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
 				
@@ -343,7 +343,8 @@ public class ControllerHomePageImpiegato {
     }
 
     //Se GestioneProgettoButton viene cliccato
-    @FXML private void gestisciProgetto(ActionEvent event) {
+    @FXML private void gestisciProgetto(ActionEvent event)
+    {
         HomePageProjectManager homeProjectManager = new HomePageProjectManager(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
         try {
             homeProjectManager.start(window, popup);
@@ -353,7 +354,8 @@ public class ControllerHomePageImpiegato {
     }
 
     //Se GestioneRiunioneButton viene cliccato
-    @FXML private void gestisciRiunione(ActionEvent event) {
+    @FXML private void gestisciRiunione(ActionEvent event)
+    {
     	HomePageOrganizzatore homeOrganizzatore = new HomePageOrganizzatore(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
         try {
             homeOrganizzatore.start(window, popup);
@@ -382,12 +384,11 @@ public class ControllerHomePageImpiegato {
             datainizio = LocalDate.parse(DataDiInizioProgettoTF.getText());
             dataFine = LocalDate.parse(DataDiFineProgettoTF.getText());
             dataScadenza = LocalDate.parse(DataDiScadenzaProgettoTF.getText());
-
+            String note = NoteProgettoTA.getText();
             ListaProgettiLV.getSelectionModel().getSelectedItem().setDataInizio(datainizio);
             ListaProgettiLV.getSelectionModel().getSelectedItem().setDataFine(dataFine);
             ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(dataScadenza);
-
-
+            ListaProgettiLV.getSelectionModel().getSelectedItem().setNote(note);
             progettoDao.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
 			SalvaModificheProgetto.setVisible(false); //una volta premuoto salva, il bottone scompare.
 
@@ -542,7 +543,8 @@ public class ControllerHomePageImpiegato {
 		}
     }
     
-    private void setCampiRiunione(Riunione riunioneSelezionata) {
+    private void setCampiRiunione(Riunione riunioneSelezionata)
+    {
     	IstruzioniBox		   .setVisible(false);
 		DescrizioneProgettoBox .setVisible(false);
 		DescrizioneRiunioneBox .setVisible(true);
@@ -565,7 +567,6 @@ public class ControllerHomePageImpiegato {
 															  riunioneSelezionata.getOrarioDiInizio().toLocalTime()));
 		OrarioDiFineRiunioneTF	.setText(utils.orarioToString(null, riunioneSelezionata.getOrarioDiFine().toLocalDate(),
 				  											  riunioneSelezionata.getOrarioDiFine().toLocalTime()));
-		
 		TipologiaRiunioneTF		.setText(riunioneSelezionata.getTipologia());
     }
 }
