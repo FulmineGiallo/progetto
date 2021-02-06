@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -274,9 +275,14 @@ public class ControllerHomePageImpiegato {
 				if(update!=0)
 					System.out.println("presenza salvata");
 					finestraConferma = new FinestraPopup();
-					try {
+					try
+                    {
 						finestraConferma.start(popup, "Presenza registrata correttamente");
-					} catch (Exception e) {
+                        /* Procedure del database che fa un insert in Salario */
+                        CallableStatement aggiungiSalarioInvito = connection.prepareCall("CALL insalarioriunione(?)");
+                        aggiungiSalarioInvito.setString(1, impiegato.getCF());
+                        aggiungiSalarioInvito.execute();
+                    } catch (Exception e) {
 						e.printStackTrace();
 					}
 					
@@ -304,9 +310,15 @@ public class ControllerHomePageImpiegato {
 				if(update!=0)
 					System.out.println("assenza salvata");
 				finestraConferma = new FinestraPopup();
-				try {
+                try
+                {
 					finestraConferma.start(popup, "Assenza registrata correttamente");
-				} catch (Exception e) {
+                    /* Procedure del database che fa un insert in Salario */
+                    CallableStatement rimuoviSalarioInvito = connection.prepareCall("CALL outsalarioriunione(?)");
+                    rimuoviSalarioInvito.setString(1, impiegato.getCF());
+                    rimuoviSalarioInvito.execute();
+                    
+                } catch (Exception e) {
 					e.printStackTrace();
 				}
 				

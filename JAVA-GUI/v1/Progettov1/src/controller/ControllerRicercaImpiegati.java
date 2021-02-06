@@ -34,7 +34,7 @@ import model.Dao.ProgettoDao;
 import model.Dao.RiunioneDao;
 import model.Dao.RuoloDao;
 import model.Dao.SkillDao;
-import model.Dao.TitoloDao;
+import model.Dao.TitoloDAO;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
@@ -189,7 +189,7 @@ public class ControllerRicercaImpiegati {
             connection = dbConnection.getConnection();
             impiegatoDao = new ImpiegatoDao(connection);
             ruoliDao = new RuoloDao(connection);
-            titoloDao = new TitoloDao(connection);
+            titoloDao = new TitoloDAO(connection);
             comuneNacitaDao = new ComuneDao(connection);
 
         } catch (SQLException throwables) {
@@ -406,7 +406,7 @@ public class ControllerRicercaImpiegati {
 					}
 					DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
 					try {
-						titoloDao = new TitoloDao(connection);
+						titoloDao = new TitoloDAO(connection);
 						skillDao = new SkillDao(connection);
 
 						SkillComboBox.setItems(titoloDao.titoliListImpiegato(infoImpiegato));
