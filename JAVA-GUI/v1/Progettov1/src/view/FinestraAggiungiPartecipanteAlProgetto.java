@@ -1,12 +1,10 @@
 package view;
 
-import controller.ControllerRegistrazioneProgetto;
 import controller.ControllerRicercaImpiegati;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Impiegato;
 import model.Progetto;
 
 public class FinestraAggiungiPartecipanteAlProgetto {

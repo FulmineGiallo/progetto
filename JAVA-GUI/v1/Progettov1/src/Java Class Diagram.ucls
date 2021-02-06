@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="view.Login" project="Progettov1" file="/Progettov1/src/view/Login.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1177" y="693"/>    
+    <position height="-1" width="-1" x="1510" y="490"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="view.CaricamentoRegistrazioneImpiegato" project="Progettov1" 
     file="/Progettov1/src/view/CaricamentoRegistrazioneImpiegato.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="470" y="888"/>    
+    <position height="-1" width="-1" x="470" y="896"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="view.HomePageImpiegato" project="Progettov1" 
     file="/Progettov1/src/view/HomePageImpiegato.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1182" y="1080"/>    
+    <position height="-1" width="-1" x="1506" y="900"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="view.HomePageOrganizzatore" project="Progettov1" 
     file="/Progettov1/src/view/HomePageOrganizzatore.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1175" y="1297"/>    
+    <position height="-1" width="-1" x="1097" y="1117"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="view.HomePageProjectManager" project="Progettov1" 
     file="/Progettov1/src/view/HomePageProjectManager.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1605" y="1294"/>    
+    <position height="-1" width="-1" x="2187" y="1116"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,19 +84,46 @@
   </class>  
   <class id="10" language="java" name="view.HomePageValutazioni" project="Progettov1" 
     file="/Progettov1/src/view/HomePageValutazioni.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="158" width="215" x="707" y="1217"/>    
+    <position height="158" width="215" x="643" y="1037"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="11">    
+  <class id="11" language="java" name="view.FormRegistrazioneProgetto" project="Progettov1" 
+    file="/Progettov1/src/view/FormRegistrazioneProgetto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="158" width="323" x="2440" y="1037"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="view.FormRegistrazioneValutazione" project="Progettov1" 
+    file="/Progettov1/src/view/FormRegistrazioneValutazione.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1398" y="1353"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="view.FormRegistrazioneRiunione" project="Progettov1" 
+    file="/Progettov1/src/view/FormRegistrazioneRiunione.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="159" width="325" x="2028" y="1273"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="14">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="12" name="homePageBenvenuto">        
+      <attribute id="15" name="homePageBenvenuto">        
         <position height="0" width="0" x="37" y="-78"/>      
       </attribute>      
-      <multiplicity id="13" minimum="0" maximum="1">        
+      <multiplicity id="16" minimum="0" maximum="1">        
         <position height="0" width="0" x="37" y="-78"/>      
       </multiplicity>    
     </end>    
