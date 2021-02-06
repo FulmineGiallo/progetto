@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import controller.ControllerValutazioni;
+import controller.ControllerHomePageValutazioni;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,8 +12,8 @@ import model.Impiegato;
 
 public class HomePageValutazioni {
 
-	private ControllerValutazioni 	controllerValutazioni;
-	private FinestraPopup			finestraErrore;
+	private ControllerHomePageValutazioni 	controllerValutazioni;
+	private FinestraPopup					finestraErrore;
 	
 	private Impiegato impiegato;
 	    

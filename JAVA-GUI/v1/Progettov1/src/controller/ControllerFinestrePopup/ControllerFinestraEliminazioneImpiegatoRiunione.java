@@ -60,9 +60,7 @@ public class ControllerFinestraEliminazioneImpiegatoRiunione extends ControllerF
 		setBottoneSinistro();
 		setBottoneDestro();
 		
-    	//setTitoloMessaggio(titoloMessaggio);
     	setMessaggioLabel(messaggioLabel);
-    	//setMessaggioTextArea(messaggioTextArea);
 	}
 	
 	@Override

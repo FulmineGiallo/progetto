@@ -1,7 +1,11 @@
 package model.Dao;
 
 import model.DaoInterface.ImpiegatoDaoInterface;
+import model.DaoInterface.ProgettoDaoInterface;
+import model.DaoInterface.RiunioneDaoInterface;
 import model.Impiegato;
+import model.Progetto;
+import model.Riunione;
 import model.Skill;
 
 import java.sql.Connection;
@@ -10,9 +14,6 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,12 +21,13 @@ import javafx.collections.ObservableList;
 public class ImpiegatoDao implements ImpiegatoDaoInterface
 {
 
-    private final Connection connection;
+    private final Connection 		connection;
+    private ProgettoDaoInterface 	progettoDao;
+    private RiunioneDaoInterface 	riunioneDao;
 
-    private final PreparedStatement getImpiegati;
-
-    private final PreparedStatement getNome;
-    private final PreparedStatement getCognome;    
+    private final PreparedStatement getImpiegatiNonInProgetto;
+    private final PreparedStatement	getImpiegatiNonInRiunione;
+  
     private final PreparedStatement loginImpiegato;
     private final PreparedStatement getImpiegato;
     private final PreparedStatement getCF;
@@ -35,10 +37,8 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     private final PreparedStatement insertImpiegato;
     private final PreparedStatement insertTitolo;
     private final PreparedStatement insertSkill;
-    private final Statement getImpiegatiConSalarioMedio;
-    private final Statement getImpiegatiSenzaSalarioMedio;
-    
-    
+    private final Statement 		getImpiegatiConSalarioMedio;
+    private final Statement 		getImpiegatiSenzaSalarioMedio;
     
     private 	  String 			direttoreRisorseUmane = "";
     private		  int				idGradoNuovoImpiegato;
@@ -47,13 +47,13 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     public ImpiegatoDao(Connection connection) throws SQLException
     {
         this.connection = connection;
-        getImpiegati = connection.prepareStatement("SELECT * FROM impiegato AS i WHERE i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = ?) ORDER BY cognome");
-  
+        
+        getImpiegatiNonInProgetto = connection.prepareStatement("SELECT * FROM impiegato AS i WHERE i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = ?) ORDER BY cognome");
+        getImpiegatiNonInRiunione = connection.prepareStatement("SELECT * FROM impiegato AS i WHERE i.cf NOT IN(SELECT partecipante FROM riunioneimpiegato AS ri WHERE ri.idriunione = ?) ORDER BY cognome");
+        
         getImpiegatiConSalarioMedio = connection.createStatement();
         getImpiegatiSenzaSalarioMedio = connection.createStatement();
         
-        getNome = connection.prepareStatement("SELECT nome FROM impiegato WHERE email = ?");
-        getCognome = connection.prepareStatement("SELECT cognome FROM impiegato WHERE email = ?");
         loginImpiegato = connection.prepareStatement("SELECT COUNT(*) FROM impiegatoaccount WHERE email = ? AND password = ?");
         getImpiegato = connection.prepareStatement("SELECT * FROM impiegato WHERE cf = ?");
         getCF = connection.prepareStatement("SELECT CF FROM impiegato WHERE email = ?");
@@ -97,7 +97,6 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             impiegato.setEmail(rs.getString("email"));
             impiegato.setDataNascita(rs.getObject("datan", LocalDate.class));
             impiegato.setPassword(rs.getString("password"));
-            //impiegato.setIdgrado(rs.getInt("idgrado")); vedere il perché del commento in Impiegato.java
             impiegato.setIdImpiegato(rs.getInt("idimpiegato"));
             impiegato.setGrado(getGrado(impiegato.getCF()));
         }
@@ -222,25 +221,43 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
         	   "\nSkill inserite: "	  + String.valueOf(skillInserite);
     }
 
-    public ObservableList<Impiegato> getAllImpiegati(int idProgetto) throws SQLException
+    @Override
+    public ObservableList<Impiegato> getAllImpiegati(Progetto progetto) throws SQLException
     {
-    	getImpiegati.setInt(1, idProgetto);
-        ResultSet rs = getImpiegati.executeQuery();
-        ObservableList<Impiegato> list = FXCollections.observableArrayList();
-
+    	ObservableList<Impiegato> list 	= FXCollections.observableArrayList();
+    	progettoDao 					= new ProgettoDao(connection);
+    	Impiegato impiegato;
+    	
+    	getImpiegatiNonInProgetto.setInt(1, progettoDao.getIdProgetto(progetto));
+        ResultSet rs = getImpiegatiNonInProgetto.executeQuery();
+        
         while(rs.next())
         {
-            Impiegato impiegato = new Impiegato(rs.getString("cf"));
-            impiegato.setCognome(rs.getString("cognome"));
-            impiegato.setNome(rs.getString("nome"));
-            impiegato.setComuneNascita(rs.getString("comunen"));
-            impiegato.setGenere(rs.getString("genere"));
-            impiegato.setEmail(rs.getString("email"));
-            impiegato.setDataNascita(rs.getObject("datan", LocalDate.class));
-            impiegato.setPassword(rs.getString("password"));
-            impiegato.setGrado(getGrado(impiegato.getCF()));
+            impiegato = creaImpiegato(rs.getString("cf"));
             list.add(impiegato);
         }
+        
+        rs.close();
+        return list;
+    }
+    
+    @Override
+    public ObservableList<Impiegato> getAllImpiegati(Riunione riunione) throws SQLException
+    {
+    	ObservableList<Impiegato> list 	= FXCollections.observableArrayList();
+    	riunioneDao 				 	= new RiunioneDao(connection);
+    	
+    	Impiegato impiegato;
+    	
+    	getImpiegatiNonInRiunione.setInt(1, riunioneDao.getIdRiunione(riunione));
+        ResultSet rs = getImpiegatiNonInRiunione.executeQuery();
+        
+        while(rs.next())
+        {
+            impiegato = creaImpiegato(rs.getString("cf"));
+            list.add(impiegato);
+        }
+        
         rs.close();
         return list;
     }
@@ -260,7 +277,9 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     	return direttoreRisorseUmane;
     }
     
-    public ObservableList<Impiegato> getAllImpiegatiOrdinati(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, int idProgetto, double valutazioneMedia) throws SQLException{
+    public ObservableList<Impiegato> getAllImpiegatiOrdinati(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, Progetto progetto, double valutazioneMedia) throws SQLException{
+    	
+    	progettoDao = new ProgettoDao(connection);
     	
     	double stellemin;
     	double stellemax;
@@ -288,31 +307,21 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
     	}
     	
         ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
-        Impiegato impiegato = new Impiegato();
+        Impiegato impiegato;
     
-        String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(quantita) AS salarioMedio FROM ((((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) LEFT OUTER JOIN listavalutazioni AS v on i.cf = v.cfrecensito) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND ("+condizionePerRicercaSkill+ " ";
+        String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(quantita) AS salariomedio FROM ((((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) LEFT OUTER JOIN listavalutazioni AS v on i.cf = v.cfrecensito) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND ("+condizionePerRicercaSkill+ " ";
         
         for (String s:skillSelezionate) {
         	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
         }
         
-        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+") GROUP BY cf, stelle HAVING (AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + ") "+ queryPerValutazioneMedia + "ORDER BY " + ordinamentoSelezionato;
-        
+        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = " + progettoDao.getIdProgetto(progetto) + ") GROUP BY cf, stelle HAVING (AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + ") "+ queryPerValutazioneMedia + "ORDER BY " + ordinamentoSelezionato;
         
         ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
-        
-  
-        
-        
+      
      	while(rs.next())
         	{
-     			impiegato=new Impiegato();
-        		impiegato.setNome(rs.getString("nome"));
-        		impiegato.setCognome(rs.getString("cognome"));
-        		impiegato.setCF(rs.getString("cf"));
-        		impiegato.setComuneNascita(rs.getString("comunen"));
-        		impiegato.setEmail(rs.getString("email"));
-        		impiegato.setDataNascita(rs.getDate("datan").toLocalDate());
+     			impiegato = creaImpiegato(rs.getString("cf"));
         		impiegati.add(impiegato);
         	}
         	rs.close();
@@ -339,65 +348,47 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
             }
             
-            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+")GROUP BY cf, stelle " + queryPerValutazioneMedia +" ORDER BY " + ordinamentoSelezionato;
+            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = " + progettoDao.getIdProgetto(progetto) + ")GROUP BY cf, stelle " + queryPerValutazioneMedia +" ORDER BY " + ordinamentoSelezionato;
 
                 
             ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
 
             while(rs.next())
             	{
-         			impiegato=new Impiegato();
-            		impiegato.setNome(rs.getString("nome"));
-            		impiegato.setCognome(rs.getString("cognome"));
-            		impiegato.setCF(rs.getString("cf"));
-            		impiegato.setComuneNascita(rs.getString("comunen"));
-            		impiegato.setEmail(rs.getString("email"));
-            		impiegato.setDataNascita(rs.getDate("datan").toLocalDate());
+         			impiegato = creaImpiegato(rs.getString("cf"));
             		impiegati.add(impiegato);
             	}
             	rs.close();
             	return impiegati;
         }
     }
-    
-    
-    
-    
-    
-    public ObservableList<Impiegato> getAllImpiegatiSenzaCampi(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, int idProgetto) throws SQLException{
+
+    public ObservableList<Impiegato> getAllImpiegatiSenzaCampi(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, Progetto progetto) throws SQLException{
     	
         
     if(salarioMedio != -1) {	
 
         ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
-        Impiegato impiegato = new Impiegato();
+        progettoDao 						= new ProgettoDao(connection);
+        Impiegato impiegato;
     
-        String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(quantita) AS salarioMedio FROM (((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (true ";
+        String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(quantita) AS salariomedio FROM (((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (true ";
         
         for (String s:skillSelezionate) {
         	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
         }
         
-        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+") GROUP BY cf HAVING AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + " ORDER BY " + ordinamentoSelezionato;
+        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = " + progettoDao.getIdProgetto(progetto) + ") GROUP BY cf HAVING AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + " ORDER BY " + ordinamentoSelezionato;
         
         ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
         
-  
-        
-        
-     	while(rs.next())
-        	{
-     			impiegato=new Impiegato();
-        		impiegato.setNome(rs.getString("nome"));
-        		impiegato.setCognome(rs.getString("cognome"));
-        		impiegato.setCF(rs.getString("cf"));
-        		impiegato.setComuneNascita(rs.getString("comunen"));
-        		impiegato.setEmail(rs.getString("email"));
-        		impiegato.setDataNascita(rs.getDate("datan").toLocalDate());
+     	while(rs.next()) {
+     			impiegato = creaImpiegato(rs.getString("cf"));
         		impiegati.add(impiegato);
-        	}
-        	rs.close();
-        	return impiegati;
+    	}
+     	
+    	rs.close();
+    	return impiegati;
         }
         else {
             ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
@@ -409,23 +400,155 @@ public class ImpiegatoDao implements ImpiegatoDaoInterface
             	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
             }
             
-            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = "+idProgetto+")GROUP BY cf ORDER BY " + ordinamentoSelezionato;
+            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT cf FROM progettoimpiegato AS pi WHERE pi.idprogetto = " + progettoDao.getIdProgetto(progetto) + ")GROUP BY cf ORDER BY " + ordinamentoSelezionato;
             
+            ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
+
+            while(rs.next()) {
+            		impiegato = creaImpiegato(rs.getString("cf"));
+            		impiegati.add(impiegato);
+            }
+            
+        	rs.close();
+        	return impiegati;
+        }
+    }
+
+    public ObservableList<Impiegato> getAllImpiegatiOrdinati(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, Riunione riunione, double valutazioneMedia) throws SQLException{
+    	
+    	riunioneDao = new RiunioneDao(connection);
+    	
+    	double stellemin;
+    	double stellemax;
+    	String queryPerValutazioneMedia;
+    	String condizionePerRicercaSkill;
+    	
+    	if(skillSelezionate.contains("%%") && skillSelezionate.size()==1) {
+    		condizionePerRicercaSkill = "true";
+    	}else {
+    		condizionePerRicercaSkill = "false";
+        }
+    	
+       
+    if(salarioMedio != -1) {	
+
+    	
+    	if(valutazioneMedia != 6) {
+    		stellemin = valutazioneMedia-1;
+    		stellemax = valutazioneMedia+1;
+    		queryPerValutazioneMedia = "AND (AVG(v.stelle) BETWEEN " + stellemin + " AND "+ stellemax +") ";
+    	}else {
+    		stellemin = valutazioneMedia-1;
+    		stellemax = valutazioneMedia+1;
+    		queryPerValutazioneMedia = " ";
+    	}
+    	
+        ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
+        Impiegato impiegato;
+    
+        String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(quantita) AS salariomedio FROM ((((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) LEFT OUTER JOIN listavalutazioni AS v on i.cf = v.cfrecensito) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND ("+condizionePerRicercaSkill+ " ";
+        
+        for (String s:skillSelezionate) {
+        	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
+        }
+        
+        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT partecipante FROM riunioneimpiegato AS ri WHERE ri.idriunione = " + riunioneDao.getIdRiunione(riunione) + ") GROUP BY cf, stelle HAVING (AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + ") "+ queryPerValutazioneMedia + "ORDER BY " + ordinamentoSelezionato;
+        
+        ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
+      
+     	while(rs.next())
+        	{
+     			impiegato = creaImpiegato(rs.getString("cf"));
+        		impiegati.add(impiegato);
+        	}
+        	rs.close();
+        	return impiegati;
+        }
+        else {
+        	
+        	if(valutazioneMedia != 6) {
+        		stellemin = valutazioneMedia-1;
+        		stellemax = valutazioneMedia+1;
+        		queryPerValutazioneMedia = "HAVING (AVG(v.stelle) BETWEEN " + stellemin + " AND "+ stellemax +") ";
+        	}else {
+        		stellemin = valutazioneMedia-1;
+        		stellemax = valutazioneMedia+1;
+        		queryPerValutazioneMedia = " ";
+        	}
+        	
+            ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
+            Impiegato impiegato = new Impiegato();
+        
+            String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan FROM(((impiegato AS i LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) LEFT OUTER JOIN listavalutazioni AS v on i.cf = v.cfrecensito) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (" + condizionePerRicercaSkill + " ";
+            
+            for (String s:skillSelezionate) {
+            	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
+            }
+            
+            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT partecipante FROM riunioneimpiegato AS ri WHERE ri.idriunione = " + riunioneDao.getIdRiunione(riunione) + ")GROUP BY cf, stelle " + queryPerValutazioneMedia +" ORDER BY " + ordinamentoSelezionato;
+
+                
             ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
 
             while(rs.next())
             	{
-         			impiegato=new Impiegato();
-            		impiegato.setNome(rs.getString("nome"));
-            		impiegato.setCognome(rs.getString("cognome"));
-            		impiegato.setCF(rs.getString("cf"));
-            		impiegato.setComuneNascita(rs.getString("comunen"));
-            		impiegato.setEmail(rs.getString("email"));
-            		impiegato.setDataNascita(rs.getDate("datan").toLocalDate());
+         			impiegato = creaImpiegato(rs.getString("cf"));
             		impiegati.add(impiegato);
             	}
             	rs.close();
             	return impiegati;
         }
     }
+
+    public ObservableList<Impiegato> getAllImpiegatiSenzaCampi(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, Riunione riunione) throws SQLException{
+    	
+        
+    if(salarioMedio != -1) {	
+
+        ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
+        riunioneDao 						= new RiunioneDao(connection);
+        Impiegato impiegato;
+    
+        String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan, AVG(quantita) AS salariomedio FROM (((impiegato AS i LEFT OUTER JOIN salario AS s ON i.cf = s.impiegato) LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (true ";
+        
+        for (String s:skillSelezionate) {
+        	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
+        }
+        
+        daEseguire = daEseguire + ") AND i.cf NOT IN(SELECT partecipante FROM riunioneimpiegato AS ri WHERE ri.idriunione = " + riunioneDao.getIdRiunione(riunione) + ") GROUP BY cf HAVING AVG(quantita) BETWEEN "+(salarioMedio-200)+" AND "+(salarioMedio+200) + " ORDER BY " + ordinamentoSelezionato;
+        
+        ResultSet rs = getImpiegatiConSalarioMedio.executeQuery(daEseguire);
+        
+     	while(rs.next()) {
+     			impiegato = creaImpiegato(rs.getString("cf"));
+        		impiegati.add(impiegato);
+    	}
+     	
+    	rs.close();
+    	return impiegati;
+        }
+        else {
+            ObservableList<Impiegato> impiegati = FXCollections.observableArrayList();
+            Impiegato impiegato = new Impiegato();
+        
+            String daEseguire = "SELECT DISTINCT nome, cognome, cf, comunen, email, datan FROM((impiegato AS i LEFT OUTER JOIN skill AS sk ON i.cf=sk.impiegato) LEFT OUTER JOIN titolo AS t ON sk.idtitolo=t.idtitolo) WHERE nome LIKE '"+nomeInserito+"' AND cognome LIKE '"+cognomeInserito+"' AND (true ";
+            
+            for (String s:skillSelezionate) {
+            	daEseguire = daEseguire + "OR t.tipotitolo LIKE '" + s + "'";
+            }
+            
+            daEseguire = daEseguire + ")AND i.cf NOT IN(SELECT partecipante FROM riunioneimpiegato AS ri WHERE ri.idriunione = " + riunioneDao.getIdRiunione(riunione) + ")GROUP BY cf ORDER BY " + ordinamentoSelezionato;
+            
+            ResultSet rs = getImpiegatiSenzaSalarioMedio.executeQuery(daEseguire);
+
+            while(rs.next()) {
+            		impiegato = creaImpiegato(rs.getString("cf"));
+            		impiegati.add(impiegato);
+            }
+            
+        	rs.close();
+        	return impiegati;
+        }
+    }
+
 }

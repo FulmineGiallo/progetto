@@ -18,16 +18,13 @@ import model.Connection.DBConnection;
 import model.Dao.ComuneDao;
 import model.Dao.ProgettoDao;
 import model.Dao.SkillDao;
-import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
-import model.DaoInterface.SkillDaoInterface;
-import model.DaoInterface.TitoloDaoInterface;
 import utilities.MetodiComuni;
 import model.Impiegato;
 import model.Progetto;
 import model.Skill;
-import view.FinestraAggiungiPartecipanteAlProgetto;
+import view.FormRicercaImpiegati;
 import view.FinestraPopup;
 import view.FormRegistrazioneRiunione;
 import view.FormRegistrazioneValutazione;
@@ -115,20 +112,17 @@ public class ControllerHomePageProjectManager
     private Stage window;
     private Stage popup;
     
-    private TitoloDaoInterface titoloDAO;
-    private SkillDaoInterface SkillDAO;
-    private progettoImpiegatoDao progettoImpiegatoDao;
     private ComuneDaoInterface comuneDao;
     
-    private FinestraPopup 							finestraRimuoviImpiegatoDalProgetto;
-    private FinestraAggiungiPartecipanteAlProgetto 	finestraAggiungiImpiegatoAlProgetto;
-    private FormRegistrazioneRiunione			   	formRegistrazioneRiunione;
+    private FinestraPopup 				finestraRimuoviImpiegatoDalProgetto;
+    private FormRicercaImpiegati 		finestraAggiungiImpiegatoAlProgetto;
+    private FormRegistrazioneRiunione	formRegistrazioneRiunione;
     
 	private FormRegistrazioneValutazione formRegistrazioneValutazione;
     
-    Progetto progetto;
-    Impiegato projectManager;
-    Impiegato impiegatoIniziale = new Impiegato("!", "Lista Vuota");
+	private Progetto progetto;
+	private Impiegato projectManager;
+	private Impiegato impiegatoIniziale = new Impiegato("!", "Lista Vuota");
 
     public void setStage(Stage window, Stage popup)
     {
@@ -136,14 +130,12 @@ public class ControllerHomePageProjectManager
     	this.popup = popup;
     }
 
-    Connection connection;
-    DBConnection dbConnection;
-    ObservableList<Impiegato> lista = FXCollections.observableArrayList();
-    ProgettoDaoInterface progettoDao;
-
+    private Connection connection;
+    private DBConnection dbConnection;
+    private ObservableList<Impiegato> lista = FXCollections.observableArrayList();
+    private ProgettoDaoInterface progettoDao;
 
 	private SkillDao skillDao;
-
 	private ObservableList<Skill> listaSkill;
 	
 	private MetodiComuni utils = new MetodiComuni();
@@ -153,9 +145,7 @@ public class ControllerHomePageProjectManager
             dbConnection = new DBConnection();
             connection = dbConnection.getConnection();
             progettoDao = new ProgettoDao(connection);
-            progettoImpiegatoDao = new progettoImpiegatoDao(connection);
             comuneDao = new ComuneDao(connection);
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -290,7 +280,7 @@ public class ControllerHomePageProjectManager
     }
     
     public void AggiungiImpiegatoAlProgetto(ActionEvent event) throws Exception {
-		finestraAggiungiImpiegatoAlProgetto = new FinestraAggiungiPartecipanteAlProgetto();
+		finestraAggiungiImpiegatoAlProgetto = new FormRicercaImpiegati();
 		finestraAggiungiImpiegatoAlProgetto.start(window, popup, progetto);
 
     }

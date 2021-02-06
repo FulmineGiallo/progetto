@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +23,6 @@ import model.Dao.RiunioneDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.RiunioneDaoInterface;
 import utilities.MetodiComuni;
-import model.Ambito;
 import model.Impiegato;
 import model.Progetto;
 import model.Riunione;
@@ -32,7 +30,6 @@ import model.RiunioneFisica;
 import model.RiunioneTelematica;
 import view.FinestraPopup;
 import view.FormRegistrazioneProgetto;
-import view.HomePageBenvenuto;
 import view.HomePageOrganizzatore;
 import view.HomePageProjectManager;
 import view.HomePageValutazioni;
@@ -183,24 +180,21 @@ public class ControllerHomePageImpiegato {
 	private FinestraPopup finestraConferma;
 	private FinestraPopup finestraErrore;
 	
-	private HomePageBenvenuto 					homePageBenvenuto;
 	private HomePageValutazioni 				homePageValutazioni;
 	private FormRegistrazioneProgetto 			registrazioneProgetto;
 	private Stage 								window;
 	private Stage								popup;
-	
-	private int updateEffettuato;
 
 	private Impiegato impiegato;
 	private MetodiComuni utils = new MetodiComuni();
 
-    ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
-    ObservableList<Riunione> listaRiunioni = FXCollections.observableArrayList();
+	private ObservableList<Progetto> listaProgetti = FXCollections.observableArrayList();
+	private ObservableList<Riunione> listaRiunioni = FXCollections.observableArrayList();
     
-    Connection connection;
-    DBConnection dbConnection;
-    ProgettoDaoInterface progettoDao;
-    RiunioneDaoInterface riunioneDao;
+	private Connection connection;
+	private DBConnection dbConnection;
+	private ProgettoDaoInterface progettoDao;
+	private RiunioneDaoInterface riunioneDao;
     
     public void setStage(Stage window, Stage popup)
     {
@@ -255,25 +249,22 @@ public class ControllerHomePageImpiegato {
         DataDiScadenzaProgettoTF.setEditable(state);
     }
 
-    @FXML
-    public void CreaProgetto(ActionEvent actionEvent) throws Exception {
+    @FXML private void CreaProgetto(ActionEvent actionEvent) throws Exception {
         registrazioneProgetto = new FormRegistrazioneProgetto();
         registrazioneProgetto.start(window, popup, impiegato);
     }
     
-    @FXML
-    public void VisualizzaValutazioni(ActionEvent event) throws Exception {
+    @FXML private void VisualizzaValutazioni(ActionEvent event) throws Exception {
         homePageValutazioni = new HomePageValutazioni(impiegato);
         homePageValutazioni.start(window, popup);
     }
     
-    @FXML
-    public void EffettuaLogout(ActionEvent event) throws Exception {
+    @FXML private void EffettuaLogout(ActionEvent event) throws Exception {
     	finestraDomanda = new FinestraPopup();
     	finestraDomanda.start(window, popup, connection);
     }
 
-    @FXML void accettaInvito(ActionEvent event) {
+    @FXML private void accettaInvito(ActionEvent event) {
     	try {
 			if(riunioneDao.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
 				
@@ -303,7 +294,7 @@ public class ControllerHomePageImpiegato {
 		}
     }
     
-    @FXML void rifutaInvito(ActionEvent event) {
+    @FXML private void rifutaInvito(ActionEvent event) {
     	try {
 			if(riunioneDao.isInvitato(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem())) {
 				
@@ -336,7 +327,7 @@ public class ControllerHomePageImpiegato {
     }
 
     //Se GestioneProgettoButton viene cliccato
-    @FXML void gestisciProgetto(ActionEvent event) {
+    @FXML private void gestisciProgetto(ActionEvent event) {
         HomePageProjectManager homeProjectManager = new HomePageProjectManager(impiegato, ListaProgettiLV.getSelectionModel().getSelectedItem());
         try {
             homeProjectManager.start(window, popup);
@@ -346,7 +337,7 @@ public class ControllerHomePageImpiegato {
     }
 
     //Se GestioneRiunioneButton viene cliccato
-    @FXML void gestisciRiunione(ActionEvent event) {
+    @FXML private void gestisciRiunione(ActionEvent event) {
     	HomePageOrganizzatore homeOrganizzatore = new HomePageOrganizzatore(impiegato, ListaRiunioniLV.getSelectionModel().getSelectedItem());
         try {
             homeOrganizzatore.start(window, popup);
@@ -356,14 +347,13 @@ public class ControllerHomePageImpiegato {
     }
 
     //Se il project manager vuole modificare le informazioni del progetto
-    @FXML
-	void modificaInformazioniProgetto(ActionEvent event)
+    @FXML private void modificaInformazioniProgetto(ActionEvent event)
 	{
         gestisciProgettoBox(true);
         SalvaModificheProgetto.setVisible(true);
     }
 
-    @FXML void salvaModificheProgetto(ActionEvent event)
+    @FXML private void salvaModificheProgetto(ActionEvent event)
 	{
     	gestisciProgettoBox(false);
         LocalDate datainizio;
@@ -382,7 +372,7 @@ public class ControllerHomePageImpiegato {
             ListaProgettiLV.getSelectionModel().getSelectedItem().setScadenza(dataScadenza);
 
 
-            updateEffettuato = progettoDao.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
+            progettoDao.updateInfoProgetto(ListaProgettiLV.getSelectionModel().getSelectedItem());
 			SalvaModificheProgetto.setVisible(false); //una volta premuoto salva, il bottone scompare.
 
         }
@@ -393,13 +383,13 @@ public class ControllerHomePageImpiegato {
 
     }
     
-    void gestioneRiunioneBox(boolean state) {
+    private void gestioneRiunioneBox(boolean state) {
         DescrizioneRiunioneTA.setEditable(state);
         TitoloRiunioneTF.setEditable(state);
         NoteRiunioneTA.setEditable(state);
     }
 
-    @FXML void modificaInformazioniRiunione(ActionEvent event)
+    @FXML private void modificaInformazioniRiunione(ActionEvent event)
     {
         gestioneRiunioneBox(true);
         SalvaModificheRiunioneButton.setVisible(true);
@@ -444,7 +434,7 @@ public class ControllerHomePageImpiegato {
 		}
     }
 
-    @FXML void visualizzaInformazioniProgetto(MouseEvent event) {
+    @FXML private void visualizzaInformazioniProgetto(MouseEvent event) {
         if (!ListaProgettiLV.getItems().contains(progettoIniziale)) {
         	
 			IstruzioniBox		  .setVisible(false);
@@ -507,7 +497,7 @@ public class ControllerHomePageImpiegato {
 		}
     }
 
-    @FXML void visualizzaInformazioniRiunione(MouseEvent event) {
+    @FXML private void visualizzaInformazioniRiunione(MouseEvent event) {
     	
         if (!ListaRiunioniLV.getItems().contains(riunioneIniziale)) {
         	

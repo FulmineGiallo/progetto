@@ -18,6 +18,8 @@ public class progettoImpiegatoDao implements ProgettoImpiegatoDaoInterface{
 	 private final PreparedStatement inserisciImpiegatoInProgetto;
 	 private final PreparedStatement getRuolo;
 	 
+	 private ProgettoDao progettoDao;
+	 
 	public progettoImpiegatoDao(Connection connection) throws SQLException {
 		this.connection = connection;
 		eliminaImpiegato = connection.createStatement();
@@ -34,11 +36,12 @@ public class progettoImpiegatoDao implements ProgettoImpiegatoDaoInterface{
 	 }
 	
 	
-	public int InserisciImpiegatoNelProgetto(Impiegato impiegato, int idProgetto, int idRuolo)throws SQLException {
+	public int InserisciImpiegatoNelProgetto(Impiegato impiegato, Progetto progetto, int idRuolo)throws SQLException {
 		
 		int inserito=0;
+		progettoDao = new ProgettoDao(connection);
 		
-		inserisciImpiegatoInProgetto.setInt(1, idProgetto);
+		inserisciImpiegatoInProgetto.setInt(1, progettoDao.getIdProgetto(progetto));
 		inserisciImpiegatoInProgetto.setInt(2, idRuolo);
 		inserisciImpiegatoInProgetto.setString(3, impiegato.getCF());
 		

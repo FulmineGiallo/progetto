@@ -25,9 +25,9 @@ public class ControllerFinestraEliminazioneImpiegatoProgetto extends ControllerF
 	private ProgettoDaoInterface 		  progettoDao;
 	private ProgettoImpiegatoDaoInterface progettoImpiegatoDao;
 	
-	private Impiegato 					  impiegatoDaEliminare;
-	private Progetto  					  progettoImpiegatoDaEliminare;
-	private ControllerHomePageProjectManager	  controllerHomePageProgetto;
+	private Impiegato 					  		impiegatoDaEliminare;
+	private Progetto  					  		progettoImpiegatoDaEliminare;
+	private ControllerHomePageProjectManager	controllerHomePageProgetto;
 
 	{
         try {
@@ -60,9 +60,7 @@ public class ControllerFinestraEliminazioneImpiegatoProgetto extends ControllerF
 		setBottoneSinistro();
 		setBottoneDestro();
 		
-    	//setTitoloMessaggio(titoloMessaggio);
     	setMessaggioLabel(messaggioLabel);
-    	//setMessaggioTextArea(messaggioTextArea);
 	}
 	
 	@Override

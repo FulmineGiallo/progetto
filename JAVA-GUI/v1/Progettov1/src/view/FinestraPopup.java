@@ -43,8 +43,8 @@ public class FinestraPopup {
 	private ControllerFinestraConferma 						controllerFinestraConferma
 															= new ControllerFinestraConferma();
 	
-	private ControllerFinestraAggiungiImpiegatoAlProgetto controllerAggiuntaImpiegatoProgetto
-															= new ControllerFinestraAggiungiImpiegatoAlProgetto();
+	private ControllerFinestraAggiungiImpiegato 			controllerFinestraAggiungiImpiegato
+															= new ControllerFinestraAggiungiImpiegato();
 	
 	private void caricaStage(Stage popup, ControllerFinestraPopup controller, String titoloFinestra) throws Exception{
 		
@@ -147,18 +147,30 @@ public class FinestraPopup {
 		controllerFinestraConferma.inizializza("Perfetto!", messaggioLabel, null);
 	}
 	
-	
 	//Inizializzazione della finestra popup per confermare l'aggiunta di un impiegato in un progetto
-	public void start(Stage popup, Impiegato impiegatoDaAggiungere, int idProgetto, ControllerRicercaImpiegati controllerRicercaImpiegati, Ruolo ruoloImpiegatoDaAggiungere) throws Exception {
+	public void start(Stage popup, Impiegato impiegatoDaAggiungere, Progetto progetto, ControllerRicercaImpiegati controllerRicercaImpiegati, Ruolo ruoloImpiegatoDaAggiungere) throws Exception {
 		
-		caricaStage(popup, controllerAggiuntaImpiegatoProgetto, "Attenzione");
+		caricaStage(popup, controllerFinestraAggiungiImpiegato, "Attenzione");
 		
-		controllerAggiuntaImpiegatoProgetto.setImpiegato(impiegatoDaAggiungere);
-		controllerAggiuntaImpiegatoProgetto.setIdProgetto(idProgetto);;
-		controllerAggiuntaImpiegatoProgetto.setControllerRicercaImpiegati(controllerRicercaImpiegati);
-		controllerAggiuntaImpiegatoProgetto.setRuolo(ruoloImpiegatoDaAggiungere);
+		controllerFinestraAggiungiImpiegato.setImpiegato(impiegatoDaAggiungere);
+		controllerFinestraAggiungiImpiegato.setProgetto(progetto);
+		controllerFinestraAggiungiImpiegato.setControllerRicercaImpiegati(controllerRicercaImpiegati);
+		controllerFinestraAggiungiImpiegato.setRuolo(ruoloImpiegatoDaAggiungere);
         
-        controllerAggiuntaImpiegatoProgetto.inizializza(null, "Sei sicuro di voler aggiungere " + impiegatoDaAggiungere.toString() 		  +
-				   												  " nel progetto? ", null);
+        controllerFinestraAggiungiImpiegato.inizializza(null, "Sei sicuro di voler aggiungere " + impiegatoDaAggiungere.toString() 		  +
+				   												  " nel progetto \"" + progetto.getTitolo() + "\"?", null);
+    }
+	
+	//Inizializzazione della finestra popup per confermare l'aggiunta di un impiegato in una riunione
+	public void start(Stage popup, Impiegato impiegatoDaAggiungere, Riunione riunione, ControllerRicercaImpiegati controllerRicercaImpiegati) throws Exception {
+		
+		caricaStage(popup, controllerFinestraAggiungiImpiegato, "Attenzione");
+		
+		controllerFinestraAggiungiImpiegato.setImpiegato(impiegatoDaAggiungere);
+		controllerFinestraAggiungiImpiegato.setRiunione(riunione);
+		controllerFinestraAggiungiImpiegato.setControllerRicercaImpiegati(controllerRicercaImpiegati);
+        
+        controllerFinestraAggiungiImpiegato.inizializza(null, "Sei sicuro di voler aggiungere " + impiegatoDaAggiungere.toString() 		  +
+				   												  " nella riunione \"" + riunione.getTitolo() + "\"?", null);
     }
 }

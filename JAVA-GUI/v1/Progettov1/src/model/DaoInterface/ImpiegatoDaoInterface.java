@@ -1,6 +1,8 @@
 package model.DaoInterface;
 
 import model.Impiegato;
+import model.Progetto;
+import model.Riunione;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,8 +20,10 @@ public interface ImpiegatoDaoInterface
     String getGrado(String email) throws SQLException;
     String insertRegistrazione(Impiegato nuovoImpiegato) throws SQLException;
     String getDirettoreRisorseUmane() throws SQLException;
-    ObservableList<Impiegato> getAllImpiegati(int idProgetto) throws SQLException;
-    ObservableList<Impiegato> getAllImpiegatiOrdinati(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, int idProgetto, double valutazioneMedia) throws SQLException;
-    ObservableList<Impiegato> getAllImpiegatiSenzaCampi(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, int idProgetto) throws SQLException;
-    	
+    ObservableList<Impiegato> getAllImpiegati(Progetto progetto) throws SQLException;
+    ObservableList<Impiegato> getAllImpiegati(Riunione riunione) throws SQLException;
+    ObservableList<Impiegato> getAllImpiegatiOrdinati(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, Progetto progetto, double valutazioneMedia) throws SQLException;
+    ObservableList<Impiegato> getAllImpiegatiOrdinati(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, Riunione riunione, double valutazioneMedia) throws SQLException;
+    ObservableList<Impiegato> getAllImpiegatiSenzaCampi(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, Progetto progetto) throws SQLException;
+    ObservableList<Impiegato> getAllImpiegatiSenzaCampi(float salarioMedio, String nomeInserito, String cognomeInserito, String ordinamentoSelezionato, ObservableList<String> skillSelezionate, int numeroDiSkill, Riunione riunione) throws SQLException;	
 }

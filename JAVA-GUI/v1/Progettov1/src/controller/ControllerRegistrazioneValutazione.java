@@ -128,7 +128,13 @@ public class ControllerRegistrazioneValutazione {
     }
 
     @FXML private void annullaOperazione(ActionEvent event) {
-
+    	if(progetto != null && riunione == null) {
+    		homePageProjectManager = new HomePageProjectManager(progetto.getProjectManager(), progetto);
+    		homePageProjectManager.start(window, popup);
+    	} else if(progetto == null && riunione != null) {
+    		homePageOrganizzatore = new HomePageOrganizzatore(riunione.getOrganizzatore(), riunione);
+    		homePageOrganizzatore.start(window, popup);
+    	}
     }
 
     @FXML private void clickStellaOk1(MouseEvent event) {

@@ -5,19 +5,13 @@ import javafx.collections.ObservableList;
 import model.DaoInterface.AmbitoDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
-import utilities.MetodiComuni;
 import model.Ambito;
 import model.Impiegato;
 import model.Progetto;
-import model.Ruolo;
-import model.Skill;
 import model.Tipologia;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-
-import javax.naming.ReferralException;
 
 public class ProgettoDao implements ProgettoDaoInterface
 {
@@ -42,12 +36,8 @@ public class ProgettoDao implements ProgettoDaoInterface
     private ImpiegatoDaoInterface 	impiegatoDao;
     private AmbitoDaoInterface 		ambitoDao;
 
-    private MetodiComuni utils = new MetodiComuni();
-
     public ProgettoDao(Connection connection) throws SQLException {
         this.connection = connection;
-        impiegatoDao 	= new ImpiegatoDao(connection);
-        ambitoDao 		= new AmbitoDao(connection);
         
         progettiImpiegato = connection.prepareStatement("SELECT * FROM listaprogetti WHERE partecipante = ?");
         updateInfo = connection.prepareStatement("UPDATE progetto SET descrizione = ?, datainizio = ?, datafine = ?, scadenza = ? WHERE projectmanagerprogetto = ? AND titolo = ?");
@@ -55,8 +45,6 @@ public class ProgettoDao implements ProgettoDaoInterface
         partecipanti = connection.prepareStatement("SELECT DISTINCT partecipante " +
 				  								   "FROM listaprogetti " 		   +
 				  								   "WHERE idprogetto = ?");
-        
-        //partecipanti = connection.prepareStatement("SELECT impiegato.*FROM progetto NATURAL JOIN progettoimpiegato INNER JOIN impiegato ON progettoimpiegato.cf = impiegato.cf WHERE projectmanagerprogetto = ? AND titolo = ?");
         
         queryRuoloImpiegatoProgetto = connection.prepareStatement("SELECT tiporuolo " 							+
         														  "FROM progettoimpiegato NATURAL JOIN ruolo " 	+
@@ -75,7 +63,9 @@ public class ProgettoDao implements ProgettoDaoInterface
     public ObservableList<Progetto> getProgettiImpiegato(Impiegato impiegato) throws SQLException
     {
         ObservableList<Progetto> lista = FXCollections.observableArrayList();
-        Progetto progetto = null;
+        Progetto progetto 	= null;
+        impiegatoDao 		= new ImpiegatoDao(connection);
+        ambitoDao 			= new AmbitoDao(connection);
 
         progettiImpiegato.setString(1, impiegato.getCF());
         ResultSet rs = progettiImpiegato.executeQuery();
@@ -192,7 +182,9 @@ public class ProgettoDao implements ProgettoDaoInterface
     {
 
         ObservableList<Impiegato> lista = FXCollections.observableArrayList();
+        impiegatoDao 					= new ImpiegatoDao(connection);
         Impiegato partecipante;
+        
         
         partecipanti.setInt(1, getIdProgetto(progetto));
 

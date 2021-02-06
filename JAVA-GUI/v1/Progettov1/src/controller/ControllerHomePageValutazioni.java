@@ -33,7 +33,7 @@ import model.Impiegato;
 import model.Valutazione;
 import view.HomePageImpiegato;
 
-public class ControllerValutazioni {
+public class ControllerHomePageValutazioni {
 
     @FXML private AnchorPane 			HomePageValutazioni;
     

@@ -22,119 +22,157 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Dao.*;
 import model.Impiegato;
 import model.Progetto;
+import model.Riunione;
 import model.Ruolo;
 import model.Titolo;
 import model.Connection.DBConnection;
-import model.Dao.TitoloDAO;
+import model.Dao.ComuneDao;
+import model.Dao.ImpiegatoDao;
+import model.Dao.ProgettoDao;
+import model.Dao.RiunioneDao;
+import model.Dao.RuoloDao;
+import model.Dao.SkillDao;
+import model.Dao.TitoloDao;
 import model.DaoInterface.ComuneDaoInterface;
 import model.DaoInterface.ImpiegatoDaoInterface;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.ProgettoImpiegatoDaoInterface;
+import model.DaoInterface.RiunioneDaoInterface;
 import model.DaoInterface.RuoloDaoInterface;
 import model.DaoInterface.SkillDaoInterface;
 import model.DaoInterface.TitoloDaoInterface;
 import view.FinestraPopup;
+import view.HomePageOrganizzatore;
 import view.HomePageProjectManager;
 
 public class ControllerRicercaImpiegati {
 	
     @FXML private AnchorPane 			RicercaImpiegati;
+    
     @FXML private HBox 					IstruzioniBox;
     @FXML private Label 				IstruzioniLabel;
+    
     @FXML private AnchorPane 			FormRicercaImpiegati;
     @FXML private AnchorPane 			FormAP;
+    
     @FXML private VBox 					RicercaSkillBox;
     @FXML private Label 				RicercaSkillLabel;
     @FXML private ComboBox<Titolo> 		RicercaSkillComboBox;
+    
     @FXML private VBox 					SkillAggiunteBox;
     @FXML private Label 				SkillAggiunteLabel;
     @FXML private ListView<String> 		SkillAggiunteLV;
+    
     @FXML private HBox 					SalarioMedioBox;
     @FXML private Label 				SalarioMedioLabel;
     @FXML private TextField 			SalarioMedioTF;
+    
     @FXML private HBox 					NomeBox;
     @FXML private Label 				NomeLabel;
     @FXML private TextField 			NomeTF;
+    
     @FXML private HBox 					CognomeBox;
     @FXML private Label 				CognomeLabel;
     @FXML private TextField 			CognomeTF;
-    @FXML private GridPane 				RIcercaImpiegatiButtonBar;
-    @FXML private VBox 					OrdinamentoBox;
-    @FXML private Label 				OrdinamentoLabel;
-    @FXML private ComboBox<String> 		OrdinamentoComboBox;
-    @FXML private Button 				RicercaImpiegatiButton;
-    @FXML private AnchorPane 			ListaRicercaImpiegatiBox;
-    @FXML private ListView<Impiegato> 	ListaRicercaImpiegatiLV;
-    @FXML private AnchorPane 			ConfermaBox;
-    @FXML private AnchorPane 			InformazioniImpiegatoBox;
-    @FXML private Label 				NomeImpiegatoLabel;
-    @FXML private TextField 			NomeImpiegatoTF;
-    @FXML private HBox 					EmailBox;
-    @FXML private Label 				EmailLabel;
-    @FXML private TextField 			EmailTF;
-    @FXML private HBox 					ComuneDiNascitaBox;
-    @FXML private Label 				ComuneDiNascitaLabel;
-    @FXML private TextField 			ComuneDiNascitaTF;
-    @FXML private HBox 					DataDiNascitaBox;
-    @FXML private Label 				DataDiNascitaLabel;
-    @FXML private TextField 			DataDiNascitaTF;
-    @FXML private HBox 					SelezionaSkillBox;
-    @FXML private Label 				SkillComboBoxLabel;
-    @FXML private ComboBox<Titolo> 		SkillComboBox;
-    @FXML private VBox 					SkillBox;
-    @FXML private HBox 					TipologiaSkillBox;
-    @FXML private Label 				TipologiaSkillLabel;
-    @FXML private TextField 			TipologiaSkillTF;
-    @FXML private HBox 					TitoloSkillBox;
-    @FXML private Label 				TitoloSkillLabel;
-    @FXML private TextField 			TitoloSkillTF;
-    @FXML private HBox 					DataDiCertificazioneBox;
-    @FXML private Label 				DataCertificazioneSkillLabel;
-    @FXML private TextField 			DataCertificazioneTF;
-    @FXML private VBox 					DescrizioneSkillBox;
-    @FXML private Label 				DescrizioneLabel;
-    @FXML private TextArea 				DescrizioneSkillTA;
-    @FXML private AnchorPane 			AggiungiImpiegatoBox;
-    @FXML private VBox 					RuoloImpiegatoBox;
-    @FXML private Label 				RuoloImpiegatoLabel;
-    @FXML private ComboBox<Ruolo> 		RuoloImpiegatoComboBox;
-    @FXML private Button 				AggiungiImpiegatoButton;
-    @FXML private AnchorPane 			IstruzioniBox2;
-    @FXML private Label 				IstruzioniLabel2;
-    @FXML private HBox 					NomeImpiegatoBox;
-    @FXML private Button 				AnnullaButton;
+    
     @FXML private Slider 				ValutazioneMediaSlider;
     @FXML private Button 				ValutazioneMediaButton;
     
-    private Stage window;
-    private Stage popup;
-    FinestraPopup finestraAggiungiImpiegatoAlProgetto;
+    @FXML private GridPane 				RicercaImpiegatiButtonBar;
     
+    @FXML private VBox 					OrdinamentoBox;
+    @FXML private Label 				OrdinamentoLabel;
+    @FXML private ComboBox<String> 		OrdinamentoComboBox;
+    
+    @FXML private Button 				RicercaImpiegatiButton;
+    
+    @FXML private AnchorPane 			ListaRicercaImpiegatiBox;
+    @FXML private ListView<Impiegato> 	ListaRicercaImpiegatiLV;
+    
+    @FXML private AnchorPane 			ConfermaBox;
+    @FXML private AnchorPane 			InformazioniImpiegatoBox;
+    
+    @FXML private HBox 					NomeImpiegatoBox;
+    @FXML private Label 				NomeImpiegatoLabel;
+    @FXML private TextField 			NomeImpiegatoTF;
+    
+    @FXML private HBox 					EmailBox;
+    @FXML private Label 				EmailLabel;
+    @FXML private TextField 			EmailTF;
+    
+    @FXML private HBox 					ComuneDiNascitaBox;
+    @FXML private Label 				ComuneDiNascitaLabel;
+    @FXML private TextField 			ComuneDiNascitaTF;
+    
+    @FXML private HBox 					DataDiNascitaBox;
+    @FXML private Label 				DataDiNascitaLabel;
+    @FXML private TextField 			DataDiNascitaTF;
+    
+    @FXML private HBox 					SelezionaSkillBox;
+    
+    @FXML private Label 				SkillComboBoxLabel;
+    @FXML private ComboBox<Titolo> 		SkillComboBox;
+    @FXML private VBox 					SkillBox;
+    
+    @FXML private HBox 					TipologiaSkillBox;
+    @FXML private Label 				TipologiaSkillLabel;
+    @FXML private TextField 			TipologiaSkillTF;
+    
+    @FXML private HBox 					TitoloSkillBox;
+    @FXML private Label 				TitoloSkillLabel;
+    @FXML private TextField 			TitoloSkillTF;
+    
+    @FXML private HBox 					DataDiCertificazioneBox;
+    @FXML private Label 				DataCertificazioneSkillLabel;
+    @FXML private TextField 			DataCertificazioneTF;
+    
+    @FXML private VBox 					DescrizioneSkillBox;
+    @FXML private Label 				DescrizioneLabel;
+    @FXML private TextArea 				DescrizioneSkillTA;
+    
+    @FXML private AnchorPane 			AggiungiImpiegatoBox;
+    
+    @FXML private VBox 					RuoloImpiegatoBox;
+    @FXML private Label 				RuoloImpiegatoLabel;
+    @FXML private ComboBox<Ruolo> 		RuoloImpiegatoComboBox;
+    
+    @FXML private Button 				AggiungiImpiegatoButton;
+    
+    @FXML private AnchorPane 			IstruzioniBox2;
+    @FXML private Label 				IstruzioniLabel2;
+    
+    @FXML private Button 				AnnullaButton;
+    
+    private Stage 			window;
+    private Stage 			popup;
+    private FinestraPopup 	finestraAggiungiImpiegato;
+    private FinestraPopup	finestraErrore;
     
     private int idProgetto;
-    private Progetto progetto;
-    private float salarioMedioInserito;
-    private String nomeInserito;
-    private String cognomeInserito;
-    private String ordinamentoSelezionato;
-    ImpiegatoDaoInterface impiegatoDao;
-    RuoloDaoInterface ruoliDao;
-    TitoloDaoInterface titoloDao;
-    ProgettoDaoInterface progettoDao;
-    SkillDaoInterface SkillDAO;
-	ComuneDaoInterface comuneNacitaDao;
-	ProgettoImpiegatoDaoInterface progettoImpiegatoDao;
+    private Progetto progetto = null;
+    
+    private Riunione riunione = null;
+    
+    private float 							salarioMedioInserito;
+    private String 							nomeInserito;
+    private String 							cognomeInserito;
+    private String 							ordinamentoSelezionato;
+    
+    private ImpiegatoDaoInterface 			impiegatoDao;
+    private RuoloDaoInterface 				ruoliDao;
+    private TitoloDaoInterface 				titoloDao;
+    private SkillDaoInterface 				skillDao;
+    private ComuneDaoInterface 				comuneNacitaDao;
     
     private ObservableList<Impiegato> listaImpiegati = FXCollections.observableArrayList();
     private ObservableList<Ruolo> listaRuoli = FXCollections.observableArrayList();
     private ObservableList<Titolo> listaTitoli = FXCollections.observableArrayList();
-    private ObservableList<String> listaOridinaPer = FXCollections.observableArrayList();
+    private ObservableList<String> listaOrdinaPer = FXCollections.observableArrayList();
 
-    HomePageProjectManager homePageProgetto;
-    
+    private HomePageProjectManager 	homePageProjectManager;
+    private HomePageOrganizzatore	homePageOrganizzatore;
     
     public void setStage(Stage window, Stage popup)
     {
@@ -142,7 +180,6 @@ public class ControllerRicercaImpiegati {
     	this.popup = popup;
     }
  
-    
     Connection connection;
     DBConnection dbConnection;
 
@@ -152,35 +189,37 @@ public class ControllerRicercaImpiegati {
             connection = dbConnection.getConnection();
             impiegatoDao = new ImpiegatoDao(connection);
             ruoliDao = new RuoloDao(connection);
-            titoloDao = new TitoloDAO(connection);
-            progettoDao = new ProgettoDao(connection);
+            titoloDao = new TitoloDao(connection);
             comuneNacitaDao = new ComuneDao(connection);
-            progettoImpiegatoDao = new model.Dao.progettoImpiegatoDao(connection);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
     
-    
     public void inizializza(Progetto progetto) throws SQLException {
     	this.progetto = progetto;
-    	idProgetto = progettoDao.getIdProgetto(progetto);
-    	listaImpiegati = impiegatoDao.getAllImpiegati(idProgetto);
-    	listaRuoli = ruoliDao.GetAllRuoli();
-    	listaTitoli = titoloDao.titoliList();
+    	
+    	listaImpiegati = impiegatoDao.getAllImpiegati(progetto);
     	ListaRicercaImpiegatiLV.setItems(listaImpiegati);
-    	RicercaSkillComboBox.setItems(listaTitoli);
+    	
+    	RuoloImpiegatoLabel.setVisible(true);
+    	RuoloImpiegatoComboBox.setVisible(true);
+    	listaRuoli = ruoliDao.GetAllRuoli();
     	RuoloImpiegatoComboBox.setItems(listaRuoli);
+    	
+    	listaTitoli = titoloDao.titoliList();
+    	RicercaSkillComboBox.setItems(listaTitoli);
+    	
     	RicercaImpiegatiButton.setDisable(false);
     	RuoloImpiegatoComboBox.getSelectionModel().select(1);
     	
-    	listaOridinaPer.add("Nome (Alfabetico)");
-    	listaOridinaPer.add("Cognome (Alfabetico)");
-    	listaOridinaPer.add("Salario (Crescente)");
-    	listaOridinaPer.add("Salario (Descrescente)");
+    	listaOrdinaPer.add("Nome (Crescente)");
+    	listaOrdinaPer.add("Cognome (Crescente)");
+    	listaOrdinaPer.add("Salario (Crescente)");
+    	listaOrdinaPer.add("Salario (Descrescente)");
     	
-    	OrdinamentoComboBox.setItems(listaOridinaPer);
+    	OrdinamentoComboBox.setItems(listaOrdinaPer);
     	OrdinamentoComboBox.getSelectionModel().select(1);
     	
     	ValutazioneMediaSlider.setBlockIncrement(1);
@@ -190,6 +229,34 @@ public class ControllerRicercaImpiegati {
     	
     }
     
+    public void inizializza(Riunione riunione) throws SQLException {
+    	this.riunione = riunione;
+    	
+    	listaImpiegati = impiegatoDao.getAllImpiegati(riunione);    	
+    	ListaRicercaImpiegatiLV.setItems(listaImpiegati);
+    	
+    	RuoloImpiegatoLabel.setVisible(false);
+    	RuoloImpiegatoComboBox.setVisible(false);
+    	
+    	listaTitoli = titoloDao.titoliList();
+    	RicercaSkillComboBox.setItems(listaTitoli);
+    	
+    	RicercaImpiegatiButton.setDisable(false);
+    	
+    	listaOrdinaPer.add("Nome (Crescente)");
+    	listaOrdinaPer.add("Cognome (Crescente)");
+    	listaOrdinaPer.add("Salario (Crescente)");
+    	listaOrdinaPer.add("Salario (Descrescente)");
+    	
+    	OrdinamentoComboBox.setItems(listaOrdinaPer);
+    	OrdinamentoComboBox.getSelectionModel().select(1);
+    	
+    	ValutazioneMediaSlider.setBlockIncrement(1);
+    	
+    	InserisciSkill();
+    	updateInfoImpiegato();
+    	
+    }    
     
     public void InserisciSkill(){
     RicercaSkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
@@ -217,10 +284,10 @@ public class ControllerRicercaImpiegati {
     	ordinamentoSelezionato = OrdinamentoComboBox.getSelectionModel().getSelectedItem();
     	
     	switch (ordinamentoSelezionato) {
-    	case "Nome (Alfabetico)":
+    	case "Nome (Crescente)":
     		ordinamento = "Nome ASC";
     		break;	
-    	case "Cognome (Alfabetico)":
+    	case "Cognome (Crescente)":
     		ordinamento = "Cognome ASC";
     		break;
     	case "Salario (Crescente)":
@@ -253,38 +320,68 @@ public class ControllerRicercaImpiegati {
     		valutazioneMediaInserita = 6;
     	}
     	
-   
+    	listaImpiegati.clear();
     	
     	if(SalarioMedioTF.getText().isBlank() && NomeTF.getText().isBlank() && CognomeTF.getText().isBlank() && SkillAggiunteLV.getItems().isEmpty() && ValutazioneMediaSlider.isDisable()) {
-        	try {
-    			listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto);
-    			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
-    			updateInfoImpiegato();
-    		} catch (SQLException e) {
-    			e.printStackTrace();
-    		}
+    		try {
+    			if (progetto != null && riunione == null)
+					listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito,
+																			cognomeInserito, ordinamento,
+																			skillAggiunte, skillAggiunte.size(), progetto);
+				else if (progetto == null && riunione != null)
+					listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito,
+																			cognomeInserito, ordinamento,
+																			skillAggiunte, skillAggiunte.size(), riunione);
+				else
+					throw new SQLException();
+        	} catch (SQLException erroreDatabase) {
+        		finestraErrore = new FinestraPopup();
+        		
+        		try {
+        			finestraErrore.start(popup, "Errore di connessione al database", erroreDatabase);
+        		} catch (Exception e) {
+        			System.err.println("Errore di connessione al database");
+        		}
+        	}
     	}
     	else {
-    	
     		try {
-				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito, cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), idProgetto, valutazioneMediaInserita);
-				ListaRicercaImpiegatiLV.setItems(listaImpiegati);
-				updateInfoImpiegato();
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
+    			if (progetto != null && riunione == null)
+    				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito,
+    																	  cognomeInserito, ordinamento, skillAggiunte,
+    																	  skillAggiunte.size(), progetto, valutazioneMediaInserita);
+    			else if (progetto == null && riunione != null)
+    				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito,
+							  											  cognomeInserito, ordinamento, skillAggiunte,
+							  											  skillAggiunte.size(), riunione, valutazioneMediaInserita);
+    			else
+    				throw new SQLException();
+    		} catch (SQLException erroreDatabase) {
+        		finestraErrore = new FinestraPopup();
+        		
+        		try {
+        			finestraErrore.start(popup, "Errore di connessione al database", erroreDatabase);
+        		} catch (Exception e) {
+        			System.err.println("Errore di connessione al database");
+        		}
+        	}
     	}
     	
-    	updateInfoImpiegato();
+    	ListaRicercaImpiegatiLV.setItems(listaImpiegati);
+		updateInfoImpiegato();
     }
     
     public void annullaOperazione() throws Exception {
-    	homePageProgetto = new HomePageProjectManager(progetto.getProjectManager(), progetto);
-    	homePageProgetto.start(window, popup);
-//    	System.out.print(ValutazioneMediaSlider.getValue());
-
+    	if(progetto == null && riunione != null) {
+        	homePageOrganizzatore = new HomePageOrganizzatore(riunione.getOrganizzatore(), riunione);
+        	homePageOrganizzatore.start(window, popup);
+    	} else if (progetto != null && riunione == null) {
+    		homePageProjectManager = new HomePageProjectManager(progetto.getProjectManager(), progetto);
+        	homePageProjectManager.start(window, popup);
+    	} else {
+    		throw new Exception();
+    	}
     }
-    
     
     public void updateInfoImpiegato()
     {
@@ -292,77 +389,77 @@ public class ControllerRicercaImpiegati {
         {
             @Override
             public void handle(MouseEvent mouseEvent) {
-            	
-            	Impiegato infoImpiegato = ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem();
-            	
-                IstruzioniBox2.setVisible(false);
-                ConfermaBox.setVisible(true);
-                InformazioniImpiegatoBox.setVisible(true);
-                
-                SkillBox.setVisible(false);
-                NomeImpiegatoTF.setText(infoImpiegato.toString());
-                EmailTF.setText(infoImpiegato.getEmail());
-//                ComuneDiNascitaTF.setText(infoImpiegato.getComuneNascita());
-                
-                try {
-					ComuneDiNascitaTF.setText(comuneNacitaDao.getComuneBySigla(infoImpiegato.getComuneNascita().toString()).toString().substring(8));
-				} catch (SQLException e2) {
-					e2.printStackTrace();
+                if (!ListaRicercaImpiegatiLV.getItems().isEmpty()) {
+                	Impiegato infoImpiegato = ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem();
+                	
+					IstruzioniBox2.setVisible(false);
+					ConfermaBox.setVisible(true);
+					InformazioniImpiegatoBox.setVisible(true);
+					SkillBox.setVisible(false);
+					NomeImpiegatoTF.setText(infoImpiegato.toString());
+					EmailTF.setText(infoImpiegato.getEmail());
+					try {
+						ComuneDiNascitaTF.setText(comuneNacitaDao
+								.getComuneBySigla(infoImpiegato.getComuneNascita().toString()).toString().substring(8));
+					} catch (SQLException e2) {
+						e2.printStackTrace();
+					}
+					DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
+					try {
+						titoloDao = new TitoloDao(connection);
+						skillDao = new SkillDao(connection);
+
+						SkillComboBox.setItems(titoloDao.titoliListImpiegato(infoImpiegato));
+
+						SkillComboBox.getSelectionModel().selectedItemProperty()
+								.addListener((options, oldValue, newValue) -> {
+
+									SkillBox.setVisible(true);
+
+									if (SkillComboBox.getSelectionModel().getSelectedItem() != null) {
+										TitoloSkillTF.setVisible(true);
+										TitoloSkillTF.setText(
+												SkillComboBox.getSelectionModel().getSelectedItem().toString());
+
+										try {
+											TipologiaSkillTF.setText(skillDao.getTipologiaSkill(
+													SkillComboBox.getSelectionModel().getSelectedItem().toString(),
+													infoImpiegato));
+										} catch (SQLException e1) {
+											e1.printStackTrace();
+										}
+
+										DataCertificazioneSkillLabel.setVisible(true);
+										DescrizioneSkillTA.setVisible(true);
+										try {
+											if ((skillDao.descrizioneCertificazione(
+													SkillComboBox.getSelectionModel().getSelectedItem().toString(),
+													infoImpiegato) == null)) {
+												DescrizioneSkillTA.setText("Nessuna descrizione");
+											} else {
+												DescrizioneSkillTA.setText(skillDao.descrizioneCertificazione(
+														SkillComboBox.getSelectionModel().getSelectedItem().toString(),
+														infoImpiegato));
+											}
+
+											DataCertificazioneTF.setText(skillDao.dataCertificazione(
+													SkillComboBox.getSelectionModel().getSelectedItem().toString(),
+													infoImpiegato));
+										} catch (SQLException e) {
+											e.printStackTrace();
+										}
+
+									} else {
+										TitoloSkillTF.setVisible(false);
+										DataCertificazioneTF.setVisible(false);
+										DescrizioneSkillTA.setVisible(false);
+									}
+
+								});
+					} catch (SQLException ex) {
+						ex.printStackTrace();
+					} 
 				}
-               
-                DataDiNascitaTF.setText(infoImpiegato.getDataNascita().toString());
-                
-                
-                
-            	try
-                {
-                    titoloDao = new TitoloDAO(connection);
-                    SkillDAO = new SkillDao(connection);
-                    
-                    SkillComboBox.setItems(titoloDao.titoliListImpiegato(infoImpiegato));
-
-
-                    
-                    SkillComboBox.getSelectionModel().selectedItemProperty().addListener( (options, oldValue, newValue) -> {
-
-                    	SkillBox.setVisible(true);
-
-                    if(SkillComboBox.getSelectionModel().getSelectedItem() != null) {	
-                    	TitoloSkillTF.setVisible(true);
-                    	TitoloSkillTF.setText(SkillComboBox.getSelectionModel().getSelectedItem().toString());
-                    	
-                        try {
-							TipologiaSkillTF.setText(SkillDAO.getTipologiaSkill(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
-						} catch (SQLException e1) {
-							e1.printStackTrace();
-						}
-                    	
-                    	DataCertificazioneSkillLabel.setVisible(true);
-                    	DescrizioneSkillTA.setVisible(true);
-                    	try {
-							if((SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato) == null)){
-								DescrizioneSkillTA.setText("Nessuna descrizione");
-							}else {
-								DescrizioneSkillTA.setText(SkillDAO.descrizioneCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
-							}
-							
-                    		DataCertificazioneTF.setText(SkillDAO.dataCertificazione(SkillComboBox.getSelectionModel().getSelectedItem().toString(), infoImpiegato));
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-                    	
-                    }else {
-                    	TitoloSkillTF.setVisible(false);
-                    	DataCertificazioneTF.setVisible(false);
-                    	DescrizioneSkillTA.setVisible(false);
-                    }
-                    
-                   });
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-                
-                
             }
         });
     }
@@ -378,19 +475,24 @@ public class ControllerRicercaImpiegati {
     
     public void AggiungiImpiegato() throws Exception
     {
-    	finestraAggiungiImpiegatoAlProgetto = new FinestraPopup();
-    	finestraAggiungiImpiegatoAlProgetto.start(popup, ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem(), idProgetto, this, RuoloImpiegatoComboBox.getSelectionModel().getSelectedItem());
-    	Impiegato impiegatoSalario = ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem();
+    	Impiegato impiegatoDaAggiungere = ListaRicercaImpiegatiLV.getSelectionModel().getSelectedItem();
+    	finestraAggiungiImpiegato = new FinestraPopup();
+    	
+    	if(progetto != null && riunione == null)
+    		finestraAggiungiImpiegato.start(popup, impiegatoDaAggiungere, progetto,
+    										this, RuoloImpiegatoComboBox.getSelectionModel().getSelectedItem());
+    	else if (progetto == null && riunione != null)
+    		finestraAggiungiImpiegato.start(popup, impiegatoDaAggiungere, riunione, this);
+    	else
+    		throw new Exception();
+    	
         /* Procedure del database che fa un insert in Salario */
-        String CF = impiegatoSalario.getCF();
         CallableStatement aggiungiSalarioProgetto = connection.prepareCall("CALL insalarioprogetto(?)");
-        aggiungiSalarioProgetto.setString(1, impiegatoSalario.getCF());
+        aggiungiSalarioProgetto.setString(1, impiegatoDaAggiungere.getCF());
         aggiungiSalarioProgetto.execute();
-
     }
     
-    public void NascondiInfoImpiegato()
-    {
+    public void NascondiInfoImpiegato() {
         ConfermaBox.setVisible(false);
         InformazioniImpiegatoBox.setVisible(false);
         IstruzioniBox2.setVisible(true);

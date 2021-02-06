@@ -10,44 +10,49 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import model.Impiegato;
 import model.Progetto;
+import model.Riunione;
 import model.Ruolo;
 import model.Connection.DBConnection;
 import model.Dao.ProgettoDao;
+import model.Dao.RiunioneDao;
+import model.Dao.RiunioneImpiegatoDao;
 import model.Dao.RuoloDao;
 import model.Dao.progettoImpiegatoDao;
 import model.DaoInterface.ProgettoDaoInterface;
 import model.DaoInterface.ProgettoImpiegatoDaoInterface;
+import model.DaoInterface.RiunioneDaoInterface;
+import model.DaoInterface.RiunioneImpiegatoDaoInterface;
 import model.DaoInterface.RuoloDaoInterface;
 
-public class ControllerFinestraAggiungiImpiegatoAlProgetto extends ControllerFinestraPopup{
-	
+public class ControllerFinestraAggiungiImpiegato extends ControllerFinestraPopup{
 	
 	private Image immagineDomanda = new Image(getClass().getClassLoader().getResourceAsStream("view/resources/img/question.png"));
 
-	private Connection 					  connection;
-    private DBConnection 				  dbConnection;
+	private Connection 					  	connection;
+    private DBConnection 				  	dbConnection;
     
-	private ProgettoDaoInterface 		  	progettoDao;
+	private ProgettoImpiegatoDaoInterface 	progettoImpiegatoDao;
+	private RiunioneImpiegatoDaoInterface 	riunioneImpiegatoDao;
 	private RuoloDaoInterface 		  		ruoloDao;
-	private ProgettoImpiegatoDaoInterface progettoImpiegatoDao;
 	
 	private Ruolo ruoloImpiegatoDaAggiungere;
 	
+	private Impiegato 	impiegatoDaAggiungere;
+	private Progetto	progetto = null;
+	private Riunione	riunione = null;
 	
-	private Impiegato 					  impiegatoDaAggiungere;
-	private int  					  	idProgettoImpiegatoDaAggiungere;
 	private ControllerRicercaImpiegati	  controllerRicercaImpiegati;
 
 	{
         try {
             dbConnection = new DBConnection();
             connection = dbConnection.getConnection();
-            progettoDao = new ProgettoDao(connection);
         	progettoImpiegatoDao = new progettoImpiegatoDao(connection);
         	ruoloDao = new RuoloDao(connection);
         	
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        	riunioneImpiegatoDao = new RiunioneImpiegatoDao(connection);
+        } catch (SQLException erroreDatabase) {
+        	System.err.println(erroreDatabase.toString());
         }
     }
 	
@@ -58,10 +63,13 @@ public class ControllerFinestraAggiungiImpiegatoAlProgetto extends ControllerFin
 	public void setRuolo(Ruolo ruoloImpiegatoDaAggiungere) {
 		this.ruoloImpiegatoDaAggiungere = ruoloImpiegatoDaAggiungere;
 	}
-		
 	
-	public void setIdProgetto(int idProgettoImpiegatoDaAggiungere) {
-		this.idProgettoImpiegatoDaAggiungere = idProgettoImpiegatoDaAggiungere;
+	public void setProgetto(Progetto progetto) {
+		this.progetto = progetto;
+	}
+	
+	public void setRiunione(Riunione riunione) {
+		this.riunione = riunione;
 	}
 	
     public void setControllerRicercaImpiegati(ControllerRicercaImpiegati controllerRicercaImpiegati) {
@@ -76,9 +84,7 @@ public class ControllerFinestraAggiungiImpiegatoAlProgetto extends ControllerFin
 		setBottoneSinistro();
 		setBottoneDestro();
 		
-    	//setTitoloMessaggio(titoloMessaggio);
     	setMessaggioLabel(messaggioLabel);
-    	//setMessaggioTextArea(messaggioTextArea);
 	}
 	
 	@Override
@@ -96,30 +102,24 @@ public class ControllerFinestraAggiungiImpiegatoAlProgetto extends ControllerFin
 	@Override
 	protected void setBottoneDestro() {
 		
-		
 		DestraButton.setText("Conferma");
 		
 		DestraButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
             	
-            	int idRuolo;
-            	int inserito = -1;
-            	
             	try {
-					idRuolo = ruoloDao.getIdRuolo(ruoloImpiegatoDaAggiungere);
-	            	inserito = progettoImpiegatoDao.InserisciImpiegatoNelProgetto(impiegatoDaAggiungere, idProgettoImpiegatoDaAggiungere, idRuolo);
+	            	if (progetto != null && riunione == null)
+						progettoImpiegatoDao.InserisciImpiegatoNelProgetto(impiegatoDaAggiungere, progetto,
+																		   ruoloDao.getIdRuolo(ruoloImpiegatoDaAggiungere));
+	            	else if (progetto == null && riunione != null)
+	            		riunioneImpiegatoDao.inserisciImpiegato(impiegatoDaAggiungere, riunione);
+	            	else
+	            		throw new SQLException();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-            
             	
-            	if (inserito != 0)
-            		System.out.print("Impiegato inserito");
-            	else
-            		System.out.print("Impiegato non inserito");
-
-
                	FinestraPopup.getScene().getWindow().hide();
                	controllerRicercaImpiegati.NascondiInfoImpiegato();
                	controllerRicercaImpiegati.avviaRicerca(null);

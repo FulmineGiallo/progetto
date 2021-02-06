@@ -37,7 +37,7 @@
             </VBox>
             <HBox fx:id="ToolBar" alignment="CENTER_RIGHT" spacing="50.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="AggiungiImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" prefHeight="65.0" text="Aggiungi partecipante" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="AggiungiImpiegatoButton" maxHeight="65.0" minHeight="65.0" mnemonicParsing="false" onAction="#aggiungiImpiegato" prefHeight="65.0" text="Aggiungi partecipante" textAlignment="CENTER" wrapText="true">
                      <styleClass>
                         <String fx:value="Button" />
                         <String fx:value="LabelGrande" />

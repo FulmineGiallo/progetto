@@ -36,6 +36,7 @@ import model.DaoInterface.RiunioneDaoInterface;
 import utilities.MetodiComuni;
 import view.FinestraPopup;
 import view.FormRegistrazioneValutazione;
+import view.FormRicercaImpiegati;
 import view.HomePageImpiegato;
 import view.HomePageOrganizzatore;
 
@@ -111,13 +112,14 @@ public class ControllerHomePageOrganizzatore {
     private Stage popup;
     
     private SkillDao skillDao;
-    private RiunioneImpiegatoDao riunioneImpiegatoDao;
     private RiunioneDaoInterface riunioneDao;
     private ComuneDao comuneDao;
     
     private int idriunione;
-    private FinestraPopup finestraRimuoviImpiegatoDallaRiunione;
-    private FormRegistrazioneValutazione formRegistrazioneValutazione;
+    
+    private FinestraPopup 					finestraRimuoviImpiegatoDallaRiunione;
+    private FormRegistrazioneValutazione 	formRegistrazioneValutazione;
+    private FormRicercaImpiegati			formRicercaImpiegati;
     
     private Riunione riunione;
     private Impiegato Organizzatore;
@@ -125,7 +127,7 @@ public class ControllerHomePageOrganizzatore {
     private Connection connection;
     private DBConnection dbConnection;
     
-    ObservableList<Impiegato> lista = FXCollections.observableArrayList();
+    private ObservableList<Impiegato> lista = FXCollections.observableArrayList();
     private ObservableList<Skill> listaSkill;
     
     private MetodiComuni utils = new MetodiComuni();
@@ -160,8 +162,7 @@ public class ControllerHomePageOrganizzatore {
         }
     }
     
-    @FXML
-    private void backHomePageImpiegato(ActionEvent event) throws Exception
+    @FXML private void backHomePageImpiegato(ActionEvent event) throws Exception
     {
     	homePageImpiegato = new HomePageImpiegato(Organizzatore);
     	homePageImpiegato.start(window, popup);
@@ -270,6 +271,11 @@ public class ControllerHomePageOrganizzatore {
     @FXML private void aggiungiValutazione() {
     	formRegistrazioneValutazione = new FormRegistrazioneValutazione();
     	formRegistrazioneValutazione.start(window, popup, ListaPartecipantiLV.getSelectionModel().getSelectedItem(), riunione);
+    }
+    
+    @FXML private void aggiungiImpiegato() {
+    	formRicercaImpiegati = new FormRicercaImpiegati();
+    	formRicercaImpiegati.start(window, popup, riunione);
     }
     
 }
