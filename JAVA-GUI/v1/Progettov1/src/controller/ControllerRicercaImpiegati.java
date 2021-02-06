@@ -272,7 +272,7 @@ public class ControllerRicercaImpiegati {
     	skillAggiunte = SkillAggiunteLV.getItems();
     	double valutazioneMediaInserita = ValutazioneMediaSlider.getValue();
     	
-    	if(SalarioMedioTF.getText().equals("")) {
+    	if(SalarioMedioTF.getText().isBlank()) {
     		salarioMedioInserito = -1;
     	}
     	else {
@@ -291,10 +291,10 @@ public class ControllerRicercaImpiegati {
     		ordinamento = "Cognome ASC";
     		break;
     	case "Salario (Crescente)":
-    		ordinamento = "salarioMedio ASC";
+    		ordinamento = "salariomedio ASC";
     		break;
     	case "Salario (Descrescente)":
-    		ordinamento = "salarioMedio DESC";
+    		ordinamento = "salariomedio DESC";
     		break;
     	}
 
@@ -320,55 +320,57 @@ public class ControllerRicercaImpiegati {
     		valutazioneMediaInserita = 6;
     	}
     	
-    	listaImpiegati.clear();
     	
-    	if(SalarioMedioTF.getText().isBlank() && NomeTF.getText().isBlank() && CognomeTF.getText().isBlank() && SkillAggiunteLV.getItems().isEmpty() && ValutazioneMediaSlider.isDisable()) {
-    		try {
-    			if (progetto != null && riunione == null)
-					listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito,
-																			cognomeInserito, ordinamento,
-																			skillAggiunte, skillAggiunte.size(), progetto);
-				else if (progetto == null && riunione != null)
-					listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito,
-																			cognomeInserito, ordinamento,
-																			skillAggiunte, skillAggiunte.size(), riunione);
-				else
-					throw new SQLException();
-        	} catch (SQLException erroreDatabase) {
-        		finestraErrore = new FinestraPopup();
-        		
-        		try {
-        			finestraErrore.start(popup, "Errore di connessione al database", erroreDatabase);
-        		} catch (Exception e) {
-        			System.err.println("Errore di connessione al database");
-        		}
-        	}
-    	}
-    	else {
-    		try {
-    			if (progetto != null && riunione == null)
-    				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito,
-    																	  cognomeInserito, ordinamento, skillAggiunte,
-    																	  skillAggiunte.size(), progetto, valutazioneMediaInserita);
-    			else if (progetto == null && riunione != null)
-    				listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito,
-							  											  cognomeInserito, ordinamento, skillAggiunte,
-							  											  skillAggiunte.size(), riunione, valutazioneMediaInserita);
-    			else
-    				throw new SQLException();
-    		} catch (SQLException erroreDatabase) {
-        		finestraErrore = new FinestraPopup();
-        		
-        		try {
-        			finestraErrore.start(popup, "Errore di connessione al database", erroreDatabase);
-        		} catch (Exception e) {
-        			System.err.println("Errore di connessione al database");
-        		}
-        	}
-    	}
-    	
-    	ListaRicercaImpiegatiLV.setItems(listaImpiegati);
-		updateInfoImpiegato();
+    	if (!(SalarioMedioTF.getText().isBlank() && ordinamento.contains("salariomedio"))) {
+    		
+    		listaImpiegati.clear();
+    		
+			if (SalarioMedioTF.getText().isBlank() && NomeTF.getText().isBlank() && CognomeTF.getText().isBlank()
+					&& SkillAggiunteLV.getItems().isEmpty() && ValutazioneMediaSlider.isDisable()) {
+				try {
+					if (progetto != null && riunione == null)
+						listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito,
+								cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), progetto);
+					else if (progetto == null && riunione != null)
+						listaImpiegati = impiegatoDao.getAllImpiegatiSenzaCampi(salarioMedioInserito, nomeInserito,
+								cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), riunione);
+					else
+						throw new SQLException();
+				} catch (SQLException erroreDatabase) {
+					finestraErrore = new FinestraPopup();
+
+					try {
+						finestraErrore.start(popup, "Errore di connessione al database", erroreDatabase);
+					} catch (Exception e) {
+						System.err.println("Errore di connessione al database");
+					}
+				}
+			} else {
+				try {
+					if (progetto != null && riunione == null)
+						listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito,
+								cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), progetto,
+								valutazioneMediaInserita);
+					else if (progetto == null && riunione != null)
+						listaImpiegati = impiegatoDao.getAllImpiegatiOrdinati(salarioMedioInserito, nomeInserito,
+								cognomeInserito, ordinamento, skillAggiunte, skillAggiunte.size(), riunione,
+								valutazioneMediaInserita);
+					else
+						throw new SQLException();
+				} catch (SQLException erroreDatabase) {
+					finestraErrore = new FinestraPopup();
+
+					try {
+						finestraErrore.start(popup, "Errore di connessione al database", erroreDatabase);
+					} catch (Exception e) {
+						System.err.println("Errore di connessione al database");
+					}
+				}
+			}
+			
+			ListaRicercaImpiegatiLV.setItems(listaImpiegati);
+			updateInfoImpiegato();
+		}
     }
     
     public void annullaOperazione() throws Exception {
