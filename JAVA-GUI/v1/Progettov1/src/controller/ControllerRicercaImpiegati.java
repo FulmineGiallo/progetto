@@ -395,7 +395,8 @@ public class ControllerRicercaImpiegati {
 
     }
     
-    public void NascondiInfoImpiegato() {
+    public void NascondiInfoImpiegato()
+    {
         ConfermaBox.setVisible(false);
         InformazioniImpiegatoBox.setVisible(false);
         IstruzioniBox2.setVisible(true);
