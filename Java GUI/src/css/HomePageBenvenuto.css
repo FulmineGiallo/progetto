@@ -1,0 +1,20 @@
+.TitoloLabel{
+	-fx-text-fill: white;
+	-fx-font-size: 50;
+}
+
+.TitoloBox{
+	-fx-border-width: 0 0 5 0;
+	-fx-border-color: -fx-terzocolore;
+}
+
+.RegistrazioneBox{
+	-fx-border-width: 0 5 0 0;
+	-fx-border-color: -fx-terzocolore;
+}
+
+.RegistrazioneLabel2{
+	-fx-font-size: 28;
+	-fx-text-fill: white;
+	-fx-font-family: 'Roboto Light';
+}

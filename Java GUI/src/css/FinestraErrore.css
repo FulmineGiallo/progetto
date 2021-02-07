@@ -1,0 +1,9 @@
+.TestoBox{
+	-fx-border-width: 0 0 0 5;
+	-fx-border-color: -fx-terzocolore;
+}
+
+.ButtonBar{
+	-fx-border-color: -fx-terzocolore;
+	-fx-border-width: 5 0 0 0;
+}

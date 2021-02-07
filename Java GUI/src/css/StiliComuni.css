@@ -1,0 +1,239 @@
+.StilePrincipale{
+	-fx-primocolore: #7289da;
+	-fx-secondocolore: #424549;
+	-fx-terzocolore: #36393e;
+	-fx-quartocolore: #1e2124;
+	-fx-background-color: -fx-secondocolore;
+	-fx-font-family: 'Roboto';
+}
+
+/*STILE LABEL*/
+.LabelUltra{
+	-fx-font-size: 30;
+	-fx-text-fill: white;	
+}
+
+.LabelGrande{
+	-fx-font-size: 18;
+	-fx-text-fill: white;
+}
+
+.LabelPiccola{
+	-fx-font-size: 16;
+	-fx-text-fill: white;
+	-fx-font-family: 'Roboto Light';
+}
+
+.LabelNascosta{
+	-fx-font-size: 12;
+	-fx-text-fill: -fx-primocolore;
+}
+
+.ErrorLabel{
+	-fx-font-size: 12;
+	-fx-text-fill: red;
+}
+
+/*STILE BOTTONI*/
+.Button{
+	-fx-background-color: -fx-terzocolore;
+	-fx-background-radius: 10;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.Button:hover{
+	-fx-background-color: -fx-primocolore;
+	-fx-background-radius: 10;
+}
+
+/*STILE CAMPI DI TESTO*/
+.TextArea,
+.TextField,
+.ComboBox,
+.DatePicker{
+	-fx-prompt-text-fill: white;
+	-fx-background-color: -fx-secondocolore;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: white;
+}
+
+.TextArea:focused,
+.TextField:focused,
+.ComboBox:focused,
+.DatePicker:focused{
+	-fx-border-color: -fx-primocolore;
+}
+
+/*STILE ANCHORPANE*/
+.AnchorPane{
+	-fx-control-inner-background: -fx-terzocolore;
+	-fx-font-size: 18;
+	-fx-border-width: 5;
+	-fx-border-color: white;
+}
+
+/*STILE TEXTAREA*/
+.TextArea,
+.TextArea .scroll-pane,
+.TextArea .scroll-pane .viewport,
+.TextArea .scroll-pane .viewport .content{
+	-fx-background-color: -fx-secondocolore;
+}
+
+.TextArea .scroll-pane{
+	-fx-hbar-policy: NEVER;
+}
+
+.TextArea .scroll-pane .scroll-bar:vertical{
+	-fx-background-color: -fx-secondocolore;
+}
+
+.TextArea .scroll-pane .scroll-bar:vertical .thumb,
+.TextArea .scroll-pane .scroll-bar:vertical .increment-button .increment-arrow,
+.TextArea .scroll-pane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
+/*STILE LISTVIEW*/
+.ListView{
+	-fx-control-inner-background: -fx-terzocolore;
+	-fx-border-width: 5;
+	-fx-border-color: white;
+}
+
+.ListView .list-cell{
+	-fx-pref-height: 100;
+}
+
+.ListView,
+.ListView .scroll-bar:vertical,
+.ListView .scroll-bar:horizontal,
+.ListView .corner{
+	-fx-background-color: -fx-terzocolore;
+}
+
+.ListView .viewport{
+	-fx-background-color: transparent;
+}
+
+.ListView .list-cell:selected,
+.ListView .scroll-bar:vertical .thumb,
+.ListView .scroll-bar:vertical .increment-button .increment-arrow,
+.ListView .scroll-bar:vertical .decrement-button .decrement-arrow,
+.ListView .scroll-bar:horizontal .thumb,
+.ListView .scroll-bar:horizontal .increment-button .increment-arrow,
+.ListView .scroll-bar:horizontal .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
+/*STILE SLIDER*/
+.Slider{
+	-fx-control-inner-background: #424549;
+}
+
+.Slider .thumb{
+	-fx-background-color: #7289da;
+	-fx-pref-width: 20;
+	-fx-pref-height: 20;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+}
+
+.Slider .track{
+	-fx-pref-height: 15;
+	-fx-border-width: 10;
+}
+
+.Slider .axis{
+	-fx-tick-label-fill: white;
+	-fx-tick-label-font: 12 'Roboto Light';
+}
+
+/*STILE SCROLLPANE*/
+.ScrollPane{
+	-fx-border-color: white;
+	-fx-border-width: 5;
+}
+
+.ScrollPane,
+.ScrollPane .scroll-bar:vertical{
+	-fx-background-color: -fx-terzocolore;
+}
+
+.ScrollPane .viewport{
+	-fx-background-color: transparent;
+}
+
+.ScrollPane .scroll-bar:vertical .thumb,
+.ScrollPane .scroll-bar:vertical .increment-button .increment-arrow,
+.ScrollPane .scroll-bar:vertical .decrement-button .decrement-arrow{
+	-fx-background-color: -fx-primocolore;
+}
+
+/*STILE COMBOBOX*/
+.ComboBox:focused{
+	-fx-border-color: -fx-primocolore;
+}
+
+.ComboBox .list-cell{
+	-fx-background-color: -fx-secondocolore;
+}
+.ComboBox .list-cell .text{
+	-fx-fill: white;
+}
+
+.ComboBox .arrow-button{
+	-fx-background-color: white;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+}
+
+.ComboBox:focused .arrow-button{
+	-fx-background-color: -fx-primocolore;
+	-fx-border-color: -fx-primocolore;
+}
+
+/*STILE RADIOBUTTON*/
+.RadioButton:focused{
+	-fx-text-fill: -fx-primocolore;
+}
+
+.RadioButton .radio{
+	-fx-background-color: -fx-secondocolore;
+	-fx-border-width: 2px;
+	-fx-border-color: white;
+	-fx-border-radius: 15px;
+}
+
+.RadioButton:focused .radio .dot{
+	-fx-mark-highlight-color: -fx-primocolore;
+	-fx-mark-color: -fx-primocolore;
+}
+
+.RadioButton .radio .dot{
+	-fx-mark-highlight-color: white;
+	-fx-mark-color: white;
+}
+
+/*STILE DATEPICKER*/
+.DatePicker .arrow-button{
+	-fx-background-color: white;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+}
+
+.DatePicker:focused .arrow-button{
+	-fx-background-color: -fx-primocolore;
+	-fx-border-color: -fx-primocolore;
+}
+
+.DatePicker .date-picker-display-node{
+	-fx-background-color: -fx-secondocolore;
+	-fx-font-size: 16;
+	-fx-text-fill: white;
+	-fx-font-family: 'Roboto Light';
+}

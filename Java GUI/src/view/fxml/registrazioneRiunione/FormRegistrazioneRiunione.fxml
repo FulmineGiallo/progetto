@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="RegistrazioneRiunione" prefHeight="650.0" styleClass="StilePrincipale" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerRegistrazioneRiunione">
+   <children>
+      <HBox fx:id="IstruzioniBox" alignment="CENTER" layoutX="100.0" layoutY="10.0" styleClass="IstruzioniBox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox spacing="3.0">
+               <children>
+                  <Label fx:id="IstruzioniLabel" alignment="TOP_LEFT" styleClass="LabelUltra" text="Inserisci qui i dati per programmare una nuova riunione" textAlignment="CENTER" />
+                  <Label fx:id="IstruzioniLabel2" style="-fx-text-fill: red;" styleClass="LabelGrande" text="* Campo obbligatorio" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox fx:id="FormBox" alignment="CENTER" layoutX="100.0" layoutY="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <ScrollPane fx:id="FormScrollPane" fitToWidth="true" hbarPolicy="NEVER" minViewportWidth="800.0" styleClass="ScrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <VBox fx:id="FormRiunione" alignment="CENTER" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
+                                 <padding>
+                                    <Insets bottom="50.0" top="50.0" />
+                                 </padding>
+                                 <children>
+                                    <HBox fx:id="OrganizzatoreBox" alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="OrganizzatoreLabel" prefWidth="131.0" styleClass="LabelGrande" text="Organizzatore:" />
+                                          <TextField fx:id="OrganizzatoreTF" editable="false" HBox.hgrow="ALWAYS">
+                                             <styleClass>
+                                                <String fx:value="TextField" />
+                                                <String fx:value="LabelPiccola" />
+                                             </styleClass>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                    <VBox fx:id="TitoloBox">
+                                       <children>
+                                          <Label fx:id="TitoloLabel" styleClass="LabelNascosta" text="* Titolo:" visible="false" />
+                                          <TextField fx:id="TitoloTF" onMouseClicked="#visualizzaTitoloLabel" promptText="* Titolo">
+                                             <styleClass>
+                                                <String fx:value="TextField" />
+                                                <String fx:value="LabelPiccola" />
+                                             </styleClass>
+                                          </TextField>
+                                          <Label fx:id="TitoloErrorLabel" styleClass="ErrorLabel" />
+                                       </children>
+                                    </VBox>
+                                    <VBox fx:id="DescrizioneBox">
+                                       <children>
+                                          <Label fx:id="DescrizioneLabel" styleClass="LabelNascosta" text="Descrizione:" visible="false" />
+                                          <TextArea fx:id="DescrizioneTA" onMouseClicked="#visualizzaDescrizioneLabel" prefHeight="200.0" prefWidth="200.0" promptText="Inserisci una descrizione" wrapText="true">
+                                             <styleClass>
+                                                <String fx:value="TextArea" />
+                                                <String fx:value="LabelPiccola" />
+                                             </styleClass>
+                                          </TextArea>
+                                       </children>
+                                    </VBox>
+                                    <GridPane hgap="10.0" vgap="10.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="40.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints vgrow="SOMETIMES" />
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <HBox fx:id="DataDiInizioBox" spacing="10.0">
+                                             <children>
+                                                <Label minWidth="131.0" styleClass="LabelGrande" text="* Orario di inizio">
+                                                   <HBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <AnchorPane>
+                                                         <children>
+                                                            <DatePicker fx:id="DataDiInizioDP" editable="false" onHiding="#controlloDataDiInizio" showWeekNumbers="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <styleClass>
+                                                                  <String fx:value="DatePicker" />
+                                                                  <String fx:value="LabelPiccola" />
+                                                               </styleClass>
+                                                            </DatePicker>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <Label fx:id="DataDiInizioErrorLabel" maxWidth="260.0" minHeight="30.0" prefHeight="30.0" styleClass="ErrorLabel" wrapText="true" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <VBox fx:id="OrarioDiInizioBox" GridPane.columnIndex="1">
+                                             <children>
+                                                <Slider fx:id="OrarioDiInizioOreSlider" majorTickUnit="12.0" max="23.0" onMouseDragged="#setOrarioDiInizioLabel" showTickLabels="true" showTickMarks="true" styleClass="Slider" />
+                                                <Slider fx:id="OrarioDiInizioMinutiSlider" majorTickUnit="10.0" max="59.0" minorTickCount="0" onMouseDragged="#setOrarioDiInizioLabel" showTickLabels="true" showTickMarks="true" styleClass="Slider" />
+                                             </children>
+                                          </VBox>
+                                          <HBox fx:id="DataDiFineBox" spacing="10.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label minWidth="131.0" prefWidth="131.0" styleClass="LabelGrande" text="* Orario di fine">
+                                                   <HBox.margin>
+                                                      <Insets top="8.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <VBox HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <AnchorPane>
+                                                         <children>
+                                                            <DatePicker fx:id="DataDiFineDP" disable="true" editable="false" onHiding="#controlloDataDiFine" showWeekNumbers="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <styleClass>
+                                                                  <String fx:value="DatePicker" />
+                                                                  <String fx:value="LabelPiccola" />
+                                                               </styleClass>
+                                                            </DatePicker>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <Label fx:id="DataDiFineErrorLabel" maxWidth="260.0" minHeight="30.0" prefHeight="30.0" styleClass="ErrorLabel" wrapText="true" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <VBox fx:id="OrarioDiFineBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Slider fx:id="OrarioDiFineOreSlider" majorTickUnit="12.0" max="23.0" onMouseDragged="#setOrarioDiFineLabel" showTickLabels="true" showTickMarks="true" styleClass="Slider" />
+                                                <Slider fx:id="OrarioDiFineMinutiSlider" majorTickUnit="10.0" max="59.0" minorTickCount="0" onMouseDragged="#setOrarioDiFineLabel" showTickLabels="true" showTickMarks="true" styleClass="Slider" />
+                                             </children>
+                                          </VBox>
+                                          <HBox alignment="CENTER" GridPane.columnIndex="2">
+                                             <children>
+                                                <Label fx:id="OrarioDiInizioLabel" styleClass="LabelPiccola" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="OrarioDiFineLabel" styleClass="LabelPiccola" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </GridPane>
+                                    <HBox fx:id="ModalitaRiunioneBox" alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label fx:id="ModalitaRiunioneLabel" prefWidth="120.0" styleClass="LabelGrande" text="Modalità:" />
+                                          <HBox alignment="CENTER_LEFT" spacing="50.0">
+                                             <children>
+                                                <RadioButton fx:id="ModalitaRiunioneRB1" mnemonicParsing="false" onAction="#visualizzaFormRiunioneFisica" selected="true" text="Riunione in sede fisica">
+                                                   <styleClass>
+                                                      <String fx:value="RadioButton" />
+                                                      <String fx:value="LabelPiccola" />
+                                                   </styleClass>
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="ModalitaRiunioneGroup" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="ModalitaRiunioneRB2" mnemonicParsing="false" onAction="#visualizzaFormRiunioneTelematica" text="Riunione in modalità telematica" toggleGroup="$ModalitaRiunioneGroup">
+                                                   <styleClass>
+                                                      <String fx:value="RadioButton" />
+                                                      <String fx:value="LabelPiccola" />
+                                                   </styleClass>
+                                                </RadioButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox fx:id="FormRiunioneFisica" spacing="25.0">
+                                             <children>
+                                                <VBox fx:id="SedeBox">
+                                                   <children>
+                                                      <Label fx:id="SedeLabel" styleClass="LabelNascosta" text="* Sede" visible="false" />
+                                                      <TextField fx:id="SedeTF" promptText="* Sede">
+                                                         <styleClass>
+                                                            <String fx:value="TextField" />
+                                                            <String fx:value="LabelPiccola" />
+                                                         </styleClass>
+                                                      </TextField>
+                                                      <Label fx:id="SedeErrorLabel" styleClass="ErrorLabel" />
+                                                   </children>
+                                                </VBox>
+                                                <GridPane fx:id="StanzaBox" hgap="10.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <VBox fx:id="NomeStanzaBox">
+                                                         <children>
+                                                            <Label fx:id="NomeStanzaLabel" styleClass="LabelNascosta" text="* Nome stanza" visible="false" />
+                                                            <TextField fx:id="NomeStanzaTF" promptText="* Nome stanza">
+                                                               <styleClass>
+                                                                  <String fx:value="TextField" />
+                                                                  <String fx:value="LabelPiccola" />
+                                                               </styleClass>
+                                                            </TextField>
+                                                            <Label fx:id="NomeStanzaErrorLabel" styleClass="ErrorLabel" wrapText="true" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox fx:id="PianoStanzaBox" GridPane.columnIndex="1">
+                                                         <children>
+                                                            <Label fx:id="PianoStanzaLabel" styleClass="LabelNascosta" text="* Piano stanza" visible="false" />
+                                                            <TextField fx:id="PianoStanzaTF" promptText="* Piano stanza">
+                                                               <styleClass>
+                                                                  <String fx:value="TextField" />
+                                                                  <String fx:value="LabelPiccola" />
+                                                               </styleClass>
+                                                            </TextField>
+                                                            <Label fx:id="PianoStanzaErrorLabel" styleClass="ErrorLabel" wrapText="true" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <GridPane fx:id="FormRiunioneTelematica" hgap="10.0" visible="false">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox fx:id="NomePiattaformaBox">
+                                                   <children>
+                                                      <Label fx:id="NomePiattaformaLabel" styleClass="LabelNascosta" text="* Nome piattaforma" visible="false" />
+                                                      <TextField fx:id="NomePiattaformaTF" promptText="* Nome piattaforma">
+                                                         <styleClass>
+                                                            <String fx:value="TextField" />
+                                                            <String fx:value="LabelPiccola" />
+                                                         </styleClass>
+                                                      </TextField>
+                                                      <Label fx:id="NomePiattaformaErrorLabel" styleClass="ErrorLabel" wrapText="true" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox fx:id="CodiceAccessoBox" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label fx:id="CodiceAccessoLabel" styleClass="LabelNascosta" text="* Codice di accesso" visible="false" />
+                                                      <PasswordField fx:id="CodiceAccessoPF" promptText="* Codice di accesso">
+                                                         <styleClass>
+                                                            <String fx:value="TextField" />
+                                                            <String fx:value="LabelPiccola" />
+                                                         </styleClass>
+                                                      </PasswordField>
+                                                      <Label fx:id="CodiceAccessoErrorLabel" styleClass="ErrorLabel" wrapText="true" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="ButtonBar" styleClass="ButtonBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <GridPane layoutX="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="AnnullaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#annullaOperazione" prefWidth="180.0" text="Annulla">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="Button" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" GridPane.columnIndex="1">
+                     <children>
+                        <Button fx:id="ConfermaButton" alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#confermaOperazione" prefWidth="180.0" text="Conferma">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="Button" />
+                              <String fx:value="LabelUltra" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@../../../css/FormRegistrazioneRiunione.css" />
+      <URL value="@../../../css/StiliComuni.css" />
+   </stylesheets>
+</AnchorPane>

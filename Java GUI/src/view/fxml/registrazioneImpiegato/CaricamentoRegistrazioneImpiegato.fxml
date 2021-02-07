@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="CaricamentoRegistrazione" prefHeight="200.0" prefWidth="400.0" styleClass="CaricamentoRegistrazione" stylesheets="@../../../css/CaricamentoRegistrazioneImpiegato.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCaricamentoRegistrazione">
+   <children>
+      <Label fx:id="CaricamentoLabel" alignment="CENTER" maxHeight="126.0" styleClass="CaricamentoLabel" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets left="10.0" right="10.0" top="20.0" />
+         </padding></Label>
+      <ProgressBar fx:id="CaricamentoPB" layoutY="54.0" styleClass="CaricamentoPB" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding></ProgressBar>
+   </children>
+</AnchorPane>

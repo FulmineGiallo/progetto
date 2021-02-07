@@ -1,0 +1,38 @@
+.IstruzioniLabel{
+	-fx-font-family: 'Roboto Light';
+	-fx-font-style: italic;
+}
+
+.DescrizionePane{
+	-fx-border-width: 5;
+	-fx-border-color: white;
+	-fx-background-color: -fx-terzocolore;
+}
+
+.SchedaListaProgetti{
+	-fx-border-width: 5 5 1 5;
+	-fx-border-color: white;
+}
+
+.SchedaListaRiunioni{
+	-fx-border-width: 0 0 5 0;
+	-fx-border-color: white;
+}
+
+.ProjectManagerBoxButton,
+.OrganizzatoreBoxButton,
+.PartecipanteBoxButton{
+	-fx-background-color: #1e2124;
+	-fx-background-radius: 10;
+	-fx-border-width: 2;
+	-fx-border-color: white;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+}
+
+.ProjectManagerBoxButton:hover,
+.OrganizzatoreBoxButton:hover,
+.PartecipanteBoxButton:hover{
+	-fx-background-color: #7289da;
+	-fx-background-radius: 10;
+}
