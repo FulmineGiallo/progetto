@@ -1,2 +1,0 @@
-ALTER TABLE public.riunione
-    ADD COLUMN note character varying(100)[];
